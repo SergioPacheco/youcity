@@ -667,8 +667,12 @@
     elements.contextualCta.classList.remove("is-visible");
   }
 
+  function isMobileTravelLayout() {
+    return window.matchMedia?.("(max-width: 800px)").matches ?? false;
+  }
+
   function scheduleContextualTravelCta(city) {
-    if (!state.playbackSessionStarted || state.contextualCtaShown || state.contextualCtaTimer || state.contextualCtaDismissedCities.has(city.id)) return;
+    if (isMobileTravelLayout() || !state.playbackSessionStarted || state.contextualCtaShown || state.contextualCtaTimer || state.contextualCtaDismissedCities.has(city.id)) return;
     state.contextualCtaTimer = setTimeout(() => {
       state.contextualCtaTimer = null;
       if (currentCity()?.id !== city.id || state.contextualCtaDismissedCities.has(city.id)) return;

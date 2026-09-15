@@ -654,14 +654,26 @@ button:focus-visible, input:focus-visible {
 }
 
 @media (max-width: 800px) {
-  .travel-menu-button { width: auto; min-width: 86px; height: 40px; padding: 0 10px; gap: 7px; }
+  /* Keep the primary travel action in the top bar on small screens. The
+     contrast is intentional: acid backgrounds always use dark ink. */
+  .travel-menu-button { width: auto; min-width: 86px; height: 40px; padding: 0 10px; gap: 7px; border-color: var(--acid); background: var(--acid); color: var(--ink); font-weight: 700; }
   .travel-menu-button svg { width: 15px; }
-  .travel-prompts { right: 14px; left: 14px; bottom: calc(194px + var(--safe-bottom)); max-width: none; }
-  .travel-prompts-heading { gap: 6px; }
-  .travel-prompts h2 { font-size: 16px; }
-  .travel-prompts-kicker { display: none; }
-  .contextual-cta { right: 14px; bottom: calc(304px + var(--safe-bottom)); left: 14px; grid-template-columns: 1fr; gap: 8px; max-width: none; padding-right: 34px; }
-  .contextual-cta-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .travel-menu-button:hover, .travel-menu-button:focus-visible { background: #e5ff78; color: var(--ink); }
+
+  /* Quick actions live at the top instead of competing with the video
+     player. The heading and disclosure remain available in the planner. */
+  .travel-prompts { top: calc(70px + var(--safe-top) + 8px); right: 12px; left: 12px; bottom: auto; max-width: none; padding: 5px; border-color: rgba(255,255,255,.22); background: rgba(7,11,8,.96); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
+  .travel-prompts-heading, .travel-prompts-disclosure { display: none; }
+  .travel-quick-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 0; }
+  .travel-quick-action { grid-template-columns: auto minmax(0, 1fr); justify-content: center; gap: 4px; min-height: 36px; padding: 5px 4px; border-color: rgba(255,255,255,.28); background: #121a14; color: #fff; }
+  .travel-quick-action:hover, .travel-quick-action:focus-visible { border-color: var(--acid); background: #1d2a1d; color: #fff; transform: none; }
+  .travel-quick-action span:not(.travel-quick-icon) { color: #fff; font-size: 8px; }
+  .travel-quick-icon { color: var(--acid); }
+  .travel-quick-action b { display: none; }
+
+  /* The persistent top action already exposes the planner on mobile; keep
+     the timed contextual card desktop-only so it never covers the ride. */
+  .contextual-cta { display: none !important; }
 }
 
 @media (max-width: 430px) {
@@ -673,11 +685,10 @@ button:focus-visible, input:focus-visible {
   .about-card { padding: 42px 26px 28px; }
   .video-gate { z-index: 6; }
   .video-gate-card { background: #050806; }
-  .travel-prompts { padding: 9px 8px; }
-  .travel-quick-actions { gap: 4px; }
-  .travel-quick-action { grid-template-columns: 1fr; justify-items: center; gap: 3px; padding: 6px 3px; }
-  .travel-quick-action b { display: none; }
-  .travel-quick-action span:not(.travel-quick-icon) { font-size: 8px; }
+  .travel-prompts { padding: 5px; }
+  .travel-quick-actions { gap: 3px; }
+  .travel-quick-action { gap: 3px; padding: 5px 3px; }
+  .travel-quick-action span:not(.travel-quick-icon) { font-size: 7px; }
   .stereo-buttons { grid-template-columns: repeat(3, 1fr); }
   .stereo-btn:nth-child(4) { display: none; }
 }
