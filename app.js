@@ -23,6 +23,7 @@
     RADIO_LOAD_TIMEOUT: 10_000,
     RADIO_MAX_RETRIES: 4,
     VIDEO_SWITCH_DEBOUNCE: 400,
+    CONTEXTUAL_CTA_DELAY: 30_000,
     DEFAULT_VOLUME: 64,
     AUTOPLAY_INTERVAL: 180_000, // 3 minutes
     POMODORO_DURATION: 25 * 60, // 25 minutes in seconds
@@ -38,6 +39,7 @@
       theme: "volta-theme",
       onboardingSeen: "youcity-onboarding-seen",
       swipeHintSeen: "youcity-swipe-hint-seen",
+      contextualCtaDismissed: "youcity-contextual-cta-dismissed",
     },
     filters: {
       ALL: "all",
@@ -373,6 +375,14 @@
     about: $("#about-modal"),
     travelDrawer: $("#travel-drawer"),
     travelButton: $("#travel-button"),
+    travelButtonFull: $("#travel-button-full"),
+    travelPrompts: $("#travel-prompts"),
+    travelPromptsCity: $("#travel-prompts-city"),
+    travelQuickActions: $("#travel-quick-actions"),
+    contextualCta: $("#contextual-cta"),
+    contextualCtaCity: $("#contextual-cta-city"),
+    contextualCtaActions: $("#contextual-cta-actions"),
+    contextualCtaClose: $("#contextual-cta-close"),
     mapModal: $("#map-modal"),
     mapContainer: $("#world-map"),
     mapResultCount: $("#map-result-count"),
@@ -464,6 +474,10 @@
     playerHidden: false,
     radioExpanded: false,
     videoRecoveryMode: false,
+    mainCtaImpressionCity: "",
+    contextualCtaTimer: null,
+    contextualCtaShown: false,
+    contextualCtaDismissedCities: new Set(),
     // Volume knob drag state
     volumeKnob: {
       isDragging: false,
@@ -471,6 +485,13 @@
       startVolume: 0,
     },
   };
+
+  try {
+    const dismissed = JSON.parse(sessionStorage.getItem(CONFIG.storageKeys.contextualCtaDismissed) || "[]");
+    if (Array.isArray(dismissed)) dismissed.forEach((cityId) => state.contextualCtaDismissedCities.add(cityId));
+  } catch (error) {
+    if (window.YOUCITY_AFFILIATE_CONFIG?.debug) console.warn("[YouCity] Failed to read contextual CTA state:", error.message);
+  }
 
   let worldMap = null;
   let leafletAssetsPromise = null;
@@ -549,17 +570,25 @@
 
   const affiliate = window.YouCityAffiliate;
   const TRAVEL_CATEGORIES = affiliate?.getVerticals?.() || {};
-  const PRIMARY_TRAVEL_CATEGORIES = ["activities", "hotels", "cars"]
+  const PRIMARY_TRAVEL_CATEGORIES = ["hotels", "activities", "cars"]
     .filter((id) => TRAVEL_CATEGORIES[id]?.placement === "primary")
     .concat(Object.entries(TRAVEL_CATEGORIES)
       .filter(([id, info]) => info.placement === "primary" && !["activities", "hotels", "cars"].includes(id))
       .map(([id]) => id));
   const SECONDARY_TRAVEL_CATEGORIES = Object.entries(TRAVEL_CATEGORIES).filter(([, info]) => info.placement === "secondary").map(([id]) => id);
   const TRAVEL_ACTION_LABELS = {
-    hotels: "Find hotels",
+    hotels: "Find a place to stay",
     "vacation-rentals": "Find vacation rentals",
     activities: "Things to do",
-    cars: "Find a car"
+    cars: "Rent a car",
+    flights: "Find flights"
+  };
+  const QUICK_TRAVEL_CATEGORIES = ["hotels", "activities", "cars", "flights"];
+  const QUICK_TRAVEL_LABELS = {
+    hotels: "Stay",
+    activities: "Things to do",
+    cars: "Cars",
+    flights: "Flights"
   };
 
   function affiliateContext(city, vertical, placement) {
@@ -583,6 +612,97 @@
     const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "travel_planner")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}"`;
     const compact = options.compact ? " is-compact" : "";
     return `<a class="travel-offer-action${compact}" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}><span>${escapeHtml(label)}</span><small>${escapeHtml(providerLabel)}</small><b aria-hidden="true">↗</b></a>`;
+  }
+
+  function travelQuickActionMarkup(category, entry, city) {
+    if (!entry?.url || !TRAVEL_CATEGORIES[category]) return "";
+    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "quick_travel_bar")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}"`;
+    return `<a class="travel-quick-action" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}><span class="travel-quick-icon" aria-hidden="true">${TRAVEL_CATEGORIES[category].icon}</span><span>${escapeHtml(QUICK_TRAVEL_LABELS[category])}</span><b aria-hidden="true">↗</b></a>`;
+  }
+
+  function trackPlanningEvent(event, city, placement) {
+    affiliate.track({
+      event,
+      provider: "planner",
+      vertical: "trip_planning",
+      city: city.name,
+      country: city.country,
+      countryCode: city.countryCode || "",
+      placement,
+      variant: "A"
+    });
+  }
+
+  function updateMainTravelCta(city, hasOffers) {
+    if (!elements.travelButton) return;
+    elements.travelButton.hidden = !hasOffers;
+    elements.travelButton.setAttribute("aria-label", `Plan a trip to ${city.name}`);
+    elements.travelButton.title = `Plan a trip to ${city.name}`;
+    elements.travelButton.dataset.travelProvider = "planner";
+    elements.travelButton.dataset.travelVertical = "trip_planning";
+    elements.travelButton.dataset.travelCity = city.id;
+    elements.travelButton.dataset.travelCityName = city.name;
+    elements.travelButton.dataset.travelCountry = city.country;
+    elements.travelButton.dataset.travelCountryCode = city.countryCode || "";
+    elements.travelButton.dataset.travelPlacement = "main_cta";
+    if (elements.travelButtonFull) elements.travelButtonFull.textContent = `Plan a trip to ${city.name}`;
+    if (hasOffers && state.mainCtaImpressionCity !== city.id) {
+      state.mainCtaImpressionCity = city.id;
+      trackPlanningEvent("affiliate_impression", city, "main_cta");
+    }
+  }
+
+  function renderQuickTravelActions(city, placement = "quick_travel_bar") {
+    const offers = resolveTravelOffers(city, placement);
+    const actions = QUICK_TRAVEL_CATEGORIES.map((category) => {
+      const entry = offers[category]?.[0];
+      return travelQuickActionMarkup(category, entry, city);
+    }).filter(Boolean).join("");
+    return { offers, actions, hasOffers: Boolean(actions) };
+  }
+
+  function hideContextualTravelCta() {
+    if (!elements.contextualCta) return;
+    elements.contextualCta.hidden = true;
+    elements.contextualCta.classList.remove("is-visible");
+  }
+
+  function scheduleContextualTravelCta(city) {
+    if (!state.playbackSessionStarted || state.contextualCtaShown || state.contextualCtaTimer || state.contextualCtaDismissedCities.has(city.id)) return;
+    state.contextualCtaTimer = setTimeout(() => {
+      state.contextualCtaTimer = null;
+      if (currentCity()?.id !== city.id || state.contextualCtaDismissedCities.has(city.id)) return;
+      const { actions, hasOffers } = renderQuickTravelActions(city, "contextual_cta");
+      if (!hasOffers || !elements.contextualCta) return;
+      elements.contextualCtaCity.textContent = city.name;
+      elements.contextualCtaActions.innerHTML = actions;
+      elements.contextualCta.hidden = false;
+      elements.contextualCta.classList.add("is-visible");
+      state.contextualCtaShown = true;
+      affiliate.observeImpressions(elements.contextualCta);
+    }, CONFIG.CONTEXTUAL_CTA_DELAY);
+  }
+
+  function resetContextualTravelCta() {
+    clearTimeout(state.contextualCtaTimer);
+    state.contextualCtaTimer = null;
+    state.contextualCtaShown = false;
+    hideContextualTravelCta();
+  }
+
+  function renderTravelPrompts(city) {
+    const { actions, hasOffers } = renderQuickTravelActions(city);
+    updateMainTravelCta(city, hasOffers);
+    if (!elements.travelPrompts || !elements.travelQuickActions) return;
+    elements.travelPrompts.hidden = !hasOffers;
+    if (!hasOffers) {
+      elements.travelQuickActions.replaceChildren();
+      return;
+    }
+    elements.travelPromptsCity.textContent = city.name;
+    elements.travelQuickActions.innerHTML = actions;
+    affiliate.observeImpressions(elements.travelPrompts);
+    if (!window.YOUCITY_DISCOVERCARS_LOCATIONS) ensureDiscoverCarsCatalog();
   }
 
   function travelCategoryMarkup(category, entries, city, options = {}) {
@@ -678,6 +798,8 @@
   function renderTravelPlanner(city) {
     if (!elements.travelPlanner || !elements.travelPrimary || !elements.travelSecondary) return;
     if (elements.travelPlannerLocation) elements.travelPlannerLocation.textContent = `${city.name} · ${city.country}`;
+    const plannerTitle = document.querySelector("#travel-planner-title");
+    if (plannerTitle) plannerTitle.textContent = `Plan your trip to ${city.name}`;
     const offers = resolveTravelOffers(city);
     const primary = PRIMARY_TRAVEL_CATEGORIES
       .map((category) => travelCategoryMarkup(category, offers[category], city)).filter(Boolean).join("");
@@ -705,6 +827,7 @@
       script.dataset.youcityDiscoverCars = "true";
       script.addEventListener("load", () => {
         renderTravelPlanner(currentCity());
+        renderTravelPrompts(currentCity());
         resolve(true);
       }, { once: true });
       script.addEventListener("error", () => {
@@ -1169,6 +1292,7 @@
       videoCommand("mute");
       videoCommand("setVolume", [0]);
     }
+    scheduleContextualTravelCta(currentCity());
   }
 
   function startPlayback(options = {}) {
@@ -2315,6 +2439,7 @@
     state.radioIndex = 0;
     
     const city = currentCity();
+    resetContextualTravelCta();
     
     // Cada cidade pode ter apenas alguns modos; preserve o atual quando
     // possível e selecione o primeiro modo realmente disponível caso contrário.
@@ -2342,6 +2467,7 @@
     updateFavoriteButton();
     updateCityInfo();
     renderTravelPlanner(city);
+    renderTravelPrompts(city);
     trackVisit(state.cityIndex);
     syncURL({ replace: options.replaceURL || false });
     
@@ -2429,6 +2555,7 @@
       if (other === layer || !other.classList.contains("is-open")) return;
       other.classList.remove("is-open");
       other.setAttribute("aria-hidden", "true");
+      if (other === elements.travelDrawer) elements.travelButton?.setAttribute("aria-expanded", "false");
       if (other._focusTrapHandler) {
         other.removeEventListener("keydown", other._focusTrapHandler);
         delete other._focusTrapHandler;
@@ -2464,6 +2591,7 @@
   function closeLayer(layer) {
     layer.classList.remove("is-open");
     layer.setAttribute("aria-hidden", "true");
+    if (layer === elements.travelDrawer) elements.travelButton?.setAttribute("aria-expanded", "false");
     
     // Remove trap de foco
     if (layer._focusTrapHandler) {
@@ -2714,8 +2842,31 @@
     $("#about-button").addEventListener("click", () => openLayer(elements.about));
 
     elements.travelButton.addEventListener("click", () => {
+      trackTravelClick(elements.travelButton);
       openLayer(elements.travelDrawer);
+      elements.travelButton.setAttribute("aria-expanded", "true");
       ensureDiscoverCarsCatalog();
+    });
+
+    elements.travelPrompts?.addEventListener("click", (event) => {
+      const offer = event.target.closest("[data-travel-provider]");
+      if (offer) trackTravelClick(offer);
+    });
+
+    elements.contextualCta?.addEventListener("click", (event) => {
+      const offer = event.target.closest("[data-travel-provider]");
+      if (offer) trackTravelClick(offer);
+    });
+
+    elements.contextualCtaClose?.addEventListener("click", () => {
+      const city = currentCity();
+      state.contextualCtaDismissedCities.add(city.id);
+      try {
+        sessionStorage.setItem(CONFIG.storageKeys.contextualCtaDismissed, JSON.stringify([...state.contextualCtaDismissedCities]));
+      } catch (error) {
+        if (window.YOUCITY_AFFILIATE_CONFIG?.debug) console.warn("[YouCity] Failed to save contextual CTA state:", error.message);
+      }
+      resetContextualTravelCta();
     });
 
     elements.mapButton.addEventListener("click", () => {
@@ -2852,6 +3003,7 @@
       button.addEventListener("click", () => {
         destroyStay22Map();
         closeLayer(elements.travelDrawer);
+        elements.travelButton?.setAttribute("aria-expanded", "false");
       });
     });
     

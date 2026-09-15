@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M64MQRNM');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="mobile-web-app-capable" content="yes" />
@@ -73,6 +80,10 @@
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M64MQRNM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a href="#city-name" class="skip-link">Skip to main content</a>
     <main class="app" id="app">
       <div class="media-layer" aria-hidden="true">
@@ -158,9 +169,10 @@
           <button class="icon-button secondary-action" id="fullscreen-button" type="button" aria-label="Fullscreen">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path></svg>
           </button>
-          <button class="menu-button travel-menu-button" id="travel-button" type="button" aria-label="Plan your trip" title="Plan your trip">
+          <button class="menu-button travel-menu-button" id="travel-button" type="button" aria-label="Plan a trip" title="Plan a trip" aria-controls="travel-drawer" aria-expanded="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12v13H6zM9 7V5a3 3 0 0 1 6 0v2M9 12h6M12 9v6"></path></svg>
-            <span>Plan your trip</span>
+            <span class="travel-label-full" id="travel-button-full">Plan a trip to this city</span>
+            <span class="travel-label-short">Plan trip</span>
           </button>
           <button class="menu-button" id="cities-button" type="button">
             <span>Explore cities</span>
@@ -210,6 +222,24 @@
           <button type="button" data-mode="drone">Drone</button>
         </nav>
       </section>
+
+      <section class="travel-prompts" id="travel-prompts" aria-labelledby="travel-prompts-title" hidden>
+        <div class="travel-prompts-heading">
+          <span class="travel-prompts-kicker">Planning a trip?</span>
+          <h2 id="travel-prompts-title">Planning a trip to <span id="travel-prompts-city"></span>?</h2>
+        </div>
+        <nav class="travel-quick-actions" id="travel-quick-actions" aria-label="Quick travel planning actions"></nav>
+        <p class="travel-prompts-disclosure">Some travel links are affiliate links.</p>
+      </section>
+
+      <aside class="contextual-cta" id="contextual-cta" aria-labelledby="contextual-cta-title" hidden>
+        <div class="contextual-cta-copy">
+          <span class="travel-prompts-kicker">Enjoying the ride?</span>
+          <h2 id="contextual-cta-title">Like <span id="contextual-cta-city"></span>?</h2>
+        </div>
+        <nav class="contextual-cta-actions" id="contextual-cta-actions" aria-label="Plan this city"></nav>
+        <button class="contextual-cta-close" id="contextual-cta-close" type="button" aria-label="Dismiss travel suggestions">×</button>
+      </aside>
 
       <aside class="rail" aria-label="City navigation">
         <button class="rail-arrow" id="previous-city" type="button" aria-label="Previous city">
@@ -529,6 +559,7 @@
     <script src="/affiliate/affiliate-engine.js"></script>
     <script src="/affiliate/affiliate-catalog.js"></script>
     <script src="/affiliate/affiliate-tracking.js"></script>
+    <script src="/analytics.js"></script>
     <script src="/affiliate/affiliate-experiments.js"></script>
     <script src="/drone-videos.js"></script>
     <script src="/radio-catalog.js"></script>

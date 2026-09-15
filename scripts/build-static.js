@@ -31,6 +31,7 @@ const STATIC_ASSETS = [
   "affiliate/affiliate-engine.js",
   "affiliate/affiliate-catalog.js",
   "affiliate/affiliate-tracking.js",
+  "analytics.js",
   "affiliate/affiliate-experiments.js",
   "affiliate/affiliate-resolver.js",
   "affiliate/providers/expedia.js",
@@ -265,6 +266,8 @@ function replaceStaticCity(html, seo, index, total) {
   output = replaceElementText(output, "p", "city-region", `${escapeHtml(seo.country)} · Now`);
   output = replaceElementText(output, "h1", "city-name", escapeHtml(seo.name));
   output = replaceElementText(output, "p", "city-note", escapeHtml(seo.description));
+  output = replaceElementText(output, "span", "travel-button-full", `Plan a trip to ${escapeHtml(seo.name)}`);
+  output = replaceElementText(output, "h2", "travel-planner-title", `Plan your trip to ${escapeHtml(seo.name)}`);
   return output;
 }
 

@@ -170,6 +170,11 @@ button:focus-visible, input:focus-visible {
 .menu-button span { display: none; }
 .menu-button svg, .icon-button svg { width: 16px; }
 .secondary-action { display: none; }
+.travel-menu-button { flex: 0 1 auto; }
+.top-actions > .travel-menu-button { flex: 0 1 auto; }
+.travel-menu-button[hidden] { display: none; }
+.travel-label-full { display: none !important; }
+.travel-label-short { display: inline !important; white-space: nowrap; }
 
 .city-intro { position: absolute; z-index: 2; top: 39%; left: 24px; width: calc(100% - 80px); transform: translateY(-50%); }
 .city-count { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font: 400 10px "DM Mono", monospace; }
@@ -451,6 +456,24 @@ button:focus-visible, input:focus-visible {
 .travel-secondary .travel-category-icon { width: 23px; height: 23px; font-size: 12px; }
 .travel-secondary .travel-category-actions { margin-top: 6px; }
 .travel-disclosure { margin: 12px 1px 0; color: var(--text-faint); font: 400 8px/1.45 "DM Mono", monospace; }
+.travel-prompts, .contextual-cta { position: absolute; z-index: 5; max-width: min(520px, calc(100% - 28px)); padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: rgba(9,13,10,.82); box-shadow: 0 14px 35px rgba(0,0,0,.28); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.travel-prompts[hidden], .contextual-cta[hidden] { display: none; }
+.travel-prompts { left: clamp(24px, 6vw, 96px); bottom: 46px; }
+.travel-prompts-heading { display: flex; align-items: baseline; gap: 8px; }
+.travel-prompts-kicker { color: var(--text-subtle); font: 500 8px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.travel-prompts h2, .contextual-cta h2 { margin: 0; color: #fff; font: 400 18px/1 "Newsreader", serif; letter-spacing: -.02em; }
+.travel-quick-actions, .contextual-cta-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 9px; }
+.travel-quick-action { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 5px; min-height: 44px; padding: 6px 8px; border: 1px solid rgba(215,255,67,.35); border-radius: 5px; background: rgba(0,0,0,.25); color: #fff; text-decoration: none; transition: border-color .15s, background .15s, transform .15s; }
+.travel-quick-action:hover, .travel-quick-action:focus-visible { border-color: var(--acid); background: rgba(215,255,67,.12); transform: translateY(-1px); }
+.travel-quick-action span:not(.travel-quick-icon) { min-width: 0; overflow: hidden; font: 700 10px/1.05 "DM Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }
+.travel-quick-icon { font-size: 14px; line-height: 1; }
+.travel-quick-action b { color: var(--acid); font-size: 13px; font-weight: 400; }
+.travel-prompts-disclosure { margin: 8px 0 0; color: var(--text-faint); font: 400 8px/1.3 "DM Mono", monospace; }
+.contextual-cta { right: clamp(24px, 6vw, 96px); bottom: 142px; display: grid; grid-template-columns: auto minmax(220px, 1fr) auto; align-items: center; gap: 12px; max-width: min(560px, calc(100% - 28px)); padding-right: 40px; opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s; }
+.contextual-cta.is-visible { opacity: 1; transform: translateY(0); }
+.contextual-cta-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0; }
+.contextual-cta-close { position: absolute; top: 5px; right: 7px; width: 26px; height: 26px; padding: 0; border: 0; background: transparent; color: rgba(255,255,255,.55); cursor: pointer; font-size: 20px; line-height: 1; }
+.contextual-cta-close:hover, .contextual-cta-close:focus-visible { color: #fff; }
 .stay22-tools { margin-top: 10px; padding: 9px; border: 1px solid rgba(215,255,67,.42); border-radius: 7px; background: rgba(95,130,35,.1); }
 .stay22-tools-heading { display: flex; align-items: center; gap: 9px; }
 .stay22-tools-heading strong { display: block; color: #fff; font: 600 14px/1.1 "Newsreader", serif; }
@@ -564,6 +587,8 @@ button:focus-visible, input:focus-visible {
   .icon-button svg { width: 19px; }
   .menu-button { width: auto; min-width: 0; height: 46px; padding: 0 18px; gap: 20px; justify-content: flex-start; }
   .menu-button span { display: inline; }
+  .travel-label-full { display: inline !important; }
+  .travel-label-short { display: none !important; }
   .menu-button svg { width: 19px; }
   .city-intro { top: 50%; left: clamp(42px, 6vw, 100px); width: min(460px, 40vw); transform: translateY(-46%); }
   .city-count { margin-bottom: 28px; }
@@ -625,7 +650,18 @@ button:focus-visible, input:focus-visible {
   .city-intro h1 { font-size: clamp(40px, 5.5vw, 58px); }
   .hint { left: 42px; }
   .travel-menu-button { width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 50%; }
-  .travel-menu-button span { display: none; }
+  .travel-menu-button span { display: none !important; }
+}
+
+@media (max-width: 800px) {
+  .travel-menu-button { width: auto; min-width: 86px; height: 40px; padding: 0 10px; gap: 7px; }
+  .travel-menu-button svg { width: 15px; }
+  .travel-prompts { right: 14px; left: 14px; bottom: calc(194px + var(--safe-bottom)); max-width: none; }
+  .travel-prompts-heading { gap: 6px; }
+  .travel-prompts h2 { font-size: 16px; }
+  .travel-prompts-kicker { display: none; }
+  .contextual-cta { right: 14px; bottom: calc(304px + var(--safe-bottom)); left: 14px; grid-template-columns: 1fr; gap: 8px; max-width: none; padding-right: 34px; }
+  .contextual-cta-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 430px) {
@@ -637,6 +673,11 @@ button:focus-visible, input:focus-visible {
   .about-card { padding: 42px 26px 28px; }
   .video-gate { z-index: 6; }
   .video-gate-card { background: #050806; }
+  .travel-prompts { padding: 9px 8px; }
+  .travel-quick-actions { gap: 4px; }
+  .travel-quick-action { grid-template-columns: 1fr; justify-items: center; gap: 3px; padding: 6px 3px; }
+  .travel-quick-action b { display: none; }
+  .travel-quick-action span:not(.travel-quick-icon) { font-size: 8px; }
   .stereo-buttons { grid-template-columns: repeat(3, 1fr); }
   .stereo-btn:nth-child(4) { display: none; }
 }
@@ -669,6 +710,7 @@ button:focus-visible, input:focus-visible {
   .player-card-main { padding: 8px; }
   .stereo-top-bar { display: none; }
   .stereo-buttons { display: none; }
+  .travel-prompts, .contextual-cta { display: none !important; }
 }
 
 /* Touch-friendly: increase touch targets */
