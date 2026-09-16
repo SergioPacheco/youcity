@@ -658,6 +658,41 @@ button:focus-visible, input:focus-visible {
 }
 
 @media (max-width: 800px) {
+  .city-intro {
+    top: calc(70px + var(--safe-top) + 14px);
+    left: 16px;
+    width: min(320px, calc(100% - 52px));
+    padding: 0;
+    transform: none;
+    background: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,.95);
+  }
+  .city-count { margin-bottom: 14px; }
+  .city-intro h1 { font-size: clamp(34px, 9vw, 46px); }
+  .city-note { max-width: 260px; margin: 10px 0; font-size: 10px; }
+  .city-actions { margin-top: 10px; }
+  .city-info { margin-top: 9px; }
+
+  .player-card {
+    right: 10px;
+    bottom: calc(10px + var(--safe-bottom));
+    left: 10px;
+    border-width: 3px;
+    border-radius: 7px;
+    box-shadow: 0 7px 16px rgba(0,0,0,.62), inset 0 1px 2px rgba(255,255,255,.06);
+  }
+  .stereo-top-bar { padding: 3px; border-bottom-width: 1px; }
+  .stereo-top-bar .mode-control { height: 32px !important; padding: 2px; }
+  .stereo-top-bar .mode-control button { height: 26px; min-height: 26px !important; }
+  .radio-summary { min-height: 42px; padding: 0 8px; gap: 5px; }
+  .radio-summary > span { font-size: 14px; }
+  .radio-summary-play, .radio-summary-nav, .radio-expand {
+    min-width: 36px !important;
+    min-height: 36px !important;
+    width: 36px;
+    height: 36px;
+  }
+
   .topbar {
     background: linear-gradient(180deg, rgba(5,8,6,.78) 0%, rgba(5,8,6,.46) 100%);
     -webkit-backdrop-filter: blur(10px);
@@ -675,22 +710,15 @@ button:focus-visible, input:focus-visible {
      top bar and opens the complete planner when needed. */
   .app .travel-prompts { display: none !important; }
 
-  /* Add a readable backing to city copy over bright video frames. */
-  .city-intro {
-    width: min(360px, calc(100% - 48px));
-    padding: 12px 14px 14px;
-    border-radius: 7px;
-    background: linear-gradient(90deg, rgba(5,8,6,.78) 0%, rgba(5,8,6,.5) 72%, rgba(5,8,6,0) 100%);
-    text-shadow: 0 2px 8px rgba(0,0,0,.9);
-  }
+  /* Keep city copy readable without covering the video with a panel. */
   .city-intro h1, .city-note, .city-info, .city-actions { position: relative; z-index: 1; }
   .city-note { color: #fff; }
   .info-item, .info-item b, .source-link { color: #fff; }
 
   /* Keep ride modes inside the radio panel on mobile. */
-  .stereo-top-bar { display: flex; flex-wrap: nowrap; gap: 4px; padding: 5px; }
-  .stereo-top-bar .mode-control { min-width: 0; width: 100%; height: 38px; padding: 3px; }
-  .stereo-top-bar .mode-control button { flex: 1 1 0; min-width: 0; height: 30px; padding: 0 4px; font-size: 8px; }
+  .stereo-top-bar { display: flex; flex-wrap: nowrap; gap: 4px; padding: 3px; }
+  .stereo-top-bar .mode-control { min-width: 0; width: 100%; height: 32px !important; padding: 2px; }
+  .stereo-top-bar .mode-control button { flex: 1 1 0; min-width: 0; min-height: 26px !important; height: 26px; padding: 0 4px; font-size: 8px; }
   .stereo-top-bar .top-bar-right { display: none; }
   .mobile-mode-control { display: none; }
 
