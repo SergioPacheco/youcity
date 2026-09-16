@@ -670,7 +670,7 @@ button:focus-visible, input:focus-visible {
   .mobile-mode-control { display: none; }
 
   /* The compact summary stays visible while the full deck can be expanded. */
-  .player-card.is-expanded .player-card-main { display: flex; padding: 10px 8px; gap: 8px; }
+  .player-card.is-expanded .player-card-main, .player-card-main.is-visible { display: flex; padding: 10px 8px; gap: 8px; }
   .player-card.is-expanded .radio-expand { transform: rotate(180deg); }
   .player-card-main .volume-knob-section { display: none; }
   .player-card-main .lcd-frequency { font-size: 18px; }

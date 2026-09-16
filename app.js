@@ -396,6 +396,7 @@
     randomBtn: $("#random-btn"),
     toast: $("#toast"),
     playerCard: document.querySelector(".player-card"),
+    playerCardMain: document.querySelector(".player-card-main"),
     playerMinimize: $("#player-minimize"),
     playerRestore: $("#player-restore"),
     radioSummaryName: $("#radio-summary-name"),
@@ -1735,8 +1736,10 @@
   function toggleRadioExpanded(expanded = !state.radioExpanded) {
     state.radioExpanded = expanded;
     elements.playerCard.classList.toggle("is-expanded", expanded);
+    elements.playerCardMain?.classList.toggle("is-visible", expanded);
     elements.radioExpand?.setAttribute("aria-expanded", String(expanded));
     elements.radioExpand?.setAttribute("aria-label", expanded ? "Collapse radio controls" : "Expand radio controls");
+    if (elements.radioExpand) elements.radioExpand.textContent = expanded ? "⌄" : "⌃";
   }
 
   // -----------------------------------------------------------------------------
