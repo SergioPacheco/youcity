@@ -24,9 +24,6 @@
     RADIO_MAX_RETRIES: 4,
     VIDEO_SWITCH_DEBOUNCE: 400,
     DEFAULT_VOLUME: 64,
-    AUTOPLAY_INTERVAL: 180_000, // 3 minutes
-    POMODORO_DURATION: 25 * 60, // 25 minutes in seconds
-    POMODORO_BREAK: 5 * 60, // 5-minute break
     VOLUME_ROTATION_FACTOR: 2.4,
     VOLUME_DRAG_SENSITIVITY: 0.5,
     VOLUME_WHEEL_STEP: 5,
@@ -64,12 +61,6 @@
   // Centralized messages for future i18n
   const MESSAGES = {
     nowIn: (cityName) => `Now in ${cityName}`,
-    autoplayOn: "Autoplay on — switching every 3 minutes",
-    autoplayOff: "Autoplay off",
-    pomodoroStart: "Pomodoro started — 25 minutes of focus",
-    pomodoroPause: "Pomodoro paused",
-    pomodoroBreakEnd: "☕ Break over! Time to focus.",
-    pomodoroComplete: "🎉 Pomodoro complete! Take a 5-minute break.",
     streetSoundOn: "Street sound on",
     streetSoundOff: "Street sound off",
     noRadio: "This city has no radio station available yet.",
@@ -404,12 +395,6 @@
     shareBtn: $("#share-button"),
     statsBtn: $("#stats-button"),
     themeBtn: $("#theme-button"),
-    autoplayBtn: $("#autoplay-btn"),
-    pomodoroBtn: $("#pomodoro-btn"),
-    pomodoroPanel: $("#pomodoro-panel"),
-    pomodoroTime: $("#pomodoro-time"),
-    autoplayPanel: $("#autoplay-panel"),
-    autoplayTime: $("#autoplay-time"),
     qualityBtn: $("#quality-btn"),
     // Seletores cacheados para grupos de botões
     modeButtons: document.querySelectorAll("[data-mode]"),
@@ -456,13 +441,6 @@
     visitedCities: new Set(),
     currentFilter: CONFIG.filters.ALL,
     currentContinent: "",
-    autoplayOn: false,
-    autoplayTimer: null,
-    autoplayRemaining: CONFIG.AUTOPLAY_INTERVAL / 1000,
-    pomodoroOn: false,
-    pomodoroTimer: null,
-    pomodoroRemaining: CONFIG.POMODORO_DURATION,
-    pomodoroIsBreak: false,
     currentTheme: CONFIG.themes.DEFAULT,
     currentQuality: CONFIG.qualities.AUTO,
     sessionStartTime: Date.now(),
@@ -1926,99 +1904,6 @@
   }
 
   // -----------------------------------------------------------------------------
-  // Autoplay
-  // -----------------------------------------------------------------------------
-  
-  /**
-   * Alterna modo autoplay
-   */
-  function toggleAutoplay() {
-    state.autoplayOn = !state.autoplayOn;
-    elements.autoplayBtn.classList.toggle("is-active", state.autoplayOn);
-    elements.autoplayBtn.setAttribute("aria-pressed", state.autoplayOn);
-    elements.autoplayPanel.classList.toggle("is-visible", state.autoplayOn);
-    
-    if (state.autoplayOn) {
-      state.autoplayRemaining = CONFIG.AUTOPLAY_INTERVAL / 1000;
-      updateAutoplayDisplay();
-      state.autoplayTimer = setInterval(() => {
-        state.autoplayRemaining--;
-        updateAutoplayDisplay();
-        if (state.autoplayRemaining <= 0) {
-          selectCity(state.cityIndex + 1);
-          state.autoplayRemaining = CONFIG.AUTOPLAY_INTERVAL / 1000;
-        }
-      }, 1000);
-      showToast(MESSAGES.autoplayOn);
-    } else {
-      clearInterval(state.autoplayTimer);
-      state.autoplayTimer = null;
-      showToast(MESSAGES.autoplayOff);
-    }
-  }
-
-  /**
-   * Atualiza display do autoplay
-   */
-  function updateAutoplayDisplay() {
-    const min = Math.floor(state.autoplayRemaining / 60);
-    const sec = state.autoplayRemaining % 60;
-    elements.autoplayTime.textContent = `${min}:${String(sec).padStart(2, "0")}`;
-  }
-
-  // -----------------------------------------------------------------------------
-  // Pomodoro
-  // -----------------------------------------------------------------------------
-  
-  /**
-   * Alterna modo pomodoro
-   */
-  function togglePomodoro() {
-    state.pomodoroOn = !state.pomodoroOn;
-    elements.pomodoroBtn.classList.toggle("is-active", state.pomodoroOn);
-    elements.pomodoroBtn.setAttribute("aria-pressed", state.pomodoroOn);
-    elements.pomodoroPanel.classList.toggle("is-visible", state.pomodoroOn);
-    
-    if (state.pomodoroOn) {
-      state.pomodoroRemaining = CONFIG.POMODORO_DURATION;
-      state.pomodoroIsBreak = false;
-      updatePomodoroDisplay();
-      state.pomodoroTimer = setInterval(() => {
-        state.pomodoroRemaining--;
-        updatePomodoroDisplay();
-        if (state.pomodoroRemaining <= 0) {
-          if (state.pomodoroIsBreak) {
-            state.pomodoroRemaining = CONFIG.POMODORO_DURATION;
-            state.pomodoroIsBreak = false;
-            showToast(MESSAGES.pomodoroBreakEnd);
-            document.querySelector(".pomodoro-label").textContent = "focus";
-          } else {
-            state.pomodoroRemaining = CONFIG.POMODORO_BREAK;
-            state.pomodoroIsBreak = true;
-            selectCity(state.cityIndex + 1);
-            showToast(MESSAGES.pomodoroComplete);
-            document.querySelector(".pomodoro-label").textContent = "break";
-          }
-        }
-      }, 1000);
-      showToast(MESSAGES.pomodoroStart);
-    } else {
-      clearInterval(state.pomodoroTimer);
-      state.pomodoroTimer = null;
-      showToast(MESSAGES.pomodoroPause);
-    }
-  }
-
-  /**
-   * Atualiza display do pomodoro
-   */
-  function updatePomodoroDisplay() {
-    const min = Math.floor(state.pomodoroRemaining / 60);
-    const sec = state.pomodoroRemaining % 60;
-    elements.pomodoroTime.textContent = `${min}:${String(sec).padStart(2, "0")}`;
-  }
-
-  // -----------------------------------------------------------------------------
   // Temas
   // -----------------------------------------------------------------------------
   
@@ -3114,12 +2999,6 @@
       console.warn("[YouCity] filter-continent element not found");
     }
     
-    // Autoplay
-    elements.autoplayBtn.addEventListener("click", toggleAutoplay);
-    
-    // Pomodoro
-    elements.pomodoroBtn.addEventListener("click", togglePomodoro);
-    
     // Tema
     elements.themeBtn.addEventListener("click", cycleTheme);
     
@@ -3197,10 +3076,6 @@
         case "f":
         case "F":
           toggleFavorite();
-          break;
-        case "a":
-        case "A":
-          toggleAutoplay();
           break;
         case "t":
         case "T":

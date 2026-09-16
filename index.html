@@ -233,12 +233,6 @@
             <button type="button" data-mode="drone" title="Drone footage">DRONE</button>
           </div>
           <div class="top-bar-right">
-            <button class="mini-btn" id="autoplay-btn" type="button" aria-pressed="false" title="Autoplay (A)">
-              <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-            </button>
-            <button class="mini-btn" id="pomodoro-btn" type="button" aria-pressed="false" title="Pomodoro 25min">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </button>
             <button class="mini-btn" id="street-sound" type="button" aria-pressed="false" title="Street sound">
               <svg viewBox="0 0 24 24"><path d="M4 14h3l3 3V7L7 10H4v4zM14 9c2 2 2 4 0 6M17 6c4 4 4 8 0 12"/></svg>
             </button>
@@ -502,18 +496,6 @@
           <p class="about-small">Statistics are stored locally in your browser.</p>
         </div>
       </section>
-
-      <!-- Painel Pomodoro flutuante -->
-      <div class="pomodoro-panel" id="pomodoro-panel">
-        <span class="pomodoro-time" id="pomodoro-time">25:00</span>
-        <span class="pomodoro-label">focus</span>
-      </div>
-
-      <!-- Painel Autoplay flutuante -->
-      <div class="autoplay-panel" id="autoplay-panel">
-        <span class="autoplay-time" id="autoplay-time">3:00</span>
-        <span class="autoplay-label">next city</span>
-      </div>
 
       <output class="toast" id="toast" aria-live="polite"></output>
       <audio id="radio-player" preload="none"></audio>

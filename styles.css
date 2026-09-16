@@ -504,14 +504,6 @@ button:focus-visible, input:focus-visible {
 .stat-value { display: block; font: 300 36px "Newsreader", serif; color: var(--lcd-green); }
 .stat-label { display: block; margin-top: 4px; color: rgba(255,255,255,.5); font: 400 9px "DM Mono", monospace; text-transform: uppercase; }
 
-/* Painel Pomodoro flutuante */
-.pomodoro-panel, .autoplay-panel { position: absolute; z-index: 5; top: 110px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 8px 16px; background: rgba(0,0,0,.7); border: 1px solid rgba(255,255,255,.15); border-radius: 20px; opacity: 0; pointer-events: none; transition: opacity .3s; }
-.pomodoro-panel.is-visible, .autoplay-panel.is-visible { opacity: 1; }
-.pomodoro-time, .autoplay-time { font: 600 18px "DM Mono", monospace; color: var(--lcd-green); }
-.pomodoro-label, .autoplay-label { font: 400 9px "DM Mono", monospace; color: rgba(255,255,255,.5); text-transform: uppercase; }
-.autoplay-panel { top: 150px; }
-.autoplay-panel .autoplay-time { color: var(--acid); }
-
 /* Temas visuais */
 .app.theme-sepia .media-layer { filter: sepia(0.4) saturate(1.2); }
 .app.theme-sepia .color-wash { background: linear-gradient(135deg, rgba(112,66,20,.35) 0%, rgba(44,33,14,.06) 50%, rgba(89,57,22,.18) 100%); }
@@ -586,7 +578,6 @@ button:focus-visible, input:focus-visible {
   .stereo-top-bar .ambient-button span { display: inline; }
   .stereo-top-bar .ambient-button svg { width: 19px; }
   .stereo-top-bar .ambient-button b { font-size: inherit; }
-  .stereo-top-bar #autoplay-btn, .stereo-top-bar #pomodoro-btn { display: grid; }
   .stereo-top-bar .speed-control { display: flex; }
   .player-card-main { display: flex; padding: 12px 14px; gap: 14px; }
   .radio-summary { display: none; }
