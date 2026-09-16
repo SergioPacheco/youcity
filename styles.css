@@ -802,6 +802,12 @@ button:focus-visible, input:focus-visible {
     background: rgba(5,8,6,.55);
     color: rgba(255,255,255,.86);
   }
+  .rail #next-city {
+    position: fixed;
+    right: 8px;
+    bottom: calc(112px + var(--safe-bottom));
+    z-index: 9;
+  }
 }
 
 /* Drawer fullscreen em mobile */
