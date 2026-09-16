@@ -36,7 +36,6 @@
       favorites: "volta-favorites",
       stats: "volta-stats",
       theme: "volta-theme",
-      onboardingSeen: "youcity-onboarding-seen",
       swipeHintSeen: "youcity-swipe-hint-seen",
     },
     filters: {
@@ -323,13 +322,6 @@
     app: $("#app"),
     videoShell: $("#city-video-shell"),
     videoContainer: $("#city-video-container"),
-    videoGate: $("#video-gate"),
-    videoGateMode: $("#video-gate-mode"),
-    videoGateTitle: $("#video-gate-title"),
-    videoGateMessage: $("#video-gate-message"),
-    videoOptions: $("#video-options"),
-    videoList: $("#video-list"),
-    startVideo: $("#start-video"),
     videoLoading: $("#video-loading"),
     videoLoadingMessage: $("#video-loading-message"),
     poster: $("#poster"),
@@ -477,7 +469,6 @@
     totalTravelTime: 0,
     playerHidden: false,
     radioExpanded: false,
-    videoRecoveryMode: false,
     mainCtaImpressionCity: "",
     // Volume knob drag state
     volumeKnob: {
@@ -1288,9 +1279,6 @@
     } else {
       showVideoLoading(false);
     }
-    if (message && elements.videoGateMessage && nextState !== VIDEO_STATES.PLAYING) {
-      elements.videoGateMessage.textContent = message;
-    }
   }
 
   function markVideoReady() {
@@ -1307,37 +1295,13 @@
     }
   }
 
-  function hideVideoGate() {
-    elements.videoGate.classList.add("is-hidden");
-    elements.videoGate.hidden = true;
-    elements.videoGate.setAttribute("aria-hidden", "true");
-  }
-
-  function showVideoGate() {
-    elements.videoGate.hidden = false;
-    elements.videoGate.classList.remove("is-hidden");
-    elements.videoGate.setAttribute("aria-hidden", "false");
-  }
-
   function startPlayback(options = {}) {
-    if (state.videoRecoveryMode) {
-      hideVideoGate();
-      state.videoRecoveryMode = false;
-      const alternateMode = availableModes(currentCity()).find((mode) => mode !== state.currentMode);
-      if (alternateMode) switchMode(alternateMode);
-      else selectRandomCity({ autoplayRadio: false });
-      return;
-    }
     if (!currentRide()) {
       selectRandomCity({ autoplayRadio: false });
       return;
     }
-    hideVideoGate();
     if (options.userGesture) state.videoUserGesture = true;
     if (options.userGesture) {
-      try { localStorage.setItem(CONFIG.storageKeys.onboardingSeen, "true"); } catch (error) {
-        console.warn("[YouCity] Failed to save onboarding state:", error.message);
-      }
       initializeRadioForUserGesture();
     }
     if (state.playbackSessionStarted) {
@@ -1371,35 +1335,18 @@
    */
   function updateVideo(city, options = {}) {
     const ride = currentRide(city);
-    renderVideoList(city);
     updateRideSourceLink(ride);
     if (!ride) {
       // Fallback: cidade sem vídeo disponível
       setVideoState(VIDEO_STATES.UNAVAILABLE, `No ${MODE_LABELS[state.currentMode] || state.currentMode} video is currently available. Try another mode.`);
       elements.videoShell.classList.remove("is-ready");
       elements.poster.style.backgroundImage = "";
-      elements.videoGateTitle.textContent = city.name;
-      elements.videoGateMode.textContent = MODE_LABELS[state.currentMode] || state.currentMode;
-      showVideoGate();
-      elements.startVideo.textContent = "Try another city";
       showToast(MESSAGES.noVideo);
       return;
     }
 
     // Poster com fallback de qualidade
     elements.poster.style.backgroundImage = `url("https://i.ytimg.com/vi/${ride.id}/maxresdefault.jpg"), url("https://i.ytimg.com/vi/${ride.id}/hqdefault.jpg")`;
-    elements.videoGateTitle.textContent = city.name;
-    elements.videoGateMode.textContent = MODE_LABELS[state.currentMode] || state.currentMode;
-    elements.startVideo.textContent = "▶ Start";
-    state.videoRecoveryMode = false;
-
-    if (!state.playbackSessionStarted) {
-      setVideoState(VIDEO_STATES.IDLE, "Choose a mode and press play.");
-      clearTimeout(state.videoChangeTimer);
-      state.videoRequestId++;
-      elements.videoShell.classList.remove("is-ready");
-      return;
-    }
 
     const playerVideoId = youtubePlayerManager.getCurrentVideoId() || state.currentVideoId;
     if (playerVideoId === ride.id) return;
@@ -1421,10 +1368,7 @@
         state.videoReadyTimer = setTimeout(markVideoReady, CONFIG.VIDEO_READY_DELAY);
       } catch (error) {
         if (requestId !== state.videoRequestId) return;
-        setVideoState(VIDEO_STATES.ERROR, "Unable to load this ride. Try another mode to continue.");
-        showVideoGate();
-        state.videoRecoveryMode = true;
-        elements.startVideo.textContent = "Try another mode";
+        setVideoState(VIDEO_STATES.ERROR, "Unable to load this ride. Choose another mode to continue.");
         showToast(MESSAGES.videoUnavailable);
         console.warn("[YouCity] YouTube player unavailable:", error.message);
       }
@@ -1437,22 +1381,6 @@
         loadRide();
       }, CONFIG.VIDEO_SWITCH_DEBOUNCE);
     }
-  }
-
-  function renderVideoList(city = currentCity()) {
-    if (!elements.videoList || !elements.videoOptions) return;
-    const availableRideModes = MODE_ORDER.filter((mode) => city?.videos?.[mode]?.length);
-    const totalVideos = availableRideModes.reduce((total, mode) => total + city.videos[mode].length, 0);
-    elements.videoOptions.hidden = totalVideos === 0;
-    elements.videoList.innerHTML = availableRideModes.map((mode) => `
-      <section class="video-list-group" aria-labelledby="video-list-${mode}">
-        <strong id="video-list-${mode}">${escapeHtml(MODE_LABELS[mode] || mode)}</strong>
-        ${city.videos[mode].map((video, index) => `
-          <button type="button" class="video-list-item${mode === state.currentMode && index === state.currentVideoIndex ? " is-active" : ""}" data-video-mode="${escapeHtml(mode)}" data-video-index="${index}">
-            <span aria-hidden="true">▶</span>
-            <span>${escapeHtml(video.title || `${MODE_LABELS[mode]} ride ${index + 1}`)}</span>
-          </button>`).join("")}
-      </section>`).join("");
   }
 
   /**
@@ -1481,9 +1409,6 @@
     }
 
     setVideoState(VIDEO_STATES.UNAVAILABLE, "No playable video found. Choose another mode to continue.");
-    state.videoRecoveryMode = true;
-    showVideoGate();
-    elements.startVideo.textContent = "Try another mode";
     showToast(MESSAGES.videoUnavailable);
   }
 
@@ -2818,13 +2743,9 @@
       replaceURL: true
     });
 
-    let onboardingSeen = false;
-    try { onboardingSeen = localStorage.getItem(CONFIG.storageKeys.onboardingSeen) === "true"; } catch (error) {
-      console.warn("[YouCity] Failed to read onboarding state:", error.message);
-    }
-    // Deep links prepare the selected ride but never autoplay it.
-    if (onboardingSeen && !route.isDeepLink) startPlayback();
-    else showVideoGate();
+    // Start the muted video immediately. The radio is released on the first
+    // user gesture when the browser allows audible media.
+    startPlayback();
     
     // Preview mode para QA
     const previewMode = new URLSearchParams(window.location.search).get("preview");
@@ -3146,24 +3067,6 @@
         console.warn("[YouCity] Fullscreen unavailable:", error.message);
         showToast(MESSAGES.fullscreenUnavailable);
       }
-    });
-    
-    // A reprodução automática começa sem som; um clique libera também o áudio.
-    elements.startVideo.addEventListener("click", () => startPlayback({ userGesture: true }));
-    elements.videoList?.addEventListener("click", (event) => {
-      const item = event.target.closest("[data-video-index]");
-      if (!item) return;
-      const selectedIndex = Number(item.dataset.videoIndex);
-      if (!Number.isInteger(selectedIndex)) return;
-      const selectedMode = item.dataset.videoMode || state.currentMode;
-      if (!currentCity().videos[selectedMode]?.[selectedIndex]) return;
-      state.currentMode = selectedMode;
-      state.currentVideoIndex = selectedIndex;
-      updateModeControls();
-      renderVideoList();
-      updateVideo(currentCity(), { immediate: state.playbackSessionStarted });
-      if (state.playbackSessionStarted) hideVideoGate();
-      syncURL();
     });
     
     // Radio errors share the same guarded retry scheduler as play() failures.

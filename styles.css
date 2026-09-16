@@ -64,28 +64,6 @@ button:focus-visible, input:focus-visible {
 .vignette { background: linear-gradient(180deg, rgba(5, 8, 6, .35), transparent 20%, transparent 75%, rgba(5, 8, 6, .45)), radial-gradient(circle at 50% 44%, transparent 40%, rgba(3, 6, 4, .22) 100%); pointer-events: none; }
 .grain { opacity: .10; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E"); mix-blend-mode: soft-light; }
 
-/* Delayed YouTube start: the poster remains the only media shown until intent. */
-.video-gate { position: absolute; z-index: 6; inset: 0; display: grid; place-items: end center; padding: 92px 24px 180px; pointer-events: none; opacity: 1; transition: opacity .35s ease; }
-.video-gate.is-hidden { opacity: 0; pointer-events: none; }
-.video-gate-card { width: min(320px, 100%); padding: 24px 26px 26px; border: 1px solid rgba(255,255,255,.2); border-radius: 6px; background: #050806; box-shadow: 0 18px 45px rgba(0,0,0,.25); text-align: center; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.video-gate-kicker { color: var(--acid); font: 500 9px "DM Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
-.video-gate-card h2 { margin: 9px 0 7px; font: 300 30px/.98 "Newsreader", serif; }
-.video-gate-card p { margin: 0 0 18px; color: var(--text-muted); font-size: 11px; }
-.video-gate-mode-control { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; margin: 0 0 12px; pointer-events: auto; }
-.video-gate-mode-control button { min-height: 40px; padding: 0 10px; border: 1px solid rgba(255,255,255,.24); border-radius: 20px; background: #202420; color: #ededed; cursor: pointer; font: 600 8px "DM Mono", monospace; letter-spacing: .07em; text-transform: uppercase; }
-.video-gate-mode-control button.is-active { border-color: var(--acid); background: var(--acid); color: #111411; }
-.video-gate-button { min-height: 46px; padding: 0 22px; border: 1px solid var(--acid); border-radius: 3px; background: var(--acid); color: #111411; cursor: pointer; font: 700 10px "DM Mono", monospace; letter-spacing: .06em; text-transform: uppercase; transition: transform .15s, box-shadow .15s; pointer-events: auto; }
-.video-gate-button:hover { box-shadow: 0 0 0 4px rgba(215,255,67,.16); transform: translateY(-1px); }
-.video-gate-button:active { transform: translateY(1px); }
-.video-options { margin-top: 15px; text-align: left; }
-.video-options summary { color: rgba(255,255,255,.62); cursor: pointer; font: 500 9px "DM Mono", monospace; letter-spacing: .08em; text-align: center; text-transform: uppercase; }
-.video-list { display: grid; gap: 5px; max-height: 150px; margin-top: 8px; overflow-y: auto; }
-.video-list-group { display: grid; gap: 5px; }
-.video-list-group + .video-list-group { margin-top: 10px; }
-.video-list-group > strong { color: var(--acid); font: 600 8px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
-.video-list-item { display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 10px; border: 1px solid rgba(255,255,255,.18); border-radius: 4px; background: #171b18; color: #f0f0f0; cursor: pointer; font: 500 9px "DM Mono", monospace; text-align: left; }
-.video-list-item span:first-child { color: var(--acid); }
-.video-list-item.is-active { border-color: var(--acid); background: #1f2a16; color: #fff; }
 .video-loading { position: absolute; z-index: 7; left: 50%; bottom: 230px; display: flex; align-items: center; gap: 8px; padding: 7px 11px; border: 1px solid rgba(255,255,255,.14); border-radius: 20px; background: rgba(5,8,6,.58); color: var(--text-muted); opacity: 0; pointer-events: none; transform: translate(-50%, 6px); transition: opacity .25s, transform .25s; font: 400 9px "DM Mono", monospace; text-transform: uppercase; }
 .video-loading.is-visible { opacity: 1; transform: translate(-50%, 0); }
 .video-loading-dot { width: 7px; height: 7px; border: 1px solid var(--acid); border-top-color: transparent; border-radius: 50%; animation: video-loading-spin .7s linear infinite; }
@@ -572,9 +550,6 @@ button:focus-visible, input:focus-visible {
    max-width overrides. */
 @media (min-width: 801px) {
   .app { min-height: 640px; }
-  .video-gate { z-index: 1; place-items: center; padding: 92px 24px 190px; }
-  .video-gate-card { background: rgba(5,8,6,.62); }
-  .video-gate-mode-control { display: none; }
   .video-loading { z-index: 2; bottom: 180px; }
   .topbar { grid-template-columns: 1fr auto 1fr; height: 92px; padding: 0 48px; }
   .brand { gap: 10px; font-size: 19px; }
@@ -749,8 +724,6 @@ button:focus-visible, input:focus-visible {
   .stereo-top-bar .mode-control { height: 30px; }
   .stereo-top-bar .mode-control button { height: 22px; font-size: 7px; padding: 0 8px; }
   .about-card { padding: 42px 26px 28px; }
-  .video-gate { z-index: 6; }
-  .video-gate-card { background: #050806; }
   .app .travel-prompts { padding: 5px; }
   .travel-quick-actions { gap: 3px; }
   .travel-quick-action { gap: 3px; padding: 5px 3px; }
@@ -762,11 +735,6 @@ button:focus-visible, input:focus-visible {
 @media (max-width: 360px) {
   .brand { gap: 0; }
   .brand span { display: none; }
-  .video-gate-card { width: min(280px, calc(100% - 32px)); padding: 17px 18px 18px; }
-  .video-gate-card h2 { margin: 7px 0 5px; font-size: 26px; }
-  .video-gate-card p { margin-bottom: 12px; font-size: 10px; }
-  .video-gate-mode-control { margin-bottom: 9px; }
-  .video-gate-mode-control button { min-height: 44px; padding: 0 8px; font-size: 7px; }
 }
 
 /* Mobile small - safe areas e ajustes finais */
@@ -801,7 +769,6 @@ button:focus-visible, input:focus-visible {
   .radio-summary-play, .radio-summary-nav, .radio-expand { min-width: 44px; min-height: 44px; }
   .mode-control button { min-width: 44px; min-height: 44px; }
   .stereo-top-bar .mode-control { height: 44px; }
-  .video-list-item { min-height: 44px; }
   .map-video-group li button, .map-travel-action, .travel-offer-action, .stay22-search-button, .stay22-browse-button, .stay22-rentals-button, .stay22-map-button { min-height: 44px; }
   .stay22-search input, .stay22-search select, .search-box input, .filter-select { font-size: 16px; }
   /* Indicate that swipe navigation is available */
@@ -838,7 +805,7 @@ button:focus-visible, input:focus-visible {
     font-size: 7px;
   }
   .mobile-mode-control { gap: 4px; margin-top: 10px; }
-  .mobile-mode-control button, .video-gate-mode-control button {
+  .mobile-mode-control button {
     min-width: 0;
     min-height: 34px;
     height: 34px;
@@ -846,8 +813,7 @@ button:focus-visible, input:focus-visible {
     font-size: 8px;
   }
   .stereo-top-bar .mode-control button.is-active,
-  .mobile-mode-control button.is-active,
-  .video-gate-mode-control button.is-active {
+  .mobile-mode-control button.is-active {
     border: 1px solid rgba(215,255,67,.85);
     border-color: rgba(215,255,67,.85);
     background: rgba(215,255,67,.18);
