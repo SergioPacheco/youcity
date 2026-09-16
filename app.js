@@ -1259,8 +1259,21 @@
     }
   }
 
+  function hideVideoGate() {
+    elements.videoGate.classList.add("is-hidden");
+    elements.videoGate.hidden = true;
+    elements.videoGate.setAttribute("aria-hidden", "true");
+  }
+
+  function showVideoGate() {
+    elements.videoGate.hidden = false;
+    elements.videoGate.classList.remove("is-hidden");
+    elements.videoGate.setAttribute("aria-hidden", "false");
+  }
+
   function startPlayback(options = {}) {
     if (state.videoRecoveryMode) {
+      hideVideoGate();
       state.videoRecoveryMode = false;
       const alternateMode = availableModes(currentCity()).find((mode) => mode !== state.currentMode);
       if (alternateMode) switchMode(alternateMode);
@@ -1271,6 +1284,7 @@
       selectRandomCity({ autoplayRadio: false });
       return;
     }
+    hideVideoGate();
     if (options.userGesture) state.videoUserGesture = true;
     if (options.userGesture) {
       try { localStorage.setItem(CONFIG.storageKeys.onboardingSeen, "true"); } catch (error) {
@@ -1283,7 +1297,6 @@
       return;
     }
     state.playbackSessionStarted = true;
-    elements.videoGate.classList.add("is-hidden");
     updateVideo(currentCity(), { immediate: true });
   }
 
@@ -1316,11 +1329,10 @@
       // Fallback: cidade sem vídeo disponível
       setVideoState(VIDEO_STATES.UNAVAILABLE, `No ${MODE_LABELS[state.currentMode] || state.currentMode} video is currently available. Try another mode.`);
       elements.videoShell.classList.remove("is-ready");
-      elements.videoGate.classList.add("is-hidden");
       elements.poster.style.backgroundImage = "";
       elements.videoGateTitle.textContent = city.name;
       elements.videoGateMode.textContent = MODE_LABELS[state.currentMode] || state.currentMode;
-      elements.videoGate.classList.remove("is-hidden");
+      showVideoGate();
       elements.startVideo.textContent = "Try another city";
       showToast(MESSAGES.noVideo);
       return;
@@ -1362,7 +1374,7 @@
       } catch (error) {
         if (requestId !== state.videoRequestId) return;
         setVideoState(VIDEO_STATES.ERROR, "Unable to load this ride. Try another mode to continue.");
-        elements.videoGate.classList.remove("is-hidden");
+        showVideoGate();
         state.videoRecoveryMode = true;
         elements.startVideo.textContent = "Try another mode";
         showToast(MESSAGES.videoUnavailable);
@@ -1422,7 +1434,7 @@
 
     setVideoState(VIDEO_STATES.UNAVAILABLE, "No playable video found. Choose another mode to continue.");
     state.videoRecoveryMode = true;
-    elements.videoGate.classList.remove("is-hidden");
+    showVideoGate();
     elements.startVideo.textContent = "Try another mode";
     showToast(MESSAGES.videoUnavailable);
   }
@@ -2769,7 +2781,7 @@
     }
     // Deep links prepare the selected ride but never autoplay it.
     if (onboardingSeen && !route.isDeepLink) startPlayback();
-    else elements.videoGate.classList.remove("is-hidden");
+    else showVideoGate();
     
     // Preview mode para QA
     const previewMode = new URLSearchParams(window.location.search).get("preview");
@@ -3099,7 +3111,7 @@
       updateModeControls();
       renderVideoList();
       updateVideo(currentCity(), { immediate: state.playbackSessionStarted });
-      if (state.playbackSessionStarted) elements.videoGate.classList.add("is-hidden");
+      if (state.playbackSessionStarted) hideVideoGate();
       syncURL();
     });
     
