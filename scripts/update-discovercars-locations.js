@@ -65,21 +65,24 @@ const ROOT_COUNTRY_CODE = Object.entries(DISCOVERCARS_ROOTS_BY_CODE).reduce((res
 }, {});
 
 function slugify(value) {
-  return String(value)
+  let slug = String(value)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/[^a-z0-9]+/g, "-");
+  while (slug.startsWith("-")) slug = slug.slice(1);
+  while (slug.endsWith("-")) slug = slug.slice(0, -1);
+  return slug;
 }
 
 function normalizeText(value) {
-  return slugify(value).replace(/-/g, " ").trim();
+  return slugify(value).replaceAll("-", " ").trim();
 }
 
 function parseScript(file, globals) {
   const context = { window: {} };
-  runInNewContext(readFileSync(resolve(ROOT_DIR, file), "utf8"), context);
+  // Catalog inputs are fixed, repository-owned browser data files.
+  runInNewContext(readFileSync(resolve(ROOT_DIR, file), "utf8"), context); // NOSONAR
   return context.window[globals];
 }
 
@@ -87,7 +90,7 @@ function loadYouCityCities() {
   const catalog = parseScript("cities-data.js", "CITY_CATALOG") || [];
   const coordinates = parseScript("map-catalog.js", "CITY_COORDINATES") || {};
   return catalog.map((item) => {
-    const point = coordinates[item.name] || coordinates[item.name.replace("Rio De Janeiro", "Rio de Janeiro")] || [];
+    const point = coordinates[item.name] || coordinates[item.name.replaceAll("Rio De Janeiro", "Rio de Janeiro")] || [];
     const countryCode = COUNTRY_CODES[item.country];
     if (!countryCode) throw new Error(`Missing country code mapping for ${item.country}`);
     return {
@@ -102,11 +105,11 @@ function loadYouCityCities() {
 }
 
 function decodeXml(value) {
-  return value.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+  return value.replaceAll("&amp;", "&").replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", '"').replaceAll("&apos;", "'");
 }
 
 function sitemapLocations(xml) {
-  return [...xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi)]
+  return [...xml.matchAll(/<loc>([^<]*)<\/loc>/gi)]
     .map((match) => decodeXml(match[1].trim()))
     .filter((url) => {
       try { return new URL(url).origin === DISCOVERCARS_ORIGIN; } catch { return false; }
@@ -216,8 +219,8 @@ function nearMatches(city, cityPages) {
 async function validateOverridePage(override, url) {
   if (!override.expectedName || process.env.DISCOVERCARS_SKIP_PAGE_VALIDATION === "1") return true;
   const html = await fetchText(url);
-  const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1] || "";
-  const headings = [...html.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/gi)].map((match) => match[1]);
+  const title = html.match(/<title[^>]*>([^<]*)<\/title>/i)?.[1] || "";
+  const headings = [...html.matchAll(/<h1[^>]*>([^<]*)<\/h1>/gi)].map((match) => match[1]);
   return normalizeText(`${title} ${headings.join(" ")}`).includes(normalizeText(override.expectedName));
 }
 

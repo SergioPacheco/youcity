@@ -132,7 +132,8 @@ function stripTags(value) {
 }
 
 function cityUrl(city) {
-  return `${SITE_URL}${sitePath(`/city/${slugify(city.name)}`)}`;
+  const path = `/city/${slugify(city.name)}`;
+  return SITE_URL + sitePath(path);
 }
 
 function checkSitemap(catalog) {

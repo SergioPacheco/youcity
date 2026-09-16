@@ -8,14 +8,12 @@ const source = fs.readFileSync(inputPath, "utf8");
 const starts = [...source.matchAll(/{"city":"/g)].map((match) => match.index);
 const parsed = [];
 
-for (const start of starts) {
+function findJsonEnd(value, start, opening, closing) {
   let depth = 0;
   let inString = false;
   let escaped = false;
-  let end = -1;
-
-  for (let index = start; index < source.length; index += 1) {
-    const character = source[index];
+  for (let index = start; index < value.length; index += 1) {
+    const character = value[index];
     if (inString) {
       if (escaped) escaped = false;
       else if (character === "\\") escaped = true;
@@ -23,18 +21,19 @@ for (const start of starts) {
       continue;
     }
     if (character === "\"") inString = true;
-    else if (character === "{") depth += 1;
-    else if (character === "}" && --depth === 0) {
-      end = index + 1;
-      break;
-    }
+    else if (character === opening) depth += 1;
+    else if (character === closing && --depth === 0) return index + 1;
   }
+  return -1;
+}
 
+for (const start of starts) {
+  const end = findJsonEnd(source, start, "{", "}");
   if (end < 0) continue;
   const json = source
     .slice(start, end)
-    .replace(/\\x([0-9a-fA-F]{2})/g, "\\u00$1")
-    .replace(/\\'/g, "'");
+    .replaceAll(/\\x([0-9a-fA-F]{2})/g, String.raw`\u00$1`)
+    .replaceAll(String.raw`\'`, "'");
 
   try {
     const item = JSON.parse(json);
@@ -86,8 +85,14 @@ const currentCatalogPath = path.resolve(__dirname, "..", "cities-data.js");
 const currentCatalogSource = fs.existsSync(currentCatalogPath)
   ? fs.readFileSync(currentCatalogPath, "utf8")
   : "";
-const currentCatalogMatch = currentCatalogSource.match(/window\.CITY_CATALOG\s*=\s*(\[[\s\S]*\])\s*;?\s*$/);
-const currentCatalog = currentCatalogMatch ? JSON.parse(currentCatalogMatch[1]) : [];
+const currentCatalogMarker = "window.CITY_CATALOG";
+const currentCatalogStart = currentCatalogSource.indexOf("[", currentCatalogSource.indexOf(currentCatalogMarker));
+const currentCatalogEnd = currentCatalogStart >= 0
+  ? findJsonEnd(currentCatalogSource, currentCatalogStart, "[", "]")
+  : -1;
+const currentCatalog = currentCatalogEnd >= 0
+  ? JSON.parse(currentCatalogSource.slice(currentCatalogStart, currentCatalogEnd))
+  : [];
 
 const cityKey = (city) => `${city.name}\u0000${city.country}`;
 const sourceKeys = new Set(parsedCatalog.map(cityKey));

@@ -97,13 +97,14 @@ function jsonForHtml(value) {
 }
 
 function slugify(value) {
-  return String(value)
+  let slug = String(value)
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+/, "")
-    .replace(/-+$/, "");
+    .replace(/[^a-z0-9]+/g, "-");
+  while (slug.startsWith("-")) slug = slug.slice(1);
+  while (slug.endsWith("-")) slug = slug.slice(0, -1);
+  return slug;
 }
 
 function loadDiscoverCarsCatalog() {

@@ -22,7 +22,8 @@ const context = vm.createContext({
 });
 
 function load(file) {
-  vm.runInContext(readFileSync(resolve(ROOT_DIR, file), "utf8"), context, { filename: file });
+  // Test fixtures are fixed, repository-owned scripts.
+  vm.runInContext(readFileSync(resolve(ROOT_DIR, file), "utf8"), context, { filename: file }); // NOSONAR
 }
 
 [
