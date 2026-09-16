@@ -3,7 +3,7 @@
   <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    Date.now(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-M64MQRNM');</script>
@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta
       name="description"
-      content="Explore 196 cities around the world through immersive Drive, Bike, Walk and Drone rides with local radio."
+      content="Explore 206 cities around the world through immersive Drive, Bike, Walk, Beach Walk and Drone rides with local radio."
     />
     <meta name="robots" content="index,follow" />
     <meta name="theme-color" content="#111411" />
@@ -24,7 +24,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="YouCity — cities in motion" />
-    <meta property="og:description" content="Explore 196 cities through immersive Drive, Bike, Walk and Drone rides with local radio." />
+    <meta property="og:description" content="Explore 206 cities through immersive Drive, Bike, Walk, Beach Walk and Drone rides with local radio." />
     <meta property="og:url" content="https://youcity.pages.dev/" />
     <meta property="og:site_name" content="YouCity" />
     <meta property="og:type" content="website" />
@@ -38,7 +38,7 @@
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="YouCity — cities in motion" />
-    <meta name="twitter:description" content="Explore 196 cities through immersive city rides with local radio." />
+    <meta name="twitter:description" content="Explore 206 cities through immersive city rides, Beach Walks, and local radio." />
     <meta name="twitter:image" content="https://youcity.pages.dev/assets/hero-saopaulo.webp" />
     <meta name="twitter:image:alt" content="YouCity — immersive city rides around the world" />
 
@@ -68,20 +68,20 @@
     </script>
     <link rel="stylesheet" href="/styles.css" />
     <script>
-      (function (s, t, a, y, twenty, two) {
+      (function (s, t, a, y) {
         s.Stay22 = s.Stay22 || {};
         s.Stay22.params = { lmaID: '6aa988f40f63b002f3d1083b' };
-        twenty = t.createElement(a);
-        two = t.getElementsByTagName(a)[0];
-        twenty.async = 1;
-        twenty.src = y;
-        two.parentNode.insertBefore(twenty, two);
+        const script = t.createElement(a);
+        const firstScript = t.getElementsByTagName(a)[0];
+        script.async = 1;
+        script.src = y;
+        firstScript.parentNode.insertBefore(script, firstScript);
       })(window, document, 'script', 'https://scripts.stay22.com/letmeallez.js');
     </script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M64MQRNM"
+    <noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-M64MQRNM"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <a href="#city-name" class="skip-link">Skip to main content</a>
@@ -114,10 +114,10 @@
           </details>
         </div>
       </section>
-      <div class="video-loading" id="video-loading" role="status" aria-live="polite" aria-hidden="true">
+      <output class="video-loading" id="video-loading" aria-live="polite" aria-hidden="true">
         <span class="video-loading-dot" aria-hidden="true"></span>
         <span id="video-loading-message">Loading video…</span>
-      </div>
+      </output>
 
       <header class="topbar">
         <button class="brand" id="about-button" type="button" aria-label="About YouCity">
@@ -196,16 +196,16 @@
       </header>
 
       <section class="city-intro" aria-labelledby="city-name">
-        <div class="city-count"><span id="city-index">01</span><i></i><span id="city-total">196</span></div>
+        <div class="city-count"><span id="city-index">01</span><i></i><span id="city-total">206</span></div>
         <p class="eyebrow" id="city-region">Worldwide · Now</p>
         <h1 id="city-name">Cities<br />in motion</h1>
-        <p class="city-note" id="city-note">Explore 196 cities through real streets, local radio, and the rhythm of the world.</p>
+        <p class="city-note" id="city-note">Explore 206 cities through real streets, local radio, and the rhythm of the world.</p>
         <div class="city-actions">
           <button class="favorite-btn" id="favorite-btn" type="button" aria-label="Add to favorites" title="Favorite (F)">
             <svg class="heart-empty" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
             <svg class="heart-full" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
           </button>
-          <a class="source-link" id="source-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="View the source video for this ride">
+          <a class="source-link" id="source-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="View ride source video">
             View ride source
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"></path></svg>
           </a>
@@ -288,8 +288,9 @@
         <div class="player-card-main">
           <!-- 3D volume knob -->
           <div class="volume-knob-section">
-            <div class="volume-knob" id="volume-knob" role="slider" aria-label="Volume" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" tabindex="0"></div>
+            <div class="volume-knob" id="volume-knob" aria-hidden="true"></div>
             <span class="knob-label">Vol</span>
+            <input class="volume-accessible" id="volume-accessible" type="range" min="0" max="100" value="64" aria-label="Volume" />
             <input id="volume" type="range" min="0" max="100" value="64" aria-label="Radio volume" style="display:none" />
           </div>
 
@@ -357,17 +358,22 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
             </button>
           </div>
-          <label class="search-box">
+          <div class="search-box">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m16 16 4 4"></path></svg>
+            <label class="sr-only" for="city-search">Search city or country</label>
             <input id="city-search" type="search" placeholder="Search city or country" autocomplete="off" />
             <span id="result-count">8 destinations</span>
-          </label>
+          </div>
           <div class="filter-bar">
             <button class="filter-btn is-active" type="button" data-filter="all">All</button>
             <button class="filter-btn" type="button" data-filter="favorites">
               <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
               Favorites
             </button>
+            <button class="filter-btn" type="button" data-filter="drone">Drone</button>
+            <button class="filter-btn" type="button" data-filter="drive">Drive</button>
+            <button class="filter-btn" type="button" data-filter="walk">Walk</button>
+            <button class="filter-btn" type="button" data-filter="beach_walk">Beach Walk</button>
             <select class="filter-select" id="filter-continent">
               <option value="">Continent</option>
               <option value="South America">South America</option>
@@ -428,7 +434,7 @@
                   <input id="stay22-children" name="children" type="number" min="0" inputmode="numeric" placeholder="0" />
                 </div>
                 <button class="stay22-search-button" type="submit">Search stays</button>
-                <p class="stay22-search-status" id="stay22-search-status" role="status" aria-live="polite"></p>
+                <output class="stay22-search-status" id="stay22-search-status" aria-live="polite"></output>
                 <a class="stay22-search-result" id="stay22-search-result" target="_blank" rel="sponsored noopener noreferrer" hidden>Open stay search ↗</a>
               </form>
               <div class="stay22-quick-actions">
@@ -464,7 +470,7 @@
       </section>
 
       <!-- World map with city video links -->
-      <section class="map-modal" id="map-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="map-title">
+      <dialog class="map-modal" id="map-modal" aria-modal="true" aria-hidden="true" aria-labelledby="map-title">
         <div class="map-backdrop" data-close-map></div>
         <div class="map-card">
           <div class="map-header">
@@ -477,7 +483,7 @@
             </button>
           </div>
           <div class="map-toolbar">
-            <span id="map-result-count">196 cities</span>
+            <span id="map-result-count">206 cities</span>
             <span>OpenStreetMap · click a marker to see videos</span>
           </div>
           <div class="world-map" id="world-map" role="application" aria-label="Interactive map of YouCity destinations"></div>
@@ -487,7 +493,7 @@
           </details>
           <p class="map-footnote">Video links open on YouTube. Select a mode in a popup to play it inside YouCity.</p>
         </div>
-      </section>
+      </dialog>
 
 
       <!-- Statistics modal -->
@@ -533,7 +539,7 @@
         <span class="autoplay-label">next city</span>
       </div>
 
-      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      <output class="toast" id="toast" aria-live="polite"></output>
       <audio id="radio-player" preload="none"></audio>
     </main>
 
@@ -556,6 +562,7 @@
     <script src="/analytics.js"></script>
     <script src="/affiliate/affiliate-experiments.js"></script>
     <script src="/drone-videos.js"></script>
+    <script src="/beach-walk-videos.js"></script>
     <script src="/radio-catalog.js"></script>
     <script src="/radio-extra-catalog.js"></script>
     <script src="/catalog-runtime.js"></script>

@@ -58,6 +58,7 @@
       BIKE: "bike",
       WALK: "walk",
       DRONE: "drone",
+      BEACH_WALK: "beach_walk",
     },
   };
 
@@ -201,9 +202,10 @@
     [CONFIG.modes.DRIVE]: "Drive", 
     [CONFIG.modes.BIKE]: "Bike", 
     [CONFIG.modes.WALK]: "Walk",
-    [CONFIG.modes.DRONE]: "Drone"
+    [CONFIG.modes.DRONE]: "Drone",
+    [CONFIG.modes.BEACH_WALK]: "Beach Walk"
   };
-  const MODE_ORDER = [CONFIG.modes.DRIVE, CONFIG.modes.BIKE, CONFIG.modes.WALK, CONFIG.modes.DRONE];
+  const MODE_ORDER = [CONFIG.modes.DRIVE, CONFIG.modes.BIKE, CONFIG.modes.WALK, CONFIG.modes.BEACH_WALK, CONFIG.modes.DRONE];
 
   const THEME_NAMES = {
     [CONFIG.themes.DEFAULT]: MESSAGES.themeDefault,
@@ -365,6 +367,7 @@
     play: $("#play-button"),
     volume: $("#volume"),
     volumeKnob: $("#volume-knob"),
+    volumeAccessible: $("#volume-accessible"),
     rail: $("#rail-track"),
     drawer: $("#city-drawer"),
     grid: $("#city-grid"),
@@ -1373,7 +1376,7 @@
     if (!elements.videoList || !elements.videoOptions) return;
     const availableRideModes = MODE_ORDER.filter((mode) => city?.videos?.[mode]?.length);
     const totalVideos = availableRideModes.reduce((total, mode) => total + city.videos[mode].length, 0);
-    elements.videoOptions.hidden = totalVideos < 2;
+    elements.videoOptions.hidden = totalVideos === 0;
     elements.videoList.innerHTML = availableRideModes.map((mode) => `
       <section class="video-list-group" aria-labelledby="video-list-${mode}">
         <strong id="video-list-${mode}">${escapeHtml(MODE_LABELS[mode] || mode)}</strong>
@@ -2312,6 +2315,11 @@
     if (state.currentFilter === CONFIG.filters.FAVORITES) {
       matches = matches.filter(({ index }) => isFavorite(index));
     }
+    const modeFilter = [CONFIG.modes.DRIVE, CONFIG.modes.WALK, CONFIG.modes.DRONE, CONFIG.modes.BEACH_WALK]
+      .find((mode) => state.currentFilter === mode);
+    if (modeFilter) {
+      matches = matches.filter(({ city }) => city.videos[modeFilter]?.length);
+    }
     if (state.currentContinent) {
       matches = matches.filter(({ city }) => city.region === state.currentContinent);
     }
@@ -2606,8 +2614,8 @@
   function updateVolumeFromKnob(newVolume) {
     const vol = Math.max(0, Math.min(100, newVolume));
     elements.volume.value = vol;
+    elements.volumeAccessible.value = vol;
     elements.radio.volume = vol / 100;
-    elements.volumeKnob.setAttribute("aria-valuenow", vol);
     elements.volumeKnob.style.transform = `rotate(${(vol - 50) * CONFIG.VOLUME_ROTATION_FACTOR}deg)`;
     savePreferences({ volume: vol });
   }
@@ -2656,6 +2664,7 @@
 
     // Inicializa rotação do knob
     const initialVolume = Number(elements.volume.value);
+    elements.volumeAccessible.value = initialVolume;
     elements.volumeKnob.style.transform = `rotate(${(initialVolume - 50) * CONFIG.VOLUME_ROTATION_FACTOR}deg)`;
   }
 
@@ -2688,7 +2697,7 @@
     if (prefs.volume !== undefined) {
       elements.volume.value = prefs.volume;
       elements.volumeKnob.style.transform = `rotate(${(prefs.volume - 50) * CONFIG.VOLUME_ROTATION_FACTOR}deg)`;
-      elements.volumeKnob.setAttribute("aria-valuenow", prefs.volume);
+      elements.volumeAccessible.value = prefs.volume;
     }
     
     if (prefs.currentMode && Object.values(CONFIG.modes).includes(prefs.currentMode)) {
@@ -2998,8 +3007,11 @@
       const value = Number(elements.volume.value);
       elements.radio.volume = value / 100;
       elements.volumeKnob.style.transform = `rotate(${(value - 50) * CONFIG.VOLUME_ROTATION_FACTOR}deg)`;
-      elements.volumeKnob.setAttribute("aria-valuenow", value);
+      elements.volumeAccessible.value = value;
       savePreferences({ volume: value });
+    });
+    elements.volumeAccessible.addEventListener("input", () => {
+      updateVolumeFromKnob(Number(elements.volumeAccessible.value));
     });
     
     // Som da rua

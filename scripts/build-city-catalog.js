@@ -1,12 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const vm = require("vm");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const inputPath = process.argv[2];
 if (!inputPath) throw new Error("Provide the path to the source bundle.");
 
 const source = fs.readFileSync(inputPath, "utf8");
-const starts = [...source.matchAll(/\{\"city\":\"/g)].map((match) => match.index);
+const starts = [...source.matchAll(/{"city":"/g)].map((match) => match.index);
 const parsed = [];
 
 for (const start of starts) {
@@ -84,14 +83,15 @@ if (parsedCatalog.length !== 179) {
 // Keep curated records that are intentionally maintained in cities-data.js
 // (for example cities added after the upstream source bundle was generated).
 const currentCatalogPath = path.resolve(__dirname, "..", "cities-data.js");
-const currentContext = { window: {} };
-if (fs.existsSync(currentCatalogPath)) {
-  vm.runInNewContext(fs.readFileSync(currentCatalogPath, "utf8"), currentContext);
-}
+const currentCatalogSource = fs.existsSync(currentCatalogPath)
+  ? fs.readFileSync(currentCatalogPath, "utf8")
+  : "";
+const currentCatalogMatch = currentCatalogSource.match(/window\.CITY_CATALOG\s*=\s*(\[[\s\S]*\])\s*;?\s*$/);
+const currentCatalog = currentCatalogMatch ? JSON.parse(currentCatalogMatch[1]) : [];
 
 const cityKey = (city) => `${city.name}\u0000${city.country}`;
 const sourceKeys = new Set(parsedCatalog.map(cityKey));
-const curatedCities = (currentContext.window.CITY_CATALOG || [])
+const curatedCities = currentCatalog
   .filter((city) => !sourceKeys.has(cityKey(city)));
 const catalog = [...new Map([...parsedCatalog, ...curatedCities].map((city) => [cityKey(city), city])).values()];
 

@@ -28,5 +28,5 @@
     });
   }
 
-  global.YOUCITY_ANALYTICS = { ...(previousAnalytics || {}), track };
+  global.YOUCITY_ANALYTICS = { ...previousAnalytics, track };
 })(window);

@@ -5,7 +5,7 @@
     const override = global.YouCityAffiliateCatalog.getOverride("discovercars", context.city);
     if (override === null) return null;
     const location = global.YouCityAffiliateCatalog.getLocation("discovercars", context.city);
-    if (!location || location.status !== "VERIFIED" || !location.available) return null;
+    if (location?.status !== "VERIFIED" || !location?.available) return null;
     if (override?.path) {
       return { ...location, discoverCars: { ...location.discoverCars, path: override.path, url: `${HOST}${override.path}` } };
     }
@@ -28,7 +28,7 @@
         const providerConfig = global.YouCityAffiliate.getProviderConfig("discovercars");
         return global.YouCityAffiliate.decorateUrl(url.toString(), providerConfig, {
           ...context,
-          tracking: { ...(providerConfig.tracking || {}), ...(context.tracking || {}) }
+          tracking: { ...providerConfig.tracking, ...context.tracking }
         });
       } catch {
         return "";

@@ -52,7 +52,7 @@
           category: normalized.vertical,
           priority: Number(offer.priority ?? providerConfig.priority ?? 0),
           variant: offer.variant || "A",
-          tracking: { ...(providerConfig.tracking || {}), ...(offer.tracking || {}) },
+          tracking: { ...providerConfig.tracking, ...offer.tracking },
           placement: offer.placement || normalized.placement
         });
       } catch (error) {

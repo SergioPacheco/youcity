@@ -2,7 +2,7 @@
   function hash(value) {
     let result = 2166136261;
     for (const character of String(value)) {
-      result ^= character.charCodeAt(0);
+      result ^= character.codePointAt(0);
       result = Math.imul(result, 16777619);
     }
     return (result >>> 0) / 4294967296;

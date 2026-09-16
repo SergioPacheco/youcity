@@ -5,7 +5,6 @@
  * for every city in the catalog. No network access or third-party dependency
  * is required during the build.
  */
-const { execFileSync } = require("node:child_process");
 const { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { dirname, join, resolve } = require("node:path");
 const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
@@ -13,8 +12,22 @@ const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
 const ROOT_DIR = resolve(__dirname, "..");
 const OUTPUT_DIR = resolve(ROOT_DIR, "dist");
 const DEFAULT_SITE_URL = "https://youcity.pages.dev";
-const SITE_URL = String(process.env.SEO_SITE_URL || DEFAULT_SITE_URL).replace(/\/+$/, "");
-const BASE_PATH = String(process.env.SEO_BASE_PATH || "").trim().replace(/^\/+|\/+$/g, "");
+
+function trimTrailingSlashes(value) {
+  let result = String(value);
+  while (result.endsWith("/")) result = result.slice(0, -1);
+  return result;
+}
+
+function trimOuterSlashes(value) {
+  let result = String(value);
+  while (result.startsWith("/")) result = result.slice(1);
+  while (result.endsWith("/")) result = result.slice(0, -1);
+  return result;
+}
+
+const SITE_URL = trimTrailingSlashes(process.env.SEO_SITE_URL || DEFAULT_SITE_URL);
+const BASE_PATH = trimOuterSlashes(String(process.env.SEO_BASE_PATH || "").trim());
 const SITE_PATH = BASE_PATH ? `/${BASE_PATH}` : "";
 const CITY_SUFFIX = String(process.env.SEO_CITY_SUFFIX || "");
 const SITE_NAME = "YouCity";
@@ -34,6 +47,7 @@ const STATIC_ASSETS = [
   "analytics.js",
   "affiliate/affiliate-experiments.js",
   "affiliate/affiliate-resolver.js",
+  "beach-walk-videos.js",
   "affiliate/providers/expedia.js",
   "affiliate/providers/booking.js",
   "affiliate/providers/viator.js",
@@ -52,22 +66,13 @@ const STATIC_FILES = [...STATIC_ASSETS, "map-config.js"];
 
 function assetVersion() {
   const supplied = String(process.env.ASSET_VERSION || process.env.GITHUB_SHA || "").trim();
-  if (supplied) return supplied.replace(/[^a-zA-Z0-9._-]/g, "").slice(0, 32) || "dev";
-
-  try {
-    return execFileSync("git", ["rev-parse", "--short", "HEAD"], {
-      cwd: ROOT_DIR,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "ignore"]
-    }).trim() || "dev";
-  } catch {
-    return "dev";
-  }
+  return supplied.replace(/[^a-zA-Z0-9._-]/g, "").slice(0, 32) || "dev";
 }
 
 const ASSET_VERSION = assetVersion();
+const staticAssetPattern = STATIC_ASSETS.map((file) => file.replaceAll(".", String.raw`\.`)).join("|");
 const STATIC_ASSET_PATTERN = new RegExp(
-  `((?:href|src)=["'])([^"']*\\/(?:${STATIC_ASSETS.map((file) => file.replace(".", "\\.")).join("|")})(?:\\?[^"']*)?)(["'])`,
+  String.raw`((?:href|src)=["'])([^"']*\/(?:${staticAssetPattern})(?:\?[^"']*)?)(["'])`,
   "g"
 );
 
@@ -80,15 +85,15 @@ function versionStaticAssets(html) {
 
 function escapeHtml(value) {
   return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 function jsonForHtml(value) {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
+  return JSON.stringify(value).replaceAll("<", String.raw`\u003c`);
 }
 
 function slugify(value) {
@@ -97,7 +102,8 @@ function slugify(value) {
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
 }
 
 function loadDiscoverCarsCatalog() {
@@ -150,6 +156,7 @@ function cityModes(city) {
     city.videos?.drive?.length ? "Drive" : null,
     city.videos?.bike?.length ? "Bike" : null,
     city.videos?.walk?.length ? "Walk" : null,
+    city.videos?.beach_walk?.length ? "Beach Walk" : null,
     city.videos?.drone?.length ? "Drone" : null
   ].filter(Boolean);
 }
@@ -193,7 +200,7 @@ function citySeo(city) {
 }
 
 function homeSeo(catalog) {
-  const description = `Explore ${catalog.length} cities around the world through immersive Drive, Bike, Walk, and Drone rides with local radio.`;
+  const description = `Explore ${catalog.length} cities around the world through immersive Drive, Bike, Walk, Beach Walk, and Drone rides with local radio.`;
   return {
     title: "YouCity — cities in motion",
     description,
@@ -217,19 +224,19 @@ function homeSeo(catalog) {
     name: "Cities in motion",
     country: "Around the world",
     path: "/",
-    modes: ["Drive", "Bike", "Walk", "Drone"]
+    modes: ["Drive", "Bike", "Walk", "Beach Walk", "Drone"]
   };
 }
 
 function replaceMeta(html, attribute, value) {
-  const escapedAttribute = attribute.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const pattern = new RegExp(`<meta\\b(?=[^>]*${escapedAttribute})[^>]*>`, "i");
+  const escapedAttribute = attribute.replace(/[.*+?^${}()|[\]\\]/g, String.raw`\$&`);
+  const pattern = new RegExp(String.raw`<meta\b(?=[^>]*${escapedAttribute})[^>]*>`, "i");
   const tag = `<meta ${attribute} content="${escapeHtml(value)}" />`;
   return pattern.test(html) ? html.replace(pattern, tag) : html.replace("</head>", `    ${tag}\n  </head>`);
 }
 
 function replaceLink(html, relation, href) {
-  const pattern = new RegExp(`<link\\b(?=[^>]*rel=["']${relation}["'])[^>]*>`, "i");
+  const pattern = new RegExp(String.raw`<link\b(?=[^>]*rel=["']${relation}["'])[^>]*>`, "i");
   const tag = `<link rel="${relation}" href="${escapeHtml(href)}" />`;
   return pattern.test(html) ? html.replace(pattern, tag) : html.replace("</head>", `    ${tag}\n  </head>`);
 }
@@ -255,7 +262,7 @@ function injectRuntimeBasePath(html) {
 }
 
 function replaceElementText(html, tagName, id, value) {
-  const pattern = new RegExp(`(<${tagName}\\b[^>]*id=["']${id}["'][^>]*>)[\\s\\S]*?(<\\/${tagName}>)`, "i");
+  const pattern = new RegExp(String.raw`(<${tagName}\b[^>]*id=["']${id}["'][^>]*>)[\s\S]*?(<\/${tagName}>)`, "i");
   return html.replace(pattern, `$1${value}$2`);
 }
 
@@ -297,7 +304,7 @@ function renderPage(baseHtml, seo, fallback) {
 }
 
 function xmlEscape(value) {
-  return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+  return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 }
 
 function buildSitemap(catalog) {
@@ -340,7 +347,7 @@ function cityFallback(seo, catalog, discoverCarsCatalog) {
 
 function homeFallback(catalog) {
   const links = catalog.map((city) => `<li><a href="${cityPath(city)}">${escapeHtml(displayCityName(city))}, ${escapeHtml(countryName(city.country))}</a></li>`).join("");
-  return `<section class="seo-fallback"><h2>Explore ${catalog.length} cities around the world</h2><p>YouCity is an interactive collection of immersive Drive, Bike, Walk, and Drone rides with local radio.</p><ul>${links}</ul></section>`;
+  return `<section class="seo-fallback"><h2>Explore ${catalog.length} cities around the world</h2><p>YouCity is an interactive collection of immersive Drive, Bike, Walk, Beach Walk, and Drone rides with local radio.</p><ul>${links}</ul></section>`;
 }
 
 function main() {

@@ -9,8 +9,22 @@ const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const OUTPUT_DIR = resolve(ROOT_DIR, "dist");
-const SITE_URL = String(process.env.SEO_SITE_URL || "https://youcity.pages.dev").replace(/\/+$/, "");
-const BASE_PATH = String(process.env.SEO_BASE_PATH || "").trim().replace(/^\/+|\/+$/g, "");
+
+function trimTrailingSlashes(value) {
+  let result = String(value);
+  while (result.endsWith("/")) result = result.slice(0, -1);
+  return result;
+}
+
+function trimOuterSlashes(value) {
+  let result = String(value);
+  while (result.startsWith("/")) result = result.slice(1);
+  while (result.endsWith("/")) result = result.slice(0, -1);
+  return result;
+}
+
+const SITE_URL = trimTrailingSlashes(process.env.SEO_SITE_URL || "https://youcity.pages.dev");
+const BASE_PATH = trimOuterSlashes(String(process.env.SEO_BASE_PATH || "").trim());
 const SITE_PATH = BASE_PATH ? `/${BASE_PATH}` : "";
 const failures = [];
 
@@ -31,8 +45,8 @@ function countMatches(html, pattern) {
 }
 
 function firstMeta(html, attribute, value) {
-  const pattern = new RegExp(`<meta\\b[^>]*${attribute}=["']${value}["'][^>]*content=["']([^"']*)["'][^>]*>`, "i");
-  const alternatePattern = new RegExp(`<meta\\b[^>]*content=["']([^"']*)["'][^>]*${attribute}=["']${value}["'][^>]*>`, "i");
+  const pattern = new RegExp(String.raw`<meta\b[^>]*${attribute}=["']${value}["'][^>]*content=["']([^"']*)["'][^>]*>`, "i");
+  const alternatePattern = new RegExp(String.raw`<meta\b[^>]*content=["']([^"']*)["'][^>]*${attribute}=["']${value}["'][^>]*>`, "i");
   return html.match(pattern)?.[1] || html.match(alternatePattern)?.[1] || "";
 }
 
@@ -57,7 +71,7 @@ function checkRequiredFiles() {
 function checkPage(file, { indexable = true } = {}) {
   const html = read(file);
   const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1].trim() || "";
-  const h1 = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map((match) => match[1].replace(/<[^>]+>/g, "").trim()).filter(Boolean);
+  const h1 = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map((match) => stripTags(match[1])).filter(Boolean);
 
   if (countMatches(html, /<title>/gi) !== 1 || !title) fail(`${file}: expected exactly one non-empty title`);
   if (h1.length !== 1) fail(`${file}: expected exactly one non-empty H1`);
@@ -104,13 +118,27 @@ function checkPage(file, { indexable = true } = {}) {
 }
 
 function slugify(value) {
-  return String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  let slug = String(value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  while (slug.startsWith("-")) slug = slug.slice(1);
+  while (slug.endsWith("-")) slug = slug.slice(0, -1);
+  return slug;
+}
+
+function stripTags(value) {
+  return String(value).split("<").map((part) => {
+    const end = part.indexOf(">");
+    return end < 0 ? part : part.slice(end + 1);
+  }).join("").trim();
+}
+
+function cityUrl(city) {
+  return `${SITE_URL}${sitePath(`/city/${slugify(city.name)}`)}`;
 }
 
 function checkSitemap(catalog) {
   const sitemap = read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const expected = [`${SITE_URL}${sitePath("/")}`, ...catalog.map((city) => `${SITE_URL}${sitePath(`/city/${slugify(city.name)}`)}`)];
+  const expected = [`${SITE_URL}${sitePath("/")}`, ...catalog.map(cityUrl)];
   if (urls.length !== expected.length) fail(`sitemap.xml: expected ${expected.length} URLs, found ${urls.length}`);
   for (const url of expected) if (!urls.includes(url)) fail(`sitemap.xml: missing ${url}`);
 }

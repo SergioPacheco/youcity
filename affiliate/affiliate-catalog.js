@@ -10,7 +10,7 @@
     const keys = [cityKey(city), city?.id].filter(Boolean);
     let entry;
     for (const key of keys) {
-      if (Object.prototype.hasOwnProperty.call(overrides, key)) {
+      if (Object.hasOwn(overrides, key)) {
         entry = overrides[key];
         break;
       }

@@ -44,7 +44,7 @@
   function normalizedPlacement(placement) {
     if (placement === "travel_planner") return "travelplanner";
     if (placement === "map_popup") return "map";
-    return global.YouCityAffiliate.slugify(placement || "travelplanner").replace(/-/g, "");
+    return global.YouCityAffiliate.slugify(placement || "travelplanner").replaceAll("-", "");
   }
 
   function createCampaign(context, vertical = context?.vertical, placement = context?.placement) {
@@ -120,7 +120,7 @@
   }
 
   function setOptionalNumber(url, name, value, minimum) {
-    if (value === "" || value === null || typeof value === "undefined") return;
+    if (value === "" || value === null || value === undefined) return;
     const number = Number(value);
     if (Number.isInteger(number) && number >= minimum) url.searchParams.set(name, String(number));
   }
@@ -167,14 +167,16 @@
         available: true,
         variant: routing.variant,
         tracking: { providerCampaign: createCampaign(context) },
-        label: context.vertical === "activities"
-          ? `Things to do in ${context.city.name}`
-          : context.vertical === "vacation-rentals"
-            ? `Vacation rentals in ${context.city.name}`
-            : `Hotels in ${context.city.name}`
+        label: getOfferLabel(context)
       };
     }
   };
+
+  function getOfferLabel(context) {
+    if (context.vertical === "activities") return `Things to do in ${context.city.name}`;
+    if (context.vertical === "vacation-rentals") return `Vacation rentals in ${context.city.name}`;
+    return `Hotels in ${context.city.name}`;
+  }
 
   global.YouCityAffiliate.registerProvider(provider);
   global.YouCityStay22 = {

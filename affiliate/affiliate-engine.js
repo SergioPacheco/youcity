@@ -42,7 +42,8 @@
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
+      .replace(/^-+/, "")
+      .replace(/-+$/, "");
   }
 
   function createConfiguredUrl(providerId, context) {
@@ -62,7 +63,7 @@
       if (providerConfig.affiliateId && providerConfig.affiliateIdParam) {
         url.searchParams.set(providerConfig.affiliateIdParam, providerConfig.affiliateId);
       }
-      const trackingContext = { ...context, tracking: { ...(providerConfig.tracking || {}), ...(context.tracking || {}) } };
+      const trackingContext = { ...context, tracking: { ...providerConfig.tracking, ...context.tracking } };
       return global.YouCityAffiliateTracking?.decorateUrl(url.toString(), providerConfig, trackingContext) || url.toString();
     } catch {
       return "";
@@ -90,7 +91,7 @@
       language: options.language || global.document?.documentElement?.lang || "en",
       device: options.device || (global.matchMedia?.("(max-width: 700px)").matches ? "mobile" : "desktop"),
       mode: options.mode || "",
-      tracking: { ...(options.tracking || {}) }
+      tracking: { ...options.tracking }
     };
   }
 
