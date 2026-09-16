@@ -80,9 +80,6 @@
     videoFallback: "Video unavailable. Loading an alternative...",
     videoUnavailable: "Video unavailable. Try another city.",
     fullscreenUnavailable: "Fullscreen is not available in this browser.",
-    pipUnavailable: "PiP is not available for embedded YouTube videos",
-    pipError: "Error enabling Picture-in-Picture",
-    pipOff: "Picture-in-Picture off",
     linkCopied: "Link copied to clipboard!",
     linkCopyFailed: "Could not copy the link",
     favoriteAdded: (city) => `${city} added to favorites ♥`,
@@ -412,7 +409,6 @@
     infoPopulation: $("#info-population"),
     filterContinent: $("#filter-continent"),
     statsModal: $("#stats-modal"),
-    pipBtn: $("#pip-button"),
     shareBtn: $("#share-button"),
     statsBtn: $("#stats-button"),
     themeBtn: $("#theme-button"),
@@ -2101,28 +2097,6 @@
   }
 
   // -----------------------------------------------------------------------------
-  // Picture-in-Picture
-  // -----------------------------------------------------------------------------
-  
-  /**
-   * Alterna Picture-in-Picture
-   */
-  async function togglePiP() {
-    try {
-      if (document.pictureInPictureElement) {
-        await document.exitPictureInPicture();
-        showToast(MESSAGES.pipOff);
-      } else {
-        // Cria um vídeo temporário para PiP (iframe não suporta diretamente)
-        showToast(MESSAGES.pipUnavailable);
-      }
-    } catch (error) {
-      console.warn("[YouCity] PiP error:", error.message);
-      showToast(MESSAGES.pipError);
-    }
-  }
-
-  // -----------------------------------------------------------------------------
   // Compartilhar
   // -----------------------------------------------------------------------------
   
@@ -3189,9 +3163,6 @@
     // Qualidade
     elements.qualityBtn.addEventListener("click", cycleQuality);
     
-    // PiP
-    elements.pipBtn.addEventListener("click", togglePiP);
-    
     // Compartilhar
     elements.shareBtn.addEventListener("click", shareCity);
     
@@ -3263,10 +3234,6 @@
         case "f":
         case "F":
           toggleFavorite();
-          break;
-        case "p":
-        case "P":
-          togglePiP();
           break;
         case "a":
         case "A":
