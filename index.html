@@ -215,12 +215,6 @@
           <span class="info-item" id="info-timezone"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><b>--:--</b></span>
           <span class="info-item" id="info-population"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><b>--</b></span>
         </div>
-        <nav class="mobile-mode-control" aria-label="Choose ride mode">
-          <button type="button" data-mode="drive">Drive</button>
-          <button type="button" data-mode="bike">Bike</button>
-          <button type="button" data-mode="walk">Walk</button>
-          <button type="button" data-mode="drone">Drone</button>
-        </nav>
       </section>
 
       <section class="travel-prompts" id="travel-prompts" aria-labelledby="travel-prompts-title" hidden>
@@ -279,7 +273,9 @@
 
         <div class="radio-summary" id="radio-summary">
           <span aria-hidden="true">♫</span>
+          <button class="radio-summary-nav" id="radio-summary-previous" type="button" aria-label="Previous radio" title="Previous radio" disabled>◄</button>
           <strong id="radio-summary-name">Local radio</strong>
+          <button class="radio-summary-nav" id="radio-summary-next" type="button" aria-label="Next radio" title="Next radio" disabled>►</button>
           <button class="radio-summary-play" id="radio-summary-play" type="button" aria-label="Play radio">▶</button>
           <button class="radio-expand" id="radio-expand" type="button" aria-expanded="false" aria-controls="radio-details" aria-label="Expand radio controls">⌃</button>
         </div>

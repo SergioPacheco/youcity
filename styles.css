@@ -234,7 +234,9 @@ button:focus-visible, input:focus-visible {
 .radio-summary { display: flex; align-items: center; gap: 9px; min-height: 48px; padding: 0 12px; border-top: 1px solid rgba(255,255,255,.08); color: var(--lcd-green); }
 .radio-summary strong { min-width: 0; overflow: hidden; color: #e8f8e9; font: 500 11px "DM Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }
 .radio-summary > span { font-size: 16px; }
-.radio-summary-play, .radio-expand { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid rgba(215,255,67,.35); border-radius: 50%; background: transparent; color: var(--acid); cursor: pointer; font: 700 12px "DM Mono", monospace; }
+.radio-summary-play, .radio-summary-nav, .radio-expand { display: grid; place-items: center; width: 38px; height: 38px; padding: 0; border: 1px solid rgba(215,255,67,.35); border-radius: 50%; background: transparent; color: var(--acid); cursor: pointer; font: 700 12px "DM Mono", monospace; }
+.radio-summary-nav { width: 30px; border: 0; color: rgba(255,255,255,.68); font-size: 11px; }
+.radio-summary-nav:disabled { cursor: not-allowed; opacity: .28; }
 .radio-summary-play { margin-left: auto; }
 .radio-expand { border: 0; font-size: 18px; }
 
@@ -656,9 +658,23 @@ button:focus-visible, input:focus-visible {
 @media (max-width: 800px) {
   /* Keep the primary travel action in the top bar on small screens. The
      contrast is intentional: acid backgrounds always use dark ink. */
-  .travel-menu-button { width: auto; min-width: 86px; height: 40px; padding: 0 10px; gap: 7px; border-color: var(--acid); background: var(--acid); color: var(--ink); font-weight: 700; }
+  .travel-menu-button { width: auto; min-width: 86px; height: 40px; padding: 0 10px; gap: 7px; border-color: #d7ff43; background: #d7ff43; color: #111411 !important; font-weight: 700; }
   .travel-menu-button svg { width: 15px; }
-  .travel-menu-button:hover, .travel-menu-button:focus-visible { background: #e5ff78; color: var(--ink); }
+  .travel-menu-button:hover, .travel-menu-button:focus-visible { background: #e5ff78; color: #111411 !important; }
+
+  /* Keep ride modes inside the radio panel on mobile. */
+  .stereo-top-bar { display: flex; flex-wrap: nowrap; gap: 4px; padding: 5px; }
+  .stereo-top-bar .mode-control { min-width: 0; width: 100%; height: 38px; padding: 3px; }
+  .stereo-top-bar .mode-control button { flex: 1 1 0; min-width: 0; height: 30px; padding: 0 4px; font-size: 8px; }
+  .stereo-top-bar .top-bar-right { display: none; }
+  .mobile-mode-control { display: none; }
+
+  /* The compact summary stays visible while the full deck can be expanded. */
+  .player-card.is-expanded .player-card-main { display: flex; padding: 10px 8px; gap: 8px; }
+  .player-card.is-expanded .radio-expand { transform: rotate(180deg); }
+  .player-card-main .volume-knob-section { display: none; }
+  .player-card-main .lcd-frequency { font-size: 18px; }
+  .player-card-main .lcd-screen { height: 54px; padding: 6px 9px; }
 
   /* Quick actions live at the top instead of competing with the video
      player. The heading and disclosure remain available in the planner. */
@@ -729,7 +745,7 @@ button:focus-visible, input:focus-visible {
   .city-card { cursor: default; }
   .city-card .card-favorite { width: 44px; height: 44px; opacity: 1; }
   .drawer-close { width: 44px; height: 44px; }
-  .radio-summary-play, .radio-expand { min-width: 44px; min-height: 44px; }
+  .radio-summary-play, .radio-summary-nav, .radio-expand { min-width: 44px; min-height: 44px; }
   .mode-control button { min-width: 44px; min-height: 44px; }
   .stereo-top-bar .mode-control { height: 44px; }
   .video-list-item { min-height: 44px; }

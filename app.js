@@ -399,6 +399,8 @@
     playerMinimize: $("#player-minimize"),
     playerRestore: $("#player-restore"),
     radioSummaryName: $("#radio-summary-name"),
+    radioSummaryPrevious: $("#radio-summary-previous"),
+    radioSummaryNext: $("#radio-summary-next"),
     radioSummaryPlay: $("#radio-summary-play"),
     radioExpand: $("#radio-expand"),
     moreButton: $("#more-button"),
@@ -1576,6 +1578,8 @@
       if (elements.radioSummaryName) elements.radioSummaryName.textContent = "No local radio";
       elements.lcdMeta.textContent = "-- · NO SIGNAL";
       elements.play.disabled = true;
+      elements.radioSummaryPrevious?.setAttribute("disabled", "true");
+      elements.radioSummaryNext?.setAttribute("disabled", "true");
       elements.stereoLed.classList.remove("is-active");
       elements.rdsLed.classList.remove("is-active");
       setPlayingState(false);
@@ -1583,6 +1587,8 @@
     }
     
     elements.play.disabled = false;
+    elements.radioSummaryPrevious?.toggleAttribute("disabled", radios.length < 2);
+    elements.radioSummaryNext?.toggleAttribute("disabled", radios.length < 2);
     state.radioIndex = (nextIndex + radios.length) % radios.length;
     
     const station = radios[state.radioIndex];
@@ -3020,6 +3026,14 @@
     elements.playerMinimize.addEventListener("click", () => togglePlayer(true));
     elements.playerRestore.addEventListener("click", () => togglePlayer(false));
     elements.radioExpand?.addEventListener("click", () => toggleRadioExpanded());
+    elements.radioSummaryPrevious?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setRadio(state.radioIndex - 1, state.radioWantsPlay || state.radioPlaying);
+    });
+    elements.radioSummaryNext?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      setRadio(state.radioIndex + 1, state.radioWantsPlay || state.radioPlaying);
+    });
     elements.radioSummaryPlay?.addEventListener("click", (event) => {
       event.stopPropagation();
       toggleRadio();
