@@ -440,6 +440,7 @@
     radioPlaying: false,
     radioWantsPlay: false,
     radioAutoplayPending: false,
+    radioInitialAutoplayPending: true,
     streetSoundOn: false,
     currentSpeed: 1,
     currentMode: CONFIG.modes.DRIVE,
@@ -1716,13 +1717,22 @@
   }
 
   function resumeRadioAfterUserGesture() {
-    if (!state.radioAutoplayPending || !state.radioWantsPlay) return;
-    state.radioAutoplayPending = false;
-    playRadioWithRetry();
+    if (!currentCity().radios.length) return;
+    if (state.radioAutoplayPending && state.radioWantsPlay) {
+      state.radioAutoplayPending = false;
+      playRadioWithRetry();
+      return;
+    }
+    if (!state.radioInitialAutoplayPending) return;
+    state.radioInitialAutoplayPending = false;
+    if (!state.radioPlaying && !state.radioWantsPlay) {
+      setRadio(state.radioIndex, true);
+    }
   }
 
   function initializeRadioForUserGesture() {
     if (!currentCity().radios.length) return;
+    state.radioInitialAutoplayPending = false;
     if (state.radioAutoplayPending) {
       resumeRadioAfterUserGesture();
       return;
@@ -1761,6 +1771,8 @@
     if (!currentCity().radios.length) {
       return showToast(MESSAGES.noRadio);
     }
+
+    state.radioInitialAutoplayPending = false;
     
     if (state.radioPlaying) {
       state.radioWantsPlay = false;
