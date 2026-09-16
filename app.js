@@ -487,6 +487,7 @@
   };
 
   let worldMap = null;
+  let worldMapMarkers = new Map();
   let leafletAssetsPromise = null;
 
   // -----------------------------------------------------------------------------
@@ -899,9 +900,53 @@
     }).join("");
   }
 
+  function mapCityCoordinates(city) {
+    const coordinates = city?.coordinates || window.CITY_COORDINATES?.[city?.rawName];
+    return Array.isArray(coordinates) && coordinates.length >= 2 ? coordinates : null;
+  }
+
+  function updateCurrentMapCity() {
+    if (!worldMap || !worldMapMarkers.size) return;
+    worldMapMarkers.forEach((marker, index) => {
+      const isCurrent = index === state.cityIndex;
+      marker.setStyle({
+        radius: isCurrent ? 10 : 6,
+        color: isCurrent ? "#ffffff" : "#d7ff43",
+        weight: isCurrent ? 3 : 2,
+        fillColor: isCurrent ? "#d7ff43" : "#111411",
+        fillOpacity: 0.95
+      });
+      if (isCurrent) {
+        if (!marker.getTooltip()) {
+          marker.bindTooltip("You are here", {
+            className: "map-current-label",
+            direction: "top",
+            offset: [0, -8],
+            permanent: true
+          });
+        }
+        marker.setTooltipContent("You are here");
+        marker.openTooltip();
+      } else if (marker.getTooltip()) {
+        marker.unbindTooltip();
+      }
+    });
+  }
+
+  function focusCurrentMapCity(openPopup = true) {
+    if (!worldMap) return;
+    const marker = worldMapMarkers.get(state.cityIndex);
+    const coordinates = mapCityCoordinates(currentCity());
+    if (!marker || !coordinates) return;
+    updateCurrentMapCity();
+    worldMap.setView(coordinates, Math.max(worldMap.getZoom(), 5), { animate: true });
+    if (openPopup) marker.openPopup();
+  }
+
   async function initializeWorldMap() {
     if (!elements.mapContainer || worldMap) {
       worldMap?.invalidateSize();
+      focusCurrentMapCity();
       return;
     }
 
@@ -930,12 +975,13 @@
 
     const bounds = [];
     let mappedCities = 0;
+    worldMapMarkers = new Map();
     cities.forEach((city, index) => {
-      const coordinates = city.coordinates || window.CITY_COORDINATES?.[city.rawName];
+      const coordinates = mapCityCoordinates(city);
       if (!Array.isArray(coordinates)) return;
       mappedCities += 1;
       bounds.push(coordinates);
-      L.circleMarker(coordinates, {
+      const marker = L.circleMarker(coordinates, {
         radius: 6,
         color: "#d7ff43",
         weight: 2,
@@ -943,12 +989,14 @@
         fillOpacity: 0.95,
         bubblingMouseEvents: false
       }).bindPopup(mapPopup(city, index), { maxWidth: 280, minWidth: 220 }).addTo(worldMap);
+      worldMapMarkers.set(index, marker);
     });
 
     if (elements.mapResultCount) elements.mapResultCount.textContent = `${mappedCities} cities · ${cities.length} destinations`;
     renderMapDirectory();
     affiliate.observeImpressions(elements.mapContainer);
     if (bounds.length) worldMap.fitBounds(bounds, { padding: [28, 28], maxZoom: 3 });
+    focusCurrentMapCity();
     setTimeout(() => worldMap?.invalidateSize(), 50);
   }
 

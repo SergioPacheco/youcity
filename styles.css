@@ -355,6 +355,8 @@ button:focus-visible, input:focus-visible {
 .map-footnote { flex: 0 0 auto; margin: 12px 0 0; color: rgba(255,255,255,.42); font: 400 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .04em; }
 .map-unavailable { display: grid; height: 100%; min-height: 360px; place-items: center; margin: 0; padding: 24px; color: #20251f; font: 500 12px "DM Mono", monospace; text-align: center; }
 .map-popup { width: min(100%, 250px); min-width: 205px; color: #182018; font-family: "Manrope", sans-serif; }
+.map-current-label { padding: 4px 7px; border: 1px solid #d7ff43; border-radius: 4px; background: #111411; color: #d7ff43; box-shadow: 0 3px 10px rgba(0,0,0,.3); font: 700 8px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.map-current-label::before { border-top-color: #d7ff43; }
 .map-popup-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid #dfe4dd; }
 .map-popup-title strong { font: 600 18px/1 "Newsreader", serif; }
 .map-popup-title span { color: #69736a; font: 500 9px "DM Mono", monospace; text-transform: uppercase; }
