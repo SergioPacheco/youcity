@@ -961,7 +961,7 @@
       ? Math.max(0, Math.min(parsedVideoIndex, videos.length - 1))
       : 0;
     closeLayer(elements.mapModal);
-    selectCity(cityIndex, { silent: true, mode, videoIndex: selectedVideoIndex });
+    selectCity(cityIndex, { silent: true, mode, videoIndex: selectedVideoIndex, autoplayRadio: true });
   }
 
   // -----------------------------------------------------------------------------
@@ -1264,11 +1264,11 @@
       state.videoRecoveryMode = false;
       const alternateMode = availableModes(currentCity()).find((mode) => mode !== state.currentMode);
       if (alternateMode) switchMode(alternateMode);
-      else selectRandomCity();
+      else selectRandomCity({ autoplayRadio: false });
       return;
     }
     if (!currentRide()) {
-      selectRandomCity();
+      selectRandomCity({ autoplayRadio: false });
       return;
     }
     if (options.userGesture) state.videoUserGesture = true;
@@ -2456,9 +2456,9 @@
   /**
    * Seleciona cidade aleatória
    */
-  function selectRandomCity() {
+  function selectRandomCity(options = { autoplayRadio: true }) {
     const randomIndex = Math.floor(Math.random() * cities.length);
-    selectCity(randomIndex);
+    selectCity(randomIndex, options);
     showToast(MESSAGES.randomDestination(cities[randomIndex].name));
   }
 
@@ -2955,7 +2955,7 @@
       const cityButton = event.target.closest("[data-map-city-select]");
       if (cityButton) {
         closeLayer(elements.mapModal);
-        selectCity(Number(cityButton.dataset.mapCitySelect), { silent: true });
+        selectCity(Number(cityButton.dataset.mapCitySelect), { silent: true, autoplayRadio: true });
       }
     });
     
@@ -2978,19 +2978,19 @@
     // Rail de navegação
     elements.rail.addEventListener("click", (event) => {
       const dot = event.target.closest("[data-city]");
-      if (dot) selectCity(Number(dot.dataset.city));
+      if (dot) selectCity(Number(dot.dataset.city), { autoplayRadio: true });
     });
     
     // Busca
     elements.search.addEventListener("input", () => renderGrid(elements.search.value));
     
     // Navegação prev/next
-    $("#previous-city").addEventListener("click", () => selectCity(state.cityIndex - 1));
-    $("#next-city").addEventListener("click", () => selectCity(state.cityIndex + 1));
+    $("#previous-city").addEventListener("click", () => selectCity(state.cityIndex - 1, { autoplayRadio: true }));
+    $("#next-city").addEventListener("click", () => selectCity(state.cityIndex + 1, { autoplayRadio: true }));
     
     // Navegação hint (botões ← →)
-    $("#hint-prev").addEventListener("click", () => selectCity(state.cityIndex - 1));
-    $("#hint-next").addEventListener("click", () => selectCity(state.cityIndex + 1));
+    $("#hint-prev").addEventListener("click", () => selectCity(state.cityIndex - 1, { autoplayRadio: true }));
+    $("#hint-next").addEventListener("click", () => selectCity(state.cityIndex + 1, { autoplayRadio: true }));
     
     // Minimizar / Restaurar player
     elements.playerMinimize.addEventListener("click", () => togglePlayer(true));
@@ -3121,7 +3121,7 @@
       }
       const card = event.target.closest("[data-city]");
       if (!card) return;
-      selectCity(Number(card.dataset.city));
+      selectCity(Number(card.dataset.city), { autoplayRadio: true });
       closeLayer(elements.drawer);
     });
     
@@ -3187,10 +3187,10 @@
       
       switch (event.key) {
         case "ArrowRight":
-          selectCity(state.cityIndex + 1);
+          selectCity(state.cityIndex + 1, { autoplayRadio: true });
           break;
         case "ArrowLeft":
-          selectCity(state.cityIndex - 1);
+          selectCity(state.cityIndex - 1, { autoplayRadio: true });
           break;
         case " ":
           event.preventDefault();
@@ -3328,9 +3328,9 @@
         // Swipe para esquerda = próxima cidade
         // Swipe para direita = cidade anterior
         if (deltaX < 0) {
-          selectCity(state.cityIndex + 1);
+          selectCity(state.cityIndex + 1, { autoplayRadio: true });
         } else {
-          selectCity(state.cityIndex - 1);
+          selectCity(state.cityIndex - 1, { autoplayRadio: true });
         }
         hideSwipeHint();
       }
