@@ -456,24 +456,22 @@ button:focus-visible, input:focus-visible {
 .travel-secondary .travel-category-icon { width: 23px; height: 23px; font-size: 12px; }
 .travel-secondary .travel-category-actions { margin-top: 6px; }
 .travel-disclosure { margin: 12px 1px 0; color: var(--text-faint); font: 400 8px/1.45 "DM Mono", monospace; }
-.travel-prompts, .contextual-cta { position: absolute; z-index: 5; max-width: min(520px, calc(100% - 28px)); padding: 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: rgba(9,13,10,.82); box-shadow: 0 14px 35px rgba(0,0,0,.28); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
-.travel-prompts[hidden], .contextual-cta[hidden] { display: none; }
+.travel-prompts { position: absolute; z-index: 5; max-width: min(520px, calc(100% - 28px)); padding: 10px 40px 10px 12px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: rgba(9,13,10,.82); box-shadow: 0 14px 35px rgba(0,0,0,.28); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.travel-prompts[hidden] { display: none; }
 .travel-prompts { left: clamp(24px, 6vw, 96px); bottom: 46px; }
 .travel-prompts-heading { display: flex; align-items: baseline; gap: 8px; }
 .travel-prompts-kicker { color: var(--text-subtle); font: 500 8px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
-.travel-prompts h2, .contextual-cta h2 { margin: 0; color: #fff; font: 400 18px/1 "Newsreader", serif; letter-spacing: -.02em; }
-.travel-quick-actions, .contextual-cta-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 9px; }
+.travel-prompts h2 { margin: 0; color: #fff; font: 400 18px/1 "Newsreader", serif; letter-spacing: -.02em; }
+.travel-quick-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 9px; }
 .travel-quick-action { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 5px; min-height: 44px; padding: 6px 8px; border: 1px solid rgba(215,255,67,.35); border-radius: 5px; background: rgba(0,0,0,.25); color: #fff; text-decoration: none; transition: border-color .15s, background .15s, transform .15s; }
 .travel-quick-action:hover, .travel-quick-action:focus-visible { border-color: var(--acid); background: rgba(215,255,67,.12); transform: translateY(-1px); }
 .travel-quick-action span:not(.travel-quick-icon) { min-width: 0; overflow: hidden; font: 700 10px/1.05 "DM Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }
 .travel-quick-icon { font-size: 14px; line-height: 1; }
 .travel-quick-action b { color: var(--acid); font-size: 13px; font-weight: 400; }
 .travel-prompts-disclosure { margin: 8px 0 0; color: var(--text-faint); font: 400 8px/1.3 "DM Mono", monospace; }
-.contextual-cta { right: clamp(24px, 6vw, 96px); bottom: 142px; display: grid; grid-template-columns: auto minmax(220px, 1fr) auto; align-items: center; gap: 12px; max-width: min(560px, calc(100% - 28px)); padding-right: 40px; opacity: 0; transform: translateY(8px); transition: opacity .25s, transform .25s; }
-.contextual-cta.is-visible { opacity: 1; transform: translateY(0); }
-.contextual-cta-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 0; }
-.contextual-cta-close { position: absolute; top: 5px; right: 7px; width: 26px; height: 26px; padding: 0; border: 0; background: transparent; color: rgba(255,255,255,.55); cursor: pointer; font-size: 20px; line-height: 1; }
-.contextual-cta-close:hover, .contextual-cta-close:focus-visible { color: #fff; }
+.travel-prompts-close { position: absolute; top: 5px; right: 7px; display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; background: transparent; color: rgba(255,255,255,.55); cursor: pointer; }
+.travel-prompts-close svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2; }
+.travel-prompts-close:hover, .travel-prompts-close:focus-visible { color: #fff; }
 .stay22-tools { margin-top: 10px; padding: 9px; border: 1px solid rgba(215,255,67,.42); border-radius: 7px; background: rgba(95,130,35,.1); }
 .stay22-tools-heading { display: flex; align-items: center; gap: 9px; }
 .stay22-tools-heading strong { display: block; color: #fff; font: 600 14px/1.1 "Newsreader", serif; }
@@ -662,7 +660,7 @@ button:focus-visible, input:focus-visible {
 
   /* Quick actions live at the top instead of competing with the video
      player. The heading and disclosure remain available in the planner. */
-  .travel-prompts { top: calc(70px + var(--safe-top) + 8px); right: 12px; left: 12px; bottom: auto; max-width: none; padding: 5px; border-color: rgba(255,255,255,.22); background: rgba(7,11,8,.96); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
+  .travel-prompts { top: calc(70px + var(--safe-top) + 8px); right: 12px; left: 12px; bottom: auto; max-width: none; padding: 5px 35px 5px 5px; border-color: rgba(255,255,255,.22); background: rgba(7,11,8,.96); box-shadow: 0 8px 20px rgba(0,0,0,.28); }
   .travel-prompts-heading, .travel-prompts-disclosure { display: none; }
   .travel-quick-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 0; }
   .travel-quick-action { grid-template-columns: auto minmax(0, 1fr); justify-content: center; gap: 4px; min-height: 36px; padding: 5px 4px; border-color: rgba(255,255,255,.28); background: #121a14; color: #fff; }
@@ -671,9 +669,6 @@ button:focus-visible, input:focus-visible {
   .travel-quick-icon { color: var(--acid); }
   .travel-quick-action b { display: none; }
 
-  /* The persistent top action already exposes the planner on mobile; keep
-     the timed contextual card desktop-only so it never covers the ride. */
-  .contextual-cta { display: none !important; }
 }
 
 @media (max-width: 430px) {
@@ -721,7 +716,7 @@ button:focus-visible, input:focus-visible {
   .player-card-main { padding: 8px; }
   .stereo-top-bar { display: none; }
   .stereo-buttons { display: none; }
-  .travel-prompts, .contextual-cta { display: none !important; }
+  .travel-prompts { display: none !important; }
 }
 
 /* Touch-friendly: increase touch targets */

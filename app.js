@@ -23,7 +23,6 @@
     RADIO_LOAD_TIMEOUT: 10_000,
     RADIO_MAX_RETRIES: 4,
     VIDEO_SWITCH_DEBOUNCE: 400,
-    CONTEXTUAL_CTA_DELAY: 30_000,
     DEFAULT_VOLUME: 64,
     AUTOPLAY_INTERVAL: 180_000, // 3 minutes
     POMODORO_DURATION: 25 * 60, // 25 minutes in seconds
@@ -39,7 +38,6 @@
       theme: "volta-theme",
       onboardingSeen: "youcity-onboarding-seen",
       swipeHintSeen: "youcity-swipe-hint-seen",
-      contextualCtaDismissed: "youcity-contextual-cta-dismissed",
     },
     filters: {
       ALL: "all",
@@ -379,10 +377,7 @@
     travelPrompts: $("#travel-prompts"),
     travelPromptsCity: $("#travel-prompts-city"),
     travelQuickActions: $("#travel-quick-actions"),
-    contextualCta: $("#contextual-cta"),
-    contextualCtaCity: $("#contextual-cta-city"),
-    contextualCtaActions: $("#contextual-cta-actions"),
-    contextualCtaClose: $("#contextual-cta-close"),
+    travelPromptsClose: $("#travel-prompts-close"),
     mapModal: $("#map-modal"),
     mapContainer: $("#world-map"),
     mapResultCount: $("#map-result-count"),
@@ -475,9 +470,6 @@
     radioExpanded: false,
     videoRecoveryMode: false,
     mainCtaImpressionCity: "",
-    contextualCtaTimer: null,
-    contextualCtaShown: false,
-    contextualCtaDismissedCities: new Set(),
     // Volume knob drag state
     volumeKnob: {
       isDragging: false,
@@ -485,13 +477,6 @@
       startVolume: 0,
     },
   };
-
-  try {
-    const dismissed = JSON.parse(sessionStorage.getItem(CONFIG.storageKeys.contextualCtaDismissed) || "[]");
-    if (Array.isArray(dismissed)) dismissed.forEach((cityId) => state.contextualCtaDismissedCities.add(cityId));
-  } catch (error) {
-    if (window.YOUCITY_AFFILIATE_CONFIG?.debug) console.warn("[YouCity] Failed to read contextual CTA state:", error.message);
-  }
 
   let worldMap = null;
   let leafletAssetsPromise = null;
@@ -659,39 +644,6 @@
       return travelQuickActionMarkup(category, entry, city);
     }).filter(Boolean).join("");
     return { offers, actions, hasOffers: Boolean(actions) };
-  }
-
-  function hideContextualTravelCta() {
-    if (!elements.contextualCta) return;
-    elements.contextualCta.hidden = true;
-    elements.contextualCta.classList.remove("is-visible");
-  }
-
-  function isMobileTravelLayout() {
-    return window.matchMedia?.("(max-width: 800px)").matches ?? false;
-  }
-
-  function scheduleContextualTravelCta(city) {
-    if (isMobileTravelLayout() || !state.playbackSessionStarted || state.contextualCtaShown || state.contextualCtaTimer || state.contextualCtaDismissedCities.has(city.id)) return;
-    state.contextualCtaTimer = setTimeout(() => {
-      state.contextualCtaTimer = null;
-      if (currentCity()?.id !== city.id || state.contextualCtaDismissedCities.has(city.id)) return;
-      const { actions, hasOffers } = renderQuickTravelActions(city, "contextual_cta");
-      if (!hasOffers || !elements.contextualCta) return;
-      elements.contextualCtaCity.textContent = city.name;
-      elements.contextualCtaActions.innerHTML = actions;
-      elements.contextualCta.hidden = false;
-      elements.contextualCta.classList.add("is-visible");
-      state.contextualCtaShown = true;
-      affiliate.observeImpressions(elements.contextualCta);
-    }, CONFIG.CONTEXTUAL_CTA_DELAY);
-  }
-
-  function resetContextualTravelCta() {
-    clearTimeout(state.contextualCtaTimer);
-    state.contextualCtaTimer = null;
-    state.contextualCtaShown = false;
-    hideContextualTravelCta();
   }
 
   function renderTravelPrompts(city) {
@@ -1296,7 +1248,6 @@
       videoCommand("mute");
       videoCommand("setVolume", [0]);
     }
-    scheduleContextualTravelCta(currentCity());
   }
 
   function startPlayback(options = {}) {
@@ -2443,8 +2394,6 @@
     state.radioIndex = 0;
     
     const city = currentCity();
-    resetContextualTravelCta();
-    
     // Cada cidade pode ter apenas alguns modos; preserve o atual quando
     // possível e selecione o primeiro modo realmente disponível caso contrário.
     state.currentMode = firstAvailableMode(city, options.mode || state.currentMode);
@@ -2857,20 +2806,8 @@
       if (offer) trackTravelClick(offer);
     });
 
-    elements.contextualCta?.addEventListener("click", (event) => {
-      const offer = event.target.closest("[data-travel-provider]");
-      if (offer) trackTravelClick(offer);
-    });
-
-    elements.contextualCtaClose?.addEventListener("click", () => {
-      const city = currentCity();
-      state.contextualCtaDismissedCities.add(city.id);
-      try {
-        sessionStorage.setItem(CONFIG.storageKeys.contextualCtaDismissed, JSON.stringify([...state.contextualCtaDismissedCities]));
-      } catch (error) {
-        if (window.YOUCITY_AFFILIATE_CONFIG?.debug) console.warn("[YouCity] Failed to save contextual CTA state:", error.message);
-      }
-      resetContextualTravelCta();
+    elements.travelPromptsClose?.addEventListener("click", () => {
+      elements.travelPrompts.hidden = true;
     });
 
     elements.mapButton.addEventListener("click", () => {
