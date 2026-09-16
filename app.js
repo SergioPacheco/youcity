@@ -1276,6 +1276,7 @@
       try { localStorage.setItem(CONFIG.storageKeys.onboardingSeen, "true"); } catch (error) {
         console.warn("[YouCity] Failed to save onboarding state:", error.message);
       }
+      initializeRadioForUserGesture();
     }
     if (state.playbackSessionStarted) {
       videoCommand("playVideo");
@@ -1655,6 +1656,17 @@
     if (!state.radioAutoplayPending || !state.radioWantsPlay) return;
     state.radioAutoplayPending = false;
     playRadioWithRetry();
+  }
+
+  function initializeRadioForUserGesture() {
+    if (!currentCity().radios.length) return;
+    if (state.radioAutoplayPending) {
+      resumeRadioAfterUserGesture();
+      return;
+    }
+    if (!state.radioPlaying && !state.radioWantsPlay) {
+      setRadio(state.radioIndex, true);
+    }
   }
 
   /**
