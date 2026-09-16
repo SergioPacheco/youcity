@@ -206,6 +206,12 @@
     [CONFIG.modes.BEACH_WALK]: "Beach Walk"
   };
   const MODE_ORDER = [CONFIG.modes.DRIVE, CONFIG.modes.BIKE, CONFIG.modes.WALK, CONFIG.modes.BEACH_WALK, CONFIG.modes.DRONE];
+  const DRAWER_MODE_FILTERS = new Set([
+    CONFIG.modes.DRIVE,
+    CONFIG.modes.WALK,
+    CONFIG.modes.DRONE,
+    CONFIG.modes.BEACH_WALK
+  ]);
 
   const THEME_NAMES = {
     [CONFIG.themes.DEFAULT]: MESSAGES.themeDefault,
@@ -1889,6 +1895,13 @@
     renderGrid(elements.search.value);
   }
 
+  function syncDrawerFilterToRide() {
+    const filter = DRAWER_MODE_FILTERS.has(state.currentMode)
+      ? state.currentMode
+      : CONFIG.filters.ALL;
+    setFilter(filter);
+  }
+
   /**
    * Define filtro de continente
    * @param {string} continent - Continente a filtrar
@@ -2508,6 +2521,7 @@
    * @param {HTMLElement} layer - Elemento da camada
    */
   function openLayer(layer) {
+    if (layer === elements.drawer) syncDrawerFilterToRide();
     const layers = [elements.drawer, elements.travelDrawer, elements.about, elements.mapModal, elements.statsModal]
       .filter(Boolean);
     const activeElement = document.activeElement;
