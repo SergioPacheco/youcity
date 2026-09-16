@@ -40,7 +40,7 @@
     });
   }
 
-  function normalizeCity(city, droneCatalog, radioCatalog, radioExtraCatalog) {
+  function normalizeCity(city, droneCatalog, radioCatalog, radioExtraCatalog, beachWalkRadioCatalog) {
     city.videos.drone.push(...(droneCatalog[city.name] || []).map((ride) =>
       typeof ride === "string" ? { id: ride, start: 0 } : { ...ride }
     ));
@@ -48,7 +48,8 @@
     const radios = [
       ...city.radios,
       ...(radioCatalog[city.name] || []),
-      ...(radioExtraCatalog[city.name] || [])
+      ...(radioExtraCatalog[city.name] || []),
+      ...(beachWalkRadioCatalog[city.name] || [])
     ];
     const seenRadioUrls = new Set();
     city.radios = radios.filter((radio) => {
@@ -95,8 +96,9 @@
   const droneCatalog = global.DRONE_CATALOG || {};
   const radioCatalog = global.RADIO_CATALOG || {};
   const radioExtraCatalog = global.RADIO_EXTRA_CATALOG || {};
-  cityByKey.forEach((city) => normalizeCity(city, droneCatalog, radioCatalog, radioExtraCatalog));
+  const beachWalkRadioCatalog = global.BEACH_WALK_RADIO_CATALOG || {};
   (global.BEACH_WALK_CATALOG || []).forEach((ride) => addBeachWalkRide(cityByKey, ride));
+  cityByKey.forEach((city) => normalizeCity(city, droneCatalog, radioCatalog, radioExtraCatalog, beachWalkRadioCatalog));
   cityByKey.forEach(finalizeBeachWalk);
 
   global.YOUCITY_CATALOG = [...cityByKey.values()];

@@ -21,6 +21,7 @@ assert.equal(beachWalkIds.size, 18, "Beach Walk source should contain 18 unique 
 assert.equal(beachWalkRides.length, 18, "all Beach Walk videos should be loaded into the canonical catalog");
 assert.ok(beachWalkRides.every((video) => beachWalkIds.has(video.id)), "canonical Beach Walk rides should come from the curated source");
 assert.ok(catalog.filter((city) => city.videos.beach_walk.length).length >= 15, "Beach Walk rides should cover the curated destinations");
+assert.ok(catalog.filter((city) => city.videos.beach_walk.length).every((city) => city.radios.length > 0), "every Beach Walk destination should have a radio station");
 assert.ok(catalog.every((city) => city.radios.length <= 5), "canonical catalog should cap radios at five per city");
 assert.ok(catalog.every((city) => Object.values(city.videos).every((videos) => new Set(videos.map((video) => video.id)).size === videos.length)), "canonical catalog should deduplicate ride IDs");
 assert.equal(new Set(catalog.map((city) => `${city.name}\u0000${city.country}`)).size, catalog.length, "canonical catalog should not contain duplicate city keys");

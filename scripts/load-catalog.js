@@ -7,6 +7,7 @@ const CATALOG_SOURCES = [
   "map-catalog.js",
   "drone-videos.js",
   "beach-walk-videos.js",
+  "beach-walk-radios.js",
   "radio-catalog.js",
   "radio-extra-catalog.js",
   "catalog-runtime.js"

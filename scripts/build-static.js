@@ -59,6 +59,7 @@ const STATIC_ASSETS = [
   "drone-videos.js",
   "radio-catalog.js",
   "radio-extra-catalog.js",
+  "beach-walk-radios.js",
   "discovercars-locations.js",
   "app.js"
 ];
