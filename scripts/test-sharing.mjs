@@ -18,13 +18,14 @@ history.save({
 });
 
 const opened = [];
+const copied = [];
 const controller = createSharingController({
   window: {
     location: { origin: "https://youcity.app" },
     open: (url) => opened.push(url)
   },
   document: { addEventListener() {}, removeEventListener() {} },
-  navigator: { userAgent: "Desktop", clipboard: { writeText: async () => {} } },
+  navigator: { userAgent: "Desktop", clipboard: { writeText: async (value) => copied.push(value) } },
   elements: { shareFan: { classList: { remove() {} } }, shareBtn: { setAttribute() {} } },
   getCity: () => ({ name: "London", rawName: "London" }),
   getState: () => ({ currentMode: "walk", currentVideoIndex: 0 }),
@@ -33,12 +34,17 @@ const controller = createSharingController({
   sitePath: (path) => path,
   modeLabels: { walk: "Walk" },
   showToast() {},
-  messages: { linkCopied: "Copied", linkCopyFailed: "Failed" }
+  messages: { linkCopied: "Copied", linkCopyFailed: "Failed", shareTextCopied: "Comment copied" }
 });
 
-assert.equal(controller.getShareData().text, "Generated comment for London — https://youcity.app/city/london?mode=walk");
+const generatedText = "Generated comment for London — https://youcity.app/city/london?mode=walk";
+assert.equal(controller.getShareData().text, generatedText);
+assert.equal(controller.getShareData().isGeneratedComment, true);
 await controller.shareToSocial("whatsapp");
 assert.equal(opened.length, 1);
 assert.ok(opened[0].includes(encodeURIComponent("Generated comment for London")));
+await controller.shareToSocial("facebook");
+assert.equal(copied.at(-1), generatedText, "Facebook fallback should copy the generated comment");
+assert.ok(opened.at(-1).includes("quote="), "Facebook share should retain the quote parameter");
 
 console.log("Sharing tests passed: persisted Comment Assistant text is used by social sharing.");

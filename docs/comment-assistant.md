@@ -103,7 +103,9 @@ timestamp, and status (`GENERATED`, `COPIED`, `APPROVED`, or the future
 When a generated, copied, or approved comment exists for the current city and
 mode, the existing YouCity social-share controls include that comment in the
 text sent to WhatsApp, X, Facebook, and Telegram while preserving the current
-YouCity URL. Without a matching history entry, sharing keeps its original
+YouCity URL. Facebook may ignore prefilled quote text in its share composer, so
+YouCity copies the generated comment before opening Facebook and asks the user
+to paste it. Without a matching history entry, sharing keeps its original
 message.
 
 ## Known limitations

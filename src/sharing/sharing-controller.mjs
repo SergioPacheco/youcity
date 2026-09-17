@@ -22,7 +22,13 @@ export function createSharingController({
     const defaultText = `🌍 Exploring ${city.name} by ${(modeLabels[state.currentMode] || state.currentMode).toLowerCase()} on YouCity — an immersive urban ride with local radio`;
     const generatedComment = getShareComment({ city: city.name, mode: state.currentMode }) || "";
     const text = generatedComment || defaultText;
-    return { url, text, title: `YouCity — ${city.name}`, hasEmbeddedUrl: /https?:\/\/\S+/i.test(text) };
+    return {
+      url,
+      text,
+      title: `YouCity — ${city.name}`,
+      hasEmbeddedUrl: /https?:\/\/\S+/i.test(text),
+      isGeneratedComment: Boolean(generatedComment)
+    };
   }
 
   function closeFan() {
@@ -45,7 +51,7 @@ export function createSharingController({
   }
 
   async function shareToSocial(platform) {
-    const { url, text, title, hasEmbeddedUrl } = getShareData();
+    const { url, text, title, hasEmbeddedUrl, isGeneratedComment } = getShareData();
     const encodedUrl = encodeURIComponent(url);
     const encodedText = encodeURIComponent(text);
     const shareUrls = {
@@ -65,6 +71,15 @@ export function createSharingController({
       }
       closeFan();
       return;
+    }
+    if (platform === "facebook" && isGeneratedComment) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(messages.shareTextCopied || "Generated comment copied. Paste it into Facebook.");
+      } catch (error) {
+        console.warn("[YouCity] Could not copy generated comment:", error.message);
+        showToast(messages.shareTextCopyFailed || "Copy the generated comment before posting.");
+      }
     }
     if (shareUrls[platform]) {
       window.open(shareUrls[platform], "_blank", "width=600,height=400,menubar=no,toolbar=no");

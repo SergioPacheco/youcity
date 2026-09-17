@@ -97,6 +97,8 @@ export function startApplication() {
     fullscreenUnavailable: "Fullscreen is not available in this browser.",
     linkCopied: "Link copied to clipboard!",
     linkCopyFailed: "Could not copy the link",
+    shareTextCopied: "Generated comment copied. Paste it into Facebook.",
+    shareTextCopyFailed: "Copy the generated comment before posting.",
     favoriteAdded: (city) => `${city} added to favorites ♥`,
     favoriteRemoved: (city) => `${city} removed from favorites`,
     randomDestination: (city) => `Random destination: ${city}`,
