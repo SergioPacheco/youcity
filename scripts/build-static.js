@@ -65,6 +65,7 @@ const STATIC_ASSETS = [
   "src/app/dom.mjs",
   "src/navigation/navigation-controller.mjs",
   "src/sharing/sharing-controller.mjs",
+  "src/sharing/comment-share.mjs",
   "src/ui/layers-controller.mjs",
   "src/ui/city-browser.mjs",
   "src/ui/media-controls.mjs",

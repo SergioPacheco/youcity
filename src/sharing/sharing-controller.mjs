@@ -5,7 +5,7 @@ export function createSharingController({
   elements,
   getCity,
   getState,
-  getCommentAssistant = () => null,
+  getShareComment = () => "",
   countryInfo = {},
   slugify,
   sitePath,
@@ -20,7 +20,7 @@ export function createSharingController({
     if (state.currentVideoIndex > 0) params.set("video", String(state.currentVideoIndex + 1));
     const url = `${window.location.origin}${sitePath(`/city/${slugify(city.rawName || city.name)}?${params.toString()}`)}`;
     const defaultText = `🌍 Exploring ${city.name} by ${(modeLabels[state.currentMode] || state.currentMode).toLowerCase()} on YouCity — an immersive urban ride with local radio`;
-    const generatedComment = getCommentAssistant()?.getShareComment?.({ city: city.name, mode: state.currentMode }) || "";
+    const generatedComment = getShareComment({ city: city.name, mode: state.currentMode }) || "";
     const text = generatedComment || defaultText;
     return { url, text, title: `YouCity — ${city.name}`, hasEmbeddedUrl: /https?:\/\/\S+/i.test(text) };
   }

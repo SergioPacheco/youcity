@@ -1,4 +1,6 @@
-const STORAGE_KEY = "youcity-comment-assistant-history-v1";
+import { COMMENT_HISTORY_STORAGE_KEY, findShareComment } from "../../sharing/comment-share.mjs";
+
+const STORAGE_KEY = COMMENT_HISTORY_STORAGE_KEY;
 const CANDIDATES_KEY = "youcity-comment-assistant-candidates-v1";
 
 function readArray(storage, key) {
@@ -42,6 +44,10 @@ export class CommentHistoryService {
 
   find(videoId) {
     return this.list().find((entry) => entry.videoId === videoId) || null;
+  }
+
+  getShareComment(filters) {
+    return findShareComment(this.storage, filters);
   }
 
   save(entry) {

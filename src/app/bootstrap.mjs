@@ -11,6 +11,7 @@ import { createWeatherController } from "../weather/weather-controller.mjs";
 import { createLazyModuleLoader } from "../core/lazy-module.mjs";
 import { createLayersController } from "../ui/layers-controller.mjs";
 import { createSharingController } from "../sharing/sharing-controller.mjs";
+import { findShareComment } from "../sharing/comment-share.mjs";
 import { createNavigationController } from "../navigation/navigation-controller.mjs";
 import { createCityBrowser } from "../ui/city-browser.mjs";
 import { createMediaControls } from "../ui/media-controls.mjs";
@@ -519,7 +520,7 @@ export function startApplication() {
     elements: { ...elements, shareFan: $("#share-fan") },
     getCity: currentCity,
     getState: () => state,
-    getCommentAssistant: () => commentAssistant,
+    getShareComment: (filters) => commentAssistant?.getShareComment?.(filters) || findShareComment(browserStorage, filters),
     countryInfo: COUNTRY_INFO,
     slugify: citySlug,
     sitePath,
