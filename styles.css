@@ -151,11 +151,8 @@ button:focus-visible, input:focus-visible {
 .menu-button span { display: none; }
 .menu-button svg, .icon-button svg { width: 16px; }
 .secondary-action { display: none; }
-.travel-menu-button { flex: 0 1 auto; }
-.top-actions > .travel-menu-button { flex: 0 1 auto; }
-.travel-menu-button[hidden] { display: none; }
-.travel-label-full { display: none !important; }
-.travel-label-short { display: inline !important; white-space: nowrap; }
+.explore-city-button { color: var(--acid); border-color: rgba(215,255,67,.46); }
+.explore-city-button:hover, .explore-city-button:focus-visible { background: rgba(215,255,67,.12); color: var(--acid); }
 
 .city-intro { position: absolute; z-index: 2; top: 39%; left: 24px; width: calc(100% - 80px); transform: translateY(-50%); }
 .city-count { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font: 400 10px "DM Mono", monospace; }
@@ -273,9 +270,9 @@ button:focus-visible, input:focus-visible {
 
 .city-drawer, .travel-drawer, .about-modal { position: fixed; z-index: 30; inset: 0; visibility: hidden; pointer-events: none; }
 .city-drawer.is-open, .travel-drawer.is-open, .about-modal.is-open { visibility: visible; pointer-events: auto; }
-.drawer-backdrop, .about-backdrop { position: absolute; inset: 0; background: rgba(4,6,5,.62); opacity: 0; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); transition: opacity .4s; }
+.drawer-backdrop, .about-backdrop { position: absolute; inset: 0; background: rgba(4,6,5,.36); opacity: 0; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: opacity .4s; }
 .is-open .drawer-backdrop, .is-open .about-backdrop { opacity: 1; }
-.drawer-panel { position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 100%; overflow-y: auto; padding: 28px 18px calc(20px + var(--safe-bottom)); background: linear-gradient(180deg, #0d100e 0%, #080a09 100%); color: #e8e6e1; transform: translateX(100%); transition: transform .5s cubic-bezier(.77,0,.18,1); }
+.drawer-panel { position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 100%; overflow-y: auto; padding: 28px 18px calc(20px + var(--safe-bottom)); background: linear-gradient(180deg, rgba(13,16,14,.48) 0%, rgba(8,10,9,.34) 100%); -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1); color: #e8e6e1; transform: translateX(100%); transition: transform .5s cubic-bezier(.77,0,.18,1); }
 .city-drawer.is-open .drawer-panel, .travel-drawer.is-open .drawer-panel { transform: translateX(0); }
 .drawer-header { display: flex; justify-content: space-between; gap: 30px; align-items: start; }
 .drawer-kicker { color: var(--lcd-green); font: 500 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; }
@@ -306,6 +303,25 @@ button:focus-visible, input:focus-visible {
 .city-card.is-current { box-shadow: 0 0 0 3px var(--lcd-green); }
 .empty-state { grid-column: 1 / -1; padding: 60px 0; color: rgba(255,255,255,.5); text-align: center; }
 .drawer-footer { display: flex; justify-content: space-between; gap: 30px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.4); font: 400 8px "DM Mono", monospace; text-transform: uppercase; }
+
+.city-guide-content { display: grid; gap: 30px; }
+.city-guide-section { padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); }
+.city-guide-section-heading h3 { margin: 7px 0 13px; color: #fff; font: 300 30px/.98 "Newsreader", serif; }
+.city-guide-section p { margin: 0; color: rgba(255,255,255,.72); font-size: 12px; line-height: 1.75; }
+.city-guide-source { display: inline-block; margin-top: 14px; color: var(--lcd-green); font: 600 9px "DM Mono", monospace; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; }
+.city-guide-source:hover, .city-guide-source:focus-visible { color: var(--acid); text-decoration: underline; }
+.city-guide-places { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.city-guide-places li { border-bottom: 1px solid rgba(255,255,255,.09); }
+.city-guide-place-row { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.city-guide-place-link { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 0; color: rgba(255,255,255,.82); font: 500 11px "DM Mono", monospace; text-decoration: none; }
+.city-guide-place-photo { flex: 0 0 48px; display: block; width: 48px; height: 42px; overflow: hidden; border-radius: 4px; background: rgba(255,255,255,.06); }
+.city-guide-place-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.city-guide-place-copy { display: grid !important; justify-content: initial !important; gap: 3px; min-width: 0; }
+.city-guide-place-copy strong { overflow: hidden; color: inherit; font: inherit; text-overflow: ellipsis; white-space: nowrap; }
+.city-guide-place-copy small { overflow: hidden; color: rgba(255,255,255,.48); font: 400 8px/1.3 "DM Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }
+.city-guide-place-link:hover, .city-guide-place-link:focus-visible { color: var(--acid); }
+.city-guide-place-link > span:last-child { color: var(--lcd-green); }
+.city-guide-loading, .city-guide-error, .city-guide-empty-section p { padding: 24px 0; color: rgba(255,255,255,.55) !important; font: 400 10px/1.6 "DM Mono", monospace !important; }
 
 .about-modal { display: grid; place-items: center; }
 .about-card { position: relative; width: 100%; max-width: 100%; max-height: 85vh; margin-top: auto; padding: 42px 26px 28px; background: linear-gradient(180deg, #0d100e 0%, #080a09 100%); color: #e8e6e1; border: 1px solid rgba(255,255,255,.1); border-radius: 16px 16px 0 0; opacity: 0; transform: translateY(20px); transition: opacity .35s, transform .35s; }
@@ -426,6 +442,9 @@ button:focus-visible, input:focus-visible {
 .travel-planner h2 { margin: 5px 0 0; font: 300 24px/.95 "Newsreader", serif; letter-spacing: -.03em; }
 .travel-planner-location { margin: 7px 0 0; color: rgba(255,255,255,.72); font: 500 10px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .08em; }
 .travel-preview-badge { padding: 4px 6px; border: 1px solid rgba(215,255,67,.45); border-radius: 3px; color: var(--acid); font: 600 8px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.travel-guide-section { padding-top: 22px; }
+.travel-section-divider { display: flex; align-items: center; gap: 12px; margin-top: 25px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.13); color: var(--lcd-green); font: 500 9px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+.travel-section-divider::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,.1); }
 .travel-category { margin-top: 10px; padding: 8px; border: 1px solid rgba(255,255,255,.19); border-radius: 7px; background: rgba(255,255,255,.065); }
 .travel-category-heading { display: flex; align-items: center; gap: 9px; }
 .travel-category-icon { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 6px; background: rgba(215,255,67,.12); font-size: 14px; }
@@ -454,10 +473,10 @@ button:focus-visible, input:focus-visible {
 .travel-prompts-heading { display: block; }
 .travel-prompts-kicker { color: var(--text-subtle); font: 500 8px "DM Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
 .travel-prompts h2 { margin: 0; color: #fff; font: 400 18px/1 "Newsreader", serif; letter-spacing: -.02em; }
-.travel-quick-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 9px; }
-.travel-quick-action { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 5px; min-height: 44px; padding: 6px 8px; border: 1px solid rgba(215,255,67,.35); border-radius: 5px; background: rgba(0,0,0,.25); color: #fff; text-decoration: none; transition: border-color .15s, background .15s, transform .15s; }
+.travel-quick-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+.travel-quick-action { flex: 1 1 135px; min-width: 135px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 7px; min-height: 44px; padding: 7px 9px; border: 1px solid rgba(215,255,67,.35); border-radius: 6px; background: linear-gradient(145deg, rgba(31,40,33,.82), rgba(8,13,10,.75)); box-shadow: inset 0 1px 0 rgba(255,255,255,.06); color: #fff; text-decoration: none; transition: border-color .15s, background .15s, transform .15s; }
 .travel-quick-action:hover, .travel-quick-action:focus-visible { border-color: var(--acid); background: rgba(215,255,67,.12); transform: translateY(-1px); }
-.travel-quick-action span:not(.travel-quick-icon) { min-width: 0; overflow: hidden; font: 700 10px/1.05 "DM Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }
+.travel-quick-action span:not(.travel-quick-icon) { min-width: 0; overflow: visible; font: 700 10px/1.15 "DM Mono", monospace; text-overflow: clip; white-space: normal; }
 .travel-quick-icon { font-size: 14px; line-height: 1; }
 .travel-quick-action b { color: var(--acid); font-size: 13px; font-weight: 400; }
 .travel-prompts-disclosure { margin: 8px 0 0; color: var(--text-faint); font: 400 8px/1.3 "DM Mono", monospace; }
@@ -559,8 +578,6 @@ button:focus-visible, input:focus-visible {
   .icon-button svg { width: 19px; }
   .menu-button { width: auto; min-width: 0; height: 46px; padding: 0 18px; gap: 20px; justify-content: flex-start; }
   .menu-button span { display: inline; }
-  .travel-label-full { display: inline !important; }
-  .travel-label-short { display: none !important; }
   .menu-button svg { width: 19px; }
   /* Keep the assistant reachable without letting the crowded desktop topbar
      push the action outside the viewport. The title remains as a tooltip. */
@@ -624,12 +641,13 @@ button:focus-visible, input:focus-visible {
   .city-intro { left: 42px; width: 45vw; }
   .city-intro h1 { font-size: clamp(40px, 5.5vw, 58px); }
   .hint { left: 42px; }
-  .travel-menu-button { width: 44px; height: 44px; padding: 0; justify-content: center; border-radius: 50%; }
-  .travel-menu-button span { display: none !important; }
 }
 
 @media (max-width: 800px) {
   .top-actions > .comment-assistant-button { display: none !important; }
+  #cities-button svg { display: none; }
+  #cities-button::before { content: ""; position: absolute; top: 10px; left: 10px; width: 9px; height: 9px; border: 1.5px solid currentColor; border-radius: 50%; }
+  #cities-button::after { content: ""; position: absolute; top: 19px; left: 19px; width: 5px; height: 1.5px; border-radius: 2px; background: currentColor; transform: rotate(45deg); transform-origin: left center; }
   .city-intro {
     top: calc(70px + var(--safe-top) + 14px);
     left: 16px;
@@ -671,15 +689,8 @@ button:focus-visible, input:focus-visible {
     backdrop-filter: blur(10px);
   }
 
-  /* Keep the primary travel action in the top bar on small screens. The
-     contrast is intentional: acid backgrounds always use dark ink. */
-  .travel-menu-button { width: auto; min-width: 86px; height: 40px; padding: 0 10px; gap: 7px; border-color: #d7ff43; background: #d7ff43; color: #111411 !important; font-weight: 700; }
-  .travel-menu-button .travel-label-short, .travel-menu-button .travel-label-full { color: #111411 !important; -webkit-text-fill-color: #111411; }
-  .travel-menu-button svg { width: 15px; stroke: #111411; }
-  .travel-menu-button:hover, .travel-menu-button:focus-visible { background: #e5ff78; color: #111411 !important; }
-
-  /* Hide the quick-planning prompt on mobile; the main CTA remains in the
-     top bar and opens the complete planner when needed. */
+  /* Keep the quick-planning prompt hidden on mobile; the top icon opens the
+     combined city guide and trip planner. */
   .app .travel-prompts { display: none !important; }
 
   /* Keep city copy readable without covering the video with a panel. */
@@ -705,12 +716,14 @@ button:focus-visible, input:focus-visible {
      player. The heading and disclosure remain available in the planner. */
   .app .travel-prompts { top: calc(70px + var(--safe-top) + 8px); right: 12px; left: 12px; bottom: auto; max-width: none; padding: 5px 35px 5px 5px; border-color: rgba(255,255,255,.22); background: rgba(7,11,8,.58); box-shadow: 0 8px 20px rgba(0,0,0,.16); -webkit-backdrop-filter: blur(7px); backdrop-filter: blur(7px); }
   .travel-prompts-heading, .travel-prompts-disclosure { display: none; }
-  .travel-quick-actions { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; margin-top: 0; }
-  .travel-quick-action { grid-template-columns: auto minmax(0, 1fr); justify-content: center; gap: 4px; min-height: 36px; padding: 5px 4px; border-color: rgba(255,255,255,.28); background: #121a14; color: #fff; }
+  .travel-quick-actions { gap: 5px; margin-top: 0; }
+  .travel-quick-action { flex: 1 1 100px; min-width: 100px; grid-template-columns: auto minmax(0, 1fr) auto; justify-content: center; gap: 5px; min-height: 38px; padding: 5px 6px; border-color: rgba(255,255,255,.28); background: #121a14; color: #fff; }
   .travel-quick-action:hover, .travel-quick-action:focus-visible { border-color: var(--acid); background: #1d2a1d; color: #fff; transform: none; }
-  .travel-quick-action span:not(.travel-quick-icon) { color: #fff; font-size: 8px; }
+  .travel-quick-action span:not(.travel-quick-icon) { color: #fff; font-size: 8px; line-height: 1.15; }
   .travel-quick-icon { color: var(--acid); }
-  .travel-quick-action b { display: none; }
+  .travel-quick-action b { position: relative; display: block; width: 14px; height: 14px; color: var(--acid); font-size: 0; }
+  .travel-quick-action b::before { content: ""; position: absolute; top: 1px; left: 1px; width: 7px; height: 7px; border: 1.5px solid currentColor; border-radius: 50%; }
+  .travel-quick-action b::after { content: ""; position: absolute; top: 9px; left: 9px; width: 5px; height: 1.5px; border-radius: 2px; background: currentColor; transform: rotate(45deg); transform-origin: left center; }
 
 }
 
@@ -722,9 +735,9 @@ button:focus-visible, input:focus-visible {
   .stereo-top-bar .mode-control button { height: 22px; font-size: 7px; padding: 0 8px; }
   .about-card { padding: 42px 26px 28px; }
   .app .travel-prompts { padding: 5px; }
-  .travel-quick-actions { gap: 3px; }
-  .travel-quick-action { gap: 3px; padding: 5px 3px; }
-  .travel-quick-action span:not(.travel-quick-icon) { font-size: 7px; }
+  .travel-quick-actions { gap: 4px; }
+  .travel-quick-action { flex-basis: 92px; min-width: 92px; gap: 4px; padding: 5px 5px; }
+  .travel-quick-action span:not(.travel-quick-icon) { font-size: 8px; }
   .stereo-buttons { grid-template-columns: repeat(3, 1fr); }
   .stereo-btn:nth-child(4) { display: none; }
 }
