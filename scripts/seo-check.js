@@ -23,7 +23,7 @@ function trimOuterSlashes(value) {
   return result;
 }
 
-const SITE_URL = trimTrailingSlashes(process.env.SEO_SITE_URL || "https://youcity.pages.dev");
+const SITE_URL = trimTrailingSlashes(process.env.SEO_SITE_URL || "https://youcity.app");
 const BASE_PATH = trimOuterSlashes(String(process.env.SEO_BASE_PATH || "").trim());
 const SITE_PATH = BASE_PATH ? `/${BASE_PATH}` : "";
 const failures = [];
@@ -136,10 +136,15 @@ function cityUrl(city) {
   return SITE_URL + sitePath(path);
 }
 
+function hasVideoExperience(city) {
+  return Object.values(city.videos || {}).some((rides) => Array.isArray(rides) && rides.length > 0);
+}
+
 function checkSitemap(catalog) {
   const sitemap = read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
-  const expected = [`${SITE_URL}${sitePath("/")}`, ...catalog.map(cityUrl)];
+  const sitemapCatalog = catalog.filter(hasVideoExperience);
+  const expected = [`${SITE_URL}${sitePath("/")}`, ...sitemapCatalog.map(cityUrl)];
   if (urls.length !== expected.length) fail(`sitemap.xml: expected ${expected.length} URLs, found ${urls.length}`);
   for (const url of expected) if (!urls.includes(url)) fail(`sitemap.xml: missing ${url}`);
 }

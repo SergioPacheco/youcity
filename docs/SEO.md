@@ -13,10 +13,9 @@ Configure the Pages project with:
 - Build output directory: `dist`
 - Production variable: `SEO_SITE_URL=https://your-real-domain.example`
 
-The default URL is `https://youcity.pages.dev` so a build is usable before a
-custom domain is connected. Set `SEO_SITE_URL` to the final canonical domain
-before the first production deployment. Do not use a preview `pages.dev` URL
-as the production value.
+The production default URL is `https://youcity.app`. Set `SEO_SITE_URL` when
+building another environment, and do not use a preview `pages.dev` URL as the
+production value.
 
 Cloudflare Pages can deploy static HTML without a framework. The build command
 is only needed here to generate the city pages and SEO files.
@@ -24,7 +23,8 @@ is only needed here to generate the city pages and SEO files.
 ## Generated SEO coverage
 
 - `/` — generic YouCity landing page; the application still starts in a random city.
-- `/city/<slug>` — one stable, indexable page for every catalog city.
+- `/city/<slug>` — one stable page for every catalog city; only cities with at
+  least one video experience are included in the sitemap.
 - Each page includes one title, description, robots directive, canonical URL,
   Open Graph tags, Twitter Card tags, H1, and JSON-LD.
 - Query-string variants such as `?city=` and `?preview=` are disallowed in

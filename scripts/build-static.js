@@ -11,7 +11,7 @@ const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const OUTPUT_DIR = resolve(ROOT_DIR, "dist");
-const DEFAULT_SITE_URL = "https://youcity.pages.dev";
+const DEFAULT_SITE_URL = "https://youcity.app";
 
 function trimTrailingSlashes(value) {
   let result = String(value);
@@ -163,6 +163,10 @@ function cityModes(city) {
   ].filter(Boolean);
 }
 
+function hasVideoExperience(city) {
+  return Object.values(city.videos || {}).some((rides) => Array.isArray(rides) && rides.length > 0);
+}
+
 function citySeo(city) {
   const name = displayCityName(city);
   const country = countryName(city.country);
@@ -310,9 +314,10 @@ function xmlEscape(value) {
 }
 
 function buildSitemap(catalog) {
+  const sitemapCatalog = catalog.filter(hasVideoExperience);
   const urls = [
     `${SITE_URL}${sitePath("/")}`,
-    ...catalog.map((city) => `${SITE_URL}${cityPath(city)}`)
+    ...sitemapCatalog.map((city) => `${SITE_URL}${cityPath(city)}`)
   ];
   const entries = urls.map((url) => `  <url>\n    <loc>${xmlEscape(url)}</loc>\n  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
@@ -393,7 +398,8 @@ function main() {
   writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog));
   writeFileSync(join(OUTPUT_DIR, "404.html"), buildNotFound());
   writeFileSync(join(OUTPUT_DIR, ".nojekyll"), "");
-  console.log(`Built ${catalog.length + 1} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (assets: ${ASSET_VERSION})`);
+  const sitemapCityCount = catalog.filter(hasVideoExperience).length;
+  console.log(`Built ${catalog.length + 1} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1} URLs, assets: ${ASSET_VERSION})`);
 }
 
 main();
