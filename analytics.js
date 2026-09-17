@@ -24,7 +24,9 @@
       variant: payload.variant || "A",
       provider_campaign: payload.providerCampaign || "",
       internal_campaign: payload.internalCampaign || "",
-      mode: payload.mode || ""
+      mode: payload.mode || "",
+      language: payload.language || "",
+      tone: payload.tone || ""
     });
   }
 

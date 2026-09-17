@@ -146,11 +146,13 @@ affiliate ID or approved URL is still pending.
 
 ## Catalog and overrides
 
-The browser and build use `catalog-runtime.js` as the canonical city view. It
-combines the unified ride catalog, audited Drone entries, coordinates and
-radio sources, removes duplicate ride IDs/radio URLs, and caps the runtime
-radio list at five stations per city. The specialized source files remain
-separate because their update and review rules differ.
+The canonical catalog source is `data/catalog.json`. The validation and
+normalization script `scripts/build-catalog.js` generates the browser asset
+`catalog.js`, which is consumed by both the application and the static build.
+It contains the unified ride catalog, audited Drone entries, coordinates and
+radio sources, validates the records, and caps the runtime radio list at five
+stations per city. Video, radio, city and map data therefore have one source
+of truth instead of multiple browser bundles.
 
 Provider configuration and destination data are separate. DiscoverCars reads
 the generated `discovercars-locations.js`, which is derived from the official

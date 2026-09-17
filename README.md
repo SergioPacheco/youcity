@@ -1,8 +1,16 @@
 # YouCity
 
-Fully static immersive urban rides with local radio. There is no database, backend, login, or data collection.
+Immersive urban rides with local radio. The core experience remains static and
+does not require a database or login; the optional Comment Assistant uses
+Cloudflare Pages Functions only when its server-side API secrets are
+configured. See [`docs/comment-assistant.md`](docs/comment-assistant.md).
 
 The catalog currently includes 206 cities. Each city exposes only the `Drive`, `Bike`, `Walk`, `Beach Walk`, and `Drone` modes that have a valid video; the world map uses static city-center coordinates and links to the catalog's YouTube videos.
+
+The canonical city, video and radio source is `data/catalog.json`. Run
+`npm run catalog:build` after editing it to validate the records and regenerate
+the browser asset `catalog.js`. Comment templates live in
+`data/comment-templates.mjs` and are also deterministic local data.
 
 ## Run locally
 
@@ -27,6 +35,11 @@ Validate the audited Drone catalog before publishing:
 ```bash
 node scripts/validate-drone-catalog.js
 ```
+
+The Comment Assistant MVP is documented in
+[`docs/comment-assistant.md`](docs/comment-assistant.md). It adds the tool to
+the existing application and requires only the server-side YouTube metadata
+secret; comments are generated locally from standard templates.
 
 Open `http://localhost:4174`. The generated city file is available at
 `http://localhost:4174/city/sao-paulo.html`; Cloudflare Pages also serves it at
@@ -58,7 +71,7 @@ For other static hosts, upload the generated `dist/` directory rather than the s
 
 ## Media
 
-Videos are embedded from YouTube, the world map uses Leaflet with OpenStreetMap tiles, and radio stations are public external streams. City-specific stations are sourced from Radio Browser's directory, with the original catalog retained as a fallback. The interface therefore needs no server, but the experience depends on an internet connection and source availability. Browsers may require an initial click before playing audio.
+Videos are embedded from YouTube, the world map uses Leaflet with OpenStreetMap tiles, and radio stations are public external streams. City-specific stations are sourced from Radio Browser's directory and stored in the canonical catalog. The interface therefore needs no server, but the experience depends on an internet connection and source availability. Browsers may require an initial click before playing audio.
 
 Map tiles and travel links are configured in `map-config.js` and
 `affiliate/affiliate-config.js`. DiscoverCars is catalog-driven; see

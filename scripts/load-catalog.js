@@ -1,31 +1,11 @@
 const { readFileSync } = require("node:fs");
 const { resolve } = require("node:path");
-const { runInNewContext } = require("node:vm");
-
-const CATALOG_SOURCES = [
-  "cities-data.js",
-  "map-catalog.js",
-  "drone-videos.js",
-  "beach-walk-videos.js",
-  "beach-walk-radios.js",
-  "radio-catalog.js",
-  "radio-extra-catalog.js",
-  "catalog-runtime.js"
-];
-
-function loadCatalogContext(rootDir) {
-  const context = { window: {} };
-  for (const file of CATALOG_SOURCES) {
-    const sourcePath = resolve(rootDir, file);
-    // These files are fixed, repository-owned browser catalog assets.
-    runInNewContext(readFileSync(sourcePath, "utf8"), context, { filename: file }); // NOSONAR
-  }
-  return context;
-}
 
 function loadCatalog(rootDir) {
-  const context = loadCatalogContext(rootDir);
-  return context.window.YOUCITY_CATALOG || context.window.CITY_CATALOG || [];
+  const sourcePath = resolve(rootDir, "data/catalog.json");
+  const catalog = JSON.parse(readFileSync(sourcePath, "utf8"));
+  if (!Array.isArray(catalog)) throw new Error("data/catalog.json must contain an array");
+  return catalog;
 }
 
-module.exports = { CATALOG_SOURCES, loadCatalog, loadCatalogContext };
+module.exports = { loadCatalog };

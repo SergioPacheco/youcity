@@ -2,11 +2,13 @@
   "name": "youcity",
   "private": true,
   "scripts": {
+    "catalog:build": "node scripts/build-catalog.js",
     "discovercars:update": "node scripts/update-discovercars-locations.js",
     "discovercars:test": "node scripts/test-discovercars.js",
     "affiliate:test": "node scripts/test-affiliates.js",
     "city:test": "node scripts/test-city-catalog.js",
     "stay22:report": "node scripts/stay22-reporting.js",
-    "test": "npm run affiliate:test && npm run discovercars:test && npm run city:test"
+    "comment:test": "node scripts/test-comment-assistant.mjs",
+    "test": "npm run catalog:build && npm run affiliate:test && npm run discovercars:test && npm run city:test && npm run comment:test"
   }
 }

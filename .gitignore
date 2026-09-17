@@ -10,6 +10,8 @@ Thumbs.db
 
 # Dependencies (se adicionar no futuro)
 node_modules/
+.dev.vars
+.dev.vars.*
 
 # Build (se adicionar no futuro)
 dist/

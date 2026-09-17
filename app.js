@@ -16,6 +16,7 @@
     VIDEO_READY_DELAY: 1500,
     YOUTUBE_API_TIMEOUT: 15_000,
     VIDEO_LOAD_TIMEOUT: 12_000,
+    MIN_VIDEO_START_SECONDS: 15,
     TOAST_DURATION: 2600,
     STREET_SOUND_VOLUME: 32,
     CLOCK_INTERVAL: 60_000,
@@ -287,7 +288,7 @@
   // -----------------------------------------------------------------------------
   // City catalog processing
   // -----------------------------------------------------------------------------
-  const cities = (window.YOUCITY_CATALOG || window.CITY_CATALOG || []).map((item) => {
+  const cities = (window.YOUCITY_CATALOG || []).map((item) => {
     const [country, region, countryTimeZone] = COUNTRY_INFO[item.country] || [item.country, "World", "UTC"];
     return {
       ...item,
@@ -308,6 +309,7 @@
   // DOM element selection (cached for performance)
   // -----------------------------------------------------------------------------
   const $ = (selector) => document.querySelector(selector);
+  const hasAdminRole = () => new URLSearchParams(window.location.search).get("role")?.toLowerCase() === "admin";
 
   const elements = {
     app: $("#app"),
@@ -386,6 +388,8 @@
     radioExpand: $("#radio-expand"),
     moreButton: $("#more-button"),
     moreMenu: $("#more-menu"),
+    commentAssistantButton: $("#comment-assistant-button"),
+    commentAssistantMenuItem: $("#more-menu [data-overflow-action=\"comment-assistant\"]"),
     // Novas funcionalidades
     favoriteBtn: $("#favorite-btn"),
     infoTimezone: $("#info-timezone"),
@@ -429,6 +433,7 @@
     videoReadyTimer: null,
     videoStatusTimer: null,
     videoState: VIDEO_STATES.IDLE,
+    isAdmin: hasAdminRole(),
     toastTimer: null,
     radioRetryCount: 0,
     radioRetryTimer: null,
@@ -513,8 +518,16 @@
 
   function buildYoutubeWatchUrl(ride) {
     const url = new URL(`https://www.youtube.com/watch?v=${encodeURIComponent(ride.id)}`);
-    if (Number(ride.start) > 0) url.searchParams.set("t", `${Math.floor(Number(ride.start))}s`);
+    url.searchParams.set("t", `${Math.floor(getVideoStartSeconds(ride))}s`);
     return url.toString();
+  }
+
+  function getVideoStartSeconds(ride) {
+    const configuredStart = Number(ride?.start);
+    return Math.max(
+      CONFIG.MIN_VIDEO_START_SECONDS,
+      Number.isFinite(configuredStart) ? configuredStart : 0
+    );
   }
 
   function updateRideSourceLink(ride) {
@@ -871,7 +884,7 @@
   }
 
   function mapCityCoordinates(city) {
-    const coordinates = city?.coordinates || window.CITY_COORDINATES?.[city?.rawName];
+    const coordinates = city?.coordinates;
     return Array.isArray(coordinates) && coordinates.length >= 2 ? coordinates : null;
   }
 
@@ -1002,7 +1015,7 @@
       cc_load_policy: 0,
       iv_load_policy: 3,
       hl: "en-US",
-      start: Number(ride.start) || 0,
+      start: Math.floor(getVideoStartSeconds(ride)),
       origin: window.location.origin
     };
   }
@@ -1178,7 +1191,7 @@
       currentVideoId = ride.id;
       player.loadVideoById({
         videoId: ride.id,
-        startSeconds: Number(ride.start) || 0
+        startSeconds: getVideoStartSeconds(ride)
       });
       player.playVideo?.();
       if (state.currentQuality !== CONFIG.qualities.AUTO) {
@@ -2020,9 +2033,12 @@
     const params = new URLSearchParams({ mode: state.currentMode });
     if (state.currentVideoIndex > 0) params.set("video", String(state.currentVideoIndex + 1));
     const url = `${window.location.origin}${sitePath(`/city/${citySlug(city.rawName || city.name)}?${params.toString()}`)}`;
-    const text = `🌍 Exploring ${city.name} by ${MODE_LABELS[state.currentMode].toLowerCase()} on YouCity — an immersive urban ride with local radio`;
+    const defaultText = `🌍 Exploring ${city.name} by ${MODE_LABELS[state.currentMode].toLowerCase()} on YouCity — an immersive urban ride with local radio`;
+    const generatedComment = window.YouCityCommentAssistant?.getShareComment?.({ city: city.name, mode: state.currentMode }) || "";
+    const text = generatedComment || defaultText;
+    const hasEmbeddedUrl = /https?:\/\/\S+/i.test(text);
     const title = `YouCity — ${city.name}`;
-    return { url, text, title };
+    return { url, text, title, hasEmbeddedUrl };
   }
 
   /**
@@ -2030,16 +2046,17 @@
    * @param {string} platform - Plataforma de compartilhamento
    */
   async function shareToSocial(platform) {
-    const { url, text, title } = getShareData();
+    const { url, text, title, hasEmbeddedUrl } = getShareData();
     const encodedUrl = encodeURIComponent(url);
     const encodedText = encodeURIComponent(text);
     const encodedTitle = encodeURIComponent(title);
-    
+    const shareUrlForText = hasEmbeddedUrl ? "" : `%20${encodedUrl}`;
+
     const shareUrls = {
-      whatsapp: `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`,
-      twitter: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      whatsapp: `https://api.whatsapp.com/send?text=${encodedText}${shareUrlForText}`,
+      twitter: `https://twitter.com/intent/tweet?text=${encodedText}${hasEmbeddedUrl ? "" : `&url=${encodedUrl}`}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
-      telegram: `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}`,
+      telegram: `https://t.me/share/url?${hasEmbeddedUrl ? "" : `url=${encodedUrl}&`}text=${encodedText}`,
       linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
     };
     
@@ -2068,9 +2085,11 @@
   async function shareCity() {
     // Em mobile com Web Share API nativa, usa ela diretamente
     if (navigator.share && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      const { url, text, title } = getShareData();
+      const { url, text, title, hasEmbeddedUrl } = getShareData();
+      const shareData = { title, text };
+      if (!hasEmbeddedUrl) shareData.url = url;
       try {
-        await navigator.share({ title, text, url });
+        await navigator.share(shareData);
       } catch (error) {
         if (error.name !== 'AbortError') {
           console.warn("[YouCity] Could not share:", error.message);
@@ -2118,6 +2137,7 @@
     const modeVideos = city.videos[state.currentMode] || [];
     if (modeVideos.length) params.set("mode", state.currentMode);
     if (modeVideos.length > 1 && state.currentVideoIndex > 0) params.set("video", String(state.currentVideoIndex + 1));
+    if (state.isAdmin) params.set("role", "admin");
     const query = params.toString();
     const url = `${sitePath(`/city/${citySlug(city.rawName || city.name)}`)}${query ? `?${query}` : ""}`;
     const method = replace ? "replaceState" : "pushState";
@@ -2463,6 +2483,34 @@
     elements.moreButton?.setAttribute("aria-expanded", "false");
   }
 
+  function openCommentAssistantForCurrentRide() {
+    if (!state.isAdmin) return;
+    const city = currentCity();
+    const ride = currentRide();
+    const rideMode = Object.entries(city?.videos || {}).find(([, videos]) =>
+      videos?.some((video) => video?.id === ride?.id)
+    )?.[0] || state.currentMode;
+    const videoUrl = ride?.id ? buildYoutubeWatchUrl(ride) : "";
+    window.YouCityCommentAssistant?.open?.({
+      videoUrl,
+      catalogContext: ride?.id ? {
+        videoId: ride.id,
+        title: ride.title || `${city.name} ${MODE_LABELS[rideMode] || "City Ride"}`,
+        description: `A ${MODE_LABELS[rideMode] || "city"} video from ${city.name}, ${city.country}.`,
+        channel: "YouCity catalog",
+        city: city.name,
+        country: city.country,
+        mode: rideMode
+      } : null
+    });
+  }
+
+  function configureCommentAssistantAccess() {
+    const enabled = state.isAdmin;
+    elements.commentAssistantButton?.toggleAttribute("hidden", !enabled);
+    elements.commentAssistantMenuItem?.toggleAttribute("hidden", !enabled);
+  }
+
   function runOverflowAction(action) {
     closeMoreMenu();
     const actions = {
@@ -2472,6 +2520,7 @@
       fullscreen: () => $("#fullscreen-button").click(),
       about: () => openLayer(elements.about),
       stats: () => { updateStats(); openLayer(elements.statsModal); },
+      "comment-assistant": openCommentAssistantForCurrentRide,
       random: selectRandomCity
     };
     actions[action]?.();
@@ -2572,6 +2621,9 @@
       showCatalogError();
       return;
     }
+
+    window.YOUCITY_COMMENT_ASSISTANT_ADMIN = state.isAdmin;
+    configureCommentAssistantAccess();
     
     // Carrega preferências salvas
     const prefs = loadPreferences();
@@ -2689,6 +2741,8 @@
     });
     
     $("#about-button").addEventListener("click", () => openLayer(elements.about));
+
+    elements.commentAssistantButton?.addEventListener("click", openCommentAssistantForCurrentRide);
 
     elements.travelButton.addEventListener("click", () => {
       trackTravelClick(elements.travelButton);

@@ -79,35 +79,43 @@ if (parsedCatalog.length !== 179) {
   throw new Error(`Incomplete source catalog: ${parsedCatalog.length} of 179 cities.`);
 }
 
-// Keep curated records that are intentionally maintained in cities-data.js
-// (for example cities added after the upstream source bundle was generated).
-const currentCatalogPath = path.resolve(__dirname, "..", "cities-data.js");
-const currentCatalogSource = fs.existsSync(currentCatalogPath)
-  ? fs.readFileSync(currentCatalogPath, "utf8")
-  : "";
-const currentCatalogMarker = "window.CITY_CATALOG";
-const currentCatalogStart = currentCatalogSource.indexOf("[", currentCatalogSource.indexOf(currentCatalogMarker));
-const currentCatalogEnd = currentCatalogStart >= 0
-  ? findJsonEnd(currentCatalogSource, currentCatalogStart, "[", "]")
-  : -1;
-const currentCatalog = currentCatalogEnd >= 0
-  ? JSON.parse(currentCatalogSource.slice(currentCatalogStart, currentCatalogEnd))
+// Keep curated records that are intentionally maintained in data/catalog.json
+// (for example cities and modes added after the upstream source bundle).
+const currentCatalogPath = path.resolve(__dirname, "..", "data/catalog.json");
+const currentCatalog = fs.existsSync(currentCatalogPath)
+  ? JSON.parse(fs.readFileSync(currentCatalogPath, "utf8"))
   : [];
 
 const cityKey = (city) => `${city.name}\u0000${city.country}`;
-const sourceKeys = new Set(parsedCatalog.map(cityKey));
-const curatedCities = currentCatalog
-  .filter((city) => !sourceKeys.has(cityKey(city)));
-const catalog = [...new Map([...parsedCatalog, ...curatedCities].map((city) => [cityKey(city), city])).values()];
+const currentByKey = new Map(currentCatalog.map((city) => [cityKey(city), city]));
+const sourceCatalog = parsedCatalog.map((city) => {
+  const current = currentByKey.get(cityKey(city));
+  if (!current) return city;
+  return {
+    ...current,
+    ...city,
+    videos: {
+      ...current.videos,
+      drive: city.videos.drive,
+      bike: city.videos.bike,
+      walk: city.videos.walk
+    },
+    radios: city.radios.length ? city.radios : current.radios
+  };
+});
+const sourceKeys = new Set(sourceCatalog.map(cityKey));
+const curatedCities = currentCatalog.filter((city) => !sourceKeys.has(cityKey(city)));
+const catalog = [...sourceCatalog, ...curatedCities];
 
-const output = `// Static catalog of rides and radio stations. Generated on 2026-08-27.\nwindow.CITY_CATALOG = ${JSON.stringify(catalog)};\n`;
-const outputPath = path.resolve(__dirname, "..", "cities-data.js");
-fs.writeFileSync(outputPath, output);
+const outputPath = path.resolve(__dirname, "..", "data/catalog.json");
+fs.writeFileSync(outputPath, `${JSON.stringify(catalog, null, 2)}\n`);
 
 const counts = {
   cities: catalog.length,
   drive: catalog.filter((city) => city.videos.drive.length).length,
   bike: catalog.filter((city) => city.videos.bike.length).length,
-  walk: catalog.filter((city) => city.videos.walk.length).length
+  walk: catalog.filter((city) => city.videos.walk.length).length,
+  drone: catalog.filter((city) => city.videos.drone?.length).length,
+  beach_walk: catalog.filter((city) => city.videos.beach_walk?.length).length
 };
 console.log(JSON.stringify(counts));

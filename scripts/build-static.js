@@ -6,6 +6,7 @@
  * is required during the build.
  */
 const { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
+const { spawnSync } = require("node:child_process");
 const { dirname, join, resolve } = require("node:path");
 const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
 
@@ -35,9 +36,7 @@ const SOCIAL_IMAGE = `${SITE_URL}${SITE_PATH}/assets/hero-saopaulo.webp`;
 const SOCIAL_ALT = "YouCity — immersive city rides around the world";
 const STATIC_ASSETS = [
   "styles.css",
-  "cities-data.js",
-  "catalog-runtime.js",
-  "map-catalog.js",
+  "catalog.js",
   "map-config.js",
   "affiliate/affiliate-config.js",
   "affiliate-overrides.js",
@@ -47,7 +46,6 @@ const STATIC_ASSETS = [
   "analytics.js",
   "affiliate/affiliate-experiments.js",
   "affiliate/affiliate-resolver.js",
-  "beach-walk-videos.js",
   "affiliate/providers/expedia.js",
   "affiliate/providers/booking.js",
   "affiliate/providers/viator.js",
@@ -56,14 +54,15 @@ const STATIC_ASSETS = [
   "affiliate/providers/airalo.js",
   "affiliate/providers/heymondo.js",
   "affiliate/providers/stay22.js",
-  "drone-videos.js",
-  "radio-catalog.js",
-  "radio-extra-catalog.js",
-  "beach-walk-radios.js",
   "discovercars-locations.js",
-  "app.js"
+  "app.js",
+  "comment-assistant.js",
+  "comment-assistant/core.mjs",
+  "comment-assistant/history.mjs",
+  "comment-assistant/comments.mjs",
+  "data/comment-templates.mjs"
 ];
-const STATIC_FILES = [...STATIC_ASSETS, "map-config.js"];
+const STATIC_FILES = STATIC_ASSETS;
 
 function assetVersion() {
   const supplied = String(process.env.ASSET_VERSION || process.env.GITHUB_SHA || "").trim();
@@ -358,6 +357,8 @@ function homeFallback(catalog) {
 }
 
 function main() {
+  const catalogBuild = spawnSync(process.execPath, [resolve(ROOT_DIR, "scripts/build-catalog.js")], { stdio: "inherit" });
+  if (catalogBuild.status !== 0) throw new Error("Catalog build failed.");
   const catalog = loadCanonicalCatalog(ROOT_DIR);
   const discoverCarsCatalog = loadDiscoverCarsCatalog();
   if (!catalog.length) throw new Error("The city catalog is empty.");

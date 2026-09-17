@@ -10,7 +10,7 @@
  */
 const { existsSync, mkdirSync, readFileSync, writeFileSync } = require("node:fs");
 const { join, resolve } = require("node:path");
-const { runInNewContext } = require("node:vm");
+const { loadCatalog } = require("./load-catalog");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const DATA_DIR = resolve(ROOT_DIR, "data");
@@ -79,18 +79,10 @@ function normalizeText(value) {
   return slugify(value).replaceAll("-", " ").trim();
 }
 
-function parseScript(file, globals) {
-  const context = { window: {} };
-  // Catalog inputs are fixed, repository-owned browser data files.
-  runInNewContext(readFileSync(resolve(ROOT_DIR, file), "utf8"), context); // NOSONAR
-  return context.window[globals];
-}
-
 function loadYouCityCities() {
-  const catalog = parseScript("cities-data.js", "CITY_CATALOG") || [];
-  const coordinates = parseScript("map-catalog.js", "CITY_COORDINATES") || {};
+  const catalog = loadCatalog(ROOT_DIR);
   return catalog.map((item) => {
-    const point = coordinates[item.name] || coordinates[item.name.replaceAll("Rio De Janeiro", "Rio de Janeiro")] || [];
+    const point = item.coordinates || [];
     const countryCode = COUNTRY_CODES[item.country];
     if (!countryCode) throw new Error(`Missing country code mapping for ${item.country}`);
     return {
