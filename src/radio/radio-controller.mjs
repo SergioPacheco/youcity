@@ -18,6 +18,11 @@ export function createRadioController({
   let requestId = 0;
   let retryTimer = null;
   let loadTimer = null;
+  let additionalStations = [];
+
+  function availableStations() {
+    return [...(getCity()?.radios || []), ...additionalStations];
+  }
 
   function publish() {
     onStateChange?.({ radioIndex, radioWantsPlay, radioAutoplayPending, radioRetryCount: retryCount, radioRequestId: requestId });
@@ -113,7 +118,7 @@ export function createRadioController({
   }
 
   function setRadio(nextIndex = 0, shouldPlay = radioPlaying, options = {}) {
-    const radios = getCity()?.radios || [];
+    const radios = availableStations();
     clearRetryTimer();
     clearLoadTimer();
     audio.pause();
@@ -165,7 +170,7 @@ export function createRadioController({
   }
 
   function toggle() {
-    if (!(getCity()?.radios || []).length) return showToast(messages.noRadio);
+    if (!availableStations().length) return showToast(messages.noRadio);
     initialAutoplayPending = false;
     if (radioPlaying) {
       radioWantsPlay = false;
@@ -184,7 +189,7 @@ export function createRadioController({
   }
 
   function resumeAfterUserGesture() {
-    if (!(getCity()?.radios || []).length) return;
+    if (!availableStations().length) return;
     if (radioAutoplayPending && radioWantsPlay) {
       radioAutoplayPending = false;
       playWithRetry();
@@ -196,7 +201,7 @@ export function createRadioController({
   }
 
   function initializeForUserGesture() {
-    if (!(getCity()?.radios || []).length) return;
+    if (!availableStations().length) return;
     initialAutoplayPending = false;
     if (radioAutoplayPending) {
       resumeAfterUserGesture();
@@ -212,6 +217,20 @@ export function createRadioController({
     audio.pause();
     audio.removeAttribute("src");
     audio.load();
+  }
+
+  function setAdditionalStations(stations = []) {
+    additionalStations = Array.isArray(stations) ? stations.filter((station) => station?.url && station?.name) : [];
+    setRadio(radioIndex, radioWantsPlay);
+  }
+
+  function clearAdditionalStations() {
+    additionalStations = [];
+  }
+
+  function playStation(station) {
+    const index = availableStations().findIndex((candidate) => candidate.stationuuid && candidate.stationuuid === station?.stationuuid);
+    if (index >= 0) setRadio(index, true);
   }
 
   audio.addEventListener("error", handleMediaError);
@@ -233,6 +252,10 @@ export function createRadioController({
     initializeForUserGesture,
     handleMediaError,
     destroy,
+    setAdditionalStations,
+    clearAdditionalStations,
+    getAdditionalStations: () => [...additionalStations],
+    playStation,
     isPlaying: () => radioPlaying,
     getIndex: () => radioIndex
   };

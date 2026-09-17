@@ -15,7 +15,9 @@ bundler: o build estático copia os módulos, corrige os caminhos e acrescenta
 - `src/core/video-policy.mjs`: política intencional de início efetivo, com mínimo de 15 s.
 - `src/core/storage.mjs` e `src/state/store.mjs`: acesso seguro a storage e estado compartilhado sem handles efêmeros.
 - `src/player/youtube-player.mjs` e `src/player/video-controller.mjs`: API do YouTube, player, timeouts, comandos e ciclo de reprodução.
-- `src/radio/radio-controller.mjs`: áudio, autoplay, retry, timers e listeners.
+- `src/radio/radio-controller.mjs`: áudio, autoplay, retry, timers, listeners e estações adicionais efêmeras.
+- `src/radio/radio-browser.mjs` e `src/radio/radio-browser-feature.mjs`: busca sob demanda, normalização, cache de sessão, AbortController e renderização das estações locais.
+- `src/radio/radio-panel.mjs`: estado visual de expansão do painel e sincronização de ARIA.
 - `src/weather/weather-controller.mjs`: cache, AbortController, timeout e proteção contra respostas obsoletas; é inicializado sem bloquear a UI.
 - `src/features/map/`: Leaflet, mapa, marcadores, listeners e loader sob demanda.
 - `src/features/city-guide/`: consultas, cache, AbortController e renderização do City Guide.

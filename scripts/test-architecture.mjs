@@ -26,7 +26,12 @@ const requiredFiles = [
   "src/features/comment-assistant/core.mjs",
   "src/features/comment-assistant/comments.mjs",
   "src/features/comment-assistant/history.mjs",
-  "src/features/comment-assistant/share-destinations.mjs"
+  "src/features/comment-assistant/share-destinations.mjs",
+  "src/radio/radio-controller.mjs",
+  "src/radio/radio-panel.mjs",
+  "src/radio/radio-browser.mjs",
+  "src/radio/radio-browser-feature.mjs",
+  "functions/api/radio-stations.js"
 ];
 
 for (const file of requiredFiles) {

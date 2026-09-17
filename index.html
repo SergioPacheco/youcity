@@ -288,8 +288,17 @@
               <span class="play-text" style="display:none">▶</span>
             </button>
             <button class="stereo-btn" id="radio-next" type="button" aria-label="Next radio" title="Next radio">►►</button>
+            <button class="stereo-btn radio-browser-discover" id="radio-browser-discover" type="button" aria-label="Find local radios" title="Find local radios">📻</button>
             <button class="stereo-btn" id="quality-btn" type="button" aria-label="Video quality" title="Quality: Auto / 720p / 1080p">HD</button>
             <button class="stereo-btn" id="random-btn" type="button" aria-label="Random city" title="Random city (R)">RDM</button>
+          </div>
+          <div class="radio-browser-panel" id="radio-browser-panel" hidden>
+            <div class="radio-browser-heading">
+              <strong>Local stations</strong>
+              <span>Radio Browser</span>
+            </div>
+            <output class="radio-browser-status" id="radio-browser-status" aria-live="polite"></output>
+            <div class="radio-browser-results" id="radio-browser-results"></div>
           </div>
         </div>
         </div>

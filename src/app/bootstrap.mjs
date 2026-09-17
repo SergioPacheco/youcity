@@ -1,6 +1,9 @@
 import { getEffectiveStartSeconds } from "../core/video-policy.mjs";
 import { slugify as slugifyContract } from "../core/url.mjs";
 import { createRadioController } from "../radio/radio-controller.mjs";
+import { createRadioPanelController } from "../radio/radio-panel.mjs";
+import { createRadioBrowserClient } from "../radio/radio-browser.mjs";
+import { createRadioBrowserFeature } from "../radio/radio-browser-feature.mjs";
 import { createVideoController } from "../player/video-controller.mjs";
 import { createCatalogRepository } from "../catalog/catalog-repository.mjs";
 import { createCitySelection } from "../city/city-selection.mjs";
@@ -335,6 +338,7 @@ export function startApplication() {
   const state = appStore.getState();
   const lazyModules = createLazyModuleLoader();
   let commentAssistant = null;
+  let radioBrowserFeature = null;
 
   // -----------------------------------------------------------------------------
   // Funções auxiliares
@@ -458,6 +462,25 @@ export function startApplication() {
       state.radioWantsPlay = next.radioWantsPlay;
     },
     onPlayingChange: (playing) => { state.radioPlaying = playing; }
+  });
+
+  const radioPanelController = createRadioPanelController({
+    playerCard: elements.playerCard,
+    playerCardMain: elements.playerCardMain,
+    expandButton: elements.radioExpand
+  });
+  radioBrowserFeature = createRadioBrowserFeature({
+    document,
+    elements: {
+      trigger: elements.radioBrowserDiscover,
+      panel: elements.radioBrowserPanel,
+      status: elements.radioBrowserStatus,
+      results: elements.radioBrowserResults
+    },
+    getCity: currentCity,
+    radioController,
+    client: createRadioBrowserClient({ basePath: BASE_PATH }),
+    showToast
   });
 
   const videoController = createVideoController({
@@ -741,6 +764,8 @@ export function startApplication() {
     if (!selection) return;
     state.cityIndex = selection.cityIndex;
     state.radioIndex = 0;
+    radioBrowserFeature?.reset();
+    radioController.clearAdditionalStations();
 
     const city = currentCity();
     // Cada cidade pode ter apenas alguns modos; preserve o atual quando
@@ -1146,7 +1171,7 @@ export function startApplication() {
     // Minimizar / Restaurar player
     elements.playerMinimize.addEventListener("click", () => togglePlayer(true));
     elements.playerRestore.addEventListener("click", () => togglePlayer(false));
-    elements.radioExpand?.addEventListener("click", () => toggleRadioExpanded());
+    elements.radioExpand?.addEventListener("click", () => radioPanelController.toggle());
     elements.radioSummaryPrevious?.addEventListener("click", (event) => {
       event.stopPropagation();
       radioController.setRadio(state.radioIndex - 1, state.radioWantsPlay || state.radioPlaying);
@@ -1160,7 +1185,7 @@ export function startApplication() {
       radioController.toggle();
     });
     $("#radio-summary")?.addEventListener("click", (event) => {
-      if (!event.target.closest("button")) toggleRadioExpanded();
+      if (!event.target.closest("button")) radioPanelController.toggle();
     });
 
     // Controles de rádio
