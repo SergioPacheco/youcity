@@ -5,8 +5,8 @@ projeto estático, sem backend e sem banco de dados.
 
 > A implementação atual usa o Affiliate Engine modular documentado em
 > [`docs/affiliate-architecture.md`](affiliate-architecture.md). O namespace
-> `YOUCITY_TRAVEL` permanece somente como alias de compatibilidade; novos
-> providers devem ser adicionados em `affiliate/`.
+> público atual é `YOUCITY_AFFILIATE_CONFIG`; novos providers devem ser
+> adicionados em `affiliate/`.
 
 ## 1. Objetivo
 
@@ -58,7 +58,7 @@ esta ordem:
 ## 4. Modelo de configuração
 
 O contrato novo deve substituir gradualmente o placeholder atual de
-`travel-config.js`. A aplicação deve usar um único namespace:
+`affiliate/affiliate-config.js`. A aplicação deve usar um único namespace:
 
 ```js
 window.YOUCITY_TRAVEL = {
@@ -284,7 +284,7 @@ descrito separadamente de analytics de afiliados.
 
 Expandir `scripts/seo-check.js` para verificar:
 
-- schema válido do `travel-config.js`;
+- schema válido de `affiliate/affiliate-config.js`;
 - providers ativos com URLs válidas;
 - ausência de `javascript:` e `data:`;
 - `rel="sponsored"` em todos os links afiliados;

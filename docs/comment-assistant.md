@@ -12,15 +12,15 @@ bypass YouTube limits.
 
 Created:
 
-- `comment-assistant/core.mjs` — shared URL validation, city matching, area and
+- `src/features/comment-assistant/core.mjs` — shared URL validation, city matching, area and
   mode detection, language heuristics, and canonical YouCity URL building.
-- `comment-assistant/comments.mjs` — deterministic comment templates for the
+- `src/features/comment-assistant/comments.mjs` — deterministic comment templates for the
   supported modes, languages, tones, and CTAs.
-- `comment-assistant/history.mjs` — local history and city-candidate storage.
-- `comment-assistant/publisher.mjs` — future OAuth publication boundary; it is
-  intentionally non-functional in the MVP.
-- `comment-assistant.js` — UI controller mounted in the existing modal/menu and
-  the `dataLayer` analytics adapter.
+- `src/features/comment-assistant/history.mjs` — local history and city-candidate storage.
+- `src/features/comment-assistant/comment-assistant-controller.mjs` — ESM UI
+  controller mounted in the existing modal/menu and analytics adapter.
+- `src/features/comment-assistant/comment-assistant-loader.mjs` — deduplicated
+  on-demand import and feature construction.
 - `functions/api/youtube-metadata.js` — server-side YouTube Data API adapter.
 - `scripts/test-comment-assistant.mjs` — core behavior tests.
 
@@ -29,8 +29,8 @@ Changed:
 - `index.html` — adds the Comment Assistant modal and existing overflow-menu
   entry.
 - `styles.css` — adds responsive styles using the existing YouCity tokens.
-- `app.js` — routes the existing overflow menu to the assistant.
-- `analytics.js` — allows `language` and `tone` properties in existing GTM
+- `src/app/bootstrap.mjs` — composes the overflow menu with the assistant feature through the lazy loader.
+- `src/integrations/analytics.mjs` — allows `language` and `tone` properties in existing GTM
   events.
 - `scripts/build-static.js` — copies the browser assistant assets into `dist/`.
 - `_headers` — prevents caching API responses.
@@ -47,7 +47,7 @@ YOUTUBE_API_KEY=your_youtube_data_api_key
 
 The browser only calls the same-origin `/api/youtube-metadata` endpoint; it
 never sees the YouTube API key or any OAuth token. Comment generation happens
-in `comment-assistant/comments.mjs` in the browser.
+in `src/features/comment-assistant/comments.mjs` in the browser.
 
 For local Cloudflare development, create an untracked `.dev.vars` file in the
 repository root with the same values, then run:
@@ -72,8 +72,8 @@ Function calls `videos.list` with `part=snippet,statistics`, which provides the
 title, description, channel title, tags when exposed, thumbnails, publication
 date, and public statistics.
 
-The future publishing adapter should use Google OAuth 2.0 for the authorized
-YouTube account and `commentThreads.insert` with the
+Publishing comments and Google OAuth 2.0 remain a separate future work item;
+when authorized, that work should use `commentThreads.insert` with the
 `https://www.googleapis.com/auth/youtube.force-ssl` scope. The MVP intentionally
 does not implement that write path; its final action is Copy or Approve.
 

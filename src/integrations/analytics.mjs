@@ -1,4 +1,4 @@
-(function initializeYouCityAnalytics(global) {
+export function initializeYouCityAnalytics(global = globalThis) {
   const dataLayer = global.dataLayer = global.dataLayer || [];
   const previousAnalytics = global.YOUCITY_ANALYTICS;
 
@@ -31,4 +31,4 @@
   }
 
   global.YOUCITY_ANALYTICS = { ...previousAnalytics, track };
-})(window);
+}

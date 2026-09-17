@@ -1,4 +1,4 @@
-import { COMMENT_TEMPLATES } from "../data/comment-templates.mjs";
+import { COMMENT_TEMPLATES } from "../../../data/comment-templates.mjs";
 
 const LANGUAGE_LABELS = { en: "English", es: "Spanish", pt: "Portuguese" };
 

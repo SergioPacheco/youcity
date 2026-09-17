@@ -1,4 +1,4 @@
-import { extractYouTubeVideoId, youtubeWatchUrl } from "../../comment-assistant/core.mjs";
+import { extractYouTubeVideoId, youtubeWatchUrl } from "../../src/features/comment-assistant/core.mjs";
 
 const CACHE_TTL = 5 * 60 * 1000;
 const RATE_WINDOW = 10 * 60 * 1000;

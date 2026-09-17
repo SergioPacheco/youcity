@@ -16,7 +16,7 @@ City
   -> tracked affiliate URL
 ```
 
-The modules are loaded in `index.html` before `app.js`:
+The compatibility modules are loaded in `index.html` before `src/main.mjs`:
 
 - `affiliate/affiliate-config.js` — feature flags, provider status, public IDs,
   priorities, vertical declarations, disclosure and ranking selection.
@@ -32,7 +32,7 @@ The modules are loaded in `index.html` before `app.js`:
   fail-safe analytics and provider query-parameter decoration.
 - `affiliate/providers/*.js` — one provider contract per partner.
 
-`app.js` only adapts city data to the common context, renders vertical cards,
+`src/features/travel/travel-controller.mjs` adapts city data to the common context, renders vertical cards,
 observes visible offers and delegates click tracking. The map uses the same
 resolver with a different placement.
 
@@ -148,20 +148,20 @@ affiliate ID or approved URL is still pending.
 
 The canonical catalog source is `data/catalog.json`. The validation and
 normalization script `scripts/build-catalog.js` generates the browser asset
-`catalog.js`, which is consumed by both the application and the static build.
+`src/catalog/catalog.mjs`, which is consumed by both the application and the static build.
 It contains the unified ride catalog, audited Drone entries, coordinates and
 radio sources, validates the records, and caps the runtime radio list at five
 stations per city. Video, radio, city and map data therefore have one source
 of truth instead of multiple browser bundles.
 
 Provider configuration and destination data are separate. DiscoverCars reads
-the generated `discovercars-locations.js`, which is derived from the official
+the generated `src/features/travel/discovercars-locations.js`, which is derived from the official
 catalog and only exposes `VERIFIED` city-level matches. Ambiguous and missing
 localities never fall back to the provider homepage. Its public `a_aid=youcity`
 is configured in the provider configuration, not in the destination records.
 
 Generic override source data lives in `data/affiliate-overrides.json`; the
-static build generates the browser bundle `affiliate-overrides.js`. An override
+static build generates the browser bundle `affiliate/affiliate-overrides.js`. An override
 can map a city key to a provider-specific destination, for example:
 
 ```json
@@ -214,5 +214,5 @@ while returning the same offer shape to the existing UI.
 4. Set `features.providers.<id>` or `providers.<id>.enabled` to `false` to
    disable it later.
 
-No change to `app.js`, city navigation or Travel Planner is required for a
+No change to city navigation or Travel Planner is required for a
 normal provider addition.

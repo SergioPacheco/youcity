@@ -4,8 +4,8 @@ import {
   detectVideoMode,
   extractYouTubeVideoId,
   matchCity
-} from "../comment-assistant/core.mjs";
-import { generateStandardComments } from "../comment-assistant/comments.mjs";
+} from "../src/features/comment-assistant/core.mjs";
+import { generateStandardComments } from "../src/features/comment-assistant/comments.mjs";
 
 const catalog = [{
   name: "London",
