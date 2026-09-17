@@ -5,7 +5,7 @@ Os links abaixo apontam para a documentação oficial de cada serviço.
 
 | Função | Serviço | Documentação oficial |
 | --- | --- | --- |
-| 📻 Rádios locais sob demanda | **Radio Browser API** | [Radio Browser API](https://docs.radio-browser.info/) |
+| 📻 Rádios, música atual e videoclipes | **Radio Browser + YouTube Data API** | [Radio Browser API](https://docs.radio-browser.info/) · [YouTube Search](https://developers.google.com/youtube/v3/docs/search/list) |
 | 🌤️ Clima | **Open-Meteo API** | [Open-Meteo API Docs](https://open-meteo.com/en/docs?utm_source=chatgpt.com) |
 | 🔎 Busca de cidades/conteúdo | **Algolia** | [Algolia API Docs](https://www.algolia.com/doc/libraries/sdk?utm_source=chatgpt.com) |
 | 🔔 Push notifications | **OneSignal** | [OneSignal Developers](https://documentation.onesignal.com/docs/developers?utm_source=chatgpt.com) |

@@ -21,6 +21,7 @@ export function createDom(document) {
       playerMinimize: $("#player-minimize"), playerRestore: $("#player-restore"), radioSummaryName: $("#radio-summary-name"), radioSummaryPrevious: $("#radio-summary-previous"), radioSummaryNext: $("#radio-summary-next"),
       radioSummaryPlay: $("#radio-summary-play"), radioExpand: $("#radio-expand"), moreButton: $("#more-button"), moreMenu: $("#more-menu"), commentAssistantButton: $("#comment-assistant-button"),
       radioBrowserDiscover: $("#radio-browser-discover"), radioBrowserPanel: $("#radio-browser-panel"), radioBrowserStatus: $("#radio-browser-status"), radioBrowserResults: $("#radio-browser-results"),
+      radioNowPlaying: $("#radio-now-playing"), radioMediaPanel: $("#radio-media-panel"), radioNowPlayingStatus: $("#radio-now-playing-status"), radioYouTubeSearch: $("#radio-youtube-search"), radioYouTubeResults: $("#radio-youtube-results"), radioYouTubePlayer: $("#radio-youtube-player"),
       commentAssistantMenuItem: $("#more-menu [data-overflow-action=\"comment-assistant\"]"), favoriteBtn: $("#favorite-btn"), infoTimezone: $("#info-timezone"),
       infoWeatherTemperature: $("#info-weather-temperature"), infoWeatherLabel: $("#info-weather-label"), filterContinent: $("#filter-continent"), shareBtn: $("#share-button"), themeBtn: $("#theme-button"), qualityBtn: $("#quality-btn"),
       modeButtons: document.querySelectorAll("[data-mode]"), speedButtons: document.querySelectorAll("[data-speed]"), closeDrawerButtons: document.querySelectorAll("[data-close-drawer]"),

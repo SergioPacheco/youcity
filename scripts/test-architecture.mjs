@@ -31,6 +31,11 @@ const requiredFiles = [
   "src/radio/radio-panel.mjs",
   "src/radio/radio-browser.mjs",
   "src/radio/radio-browser-feature.mjs",
+  "src/radio/radio-now-playing.mjs",
+  "src/radio/radio-youtube.mjs",
+  "src/radio/radio-media-feature.mjs",
+  "functions/api/radio-now-playing.js",
+  "functions/api/youtube-search.js",
   "functions/api/radio-stations.js"
 ];
 

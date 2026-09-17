@@ -4,6 +4,9 @@ import { createRadioController } from "../radio/radio-controller.mjs";
 import { createRadioPanelController } from "../radio/radio-panel.mjs";
 import { createRadioBrowserClient } from "../radio/radio-browser.mjs";
 import { createRadioBrowserFeature } from "../radio/radio-browser-feature.mjs";
+import { createNowPlayingClient } from "../radio/radio-now-playing.mjs";
+import { createYouTubeSearchClient } from "../radio/radio-youtube.mjs";
+import { createRadioMediaFeature } from "../radio/radio-media-feature.mjs";
 import { createVideoController } from "../player/video-controller.mjs";
 import { createCatalogRepository } from "../catalog/catalog-repository.mjs";
 import { createCitySelection } from "../city/city-selection.mjs";
@@ -339,6 +342,8 @@ export function startApplication() {
   const lazyModules = createLazyModuleLoader();
   let commentAssistant = null;
   let radioBrowserFeature = null;
+  let radioMediaFeature = null;
+  let lastRadioIndex = state.radioIndex;
 
   // -----------------------------------------------------------------------------
   // Funções auxiliares
@@ -460,6 +465,10 @@ export function startApplication() {
     onStateChange: (next) => {
       state.radioIndex = next.radioIndex;
       state.radioWantsPlay = next.radioWantsPlay;
+      if (next.radioIndex !== lastRadioIndex) {
+        lastRadioIndex = next.radioIndex;
+        radioMediaFeature?.reset();
+      }
     },
     onPlayingChange: (playing) => { state.radioPlaying = playing; }
   });
@@ -480,6 +489,21 @@ export function startApplication() {
     getCity: currentCity,
     radioController,
     client: createRadioBrowserClient({ basePath: BASE_PATH }),
+    showToast
+  });
+  radioMediaFeature = createRadioMediaFeature({
+    document,
+    elements: {
+      identifyButton: elements.radioNowPlaying,
+      panel: elements.radioMediaPanel,
+      status: elements.radioNowPlayingStatus,
+      searchButton: elements.radioYouTubeSearch,
+      results: elements.radioYouTubeResults,
+      videoHost: elements.radioYouTubePlayer
+    },
+    getStation: () => radioController.getCurrentStation(),
+    nowPlayingClient: createNowPlayingClient({ basePath: BASE_PATH }),
+    youtubeClient: createYouTubeSearchClient({ basePath: BASE_PATH }),
     showToast
   });
 
@@ -765,6 +789,7 @@ export function startApplication() {
     state.cityIndex = selection.cityIndex;
     state.radioIndex = 0;
     radioBrowserFeature?.reset();
+    radioMediaFeature?.reset();
     radioController.clearAdditionalStations();
 
     const city = currentCity();

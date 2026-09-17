@@ -233,6 +233,10 @@ export function createRadioController({
     if (index >= 0) setRadio(index, true);
   }
 
+  function getCurrentStation() {
+    return availableStations()[radioIndex] || null;
+  }
+
   audio.addEventListener("error", handleMediaError);
   audio.addEventListener("playing", () => {
     clearLoadTimer();
@@ -256,6 +260,7 @@ export function createRadioController({
     clearAdditionalStations,
     getAdditionalStations: () => [...additionalStations],
     playStation,
+    getCurrentStation,
     isPlaying: () => radioPlaying,
     getIndex: () => radioIndex
   };

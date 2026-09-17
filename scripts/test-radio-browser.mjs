@@ -9,6 +9,7 @@ import {
 } from "../src/radio/radio-browser.mjs";
 import { createRadioPanelController } from "../src/radio/radio-panel.mjs";
 import { createRadioController } from "../src/radio/radio-controller.mjs";
+import { createRadioBrowserFeature } from "../src/radio/radio-browser-feature.mjs";
 
 const city = {
   name: "São Paulo",
@@ -109,7 +110,41 @@ radioController.setAdditionalStations([additionalStation]);
 assert.deepEqual(radioController.getAdditionalStations(), [additionalStation]);
 radioController.playStation(additionalStation);
 assert.equal(radioController.getIndex(), 1, "an additional station should be playable after catalog stations");
+assert.deepEqual(radioController.getCurrentStation(), additionalStation);
 radioController.clearAdditionalStations();
 assert.deepEqual(radioController.getAdditionalStations(), []);
+
+function browserElement() {
+  const classes = new Set();
+  return {
+    hidden: true,
+    disabled: false,
+    dataset: {},
+    classList: { toggle(name, force) { if (force) classes.add(name); else classes.delete(name); } },
+    setAttribute(name, value) { this[name] = value; },
+    addEventListener() {},
+    replaceChildren(...children) { this.children = children; },
+    append(...children) { this.children = [...(this.children || []), ...children]; }
+  };
+}
+const discoverElements = {
+  trigger: browserElement(),
+  panel: browserElement(),
+  status: browserElement(),
+  results: browserElement()
+};
+let discoveryCalls = 0;
+const browserFeature = createRadioBrowserFeature({
+  document: { createElement: () => browserElement() },
+  elements: discoverElements,
+  getCity: () => ({ name: "São Paulo", country: "Brazil" }),
+  radioController: { setAdditionalStations() {}, getAdditionalStations: () => [], playStation() {} },
+  client: { findForCity: async () => { discoveryCalls += 1; return []; } }
+});
+await browserFeature.search();
+assert.equal(discoverElements.panel.hidden, false);
+await browserFeature.search();
+assert.equal(discoverElements.panel.hidden, true, "the local-radio icon should close an open result list");
+assert.equal(discoveryCalls, 1, "closing the list should not repeat the Radio Browser request");
 
 console.log("Radio Browser tests passed: request contract, station normalization, deduplication, and panel expansion.");

@@ -16,6 +16,23 @@ aciona; a busca não bloqueia o carregamento inicial e não substitui o catálog
 5. Se a consulta falhar ou não retornar resultados, as rádios atuais continuam
    funcionando normalmente.
 
+## Música atual e videoclipe
+
+O botão `♫` do painel inicia, somente após solicitação do usuário, uma consulta
+ao endpoint `/api/radio-now-playing`. A Function resolve a estação pelo Radio
+Browser e tenta ler o campo `StreamTitle` dos metadados ICY do stream. Quando há
+artista e título, o botão `Find music video` consulta `/api/youtube-search` e
+mostra até três candidatos. O iframe do YouTube só é criado depois que o
+usuário escolhe um resultado.
+
+Esse fluxo é best-effort: rádios podem não transmitir `artist/title`, podem
+transmitir o nome de um programa ou podem não estar indexadas pelo Radio
+Browser. Nesses casos a interface informa que não há metadados disponíveis e
+mantém o áudio funcionando. A busca usa a `YOUTUBE_API_KEY` exclusivamente no
+backend; o desenvolvimento local com Functions pode ser executado com um
+arquivo `.dev.vars` contendo essa variável, conforme a documentação do
+Comment Assistant.
+
 ## Contrato externo
 
 A Function usa o endpoint `/json/stations/search` com `name`, `country`,
@@ -62,3 +79,5 @@ API](https://docs.radio-browser.info/).
 - O contador de cliques do Radio Browser não é acionado nesta primeira etapa;
   adicionar esse registro exige uma decisão separada sobre telemetria de estações
   de terceiros.
+- Não há reconhecimento acústico/fingerprinting. Isso fica fora do escopo por
+  custo, privacidade e complexidade operacional.

@@ -289,6 +289,7 @@
             </button>
             <button class="stereo-btn" id="radio-next" type="button" aria-label="Next radio" title="Next radio">►►</button>
             <button class="stereo-btn radio-browser-discover" id="radio-browser-discover" type="button" aria-label="Find local radios" title="Find local radios">📻</button>
+            <button class="stereo-btn radio-now-playing" id="radio-now-playing" type="button" aria-label="Identify current song" title="Identify current song">♫</button>
             <button class="stereo-btn" id="quality-btn" type="button" aria-label="Video quality" title="Quality: Auto / 720p / 1080p">HD</button>
             <button class="stereo-btn" id="random-btn" type="button" aria-label="Random city" title="Random city (R)">RDM</button>
           </div>
@@ -299,6 +300,16 @@
             </div>
             <output class="radio-browser-status" id="radio-browser-status" aria-live="polite"></output>
             <div class="radio-browser-results" id="radio-browser-results"></div>
+          </div>
+          <div class="radio-media-panel" id="radio-media-panel" hidden>
+            <div class="radio-media-heading">
+              <strong>Now playing</strong>
+              <span>user requested</span>
+            </div>
+            <output class="radio-now-playing-status" id="radio-now-playing-status" aria-live="polite"></output>
+            <button class="radio-youtube-search" id="radio-youtube-search" type="button" disabled>▶ Find music video</button>
+            <div class="radio-youtube-results" id="radio-youtube-results"></div>
+            <div class="radio-youtube-player" id="radio-youtube-player" hidden></div>
           </div>
         </div>
         </div>

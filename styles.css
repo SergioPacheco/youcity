@@ -239,9 +239,10 @@ button:focus-visible, input:focus-visible {
 .lcd-led.is-active { opacity: 1; text-shadow: 0 0 5px var(--lcd-green); }
 
 /* Physical radio buttons */
-.stereo-buttons { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.stereo-buttons { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; }
 .stereo-btn { background: linear-gradient(180deg, #2c3036 0%, #1e2024 100%); border: 1px solid #111; border-bottom: 2px solid #0b0c0d; color: #b9bec8; font: 700 9px "DM Mono", monospace; padding: 7px 0; border-radius: 3px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.5); transition: all 0.05s ease; text-transform: uppercase; letter-spacing: 0.3px; }
 .radio-browser-discover { font-size: 15px; line-height: 1; }
+.radio-now-playing { font-size: 16px; line-height: 1; }
 .stereo-btn:active { border-bottom-width: 1px; transform: translateY(1px); background: #18191c; color: var(--lcd-green); box-shadow: inset 0 2px 4px rgba(0,0,0,0.8); }
 .stereo-btn.is-active, .stereo-btn.is-playing { color: var(--lcd-green); text-shadow: 0 0 4px rgba(0, 255, 102, 0.5); border-bottom-color: #008833; }
 .stereo-btn svg { width: 12px; height: 12px; stroke: currentColor; stroke-width: 2; fill: none; vertical-align: middle; }
@@ -256,6 +257,22 @@ button:focus-visible, input:focus-visible {
 .radio-browser-station:hover, .radio-browser-station:focus-visible { border-color: var(--lcd-green); background: rgba(0,255,102,.12); outline: none; }
 .radio-browser-station strong { min-width: 0; overflow: hidden; color: #e8f8e9; font: 600 10px Manrope, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
 .radio-browser-station small { flex-shrink: 0; color: rgba(0,255,102,.58); font: 400 8px "DM Mono", monospace; text-transform: uppercase; }
+.radio-media-panel { margin-top: 2px; padding: 10px; border: 1px solid rgba(0,255,102,.2); border-radius: 4px; background: rgba(0,0,0,.2); }
+.radio-media-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--lcd-green); font: 700 9px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.radio-media-heading span { color: rgba(0,255,102,.55); font-size: 8px; }
+.radio-now-playing-status { display: block; min-height: 18px; margin-top: 7px; color: #e8f8e9; font: 600 11px Manrope, sans-serif; }
+.radio-now-playing-status.is-busy::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border: 1px solid var(--lcd-green); border-top-color: transparent; border-radius: 50%; animation: video-loading-spin .7s linear infinite; vertical-align: 1px; }
+.radio-youtube-search { margin-top: 7px; padding: 7px 9px; border: 1px solid rgba(0,255,102,.3); border-radius: 3px; background: rgba(0,255,102,.06); color: var(--lcd-green); cursor: pointer; font: 700 9px "DM Mono", monospace; text-transform: uppercase; }
+.radio-youtube-search:disabled { cursor: not-allowed; opacity: .45; }
+.radio-youtube-results { display: grid; gap: 6px; margin-top: 8px; }
+.radio-youtube-result { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px; border: 1px solid rgba(0,255,102,.16); border-radius: 3px; background: rgba(0,255,102,.04); color: #e8f8e9; cursor: pointer; text-align: left; }
+.radio-youtube-result:hover, .radio-youtube-result:focus-visible { border-color: var(--lcd-green); background: rgba(0,255,102,.12); outline: none; }
+.radio-youtube-result img { width: 74px; height: 42px; flex-shrink: 0; border-radius: 2px; object-fit: cover; }
+.radio-youtube-result span { display: grid; min-width: 0; gap: 3px; }
+.radio-youtube-result strong { overflow: hidden; font: 600 10px Manrope, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.radio-youtube-result small { overflow: hidden; color: rgba(0,255,102,.58); font: 400 8px "DM Mono", monospace; text-overflow: ellipsis; white-space: nowrap; }
+.radio-youtube-player { margin-top: 8px; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 3px; background: #000; }
+.radio-youtube-player iframe { width: 100%; height: 100%; border: 0; }
 
 /* Equalizer adaptado */
 .lcd-equalizer { display: flex; align-items: end; gap: 2px; height: 18px; }
@@ -620,7 +637,7 @@ button:focus-visible, input:focus-visible {
   .lcd-frequency { font-size: 22px; }
   .lcd-frequency small { font-size: 12px; }
   .lcd-meta { font-size: 9px; }
-  .stereo-buttons { grid-template-columns: repeat(7, 1fr); }
+  .stereo-buttons { grid-template-columns: repeat(8, 1fr); }
   .stereo-btn { font-size: 9px; padding: 7px 0; }
   .stereo-btn:nth-child(n) { display: block; }
   .drawer-panel { width: min(720px, 100%); max-width: none; padding: 46px 54px 28px; }

@@ -5,6 +5,10 @@ does not require a database or login; the optional Comment Assistant uses
 Cloudflare Pages Functions only when its server-side API secrets are
 configured. See [`docs/comment-assistant.md`](docs/comment-assistant.md).
 
+The radio panel also supports user-triggered current-song detection and
+YouTube music-video matching when the selected station publishes ICY metadata;
+see [`docs/radio-browser-integration.md`](docs/radio-browser-integration.md).
+
 The catalog currently includes 206 cities. Each city exposes only the `Drive`, `Bike`, `Walk`, `Beach Walk`, and `Drone` modes that have a valid video; the world map uses static city-center coordinates and links to the catalog's YouTube videos.
 
 The canonical city, video and radio source is `data/catalog.json`. Run
@@ -41,6 +45,11 @@ The Comment Assistant MVP is documented in
 the existing application and requires only the server-side YouTube metadata
 secret; comments are generated locally from standard templates.
 
+The static preview does not execute Pages Functions. To test current-song
+detection and YouTube matching locally, configure `YOUTUBE_API_KEY` in an
+untracked `.dev.vars` file and run the Cloudflare Pages development command
+described in [`docs/comment-assistant.md`](docs/comment-assistant.md).
+
 Open `http://localhost:4174`. The generated city file is available at
 `http://localhost:4174/city/sao-paulo.html`; Cloudflare Pages also serves it at
 the extensionless URL `/city/sao-paulo` after deployment.
@@ -71,7 +80,7 @@ For other static hosts, upload the generated `dist/` directory rather than the s
 
 ## Media
 
-Videos are embedded from YouTube, the world map uses Leaflet with OpenStreetMap tiles, and radio stations are public external streams. City-specific stations are sourced from Radio Browser's directory and stored in the canonical catalog. The interface therefore needs no server, but the experience depends on an internet connection and source availability. Browsers may require an initial click before playing audio.
+Videos are embedded from YouTube, the world map uses Leaflet with OpenStreetMap tiles, and radio stations are public external streams. City-specific stations are sourced from Radio Browser's directory and stored in the canonical catalog. Current-song detection and YouTube matching are optional, user-triggered server-side integrations; they require a deployed Pages Function and `YOUTUBE_API_KEY` for the YouTube search. The experience depends on an internet connection and source availability. Browsers may require an initial click before playing audio.
 
 Map tiles and travel links are configured in `src/features/map/map-config.mjs` and
 `affiliate/affiliate-config.js`. DiscoverCars is catalog-driven; see

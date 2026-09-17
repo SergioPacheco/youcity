@@ -44,6 +44,10 @@ export function createRadioBrowserFeature({
   }
 
   async function search() {
+    if (!elements.panel.hidden) {
+      reset();
+      return;
+    }
     const city = getCity?.();
     if (!city) return;
     requestController?.abort();
