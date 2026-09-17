@@ -139,9 +139,6 @@
           <button class="icon-button secondary-action" id="map-button" type="button" aria-label="Open world map" title="World map (M)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.2 2.4 3.3 5.4 3.3 9s-1.1 6.6-3.3 9c-2.2-2.4-3.3-5.4-3.3-9S9.8 5.4 12 3zM5.2 6.5c2 .9 4.3 1.3 6.8 1.3s4.8-.4 6.8-1.3M5.2 17.5c2-.9 4.3-1.3 6.8-1.3s4.8.4 6.8 1.3"></path></svg>
           </button>
-          <button class="icon-button secondary-action" id="stats-button" type="button" aria-label="Statistics" title="Your statistics">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-          </button>
           <button class="icon-button secondary-action" id="theme-button" type="button" aria-label="Change theme" title="Change visual theme">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
@@ -171,8 +168,7 @@
               <button type="button" role="menuitem" data-overflow-action="theme">Theme</button>
               <button type="button" role="menuitem" data-overflow-action="fullscreen">Fullscreen</button>
               <button type="button" role="menuitem" data-overflow-action="about">About</button>
-              <button type="button" role="menuitem" data-overflow-action="stats">Statistics</button>
-          <button type="button" role="menuitem" data-overflow-action="comment-assistant" hidden>Comment Assistant</button>
+              <button type="button" role="menuitem" data-overflow-action="comment-assistant" hidden>Comment Assistant</button>
               <button type="button" role="menuitem" data-overflow-action="random">Random city</button>
             </div>
           </div>
@@ -196,8 +192,10 @@
         </div>
         <!-- City information -->
         <div class="city-info" id="city-info">
-          <span class="info-item" id="info-timezone"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><b>--:--</b></span>
-          <span class="info-item" id="info-population"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><b>--</b></span>
+          <span class="info-item time-weather-info" id="info-timezone" aria-live="polite" data-state="loading">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            <span class="time-weather-content"><span class="time-weather-primary"><b>--:-- --</b><strong id="info-weather-temperature">--°C</strong></span><small id="info-weather-label">Loading weather…</small></span>
+          </span>
         </div>
       </section>
 
@@ -468,38 +466,6 @@
           <p class="map-footnote">Video links open on YouTube. Select a mode in a popup to play it inside YouCity.</p>
         </div>
       </dialog>
-
-
-      <!-- Statistics modal -->
-      <section class="about-modal" id="stats-modal" aria-hidden="true" aria-labelledby="stats-title">
-        <div class="about-backdrop" data-close-stats></div>
-        <div class="about-card stats-card">
-          <button type="button" class="drawer-close" data-close-stats aria-label="Close">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
-          </button>
-          <span class="drawer-kicker">Your statistics</span>
-          <h2 id="stats-title">Your journey</h2>
-          <div class="stats-grid">
-            <div class="stat-item">
-              <span class="stat-value" id="stat-cities">0</span>
-              <span class="stat-label">cities visited</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value" id="stat-favorites">0</span>
-              <span class="stat-label">favorites</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value" id="stat-time">0h 0m</span>
-              <span class="stat-label">travel time</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-value" id="stat-sessions">0</span>
-              <span class="stat-label">sessions</span>
-            </div>
-          </div>
-          <p class="about-small">Statistics are stored locally in your browser.</p>
-        </div>
-      </section>
 
       <section class="comment-assistant-modal" id="comment-assistant-modal" aria-hidden="true" aria-labelledby="comment-assistant-title">
         <div class="comment-assistant-backdrop" data-close-comment-assistant></div>

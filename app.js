@@ -32,7 +32,7 @@
       prefs: "volta-prefs",
       playerHidden: "volta-player-hidden",
       favorites: "volta-favorites",
-      stats: "volta-stats",
+      recentCities: "volta-recent-cities",
       theme: "volta-theme",
       swipeHintSeen: "youcity-swipe-hint-seen",
     },
@@ -200,6 +200,12 @@
     CONFIG.modes.DRONE,
     CONFIG.modes.BEACH_WALK
   ]);
+
+  const WEATHER_CONFIG = Object.freeze({
+    CACHE_TTL: 15 * 60 * 1000,
+    REQUEST_TIMEOUT: 8_000,
+    PUBLIC_ENDPOINT: "https://api.open-meteo.com/v1/forecast"
+  });
 
   const THEME_NAMES = {
     [CONFIG.themes.DEFAULT]: MESSAGES.themeDefault,
@@ -393,11 +399,10 @@
     // Novas funcionalidades
     favoriteBtn: $("#favorite-btn"),
     infoTimezone: $("#info-timezone"),
-    infoPopulation: $("#info-population"),
+    infoWeatherTemperature: $("#info-weather-temperature"),
+    infoWeatherLabel: $("#info-weather-label"),
     filterContinent: $("#filter-continent"),
-    statsModal: $("#stats-modal"),
     shareBtn: $("#share-button"),
-    statsBtn: $("#stats-button"),
     themeBtn: $("#theme-button"),
     qualityBtn: $("#quality-btn"),
     // Seletores cacheados para grupos de botões
@@ -407,7 +412,6 @@
     closeTravelButtons: document.querySelectorAll("[data-close-travel]"),
     closeAboutButtons: document.querySelectorAll("[data-close-about]"),
     closeMapButtons: document.querySelectorAll("[data-close-map]"),
-    closeStatsButtons: document.querySelectorAll("[data-close-stats]"),
     shareFanButtons: document.querySelectorAll(".share-fan-item"),
     filterButtons: document.querySelectorAll("[data-filter]"),
   };
@@ -448,11 +452,11 @@
     currentContinent: "",
     currentTheme: CONFIG.themes.DEFAULT,
     currentQuality: CONFIG.qualities.AUTO,
-    sessionStartTime: Date.now(),
-    totalTravelTime: 0,
     playerHidden: false,
     radioExpanded: false,
     mainCtaImpressionCity: "",
+    weatherRequestId: 0,
+    weatherCache: new Map(),
     // Volume knob drag state
     volumeKnob: {
       isDragging: false,
@@ -1795,7 +1799,6 @@
     saveFavorites();
     updateFavoriteButton();
     renderGrid();
-    updateStats();
   }
 
   /**
@@ -1817,49 +1820,25 @@
   }
 
   // -----------------------------------------------------------------------------
-  // Estatísticas
+  // Recent cities
   // -----------------------------------------------------------------------------
-  
-  /**
-   * Carrega estatísticas do localStorage
-   * @returns {Object} Objeto de estatísticas
-   */
-  function loadStats() {
+
+  function loadRecentCities() {
     try {
-      const saved = localStorage.getItem(CONFIG.storageKeys.stats);
-      return saved ? JSON.parse(saved) : { visited: [], totalTime: 0, sessions: 0 };
+      const saved = localStorage.getItem(CONFIG.storageKeys.recentCities);
+      return saved ? new Set(JSON.parse(saved)) : new Set();
     } catch (error) {
-      console.warn("[YouCity] Failed to load statistics:", error.message);
-      return { visited: [], totalTime: 0, sessions: 0 };
+      console.warn("[YouCity] Failed to load recent cities:", error.message);
+      return new Set();
     }
   }
 
-  /**
-   * Salva estatísticas no localStorage
-   */
-  function saveStats() {
+  function saveRecentCities() {
     try {
-      const stats = loadStats();
-      stats.visited = [...state.visitedCities];
-      stats.totalTime = state.totalTravelTime + Math.floor((Date.now() - state.sessionStartTime) / 1000);
-      localStorage.setItem(CONFIG.storageKeys.stats, JSON.stringify(stats));
+      localStorage.setItem(CONFIG.storageKeys.recentCities, JSON.stringify([...state.visitedCities]));
     } catch (error) {
-      console.warn("[YouCity] Failed to save statistics:", error.message);
+      console.warn("[YouCity] Failed to save recent cities:", error.message);
     }
-  }
-
-  /**
-   * Atualiza exibição de estatísticas
-   */
-  function updateStats() {
-    const stats = loadStats();
-    $("#stat-cities").textContent = state.visitedCities.size;
-    $("#stat-favorites").textContent = state.favorites.size;
-    const totalSeconds = stats.totalTime + Math.floor((Date.now() - state.sessionStartTime) / 1000);
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    $("#stat-time").textContent = `${hours}h ${minutes}m`;
-    $("#stat-sessions").textContent = stats.sessions;
   }
 
   /**
@@ -1868,20 +1847,7 @@
    */
   function trackVisit(index) {
     state.visitedCities.add(cities[index].rawName || cities[index].id);
-    saveStats();
-  }
-
-  /**
-   * Incrementa contador de sessões
-   */
-  function incrementSession() {
-    try {
-      const stats = loadStats();
-      stats.sessions = (stats.sessions || 0) + 1;
-      localStorage.setItem(CONFIG.storageKeys.stats, JSON.stringify(stats));
-    } catch (error) {
-      console.warn("[YouCity] Failed to increment session count:", error.message);
-    }
+    saveRecentCities();
   }
 
   // -----------------------------------------------------------------------------
@@ -2179,14 +2145,131 @@
       }
     }
     
-    // População (dados simulados baseados no tamanho da cidade)
-    const populations = {
-      "São Paulo": "12.3M", "Tokyo": "13.9M", "New York": "8.3M", "London": "8.9M",
-      "Paris": "2.1M", "Berlin": "3.6M", "Sydney": "5.3M", "Mumbai": "12.4M",
-      "Beijing": "21.5M", "Moscow": "11.9M", "Cairo": "9.5M", "Lagos": "14.3M",
-    };
-    const pop = populations[city.name] || populations[city.rawName] || `${Math.floor(Math.random() * 5 + 1)}.${Math.floor(Math.random() * 9)}M`;
-    elements.infoPopulation.querySelector("b").textContent = pop;
+  }
+
+  const WEATHER_LABELS = {
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Rime fog",
+    51: "Light drizzle",
+    53: "Drizzle",
+    55: "Heavy drizzle",
+    56: "Freezing drizzle",
+    57: "Heavy freezing drizzle",
+    61: "Light rain",
+    63: "Rain",
+    65: "Heavy rain",
+    66: "Freezing rain",
+    67: "Heavy freezing rain",
+    71: "Light snow",
+    73: "Snow",
+    75: "Heavy snow",
+    77: "Snow grains",
+    80: "Light showers",
+    81: "Showers",
+    82: "Heavy showers",
+    85: "Light snow showers",
+    86: "Heavy snow showers",
+    95: "Thunderstorm",
+    96: "Thunderstorm with hail",
+    99: "Heavy thunderstorm with hail"
+  };
+
+  function weatherLabel(code) {
+    return WEATHER_LABELS[Number(code)] || "Weather update";
+  }
+
+  function weatherEndpoint(latitude, longitude) {
+    const endpoint = new URL(WEATHER_CONFIG.PUBLIC_ENDPOINT);
+    endpoint.searchParams.set("latitude", String(latitude));
+    endpoint.searchParams.set("longitude", String(longitude));
+    endpoint.searchParams.set("current", "temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation,is_day");
+    endpoint.searchParams.set("daily", "temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code,sunrise,sunset");
+    endpoint.searchParams.set("forecast_days", "3");
+    endpoint.searchParams.set("timezone", "auto");
+    endpoint.searchParams.set("temperature_unit", "celsius");
+    endpoint.searchParams.set("wind_speed_unit", "kmh");
+    return endpoint;
+  }
+
+  async function fetchWeatherEndpoint(endpoint, timeout = WEATHER_CONFIG.REQUEST_TIMEOUT) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      const response = await fetch(endpoint, { signal: controller.signal, headers: { accept: "application/json" } });
+      if (!response.ok) throw new Error(`Weather request failed with status ${response.status}`);
+      const payload = await response.json();
+      if (payload?.error || !payload?.current) throw new Error("Weather response is incomplete");
+      return payload;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  function setWeatherState(stateName, label = "") {
+    if (!elements.infoTimezone) return;
+    elements.infoTimezone.dataset.state = stateName;
+    if (label) elements.infoWeatherLabel.textContent = label;
+  }
+
+  function renderWeather(weather) {
+    const temperature = Number(weather?.current?.temperature_2m);
+    const code = Number(weather?.current?.weather_code);
+    if (!Number.isFinite(temperature)) throw new Error("Weather temperature is unavailable");
+    elements.infoWeatherTemperature.textContent = `${Math.round(temperature)}°C`;
+    elements.infoWeatherLabel.textContent = weatherLabel(code);
+    elements.infoTimezone.title = `Current weather: ${weatherLabel(code)}`;
+    setWeatherState("ready");
+  }
+
+  async function updateCityWeather(city) {
+    if (!elements.infoTimezone) return;
+    const coordinates = Array.isArray(city?.coordinates) ? city.coordinates : [];
+    const latitude = Number(coordinates[0]);
+    const longitude = Number(coordinates[1]);
+    const requestId = ++state.weatherRequestId;
+
+    if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      elements.infoWeatherTemperature.textContent = "--°C";
+      setWeatherState("error", "Weather unavailable");
+      return;
+    }
+
+    const cacheKey = `${latitude.toFixed(4)},${longitude.toFixed(4)}`;
+    const cached = state.weatherCache.get(cacheKey);
+    if (cached && cached.expiresAt > Date.now()) {
+      renderWeather(cached.value);
+      return;
+    }
+
+    elements.infoWeatherTemperature.textContent = "--°C";
+    setWeatherState("loading", "Loading weather…");
+
+    try {
+      let weather;
+      const apiEndpoint = new URL(sitePath("/api/weather"), window.location.origin);
+      apiEndpoint.searchParams.set("latitude", String(latitude));
+      apiEndpoint.searchParams.set("longitude", String(longitude));
+      try {
+        weather = await fetchWeatherEndpoint(apiEndpoint);
+      } catch (error) {
+        // The static local preview does not execute Pages Functions. In that
+        // case, use the same public Open-Meteo response shape as a local fallback.
+        const isLocalFunctionMiss = /status 404/.test(error.message);
+        if (!isLocalFunctionMiss) throw error;
+        weather = await fetchWeatherEndpoint(weatherEndpoint(latitude, longitude));
+      }
+      if (requestId !== state.weatherRequestId) return;
+      state.weatherCache.set(cacheKey, { value: weather, expiresAt: Date.now() + WEATHER_CONFIG.CACHE_TTL });
+      renderWeather(weather);
+    } catch (error) {
+      if (requestId !== state.weatherRequestId) return;
+      setWeatherState("error", "Weather unavailable");
+      console.warn(`[YouCity] Could not load weather for ${city.name}:`, error.message);
+    }
   }
 
   // -----------------------------------------------------------------------------
@@ -2337,6 +2420,7 @@
     // Novas funcionalidades
     updateFavoriteButton();
     updateCityInfo();
+    updateCityWeather(city);
     renderTravelPlanner(city);
     renderTravelPrompts(city);
     trackVisit(state.cityIndex);
@@ -2419,7 +2503,7 @@
    */
   function openLayer(layer) {
     if (layer === elements.drawer) syncDrawerFilterToRide();
-    const layers = [elements.drawer, elements.travelDrawer, elements.about, elements.mapModal, elements.statsModal]
+    const layers = [elements.drawer, elements.travelDrawer, elements.about, elements.mapModal]
       .filter(Boolean);
     const activeElement = document.activeElement;
     const activeInsideAnotherLayer = layers.some((other) => other !== layer && other.contains(activeElement));
@@ -2519,7 +2603,6 @@
       theme: cycleTheme,
       fullscreen: () => $("#fullscreen-button").click(),
       about: () => openLayer(elements.about),
-      stats: () => { updateStats(); openLayer(elements.statsModal); },
       "comment-assistant": openCommentAssistantForCurrentRide,
       random: selectRandomCity
     };
@@ -2630,10 +2713,7 @@
     
     // Carrega dados das novas funcionalidades
     state.favorites = loadFavorites();
-    const stats = loadStats();
-    state.visitedCities = new Set(stats.visited || []);
-    state.totalTravelTime = stats.totalTime || 0;
-    incrementSession();
+    state.visitedCities = loadRecentCities();
     loadTheme();
     
     // Restaura estado
@@ -2691,9 +2771,6 @@
       openLayer(elements.travelDrawer);
       ensureDiscoverCarsCatalog();
     }
-    
-    // Salva estatísticas ao fechar a página
-    window.addEventListener("beforeunload", saveStats);
     
     // Configura event listeners
     setupEventListeners();
@@ -3067,16 +3144,6 @@
       btn.addEventListener("click", () => shareToSocial(btn.dataset.share));
     });
     
-    // Estatísticas
-    elements.statsBtn.addEventListener("click", () => {
-      updateStats();
-      openLayer(elements.statsModal);
-    });
-    
-    elements.closeStatsButtons.forEach(btn => {
-      btn.addEventListener("click", () => closeLayer(elements.statsModal));
-    });
-
     window.addEventListener("popstate", () => {
       const nextRoute = loadRouteFromURL();
       if (nextRoute.cityIndex === null) return;
@@ -3110,7 +3177,6 @@
           closeLayer(elements.travelDrawer);
           closeLayer(elements.about);
           closeLayer(elements.mapModal);
-          closeLayer(elements.statsModal);
           closeShareFan();
           closeMoreMenu();
           break;

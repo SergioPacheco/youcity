@@ -54,9 +54,9 @@ export async function onRequestPost({ request, env }) {
   if (cached && cached.expiresAt > Date.now()) return json(cached.value);
 
   const endpoint = new URL("https://www.googleapis.com/youtube/v3/videos");
-  endpoint.searchParams.set("part", "snippet,statistics");
+  endpoint.searchParams.set("part", "snippet");
   endpoint.searchParams.set("id", videoId);
-  endpoint.searchParams.set("fields", "items(id,snippet,statistics)");
+  endpoint.searchParams.set("fields", "items(id,snippet)");
   endpoint.searchParams.set("key", env.YOUTUBE_API_KEY);
 
   let response;
@@ -85,7 +85,6 @@ export async function onRequestPost({ request, env }) {
     tags: Array.isArray(snippet.tags) ? snippet.tags.slice(0, 50) : [],
     thumbnails: snippet.thumbnails || {},
     publishedAt: snippet.publishedAt || null,
-    statistics: item.statistics || {}
   };
   cache.set(videoId, { value, expiresAt: Date.now() + CACHE_TTL });
   return json(value);

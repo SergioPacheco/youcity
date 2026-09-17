@@ -405,6 +405,13 @@ button:focus-visible, input:focus-visible {
 .info-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,.6); font: 400 10px "DM Mono", monospace; }
 .info-item svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .info-item b { color: rgba(255,255,255,.85); }
+.time-weather-info { min-width: 178px; }
+.time-weather-content { display: grid; gap: 2px; }
+.time-weather-primary { display: flex; align-items: baseline; gap: 8px; }
+.time-weather-primary strong { color: rgba(255,255,255,.85); font: 600 10px "DM Mono", monospace; }
+.time-weather-content small { color: rgba(255,255,255,.55); font: 400 8px/1.1 "DM Mono", monospace; text-transform: uppercase; white-space: nowrap; }
+.time-weather-info[data-state="loading"] { opacity: .7; }
+.time-weather-info[data-state="error"] { opacity: .72; }
 .mobile-mode-control { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
 .mobile-mode-control button { min-height: 44px; padding: 0 12px; border: 1px solid rgba(255,255,255,.24); border-radius: 22px; background: rgba(0,0,0,.28); color: rgba(255,255,255,.75); cursor: pointer; font: 600 9px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .mobile-mode-control button.is-active { border-color: var(--acid); background: var(--acid); color: var(--ink); }
@@ -497,13 +504,6 @@ button:focus-visible, input:focus-visible {
 .city-card .card-favorite.is-active { opacity: 1; color: #ff6b6b; }
 .city-card .card-favorite.is-active svg { fill: currentColor; }
 .city-card .card-favorite:hover { background: rgba(0,0,0,.8); color: #ff6b6b; }
-
-/* Statistics modal */
-.stats-card { text-align: center; }
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0; }
-.stat-item { padding: 20px; background: rgba(255,255,255,.05); border-radius: 8px; }
-.stat-value { display: block; font: 300 36px "Newsreader", serif; color: var(--lcd-green); }
-.stat-label { display: block; margin-top: 4px; color: rgba(255,255,255,.5); font: 400 9px "DM Mono", monospace; text-transform: uppercase; }
 
 /* Temas visuais */
 .app.theme-sepia .media-layer { filter: sepia(0.4) saturate(1.2); }

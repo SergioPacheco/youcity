@@ -182,7 +182,6 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
         high: { url: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` }
       },
       publishedAt: null,
-      statistics: {}
     };
   }
 
