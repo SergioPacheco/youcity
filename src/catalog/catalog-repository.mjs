@@ -37,6 +37,7 @@ export function createCatalogRepository(rawCatalog = []) {
     list: () => cities,
     getCity,
     availableModes,
+    firstAvailableMode,
     selectRide
   };
 }

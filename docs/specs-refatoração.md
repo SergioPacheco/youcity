@@ -90,7 +90,7 @@ Uma estrutura inicial possível é:
 
 ```text
 src/
-  main.js
+  main.mjs
   state.js
   navigation.js
   catalog.js
@@ -117,7 +117,7 @@ Crie arquivos internos adicionais quando houver responsabilidades distintas, ló
 
 ### Regras de organização
 
-* `main.js` deve compor e inicializar a aplicação.
+* `main.mjs` deve compor e inicializar a aplicação.
 * Cada funcionalidade deve possuir uma API pública pequena.
 * Declare dependências explicitamente.
 * Separe regras de domínio, acesso externo e manipulação do DOM onde isso simplificar o código.
@@ -195,7 +195,7 @@ Verifique o grafo completo de imports, incluindo imports dinâmicos.
 
 Não considere suficiente versionar apenas `main.js` com query string: isso não versiona automaticamente suas dependências.
 
-Escolha uma estratégia consistente, como assets com hash de conteúdo, e justifique a ferramenta de build usada. Um bundler leve pode ser adotado se resolver concretamente code splitting, caminhos e versionamento.
+Use a estratégia de versionamento já suportada pelo build estático, aplicando a mesma versão aos assets e a todo o grafo de imports estáticos e dinâmicos. Não introduza bundler automaticamente: só o adote se uma necessidade comprovada de build, cache ou imports não puder ser atendida pelos ES Modules nativos.
 
 Valide:
 

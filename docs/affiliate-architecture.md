@@ -16,7 +16,7 @@ City
   -> tracked affiliate URL
 ```
 
-The modules are loaded in `index.html` before `app.js`:
+The compatibility modules are loaded in `index.html` before `src/main.mjs`:
 
 - `affiliate/affiliate-config.js` — feature flags, provider status, public IDs,
   priorities, vertical declarations, disclosure and ranking selection.
@@ -32,7 +32,7 @@ The modules are loaded in `index.html` before `app.js`:
   fail-safe analytics and provider query-parameter decoration.
 - `affiliate/providers/*.js` — one provider contract per partner.
 
-`app.js` only adapts city data to the common context, renders vertical cards,
+`src/features/travel/travel-controller.mjs` adapts city data to the common context, renders vertical cards,
 observes visible offers and delegates click tracking. The map uses the same
 resolver with a different placement.
 
@@ -214,5 +214,5 @@ while returning the same offer shape to the existing UI.
 4. Set `features.providers.<id>` or `providers.<id>.enabled` to `false` to
    disable it later.
 
-No change to `app.js`, city navigation or Travel Planner is required for a
+No change to city navigation or Travel Planner is required for a
 normal provider addition.

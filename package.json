@@ -10,6 +10,7 @@
     "stay22:report": "node scripts/stay22-reporting.js",
     "comment:test": "node scripts/test-comment-assistant.mjs",
     "core:test": "node scripts/test-core-contracts.mjs && node scripts/test-async-guards.mjs",
-    "test": "npm run catalog:build && npm run core:test && npm run affiliate:test && npm run discovercars:test && npm run city:test && npm run comment:test"
+    "architecture:test": "node scripts/test-architecture.mjs",
+    "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run affiliate:test && npm run discovercars:test && npm run city:test && npm run comment:test"
   }
 }

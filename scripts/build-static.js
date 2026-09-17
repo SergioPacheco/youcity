@@ -55,12 +55,37 @@ const STATIC_ASSETS = [
   "affiliate/providers/heymondo.js",
   "affiliate/providers/stay22.js",
   "discovercars-locations.js",
-  "app.js",
-  "comment-assistant.js",
-  "comment-assistant/core.mjs",
-  "comment-assistant/history.mjs",
-  "comment-assistant/comments.mjs",
-  "data/comment-templates.mjs"
+  "src/features/comment-assistant/comment-assistant-controller.mjs",
+  "src/features/comment-assistant/core.mjs",
+  "src/features/comment-assistant/history.mjs",
+  "src/features/comment-assistant/comments.mjs",
+  "data/comment-templates.mjs",
+  "src/main.mjs",
+  "src/app/bootstrap.mjs",
+  "src/app/dom.mjs",
+  "src/navigation/navigation-controller.mjs",
+  "src/sharing/sharing-controller.mjs",
+  "src/ui/layers-controller.mjs",
+  "src/ui/city-browser.mjs",
+  "src/ui/media-controls.mjs",
+  "src/core/video-policy.mjs",
+  "src/core/async-guard.mjs",
+  "src/core/lazy-module.mjs",
+  "src/core/url.mjs",
+  "src/core/storage.mjs",
+  "src/catalog/catalog-repository.mjs",
+  "src/city/city-selection.mjs",
+  "src/state/store.mjs",
+  "src/player/youtube-player.mjs",
+  "src/player/video-controller.mjs",
+  "src/radio/radio-controller.mjs",
+  "src/features/comment-assistant/comment-assistant-loader.mjs",
+  "src/features/map/map-controller.mjs",
+  "src/features/map/map-feature-loader.mjs",
+  "src/features/city-guide/city-guide-controller.mjs",
+  "src/features/travel/secondary-providers-loader.mjs",
+  "src/features/travel/travel-controller.mjs",
+  "src/weather/weather-controller.mjs"
 ];
 const STATIC_FILES = STATIC_ASSETS;
 
@@ -81,6 +106,15 @@ function versionStaticAssets(html) {
     const separator = url.includes("?") ? "&" : "?";
     return `${prefix}${url}${separator}v=${encodeURIComponent(ASSET_VERSION)}${suffix}`;
   });
+}
+
+function versionModuleImports(source) {
+  const version = encodeURIComponent(ASSET_VERSION);
+  const addVersion = (url) => url.includes("?") ? `${url}&v=${version}` : `${url}?v=${version}`;
+  return source
+    .replace(/(from\s+["'])(\.[^"']+\.(?:mjs|js))(["'])/g, (_, prefix, url, suffix) => `${prefix}${addVersion(url)}${suffix}`)
+    .replace(/(import\s+["'])(\.[^"']+\.(?:mjs|js))(["'])/g, (_, prefix, url, suffix) => `${prefix}${addVersion(url)}${suffix}`)
+    .replace(/(import\(\s*["'])(\.[^"']+\.(?:mjs|js))(["'])/g, (_, prefix, url, suffix) => `${prefix}${addVersion(url)}${suffix}`);
 }
 
 function escapeHtml(value) {
@@ -262,7 +296,7 @@ function rewriteInternalPaths(html) {
 }
 
 function injectRuntimeBasePath(html) {
-  const script = `<script>window.YOUCITY_BASE_PATH = ${jsonForHtml(SITE_PATH)};</script>`;
+  const script = `<script>window.YOUCITY_BASE_PATH = ${jsonForHtml(SITE_PATH)}; window.YOUCITY_ASSET_VERSION = ${jsonForHtml(ASSET_VERSION)};</script>`;
   return html.replace("</head>", `    ${script}\n  </head>`);
 }
 
@@ -372,6 +406,9 @@ function main() {
     const destination = join(OUTPUT_DIR, file);
     mkdirSync(dirname(destination), { recursive: true });
     cpSync(resolve(ROOT_DIR, file), destination);
+    if (/\.(?:mjs|js)$/.test(file)) {
+      writeFileSync(destination, versionModuleImports(readFileSync(destination, "utf8")));
+    }
   }
   writeAffiliateOverridesAsset();
   cpSync(resolve(ROOT_DIR, "assets"), join(OUTPUT_DIR, "assets"), { recursive: true });

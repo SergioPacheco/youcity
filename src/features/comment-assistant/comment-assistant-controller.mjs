@@ -11,14 +11,24 @@ import {
   normalizeText,
   resolveMode,
   youtubeWatchUrl
-} from "./comment-assistant/core.mjs";
-import { generateStandardComments } from "./comment-assistant/comments.mjs";
-import { CommentHistoryService } from "./comment-assistant/history.mjs";
+} from "./core.mjs";
+import { generateStandardComments } from "./comments.mjs";
+import { CommentHistoryService } from "./history.mjs";
 
-(function initializeCommentAssistant(global) {
-  "use strict";
-
-  const history = new CommentHistoryService();
+export function createCommentAssistant({
+  window: windowRef = globalThis,
+  document: documentRef = windowRef.document,
+  navigator: navigatorRef = windowRef.navigator,
+  fetchImpl = windowRef.fetch?.bind(windowRef),
+  catalog = windowRef.YOUCITY_CATALOG || [],
+  basePath = windowRef.YOUCITY_BASE_PATH || "",
+  analytics = windowRef.YOUCITY_ANALYTICS,
+  isAdmin = windowRef.YOUCITY_COMMENT_ASSISTANT_ADMIN === true,
+  storage
+} = {}) {
+  const document = documentRef;
+  const navigator = navigatorRef;
+  const history = new CommentHistoryService(storage);
   const state = {
     metadata: null,
     detection: null,
@@ -69,7 +79,7 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
     const metadata = state.metadata || {};
     const detection = state.detection || {};
     try {
-      global.YOUCITY_ANALYTICS?.track?.({
+      analytics?.track?.({
         event,
         city: context.city || detection.city?.name || detection.cityCandidate || "",
         country: context.country || (detection.city ? countryName(detection.city.country) : detection.country) || "",
@@ -102,7 +112,7 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
   }
 
   function open(options = {}) {
-    if (!elements.modal || global.YOUCITY_COMMENT_ASSISTANT_ADMIN !== true) return;
+    if (!elements.modal || isAdmin !== true) return;
     state.previousFocus = document.activeElement;
     elements.modal.classList.add("is-open");
     elements.modal.setAttribute("aria-hidden", "false");
@@ -148,8 +158,9 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
   }
 
   async function post(path, body) {
-    const basePath = String(global.YOUCITY_BASE_PATH || "").replace(/\/+$/, "");
-    const response = await fetch(`${basePath}${path}`, {
+    const requestBasePath = String(basePath || "").replace(/\/+$/, "");
+    if (typeof fetchImpl !== "function") throw new Error("FETCH_UNAVAILABLE");
+    const response = await fetchImpl(`${requestBasePath}${path}`, {
       method: "POST",
       headers: { "content-type": "application/json", accept: "application/json" },
       body: JSON.stringify(body)
@@ -186,7 +197,6 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
   }
 
   function matchCatalogVideo(videoId, title = "", description = "") {
-    const catalog = global.YOUCITY_CATALOG || [];
     const city = catalog.find((candidate) => Object.values(candidate.videos || {}).some((videos) =>
       videos?.some((video) => video?.id === videoId)
     ));
@@ -403,7 +413,7 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
       const metadata = catalogMetadata || await post("/api/youtube-metadata", { url });
       state.metadata = { ...metadata, videoUrl: youtubeWatchUrl(metadata.videoId || videoId) };
       state.detection = matchCatalogVideo(metadata.videoId || videoId, metadata.title, metadata.description)
-        || matchCity(metadata.title, metadata.description, global.YOUCITY_CATALOG || []);
+        || matchCity(metadata.title, metadata.description, catalog);
       state.historyEntry = history.find(metadata.videoId || videoId);
       renderMetadata(state.metadata);
       renderDetection();
@@ -474,7 +484,8 @@ import { CommentHistoryService } from "./comment-assistant/history.mjs";
     });
   }
 
-  global.YouCityCommentAssistant = { open, close, analyze: analyzeVideo, getShareComment };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initialize, { once: true });
   else initialize();
-})(window);
+
+  return { open, close, analyze: analyzeVideo, getShareComment };
+}
