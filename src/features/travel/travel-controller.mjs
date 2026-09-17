@@ -184,7 +184,7 @@ export function createTravelController({
     discoverCarsCatalogPromise = new Promise((resolve) => {
       const script = document.createElement("script");
       const version = String(window.YOUCITY_ASSET_VERSION || "").trim();
-      script.src = `${sitePath("/discovercars-locations.js")}${version ? `?v=${encodeURIComponent(version)}` : ""}`;
+      script.src = `${sitePath("/src/features/travel/discovercars-locations.js")}${version ? `?v=${encodeURIComponent(version)}` : ""}`;
       script.async = true;
       script.dataset.youcityDiscoverCars = "true";
       script.addEventListener("load", () => { renderTravelPlanner(currentCity()); renderTravelPrompts(currentCity()); resolve(true); }, { once: true });

@@ -193,7 +193,3 @@ window.YOUCITY_AFFILIATE_CONFIG = {
     }
   }
 };
-
-// Temporary compatibility alias for integrations that still read the old name.
-window.YOUCITY_TRAVEL = window.YOUCITY_AFFILIATE_CONFIG;
-window.YOUCITY_TRAVEL_RECOMMENDATIONS = window.YOUCITY_AFFILIATE_CONFIG;

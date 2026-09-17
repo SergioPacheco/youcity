@@ -271,7 +271,7 @@ export function createCityGuideController({ window, document, elements, getCity,
   }
 
   async function openCityGuide() {
-    const city = currentCity();
+    const city = getCity();
     if (!elements.travelDrawer || !elements.cityGuideContent || !city) return;
     const language = cityGuideLanguage();
     const cacheKey = `${city.id}|${language}`;

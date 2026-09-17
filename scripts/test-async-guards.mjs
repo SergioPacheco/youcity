@@ -5,6 +5,7 @@ import { createRequestGuard } from "../src/core/async-guard.mjs";
 import { createLazyModuleLoader } from "../src/core/lazy-module.mjs";
 import { createWeatherController } from "../src/weather/weather-controller.mjs";
 import { createCommentAssistantLoader } from "../src/features/comment-assistant/comment-assistant-loader.mjs";
+import { createCityGuideController } from "../src/features/city-guide/city-guide-controller.mjs";
 
 const guard = createRequestGuard();
 const first = guard.next();
@@ -61,6 +62,35 @@ const assistantSecondLoad = assistantLoader({ enabled: true, ...assistantDepende
 assert.strictEqual(assistantFirstLoad, assistantSecondLoad, "assistant loads should share one promise");
 assert.deepEqual(await assistantFirstLoad, { dependencies: assistantDependencies });
 assert.equal(assistantFactoryCount, 1, "assistant factory should run once for concurrent loads");
+
+const guideContent = { innerHTML: "" };
+const guideDrawer = {};
+const guideButton = { setAttribute() {} };
+const guideDocument = { documentElement: { lang: "en" } };
+const guideCity = { id: "london", name: "London", country: "UK", coordinates: [51.5, -0.12] };
+const previousFetch = globalThis.fetch;
+let openedGuideLayer = null;
+globalThis.fetch = async () => ({
+  ok: true,
+  json: async () => ({ wikipedia: { extract: "London summary", url: "" }, places: [] })
+});
+try {
+  const guide = createCityGuideController({
+    window: { location: { origin: "http://localhost" } },
+    document: guideDocument,
+    elements: { travelDrawer: guideDrawer, cityGuideContent: guideContent, travelButton: guideButton },
+    getCity: () => guideCity,
+    openLayer: (layer) => { openedGuideLayer = layer; },
+    ensureDiscoverCarsCatalog() {},
+    sitePath: (path) => path,
+    isStaticLocalPreview: () => false
+  });
+  await guide.open();
+} finally {
+  globalThis.fetch = previousFetch;
+}
+assert.strictEqual(openedGuideLayer, guideDrawer, "City Guide should open its drawer using the injected city getter");
+assert.match(guideContent.innerHTML, /London summary/);
 
 const weatherRequests = new Map();
 const weatherReady = [];

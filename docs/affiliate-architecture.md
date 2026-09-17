@@ -148,20 +148,20 @@ affiliate ID or approved URL is still pending.
 
 The canonical catalog source is `data/catalog.json`. The validation and
 normalization script `scripts/build-catalog.js` generates the browser asset
-`catalog.js`, which is consumed by both the application and the static build.
+`src/catalog/catalog.mjs`, which is consumed by both the application and the static build.
 It contains the unified ride catalog, audited Drone entries, coordinates and
 radio sources, validates the records, and caps the runtime radio list at five
 stations per city. Video, radio, city and map data therefore have one source
 of truth instead of multiple browser bundles.
 
 Provider configuration and destination data are separate. DiscoverCars reads
-the generated `discovercars-locations.js`, which is derived from the official
+the generated `src/features/travel/discovercars-locations.js`, which is derived from the official
 catalog and only exposes `VERIFIED` city-level matches. Ambiguous and missing
 localities never fall back to the provider homepage. Its public `a_aid=youcity`
 is configured in the provider configuration, not in the destination records.
 
 Generic override source data lives in `data/affiliate-overrides.json`; the
-static build generates the browser bundle `affiliate-overrides.js`. An override
+static build generates the browser bundle `affiliate/affiliate-overrides.js`. An override
 can map a city key to a provider-specific destination, for example:
 
 ```json

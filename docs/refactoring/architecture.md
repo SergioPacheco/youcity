@@ -22,6 +22,8 @@ bundler: o build estático copia os módulos, corrige os caminhos e acrescenta
 - `src/features/comment-assistant/`: controlador ESM, regras puras, histórico e
   importação deduplicada; todo o Comment Assistant só é carregado ao abrir a ferramenta.
 - `src/features/travel/`: CTA, planner, Stay22 e providers secundários, com carregamento progressivo.
+- `src/integrations/analytics.mjs`: inicialização explícita do contrato de analytics
+  usado pelos módulos de afiliados.
 - `src/navigation/`: leitura e sincronização de rota sem depender de funções do bootstrap.
 - `src/sharing/`: composição dos dados e destinos de compartilhamento.
 - `src/ui/`: DOM cacheado, camadas, navegador de cidades e controles de mídia.
@@ -29,8 +31,9 @@ bundler: o build estático copia os módulos, corrige os caminhos e acrescenta
 
 O store contém apenas dados de aplicação/navegação. Timers, players, mapa,
 AbortControllers, cache de serviço e estado transitório dos controladores não são
-persistidos nele. A compatibilidade dos scripts globais de catálogo, afiliados e
-analytics foi mantida porque esses contratos já são consumidos pela página.
+persistidos nele. Catálogo e configuração do mapa são imports ESM; scripts
+clássicos permanecem apenas onde a integração de afiliados exige os namespaces
+globais públicos existentes.
 
 ## Lazy loading e recuperação
 

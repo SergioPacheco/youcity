@@ -1,7 +1,7 @@
 # DiscoverCars integration
 
 The car-rental integration is static and catalog-driven. The browser never
-queries DiscoverCars. It loads the generated `discovercars-locations.js`, and
+queries DiscoverCars. It loads the generated `src/features/travel/discovercars-locations.js`, and
 the `Plan your trip` resolver exposes the car-rental card only for a city whose
 catalog status is `VERIFIED`.
 
@@ -46,7 +46,7 @@ files sequentially, applies country-aware matching, validates manual aliases,
 and writes:
 
 - `data/discovercars-locations.json` — reviewable catalog;
-- `discovercars-locations.js` — browser bundle used by the static site;
+- `src/features/travel/discovercars-locations.js` — browser bundle used by the static site;
 - `reports/discovercars-locations-report.json` — status report.
 
 No weekly GitHub Action is configured. This keeps updates manual and avoids

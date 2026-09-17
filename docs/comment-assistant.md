@@ -30,7 +30,7 @@ Changed:
   entry.
 - `styles.css` — adds responsive styles using the existing YouCity tokens.
 - `src/app/bootstrap.mjs` — composes the overflow menu with the assistant feature through the lazy loader.
-- `analytics.js` — allows `language` and `tone` properties in existing GTM
+- `src/integrations/analytics.mjs` — allows `language` and `tone` properties in existing GTM
   events.
 - `scripts/build-static.js` — copies the browser assistant assets into `dist/`.
 - `_headers` — prevents caching API responses.

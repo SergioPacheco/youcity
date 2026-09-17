@@ -17,6 +17,8 @@ import { createMediaControls } from "../ui/media-controls.mjs";
 import { createTravelController } from "../features/travel/travel-controller.mjs";
 import { createMapFeatureLoader } from "../features/map/map-feature-loader.mjs";
 import { createDom, createSitePath, hasAdminRole } from "./dom.mjs";
+import CATALOG from "../catalog/catalog.mjs";
+import MAP_CONFIG from "../features/map/map-config.mjs";
 
 // =============================================================================
 // YouCity application runtime
@@ -278,7 +280,7 @@ export function startApplication() {
   // -----------------------------------------------------------------------------
   // City catalog processing
   // -----------------------------------------------------------------------------
-  const catalogRepository = createCatalogRepository((window.YOUCITY_CATALOG || []).map((item) => {
+  const catalogRepository = createCatalogRepository(CATALOG.map((item) => {
     const [country, region, countryTimeZone] = COUNTRY_INFO[item.country] || [item.country, "World", "UTC"];
     return {
       ...item,
@@ -579,7 +581,7 @@ export function startApplication() {
     cities,
     state,
     lazyModules,
-    mapConfig: window.YOUCITY_MAP_CONFIG || {},
+    mapConfig: MAP_CONFIG,
     buildPopup: mapPopup,
     trackTravelClick,
     observeImpressions: (root) => window.YouCityAffiliate?.observeImpressions?.(root),
@@ -811,7 +813,7 @@ export function startApplication() {
         document,
         navigator,
         fetchImpl: window.fetch?.bind(window),
-        catalog: window.YOUCITY_CATALOG || [],
+        catalog: CATALOG,
         basePath: BASE_PATH,
         analytics: window.YOUCITY_ANALYTICS,
         isAdmin: state.isAdmin,

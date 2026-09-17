@@ -20,10 +20,10 @@ export function createCommentAssistant({
   document: documentRef = windowRef.document,
   navigator: navigatorRef = windowRef.navigator,
   fetchImpl = windowRef.fetch?.bind(windowRef),
-  catalog = windowRef.YOUCITY_CATALOG || [],
-  basePath = windowRef.YOUCITY_BASE_PATH || "",
+  catalog = [],
+  basePath = "",
   analytics = windowRef.YOUCITY_ANALYTICS,
-  isAdmin = windowRef.YOUCITY_COMMENT_ASSISTANT_ADMIN === true,
+  isAdmin = false,
   storage
 } = {}) {
   const document = documentRef;

@@ -36,14 +36,14 @@ const SOCIAL_IMAGE = `${SITE_URL}${SITE_PATH}/assets/hero-saopaulo.webp`;
 const SOCIAL_ALT = "YouCity — immersive city rides around the world";
 const STATIC_ASSETS = [
   "styles.css",
-  "catalog.js",
-  "map-config.js",
+  "src/catalog/catalog.mjs",
+  "src/features/map/map-config.mjs",
   "affiliate/affiliate-config.js",
-  "affiliate-overrides.js",
+  "affiliate/affiliate-overrides.js",
   "affiliate/affiliate-engine.js",
   "affiliate/affiliate-catalog.js",
   "affiliate/affiliate-tracking.js",
-  "analytics.js",
+  "src/integrations/analytics.mjs",
   "affiliate/affiliate-experiments.js",
   "affiliate/affiliate-resolver.js",
   "affiliate/providers/expedia.js",
@@ -54,7 +54,7 @@ const STATIC_ASSETS = [
   "affiliate/providers/airalo.js",
   "affiliate/providers/heymondo.js",
   "affiliate/providers/stay22.js",
-  "discovercars-locations.js",
+  "src/features/travel/discovercars-locations.js",
   "src/features/comment-assistant/comment-assistant-controller.mjs",
   "src/features/comment-assistant/core.mjs",
   "src/features/comment-assistant/history.mjs",
@@ -151,7 +151,7 @@ function writeAffiliateOverridesAsset() {
   const source = resolve(ROOT_DIR, "data/affiliate-overrides.json");
   const overrides = existsSync(source) ? JSON.parse(readFileSync(source, "utf8")) : {};
   writeFileSync(
-    join(OUTPUT_DIR, "affiliate-overrides.js"),
+    join(OUTPUT_DIR, "affiliate/affiliate-overrides.js"),
     `// Generated from data/affiliate-overrides.json.\nwindow.YOUCITY_AFFILIATE_OVERRIDES = ${JSON.stringify(overrides)};\n`
   );
 }
