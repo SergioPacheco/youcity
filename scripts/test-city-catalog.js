@@ -16,10 +16,11 @@ assert.deepEqual(Array.from(granada.videos.drone, (video) => video.id), ["c6u22g
 assert.deepEqual(Array.from(granada.coordinates), [37.1765, -3.5979]);
 const beachWalkIds = new Set(catalog.flatMap((city) => city.videos.beach_walk || []).map((video) => video.id));
 const beachWalkRides = catalog.flatMap((city) => city.videos.beach_walk || []);
-assert.equal(beachWalkIds.size, 18, "Beach Walk catalog should contain 18 unique videos");
-assert.equal(beachWalkRides.length, 18, "all Beach Walk videos should be loaded into the canonical catalog");
+assert.equal(beachWalkIds.size, 17, "Beach Walk catalog should contain 17 active unique videos");
+assert.equal(beachWalkRides.length, 17, "all active Beach Walk videos should be loaded into the canonical catalog");
+assert.equal(beachWalkIds.has("K7T-e62o18g"), false, "the removed Clearwater video must not return to the catalog");
 assert.ok(beachWalkRides.every((video) => beachWalkIds.has(video.id)), "Beach Walk rides should have unique catalog IDs");
-assert.ok(catalog.filter((city) => city.videos.beach_walk.length).length >= 15, "Beach Walk rides should cover the curated destinations");
+assert.ok(catalog.filter((city) => city.videos.beach_walk.length).length >= 14, "Beach Walk rides should cover the curated destinations");
 assert.ok(catalog.filter((city) => city.videos.beach_walk.length).every((city) => city.radios.length > 0), "every Beach Walk destination should have a radio station");
 assert.ok(catalog.every((city) => city.radios.length <= 5), "canonical catalog should cap radios at five per city");
 assert.ok(catalog.every((city) => city.radios.length > 0), "every catalog city should have at least one radio station");

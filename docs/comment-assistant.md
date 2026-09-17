@@ -16,6 +16,9 @@ Created:
   mode detection, language heuristics, and canonical YouCity URL building.
 - `src/features/comment-assistant/comments.mjs` — deterministic comment templates for the
   supported modes, languages, tones, and CTAs.
+- `src/features/comment-assistant/share-destinations.mjs` — curated share-link
+  registry with 50 destinations and copy-first fallbacks for networks without a
+  reliable public web composer.
 - `src/features/comment-assistant/history.mjs` — local history and city-candidate storage.
 - `src/features/comment-assistant/comment-assistant-controller.mjs` — ESM UI
   controller mounted in the existing modal/menu and analytics adapter.
@@ -99,6 +102,19 @@ The local history uses `localStorage` under the keys
 title, detected city/country/area, mode, generated alternatives, language,
 timestamp, and status (`GENERATED`, `COPIED`, `APPROVED`, or the future
 `PUBLISHED`).
+
+The compact assistant flow is: analyze a YouTube URL, optionally open
+`Personalize`, generate three alternatives, then edit, copy, or share an
+alternative. Sharing shows the most useful destinations first and expands to
+50 destinations on request. Instagram, TikTok, Discord, and other networks
+without a stable public prefilled composer use `copy + open`: the assistant
+copies the selected text and opens the network homepage for manual posting.
+
+The registry is intentionally data-driven. It includes current share endpoints
+for services such as WhatsApp, X, Facebook, Telegram, LinkedIn, Reddit,
+Pinterest, LINE, VK, Weibo, email, SMS, and bookmarking services, plus
+copy-first entries for networks that require their own app or do not document a
+web prefill URL. Discontinued services are not presented as supported.
 
 When a generated, copied, or approved comment exists for the current city and
 mode, the existing YouCity social-share controls include that comment in the

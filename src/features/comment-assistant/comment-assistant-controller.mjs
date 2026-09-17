@@ -14,6 +14,7 @@ import {
 } from "./core.mjs";
 import { generateStandardComments } from "./comments.mjs";
 import { CommentHistoryService } from "./history.mjs";
+import { buildCommentShareLink, getCommentShareDestinations } from "./share-destinations.mjs";
 
 export function createCommentAssistant({
   window: windowRef = globalThis,
@@ -38,7 +39,9 @@ export function createCommentAssistant({
     catalogContext: null,
     previousFocus: null,
     busy: false,
-    generationCount: 0
+    generationCount: 0,
+    shareOptionIndex: null,
+    shareExpanded: false
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -69,9 +72,14 @@ export function createCommentAssistant({
     urlToggle: $("#comment-assistant-url-toggle"),
     trip: $("#comment-assistant-trip"),
     generate: $("#comment-assistant-generate"),
+    generateActions: $("#comment-assistant-generate-actions"),
     historyNotice: $("#comment-assistant-history-notice"),
     results: $("#comment-assistant-results"),
-    options: $("#comment-assistant-options")
+    options: $("#comment-assistant-options"),
+    sharePicker: $("#comment-assistant-share-picker"),
+    shareHelp: $("#comment-assistant-share-help"),
+    shareDestinations: $("#comment-assistant-share-destinations"),
+    shareMore: $("#comment-assistant-share-more")
   };
 
   function track(event, extra = {}) {
@@ -128,6 +136,7 @@ export function createCommentAssistant({
   }
 
   function close() {
+    closeSharePicker();
     elements.modal.classList.remove("is-open");
     elements.modal.setAttribute("aria-hidden", "true");
     if (state.previousFocus?.focus) state.previousFocus.focus();
@@ -250,6 +259,7 @@ export function createCommentAssistant({
     elements.detection.hidden = false;
     elements.candidate.hidden = Boolean(city);
     elements.settings.hidden = !city;
+    elements.generateActions.hidden = !city;
     if (city) {
       const autoMode = resolveMode(city, "auto", detectedMode);
       elements.experience.value = autoMode === DEFAULT_MODE && !city.videos?.[detectedMode]?.length ? "auto" : autoMode;
@@ -325,10 +335,10 @@ export function createCommentAssistant({
       textarea.setAttribute("aria-label", `Comment option ${index + 1}`);
       const actions = document.createElement("div");
       actions.className = "comment-assistant-option-actions";
-      [["copy", "Copy"], ["regenerate", "Regenerate"], ["edit", "Edit"], ["approve", "Approve"]].forEach(([action, label]) => {
+      [["copy", "Copy"], ["edit", "Edit"], ["share", "Share"]].forEach(([action, label]) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.className = action === "copy" ? "comment-assistant-secondary" : "comment-assistant-quiet";
+        button.className = action === "copy" || action === "share" ? "comment-assistant-secondary" : "comment-assistant-quiet";
         button.dataset.commentAction = action;
         button.textContent = label;
         actions.append(button);
@@ -339,37 +349,97 @@ export function createCommentAssistant({
     elements.results.hidden = !state.comments.length;
   }
 
+  async function copyText(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return true;
+    } catch {
+      try {
+        const input = document.createElement("textarea");
+        input.value = text;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.append(input);
+        input.select();
+        const copied = document.execCommand("copy");
+        input.remove();
+        return copied;
+      } catch {
+        return false;
+      }
+    }
+  }
+
   async function copyComment(index) {
     const comment = state.comments[index];
     if (!comment) return;
-    try {
-      await navigator.clipboard.writeText(comment);
-    } catch {
-      const input = document.createElement("textarea");
-      input.value = comment;
-      input.style.position = "fixed";
-      input.style.opacity = "0";
-      document.body.append(input);
-      input.select();
-      document.execCommand("copy");
-      input.remove();
-    }
+    await copyText(comment);
     saveHistory("COPIED", comment);
     track("comment_copied", { variant: `option_${index + 1}` });
     setStatus("Comment copied. Review it before posting.");
   }
 
-  function approveComment(index) {
-    const comment = state.comments[index];
-    if (!comment) return;
-    saveHistory("APPROVED", comment);
-    track("comment_approved", { variant: `option_${index + 1}` });
-    const button = elements.options.querySelector(`[data-option="${index}"] [data-comment-action="approve"]`);
-    if (button) {
-      button.textContent = "Approved";
-      button.disabled = true;
+  function getOptionText(index) {
+    const card = elements.options.querySelector(`[data-option="${index}"]`);
+    return card?.querySelector("textarea")?.value.trim() || state.comments[index] || "";
+  }
+
+  function renderShareDestinations() {
+    elements.shareDestinations.replaceChildren();
+    getCommentShareDestinations({ expanded: state.shareExpanded }).forEach((destination) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "comment-assistant-share-destination";
+      button.dataset.shareDestination = destination.id;
+      button.innerHTML = `<span class="comment-assistant-share-icon" aria-hidden="true"></span><span></span>`;
+      button.querySelector(".comment-assistant-share-icon").textContent = destination.icon;
+      button.querySelector("span:last-child").textContent = destination.label;
+      if (destination.requiresCopy) {
+        const hint = document.createElement("small");
+        hint.textContent = "copy + open";
+        button.querySelector("span:last-child").append(hint);
+      }
+      elements.shareDestinations.append(button);
+    });
+    elements.shareMore.textContent = state.shareExpanded ? "Fewer networks" : "More networks";
+  }
+
+  function openSharePicker(index) {
+    if (!state.comments[index] || !elements.sharePicker) return;
+    state.shareOptionIndex = index;
+    state.shareExpanded = false;
+    renderShareDestinations();
+    elements.sharePicker.hidden = false;
+    elements.shareHelp.textContent = `Sharing option ${index + 1}. Networks marked “copy + open” do not expose a reliable web prefill action.`;
+    elements.sharePicker.scrollIntoView?.({ block: "nearest", behavior: "smooth" });
+  }
+
+  function closeSharePicker() {
+    if (!elements.sharePicker) return;
+    elements.sharePicker.hidden = true;
+    state.shareOptionIndex = null;
+    state.shareExpanded = false;
+  }
+
+  async function shareComment(destinationId) {
+    const index = state.shareOptionIndex;
+    if (index === null) return;
+    const text = getOptionText(index);
+    if (!text) return;
+    const link = buildCommentShareLink(destinationId, {
+      text,
+      title: state.metadata?.title || "YouCity",
+      url: state.metadata?.videoUrl || ""
+    });
+    if (link.requiresCopy) {
+      const copied = await copyText(text);
+      setStatus(copied ? `${link.label} opened. Paste the comment before posting.` : `Open ${link.label} and copy the comment manually.`);
     }
-    setStatus("Comment approved for your review. Publishing is not automated in this MVP.");
+    if (typeof windowRef.open === "function") {
+      windowRef.open(link.href, "_blank", "width=600,height=600,menubar=no,toolbar=no");
+    }
+    track("comment_shared", { variant: `option_${index + 1}`, destination: link.id });
+    closeSharePicker();
   }
 
   function generateComments() {
@@ -379,6 +449,7 @@ export function createCommentAssistant({
     state.context = buildContextFromForm();
     state.generationCount += 1;
     state.comments = generateStandardComments(state.context, state.generationCount - 1);
+    elements.generate.textContent = isRegeneration ? "Generate new options" : "Generate comments";
     saveHistory("GENERATED");
     renderOptions();
     track(isRegeneration ? "comment_regenerated" : "comment_generated");
@@ -401,6 +472,9 @@ export function createCommentAssistant({
     elements.settings.hidden = true;
     elements.results.hidden = true;
     elements.historyNotice.hidden = true;
+    elements.generateActions.hidden = true;
+    elements.generate.textContent = "Generate comments";
+    closeSharePicker();
     elements.addCandidate.disabled = false;
     elements.addCandidate.textContent = "Add to city candidates";
     state.metadata = null;
@@ -455,8 +529,7 @@ export function createCommentAssistant({
     const index = Number(card?.dataset.option);
     const action = button.dataset.commentAction;
     if (action === "copy") copyComment(index);
-    if (action === "approve") approveComment(index);
-    if (action === "regenerate") generateComments();
+    if (action === "share") openSharePicker(index);
     if (action === "edit") {
       const textarea = card.querySelector("textarea");
       const editing = textarea.readOnly;
@@ -476,6 +549,14 @@ export function createCommentAssistant({
     elements.generate.addEventListener("click", generateComments);
     elements.addCandidate.addEventListener("click", addCandidate);
     elements.options.addEventListener("click", handleOptionAction);
+    elements.shareDestinations.addEventListener("click", (event) => {
+      const destination = event.target.closest("[data-share-destination]");
+      if (destination) shareComment(destination.dataset.shareDestination);
+    });
+    elements.shareMore.addEventListener("click", () => {
+      state.shareExpanded = !state.shareExpanded;
+      renderShareDestinations();
+    });
     elements.modal.addEventListener("click", (event) => {
       if (event.target.closest("[data-close-comment-assistant]")) close();
     });

@@ -25,7 +25,8 @@ const requiredFiles = [
   "src/features/comment-assistant/comment-assistant-controller.mjs",
   "src/features/comment-assistant/core.mjs",
   "src/features/comment-assistant/comments.mjs",
-  "src/features/comment-assistant/history.mjs"
+  "src/features/comment-assistant/history.mjs",
+  "src/features/comment-assistant/share-destinations.mjs"
 ];
 
 for (const file of requiredFiles) {

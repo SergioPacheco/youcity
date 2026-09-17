@@ -59,6 +59,7 @@ const STATIC_ASSETS = [
   "src/features/comment-assistant/core.mjs",
   "src/features/comment-assistant/history.mjs",
   "src/features/comment-assistant/comments.mjs",
+  "src/features/comment-assistant/share-destinations.mjs",
   "data/comment-templates.mjs",
   "src/main.mjs",
   "src/app/bootstrap.mjs",
