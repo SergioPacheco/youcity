@@ -257,6 +257,8 @@ button:focus-visible, input:focus-visible {
 .radio-browser-station:hover, .radio-browser-station:focus-visible { border-color: var(--lcd-green); background: rgba(0,255,102,.12); outline: none; }
 .radio-browser-station strong { min-width: 0; overflow: hidden; color: #e8f8e9; font: 600 10px Manrope, sans-serif; text-overflow: ellipsis; white-space: nowrap; }
 .radio-browser-station small { flex-shrink: 0; color: rgba(0,255,102,.58); font: 400 8px "DM Mono", monospace; text-transform: uppercase; }
+.radio-collapse { align-self: flex-end; padding: 3px 7px; border: 1px solid rgba(255,255,255,.14); border-radius: 3px; background: rgba(0,0,0,.22); color: rgba(232,248,233,.68); cursor: pointer; font: 700 8px "DM Mono", monospace; text-transform: uppercase; }
+.radio-collapse:hover, .radio-collapse:focus-visible { border-color: var(--lcd-green); color: var(--lcd-green); outline: none; }
 .radio-media-panel { margin-top: 2px; padding: 10px; border: 1px solid rgba(0,255,102,.2); border-radius: 4px; background: rgba(0,0,0,.2); }
 .radio-media-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--lcd-green); font: 700 9px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .radio-media-heading span { color: rgba(0,255,102,.55); font-size: 8px; }
@@ -629,8 +631,8 @@ button:focus-visible, input:focus-visible {
   .stereo-top-bar .ambient-button svg { width: 19px; }
   .stereo-top-bar .ambient-button b { font-size: inherit; }
   .stereo-top-bar .speed-control { display: flex; }
-  .player-card-main { display: flex; padding: 12px 14px; gap: 14px; }
-  .radio-summary { display: none; }
+  .player-card.is-expanded .player-card-main, .player-card-main.is-visible { display: flex; padding: 12px 14px; gap: 14px; }
+  .player-card.is-expanded .radio-summary { display: none; }
   .volume-knob-section { flex-direction: column; gap: 5px; }
   .volume-knob { width: 52px; height: 52px; }
   .lcd-screen { height: 62px; padding: 8px 12px; }

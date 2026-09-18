@@ -75,6 +75,14 @@ assert.equal(panel.toggle(), true);
 assert.equal(expandButton["aria-expanded"], "true");
 assert.equal(panel.toggle(), false);
 assert.equal(expandButton["aria-expanded"], "false");
+const desktopPanel = createRadioPanelController({ playerCard, playerCardMain, expandButton, initialExpanded: true });
+assert.equal(desktopPanel.isExpanded(), true, "desktop radio should expose a collapsible expanded state");
+assert.equal(desktopPanel.toggle(), false, "desktop radio should be able to return to compact mode");
+const collapseButton = { setAttribute: (name, value) => { collapseButton[name] = value; } };
+const panelWithCollapseControl = createRadioPanelController({ playerCard, playerCardMain, expandButton, collapseButton, initialExpanded: true });
+assert.equal(collapseButton["aria-expanded"], "true");
+panelWithCollapseControl.setExpanded(false);
+assert.equal(collapseButton["aria-expanded"], "false");
 
 const audio = {
   paused: true,

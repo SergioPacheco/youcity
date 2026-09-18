@@ -476,7 +476,9 @@ export function startApplication() {
   const radioPanelController = createRadioPanelController({
     playerCard: elements.playerCard,
     playerCardMain: elements.playerCardMain,
-    expandButton: elements.radioExpand
+    expandButton: elements.radioExpand,
+    collapseButton: elements.radioCollapse,
+    initialExpanded: window.matchMedia?.("(min-width: 801px)")?.matches === true
   });
   radioBrowserFeature = createRadioBrowserFeature({
     document,
@@ -1197,6 +1199,7 @@ export function startApplication() {
     elements.playerMinimize.addEventListener("click", () => togglePlayer(true));
     elements.playerRestore.addEventListener("click", () => togglePlayer(false));
     elements.radioExpand?.addEventListener("click", () => radioPanelController.toggle());
+    elements.radioCollapse?.addEventListener("click", () => radioPanelController.setExpanded(false));
     elements.radioSummaryPrevious?.addEventListener("click", (event) => {
       event.stopPropagation();
       radioController.setRadio(state.radioIndex - 1, state.radioWantsPlay || state.radioPlaying);
