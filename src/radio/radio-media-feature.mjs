@@ -75,6 +75,10 @@ export function createRadioMediaFeature({
   }
 
   async function identify() {
+    if (!elements.panel.hidden) {
+      reset();
+      return;
+    }
     const station = getStation?.();
     if (!station) {
       setPanelVisible(true);

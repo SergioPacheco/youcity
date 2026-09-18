@@ -1,6 +1,7 @@
 import { normalizeNowPlaying, parseIcyMetadata } from "../../src/radio/radio-now-playing.mjs";
 
-const CACHE_TTL = 10 * 60 * 1000;
+// Never cache the track itself: a later user request must inspect the live stream again.
+const CACHE_TTL = 0;
 const RATE_WINDOW = 10 * 60 * 1000;
 const MAX_REQUESTS = 30;
 const MAX_BYTES = 256 * 1024;
@@ -18,7 +19,7 @@ function json(data, status = 200, headers = {}) {
     status,
     headers: {
       "content-type": "application/json; charset=utf-8",
-      "cache-control": status === 200 ? "public, max-age=60, s-maxage=60" : "no-store",
+      "cache-control": "no-store",
       ...headers
     }
   });
@@ -141,6 +142,7 @@ async function inspectStation(station) {
   try {
     const response = await fetch(streamUrl, {
       signal: controller.signal,
+      cache: "no-store",
       redirect: "follow",
       headers: {
         accept: "audio/*",
@@ -163,7 +165,7 @@ export async function onRequestGet({ request }) {
   if (!stationuuid && !url) return json({ error: "INVALID_STATION", message: "A station UUID or valid stream URL is required." }, 400);
   const cacheKey = stationuuid || url;
   const cached = cache.get(cacheKey);
-  if (cached && cached.expiresAt > Date.now()) return json(cached.value);
+  if (CACHE_TTL > 0 && cached && cached.expiresAt > Date.now()) return json(cached.value);
 
   const resolveController = new AbortController();
   const resolveTimeout = setTimeout(() => resolveController.abort(), REQUEST_TIMEOUT);
@@ -175,7 +177,7 @@ export async function onRequestGet({ request }) {
   }
   if (!station) {
     const value = { nowPlaying: null, reason: "STATION_NOT_INDEXED" };
-    cache.set(cacheKey, { value, expiresAt: Date.now() + CACHE_TTL });
+    if (CACHE_TTL > 0) cache.set(cacheKey, { value, expiresAt: Date.now() + CACHE_TTL });
     return json(value);
   }
 
@@ -188,6 +190,6 @@ export async function onRequestGet({ request }) {
     nowPlaying,
     reason: nowPlaying ? null : "NO_METADATA"
   };
-  cache.set(cacheKey, { value, expiresAt: Date.now() + CACHE_TTL });
+  if (CACHE_TTL > 0) cache.set(cacheKey, { value, expiresAt: Date.now() + CACHE_TTL });
   return json(value);
 }

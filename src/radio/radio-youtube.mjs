@@ -12,7 +12,7 @@ export function buildYouTubeSearchRequestPath({ basePath = "", query, regionCode
 }
 
 export function normalizeYouTubeResults(payload, { limit = 3 } = {}) {
-  const source = Array.isArray(payload) ? payload : payload?.results;
+  const source = Array.isArray(payload) ? payload : payload?.results || payload?.items;
   if (!Array.isArray(source)) return [];
   const seen = new Set();
   const results = [];

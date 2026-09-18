@@ -33,6 +33,11 @@ backend; o desenvolvimento local com Functions pode ser executado com um
 arquivo `.dev.vars` contendo essa variável, conforme a documentação do
 Comment Assistant.
 
+As leituras de música atual não usam cache de resposta: cada clique consulta o
+stream novamente para não reapresentar uma faixa anterior. A deduplicação de
+requisições concorrentes continua ativa; o cache de dez minutos permanece
+aplicado à descoberta de estações e à busca de vídeos.
+
 ## Contrato externo
 
 A Function usa o endpoint `/json/stations/search` com `name`, `country`,

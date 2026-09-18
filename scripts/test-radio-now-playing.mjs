@@ -70,6 +70,18 @@ assert.deepEqual(await firstNowPlaying, {
 });
 assert.equal(nowPlayingCalls, 1);
 
+let freshMetadataCalls = 0;
+const freshNowPlayingClient = createNowPlayingClient({
+  fetchImpl: async () => {
+    freshMetadataCalls += 1;
+    const title = freshMetadataCalls === 1 ? "First song" : "Second song";
+    return { ok: true, json: async () => ({ nowPlaying: { artist: "Artist", title } }) };
+  }
+});
+assert.equal((await freshNowPlayingClient.findForStation(station)).title, "First song");
+assert.equal((await freshNowPlayingClient.findForStation(station)).title, "Second song", "a new explicit identification should not reuse the previous track");
+assert.equal(freshMetadataCalls, 2);
+
 const youtubeResults = normalizeYouTubeResults({
   results: [
     { videoId: "one", title: "One", channel: "Channel One", thumbnail: "https://img.example/one.jpg", videoUrl: "https://www.youtube.com/watch?v=one" },
@@ -81,6 +93,22 @@ assert.deepEqual(youtubeResults, [
   { videoId: "one", title: "One", channel: "Channel One", thumbnail: "https://img.example/one.jpg", videoUrl: "https://www.youtube.com/watch?v=one" },
   { videoId: "two", title: "Two", channel: "Channel Two", thumbnail: "", videoUrl: "https://www.youtube.com/watch?v=two" }
 ]);
+assert.deepEqual(normalizeYouTubeResults({
+  items: [{
+    id: { videoId: "official-1" },
+    snippet: {
+      title: "Official video",
+      channelTitle: "Official channel",
+      thumbnails: { high: { url: "https://img.example/official.jpg" } }
+    }
+  }]
+}), [{
+  videoId: "official-1",
+  title: "Official video",
+  channel: "Official channel",
+  thumbnail: "https://img.example/official.jpg",
+  videoUrl: "https://www.youtube.com/watch?v=official-1"
+}], "the YouTube Data API items format should be normalized");
 assert.match(buildYouTubeSearchRequestPath({ basePath: "/youcity", query: "A & B" }), /q=A\+%26\+B/);
 
 let releaseSearch;
@@ -141,6 +169,11 @@ await mediaFeature.identify();
 assert.equal(nowPlayingCallsFromFeature, 1, "identification must happen only after the explicit action");
 assert.equal(mediaElements.status.textContent, "A — B");
 assert.equal(mediaElements.searchButton.disabled, false);
+await mediaFeature.identify();
+assert.equal(mediaElements.panel.hidden, true, "the identify button should close an open Now Playing panel");
+assert.equal(nowPlayingCallsFromFeature, 1, "closing Now Playing should not repeat metadata lookup");
+await mediaFeature.identify();
+assert.equal(nowPlayingCallsFromFeature, 2, "identification should run again after reopening the panel");
 await mediaFeature.searchVideos();
 assert.equal(youtubeSearchCalls, 1, "YouTube search must happen only after the explicit action");
 assert.equal(mediaElements.results.children.length, 1);

@@ -42,7 +42,8 @@ without adding any initial-load requests or autoplaying video.
 - No station URL is accepted directly by the metadata Function unless it is
   resolved from a Radio Browser station record or matches a catalog station
   allowlist.
-- Requests are rate-limited per client and cached for ten minutes.
+- Requests are rate-limited per client; station discovery and YouTube search are
+  cached for ten minutes, while current-track reads are never response-cached.
 - Stream reads stop after a bounded number of bytes and a bounded timeout.
 - Metadata may be absent, stale, a program title, or not music; the UI says so
   instead of guessing.

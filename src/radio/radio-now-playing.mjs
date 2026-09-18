@@ -1,4 +1,5 @@
-const CACHE_TTL = 10 * 60 * 1000;
+// A current track changes during the session; explicit requests must read fresh metadata.
+const CACHE_TTL = 0;
 
 function normalizedBasePath(basePath = "") {
   const value = String(basePath || "").replace(/\/+$/, "");
@@ -64,11 +65,12 @@ export function createNowPlayingClient({
   function findForStation(station, { signal } = {}) {
     const requestPath = buildNowPlayingRequestPath({ basePath, station });
     const cached = cache.get(requestPath);
-    if (cached && cached.expiresAt > Date.now()) return Promise.resolve(cached.value);
+    if (cacheTtl > 0 && cached && cached.expiresAt > Date.now()) return Promise.resolve(cached.value);
     if (pending.has(requestPath)) return pending.get(requestPath);
     if (typeof fetchImpl !== "function") return Promise.reject(new Error("RADIO_NOW_PLAYING_FETCH_UNAVAILABLE"));
     const request = Promise.resolve(fetchImpl(requestPath, {
       headers: { accept: "application/json" },
+      cache: "no-store",
       signal
     })).then(async (response) => {
       let payload = {};
@@ -77,7 +79,7 @@ export function createNowPlayingClient({
         throw new Error(payload.message || `Now-playing request failed (${response.status}).`);
       }
       const value = normalizeNowPlaying(payload);
-      cache.set(requestPath, { value, expiresAt: Date.now() + cacheTtl });
+      if (cacheTtl > 0) cache.set(requestPath, { value, expiresAt: Date.now() + cacheTtl });
       return value;
     }).finally(() => pending.delete(requestPath));
     pending.set(requestPath, request);
