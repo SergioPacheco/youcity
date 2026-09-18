@@ -55,6 +55,19 @@ export function createVideoController({
       command("mute");
       command("setVolume", [0]);
     }
+
+    // Analytics: ride_start
+    const city = getCurrentCity();
+    const ride = getCurrentRide(city);
+    if (city && ride) {
+      window.YOUCITY_ANALYTICS?.track?.({
+        event: "ride_start",
+        city: city.name,
+        country: city.country,
+        countryCode: city.countryCode || "",
+        mode: state.currentMode
+      });
+    }
   }
   function handleReady() {
     command("setPlaybackRate", [state.currentSpeed]);

@@ -31,7 +31,8 @@
       placement: data.travelPlacement || "travel_planner",
       variant: data.travelVariant || "A",
       providerCampaign: data.travelProviderCampaign || "",
-      internalCampaign: data.travelInternalCampaign || ""
+      internalCampaign: data.travelInternalCampaign || "",
+      mode: data.travelMode || ""
     };
   }
 

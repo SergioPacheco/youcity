@@ -899,6 +899,299 @@ button:focus-visible, input:focus-visible {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
 
+/* ============================================================================
+   Consent Banner (Google Consent Mode v2)
+   ============================================================================ */
+
+.consent-banner {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  bottom: 24px;
+  width: min(520px, calc(100% - 32px));
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+  pointer-events: auto;
+}
+
+.consent-banner.consent-banner-hidden {
+  transform: translateX(-50%) translateY(100px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.consent-banner-content,
+.consent-preferences {
+  padding: 20px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  background: rgba(10, 14, 11, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  color: #e8e6e1;
+}
+
+.consent-banner-content {
+  animation: consent-slide-up 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes consent-slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.consent-description {
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.78);
+  font: 400 13px/1.5 "Manrope", sans-serif;
+}
+
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.consent-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font: 600 13px "DM Mono", monospace;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.consent-btn:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 2px;
+}
+
+.consent-btn-primary {
+  background: var(--acid);
+  border-color: var(--acid);
+  color: var(--ink);
+}
+
+.consent-btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.consent-btn-secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.24);
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.consent-btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.consent-btn-manage {
+  background: transparent;
+  border-color: var(--acid);
+  color: var(--acid);
+  flex: 1 1 100%;
+}
+
+.consent-btn-manage:hover {
+  background: rgba(215, 255, 67, 0.1);
+}
+
+.consent-preferences {
+  display: grid;
+  gap: 16px;
+}
+
+.consent-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.consent-fieldset legend {
+  margin-bottom: 8px;
+  color: var(--acid);
+  font: 600 11px "DM Mono", monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.consent-pref-description {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font: 400 12px "Manrope", sans-serif;
+}
+
+.consent-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.consent-toggle input[type="checkbox"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.consent-toggle-slider {
+  position: relative;
+  width: 44px;
+  height: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.consent-toggle-slider::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.consent-toggle input[type="checkbox"]:checked + .consent-toggle-slider {
+  border-color: var(--acid);
+  background: var(--acid);
+}
+
+.consent-toggle input[type="checkbox"]:checked + .consent-toggle-slider::after {
+  transform: translateX(18px);
+}
+
+.consent-toggle input[type="checkbox"]:focus-visible + .consent-toggle-slider {
+  outline: 2px solid var(--acid);
+  outline-offset: 2px;
+}
+
+.consent-toggle-label {
+  color: rgba(255, 255, 255, 0.88);
+  font: 500 13px "Manrope", sans-serif;
+}
+
+.consent-pref-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+/* Privacy Settings Button */
+.privacy-settings-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 18px;
+  background: rgba(10, 14, 11, 0.8);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  font: 500 11px "DM Mono", monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
+}
+
+.privacy-settings-button:hover {
+  border-color: var(--acid);
+  background: rgba(215, 255, 67, 0.1);
+  color: var(--acid);
+}
+
+.privacy-settings-button:focus-visible {
+  outline: 2px solid var(--acid);
+  outline-offset: 2px;
+}
+
+.privacy-settings-label {
+  display: none;
+}
+
+@media (min-width: 801px) {
+  .privacy-settings-label {
+    display: inline;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .consent-banner {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    width: auto;
+    transform: translateY(100px);
+  }
+
+  .consent-banner.consent-banner-hidden {
+    transform: translateY(100px);
+  }
+
+  .consent-banner-content,
+  .consent-preferences {
+    padding: 16px 20px;
+  }
+
+  .consent-btn {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 0;
+  }
+
+  .consent-btn-manage {
+    flex: 1 1 100%;
+  }
+
+  .consent-pref-actions .consent-btn {
+    flex: 1 1 calc(50% - 5px);
+  }
+}
+
+/* Ensure the privacy button is accessible in the overflow menu on mobile */
+@media (max-width: 800px) {
+  .top-actions > .icon-button,
+  .top-actions > .share-fan-wrapper,
+  .top-actions > .menu-button,
+  .top-actions > .overflow-menu-wrapper {
+    flex: 0 0 36px;
+  }
+  
+  .top-actions .privacy-settings-button {
+    display: none;
+  }
+}
+
+@media (min-width: 801px) {
+  .top-actions .privacy-settings-button {
+    display: inline-flex;
+  }
+}
+
 /* Comment Assistant — reuses the existing YouCity drawer language and tokens. */
 .comment-assistant-modal {
   position: fixed;

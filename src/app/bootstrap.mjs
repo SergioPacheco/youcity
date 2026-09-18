@@ -828,6 +828,15 @@ export function startApplication() {
     // Salva preferência
     savePreferences({ cityIndex: state.cityIndex, currentMode: state.currentMode });
 
+    // Analytics: city_view
+    window.YOUCITY_ANALYTICS?.track?.({
+      event: "city_view",
+      city: city.name,
+      country: city.country,
+      countryCode: city.countryCode || "",
+      mode: state.currentMode
+    });
+
     if (!options.silent) {
       showToast(MESSAGES.nowIn(city.name));
     }
@@ -915,7 +924,8 @@ export function startApplication() {
       fullscreen: () => $("#fullscreen-button").click(),
       about: () => openLayer(elements.about),
       "comment-assistant": openCommentAssistantForCurrentRide,
-      random: selectRandomCity
+      random: selectRandomCity,
+      privacy: () => window.YOUCITY_CONSENT?.showSettings?.()
     };
     actions[action]?.();
   }
@@ -1047,6 +1057,10 @@ export function startApplication() {
     });
 
     $("#about-button").addEventListener("click", () => openLayer(elements.about));
+
+    elements.privacySettingsButton?.addEventListener("click", () => {
+      window.YOUCITY_CONSENT?.showSettings?.();
+    });
 
     elements.commentAssistantButton?.addEventListener("click", openCommentAssistantForCurrentRide);
 

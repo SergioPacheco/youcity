@@ -55,18 +55,18 @@ export function createTravelController({
   function offerMarkup(entry, city, options = {}) {
     if (!entry?.url) return "";
     const label = options.minimal ? categories[entry.vertical]?.label || "Open" : entry.label || ACTION_LABELS[entry.vertical] || `Explore ${categories[entry.vertical]?.label?.toLowerCase() || "options"}`;
-    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "travel_planner")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}"`;
+    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "travel_planner")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}" data-travel-mode="${escapeHtml(state.currentMode)}"`;
     return `<a class="travel-offer-action${options.compact ? " is-compact" : ""}" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}><span>${escapeHtml(label)}</span><small>${escapeHtml(entry.name || entry.provider)}</small><b aria-hidden="true">↗</b></a>`;
   }
 
   function quickActionMarkup(category, entry, city) {
     if (!entry?.url || !categories[category]) return "";
-    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "quick_travel_bar")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}"`;
+    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "quick_travel_bar")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}" data-travel-mode="${escapeHtml(state.currentMode)}"`;
     return `<a class="travel-quick-action" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}><span class="travel-quick-icon" aria-hidden="true">${categories[category].icon}</span><span>${escapeHtml(QUICK_LABELS[category])}</span><b aria-hidden="true">↗</b></a>`;
   }
 
   function trackPlanningEvent(event, city, placement) {
-    affiliate.track({ event, provider: "planner", vertical: "trip_planning", city: city.name, country: city.country, countryCode: city.countryCode || "", placement, variant: "A" });
+    affiliate.track({ event, provider: "planner", vertical: "trip_planning", city: city.name, country: city.country, countryCode: city.countryCode || "", placement, variant: "A", mode: state.currentMode });
   }
 
   function updateMainTravelCta(city, hasOffers) {
@@ -76,7 +76,7 @@ export function createTravelController({
     elements.travelButton.title = `City guide and trip planning for ${city.name}`;
     Object.assign(elements.travelButton.dataset, {
       travelProvider: "planner", travelVertical: "trip_planning", travelCity: city.id,
-      travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "main_cta"
+      travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "main_cta", travelMode: state.currentMode
     });
     if (hasOffers && state.mainCtaImpressionCity !== city.id) {
       state.mainCtaImpressionCity = city.id;
@@ -115,7 +115,7 @@ export function createTravelController({
 
   function trackStay22Action(action, extra = {}) {
     const city = currentCity();
-    affiliate.track({ event: `affiliate_${action}`, provider: "stay22", vertical: "hotels", action, city: city.name, country: city.country, countryCode: city.countryCode || "", placement: "travel_planner", ...extra });
+    affiliate.track({ event: `affiliate_${action}`, provider: "stay22", vertical: "hotels", action, city: city.name, country: city.country, countryCode: city.countryCode || "", placement: "travel_planner", mode: state.currentMode, ...extra });
   }
 
   function destroyStay22Map() {
@@ -143,7 +143,7 @@ export function createTravelController({
         element.hidden = !url;
         if (!url) { element.removeAttribute("href"); return; }
         element.href = url;
-        Object.assign(element.dataset, { affiliateOffer: "true", travelProvider: "stay22", travelVertical: vertical, travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "travel_planner", travelProviderCampaign: new URL(url).searchParams.get("campaign") || "" });
+        Object.assign(element.dataset, { affiliateOffer: "true", travelProvider: "stay22", travelVertical: vertical, travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "travel_planner", travelProviderCampaign: new URL(url).searchParams.get("campaign") || "", travelMode: state.currentMode });
       };
       applyLink(elements.stay22BrowseButton, browseUrl, "hotels");
       applyLink(elements.stay22RentalsButton, rentalsUrl, "vacation-rentals");
@@ -220,6 +220,17 @@ export function createTravelController({
     try {
       const controller = await cityGuidePromise;
       await controller.open();
+
+      // Analytics: travel_planner_open
+      const city = currentCity();
+      window.YOUCITY_ANALYTICS?.track?.({
+        event: "travel_planner_open",
+        city: city.name,
+        country: city.country,
+        countryCode: city.countryCode || "",
+        mode: state.currentMode
+      });
+
       loadSecondaryProviders({ document, sitePath }).then(() => { renderTravelPlanner(currentCity()); renderTravelPrompts(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
     } catch (error) {
       cityGuidePromise = null;

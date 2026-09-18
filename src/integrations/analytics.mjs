@@ -30,5 +30,36 @@ export function initializeYouCityAnalytics(global = globalThis) {
     });
   }
 
-  global.YOUCITY_ANALYTICS = { ...previousAnalytics, track };
+  function createEventPayload(event, overrides = {}) {
+    const city = overrides.city || "";
+    const country = overrides.country || "";
+    const countryCode = overrides.countryCode || "";
+    const mode = overrides.mode || "";
+    const provider = overrides.provider || "";
+    const vertical = overrides.vertical || "";
+    const placement = overrides.placement || "";
+    const variant = overrides.variant || "A";
+    const providerCampaign = overrides.providerCampaign || "";
+    const internalCampaign = overrides.internalCampaign || "";
+    const language = overrides.language || "";
+    const tone = overrides.tone || "";
+
+    return {
+      event,
+      provider,
+      vertical,
+      city,
+      country,
+      countryCode,
+      mode,
+      placement,
+      variant,
+      providerCampaign,
+      internalCampaign,
+      language,
+      tone
+    };
+  }
+
+  global.YOUCITY_ANALYTICS = { ...previousAnalytics, track, createEventPayload };
 }
