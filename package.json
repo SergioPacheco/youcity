@@ -16,5 +16,8 @@
     "sharing:test": "node scripts/test-sharing.mjs",
     "architecture:test": "node scripts/test-architecture.mjs",
     "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run sharing:test && npm run affiliate:test && npm run discovercars:test && npm run city:test && npm run comment:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
+  },
+  "devDependencies": {
+    "jsdom": "^27.0.1"
   }
 }

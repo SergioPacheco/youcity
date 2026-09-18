@@ -1,18 +1,18 @@
-const CONSENT_STORAGE_KEY = "youcity_consent_v1";
-const CONSENT_VERSION = 1;
+export const CONSENT_STORAGE_KEY = "youcity_consent_v1";
+export const CONSENT_VERSION = 1;
 
-const DEFAULT_CONSENT = {
+export const DEFAULT_CONSENT = {
   ad_storage: "denied",
   analytics_storage: "denied",
   ad_user_data: "denied",
   ad_personalization: "denied",
 };
 
-function getDataLayer(global = globalThis) {
+export function getDataLayer(global = globalThis) {
   return (global.dataLayer = global.dataLayer || []);
 }
 
-function pushConsentToDataLayer(consent, global = globalThis) {
+export function pushConsentToDataLayer(consent, global = globalThis) {
   const dataLayer = getDataLayer(global);
   dataLayer.push({
     event: "consent_update",
@@ -20,7 +20,7 @@ function pushConsentToDataLayer(consent, global = globalThis) {
   });
 }
 
-function pushDefaultConsentToDataLayer(global = globalThis) {
+export function pushDefaultConsentToDataLayer(global = globalThis) {
   const dataLayer = getDataLayer(global);
   dataLayer.push({
     event: "default_consent",
@@ -28,7 +28,7 @@ function pushDefaultConsentToDataLayer(global = globalThis) {
   });
 }
 
-function updateConsentMode(consent, global = globalThis) {
+export function updateConsentMode(consent, global = globalThis) {
   const dataLayer = getDataLayer(global);
   dataLayer.push({
     event: "consent_update",
@@ -36,7 +36,7 @@ function updateConsentMode(consent, global = globalThis) {
   });
 }
 
-function readStoredConsent(global = globalThis) {
+export function readStoredConsent(global = globalThis) {
   try {
     const stored = global.localStorage?.getItem(CONSENT_STORAGE_KEY);
     if (!stored) return null;
@@ -48,7 +48,7 @@ function readStoredConsent(global = globalThis) {
   }
 }
 
-function writeStoredConsent(consent, global = globalThis) {
+export function writeStoredConsent(consent, global = globalThis) {
   try {
     global.localStorage?.setItem(
       CONSENT_STORAGE_KEY,
@@ -60,7 +60,7 @@ function writeStoredConsent(consent, global = globalThis) {
   }
 }
 
-function hasValidStoredConsent(global = globalThis) {
+export function hasValidStoredConsent(global = globalThis) {
   const stored = readStoredConsent(global);
   if (!stored) return false;
   return (
@@ -71,16 +71,16 @@ function hasValidStoredConsent(global = globalThis) {
   );
 }
 
-function initializeConsentMode(global = globalThis) {
+export function initializeConsentMode(global = globalThis) {
   pushDefaultConsentToDataLayer(global);
 }
 
-function applyConsent(consent, global = globalThis) {
+export function applyConsent(consent, global = globalThis) {
   writeStoredConsent(consent, global);
   updateConsentMode(consent, global);
 }
 
-function acceptAll(global = globalThis) {
+export function acceptAll(global = globalThis) {
   const consent = {
     ad_storage: "granted",
     analytics_storage: "granted",
@@ -91,7 +91,7 @@ function acceptAll(global = globalThis) {
   return consent;
 }
 
-function rejectAll(global = globalThis) {
+export function rejectAll(global = globalThis) {
   const consent = {
     ad_storage: "denied",
     analytics_storage: "denied",
@@ -102,14 +102,14 @@ function rejectAll(global = globalThis) {
   return consent;
 }
 
-function setAnalyticsConsent(granted, global = globalThis) {
+export function setAnalyticsConsent(granted, global = globalThis) {
   const stored = readStoredConsent(global) || { ...DEFAULT_CONSENT };
   stored.analytics_storage = granted ? "granted" : "denied";
   applyConsent(stored, global);
   return stored;
 }
 
-function setAdvertisingConsent(granted, global = globalThis) {
+export function setAdvertisingConsent(granted, global = globalThis) {
   const stored = readStoredConsent(global) || { ...DEFAULT_CONSENT };
   stored.ad_storage = granted ? "granted" : "denied";
   stored.ad_user_data = granted ? "granted" : "denied";
@@ -118,11 +118,11 @@ function setAdvertisingConsent(granted, global = globalThis) {
   return stored;
 }
 
-function getCurrentConsent(global = globalThis) {
+export function getCurrentConsent(global = globalThis) {
   return readStoredConsent(global) || { ...DEFAULT_CONSENT };
 }
 
-function shouldShowBanner(global = globalThis) {
+export function shouldShowBanner(global = globalThis) {
   return !hasValidStoredConsent(global);
 }
 
