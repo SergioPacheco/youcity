@@ -354,14 +354,14 @@ button:focus-visible, input:focus-visible {
 .city-guide-quick-action b { color: var(--acid); font-size: 14px; font-weight: 400; }
 .city-guide-source { display: inline-block; margin-top: 14px; color: rgba(255,255,255,.55); font: 500 8px "DM Mono", monospace; letter-spacing: .04em; text-decoration: none; }
 .city-guide-source:hover, .city-guide-source:focus-visible { color: var(--acid); text-decoration: underline; }
-.city-guide-places { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
-.city-guide-places li { min-width: 0; }
-.city-guide-place-card { padding: 10px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: rgba(255,255,255,.045); }
-.city-guide-place-main { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 13px; min-width: 0; color: #fff; text-decoration: none; }
+.city-guide-places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.city-guide-places li { display: flex; min-width: 0; }
+.city-guide-place-card { display: flex; width: 100%; flex-direction: column; padding: 10px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: rgba(255,255,255,.045); }
+.city-guide-place-main { display: grid; grid-template-columns: 1fr; flex: 1; gap: 9px; min-width: 0; color: #fff; text-decoration: none; }
 .city-guide-place-main:hover, .city-guide-place-main:focus-visible { color: var(--acid); }
-.city-guide-place-image { display: block; width: 92px; height: 78px; overflow: hidden; border-radius: 5px; background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.03)); object-fit: cover; }
+.city-guide-place-image { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 5px; background: linear-gradient(135deg, rgba(255,255,255,.09), rgba(255,255,255,.03)); object-fit: cover; }
 .city-guide-place-image-empty { border: 1px solid rgba(255,255,255,.08); }
-.city-guide-place-copy { display: grid; align-content: center; gap: 4px; min-width: 0; }
+.city-guide-place-copy { display: grid; align-content: start; gap: 5px; min-width: 0; }
 .city-guide-place-copy strong { color: inherit; font: 600 18px/1.1 "Newsreader", serif; overflow-wrap: anywhere; }
 .city-guide-place-copy p { color: rgba(255,255,255,.68); font-size: 11px; line-height: 1.45; overflow-wrap: anywhere; }
 .city-guide-place-more { color: var(--lcd-green); font: 600 9px "DM Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
@@ -795,11 +795,6 @@ button:focus-visible, input:focus-visible {
     width: min(620px, 48vw);
     max-width: 620px;
   }
-
-  .travel-drawer .city-guide-place-image {
-    width: 92px;
-    height: 78px;
-  }
 }
 
 @media (max-width: 899px) {
@@ -813,12 +808,6 @@ button:focus-visible, input:focus-visible {
     gap: 10px;
   }
 
-  .city-guide-place-image {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-  }
-
   .city-guide-destination h2 {
     font-size: clamp(36px, 10vw, 48px);
   }
@@ -826,6 +815,10 @@ button:focus-visible, input:focus-visible {
   .city-guide-secondary-actions {
     grid-template-columns: 1fr;
   }
+}
+
+@media (max-width: 360px) {
+  .city-guide-places { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 430px) {

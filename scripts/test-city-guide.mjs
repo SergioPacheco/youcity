@@ -17,6 +17,10 @@ assert.match(indexHtml, /View stays on map/);
 assert.match(stylesCss, /@media \(min-width: 900px\)[\s\S]*\.travel-drawer \.travel-panel/);
 assert.match(stylesCss, /@media \(max-width: 899px\)[\s\S]*\.travel-drawer \.travel-panel/);
 assert.match(stylesCss, /\.city-guide-place-card/);
+assert.match(stylesCss, /\.city-guide-places\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/, "places should use a two-column grid");
+assert.match(stylesCss, /\.city-guide-place-main\s*\{[^}]*grid-template-columns:\s*1fr/, "place cards should stack image and copy");
+assert.match(stylesCss, /\.city-guide-place-image\s*\{[^}]*width:\s*100%[^}]*aspect-ratio:\s*4\s*\/\s*3/, "place images should use the card width and a larger ratio");
+assert.match(stylesCss, /@media \(max-width: 360px\)[\s\S]*\.city-guide-places\s*\{[^}]*grid-template-columns:\s*1fr/, "very narrow screens should use one place per row");
 
 const city = {
   id: "granada",
