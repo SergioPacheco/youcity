@@ -7,7 +7,7 @@
  */
 const { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { spawnSync } = require("node:child_process");
-const { dirname, join, resolve } = require("node:path");
+const { dirname, join, resolve, relative } = require("node:path");
 const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
 
 const ROOT_DIR = resolve(__dirname, "..");
@@ -44,6 +44,7 @@ const STATIC_ASSETS = [
   "affiliate/affiliate-catalog.js",
   "affiliate/affiliate-tracking.js",
   "src/integrations/analytics.mjs",
+  "src/integrations/consent.mjs",
   "affiliate/affiliate-experiments.js",
   "affiliate/affiliate-resolver.js",
   "affiliate/providers/expedia.js",
@@ -398,6 +399,69 @@ function homeFallback(catalog) {
   return `<section class="seo-fallback"><h2>Explore ${catalog.length} cities around the world</h2><p>YouCity is an interactive collection of immersive Drive, Bike, Walk, Beach Walk, and Drone rides with local radio.</p><ul>${links}</ul></section>`;
 }
 
+function stripQuery(url) {
+  return url.split("?")[0];
+}
+
+function validateModuleImports() {
+  const modulePattern = /(?:from|import)\s+["'](\.[^"']+\.(?:mjs|js))(?:\?[^"']*)?["']/g;
+  
+  const requiredFiles = [
+    "src/main.mjs",
+    "src/integrations/analytics.mjs",
+    "src/integrations/consent.mjs",
+    "src/app/bootstrap.mjs",
+    "styles.css",
+    "privacy.html",
+    "terms.html"
+  ];
+
+  for (const file of requiredFiles) {
+    const filePath = resolve(OUTPUT_DIR, file);
+    if (!existsSync(filePath)) {
+      throw new Error(
+        `Build validation failed: missing required file in dist/\n` +
+        `Expected: ${file}\n` +
+        `Full path: ${filePath}`
+      );
+    }
+  }
+
+  // Validate module dependencies: if src/main.mjs imports ./integrations/consent.mjs,
+  // then dist/src/integrations/consent.mjs must exist
+  const moduleFiles = [
+    "src/main.mjs",
+    "src/app/bootstrap.mjs",
+    "src/integrations/analytics.mjs",
+    "src/integrations/consent.mjs"
+  ];
+
+  for (const moduleFile of moduleFiles) {
+    const filePath = resolve(OUTPUT_DIR, moduleFile);
+    if (!existsSync(filePath)) continue;
+
+    const source = readFileSync(filePath, "utf8");
+    const matches = [...source.matchAll(modulePattern)];
+
+    for (const match of matches) {
+      const importPath = match[1];
+      const cleanImport = stripQuery(importPath);
+      const resolved = resolve(dirname(filePath), cleanImport);
+
+      if (!existsSync(resolved)) {
+        throw new Error(
+          `Build validation failed: missing module in build output\n` +
+          `Importer: dist/${moduleFile}\n` +
+          `Import: ${importPath}\n` +
+          `Expected: dist/${relative(OUTPUT_DIR, resolved)}`
+        );
+      }
+    }
+  }
+
+  console.log("✓ Module import validation passed");
+}
+
 function main() {
   const catalogBuild = spawnSync(process.execPath, [resolve(ROOT_DIR, "scripts/build-catalog.js")], { stdio: "inherit" });
   if (catalogBuild.status !== 0) throw new Error("Catalog build failed.");
@@ -424,6 +488,17 @@ function main() {
     if (existsSync(resolve(ROOT_DIR, file))) cpSync(resolve(ROOT_DIR, file), join(OUTPUT_DIR, file));
   }
 
+  // Copy required static HTML pages
+  const STATIC_HTML_PAGES = ["privacy.html", "terms.html"];
+  for (const file of STATIC_HTML_PAGES) {
+    const source = resolve(ROOT_DIR, file);
+    const destination = join(OUTPUT_DIR, file);
+    if (!existsSync(source)) {
+      throw new Error(`Required static page not found: ${file}`);
+    }
+    cpSync(source, destination);
+  }
+
   const baseHtml = versionStaticAssets(
     injectRuntimeBasePath(rewriteInternalPaths(readFileSync(resolve(ROOT_DIR, "index.html"), "utf8")))
   );
@@ -444,6 +519,10 @@ function main() {
   writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog));
   writeFileSync(join(OUTPUT_DIR, "404.html"), buildNotFound());
   writeFileSync(join(OUTPUT_DIR, ".nojekyll"), "");
+  
+  // Validate build output
+  validateModuleImports();
+  
   const sitemapCityCount = catalog.filter(hasVideoExperience).length;
   console.log(`Built ${catalog.length + 1} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1} URLs, assets: ${ASSET_VERSION})`);
 }
