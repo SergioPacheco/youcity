@@ -1111,7 +1111,7 @@ export function startApplication() {
         checkout,
         adults: elements.stay22Adults.value,
         children: elements.stay22Children.value
-      }, { placement: "travel_planner" });
+      }, { placement: "city_guide_stay" });
       if (!url) {
         elements.stay22SearchStatus.textContent = "Stay search is temporarily unavailable.";
         return;
@@ -1124,7 +1124,7 @@ export function startApplication() {
       elements.stay22SearchResult.dataset.travelCityName = city.name;
       elements.stay22SearchResult.dataset.travelCountry = city.country;
       elements.stay22SearchResult.dataset.travelCountryCode = city.countryCode || "";
-      elements.stay22SearchResult.dataset.travelPlacement = "travel_planner";
+      elements.stay22SearchResult.dataset.travelPlacement = "city_guide_stay";
       elements.stay22SearchResult.dataset.travelProviderCampaign = new URL(url).searchParams.get("campaign") || "";
       elements.stay22SearchStatus.textContent = "Opening stay search…";
       trackStay22Action("search_submit", {
@@ -1160,7 +1160,7 @@ export function startApplication() {
 
     elements.stay22MapButton.addEventListener("click", () => {
       const city = currentCity();
-      const url = window.YouCityStay22?.createMapUrl(city, { placement: "map" });
+      const url = window.YouCityStay22?.createMapUrl(city, { placement: "city_guide_stay" });
       if (!url) return;
       destroyStay22Map();
       const iframe = document.createElement("iframe");

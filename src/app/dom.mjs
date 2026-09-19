@@ -16,6 +16,7 @@ export function createDom(document) {
       volumeKnob: $("#volume-knob"), volumeAccessible: $("#volume-accessible"), rail: $("#rail-track"), drawer: $("#city-drawer"), grid: $("#city-grid"), search: $("#city-search"),
       resultCount: $("#result-count"), about: $("#about-modal"), travelDrawer: $("#travel-drawer"), travelButton: $("#travel-button"), travelPrompts: $("#travel-prompts"),
       travelPromptsCity: $("#travel-prompts-city"), travelQuickActions: $("#travel-quick-actions"), travelPromptsClose: $("#travel-prompts-close"), cityGuideContent: $("#city-guide-content"),
+      cityGuideStaySlot: $("#city-guide-stay-slot"), cityGuideStayFallback: $("#city-guide-stay-fallback"), cityGuideTransportSlot: $("#city-guide-transport-slot"), cityGuideSecondarySlot: $("#city-guide-secondary-slot"),
       mapModal: $("#map-modal"), mapContainer: $("#world-map"), mapResultCount: $("#map-result-count"), mapDirectory: $("#map-directory"), mapButton: $("#map-button"),
       streetSound: $("#street-sound"), randomBtn: $("#random-btn"), toast: $("#toast"), playerCard: document.querySelector(".player-card"), playerCardMain: document.querySelector(".player-card-main"),
       playerMinimize: $("#player-minimize"), playerRestore: $("#player-restore"), radioSummaryName: $("#radio-summary-name"), radioSummaryPrevious: $("#radio-summary-previous"), radioSummaryNext: $("#radio-summary-next"),

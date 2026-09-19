@@ -442,7 +442,7 @@
             <div class="travel-planner-header">
               <div>
                 <span class="travel-planner-kicker">City guide · plan your trip</span>
-                <h2 id="travel-planner-title">Explore this city</h2>
+                <h2 id="travel-planner-title" class="sr-only">City guide</h2>
                 <p class="travel-planner-location" id="travel-planner-location"></p>
               </div>
               <div class="travel-planner-actions">
@@ -452,19 +452,19 @@
                 </button>
               </div>
             </div>
-            <section class="travel-guide-section" aria-label="City guide">
+            <section class="travel-guide-section" aria-label="Destination hub">
               <div class="city-guide-content" id="city-guide-content" aria-live="polite">
                 <p class="city-guide-loading">Open Explore city to discover this destination.</p>
               </div>
             </section>
-            <div class="travel-section-divider" aria-hidden="true"><span>Plan your trip</span></div>
-            <div class="travel-primary" id="travel-primary"></div>
-            <section class="stay22-tools" id="stay22-tools" aria-labelledby="stay22-stay-title" hidden>
+            <section class="city-guide-commerce-section city-guide-stay-section" id="city-guide-stay-slot" aria-label="Where to stay">
+              <div id="city-guide-stay-fallback"></div>
+              <section class="stay22-tools" id="stay22-tools" aria-labelledby="stay22-stay-title" hidden>
               <div class="stay22-tools-heading">
                 <span class="travel-category-icon" aria-hidden="true">🏨</span>
                 <div>
-                  <strong id="stay22-stay-title">Stay in this city</strong>
-                  <small>Find places to stay in this city</small>
+                  <strong id="stay22-stay-title">Where to stay</strong>
+                  <small>Find a place to stay</small>
                 </div>
               </div>
               <form class="stay22-search" id="stay22-search-form" novalidate>
@@ -487,7 +487,7 @@
               <div class="stay22-quick-actions">
                 <a class="stay22-browse-button" id="stay22-browse-button" target="_blank" rel="sponsored noopener noreferrer" hidden>Find hotels ↗</a>
                 <a class="stay22-rentals-button" id="stay22-rentals-button" target="_blank" rel="sponsored noopener noreferrer" hidden>Find vacation rentals ↗</a>
-                <button class="stay22-map-button" id="stay22-map-button" type="button">View on map</button>
+                <button class="stay22-map-button" id="stay22-map-button" type="button">View stays on map</button>
               </div>
               <section class="stay22-map-panel" id="stay22-map-panel" aria-labelledby="stay22-map-title" hidden>
                 <div class="stay22-map-header">
@@ -496,8 +496,10 @@
                 </div>
                 <div class="stay22-map-frame" id="stay22-map-frame"></div>
               </section>
+              </section>
             </section>
-            <div class="travel-secondary" id="travel-secondary"></div>
+            <section class="city-guide-commerce-section" id="city-guide-transport-slot" aria-label="Get around"></section>
+            <section class="city-guide-commerce-section" id="city-guide-secondary-slot" aria-label="More for your trip"></section>
             <p class="travel-disclosure" id="travel-disclosure"></p>
           </section>
         </div>
