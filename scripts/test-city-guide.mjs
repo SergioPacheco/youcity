@@ -1,7 +1,22 @@
 #!/usr/bin/env node
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { createCityGuideController } from "../src/features/city-guide/city-guide-controller.mjs";
+
+const root = resolve(new URL(".", import.meta.url).pathname, "..");
+const indexHtml = readFileSync(resolve(root, "index.html"), "utf8");
+const stylesCss = readFileSync(resolve(root, "styles.css"), "utf8");
+assert.match(indexHtml, /id="city-guide-stay-slot"/);
+assert.match(indexHtml, /id="city-guide-transport-slot"/);
+assert.match(indexHtml, /id="city-guide-secondary-slot"/);
+assert.match(indexHtml, /id="stay22-search-form"/);
+assert.match(indexHtml, /id="stay22-map-button"/);
+assert.match(indexHtml, /View stays on map/);
+assert.match(stylesCss, /@media \(min-width: 900px\)[\s\S]*\.travel-drawer \.travel-panel/);
+assert.match(stylesCss, /@media \(max-width: 899px\)[\s\S]*\.travel-drawer \.travel-panel/);
+assert.match(stylesCss, /\.city-guide-place-card/);
 
 const city = {
   id: "granada",
