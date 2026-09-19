@@ -287,7 +287,7 @@ const mediaElements = {
   identifyButton: fakeElement(),
   panel: fakeElement(),
   status: fakeElement(),
-  searchButton: fakeElement(),
+  searchButton: null,
   results: fakeElement(),
   videoHost: fakeElement()
 };
@@ -304,7 +304,6 @@ assert.equal(mediaElements.panel.hidden, true, "media panel should start closed"
 await mediaFeature.identify();
 assert.equal(nowPlayingCallsFromFeature, 1, "identification must happen only after the explicit action");
 assert.match(mediaElements.status.textContent, /^A — B/);
-assert.equal(mediaElements.searchButton.disabled, false);
 assert.equal(youtubeSearchCalls, 1, "YouTube search must start automatically after identification");
 assert.equal(mediaElements.results.children.length, 1);
 assert.equal(mediaElements.videoHost.hidden, true, "YouTube iframe must remain lazy until a result is selected");

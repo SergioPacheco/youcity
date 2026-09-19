@@ -488,6 +488,7 @@ export function startApplication() {
     elements: {
       trigger: elements.radioBrowserDiscover,
       panel: elements.radioBrowserPanel,
+      closeButton: elements.radioBrowserClose,
       status: elements.radioBrowserStatus,
       results: elements.radioBrowserResults
     },
@@ -504,7 +505,6 @@ export function startApplication() {
       panel: elements.radioMediaPanel,
       closeButton: elements.radioMediaClose,
       status: elements.radioNowPlayingStatus,
-      searchButton: elements.radioYouTubeSearch,
       results: elements.radioYouTubeResults,
       videoHost: elements.radioYouTubePlayer
     },
@@ -564,6 +564,7 @@ export function startApplication() {
     setFilter,
     syncDrawerFilterToRide,
     setContinent,
+    resetForOpen,
     renderRail,
     renderGrid
   } = cityBrowser;
@@ -599,7 +600,7 @@ export function startApplication() {
   const layersController = createLayersController({
     document,
     elements,
-    onBeforeDrawerOpen: () => syncDrawerFilterToRide()
+    onBeforeDrawerOpen: () => resetForOpen()
   });
   const { open: openLayer, close: closeLayer, closeMoreMenu } = layersController;
 

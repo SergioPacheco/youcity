@@ -121,6 +121,7 @@ export function createRadioBrowserFeature({
 
   function initialize() {
     elements.trigger.addEventListener("click", search);
+    elements.closeButton?.addEventListener("click", reset);
     elements.results.addEventListener("click", (event) => {
       const station = event.target.closest?.("[data-station-ref]");
       if (station) selectStation(station.dataset.stationRef);

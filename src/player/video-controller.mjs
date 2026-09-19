@@ -23,7 +23,7 @@ export function createVideoController({
 
   function command(method, args = []) { playerManager.command(method, args); }
   function buildPlayerVars(ride) {
-    return { autoplay: 1, mute: 1, controls: 0, loop: 1, playlist: ride.id, modestbranding: 1, rel: 0, playsinline: 1, disablekb: 1, fs: 0, cc_load_policy: 0, iv_load_policy: 3, hl: "en-US", start: Math.floor(getStartSeconds(ride)), origin: window.location.origin };
+    return { autoplay: 1, mute: 1, controls: 0, loop: 0, playlist: ride.id, modestbranding: 1, rel: 0, playsinline: 1, disablekb: 1, fs: 0, cc_load_policy: 0, iv_load_policy: 3, hl: "en-US", start: Math.floor(getStartSeconds(ride)), origin: window.location.origin };
   }
   function showVideoLoading(loading, message = "Loading video…") {
     clearTimeout(runtime.statusTimer);
@@ -136,6 +136,35 @@ export function createVideoController({
     setVideoState(videoStates.UNAVAILABLE, "No playable video found. Choose another mode to continue.");
     showToast(messages.videoUnavailable);
   }
+  function handleEnded() {
+    const city = getCurrentCity();
+    const videos = city?.videos?.[state.currentMode] || [];
+    const alternativeIndexes = videos
+      .map((_, index) => index)
+      .filter((index) => index !== state.currentVideoIndex);
+
+    if (alternativeIndexes.length) {
+      state.currentVideoIndex = alternativeIndexes[Math.floor(Math.random() * alternativeIndexes.length)];
+      updateVideo(city, { loadingState: videoStates.RETRYING, loadingMessage: "Loading another video…" });
+      return;
+    }
+
+    const alternativeModes = (availableModes(city) || []).filter((mode) => mode !== state.currentMode);
+    if (alternativeModes.length) {
+      state.currentMode = alternativeModes[Math.floor(Math.random() * alternativeModes.length)];
+      const modeVideos = city.videos[state.currentMode] || [];
+      state.currentVideoIndex = Math.floor(Math.random() * modeVideos.length);
+      onModeChange();
+      updateVideo(city, { loadingState: videoStates.RETRYING, loadingMessage: "Loading another video…" });
+      return;
+    }
+
+    const ride = getCurrentRide(city);
+    if (ride) {
+      command("seekTo", [getStartSeconds(ride), true]);
+      command("playVideo");
+    }
+  }
   const playerManager = createYouTubePlayer({
     window,
     document,
@@ -148,6 +177,7 @@ export function createVideoController({
     onReady: handleReady,
     onBuffering: () => setVideoState(videoStates.LOADING),
     onPlaying: markReady,
+    onEnded: handleEnded,
     onAutoplayBlocked: () => { command("mute"); command("playVideo"); },
     onError: () => handleError()
   });
