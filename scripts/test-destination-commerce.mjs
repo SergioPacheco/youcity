@@ -2,6 +2,7 @@
 
 import assert from "node:assert/strict";
 import { createDestinationCommerce } from "../src/features/travel/destination-commerce.mjs";
+import { createTravelController } from "../src/features/travel/travel-controller.mjs";
 
 const city = { id: "granada", name: "Granada", country: "Spain" };
 const fixtureCategories = {
@@ -93,5 +94,67 @@ assert.equal(emptyCommerce.afterPlaces(city), "");
 assert.equal(emptyCommerce.accommodation(city), "");
 assert.equal(emptyCommerce.transport(city), "");
 assert.equal(emptyCommerce.secondary(city), "");
+
+{
+  const categories = {
+    hotels: { label: "Stay", icon: "🏨", description: "Hotels and stays", placement: "primary" },
+    activities: { label: "Things to do", icon: "🎟", description: "Tours and experiences", placement: "primary" },
+    cars: { label: "Get around", icon: "🚗", description: "Car rentals", placement: "primary" },
+    flights: { label: "Get there", icon: "✈", description: "Compare flights", placement: "secondary" },
+    insurance: { label: "Insurance", icon: "🛡", description: "Travel insurance", placement: "secondary" }
+  };
+  const affiliate = {
+    getVerticals: () => categories,
+    createContext: (destination, vertical, options) => ({ city: destination, vertical, placement: options.placement }),
+    getAffiliateOffers: (context) => {
+      const available = { hotels: "stay22", activities: "stay22", cars: "discovercars", insurance: "heymondo" };
+      if (!available[context.vertical]) return [];
+      return [{
+        provider: available[context.vertical],
+        vertical: context.vertical,
+        placement: context.placement,
+        url: `https://example.test/${context.vertical}`,
+        label: context.vertical
+      }];
+    },
+    observeImpressions() {},
+    track() {},
+    trackClick() {}
+  };
+  const elements = {
+    travelPlanner: { classList: { remove() {} } },
+    travelPrimary: { innerHTML: "" },
+    travelSecondary: { innerHTML: "" },
+    travelDisclosure: { textContent: "" },
+    travelPreviewBadge: { hidden: false },
+    travelPlannerLocation: { textContent: "" },
+    cityGuideStayFallback: { innerHTML: "" },
+    cityGuideTransportSlot: { innerHTML: "" },
+    cityGuideSecondarySlot: { innerHTML: "" },
+    stay22Tools: null
+  };
+  const travel = createTravelController({
+    window: { YOUCITY_AFFILIATE_CONFIG: { disclosure: { short: "Disclosure" } } },
+    document: { querySelector: () => null },
+    elements,
+    state: { currentMode: "drive" },
+    affiliate,
+    sitePath: (path) => path,
+    lazyModules: { load: async () => ({}) },
+    modeLabels: {},
+    availableModes: () => [],
+    currentCity: () => city,
+    openLayer() {},
+    closeLayer() {},
+    selectCity() {},
+    showToast() {}
+  });
+  travel.renderTravelPlanner(city);
+  assert.match(elements.cityGuideStayFallback.innerHTML, /data-travel-placement="city_guide_stay"/);
+  assert.match(elements.cityGuideTransportSlot.innerHTML, /data-travel-placement="city_guide_transport"/);
+  assert.match(elements.cityGuideSecondarySlot.innerHTML, /data-travel-placement="city_guide_bottom"/);
+  assert.match(elements.cityGuideTransportSlot.innerHTML, /rel="sponsored noopener noreferrer"/);
+  assert.doesNotMatch(elements.cityGuideStayFallback.innerHTML, /travel_planner/);
+}
 
 console.log("Destination commerce tests passed: valid offers, placements, partial availability, and Stay22 suppression.");

@@ -1,4 +1,5 @@
 import { loadSecondaryProviders } from "./secondary-providers-loader.mjs";
+import { createDestinationCommerce } from "./destination-commerce.mjs";
 
 const PRIMARY_DEFAULTS = ["hotels", "activities", "cars"];
 const QUICK_CATEGORIES = ["hotels", "activities", "cars", "flights"];
@@ -52,17 +53,29 @@ export function createTravelController({
     return offers;
   }
 
+  function affiliateMetadata(entry, city, placementFallback = "travel_planner") {
+    return `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || placementFallback)}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}" data-travel-mode="${escapeHtml(state.currentMode)}"`;
+  }
+
   function offerMarkup(entry, city, options = {}) {
     if (!entry?.url) return "";
-    const label = options.minimal ? categories[entry.vertical]?.label || "Open" : entry.label || ACTION_LABELS[entry.vertical] || `Explore ${categories[entry.vertical]?.label?.toLowerCase() || "options"}`;
-    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "travel_planner")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}" data-travel-mode="${escapeHtml(state.currentMode)}"`;
-    return `<a class="travel-offer-action${options.compact ? " is-compact" : ""}" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}><span>${escapeHtml(label)}</span><small>${escapeHtml(entry.name || entry.provider)}</small><b aria-hidden="true">↗</b></a>`;
+    const label = options.label || (options.minimal ? categories[entry.vertical]?.label || "Open" : entry.label || ACTION_LABELS[entry.vertical] || `Explore ${categories[entry.vertical]?.label?.toLowerCase() || "options"}`);
+    const className = options.className || `travel-offer-action${options.compact ? " is-compact" : ""}`;
+    const icon = options.icon ? `<span class="travel-quick-icon" aria-hidden="true">${escapeHtml(options.icon)}</span>` : "";
+    const provider = options.showProvider === false ? "" : `<small>${escapeHtml(entry.name || entry.provider)}</small>`;
+    const metadata = affiliateMetadata(entry, city, options.placement || "travel_planner");
+    return `<a class="${escapeHtml(className)}" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}>${icon}<span>${escapeHtml(label)}</span>${provider}<b aria-hidden="true">↗</b></a>`;
   }
 
   function quickActionMarkup(category, entry, city) {
     if (!entry?.url || !categories[category]) return "";
-    const metadata = `data-affiliate-offer="true" data-travel-provider="${escapeHtml(entry.provider)}" data-travel-vertical="${escapeHtml(entry.vertical)}" data-travel-city="${escapeHtml(city.id)}" data-travel-city-name="${escapeHtml(city.name)}" data-travel-country="${escapeHtml(city.rawCountry || city.country)}" data-travel-country-code="${escapeHtml(city.countryCode || "")}" data-travel-placement="${escapeHtml(entry.placement || "quick_travel_bar")}" data-travel-variant="${escapeHtml(entry.variant || "A")}" data-travel-provider-campaign="${escapeHtml(entry.tracking?.providerCampaign || "")}" data-travel-internal-campaign="${escapeHtml(entry.tracking?.internalCampaign || "")}" data-travel-mode="${escapeHtml(state.currentMode)}"`;
-    return `<a class="travel-quick-action" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}><span class="travel-quick-icon" aria-hidden="true">${categories[category].icon}</span><span>${escapeHtml(QUICK_LABELS[category])}</span><b aria-hidden="true">↗</b></a>`;
+    return offerMarkup(entry, city, {
+      className: "travel-quick-action",
+      label: QUICK_LABELS[category],
+      icon: categories[category].icon,
+      placement: "quick_travel_bar",
+      showProvider: false
+    });
   }
 
   function trackPlanningEvent(event, city, placement) {
@@ -72,8 +85,8 @@ export function createTravelController({
   function updateMainTravelCta(city, hasOffers) {
     if (!elements.travelButton) return;
     elements.travelButton.hidden = false;
-    elements.travelButton.setAttribute("aria-label", `Explore ${city.name}`);
-    elements.travelButton.title = `City guide and trip planning for ${city.name}`;
+    elements.travelButton.setAttribute("aria-label", `Explore ${city.name} city guide and trip planning`);
+    elements.travelButton.title = `City guide, stays and things to do in ${city.name}`;
     Object.assign(elements.travelButton.dataset, {
       travelProvider: "planner", travelVertical: "trip_planning", travelCity: city.id,
       travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "main_cta", travelMode: state.currentMode
@@ -115,7 +128,7 @@ export function createTravelController({
 
   function trackStay22Action(action, extra = {}) {
     const city = currentCity();
-    affiliate.track({ event: `affiliate_${action}`, provider: "stay22", vertical: "hotels", action, city: city.name, country: city.country, countryCode: city.countryCode || "", placement: "travel_planner", mode: state.currentMode, ...extra });
+    affiliate.track({ event: `affiliate_${action}`, provider: "stay22", vertical: "hotels", action, city: city.name, country: city.country, countryCode: city.countryCode || "", placement: "city_guide_stay", mode: state.currentMode, ...extra });
   }
 
   function destroyStay22Map() {
@@ -126,24 +139,24 @@ export function createTravelController({
   function renderStay22Tools(city) {
     try {
       const stay22 = window.YouCityStay22;
-      if (!elements.stay22Tools || !stay22) return;
+      if (!elements.stay22Tools || !stay22) return false;
       destroyStay22Map();
       const hotelsEnabled = stay22.isEnabled("hotels");
       elements.stay22Tools.hidden = !hotelsEnabled;
-      if (!hotelsEnabled) return;
+      if (!hotelsEnabled) return false;
       const title = elements.stay22Tools.querySelector("#stay22-stay-title");
       const description = elements.stay22Tools.querySelector(".stay22-tools-heading small");
       if (title) title.textContent = `Stay in ${city.name}`;
       if (description) description.textContent = "Find places to stay";
       const searchEnabled = stay22.isEnabled("searchbar");
       const mapEnabled = stay22.isEnabled("map");
-      const browseUrl = stay22.createRoamUrl(affiliateContext(city, "hotels", "travel_planner"));
-      const rentalsUrl = stay22.createRoamUrl(affiliateContext(city, "vacation-rentals", "travel_planner"));
+      const browseUrl = stay22.createRoamUrl(affiliateContext(city, "hotels", "city_guide_stay"));
+      const rentalsUrl = stay22.createRoamUrl(affiliateContext(city, "vacation-rentals", "city_guide_stay"));
       const applyLink = (element, url, vertical) => {
         element.hidden = !url;
         if (!url) { element.removeAttribute("href"); return; }
         element.href = url;
-        Object.assign(element.dataset, { affiliateOffer: "true", travelProvider: "stay22", travelVertical: vertical, travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "travel_planner", travelProviderCampaign: new URL(url).searchParams.get("campaign") || "", travelMode: state.currentMode });
+        Object.assign(element.dataset, { affiliateOffer: "true", travelProvider: "stay22", travelVertical: vertical, travelCity: city.id, travelCityName: city.name, travelCountry: city.country, travelCountryCode: city.countryCode || "", travelPlacement: "city_guide_stay", travelProviderCampaign: new URL(url).searchParams.get("campaign") || "", travelMode: state.currentMode });
       };
       applyLink(elements.stay22BrowseButton, browseUrl, "hotels");
       applyLink(elements.stay22RentalsButton, rentalsUrl, "vacation-rentals");
@@ -155,27 +168,41 @@ export function createTravelController({
       elements.stay22Checkin.min = stay22.today();
       elements.stay22Checkout.min = stay22.today();
       elements.stay22SearchForm.dataset.cityId = city.id;
+      return true;
     } catch (error) {
       destroyStay22Map();
       if (elements.stay22Tools) elements.stay22Tools.hidden = true;
       if (window.YOUCITY_AFFILIATE_CONFIG?.debug) console.warn("[YouCity Affiliate] Stay22 tools unavailable", error.message);
+      return false;
     }
   }
 
+  const commerce = createDestinationCommerce({
+    categories,
+    resolveOffers: resolveTravelOffers,
+    renderOffer: offerMarkup,
+    secondaryCategories
+  });
+
+  function renderDestinationCommerce(city) {
+    if (!city) return;
+    const richAccommodationAvailable = Boolean(window.YouCityStay22?.isEnabled?.("hotels") && elements.stay22Tools);
+    if (elements.cityGuideStayFallback) elements.cityGuideStayFallback.innerHTML = commerce.accommodation(city, { richAccommodationAvailable });
+    if (elements.cityGuideTransportSlot) elements.cityGuideTransportSlot.innerHTML = commerce.transport(city);
+    if (elements.cityGuideSecondarySlot) elements.cityGuideSecondarySlot.innerHTML = commerce.secondary(city);
+    renderStay22Tools(city);
+    affiliate.observeImpressions(elements.travelPlanner);
+  }
+
   function renderTravelPlanner(city) {
-    if (!elements.travelPlanner || !elements.travelPrimary || !elements.travelSecondary) return;
+    if (!elements.travelPlanner) return;
     if (elements.travelPlannerLocation) elements.travelPlannerLocation.textContent = `${city.name} · ${city.country}`;
     const title = document.querySelector("#travel-planner-title");
     if (title) title.textContent = `Explore ${city.name}`;
-    const offers = resolveTravelOffers(city);
-    elements.travelPrimary.innerHTML = primaryCategories.map((category) => categoryMarkup(category, offers[category], city)).filter(Boolean).join("");
-    const secondary = secondaryCategories.map((category) => categoryMarkup(category, offers[category], city, { secondary: true, compact: true })).filter(Boolean).join("");
-    elements.travelSecondary.innerHTML = secondary ? `<div class="travel-secondary-heading">More travel options</div>${secondary}` : "";
     elements.travelDisclosure.textContent = window.YOUCITY_AFFILIATE_CONFIG?.disclosure?.short || "Travel options may include affiliate links.";
     elements.travelPlanner.classList.remove("is-demo");
     elements.travelPreviewBadge.hidden = true;
-    renderStay22Tools(city);
-    affiliate.observeImpressions(elements.travelPlanner);
+    renderDestinationCommerce(city);
   }
 
   function ensureDiscoverCarsCatalog() {
@@ -187,7 +214,7 @@ export function createTravelController({
       script.src = `${sitePath("/src/features/travel/discovercars-locations.js")}${version ? `?v=${encodeURIComponent(version)}` : ""}`;
       script.async = true;
       script.dataset.youcityDiscoverCars = "true";
-      script.addEventListener("load", () => { renderTravelPlanner(currentCity()); renderTravelPrompts(currentCity()); resolve(true); }, { once: true });
+      script.addEventListener("load", () => { refreshDestinationHub(currentCity()); renderTravelPrompts(currentCity()); resolve(true); }, { once: true });
       script.addEventListener("error", () => { discoverCarsCatalogPromise = null; resolve(false); }, { once: true });
       document.head.appendChild(script);
     });
@@ -196,6 +223,15 @@ export function createTravelController({
 
   function trackTravelClick(target) {
     if (target) affiliate.trackClick(target, { mode: state.currentMode });
+  }
+
+  function refreshDestinationHub(city) {
+    if (!city) return;
+    renderTravelPlanner(city);
+    if (!elements.travelDrawer?.classList?.contains?.("is-open")) return;
+    cityGuidePromise?.then((controller) => {
+      if (currentCity()?.id === city.id) controller.refresh?.();
+    }).catch(() => {});
   }
 
   function travelRecommendationMarkup(city) {
@@ -214,15 +250,21 @@ export function createTravelController({
     if (!elements.travelDrawer || !elements.cityGuideContent || !currentCity()) return;
     if (!cityGuidePromise) {
       cityGuidePromise = lazyModules.load("city-guide-controller", () => import("../city-guide/city-guide-controller.mjs")).then(({ createCityGuideController }) => createCityGuideController({
-        window, document, elements, getCity: currentCity, openLayer, ensureDiscoverCarsCatalog, sitePath, isStaticLocalPreview
+        window, document, elements, getCity: currentCity, openLayer, sitePath, isStaticLocalPreview,
+        renderCommerce: {
+          topActions: (city) => commerce.topActions(city),
+          afterPlaces: (city) => commerce.afterPlaces(city)
+        }
       }));
     }
     try {
       const controller = await cityGuidePromise;
       await controller.open();
+      const city = currentCity();
+      renderTravelPlanner(city);
+      ensureDiscoverCarsCatalog();
 
       // Analytics: travel_planner_open
-      const city = currentCity();
       window.YOUCITY_ANALYTICS?.track?.({
         event: "travel_planner_open",
         city: city.name,
@@ -230,8 +272,15 @@ export function createTravelController({
         countryCode: city.countryCode || "",
         mode: state.currentMode
       });
+      window.YOUCITY_ANALYTICS?.track?.({
+        event: "city_guide_open",
+        city: city.name,
+        country: city.country,
+        countryCode: city.countryCode || "",
+        mode: state.currentMode
+      });
 
-      loadSecondaryProviders({ document, sitePath }).then(() => { renderTravelPlanner(currentCity()); renderTravelPrompts(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
+      loadSecondaryProviders({ document, sitePath }).then(() => { refreshDestinationHub(currentCity()); renderTravelPrompts(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
     } catch (error) {
       cityGuidePromise = null;
       elements.cityGuideContent.innerHTML = '<p class="city-guide-error" role="alert">City guide data is temporarily unavailable. Try again later.</p>';
@@ -243,5 +292,5 @@ export function createTravelController({
     cityGuidePromise?.then((controller) => controller.invalidate?.()).catch(() => {});
   }
 
-  return { renderTravelPlanner, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide };
+  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide };
 }
