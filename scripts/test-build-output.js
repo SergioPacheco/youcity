@@ -33,6 +33,7 @@ const REQUIRED_FILES = [
   "src/radio/radio-station-repository.mjs",
   "src/radio/radio-catalog-index.mjs",
   "src/features/travel/destination-commerce.mjs",
+  "src/features/travel/flight-origin.mjs",
   "styles.css",
   "privacy.html",
   "terms.html",

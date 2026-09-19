@@ -1,7 +1,8 @@
 (function registerStay22(global) {
   const ENDPOINTS = {
     hotels: "https://www.stay22.com/allez/roam",
-    activities: "https://www.stay22.com/allez/getyourguide"
+    activities: "https://www.stay22.com/allez/getyourguide",
+    flights: "https://www.stay22.com/allez/kayak"
   };
   const SEARCHBAR_ENDPOINT = "https://www.stay22.com/allez/searchbar";
   const MAP_ENDPOINT = "https://www.stay22.com/embed/gm";
@@ -10,7 +11,7 @@
     "vacation-rentals": "hotels",
     activities: "activities"
   };
-  const VERTICALS = Object.keys(VERTICAL_ENDPOINTS);
+  const VERTICALS = [...Object.keys(VERTICAL_ENDPOINTS), "flights"];
   const ROAM_PROVIDERS = new Set(["booking", "expedia", "hotelscom", "vrbo", "agoda", "kayak"]);
 
   function providerConfig() {
@@ -91,6 +92,19 @@
     return url.toString();
   }
 
+  function createFlightUrl(context, options = {}) {
+    const config = providerConfig();
+    if (!supports(context?.city, "flights") || !config.aid) return "";
+    const url = new URL(ENDPOINTS.flights);
+    url.searchParams.set("aid", config.aid);
+    url.searchParams.set("address", `${context.city.name}, ${context.city.country}`);
+    url.searchParams.set("category", "flight");
+    if (/^[A-Z]{3}$/.test(String(options.fromIata || "").toUpperCase())) url.searchParams.set("fromiata", String(options.fromIata).toUpperCase());
+    if (/^[A-Z]{3}$/.test(String(options.toIata || "").toUpperCase())) url.searchParams.set("toiata", String(options.toIata).toUpperCase());
+    url.searchParams.set("campaign", createCampaign(context));
+    return url.toString();
+  }
+
   function dateString(value) {
     return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
   }
@@ -155,9 +169,9 @@
     name: "Stay22",
     verticals: VERTICALS,
     supports,
-    createUrl: createRoamUrl,
+    createUrl: (context) => context?.vertical === "flights" ? createFlightUrl(context) : createRoamUrl(context),
     getOffer(context) {
-      const url = createRoamUrl(context);
+      const url = context?.vertical === "flights" ? createFlightUrl(context) : createRoamUrl(context);
       if (!url) return null;
       const routing = routingOptions(context);
       return {
@@ -175,6 +189,7 @@
   function getOfferLabel(context) {
     if (context.vertical === "activities") return `Things to do in ${context.city.name}`;
     if (context.vertical === "vacation-rentals") return `Vacation rentals in ${context.city.name}`;
+    if (context.vertical === "flights") return `Compare flights to ${context.city.name}`;
     return `Hotels in ${context.city.name}`;
   }
 
@@ -184,6 +199,7 @@
     isEnabled,
     createCampaign,
     createRoamUrl,
+    createFlightUrl,
     createAccommodationSearchUrl,
     createMapUrl,
     validAccommodationDates,

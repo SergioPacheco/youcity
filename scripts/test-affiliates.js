@@ -45,6 +45,8 @@ function load(file) {
 
 const affiliate = context.window.YouCityAffiliate;
 const config = context.window.YOUCITY_AFFILIATE_CONFIG;
+config.features.stay22.flights = true;
+config.providers.stay22.features.flights = true;
 const availableCity = { id: "sao-paulo", name: "Sao Paulo", rawCountry: "Brazil", country: "Brazil", countryCode: "BR" };
 const unavailableCity = { id: "st-petersburg", name: "St. Petersburg", rawCountry: "Russia", country: "Russia", countryCode: "RU" };
 const londonCity = { id: "london", name: "London", rawCountry: "UK", country: "United Kingdom" };
@@ -104,6 +106,16 @@ assert.equal(vacationRentalUrl.pathname, "/allez/roam");
 assert.equal(vacationRentalUrl.searchParams.get("provider"), "vrbo");
 assert.equal(vacationRentalOffer.variant, "stay22_vrbo");
 assert.equal(vacationRentalOffer.label, "Vacation rentals in Granada");
+
+const flightOffer = stay22Offer(granadaCity, "flights");
+assert.ok(flightOffer, "Stay22 should resolve configured flight offers");
+const flightUrl = new URL(flightOffer.url);
+assert.equal(flightUrl.origin + flightUrl.pathname, "https://www.stay22.com/allez/kayak");
+assert.equal(flightUrl.searchParams.get("aid"), "youcity");
+assert.equal(flightUrl.searchParams.get("address"), "Granada, Spain");
+assert.equal(flightUrl.searchParams.get("category"), "flight");
+assert.equal(flightUrl.searchParams.get("campaign"), "yc_granada_es_flights_travelplanner");
+assert.equal(flightOffer.label, "Compare flights to Granada");
 
 for (const [city, address, campaign] of [
   [saoPauloCity, "São Paulo, Brazil", "yc_sao-paulo_br_hotels_travelplanner"],
@@ -184,7 +196,11 @@ config.features.stay22.activities = false;
 assert.equal(stay22Offer(granadaCity, "activities"), undefined, "activities flag should disable activities");
 config.features.stay22.activities = true;
 assert.equal(stay22Offer(granadaCity, "cars"), undefined, "Stay22 cars remain disabled until confirmed");
-assert.equal(stay22Offer(granadaCity, "flights"), undefined, "Stay22 flights remain disabled until confirmed");
+config.features.stay22.flights = false;
+config.providers.stay22.features.flights = false;
+assert.equal(stay22Offer(granadaCity, "flights"), undefined, "Stay22 flights should be disableable");
+config.features.stay22.flights = true;
+config.providers.stay22.features.flights = true;
 
 config.providers.stay22.enabled = false;
 assert.equal(stay22Offer(granadaCity), undefined, "disabled Stay22 should be hidden");
@@ -192,7 +208,7 @@ config.providers.stay22.enabled = true;
 config.providers.stay22.configured = false;
 assert.equal(stay22Offer(granadaCity), undefined, "unconfigured Stay22 should not produce an offer");
 config.providers.stay22.configured = true;
-for (const vertical of ["cars", "flights", "insurance", "esim"]) {
+for (const vertical of ["cars", "insurance", "esim"]) {
   assert.equal(stay22Offer(granadaCity, vertical), undefined, `Stay22 should not appear in ${vertical}`);
 }
 assert.equal(affiliate.getAffiliateOffers(affiliate.createContext({ name: "Granada" }, "hotels")).length, 0, "city without country should be unavailable");
