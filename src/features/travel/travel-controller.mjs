@@ -1,5 +1,6 @@
 import { loadSecondaryProviders } from "./secondary-providers-loader.mjs";
 import { createDestinationCommerce } from "./destination-commerce.mjs";
+import { airportsFromDiscoverCars, buildFlightSearchUrl, createFlightOriginResolver } from "./flight-origin.mjs";
 
 const PRIMARY_DEFAULTS = ["hotels", "activities", "cars"];
 const QUICK_CATEGORIES = ["hotels", "activities", "cars", "flights"];
@@ -40,6 +41,10 @@ export function createTravelController({
   const secondaryCategories = Object.entries(categories).filter(([, info]) => info.placement === "secondary").map(([id]) => id);
   let discoverCarsCatalogPromise = null;
   let cityGuidePromise = null;
+  const flightOriginResolver = createFlightOriginResolver({
+    geolocation: window?.navigator?.geolocation,
+    getAirports: () => airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS)
+  });
 
   function affiliateContext(city, vertical, placement) {
     return affiliate.createContext(city, vertical, { placement, mode: state.currentMode });
@@ -64,7 +69,8 @@ export function createTravelController({
     const icon = options.icon ? `<span class="travel-quick-icon" aria-hidden="true">${escapeHtml(options.icon)}</span>` : "";
     const provider = options.showProvider === false ? "" : `<small>${escapeHtml(entry.name || entry.provider)}</small>`;
     const metadata = affiliateMetadata(entry, city, options.placement || "travel_planner");
-    return `<a class="${escapeHtml(className)}" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}>${icon}<span>${escapeHtml(label)}</span>${provider}<b aria-hidden="true">↗</b></a>`;
+    const flightOrigin = entry.vertical === "flights" ? ' data-travel-flight-origin="true"' : "";
+    return `<a class="${escapeHtml(className)}" href="${escapeHtml(entry.url)}" target="_blank" rel="sponsored noopener noreferrer" ${metadata}${flightOrigin}>${icon}<span>${escapeHtml(label)}</span>${provider}<b aria-hidden="true">↗</b></a>`;
   }
 
   function quickActionMarkup(category, entry, city) {
@@ -231,6 +237,31 @@ export function createTravelController({
     if (target) affiliate.trackClick(target, { mode: state.currentMode });
   }
 
+  function destinationAirport(city) {
+    const airports = airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS);
+    return airports.find((airport) => airport.cityId === city?.id)
+      || airports.find((airport) => airport.cityName && airport.cityName.toLowerCase() === String(city?.name || "").toLowerCase())
+      || null;
+  }
+
+  async function openFlightOffer(target, city = currentCity()) {
+    if (!target?.href) return "";
+    const popup = (() => {
+      try { return window.open?.("", "_blank", "noopener,noreferrer"); } catch { return null; }
+    })();
+    const origin = await flightOriginResolver.resolve();
+    const destination = destinationAirport(city);
+    const fromIata = origin?.code && origin.code !== destination?.code ? origin.code : "";
+    const url = buildFlightSearchUrl(target.href, { fromIata, toIata: destination?.code });
+    if (!url) return "";
+    if (popup && !popup.closed) {
+      popup.location.href = url;
+    } else if (window.location?.assign) {
+      window.location.assign(url);
+    }
+    return url;
+  }
+
   function refreshDestinationHub(city) {
     if (!city) return;
     renderTravelPlanner(city);
@@ -298,5 +329,5 @@ export function createTravelController({
     cityGuidePromise?.then((controller) => controller.invalidate?.()).catch(() => {});
   }
 
-  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide };
+  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, openFlightOffer, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide };
 }

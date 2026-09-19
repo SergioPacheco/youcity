@@ -625,6 +625,7 @@ export function startApplication() {
     renderTravelPrompts,
     ensureDiscoverCarsCatalog,
     trackTravelClick,
+    openFlightOffer,
     trackStay22Action,
     destroyStay22Map,
     mapPopup,
@@ -1074,10 +1075,17 @@ export function startApplication() {
       openCityGuide();
     });
 
-    elements.travelPrompts?.addEventListener("click", (event) => {
+    const handleTravelOfferClick = (event) => {
       const offer = event.target.closest("[data-travel-provider]");
-      if (offer) trackTravelClick(offer);
-    });
+      if (!offer) return;
+      trackTravelClick(offer);
+      if (offer.dataset.travelFlightOrigin === "true") {
+        event.preventDefault();
+        openFlightOffer(offer);
+      }
+    };
+
+    elements.travelPrompts?.addEventListener("click", handleTravelOfferClick);
 
     elements.travelPromptsClose?.addEventListener("click", () => {
       elements.travelPrompts.hidden = true;
@@ -1088,11 +1096,7 @@ export function startApplication() {
       initializeWorldMap();
     });
 
-    elements.travelPlanner.addEventListener("click", (event) => {
-      const offer = event.target.closest("[data-travel-provider]");
-      if (!offer) return;
-      trackTravelClick(offer);
-    });
+    elements.travelPlanner.addEventListener("click", handleTravelOfferClick);
 
     elements.stay22SearchForm.addEventListener("submit", (event) => {
       event.preventDefault();

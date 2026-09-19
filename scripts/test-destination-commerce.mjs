@@ -107,7 +107,7 @@ assert.equal(emptyCommerce.secondary(city), "");
     getVerticals: () => categories,
     createContext: (destination, vertical, options) => ({ city: destination, vertical, placement: options.placement }),
     getAffiliateOffers: (context) => {
-      const available = { hotels: "stay22", activities: "stay22", cars: "discovercars", insurance: "heymondo" };
+      const available = { hotels: "stay22", activities: "stay22", cars: "discovercars", flights: "stay22", insurance: "heymondo" };
       if (!available[context.vertical]) return [];
       return [{
         provider: available[context.vertical],
@@ -128,14 +128,45 @@ assert.equal(emptyCommerce.secondary(city), "");
     travelDisclosure: { textContent: "" },
     travelPreviewBadge: { hidden: false },
     travelPlannerLocation: { textContent: "" },
+    travelPrompts: { hidden: false },
+    travelQuickActions: { innerHTML: "" },
+    travelPromptsCity: { textContent: "" },
     cityGuideStaySlot: { hidden: false },
     cityGuideStayFallback: { innerHTML: "" },
     cityGuideTransportSlot: { hidden: false, innerHTML: "" },
     cityGuideSecondarySlot: { hidden: false, innerHTML: "" },
     stay22Tools: null
   };
+  const popup = { closed: false, location: { href: "" } };
+  const integrationWindow = {
+    YOUCITY_AFFILIATE_CONFIG: { disclosure: { short: "Disclosure" } },
+    YOUCITY_DISCOVERCARS_LOCATIONS: {
+      "sao-paulo-br": {
+        youCityId: "sao-paulo",
+        youCityName: "São Paulo",
+        latitude: -23.5505,
+        longitude: -46.6333,
+        discoverCars: { airports: [{ name: "CGH" }] }
+      },
+      "granada-es": {
+        youCityId: "granada",
+        youCityName: "Granada",
+        latitude: 37.1773,
+        longitude: -3.5986,
+        discoverCars: { airports: [{ name: "GRX" }] }
+      }
+    },
+    navigator: {
+      geolocation: {
+        getCurrentPosition(success) {
+          success({ coords: { latitude: -23.5505, longitude: -46.6333 } });
+        }
+      }
+    },
+    open: () => popup
+  };
   const travel = createTravelController({
-    window: { YOUCITY_AFFILIATE_CONFIG: { disclosure: { short: "Disclosure" } } },
+    window: integrationWindow,
     document: { querySelector: () => null },
     elements,
     state: { currentMode: "drive" },
@@ -151,6 +182,7 @@ assert.equal(emptyCommerce.secondary(city), "");
     showToast() {}
   });
   travel.renderTravelPlanner(city);
+  travel.renderTravelPrompts(city);
   assert.match(elements.cityGuideStayFallback.innerHTML, /data-travel-placement="city_guide_stay"/);
   assert.equal(elements.cityGuideStaySlot.hidden, false);
   assert.match(elements.cityGuideTransportSlot.innerHTML, /data-travel-placement="city_guide_transport"/);
@@ -159,6 +191,12 @@ assert.equal(emptyCommerce.secondary(city), "");
   assert.equal(elements.cityGuideSecondarySlot.hidden, false);
   assert.match(elements.cityGuideTransportSlot.innerHTML, /rel="sponsored noopener noreferrer"/);
   assert.doesNotMatch(elements.cityGuideStayFallback.innerHTML, /travel_planner/);
+  assert.match(elements.travelQuickActions.innerHTML, /data-travel-vertical="flights"/);
+  assert.match(elements.travelQuickActions.innerHTML, /data-travel-flight-origin="true"/);
+  const openedFlightUrl = await travel.openFlightOffer({ href: "https://example.test/flights?category=flight" }, city);
+  assert.equal(new URL(openedFlightUrl).searchParams.get("fromiata"), "CGH");
+  assert.equal(new URL(openedFlightUrl).searchParams.get("toiata"), "GRX");
+  assert.equal(popup.location.href, openedFlightUrl);
 }
 
 {

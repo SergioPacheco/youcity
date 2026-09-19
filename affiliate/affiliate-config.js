@@ -79,7 +79,7 @@ window.YOUCITY_AFFILIATE_CONFIG = {
       searchbar: true,
       map: true,
       cars: false,
-      flights: false,
+      flights: true,
       script: true
     }
   },
@@ -139,17 +139,18 @@ window.YOUCITY_AFFILIATE_CONFIG = {
       enabled: true,
       configured: true,
       priority: 100,
-      verticals: ["hotels", "vacation-rentals", "activities"],
+      verticals: ["hotels", "vacation-rentals", "activities", "flights"],
       aid: "youcity",
-      // Public integration switches. Cars and flights stay off until their
-      // documented Allez construction contract is confirmed for this UI.
+      // Public integration switches. Cars remain off until their documented
+      // Allez construction contract is confirmed for this UI. Flights use
+      // Stay22's documented Kayak Allez flight category.
       features: {
         hotels: true,
         activities: true,
         searchbar: true,
         map: true,
         cars: false,
-        flights: false,
+        flights: true,
         script: true
       },
       roam: {
@@ -166,7 +167,7 @@ window.YOUCITY_AFFILIATE_CONFIG = {
       retail: "account-controlled",
       status: {
         cars: "NEEDS_EXTERNAL_CONFIGURATION",
-        flights: "NEEDS_EXTERNAL_CONFIGURATION",
+        flights: "READY_VIA_ALLEZ_KAYAK",
         script: "READY",
         nova: "READY_VIA_SCRIPT",
         spark: "READY_VIA_SCRIPT",
