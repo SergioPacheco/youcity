@@ -12,6 +12,51 @@ export function getDataLayer(global = globalThis) {
   return (global.dataLayer = global.dataLayer || []);
 }
 
+const CONSENT_KEYS = ["ad_storage", "analytics_storage", "ad_user_data", "ad_personalization"];
+
+function toConsentParams(consent = {}) {
+  return {
+    ad_storage: consent.ad_storage,
+    analytics_storage: consent.analytics_storage,
+    ad_user_data: consent.ad_user_data,
+    ad_personalization: consent.ad_personalization,
+  };
+}
+
+function sameConsent(a = {}, b = {}) {
+  return CONSENT_KEYS.every((key) => a[key] === b[key]);
+}
+
+/**
+ * Forward consent state to the native Google Consent Mode API.
+ *
+ * Prefers gtag('consent', command, params) — the inline snippet in index.html
+ * defines a gtag stub before GTM loads, so the default is registered
+ * synchronously. Falls back to the dataLayer array form
+ * (["consent", command, params]), which GTM processes as a gtag command.
+ *
+ * The custom default_consent/consent_update dataLayer events are still pushed
+ * alongside (see pushDefaultConsentToDataLayer/updateConsentMode) for
+ * backwards compatibility with existing GTM triggers and tests.
+ */
+export function applyNativeConsent(global = globalThis, command, consent) {
+  const params = toConsentParams(consent);
+  try {
+    if (typeof global.gtag === "function") {
+      global.gtag("consent", command, params);
+      return true;
+    }
+  } catch {
+    // Fall through to the dataLayer fallback below.
+  }
+  try {
+    getDataLayer(global).push(["consent", command, params]);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function pushConsentToDataLayer(consent, global = globalThis) {
   const dataLayer = getDataLayer(global);
   dataLayer.push({
@@ -26,6 +71,7 @@ export function pushDefaultConsentToDataLayer(global = globalThis) {
     event: "default_consent",
     consent: DEFAULT_CONSENT,
   });
+  applyNativeConsent(global, "default", DEFAULT_CONSENT);
 }
 
 export function updateConsentMode(consent, global = globalThis) {
@@ -34,6 +80,7 @@ export function updateConsentMode(consent, global = globalThis) {
     event: "consent_update",
     consent,
   });
+  applyNativeConsent(global, "update", consent);
 }
 
 export function readStoredConsent(global = globalThis) {
@@ -296,11 +343,19 @@ function createPrivacySettingsButton(global = globalThis) {
 }
 
 export function initializeYouCityConsent(global = globalThis) {
-  initializeConsentMode(global);
+  // The synchronous inline snippet in index.html already registered the
+  // consent default (stored choice or denied) via gtag before GTM loaded.
+  // Only push a default here when that snippet did not run (e.g. tests).
+  const syncDefault = global.__YOUCITY_CONSENT_DEFAULT__;
+  if (!syncDefault) {
+    initializeConsentMode(global);
+  }
 
   if (hasValidStoredConsent(global)) {
     const consent = readStoredConsent(global);
-    if (consent) {
+    // Skip the redundant update when the sync snippet already applied this
+    // exact state as the default.
+    if (consent && !sameConsent(consent, syncDefault)) {
       updateConsentMode(consent, global);
     }
   }

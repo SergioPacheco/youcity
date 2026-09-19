@@ -67,6 +67,8 @@ function resetTestEnvironment() {
   mockWindow.dataLayer = [];
   mockWindow.localStorage.clear();
   mockWindow.YOUCITY_CONSENT = undefined;
+  delete mockWindow.gtag;
+  delete mockWindow.__YOUCITY_CONSENT_DEFAULT__;
 }
 
 function runTest(name, fn) {
@@ -250,6 +252,73 @@ runTest("writeStoredConsent returns true on success", () => {
     ad_personalization: "granted"
   }, mockWindow);
   assert.equal(result, true);
+});
+
+// Test 13: native Consent Mode API via gtag
+runTest("initializeConsentMode forwards default via gtag when available", () => {
+  const calls = [];
+  mockWindow.gtag = (...args) => { calls.push(args); };
+  initializeConsentMode(mockWindow);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0][0], "consent");
+  assert.equal(calls[0][1], "default");
+  assert.equal(calls[0][2].ad_storage, "denied");
+  assert.equal(calls[0][2].analytics_storage, "denied");
+  assert.equal(calls[0][2].ad_user_data, "denied");
+  assert.equal(calls[0][2].ad_personalization, "denied");
+});
+
+runTest("acceptAll forwards granted update via gtag", () => {
+  const calls = [];
+  mockWindow.gtag = (...args) => { calls.push(args); };
+  acceptAll(mockWindow);
+  const update = calls.find((args) => args[0] === "consent" && args[1] === "update");
+  assert.ok(update, "gtag consent update should be called");
+  assert.equal(update[2].ad_storage, "granted");
+  assert.equal(update[2].analytics_storage, "granted");
+});
+
+runTest("falls back to dataLayer array form without gtag", () => {
+  initializeConsentMode(mockWindow);
+  const native = mockWindow.dataLayer.find(
+    (entry) => Array.isArray(entry) && entry[0] === "consent" && entry[1] === "default"
+  );
+  assert.ok(native, "dataLayer should contain a native consent default entry");
+  assert.equal(native[2].analytics_storage, "denied");
+});
+
+// Test 14: sync snippet guard (index.html sets __YOUCITY_CONSENT_DEFAULT__)
+runTest("skips redundant default/update when sync snippet already applied state", () => {
+  mockWindow.__YOUCITY_CONSENT_DEFAULT__ = { ...DEFAULT_CONSENT };
+  initializeYouCityConsent(mockWindow);
+  assert.equal(
+    mockWindow.dataLayer.filter((e) => e.event === "default_consent").length,
+    0,
+    "Should not re-push default when the sync snippet already set it"
+  );
+  assert.equal(
+    mockWindow.dataLayer.filter((e) => e.event === "consent_update").length,
+    0,
+    "Should not push update when stored state equals the sync default"
+  );
+});
+
+runTest("still pushes update when stored consent differs from sync default", () => {
+  mockWindow.__YOUCITY_CONSENT_DEFAULT__ = { ...DEFAULT_CONSENT };
+  mockWindow.localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify({
+    version: CONSENT_VERSION,
+    consent: {
+      ad_storage: "granted",
+      analytics_storage: "granted",
+      ad_user_data: "granted",
+      ad_personalization: "granted"
+    },
+    timestamp: Date.now()
+  }));
+  initializeYouCityConsent(mockWindow);
+  const events = mockWindow.dataLayer.filter((e) => e.event === "consent_update");
+  assert.equal(events.length, 1);
+  assert.equal(events[0].consent.ad_storage, "granted");
 });
 
 console.log("\nAll Consent Mode v2 unit tests passed! 🎉");

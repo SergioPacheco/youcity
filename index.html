@@ -1,10 +1,47 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- YouCity Consent Mode v2 - Must load before GTM -->
-    <script type="module">
-      import { initializeYouCityConsent } from '/src/integrations/consent.mjs';
-      initializeYouCityConsent(window);
+    <!-- YouCity Consent Mode v2 default - Must run synchronously before GTM.
+         Plain (non-module) script on purpose: type="module" is deferred and
+         would race with gtm.js. Applies the stored choice (or denied) via the
+         native gtag consent API. Keep storage key/version in sync with
+         src/integrations/consent.mjs. -->
+    <script>
+      (function () {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+          var stored = null;
+          try {
+            var raw = window.localStorage.getItem("youcity_consent_v1");
+            if (raw) {
+              var parsed = JSON.parse(raw);
+              if (
+                parsed && parsed.version === 1 && parsed.consent &&
+                typeof parsed.consent.ad_storage === "string" &&
+                typeof parsed.consent.analytics_storage === "string" &&
+                typeof parsed.consent.ad_user_data === "string" &&
+                typeof parsed.consent.ad_personalization === "string"
+              ) {
+                stored = parsed.consent;
+              }
+            }
+          } catch (e) {}
+          var def = stored || {
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied"
+          };
+          window.gtag("consent", "default", {
+            ad_storage: def.ad_storage,
+            analytics_storage: def.analytics_storage,
+            ad_user_data: def.ad_user_data,
+            ad_personalization: def.ad_personalization
+          });
+          window.__YOUCITY_CONSENT_DEFAULT__ = def;
+        } catch (e) {}
+      })();
     </script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

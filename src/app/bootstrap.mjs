@@ -1065,7 +1065,8 @@ export function startApplication() {
     elements.commentAssistantButton?.addEventListener("click", openCommentAssistantForCurrentRide);
 
     elements.travelButton.addEventListener("click", () => {
-      trackTravelClick(elements.travelButton);
+      // Internal navigation only: opening the city guide is not an affiliate
+      // click. It is tracked as travel_planner_open by openCityGuide().
       openCityGuide();
     });
 
@@ -1128,7 +1129,9 @@ export function startApplication() {
         adultsProvided: elements.stay22Adults.value !== "",
         childrenProvided: elements.stay22Children.value !== ""
       });
-      trackTravelClick(elements.stay22SearchResult);
+      // No affiliate_click here: the search opens programmatically, no click
+      // happened yet. A real user click on the result link is tracked by the
+      // stay22SearchResult click listener below.
       const searchWindow = window.open(url, "_blank", "noopener,noreferrer");
       if (!searchWindow) {
         elements.stay22SearchResult.hidden = false;
