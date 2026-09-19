@@ -921,6 +921,11 @@ button:focus-visible, input:focus-visible {
   pointer-events: none;
 }
 
+.consent-banner.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
 .consent-banner-content,
 .consent-preferences {
   padding: 20px 24px;
@@ -1151,6 +1156,10 @@ button:focus-visible, input:focus-visible {
 
   .consent-banner.consent-banner-hidden {
     transform: translateY(100px);
+  }
+
+  .consent-banner.is-visible {
+    transform: translateY(0);
   }
 
   .consent-banner-content,

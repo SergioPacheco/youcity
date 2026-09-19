@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Consent Mode v2 default (same as index.html) -->
+    <script>
+      (function () {
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+          var stored = null;
+          try {
+            var raw = window.localStorage.getItem("youcity_consent_v1");
+            if (raw) {
+              var parsed = JSON.parse(raw);
+              if (
+                parsed && parsed.version === 1 && parsed.consent &&
+                typeof parsed.consent.ad_storage === "string" &&
+                typeof parsed.consent.analytics_storage === "string" &&
+                typeof parsed.consent.ad_user_data === "string" &&
+                typeof parsed.consent.ad_personalization === "string"
+              ) {
+                stored = parsed.consent;
+              }
+            }
+          } catch (e) {}
+          var def = stored || {
+            ad_storage: "denied",
+            analytics_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied"
+          };
+          window.gtag("consent", "default", {
+            ad_storage: def.ad_storage,
+            analytics_storage: def.analytics_storage,
+            ad_user_data: def.ad_user_data,
+            ad_personalization: def.ad_personalization
+          });
+          window.__YOUCITY_CONSENT_DEFAULT__ = def;
+        } catch (e) {}
+      })();
+    </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    Date.now(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M64MQRNM');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Terms of Service — YouCity. Review our terms before using our platform." />
+    <meta name="robots" content="index,follow" />
+    <title>Terms of Service — YouCity</title>
+    <link rel="canonical" href="https://youcity.pages.dev/terms.html" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html, body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        color: #333;
+        background: #f9f9f9;
+      }
+      header {
+        background: #111411;
+        color: #fff;
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      header p {
+        font-size: 1.1rem;
+        opacity: 0.85;
+      }
+      main {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem 2rem;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      section {
+        margin-bottom: 3rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+        margin: 1.5rem 0 1rem;
+        color: #111411;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.5rem;
+        color: #222;
+      }
+      p, li {
+        margin-bottom: 1rem;
+      }
+      ul, ol {
+        margin-left: 1.5rem;
+      }
+      li {
+        margin-bottom: 0.5rem;
+      }
+      .warning-box {
+        background: #fff3cd;
+        border-left: 4px solid #ff9800;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+      }
+      footer {
+        text-align: center;
+        padding: 1.5rem;
+        color: #666;
+        font-size: 0.9rem;
+        border-top: 1px solid #e0e0e0;
+        margin-top: 2rem;
+      }
+      a {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: #0066cc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M64MQRNM"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <a href="/" class="back-link">← Back to YouCity</a>
+
+    <header>
+      <h1>Terms of Service</h1>
+      <p>Last updated: September 19, 2026</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>1. Agreement to Terms</h2>
+        <p>
+          By accessing and using YouCity, you agree to be bound by these Terms of Service.
+          If you do not agree with any part of these terms, you must stop using YouCity immediately.
+        </p>
+        <p>
+          YouCity ("Company," "we," "us," "our") reserves the right to update these terms
+          at any time without notice. Your continued use constitutes acceptance of updated terms.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. Use License</h2>
+        <p>
+          YouCity grants you a limited, non-exclusive, non-transferable license to access and
+          use the platform for personal, non-commercial purposes. You may not:
+        </p>
+        <ul>
+          <li>Modify or copy content without permission</li>
+          <li>Use automated scripts to scrape data</li>
+          <li>Attempt to gain unauthorized access (hacking, password guessing, etc.)</li>
+          <li>Transmit viruses, malware, or harmful code</li>
+          <li>Interfere with platform operation or degrade performance</li>
+          <li>Remove or alter copyright notices and legal disclaimers</li>
+          <li>Frame or embed YouCity content on external sites without permission</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. Intellectual Property Rights</h2>
+        <p>
+          All content on YouCity — including text, images, videos, code, designs, and trademarks —
+          is owned or licensed by YouCity and protected by copyright and intellectual property laws.
+          You may not reproduce, distribute, or transmit any content without written permission.
+        </p>
+        <p>
+          <strong>Third-Party Content:</strong> YouCity displays content and data from third-party
+          sources (e.g., radio streams, city data, affiliate offers). We are not responsible for
+          the accuracy or legality of third-party content.
+        </p>
+      </section>
+
+      <section>
+        <h2>4. User Accounts & Responsibility</h2>
+        <h3>4.1 Account Creation</h3>
+        <p>
+          If you create an account, you are responsible for maintaining confidentiality of your
+          credentials. You agree to provide accurate information and notify us immediately if
+          your account is compromised.
+        </p>
+
+        <h3>4.2 User Conduct</h3>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Post or transmit offensive, abusive, hateful, or defamatory content</li>
+          <li>Harass, threaten, or impersonate other users</li>
+          <li>Engage in commercial activity or spam</li>
+          <li>Violate any applicable laws or regulations</li>
+          <li>Upload malware or harmful content</li>
+        </ul>
+
+        <h3>4.3 Suspension & Termination</h3>
+        <p>
+          YouCity reserves the right to suspend or terminate your account at any time for:
+          violation of these terms, illegal activity, or any reason at our sole discretion.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Affiliate Links & Monetization</h2>
+        <p>
+          YouCity displays affiliate links to travel, accommodation, and booking services.
+          When you click an affiliate link and complete a purchase, YouCity may earn a
+          commission at no extra cost to you.
+        </p>
+        <p>
+          <strong>Disclosure:</strong> We are transparent about our affiliate relationships.
+          YouCity does not endorse products solely for commission; we recommend experiences
+          we believe are valuable.
+        </p>
+        <p>
+          <strong>Third-Party Terms:</strong> When you leave YouCity to use an affiliate service,
+          you are subject to that service's terms and privacy policy. YouCity is not responsible
+          for affiliate partner conduct or disputes.
+        </p>
+      </section>
+
+      <section>
+        <h2>6. Disclaimer of Warranties</h2>
+        <div class="warning-box">
+          <strong>YOUICITY IS PROVIDED "AS IS" WITHOUT WARRANTIES.</strong>
+        </div>
+        <p>
+          YouCity makes no warranties, express or implied, regarding:
+        </p>
+        <ul>
+          <li>Accuracy, completeness, or reliability of content</li>
+          <li>Uninterrupted or error-free operation</li>
+          <li>Fitness for a particular purpose</li>
+          <li>Performance of third-party services (affiliate, radio, weather, etc.)</li>
+        </ul>
+        <p>
+          You use YouCity at your own risk. We are not liable for data loss, interruptions,
+          or third-party conduct.
+        </p>
+      </section>
+
+      <section>
+        <h2>7. Limitation of Liability</h2>
+        <p>
+          <strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW:</strong>
+        </p>
+        <ul>
+          <li>YouCity is not liable for indirect, incidental, or consequential damages</li>
+          <li>YouCity is not liable for lost profit or data, even if we knew the risk</li>
+          <li>Our total liability is limited to the amount you paid YouCity (if any) in the past 12 months</li>
+        </ul>
+        <p>
+          Some jurisdictions do not allow liability limitations. If this applies to you,
+          we are liable only to the extent permitted by law.
+        </p>
+      </section>
+
+      <section>
+        <h2>8. Indemnification</h2>
+        <p>
+          You agree to indemnify, defend, and hold harmless YouCity from any claims, losses,
+          or expenses (including legal fees) arising from:
+        </p>
+        <ul>
+          <li>Your violation of these terms</li>
+          <li>Your violation of any law or third-party rights</li>
+          <li>Your content or conduct on YouCity</li>
+          <li>Your use of affiliate links and third-party services</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>9. External Links</h2>
+        <p>
+          YouCity may link to external websites and services. We do not control, endorse, or
+          assume responsibility for their content, privacy practices, or conduct. Use external
+          links at your own risk and review their terms and privacy policies.
+        </p>
+      </section>
+
+      <section>
+        <h2>10. Governing Law & Jurisdiction</h2>
+        <p>
+          These terms are governed by the laws of the jurisdiction where YouCity operates,
+          without regard to conflict of law principles. You agree to submit to the exclusive
+          jurisdiction of courts in that location for dispute resolution.
+        </p>
+      </section>
+
+      <section>
+        <h2>11. Dispute Resolution</h2>
+        <p>
+          Before filing a lawsuit, please attempt to resolve disputes by emailing us at
+          <a href="mailto:support@youcity.pages.dev">support@youcity.pages.dev</a> with
+          "Dispute" in the subject line. We will attempt to resolve the issue within 30 days.
+        </p>
+      </section>
+
+      <section>
+        <h2>12. Severability</h2>
+        <p>
+          If any provision of these terms is found invalid or unenforceable, that provision
+          will be removed, and the remaining terms will continue in effect.
+        </p>
+      </section>
+
+      <section>
+        <h2>13. Entire Agreement</h2>
+        <p>
+          These terms, along with our Privacy Policy and any posted guidelines, constitute
+          the entire agreement between you and YouCity. No other representations or warranties apply.
+        </p>
+      </section>
+
+      <section>
+        <h2>14. Contact Us</h2>
+        <p>For questions about these terms, contact us at:</p>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:support@youcity.pages.dev">support@youcity.pages.dev</a></li>
+          <li><strong>Website:</strong> <a href="https://youcity.pages.dev">youcity.pages.dev</a></li>
+        </ul>
+      </section>
+
+      <footer>
+        <p>&copy; 2026 YouCity. All rights reserved.</p>
+        <p><a href="/">Back to YouCity</a> | <a href="/privacy.html">Privacy & Cookie Policy</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

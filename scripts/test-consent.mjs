@@ -321,4 +321,23 @@ runTest("still pushes update when stored consent differs from sync default", () 
   assert.equal(events[0].consent.ad_storage, "granted");
 });
 
+// Test 15: banner actually becomes visible (regression: base CSS starts hidden)
+runTest("banner receives is-visible state so it actually displays", () => {
+  const added = [];
+  const origCreate = mockWindow.document.createElement;
+  mockWindow.document.createElement = (tag) => {
+    const el = origCreate(tag);
+    el.classList.add = (cls) => { added.push(cls); };
+    return el;
+  };
+  mockWindow.requestAnimationFrame = (cb) => { cb(); return 0; };
+  try {
+    initializeYouCityConsent(mockWindow);
+  } finally {
+    mockWindow.document.createElement = origCreate;
+    delete mockWindow.requestAnimationFrame;
+  }
+  assert.ok(added.includes("is-visible"), "banner should get the is-visible class");
+});
+
 console.log("\nAll Consent Mode v2 unit tests passed! 🎉");

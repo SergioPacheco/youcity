@@ -180,6 +180,11 @@ function createConsentBanner(global = globalThis) {
   const existing = document.getElementById("consent-banner");
   if (existing) existing.remove();
 
+  // Read consent state once, before creating HTML
+  const currentConsent = getCurrentConsent(global);
+  const analyticsChecked = currentConsent.analytics_storage === "granted" ? "checked" : "";
+  const advertisingChecked = currentConsent.ad_storage === "granted" ? "checked" : "";
+
   const banner = document.createElement("div");
   banner.id = "consent-banner";
   banner.className = "consent-banner";
@@ -190,45 +195,14 @@ function createConsentBanner(global = globalThis) {
     <div class="consent-banner-content">
       <p id="consent-description" class="consent-description">
         We use cookies to enhance your experience, analyze traffic, and personalize ads.
-        By clicking "Accept all", you consent to our use of cookies.
+        Learn more in our <a href="/privacy.html" style="color: #fff; text-decoration: underline;">Privacy & Cookie Policy</a>.
       </p>
       <div class="consent-actions">
-        <button type="button" class="consent-btn consent-btn-primary" id="consent-accept-all" aria-label="Accept all cookies">
-          Accept all
-        </button>
         <button type="button" class="consent-btn consent-btn-secondary" id="consent-reject-all" aria-label="Reject all cookies">
           Reject all
         </button>
-        <button type="button" class="consent-btn consent-btn-manage" id="consent-manage" aria-label="Manage cookie preferences">
-          Manage preferences
-        </button>
-      </div>
-    </div>
-    <div class="consent-preferences" id="consent-preferences" hidden>
-      <fieldset class="consent-fieldset">
-        <legend>Analytics</legend>
-        <p class="consent-pref-description">Help us understand how visitors interact with YouCity.</p>
-        <label class="consent-toggle">
-          <input type="checkbox" id="consent-analytics" ${getCurrentConsent(global).analytics_storage === "granted" ? "checked" : ""} />
-          <span class="consent-toggle-slider"></span>
-          <span class="consent-toggle-label">Analytics cookies</span>
-        </label>
-      </fieldset>
-      <fieldset class="consent-fieldset">
-        <legend>Advertising</legend>
-        <p class="consent-pref-description">Show personalized ads based on your activity.</p>
-        <label class="consent-toggle">
-          <input type="checkbox" id="consent-advertising" ${getCurrentConsent(global).ad_storage === "granted" ? "checked" : ""} />
-          <span class="consent-toggle-slider"></span>
-          <span class="consent-toggle-label">Advertising cookies</span>
-        </label>
-      </fieldset>
-      <div class="consent-pref-actions">
-        <button type="button" class="consent-btn consent-btn-primary" id="consent-save-preferences" aria-label="Save preferences">
-          Save preferences
-        </button>
-        <button type="button" class="consent-btn consent-btn-secondary" id="consent-back" aria-label="Back to main options">
-          Back
+        <button type="button" class="consent-btn consent-btn-primary" id="consent-accept-all" aria-label="Accept all cookies">
+          Accept all
         </button>
       </div>
     </div>
@@ -236,24 +210,21 @@ function createConsentBanner(global = globalThis) {
 
   document.body.appendChild(banner);
 
-  const acceptAllBtn = banner.querySelector("#consent-accept-all");
-  const rejectAllBtn = banner.querySelector("#consent-reject-all");
-  const manageBtn = banner.querySelector("#consent-manage");
-  const savePrefsBtn = banner.querySelector("#consent-save-preferences");
-  const backBtn = banner.querySelector("#consent-back");
-  const analyticsCheckbox = banner.querySelector("#consent-analytics");
-  const advertisingCheckbox = banner.querySelector("#consent-advertising");
-  const preferencesPanel = banner.querySelector("#consent-preferences");
-  const mainContent = banner.querySelector(".consent-banner-content");
-
-  function showPreferences() {
-    mainContent.hidden = true;
-    preferencesPanel.hidden = false;
+  // The base .consent-banner style starts hidden (opacity 0, translated down).
+  // Flip to the visible state on the next frames so the CSS transition plays.
+  const show = () => banner.classList.add("is-visible");
+  if (typeof global.requestAnimationFrame === "function") {
+    global.requestAnimationFrame(() => global.requestAnimationFrame(show));
+  } else {
+    show();
   }
 
-  function showMain() {
-    mainContent.hidden = false;
-    preferencesPanel.hidden = true;
+  const acceptAllBtn = banner.querySelector("#consent-accept-all");
+  const rejectAllBtn = banner.querySelector("#consent-reject-all");
+
+  function hideBanner() {
+    banner.classList.add("consent-banner-hidden");
+    setTimeout(() => banner.remove(), 300);
   }
 
   acceptAllBtn?.addEventListener("click", () => {
@@ -266,81 +237,10 @@ function createConsentBanner(global = globalThis) {
     hideBanner();
   });
 
-  manageBtn?.addEventListener("click", showPreferences);
-
-  backBtn?.addEventListener("click", showMain);
-
-  savePrefsBtn?.addEventListener("click", () => {
-    const analytics = analyticsCheckbox?.checked ?? false;
-    const advertising = advertisingCheckbox?.checked ?? false;
-    const stored = getCurrentConsent(global);
-    stored.analytics_storage = analytics ? "granted" : "denied";
-    stored.ad_storage = advertising ? "granted" : "denied";
-    stored.ad_user_data = advertising ? "granted" : "denied";
-    stored.ad_personalization = advertising ? "granted" : "denied";
-    applyConsent(stored, global);
-    hideBanner();
-  });
-
-  analyticsCheckbox?.addEventListener("change", () => {
-    const current = getCurrentConsent(global);
-    current.analytics_storage = analyticsCheckbox.checked ? "granted" : "denied";
-  });
-
-  advertisingCheckbox?.addEventListener("change", () => {
-    const current = getCurrentConsent(global);
-    const granted = advertisingCheckbox.checked;
-    current.ad_storage = granted ? "granted" : "denied";
-    current.ad_user_data = granted ? "granted" : "denied";
-    current.ad_personalization = granted ? "granted" : "denied";
-  });
-
-  function hideBanner() {
-    banner.classList.add("consent-banner-hidden");
-    setTimeout(() => banner.remove(), 300);
-  }
-
   return banner;
 }
 
-function createPrivacySettingsButton(global = globalThis) {
-  const document = global.document;
-  if (!document) return null;
 
-  const existing = document.getElementById("privacy-settings-button");
-  if (existing) return existing;
-
-  const button = document.createElement("button");
-  button.id = "privacy-settings-button";
-  button.className = "privacy-settings-button";
-  button.type = "button";
-  button.setAttribute("aria-label", "Privacy & cookie settings");
-  button.setAttribute("aria-expanded", "false");
-  button.setAttribute("aria-haspopup", "dialog");
-  button.innerHTML = `
-    <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
-    </svg>
-    <span class="privacy-settings-label">Privacy</span>
-  `;
-
-  button.addEventListener("click", () => {
-    const consent = getCurrentConsent(global);
-    const banner = createConsentBanner(global);
-    if (banner) {
-      const mainContent = banner.querySelector(".consent-banner-content");
-      const preferencesPanel = banner.querySelector("#consent-preferences");
-      mainContent.hidden = true;
-      preferencesPanel.hidden = false;
-      const analyticsCheckbox = banner.querySelector("#consent-analytics");
-      const advertisingCheckbox = banner.querySelector("#consent-advertising");
-      if (analyticsCheckbox) analyticsCheckbox.checked = consent.analytics_storage === "granted";
-      if (advertisingCheckbox) advertisingCheckbox.checked = consent.ad_storage === "granted";
-    }
-  });
-
-  return button;
-}
 
 export function initializeYouCityConsent(global = globalThis) {
   // The synchronous inline snippet in index.html already registered the
@@ -365,13 +265,11 @@ export function initializeYouCityConsent(global = globalThis) {
       if (shouldShowBanner(global)) {
         createConsentBanner(global);
       }
-      createPrivacySettingsButton(global);
     });
   } else {
     if (shouldShowBanner(global)) {
       createConsentBanner(global);
     }
-    createPrivacySettingsButton(global);
   }
 
   global.YOUCITY_CONSENT = {
@@ -382,14 +280,5 @@ export function initializeYouCityConsent(global = globalThis) {
     getCurrentConsent: () => getCurrentConsent(global),
     hasValidConsent: () => hasValidStoredConsent(global),
     showBanner: () => createConsentBanner(global),
-    showSettings: () => {
-      const banner = createConsentBanner(global);
-      if (banner) {
-        const mainContent = banner.querySelector(".consent-banner-content");
-        const preferencesPanel = banner.querySelector("#consent-preferences");
-        mainContent.hidden = true;
-        preferencesPanel.hidden = false;
-      }
-    },
   };
 }
