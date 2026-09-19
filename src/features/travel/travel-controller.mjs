@@ -187,10 +187,16 @@ export function createTravelController({
   function renderDestinationCommerce(city) {
     if (!city) return;
     const richAccommodationAvailable = Boolean(window.YouCityStay22?.isEnabled?.("hotels") && elements.stay22Tools);
-    if (elements.cityGuideStayFallback) elements.cityGuideStayFallback.innerHTML = commerce.accommodation(city, { richAccommodationAvailable });
-    if (elements.cityGuideTransportSlot) elements.cityGuideTransportSlot.innerHTML = commerce.transport(city);
-    if (elements.cityGuideSecondarySlot) elements.cityGuideSecondarySlot.innerHTML = commerce.secondary(city);
-    renderStay22Tools(city);
+    const accommodationFallback = commerce.accommodation(city, { richAccommodationAvailable });
+    const transport = commerce.transport(city);
+    const secondary = commerce.secondary(city);
+    if (elements.cityGuideStayFallback) elements.cityGuideStayFallback.innerHTML = accommodationFallback;
+    if (elements.cityGuideTransportSlot) elements.cityGuideTransportSlot.innerHTML = transport;
+    if (elements.cityGuideSecondarySlot) elements.cityGuideSecondarySlot.innerHTML = secondary;
+    const richAccommodationRendered = renderStay22Tools(city);
+    if (elements.cityGuideStaySlot) elements.cityGuideStaySlot.hidden = !(richAccommodationRendered || accommodationFallback);
+    if (elements.cityGuideTransportSlot) elements.cityGuideTransportSlot.hidden = !transport;
+    if (elements.cityGuideSecondarySlot) elements.cityGuideSecondarySlot.hidden = !secondary;
     affiliate.observeImpressions(elements.travelPlanner);
   }
 

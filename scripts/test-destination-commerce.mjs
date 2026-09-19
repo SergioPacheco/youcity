@@ -128,9 +128,10 @@ assert.equal(emptyCommerce.secondary(city), "");
     travelDisclosure: { textContent: "" },
     travelPreviewBadge: { hidden: false },
     travelPlannerLocation: { textContent: "" },
+    cityGuideStaySlot: { hidden: false },
     cityGuideStayFallback: { innerHTML: "" },
-    cityGuideTransportSlot: { innerHTML: "" },
-    cityGuideSecondarySlot: { innerHTML: "" },
+    cityGuideTransportSlot: { hidden: false, innerHTML: "" },
+    cityGuideSecondarySlot: { hidden: false, innerHTML: "" },
     stay22Tools: null
   };
   const travel = createTravelController({
@@ -151,10 +152,56 @@ assert.equal(emptyCommerce.secondary(city), "");
   });
   travel.renderTravelPlanner(city);
   assert.match(elements.cityGuideStayFallback.innerHTML, /data-travel-placement="city_guide_stay"/);
+  assert.equal(elements.cityGuideStaySlot.hidden, false);
   assert.match(elements.cityGuideTransportSlot.innerHTML, /data-travel-placement="city_guide_transport"/);
+  assert.equal(elements.cityGuideTransportSlot.hidden, false);
   assert.match(elements.cityGuideSecondarySlot.innerHTML, /data-travel-placement="city_guide_bottom"/);
+  assert.equal(elements.cityGuideSecondarySlot.hidden, false);
   assert.match(elements.cityGuideTransportSlot.innerHTML, /rel="sponsored noopener noreferrer"/);
   assert.doesNotMatch(elements.cityGuideStayFallback.innerHTML, /travel_planner/);
+}
+
+{
+  const elements = {
+    travelPlanner: { classList: { remove() {} } },
+    travelPrimary: { innerHTML: "" },
+    travelSecondary: { innerHTML: "" },
+    travelDisclosure: { textContent: "" },
+    travelPreviewBadge: { hidden: false },
+    travelPlannerLocation: { textContent: "" },
+    cityGuideStaySlot: { hidden: false },
+    cityGuideStayFallback: { innerHTML: "" },
+    cityGuideTransportSlot: { hidden: false, innerHTML: "" },
+    cityGuideSecondarySlot: { hidden: false, innerHTML: "" },
+    stay22Tools: null
+  };
+  const travel = createTravelController({
+    window: { YOUCITY_AFFILIATE_CONFIG: { disclosure: { short: "Disclosure" } } },
+    document: { querySelector: () => null },
+    elements,
+    state: { currentMode: "drive" },
+    affiliate: {
+      getVerticals: () => fixtureCategories,
+      createContext: () => ({}),
+      getAffiliateOffers: () => [],
+      observeImpressions() {},
+      track() {},
+      trackClick() {}
+    },
+    sitePath: (path) => path,
+    lazyModules: { load: async () => ({}) },
+    modeLabels: {},
+    availableModes: () => [],
+    currentCity: () => city,
+    openLayer() {},
+    closeLayer() {},
+    selectCity() {},
+    showToast() {}
+  });
+  travel.renderTravelPlanner(city);
+  assert.equal(elements.cityGuideStaySlot.hidden, true);
+  assert.equal(elements.cityGuideTransportSlot.hidden, true);
+  assert.equal(elements.cityGuideSecondarySlot.hidden, true);
 }
 
 console.log("Destination commerce tests passed: valid offers, placements, partial availability, and Stay22 suppression.");
