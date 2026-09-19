@@ -10,6 +10,7 @@
     "city:test": "node scripts/test-city-catalog.js",
     "stay22:report": "node scripts/stay22-reporting.js",
     "comment:test": "node scripts/test-comment-assistant.mjs",
+    "comment:ui:test": "node scripts/test-comment-assistant-ui.mjs",
     "comment:sharing:test": "node scripts/test-comment-sharing.mjs",
     "radio:test": "node scripts/test-radio-station-repository.mjs && node scripts/test-radio-browser.mjs",
     "radio:now-playing:test": "node scripts/test-radio-now-playing.mjs",
@@ -22,7 +23,7 @@
     "architecture:test": "node scripts/test-architecture.mjs",
     "consent:test": "node scripts/test-consent.mjs",
     "build:validate": "node scripts/test-build-output.js",
-    "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run consent:test && npm run sharing:test && npm run mobile-menu:test && npm run city-browser:test && npm run video:test && npm run flight-origin:test && npm run affiliate:test && npm run destination:commerce:test && npm run discovercars:test && npm run city:test && npm run comment:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
+    "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run consent:test && npm run sharing:test && npm run mobile-menu:test && npm run city-browser:test && npm run video:test && npm run flight-origin:test && npm run affiliate:test && npm run destination:commerce:test && npm run discovercars:test && npm run city:test && npm run comment:test && npm run comment:ui:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
   },
   "devDependencies": {
     "jsdom": "^27.0.1"

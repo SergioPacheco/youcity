@@ -48,6 +48,7 @@ export function createCommentAssistant({
   const elements = {
     modal: $("#comment-assistant-modal"),
     panel: $(".comment-assistant-panel"),
+    changeVideo: $("#comment-assistant-change-video"),
     form: $("#comment-assistant-form"),
     url: $("#comment-assistant-url"),
     analyze: $("#comment-assistant-analyze"),
@@ -127,9 +128,10 @@ export function createCommentAssistant({
     state.catalogContext = options.catalogContext || null;
     track("comment_assistant_open");
     const videoUrl = String(options.videoUrl || options.url || "").trim();
+    if (elements.changeVideo) elements.changeVideo.open = !videoUrl;
     if (videoUrl) {
       elements.url.value = videoUrl;
-      setTimeout(() => analyzeVideo(), 100);
+      void analyzeVideo();
     } else {
       setTimeout(() => elements.url.focus(), 80);
     }

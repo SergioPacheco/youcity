@@ -544,99 +544,109 @@
         <div class="comment-assistant-panel">
           <div class="comment-assistant-header">
             <div>
-              <span class="drawer-kicker">YouTube · human in the loop</span>
-              <h2 id="comment-assistant-title">YouCity Comment Assistant</h2>
-              <p>Turn a city video into a thoughtful comment you can review before copying.</p>
+              <span class="drawer-kicker">YouTube · review before posting</span>
+              <h2 id="comment-assistant-title">Comment Assistant</h2>
+              <p>Review the current video, then generate a comment ready to copy.</p>
             </div>
             <button type="button" class="drawer-close" data-close-comment-assistant aria-label="Close Comment Assistant">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
             </button>
           </div>
 
-          <form class="comment-assistant-form" id="comment-assistant-form" novalidate>
-            <label class="comment-assistant-url-field" for="comment-assistant-url">
-              <span>YouTube URL</span>
-              <input id="comment-assistant-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://youtube.com/watch?v=xxxx" required />
-            </label>
-            <button class="comment-assistant-primary" type="submit" id="comment-assistant-analyze">Analyze video</button>
-          </form>
+          <details class="comment-assistant-change-video" id="comment-assistant-change-video" open>
+            <summary><span>Change video</span><span class="comment-assistant-change-video-hint">Paste another YouTube URL</span><span aria-hidden="true">⌄</span></summary>
+            <form class="comment-assistant-form" id="comment-assistant-form" novalidate>
+              <label class="comment-assistant-url-field" for="comment-assistant-url">
+                <span>YouTube URL</span>
+                <input id="comment-assistant-url" name="url" type="url" inputmode="url" autocomplete="url" placeholder="https://youtube.com/watch?v=xxxx" required />
+              </label>
+              <button class="comment-assistant-primary" type="submit" id="comment-assistant-analyze">Analyze video</button>
+            </form>
+          </details>
 
           <output class="comment-assistant-status" id="comment-assistant-status" aria-live="polite"></output>
           <p class="comment-assistant-error" id="comment-assistant-error" role="alert" hidden></p>
 
-          <section class="comment-assistant-video" id="comment-assistant-video" aria-labelledby="comment-assistant-video-title" hidden>
-            <div class="comment-assistant-video-thumb" id="comment-assistant-video-thumb"></div>
-            <div>
-              <span class="comment-assistant-kicker">Video metadata</span>
-              <h3 id="comment-assistant-video-title"></h3>
-              <p id="comment-assistant-video-channel"></p>
-              <a id="comment-assistant-video-link" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
-            </div>
-          </section>
+          <div class="comment-assistant-workspace">
+            <div class="comment-assistant-context-column">
+              <section class="comment-assistant-video" id="comment-assistant-video" aria-labelledby="comment-assistant-video-title" hidden>
+                <div class="comment-assistant-video-thumb" id="comment-assistant-video-thumb"></div>
+                <div class="comment-assistant-video-copy">
+                  <span class="comment-assistant-kicker">Analyzed video</span>
+                  <h3 id="comment-assistant-video-title"></h3>
+                  <p id="comment-assistant-video-channel"></p>
+                  <a id="comment-assistant-video-link" target="_blank" rel="noopener noreferrer">Open on YouTube ↗</a>
+                </div>
+              </section>
 
-          <section class="comment-assistant-detection" id="comment-assistant-detection" aria-labelledby="comment-assistant-detected-title" hidden>
-            <div class="comment-assistant-section-heading">
-              <span class="comment-assistant-kicker">Detected</span>
-              <h3 id="comment-assistant-detected-title">Video context</h3>
+              <section class="comment-assistant-detection" id="comment-assistant-detection" aria-labelledby="comment-assistant-detected-title" hidden>
+                <div class="comment-assistant-section-heading">
+                  <span class="comment-assistant-kicker">Detected context</span>
+                  <h3 id="comment-assistant-detected-title">Ready to personalize</h3>
+                </div>
+                <div class="comment-assistant-detected-grid" id="comment-assistant-detected-grid"></div>
+                <div class="comment-assistant-candidate" id="comment-assistant-candidate" hidden>
+                  <p>City not available on YouCity yet.</p>
+                  <button type="button" class="comment-assistant-secondary" id="comment-assistant-add-candidate">Add to city candidates</button>
+                </div>
+              </section>
             </div>
-            <div class="comment-assistant-detected-grid" id="comment-assistant-detected-grid"></div>
-            <div class="comment-assistant-candidate" id="comment-assistant-candidate" hidden>
-              <p>City not available on YouCity yet.</p>
-              <button type="button" class="comment-assistant-secondary" id="comment-assistant-add-candidate">Add to city candidates</button>
-            </div>
-          </section>
 
-          <details class="comment-assistant-settings" id="comment-assistant-settings" aria-labelledby="comment-assistant-settings-title" hidden>
-            <summary><span>Personalize (optional)</span><span aria-hidden="true">⌄</span></summary>
-            <div class="comment-assistant-settings-body">
-              <div class="comment-assistant-select-grid">
-                <label for="comment-assistant-tone"><span>Tone</span><select id="comment-assistant-tone">
-                  <option value="natural">Natural</option>
-                  <option value="curious">Curious</option>
-                  <option value="traveller">Traveller</option>
-                  <option value="informative">Informative</option>
-                  <option value="short">Short</option>
-                </select></label>
-                <label for="comment-assistant-language"><span>Language</span><select id="comment-assistant-language">
-                  <option value="auto">Auto</option>
-                  <option value="en">English</option>
-                  <option value="es">Spanish</option>
-                  <option value="pt">Portuguese</option>
-                </select></label>
-                <label for="comment-assistant-cta"><span>CTA</span><select id="comment-assistant-cta">
-                  <option value="none">No CTA</option>
-                  <option value="mention">Mention YouCity</option>
-                  <option value="city-link">City link</option>
-                  <option value="plan-trip">Plan your trip</option>
-                </select></label>
-                <label for="comment-assistant-experience"><span>Experience</span><select id="comment-assistant-experience">
-                  <option value="auto">Auto</option>
-                  <option value="drive">Drive</option>
-                  <option value="walk">Walk</option>
-                  <option value="bike">Bike</option>
-                  <option value="drone">Drone</option>
-                </select></label>
+            <div class="comment-assistant-action-column">
+              <details class="comment-assistant-settings" id="comment-assistant-settings" aria-labelledby="comment-assistant-settings-title" hidden>
+                <summary id="comment-assistant-settings-title"><span>Personalize</span><span class="comment-assistant-settings-hint">Optional</span><span aria-hidden="true">⌄</span></summary>
+                <div class="comment-assistant-settings-body">
+                  <div class="comment-assistant-select-grid">
+                    <label for="comment-assistant-tone"><span>Tone</span><select id="comment-assistant-tone">
+                      <option value="natural">Natural</option>
+                      <option value="curious">Curious</option>
+                      <option value="traveller">Traveller</option>
+                      <option value="informative">Informative</option>
+                      <option value="short">Short</option>
+                    </select></label>
+                    <label for="comment-assistant-language"><span>Language</span><select id="comment-assistant-language">
+                      <option value="auto">Auto</option>
+                      <option value="en">English</option>
+                      <option value="es">Spanish</option>
+                      <option value="pt">Portuguese</option>
+                    </select></label>
+                    <label for="comment-assistant-cta"><span>CTA</span><select id="comment-assistant-cta">
+                      <option value="none">No CTA</option>
+                      <option value="mention">Mention YouCity</option>
+                      <option value="city-link">City link</option>
+                      <option value="plan-trip">Plan your trip</option>
+                    </select></label>
+                    <label for="comment-assistant-experience"><span>Experience</span><select id="comment-assistant-experience">
+                      <option value="auto">Auto</option>
+                      <option value="drive">Drive</option>
+                      <option value="walk">Walk</option>
+                      <option value="bike">Bike</option>
+                      <option value="drone">Drone</option>
+                    </select></label>
+                  </div>
+                  <div class="comment-assistant-checks">
+                    <label><input type="checkbox" id="comment-assistant-specific" checked /> <span>Mention something specific</span></label>
+                    <label><input type="checkbox" id="comment-assistant-youcity" checked /> <span>Mention YouCity naturally</span></label>
+                    <label><input type="checkbox" id="comment-assistant-url-toggle" checked /> <span>Include city URL</span></label>
+                    <label><input type="checkbox" id="comment-assistant-trip" /> <span>Mention Plan your trip</span></label>
+                  </div>
+                </div>
+              </details>
+
+              <div class="comment-assistant-generate-actions" id="comment-assistant-generate-actions" hidden>
+                <button class="comment-assistant-primary" type="button" id="comment-assistant-generate">Generate comments</button>
               </div>
-              <div class="comment-assistant-checks">
-                <label><input type="checkbox" id="comment-assistant-specific" checked /> <span>Mention something specific from the video</span></label>
-                <label><input type="checkbox" id="comment-assistant-youcity" checked /> <span>Mention YouCity naturally</span></label>
-                <label><input type="checkbox" id="comment-assistant-url-toggle" checked /> <span>Include city-specific URL</span></label>
-                <label><input type="checkbox" id="comment-assistant-trip" /> <span>Mention Plan your trip</span></label>
-              </div>
-            </div>
-          </details>
 
-          <div class="comment-assistant-generate-actions" id="comment-assistant-generate-actions" hidden>
-            <button class="comment-assistant-primary" type="button" id="comment-assistant-generate">Generate comments</button>
+              <div class="comment-assistant-history-notice" id="comment-assistant-history-notice" hidden></div>
+            </div>
           </div>
 
-          <div class="comment-assistant-history-notice" id="comment-assistant-history-notice" hidden></div>
           <section class="comment-assistant-results" id="comment-assistant-results" aria-labelledby="comment-assistant-results-title" hidden>
             <div class="comment-assistant-section-heading">
               <span class="comment-assistant-kicker">Review before sharing</span>
               <h3 id="comment-assistant-results-title">Comment options</h3>
             </div>
-            <div id="comment-assistant-options"></div>
+            <div class="comment-assistant-options" id="comment-assistant-options"></div>
           </section>
 
           <section class="comment-assistant-share-picker" id="comment-assistant-share-picker" aria-labelledby="comment-assistant-share-title" hidden>
