@@ -19,7 +19,7 @@ export function createVideoController({
   onModeChange = () => {},
   onNoRide = () => {}
 } = {}) {
-  const runtime = { requestId: 0, changeTimer: null, readyTimer: null, statusTimer: null, clockTimeout: null, clockInterval: null };
+  const runtime = { requestId: 0, changeTimer: null, startTimer: null, readyTimer: null, statusTimer: null, clockTimeout: null, clockInterval: null };
 
   function command(method, args = []) { playerManager.command(method, args); }
   function buildPlayerVars(ride) {
@@ -89,7 +89,7 @@ export function createVideoController({
       showToast(messages.noVideo);
       return;
     }
-    if (elements.poster) elements.poster.style.backgroundImage = `url("https://i.ytimg.com/vi/${ride.id}/maxresdefault.jpg"), url("https://i.ytimg.com/vi/${ride.id}/hqdefault.jpg")`;
+    if (elements.poster) elements.poster.style.backgroundImage = `url("https://i.ytimg.com/vi/${ride.id}/hqdefault.jpg")`;
     if ((playerManager.getCurrentVideoId() || state.currentVideoId) === ride.id) return;
     clearTimeout(runtime.changeTimer);
     clearTimeout(runtime.readyTimer);
@@ -181,18 +181,45 @@ export function createVideoController({
     onAutoplayBlocked: () => { command("mute"); command("playVideo"); },
     onError: () => handleError()
   });
+  function isMobileViewport() {
+    return window.matchMedia?.("(max-width: 800px)")?.matches === true;
+  }
+  function clearStartupTimers() {
+    clearTimeout(runtime.startTimer);
+    runtime.startTimer = null;
+    clearTimeout(runtime.changeTimer);
+    runtime.changeTimer = null;
+  }
+  function beginPlayback() {
+    runtime.startTimer = null;
+    updateVideo(getCurrentCity(), { immediate: true });
+  }
   function startPlayback(options = {}) {
     if (!getCurrentRide()) {
       onNoRide();
       return;
     }
-    if (options.userGesture) {
+    const userGesture = options.userGesture === true;
+    if (userGesture) {
       state.videoUserGesture = true;
       radioController?.initializeForUserGesture?.();
     }
-    if (state.playbackSessionStarted) { command("playVideo"); return; }
+    if (state.playbackSessionStarted) {
+      if (userGesture && !playerManager.getCurrentVideoId()) {
+        clearStartupTimers();
+        beginPlayback();
+      } else {
+        command("playVideo");
+      }
+      return;
+    }
     state.playbackSessionStarted = true;
-    updateVideo(getCurrentCity(), { immediate: true });
+    clearStartupTimers();
+    if (!userGesture && isMobileViewport()) {
+      runtime.startTimer = setTimeout(beginPlayback, Math.max(0, Number(config.MOBILE_VIDEO_START_DELAY) || 0));
+      return;
+    }
+    beginPlayback();
   }
   function updateClock() {
     if (!elements.topTime) return;
@@ -211,5 +238,5 @@ export function createVideoController({
     const delay = (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
     runtime.clockTimeout = setTimeout(() => { updateClock(); runtime.clockInterval = setInterval(updateClock, config.CLOCK_INTERVAL); }, delay);
   }
-  return { command, playerManager, setVideoState, updateVideo, startPlayback, handleReady, markReady, updateClock, scheduleClockUpdate, destroy: () => { clearTimeout(runtime.changeTimer); clearTimeout(runtime.readyTimer); clearTimeout(runtime.statusTimer); clearTimeout(runtime.clockTimeout); if (runtime.clockInterval) clearInterval(runtime.clockInterval); playerManager.destroy(); } };
+  return { command, playerManager, setVideoState, updateVideo, startPlayback, handleReady, markReady, updateClock, scheduleClockUpdate, destroy: () => { clearTimeout(runtime.changeTimer); clearTimeout(runtime.startTimer); clearTimeout(runtime.readyTimer); clearTimeout(runtime.statusTimer); clearTimeout(runtime.clockTimeout); if (runtime.clockInterval) clearInterval(runtime.clockInterval); playerManager.destroy(); } };
 }
