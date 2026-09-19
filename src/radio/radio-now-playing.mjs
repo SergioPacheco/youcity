@@ -48,9 +48,7 @@ export function normalizeNowPlaying(payload) {
 
 export function buildNowPlayingRequestPath({ basePath = "", station } = {}) {
   const params = new URLSearchParams();
-  if (station?.stationuuid) params.set("stationuuid", String(station.stationuuid));
-  if (station?.url) params.set("url", String(station.url));
-  if (station?.name) params.set("name", String(station.name));
+  if (station?.stationRef) params.set("stationRef", String(station.stationRef));
   return `${normalizedBasePath(basePath)}/api/radio-now-playing?${params.toString()}`;
 }
 

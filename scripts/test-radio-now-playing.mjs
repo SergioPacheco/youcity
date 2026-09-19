@@ -7,6 +7,11 @@ import {
   normalizeNowPlaying,
   parseIcyMetadata
 } from "../src/radio/radio-now-playing.mjs";
+import { findCatalogStation } from "../src/radio/radio-catalog-index.mjs";
+import {
+  handleNowPlayingRequest,
+  parseStationRef
+} from "../src/radio/radio-now-playing-server.mjs";
 import {
   buildYouTubeSearchRequestPath,
   createYouTubeSearchClient,
@@ -15,6 +20,7 @@ import {
 import { createRadioMediaFeature } from "../src/radio/radio-media-feature.mjs";
 
 const station = {
+  stationRef: "radio-browser:station-1",
   stationuuid: "station-1",
   name: "Radio Example",
   url: "https://radio.example/stream",
@@ -45,7 +51,93 @@ assert.deepEqual(parseIcyMetadata(icyMetadata), {
 });
 assert.equal(parseIcyMetadata(new TextEncoder().encode("StreamUrl='https://radio.example';")), null);
 assert.match(buildNowPlayingRequestPath({ basePath: "/youcity", station }), /^\/youcity\/api\/radio-now-playing\?/);
-assert.match(buildNowPlayingRequestPath({ basePath: "/youcity", station }), /stationuuid=station-1/);
+assert.match(buildNowPlayingRequestPath({ basePath: "/youcity", station }), /stationRef=radio-browser%3Astation-1/);
+assert.doesNotMatch(buildNowPlayingRequestPath({ basePath: "/youcity", station }), /stationuuid=|url=|name=/);
+
+function icyResponse(streamTitle) {
+  const metadata = new TextEncoder().encode(`StreamTitle='${streamTitle}';`);
+  const metadataLength = Math.ceil(metadata.length / 16) * 16;
+  const body = new Uint8Array(4 + 1 + metadataLength);
+  body[4] = metadataLength / 16;
+  body.set(metadata, 5);
+  let read = false;
+  return {
+    ok: true,
+    status: 200,
+    headers: { get: (name) => name.toLowerCase() === "icy-metaint" ? "4" : null },
+    body: {
+      getReader() {
+        return {
+          async read() {
+            if (read) return { done: true, value: undefined };
+            read = true;
+            return { done: false, value: body };
+          },
+          async cancel() {}
+        };
+      }
+    }
+  };
+}
+
+const generatedCatalogStation = findCatalogStation("catalog:sao-paulo:0");
+assert.equal(generatedCatalogStation.stationRef, "catalog:sao-paulo:0");
+let catalogFetches = 0;
+const catalogResult = await handleNowPlayingRequest({
+  stationRef: generatedCatalogStation.stationRef,
+  fetchImpl: async () => {
+    catalogFetches += 1;
+    return icyResponse("Artist - Catalog Song");
+  },
+  findCatalogStation: () => generatedCatalogStation,
+  apiMirrors: ["https://radio-browser.test"]
+});
+assert.equal(catalogResult.status, 200);
+assert.deepEqual(catalogResult.body.nowPlaying, {
+  artist: "Artist",
+  title: "Catalog Song",
+  display: "Artist — Catalog Song",
+  source: "icy"
+});
+assert.equal(catalogFetches, 1, "curated Now Playing must inspect the trusted catalog stream directly");
+
+let browserApiFetches = 0;
+const browserResult = await handleNowPlayingRequest({
+  stationRef: "radio-browser:browser-uuid",
+  fetchImpl: async (url) => {
+    browserApiFetches += 1;
+    if (String(url).includes("/byuuid/")) {
+      return { ok: true, status: 200, json: async () => [{ stationuuid: "browser-uuid", name: "Browser FM", url: "https://browser.example/live" }] };
+    }
+    return icyResponse("Artist - Browser Song");
+  },
+  findCatalogStation: () => null,
+  apiMirrors: ["https://radio-browser.test"]
+});
+assert.equal(browserResult.status, 200);
+assert.equal(browserResult.body.nowPlaying.title, "Browser Song");
+assert.equal(browserApiFetches, 2);
+
+assert.equal(parseStationRef("https://evil.example/"), null);
+assert.equal(parseStationRef("file:///etc/passwd"), null);
+assert.equal(parseStationRef("unknown:anything"), null);
+const invalidResult = await handleNowPlayingRequest({ stationRef: "https://evil.example/", fetchImpl: async () => { throw new Error("must not fetch"); } });
+assert.equal(invalidResult.status, 400);
+const unknownResult = await handleNowPlayingRequest({ stationRef: "catalog:unknown:0", findCatalogStation: () => null, fetchImpl: async () => { throw new Error("must not fetch"); } });
+assert.equal(unknownResult.status, 404);
+
+const hlsResult = await handleNowPlayingRequest({
+  stationRef: "catalog:test-city:0",
+  findCatalogStation: () => ({ stationRef: "catalog:test-city:0", name: "HLS FM", url: "https://radio.example/live.m3u8" }),
+  fetchImpl: async () => { throw new Error("HLS metadata must not be fetched as ICY"); }
+});
+assert.equal(hlsResult.body.reason, "UNSUPPORTED_HLS_METADATA");
+const emptyMetadataResult = await handleNowPlayingRequest({
+  stationRef: "catalog:test-city:1",
+  findCatalogStation: () => ({ stationRef: "catalog:test-city:1", name: "Silent FM", url: "https://radio.example/live" }),
+  fetchImpl: async () => ({ ok: true, status: 200, headers: { get: () => null }, body: { cancel: async () => {} } })
+});
+assert.equal(emptyMetadataResult.body.reason, "NO_METADATA");
 
 let releaseNowPlaying;
 let nowPlayingCalls = 0;
