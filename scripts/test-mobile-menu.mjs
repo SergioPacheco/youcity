@@ -21,4 +21,11 @@ assert.match(overflowMenu, /data-overflow-action="privacy"/);
 const mobileCss = stylesCss.match(/@media \(max-width: 800px\) \{[\s\S]*?\n\}/g)?.at(-1) || "";
 assert.match(mobileCss, /#map-button[\s\S]*#theme-button\s*\{\s*display:\s*grid;/, "World Map and Theme icons should be visible on mobile");
 
+const citiesButton = indexHtml.match(/<button class="menu-button" id="cities-button"[\s\S]*?<\/button>/)?.[0] || "";
+assert.match(citiesButton, /aria-label="Explore cities"/);
+assert.match(citiesButton, /title="Explore cities"/);
+assert.match(citiesButton, /<circle[^>]+cx="11"[^>]+cy="11"[^>]+r="6"/);
+assert.match(stylesCss, /@media \(min-width: 801px\)[\s\S]*?#cities-button\s*\{[^}]*width:\s*44px[^}]*\}/, "Explore cities should be compact on desktop");
+assert.match(stylesCss, /@media \(min-width: 801px\)[\s\S]*?#cities-button\s+span\s*\{\s*display:\s*none;/, "Explore cities label should be visually hidden on desktop");
+
 console.log("Mobile menu tests passed: More Options is focused and World Map/Theme remain top-level mobile icons.");
