@@ -223,6 +223,7 @@ function createConsentBanner(global = globalThis) {
   const rejectAllBtn = banner.querySelector("#consent-reject-all");
 
   function hideBanner() {
+    banner.classList.remove("is-visible");
     banner.classList.add("consent-banner-hidden");
     setTimeout(() => banner.remove(), 300);
   }
