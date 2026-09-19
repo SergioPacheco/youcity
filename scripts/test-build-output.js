@@ -8,8 +8,10 @@
  * Run: node scripts/test-build-output.mjs
  */
 
-const { existsSync } = require("node:fs");
-const { resolve } = require("node:path");
+const { existsSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } = require("node:fs");
+const { join, resolve } = require("node:path");
+const { tmpdir } = require("node:os");
+const { validateModuleImports } = require("./build-static.js");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const OUTPUT_DIR = resolve(ROOT_DIR, "dist");
@@ -19,6 +21,17 @@ const REQUIRED_FILES = [
   "src/integrations/analytics.mjs",
   "src/integrations/consent.mjs",
   "src/app/bootstrap.mjs",
+  "src/radio/radio-controller.mjs",
+  "src/radio/radio-panel.mjs",
+  "src/radio/radio-browser.mjs",
+  "src/radio/radio-browser-feature.mjs",
+  "src/radio/radio-now-playing.mjs",
+  "src/radio/radio-now-playing-server.mjs",
+  "src/radio/radio-youtube.mjs",
+  "src/radio/radio-media-feature.mjs",
+  "src/radio/radio-station.mjs",
+  "src/radio/radio-station-repository.mjs",
+  "src/radio/radio-catalog-index.mjs",
   "styles.css",
   "privacy.html",
   "terms.html",
@@ -48,5 +61,25 @@ if (failed > 0) {
   process.exit(1);
 }
 
+const fixture = mkdtempSync(join(tmpdir(), "youcity-build-validation-"));
+try {
+  mkdirSync(join(fixture, "src"), { recursive: true });
+  writeFileSync(join(fixture, "src/entry.mjs"), 'import "./missing.mjs?v=fixture";\n');
+  try {
+    validateModuleImports(fixture, { checkRequired: false });
+    console.log("  ✗ recursive missing-module fixture was accepted");
+    process.exitCode = 1;
+  } catch (error) {
+    if (!/Importer: dist\/src\/entry\.mjs/.test(error.message)
+      || !/Import: \.\/missing\.mjs\?v=fixture/.test(error.message)
+      || !/Expected: dist\/src\/missing\.mjs/.test(error.message)) {
+      throw error;
+    }
+    console.log("  ✓ recursive missing-module validation reports importer, import, and expected target");
+  }
+} finally {
+  rmSync(fixture, { recursive: true, force: true });
+}
+
 console.log("Build validation PASSED.\n");
-process.exit(0);
+process.exit(process.exitCode || 0);

@@ -5,7 +5,7 @@
  * for every city in the catalog. No network access or third-party dependency
  * is required during the build.
  */
-const { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
+const { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { spawnSync } = require("node:child_process");
 const { dirname, join, resolve, relative } = require("node:path");
 const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
@@ -86,8 +86,12 @@ const STATIC_ASSETS = [
   "src/radio/radio-browser.mjs",
   "src/radio/radio-browser-feature.mjs",
   "src/radio/radio-now-playing.mjs",
+  "src/radio/radio-now-playing-server.mjs",
   "src/radio/radio-youtube.mjs",
   "src/radio/radio-media-feature.mjs",
+  "src/radio/radio-station.mjs",
+  "src/radio/radio-station-repository.mjs",
+  "src/radio/radio-catalog-index.mjs",
   "src/features/comment-assistant/comment-assistant-loader.mjs",
   "src/features/map/map-controller.mjs",
   "src/features/map/map-feature-loader.mjs",
@@ -403,8 +407,17 @@ function stripQuery(url) {
   return url.split("?")[0];
 }
 
-function validateModuleImports() {
-  const modulePattern = /(?:from|import)\s+["'](\.[^"']+\.(?:mjs|js))(?:\?[^"']*)?["']/g;
+function listModuleFiles(directory) {
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filePath = join(directory, entry.name);
+    if (entry.isDirectory()) return listModuleFiles(filePath);
+    return /\.(?:mjs|js)$/.test(entry.name) ? [filePath] : [];
+  });
+}
+
+function validateModuleImports(outputDir = OUTPUT_DIR, { checkRequired = outputDir === OUTPUT_DIR } = {}) {
+  const modulePattern = /(?:from\s+|import\s*(?:\(\s*)?)["'](\.[^"']+\.(?:mjs|js)(?:\?[^"']*)?)["']/g;
   
   const requiredFiles = [
     "src/main.mjs",
@@ -416,30 +429,20 @@ function validateModuleImports() {
     "terms.html"
   ];
 
-  for (const file of requiredFiles) {
-    const filePath = resolve(OUTPUT_DIR, file);
-    if (!existsSync(filePath)) {
-      throw new Error(
-        `Build validation failed: missing required file in dist/\n` +
-        `Expected: ${file}\n` +
-        `Full path: ${filePath}`
-      );
+  if (checkRequired) {
+    for (const file of requiredFiles) {
+      const filePath = resolve(outputDir, file);
+      if (!existsSync(filePath)) {
+        throw new Error(
+          `Build validation failed: missing required file in dist/\n` +
+          `Expected: ${file}\n` +
+          `Full path: ${filePath}`
+        );
+      }
     }
   }
 
-  // Validate module dependencies: if src/main.mjs imports ./integrations/consent.mjs,
-  // then dist/src/integrations/consent.mjs must exist
-  const moduleFiles = [
-    "src/main.mjs",
-    "src/app/bootstrap.mjs",
-    "src/integrations/analytics.mjs",
-    "src/integrations/consent.mjs"
-  ];
-
-  for (const moduleFile of moduleFiles) {
-    const filePath = resolve(OUTPUT_DIR, moduleFile);
-    if (!existsSync(filePath)) continue;
-
+  for (const filePath of listModuleFiles(resolve(outputDir, "src"))) {
     const source = readFileSync(filePath, "utf8");
     const matches = [...source.matchAll(modulePattern)];
 
@@ -449,11 +452,12 @@ function validateModuleImports() {
       const resolved = resolve(dirname(filePath), cleanImport);
 
       if (!existsSync(resolved)) {
+        const importer = relative(outputDir, filePath);
         throw new Error(
           `Build validation failed: missing module in build output\n` +
-          `Importer: dist/${moduleFile}\n` +
+          `Importer: dist/${importer}\n` +
           `Import: ${importPath}\n` +
-          `Expected: dist/${relative(OUTPUT_DIR, resolved)}`
+          `Expected: dist/${relative(outputDir, resolved)}`
         );
       }
     }
@@ -461,6 +465,8 @@ function validateModuleImports() {
 
   console.log("✓ Module import validation passed");
 }
+
+module.exports = { validateModuleImports };
 
 function main() {
   const catalogBuild = spawnSync(process.execPath, [resolve(ROOT_DIR, "scripts/build-catalog.js")], { stdio: "inherit" });
@@ -527,4 +533,4 @@ function main() {
   console.log(`Built ${catalog.length + 1} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1} URLs, assets: ${ASSET_VERSION})`);
 }
 
-main();
+if (require.main === module) main();
