@@ -4,6 +4,7 @@ import { createRadioController } from "../radio/radio-controller.mjs";
 import { createRadioPanelController } from "../radio/radio-panel.mjs";
 import { createRadioBrowserClient } from "../radio/radio-browser.mjs";
 import { createRadioBrowserFeature } from "../radio/radio-browser-feature.mjs";
+import { createRadioStationRepository } from "../radio/radio-station-repository.mjs";
 import { createNowPlayingClient } from "../radio/radio-now-playing.mjs";
 import { createYouTubeSearchClient } from "../radio/radio-youtube.mjs";
 import { createRadioMediaFeature } from "../radio/radio-media-feature.mjs";
@@ -454,10 +455,12 @@ export function startApplication() {
   } = mediaControls;
 
   // -----------------------------------------------------------------------------
+  const radioStationRepository = createRadioStationRepository({ getCity: currentCity });
   const radioController = createRadioController({
     audio: elements.radio,
     elements,
     getCity: currentCity,
+    getStations: () => radioStationRepository.getStations(),
     getVolume: () => Number(elements.volume.value),
     messages: MESSAGES,
     showToast,
@@ -489,6 +492,7 @@ export function startApplication() {
       results: elements.radioBrowserResults
     },
     getCity: currentCity,
+    stationRepository: radioStationRepository,
     radioController,
     client: createRadioBrowserClient({ basePath: BASE_PATH }),
     showToast
@@ -792,7 +796,6 @@ export function startApplication() {
     state.radioIndex = 0;
     radioBrowserFeature?.reset();
     radioMediaFeature?.reset();
-    radioController.clearAdditionalStations();
 
     const city = currentCity();
     // Cada cidade pode ter apenas alguns modos; preserve o atual quando

@@ -10,6 +10,7 @@ import {
 import { createRadioPanelController } from "../src/radio/radio-panel.mjs";
 import { createRadioController } from "../src/radio/radio-controller.mjs";
 import { createRadioBrowserFeature } from "../src/radio/radio-browser-feature.mjs";
+import { createRadioStationRepository } from "../src/radio/radio-station-repository.mjs";
 
 const city = {
   name: "São Paulo",
@@ -84,14 +85,20 @@ assert.equal(collapseButton["aria-expanded"], "true");
 panelWithCollapseControl.setExpanded(false);
 assert.equal(collapseButton["aria-expanded"], "false");
 
+let audioSrc = "";
+let audioLoadCount = 0;
+let audioPauseCount = 0;
+let audioPlayCount = 0;
 const audio = {
   paused: true,
   readyState: 0,
   addEventListener() {},
-  pause() { this.paused = true; },
-  load() {},
-  play() { this.paused = false; return Promise.resolve(); },
-  removeAttribute() {}
+  pause() { audioPauseCount += 1; this.paused = true; },
+  load() { audioLoadCount += 1; },
+  play() { audioPlayCount += 1; this.paused = false; return Promise.resolve(); },
+  removeAttribute() {},
+  get src() { return audioSrc; },
+  set src(value) { audioSrc = value; }
 };
 const radioElements = {
   play: { querySelector: () => ({ style: {} }), setAttribute() {}, disabled: false },
@@ -104,23 +111,41 @@ const radioElements = {
   radioSummaryPrevious: { toggleAttribute() {} },
   radioSummaryNext: { toggleAttribute() {} }
 };
+const playbackCity = {
+  name: "São Paulo",
+  country: "Brazil",
+  countryCode: "BR",
+  radios: [{ name: "Catalog radio", url: "https://radio.example/catalog" }]
+};
+let currentPlaybackCity = playbackCity;
+const stationRepository = createRadioStationRepository({ getCity: () => currentPlaybackCity });
 const radioController = createRadioController({
   audio,
   elements: radioElements,
-  getCity: () => ({ name: "São Paulo", radios: [{ name: "Catalog radio", url: "https://radio.example/catalog" }] }),
+  getCity: () => currentPlaybackCity,
+  getStations: () => stationRepository.getStations(),
   getVolume: () => 64,
   messages: { noRadio: "No radio", radioRetry: "Retry", radioUnavailable: "Unavailable" },
   showToast() {},
   config: { RADIO_MAX_RETRIES: 1, RADIO_RETRY_DELAY: 1, RADIO_LOAD_TIMEOUT: 10 }
 });
-const additionalStation = { stationuuid: "additional", name: "Local discovery", url: "https://radio.example/additional" };
-radioController.setAdditionalStations([additionalStation]);
-assert.deepEqual(radioController.getAdditionalStations(), [additionalStation]);
+radioController.setRadio(0, true);
+const playingStation = radioController.getCurrentStation();
+const sourceBeforeDiscovery = audio.src;
+const loadCountBeforeDiscovery = audioLoadCount;
+const playCountBeforeDiscovery = audioPlayCount;
+assert.equal(playingStation.stationRef, "catalog:sao-paulo:0");
+stationRepository.mergeDiscoveredStations([{ stationuuid: "additional", name: "Local discovery", url: "https://radio.example/additional" }]);
+assert.equal(radioController.getCurrentStation().stationRef, playingStation.stationRef, "discovery must not change the current station");
+assert.equal(audio.src, sourceBeforeDiscovery, "discovery must not change the playing stream");
+assert.equal(audioLoadCount, loadCountBeforeDiscovery, "discovery must not reload audio");
+assert.equal(audioPauseCount, 1, "only the original station selection should pause before loading");
+assert.equal(audioPlayCount, playCountBeforeDiscovery, "discovery must not replay audio");
+const additionalStation = stationRepository.getDiscoveredStations()[0];
 radioController.playStation(additionalStation);
-assert.equal(radioController.getIndex(), 1, "an additional station should be playable after catalog stations");
+assert.equal(radioController.getIndex(), 1, "a discovered station should be playable after catalog stations");
 assert.deepEqual(radioController.getCurrentStation(), additionalStation);
-radioController.clearAdditionalStations();
-assert.deepEqual(radioController.getAdditionalStations(), []);
+assert.equal(typeof radioController.setAdditionalStations, "undefined");
 
 function browserElement() {
   const classes = new Set();
@@ -142,15 +167,20 @@ const discoverElements = {
   results: browserElement()
 };
 let discoveryCalls = 0;
+const browserStationRepository = createRadioStationRepository({ getCity: () => playbackCity });
 const browserFeature = createRadioBrowserFeature({
   document: { createElement: () => browserElement() },
   elements: discoverElements,
-  getCity: () => ({ name: "São Paulo", country: "Brazil" }),
-  radioController: { setAdditionalStations() {}, getAdditionalStations: () => [], playStation() {} },
+  getCity: () => playbackCity,
+  stationRepository: browserStationRepository,
+  radioController,
   client: { findForCity: async () => { discoveryCalls += 1; return []; } }
 });
 await browserFeature.search();
 assert.equal(discoverElements.panel.hidden, false);
+assert.ok(discoverElements.results.children.some((item) => item.dataset?.stationGroup === "recommended"), "curated stations should render immediately");
+assert.equal(discoverElements.results.children.filter((item) => item.dataset?.stationRef === "catalog:sao-paulo:0").length, 1);
+assert.match(discoverElements.status.textContent, /No additional nearby stations found/);
 await browserFeature.search();
 assert.equal(discoverElements.panel.hidden, true, "the local-radio icon should close an open result list");
 assert.equal(discoveryCalls, 1, "closing the list should not repeat the Radio Browser request");

@@ -253,6 +253,8 @@ button:focus-visible, input:focus-visible {
 .radio-browser-status { display: block; min-height: 16px; margin-top: 7px; color: rgba(232,248,233,.65); font: 400 9px "DM Mono", monospace; }
 .radio-browser-status.is-busy::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border: 1px solid var(--lcd-green); border-top-color: transparent; border-radius: 50%; animation: video-loading-spin .7s linear infinite; vertical-align: -1px; }
 .radio-browser-results { display: grid; gap: 5px; max-height: 150px; margin-top: 3px; overflow: auto; }
+.radio-browser-group-heading { margin-top: 5px; color: rgba(0,255,102,.65); font: 700 8px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
+.radio-browser-nearby-status { color: rgba(232,248,233,.65); font: 400 9px "DM Mono", monospace; }
 .radio-browser-station { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 7px 8px; border: 1px solid rgba(0,255,102,.16); border-radius: 3px; background: rgba(0,255,102,.04); color: var(--lcd-green); cursor: pointer; text-align: left; }
 .radio-browser-station:hover, .radio-browser-station:focus-visible { border-color: var(--lcd-green); background: rgba(0,255,102,.12); outline: none; }
 .radio-browser-station strong { min-width: 0; overflow: hidden; color: #e8f8e9; font: 600 10px Manrope, sans-serif; text-overflow: ellipsis; white-space: nowrap; }

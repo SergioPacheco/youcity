@@ -2,6 +2,7 @@ export function createRadioController({
   audio,
   elements,
   getCity,
+  getStations,
   getVolume,
   messages,
   showToast,
@@ -18,10 +19,11 @@ export function createRadioController({
   let requestId = 0;
   let retryTimer = null;
   let loadTimer = null;
-  let additionalStations = [];
+  let currentStationRef = null;
 
   function availableStations() {
-    return [...(getCity()?.radios || []), ...additionalStations];
+    const stations = getStations?.();
+    return Array.isArray(stations) ? [...stations] : [];
   }
 
   function publish() {
@@ -127,6 +129,7 @@ export function createRadioController({
     if (!options.preserveRetries) retryCount = 0;
     requestId += 1;
     radioIndex = radios.length ? (nextIndex + radios.length) % radios.length : 0;
+    currentStationRef = radios[radioIndex]?.stationRef || null;
     publish();
 
     if (!radios.length) {
@@ -219,22 +222,15 @@ export function createRadioController({
     audio.load();
   }
 
-  function setAdditionalStations(stations = []) {
-    additionalStations = Array.isArray(stations) ? stations.filter((station) => station?.url && station?.name) : [];
-    setRadio(radioIndex, radioWantsPlay);
-  }
-
-  function clearAdditionalStations() {
-    additionalStations = [];
-  }
-
   function playStation(station) {
-    const index = availableStations().findIndex((candidate) => candidate.stationuuid && candidate.stationuuid === station?.stationuuid);
+    const stationRef = station?.stationRef || "";
+    const index = availableStations().findIndex((candidate) => candidate.stationRef === stationRef);
     if (index >= 0) setRadio(index, true);
   }
 
   function getCurrentStation() {
-    return availableStations()[radioIndex] || null;
+    const stations = availableStations();
+    return stations.find((station) => station.stationRef === currentStationRef) || stations[radioIndex] || null;
   }
 
   audio.addEventListener("error", handleMediaError);
@@ -256,9 +252,6 @@ export function createRadioController({
     initializeForUserGesture,
     handleMediaError,
     destroy,
-    setAdditionalStations,
-    clearAdditionalStations,
-    getAdditionalStations: () => [...additionalStations],
     playStation,
     getCurrentStation,
     isPlaying: () => radioPlaying,

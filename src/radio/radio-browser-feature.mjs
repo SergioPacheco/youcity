@@ -4,6 +4,7 @@ export function createRadioBrowserFeature({
   document,
   elements,
   getCity,
+  stationRepository,
   radioController,
   client = createRadioBrowserClient(),
   showToast
@@ -21,26 +22,46 @@ export function createRadioBrowserFeature({
     elements.status.classList.toggle("is-busy", busy);
   }
 
-  function renderStations(stations) {
+  function createGroupHeading(label, group) {
+    const heading = document.createElement("strong");
+    heading.className = "radio-browser-group-heading";
+    heading.dataset.stationGroup = group;
+    heading.textContent = label;
+    return heading;
+  }
+
+  function createStationButton(station) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "radio-browser-station";
+    button.dataset.stationRef = station.stationRef;
+    const name = document.createElement("strong");
+    name.textContent = station.name;
+    const meta = document.createElement("small");
+    const details = [station.language, station.codec, station.bitrate ? `${station.bitrate} kbps` : ""].filter(Boolean);
+    meta.textContent = details.join(" · ") || (station.curated ? "Recommended station" : "Radio Browser station");
+    button.append(name, meta);
+    return button;
+  }
+
+  function renderStations({ searching = false } = {}) {
+    const recommended = stationRepository?.getCatalogStations?.() || [];
+    const nearby = stationRepository?.getDiscoveredStations?.() || [];
     elements.results.replaceChildren();
-    if (!stations.length) {
-      setStatus("No verified local stations found for this city.");
-      return;
+    if (recommended.length) {
+      elements.results.append(createGroupHeading("Recommended", "recommended"));
+      recommended.forEach((station) => elements.results.append(createStationButton(station)));
     }
-    stations.forEach((station) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "radio-browser-station";
-      button.dataset.stationUuid = station.stationuuid;
-      const name = document.createElement("strong");
-      name.textContent = station.name;
-      const meta = document.createElement("small");
-      const details = [station.language, station.codec, station.bitrate ? `${station.bitrate} kbps` : ""].filter(Boolean);
-      meta.textContent = details.join(" · ") || "Radio Browser station";
-      button.append(name, meta);
-      elements.results.append(button);
-    });
-    setStatus(`${stations.length} local stations found. Select one to listen.`);
+    elements.results.append(createGroupHeading("More nearby", "nearby"));
+    if (searching) {
+      const status = document.createElement("span");
+      status.className = "radio-browser-nearby-status";
+      status.dataset.stationGroup = "nearby-status";
+      status.textContent = "Searching…";
+      elements.results.append(status);
+    } else {
+      nearby.forEach((station) => elements.results.append(createStationButton(station)));
+    }
   }
 
   async function search() {
@@ -52,31 +73,37 @@ export function createRadioBrowserFeature({
     if (!city) return;
     requestController?.abort();
     requestController = new AbortController();
-    const currentRequestId = ++requestId;
+    const activeRequestId = ++requestId;
     currentCityKey = cityKey(city);
     elements.panel.hidden = false;
     elements.trigger.setAttribute("aria-expanded", "true");
     elements.trigger.disabled = true;
-    setStatus("Searching verified local stations…", true);
-    elements.results.replaceChildren();
+    renderStations({ searching: true });
+    setStatus("Searching additional nearby stations…", true);
     try {
       const stations = await client.findForCity(city, { signal: requestController.signal });
-      if (currentRequestId !== requestId || currentCityKey !== cityKey(getCity?.())) return;
-      radioController.setAdditionalStations(stations);
-      renderStations(stations);
+      if (activeRequestId !== requestId || currentCityKey !== cityKey(getCity?.())) return;
+      stationRepository?.mergeDiscoveredStations?.(stations);
+      const nearby = stationRepository?.getDiscoveredStations?.() || [];
+      renderStations();
+      setStatus(nearby.length ? `${nearby.length} additional nearby stations found.` : "No additional nearby stations found.");
     } catch (error) {
       if (error.name === "AbortError") return;
-      setStatus("Local radio search is unavailable. Your current stations are still available.");
+      renderStations();
+      setStatus("Local radio search is unavailable. Your recommended stations are still available.");
       showToast?.("Could not load local radio stations.");
     } finally {
-      if (currentRequestId === requestId) elements.trigger.disabled = false;
+      if (activeRequestId === requestId) {
+        elements.trigger.disabled = false;
+        requestController = null;
+      }
     }
   }
 
-  function selectStation(stationUuid) {
-    const station = radioController.getAdditionalStations().find((item) => item.stationuuid === stationUuid);
+  function selectStation(stationRef) {
+    const station = stationRepository?.findStationByRef?.(stationRef);
     if (!station) return;
-    radioController.playStation(station);
+    radioController?.playStation?.(station);
     setStatus(`${station.name} selected.`);
   }
 
@@ -95,8 +122,8 @@ export function createRadioBrowserFeature({
   function initialize() {
     elements.trigger.addEventListener("click", search);
     elements.results.addEventListener("click", (event) => {
-      const station = event.target.closest("[data-station-uuid]");
-      if (station) selectStation(station.dataset.stationUuid);
+      const station = event.target.closest?.("[data-station-ref]");
+      if (station) selectStation(station.dataset.stationRef);
     });
   }
 
