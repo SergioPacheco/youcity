@@ -9,7 +9,7 @@ const catalog = loadCatalog(ROOT_DIR);
 const granada = catalog.find((city) => city.name === "Granada" && city.country === "Spain");
 assert.ok(granada, "Granada, Spain must be in the city catalog");
 assert.equal(granada.countryCode, "ES");
-assert.equal(catalog.length, 206, "catalog should contain 206 cities including Beach Walk destinations");
+assert.equal(catalog.length, 228, "catalog should contain 228 cities including Beach Walk destinations");
 assert.deepEqual(Array.from(granada.videos.drive, (video) => video.id), ["zMTHYYszb94"]);
 assert.deepEqual(Array.from(granada.videos.walk, (video) => video.id), ["X1unB-eKnB4", "thvjqM6ksHI"]);
 assert.deepEqual(Array.from(granada.videos.drone, (video) => video.id), ["c6u22gDXtYw"]);

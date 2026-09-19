@@ -13707,5 +13707,577 @@
       34.0259,
       -118.7798
     ]
+  },
+  {
+    "name": "Lima",
+    "country": "Peru",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "nuSKgoZzkIk",
+          "start": 164
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Studio 92",
+        "url": "https://mdstrm.com/audio/5fada553978fe1080e3ac5ea/icecast.audio"
+      }
+    ],
+    "coordinates": [
+      -12.0459808,
+      -77.0305912
+    ]
+  },
+  {
+    "name": "Cusco",
+    "country": "Peru",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "Kh5o5pUFSog",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio Inti Raymi del Cusco",
+        "url": "https://streamhotsperu.purosurfm.com:8150/intiraymi"
+      }
+    ],
+    "coordinates": [
+      -13.5170887,
+      -71.9785356
+    ]
+  },
+  {
+    "name": "Medellín",
+    "country": "Colombia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "BvF5IqthS5M",
+          "start": 256
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Olímpica Stereo Medellín",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/OLP_MEDELLINAAC.aac"
+      }
+    ],
+    "coordinates": [
+      6.2697324,
+      -75.6025597
+    ]
+  },
+  {
+    "name": "Cartagena",
+    "country": "Colombia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "R-W3WJOKaBE",
+          "start": 139
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Blu Radio",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/BLURADIO_ADP.aac"
+      }
+    ],
+    "coordinates": [
+      10.4265566,
+      -75.5441671
+    ]
+  },
+  {
+    "name": "Quito",
+    "country": "Ecuador",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "ayHMqwDHL_c",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio Quito",
+        "url": "https://streamingecuador.net:8332/radioquito?1679294453918"
+      }
+    ],
+    "coordinates": [
+      -0.2201641,
+      -78.5123274
+    ]
+  },
+  {
+    "name": "La Paz",
+    "country": "Bolivia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "FwGOwkYdc6w",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "FM La Paz",
+        "url": "https://spanel.gcomstreaming.com/8018/stream"
+      }
+    ],
+    "coordinates": [
+      -16.4955455,
+      -68.1336229
+    ]
+  },
+  {
+    "name": "San José",
+    "country": "Costa Rica",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "19Z5gUMHsLE",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Urbano 106",
+        "url": "https://usa18.fastcast4u.com/proxy/rmoohhrw?mp=/1"
+      }
+    ],
+    "coordinates": [
+      9.9327707,
+      -84.0796144
+    ]
+  },
+  {
+    "name": "Nairobi",
+    "country": "Kenya",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "yBncZLoUjZs",
+          "start": 85
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio Maria Kenya - Nairobi",
+        "url": "http://dreamsiteradiocp5.com:8069/stream"
+      }
+    ],
+    "coordinates": [
+      -1.2890006,
+      36.8172812
+    ]
+  },
+  {
+    "name": "Mombasa",
+    "country": "Kenya",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "xYyblKC-3tY",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio Kaya",
+        "url": "http://usa9-vn.mixstream.net:8084/;"
+      }
+    ],
+    "coordinates": [
+      -4.05052,
+      39.667169
+    ]
+  },
+  {
+    "name": "Stone Town",
+    "country": "Tanzania",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "fLi9k1GwTMo",
+          "start": 24
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Capital Radio Tanzania",
+        "url": "https://capitalradio.radioca.st/stream"
+      }
+    ],
+    "coordinates": [
+      -6.1626528,
+      39.1896552
+    ]
+  },
+  {
+    "name": "Marrakech",
+    "country": "Morocco",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "9Fl4VnISQfA",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Marrakech Plus",
+        "url": "https://cast5.my-control-panel.com/proxy/marrakec/stream"
+      }
+    ],
+    "coordinates": [
+      31.6258257,
+      -7.9891608
+    ]
+  },
+  {
+    "name": "Casablanca",
+    "country": "Morocco",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "YFfTR1FfRwQ",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Skyrock Casablanca",
+        "url": "https://icecast.skyrock.net/s/casa_aac_64k"
+      }
+    ],
+    "coordinates": [
+      33.5945144,
+      -7.6200284
+    ]
+  },
+  {
+    "name": "Abuja",
+    "country": "Nigeria",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "EIAiyc1IhuE",
+          "start": 195
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "RFI Haoussa",
+        "url": "https://rfihaoussa96k.ice.infomaniak.ch/rfihaoussa-96k.mp3"
+      }
+    ],
+    "coordinates": [
+      9.0643305,
+      7.4892974
+    ]
+  },
+  {
+    "name": "Kigali",
+    "country": "Rwanda",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "PlNsvCgOJyU",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "90.7 Magic FM",
+        "url": "http://listen.rba.co.rw:8080/"
+      }
+    ],
+    "coordinates": [
+      -1.9534357,
+      30.1140089
+    ]
+  },
+  {
+    "name": "Perth",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "WQYAiKbhcG4",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "ABC Radio Perth",
+        "url": "https://streaming.abc-cdn.net.au/audio/hls/localperth.m3u8?source=web"
+      }
+    ],
+    "coordinates": [
+      -31.9558967,
+      115.8605784
+    ]
+  },
+  {
+    "name": "Hobart",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "Mmk8YTSBZ04",
+          "start": 70
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "7HO FM",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/HOB_7HOAAC.aac"
+      }
+    ],
+    "coordinates": [
+      -42.8825088,
+      147.3281233
+    ]
+  },
+  {
+    "name": "Adelaide",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "r7PZuUP9KyE",
+          "start": 330
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "ABC Radio Adelaide",
+        "url": "https://mediaserviceslive.akamaized.net/hls/live/2038298/localadelaide/index.m3u8"
+      }
+    ],
+    "coordinates": [
+      -34.9281805,
+      138.5999312
+    ]
+  },
+  {
+    "name": "Canberra",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "z7LiRaH1Rc8",
+          "start": 300
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Mix 106.3 Canberra",
+        "url": "https://ais-arn.streamguys1.com/au_006/playlist.m3u8"
+      }
+    ],
+    "coordinates": [
+      -35.2975906,
+      149.1012676
+    ]
+  },
+  {
+    "name": "Darwin",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "Bo-2yVX0TP8",
+          "start": 450
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Territory FM",
+        "url": "https://streaming.territoryfm.com:8443/TerritoryFM"
+      }
+    ],
+    "coordinates": [
+      -12.46044,
+      130.8410469
+    ]
+  },
+  {
+    "name": "Cairns",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "6n9orcOBLlI",
+          "start": 90
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "ABC Radio Cairns",
+        "url": "https://mediaserviceslive.akamaized.net/hls/live/2038337/localcairns/masterhq.m3u8"
+      }
+    ],
+    "coordinates": [
+      -16.9206657,
+      145.7721854
+    ]
+  },
+  {
+    "name": "Broome",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "O4F0Dyo7MOU",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "ABC Radio Kimberley",
+        "url": "https://streaming.abc-cdn.net.au/audio/hls/localkimberley.m3u8?source=web"
+      }
+    ],
+    "coordinates": [
+      -17.9566909,
+      122.2240181
+    ]
+  },
+  {
+    "name": "Esperance",
+    "country": "Australia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "pMX2j0MkVlk",
+          "start": 0
+        }
+      ],
+      "drone": [],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "ABC Radio Esperance",
+        "url": "https://streaming.abc-cdn.net.au/audio/hls/localesperance.m3u8?source=web"
+      }
+    ],
+    "coordinates": [
+      -33.858228,
+      121.8931606
+    ]
   }
 ]
