@@ -28,4 +28,28 @@ assert.ok(catalog.every((city) => Object.values(city.videos).every((videos) => n
 assert.equal(new Set(catalog.map((city) => `${city.name}\u0000${city.country}`)).size, catalog.length, "canonical catalog should not contain duplicate city keys");
 assert.ok(catalog.every((city) => Array.isArray(city.coordinates)), "canonical catalog should provide coordinates for every city");
 
+const expectedBeachWalkCoverage = {
+  Nerja: { walk: ["UN4UTkhkajo"] },
+  "Fort Myers": { walk: ["bWhSxsjwLs4"], drone: ["_N_nJmW9i1g"] },
+  Kefalonia: { walk: ["xRu_O6KPmN0"] },
+  Elafonisi: { drone: ["oaYPWbJgpuI"] },
+  "St. Pete Beach": { walk: ["oK2967-MN4I"] },
+  Skopelos: { walk: ["y7_sn5tW794"], drone: ["bM2rrmRraSY"] },
+  Malibu: { walk: ["HD9bJOtMJvg"], drive: ["gAqKmqYlwv8"] }
+};
+for (const [cityName, modes] of Object.entries(expectedBeachWalkCoverage)) {
+  const city = catalog.find((entry) => entry.name === cityName);
+  assert.ok(city, `${cityName} must be in the city catalog`);
+  for (const [mode, ids] of Object.entries(modes)) {
+    assert.deepEqual(city.videos[mode].map((video) => video.id), ids, `${cityName} ${mode} coverage should be curated`);
+  }
+}
+
+for (const cityName of ["Cala Mariolu", "Saint-Tropez"]) {
+  const city = catalog.find((entry) => entry.name === cityName);
+  assert.ok(city, `${cityName} must be in the city catalog`);
+  assert.equal(city.videos.walk.length, 0, `${cityName} walk coverage should remain pending validation`);
+  assert.equal(city.videos.drone.length, 0, `${cityName} drone coverage should remain pending validation`);
+}
+
 console.log("City catalog tests passed: Granada, Spain is available with Drive, Walk, Drone, and map data.");
