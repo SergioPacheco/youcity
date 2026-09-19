@@ -19,6 +19,7 @@ const requiredFiles = [
   "src/features/map/map-config.mjs",
   "src/features/city-guide/city-guide-controller.mjs",
   "src/features/travel/secondary-providers-loader.mjs",
+  "src/features/travel/stay22-loader.mjs",
   "src/features/travel/discovercars-locations.js",
   "affiliate/affiliate-overrides.js",
   "src/features/comment-assistant/comment-assistant-loader.mjs",

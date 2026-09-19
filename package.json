@@ -20,10 +20,11 @@
     "city-browser:test": "node scripts/test-city-browser-reset.mjs",
     "video:test": "node scripts/test-video-playback.mjs",
     "flight-origin:test": "node scripts/test-flight-origin.mjs",
+    "stay22:loader:test": "node scripts/test-stay22-loader.mjs",
     "architecture:test": "node scripts/test-architecture.mjs",
     "consent:test": "node scripts/test-consent.mjs",
     "build:validate": "node scripts/test-build-output.js",
-    "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run consent:test && npm run sharing:test && npm run mobile-menu:test && npm run city-browser:test && npm run video:test && npm run flight-origin:test && npm run affiliate:test && npm run destination:commerce:test && npm run discovercars:test && npm run city:test && npm run comment:test && npm run comment:ui:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
+    "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run consent:test && npm run sharing:test && npm run mobile-menu:test && npm run city-browser:test && npm run video:test && npm run flight-origin:test && npm run affiliate:test && npm run stay22:loader:test && npm run destination:commerce:test && npm run discovercars:test && npm run city:test && npm run comment:test && npm run comment:ui:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
   },
   "devDependencies": {
     "jsdom": "^27.0.1"

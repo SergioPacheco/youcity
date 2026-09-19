@@ -34,6 +34,7 @@ export function createTravelController({
   closeLayer,
   selectCity,
   showToast,
+  loadStay22 = async () => false,
   flightOriginWaitMs = DEFAULT_FLIGHT_ORIGIN_WAIT_MS,
   isStaticLocalPreview = () => false
 } = {}) {
@@ -312,6 +313,7 @@ export function createTravelController({
 
   async function openCityGuide() {
     if (!elements.travelDrawer || !elements.cityGuideContent || !currentCity()) return;
+    const stay22Promise = Promise.resolve(loadStay22()).catch(() => false);
     if (!cityGuidePromise) {
       cityGuidePromise = lazyModules.load("city-guide-controller", () => import("../city-guide/city-guide-controller.mjs")).then(({ createCityGuideController }) => createCityGuideController({
         window, document, elements, getCity: currentCity, openLayer, sitePath, isStaticLocalPreview,
@@ -327,6 +329,9 @@ export function createTravelController({
       const city = currentCity();
       renderTravelPlanner(city);
       ensureDiscoverCarsCatalog();
+      await stay22Promise;
+      refreshDestinationHub(currentCity());
+      renderTravelPrompts(currentCity());
 
       // Analytics: travel_planner_open
       window.YOUCITY_ANALYTICS?.track?.({

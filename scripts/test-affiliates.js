@@ -7,7 +7,9 @@ const vm = require("node:vm");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const indexHtml = readFileSync(resolve(ROOT_DIR, "index.html"), "utf8");
-assert.ok(/AWAITING_STAY22_SCRIPT/.test(indexHtml) || /https:\/\/scripts\.stay22\.com\/letmeallez\.js/.test(indexHtml), "Stay22 script must be installed or explicitly documented as pending");
+const stay22Loader = readFileSync(resolve(ROOT_DIR, "src/features/travel/stay22-loader.mjs"), "utf8");
+assert.doesNotMatch(indexHtml, /https:\/\/scripts\.stay22\.com\/letmeallez\.js/, "Stay22 third-party script must not load eagerly");
+assert.match(stay22Loader, /https:\/\/scripts\.stay22\.com\/letmeallez\.js/, "Stay22 loader must retain the deferred script URL");
 const catalog = require(resolve(ROOT_DIR, "data/discovercars-locations.json"));
 const context = vm.createContext({
   URL,

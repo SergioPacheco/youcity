@@ -23,6 +23,7 @@ import { createNavigationController } from "../navigation/navigation-controller.
 import { createCityBrowser } from "../ui/city-browser.mjs";
 import { createMediaControls } from "../ui/media-controls.mjs";
 import { createTravelController } from "../features/travel/travel-controller.mjs";
+import { createStay22Loader } from "../features/travel/stay22-loader.mjs";
 import { createMapFeatureLoader } from "../features/map/map-feature-loader.mjs";
 import { createDom, createSitePath, hasAdminRole } from "./dom.mjs";
 import CATALOG from "../catalog/catalog.mjs";
@@ -605,6 +606,7 @@ export function startApplication() {
   });
   const isCityDrawerOpen = () => elements.drawer?.classList.contains("is-open") === true;
   const { open: openLayer, close: closeLayer, closeMoreMenu } = layersController;
+  const stay22Loader = createStay22Loader({ window, document });
 
   const travelController = createTravelController({
     window,
@@ -621,6 +623,7 @@ export function startApplication() {
     closeLayer,
     selectCity,
     showToast,
+    loadStay22: () => stay22Loader.load(),
     isStaticLocalPreview: () => ["localhost", "127.0.0.1", "0.0.0.0", "::1"].includes(window.location.hostname)
   });
   const {
