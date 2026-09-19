@@ -25,6 +25,50 @@ export function distanceKm(firstLatitude, firstLongitude, secondLatitude, second
   return 6371 * 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
 }
 
+export function buildRadioBrowserSearchEndpoint(mirror, { city, country, countryCode, includeName = false } = {}) {
+  const endpoint = new URL("/json/stations/search", mirror);
+  if (includeName && city) endpoint.searchParams.set("name", String(city).trim());
+  if (countryCode) endpoint.searchParams.set("countrycode", String(countryCode).trim());
+  else if (country) endpoint.searchParams.set("country", String(country).trim());
+  endpoint.searchParams.set("is_https", "true");
+  endpoint.searchParams.set("has_geo_info", "true");
+  endpoint.searchParams.set("hidebroken", "true");
+  endpoint.searchParams.set("order", "votes");
+  endpoint.searchParams.set("reverse", "true");
+  endpoint.searchParams.set("limit", "25");
+  return endpoint;
+}
+
+export function normalizeRadioBrowserSearchStations(payload, origin, { limit = 8 } = {}) {
+  const source = Array.isArray(payload) ? payload : [];
+  const seen = new Set();
+  return source.filter(isUsableStation).map((station) => {
+    const url = String(station.url_resolved || station.url).trim();
+    return {
+      stationuuid: String(station.stationuuid || ""),
+      name: String(station.name).trim(),
+      url,
+      homepage: String(station.homepage || ""),
+      favicon: String(station.favicon || ""),
+      country: String(station.country || ""),
+      countrycode: String(station.countrycode || ""),
+      language: String(station.language || ""),
+      tags: String(station.tags || ""),
+      codec: String(station.codec || ""),
+      bitrate: Number(station.bitrate) || 0,
+      source: "radio-browser",
+      distance: distanceKm(origin.latitude, origin.longitude, Number(station.geo_lat), Number(station.geo_long)),
+      votes: Number(station.votes) || 0
+    };
+  }).filter((station) => {
+    const key = station.stationuuid || station.url;
+    if (!key || seen.has(key) || !Number.isFinite(station.distance)) return false;
+    seen.add(key);
+    return station.distance <= 150;
+  }).sort((first, second) => first.distance - second.distance || second.votes - first.votes)
+    .slice(0, limit);
+}
+
 export function buildRadioBrowserRequestPath({ basePath = "", city } = {}) {
   const { latitude, longitude } = cityCoordinates(city);
   const params = new URLSearchParams({
@@ -32,6 +76,7 @@ export function buildRadioBrowserRequestPath({ basePath = "", city } = {}) {
     country: String(city?.country || "").trim(),
     limit: "8"
   });
+  if (city?.countryCode) params.set("countryCode", String(city.countryCode).trim());
   if (latitude !== null) params.set("latitude", latitude.toFixed(4));
   if (longitude !== null) params.set("longitude", longitude.toFixed(4));
   return `${normalizedBasePath(basePath)}/api/radio-stations?${params.toString()}`;
@@ -68,6 +113,7 @@ export function normalizeRadioBrowserStations(payload, { limit = 8 } = {}) {
       favicon: String(station.favicon || ""),
       country: String(station.country || ""),
       countrycode: String(station.countrycode || ""),
+      countryCode: String(station.countrycode || ""),
       language: String(station.language || ""),
       tags: String(station.tags || ""),
       codec: String(station.codec || ""),

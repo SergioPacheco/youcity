@@ -1,4 +1,7 @@
-import { distanceKm } from "../../src/radio/radio-browser.mjs";
+import {
+  buildRadioBrowserSearchEndpoint,
+  normalizeRadioBrowserSearchStations
+} from "../../src/radio/radio-browser.mjs";
 
 const CACHE_TTL = 10 * 60 * 1000;
 const RATE_WINDOW = 10 * 60 * 1000;
@@ -52,62 +55,6 @@ function coordinate(value, min, max) {
   return Number.isFinite(number) && number >= min && number <= max ? number : null;
 }
 
-function buildEndpoint(mirror, { city, country }) {
-  const endpoint = new URL("/json/stations/search", mirror);
-  endpoint.searchParams.set("name", city);
-  endpoint.searchParams.set("country", country);
-  endpoint.searchParams.set("is_https", "true");
-  endpoint.searchParams.set("has_geo_info", "true");
-  endpoint.searchParams.set("hidebroken", "true");
-  endpoint.searchParams.set("order", "votes");
-  endpoint.searchParams.set("reverse", "true");
-  endpoint.searchParams.set("limit", "25");
-  return endpoint;
-}
-
-function usableStation(station) {
-  const stream = String(station?.url_resolved || station?.url || "").trim();
-  return Boolean(
-    station?.stationuuid
-    && station?.name
-    && station?.lastcheckok !== 0
-    && Number(station?.hls || 0) === 0
-    && /^https:\/\//i.test(stream)
-  );
-}
-
-function normalizeStations(payload, origin) {
-  const source = Array.isArray(payload) ? payload : [];
-  const seen = new Set();
-  return source.filter(usableStation).map((station) => {
-    const url = String(station.url_resolved || station.url).trim();
-    return {
-      stationuuid: station.stationuuid,
-      name: String(station.name).trim(),
-      url,
-      homepage: String(station.homepage || ""),
-      favicon: String(station.favicon || ""),
-      country: String(station.country || ""),
-      countrycode: String(station.countrycode || ""),
-      language: String(station.language || ""),
-      tags: String(station.tags || ""),
-      codec: String(station.codec || ""),
-      bitrate: Number(station.bitrate) || 0,
-      source: "radio-browser",
-      distance: distanceKm(origin.latitude, origin.longitude, Number(station.geo_lat), Number(station.geo_long)),
-      votes: Number(station.votes) || 0
-    };
-  }).filter((station) => {
-    const key = `${station.stationuuid}:${station.url}`;
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  }).filter((station) => station.distance <= 150)
-    .sort((first, second) => first.distance - second.distance || second.votes - first.votes)
-    .slice(0, MAX_RESULTS)
-    .map(({ distance, votes, ...station }) => station);
-}
-
 async function fetchStations(endpoint) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 7_000);
@@ -132,6 +79,7 @@ export async function onRequestGet({ request }) {
   const requestUrl = new URL(request.url);
   const city = textParam(requestUrl.searchParams.get("city"), 80);
   const country = textParam(requestUrl.searchParams.get("country"), 80);
+  const countryCode = textParam(requestUrl.searchParams.get("countryCode"), 3);
   const latitude = coordinate(requestUrl.searchParams.get("latitude"), -90, 90);
   const longitude = coordinate(requestUrl.searchParams.get("longitude"), -180, 180);
   if (!city || !country || latitude === null || longitude === null) {
@@ -142,18 +90,28 @@ export async function onRequestGet({ request }) {
   const cached = cache.get(cacheKey);
   if (cached && cached.expiresAt > Date.now()) return json(cached.value);
 
-  let payload;
+  const payloads = [];
+  let receivedResponse = false;
   for (const mirror of API_MIRRORS) {
-    try {
-      payload = await fetchStations(buildEndpoint(mirror, { city, country }));
-      break;
-    } catch {
-      // Try the next official mirror before returning an error.
+    const endpoints = [
+      buildRadioBrowserSearchEndpoint(mirror, { city, country, countryCode }),
+      buildRadioBrowserSearchEndpoint(mirror, { city, country, countryCode, includeName: true })
+    ];
+    for (const endpoint of endpoints) {
+      try {
+        payloads.push(await fetchStations(endpoint));
+        receivedResponse = true;
+      } catch {
+        // Try the next candidate endpoint and official mirror.
+      }
     }
+    if (receivedResponse) break;
   }
-  if (!payload) return json({ error: "RADIO_BROWSER_UNAVAILABLE", message: "Local radio search is temporarily unavailable." }, 502);
+  if (!receivedResponse) return json({ error: "RADIO_BROWSER_UNAVAILABLE", message: "Local radio search is temporarily unavailable." }, 502);
 
-  const value = { city, stations: normalizeStations(payload, { latitude, longitude }) };
+  const stations = normalizeRadioBrowserSearchStations(payloads.flat(), { latitude, longitude }, { limit: MAX_RESULTS })
+    .map(({ distance, votes, ...station }) => station);
+  const value = { city, stations };
   cache.set(cacheKey, { value, expiresAt: Date.now() + CACHE_TTL });
   return json(value);
 }

@@ -11,6 +11,7 @@ import { createRadioPanelController } from "../src/radio/radio-panel.mjs";
 import { createRadioController } from "../src/radio/radio-controller.mjs";
 import { createRadioBrowserFeature } from "../src/radio/radio-browser-feature.mjs";
 import { createRadioStationRepository } from "../src/radio/radio-station-repository.mjs";
+import { buildRadioBrowserSearchEndpoint, normalizeRadioBrowserSearchStations } from "../src/radio/radio-browser.mjs";
 
 const city = {
   name: "São Paulo",
@@ -25,6 +26,30 @@ assert.match(requestPath, /country=Brazil/);
 assert.match(requestPath, /latitude=-23\.5507/);
 assert.match(requestPath, /longitude=-46\.6334/);
 assert.ok(Math.abs(distanceKm(0, 0, 0, 1) - 111.195) < 0.2, "distance helper should calculate earth distance in kilometers");
+
+const countryEndpoint = buildRadioBrowserSearchEndpoint("https://all.api.radio-browser.info", {
+  city: "Granada",
+  country: "Spain",
+  countryCode: "ES"
+});
+assert.equal(countryEndpoint.searchParams.get("countrycode"), "ES");
+assert.equal(countryEndpoint.searchParams.has("name"), false, "the primary candidate search must not require the city in the station name");
+const supplementalEndpoint = buildRadioBrowserSearchEndpoint("https://all.api.radio-browser.info", {
+  city: "Granada",
+  country: "Spain",
+  countryCode: "ES",
+  includeName: true
+});
+assert.equal(supplementalEndpoint.searchParams.get("name"), "Granada");
+
+const rankedServerStations = normalizeRadioBrowserSearchStations([
+  { stationuuid: "far", name: "Far FM", url: "https://radio.example/far", lastcheckok: 1, hls: 0, geo_lat: 39, geo_long: -3.6, votes: 100 },
+  { stationuuid: "near", name: "Near FM", url: "https://radio.example/near", lastcheckok: 1, hls: 0, geo_lat: 37.18, geo_long: -3.59, votes: 1 },
+  { stationuuid: "mid", name: "Mid FM", url: "https://radio.example/mid", lastcheckok: 1, hls: 0, geo_lat: 38.2, geo_long: -3.6, votes: 200 },
+  { stationuuid: "popular-near", name: "Popular Near FM", url: "https://radio.example/popular-near", lastcheckok: 1, hls: 0, geo_lat: 37.18, geo_long: -3.59, votes: 50 },
+  { stationuuid: "unknown", name: "Unknown Location", url: "https://radio.example/unknown", lastcheckok: 1, hls: 0, votes: 999 }
+], { latitude: 37.1773, longitude: -3.5986, limit: 8 });
+assert.deepEqual(rankedServerStations.map((station) => station.stationuuid), ["popular-near", "near", "mid"], "stations should be geographically ranked and invalid coordinates excluded");
 
 const stations = normalizeRadioBrowserStations([
   { stationuuid: "one", name: "Radio One", url: "http://radio.example/one", url_resolved: "https://radio.example/one.mp3", lastcheckok: 1, hls: 0, codec: "MP3", bitrate: 128 },
@@ -42,6 +67,7 @@ assert.deepEqual(stations, [{
   favicon: "",
   country: "",
   countrycode: "",
+  countryCode: "",
   language: "",
   tags: "",
   codec: "MP3",
