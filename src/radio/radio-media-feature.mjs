@@ -5,6 +5,21 @@ function stationKey(station) {
   return station?.stationRef || "";
 }
 
+function unavailableMessage(reason) {
+  switch (reason) {
+    case "UNSUPPORTED_HLS_METADATA":
+      return "This HLS station does not expose current-song metadata.";
+    case "STREAM_UNAVAILABLE":
+      return "The station stream is unavailable for song identification.";
+    case "METADATA_TIMEOUT":
+      return "The station metadata request timed out.";
+    case "STATION_NOT_FOUND":
+      return "This station could not be resolved for song identification.";
+    default:
+      return "This station is not sending current-song metadata.";
+  }
+}
+
 export function createRadioMediaFeature({
   document,
   elements,
@@ -110,7 +125,7 @@ export function createRadioMediaFeature({
       if (activeRequestId !== requestId || currentStationKey !== stationKey(getStation?.())) return;
       currentTrack = track;
       if (!track) {
-        setStatus("This station is not sending current-song metadata.");
+        setStatus(unavailableMessage(nowPlayingClient.getReason?.(station)));
         return;
       }
       setStatus(track.display);

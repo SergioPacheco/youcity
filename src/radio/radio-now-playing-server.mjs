@@ -7,6 +7,7 @@ const DEFAULT_API_MIRRORS = [
   "https://nl1.api.radio-browser.info"
 ];
 const MAX_BYTES = 256 * 1024;
+const MAX_METADATA_INTERVALS = 8;
 const REQUEST_TIMEOUT = 7_000;
 
 function text(value) {
@@ -93,7 +94,7 @@ function appendBytes(first, second) {
   return result;
 }
 
-export async function readIcyMetadata(response) {
+export async function readIcyMetadata(response, { maxIntervals = MAX_METADATA_INTERVALS } = {}) {
   const metaint = Number(response.headers.get("icy-metaint"));
   if (!Number.isInteger(metaint) || metaint <= 0 || metaint > MAX_BYTES || !response.body?.getReader) {
     if (response.body?.cancel) await response.body.cancel().catch(() => {});
@@ -119,11 +120,16 @@ export async function readIcyMetadata(response) {
     return value;
   }
   try {
-    if (!await ensure(metaint + 1)) return null;
-    take(metaint);
-    const metadataLength = take(1)[0] * 16;
-    if (!metadataLength || !await ensure(metadataLength)) return null;
-    return parseIcyMetadata(take(metadataLength));
+    for (let interval = 0; interval < maxIntervals; interval += 1) {
+      if (!await ensure(metaint + 1)) return null;
+      take(metaint);
+      const metadataLength = take(1)[0] * 16;
+      if (!metadataLength) continue;
+      if (!await ensure(metadataLength)) return null;
+      const nowPlaying = parseIcyMetadata(take(metadataLength));
+      if (nowPlaying) return nowPlaying;
+    }
+    return null;
   } finally {
     await reader.cancel().catch(() => {});
   }

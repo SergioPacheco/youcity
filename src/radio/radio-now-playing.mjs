@@ -59,13 +59,16 @@ export function createNowPlayingClient({
 } = {}) {
   const cache = new Map();
   const pending = new Map();
+  const reasons = new Map();
 
   function findForStation(station, { signal } = {}) {
     const requestPath = buildNowPlayingRequestPath({ basePath, station });
+    const stationRef = station?.stationRef || "";
     const cached = cache.get(requestPath);
     if (cacheTtl > 0 && cached && cached.expiresAt > Date.now()) return Promise.resolve(cached.value);
     if (pending.has(requestPath)) return pending.get(requestPath);
     if (typeof fetchImpl !== "function") return Promise.reject(new Error("RADIO_NOW_PLAYING_FETCH_UNAVAILABLE"));
+    if (stationRef) reasons.delete(stationRef);
     const request = Promise.resolve(fetchImpl(requestPath, {
       headers: { accept: "application/json" },
       cache: "no-store",
@@ -77,6 +80,7 @@ export function createNowPlayingClient({
         throw new Error(payload.message || `Now-playing request failed (${response.status}).`);
       }
       const value = normalizeNowPlaying(payload);
+      if (stationRef) reasons.set(stationRef, String(payload.reason || payload.error || (value ? "" : "NO_METADATA")));
       if (cacheTtl > 0) cache.set(requestPath, { value, expiresAt: Date.now() + cacheTtl });
       return value;
     }).finally(() => pending.delete(requestPath));
@@ -84,5 +88,9 @@ export function createNowPlayingClient({
     return request;
   }
 
-  return { findForStation };
+  function getReason(station) {
+    return reasons.get(station?.stationRef || "") || "";
+  }
+
+  return { findForStation, getReason };
 }

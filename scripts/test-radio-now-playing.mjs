@@ -80,6 +80,38 @@ function icyResponse(streamTitle) {
   };
 }
 
+function icyResponseWithEmptyFirstBlock(streamTitle) {
+  const metaint = 4;
+  const blocks = [
+    new Uint8Array(metaint + 1),
+    (() => {
+      const metadata = new TextEncoder().encode(`StreamTitle='${streamTitle}';`);
+      const metadataLength = Math.ceil(metadata.length / 16) * 16;
+      const block = new Uint8Array(metaint + 1 + metadataLength);
+      block[metaint] = metadataLength / 16;
+      block.set(metadata, metaint + 1);
+      return block;
+    })()
+  ];
+  let blockIndex = 0;
+  return {
+    ok: true,
+    status: 200,
+    headers: { get: (name) => name.toLowerCase() === "icy-metaint" ? String(metaint) : null },
+    body: {
+      getReader() {
+        return {
+          async read() {
+            if (blockIndex >= blocks.length) return { done: true, value: undefined };
+            return { done: false, value: blocks[blockIndex++] };
+          },
+          async cancel() {}
+        };
+      }
+    }
+  };
+}
+
 const generatedCatalogStation = findCatalogStation("catalog:sao-paulo:0");
 assert.equal(generatedCatalogStation.stationRef, "catalog:sao-paulo:0");
 let catalogFetches = 0;
@@ -100,6 +132,18 @@ assert.deepEqual(catalogResult.body.nowPlaying, {
   source: "icy"
 });
 assert.equal(catalogFetches, 1, "curated Now Playing must inspect the trusted catalog stream directly");
+
+const delayedMetadataResult = await handleNowPlayingRequest({
+  stationRef: "catalog:test-city:2",
+  findCatalogStation: () => ({ stationRef: "catalog:test-city:2", name: "Delayed Metadata FM", url: "https://radio.example/delayed" }),
+  fetchImpl: async () => icyResponseWithEmptyFirstBlock("Artist - Delayed Song")
+});
+assert.deepEqual(delayedMetadataResult.body.nowPlaying, {
+  artist: "Artist",
+  title: "Delayed Song",
+  display: "Artist — Delayed Song",
+  source: "icy"
+}, "ICY readers should continue after an empty metadata interval");
 
 let browserApiFetches = 0;
 const browserResult = await handleNowPlayingRequest({
@@ -294,6 +338,27 @@ const noMetadataFeature = createRadioMediaFeature({
 await noMetadataFeature.identify();
 assert.equal(noMetadataSearches, 0, "missing metadata must not trigger YouTube search");
 assert.match(noMetadataElements.status.textContent, /not sending current-song metadata/);
+
+const hlsMessageElements = {
+  identifyButton: fakeElement(),
+  panel: fakeElement(),
+  status: fakeElement(),
+  searchButton: fakeElement(),
+  results: fakeElement(),
+  videoHost: fakeElement()
+};
+const hlsMessageFeature = createRadioMediaFeature({
+  document: { createElement: () => fakeElement() },
+  elements: hlsMessageElements,
+  getStation: () => station,
+  nowPlayingClient: {
+    findForStation: async () => null,
+    getReason: () => "UNSUPPORTED_HLS_METADATA"
+  },
+  youtubeClient: { search: async () => [] }
+});
+await hlsMessageFeature.identify();
+assert.match(hlsMessageElements.status.textContent, /HLS station/);
 
 const staleElements = {
   identifyButton: fakeElement(),
