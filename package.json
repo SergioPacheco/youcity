@@ -10,7 +10,7 @@
     "stay22:report": "node scripts/stay22-reporting.js",
     "comment:test": "node scripts/test-comment-assistant.mjs",
     "comment:sharing:test": "node scripts/test-comment-sharing.mjs",
-    "radio:test": "node scripts/test-radio-browser.mjs",
+    "radio:test": "node scripts/test-radio-station-repository.mjs && node scripts/test-radio-browser.mjs",
     "radio:now-playing:test": "node scripts/test-radio-now-playing.mjs",
     "core:test": "node scripts/test-core-contracts.mjs && node scripts/test-async-guards.mjs",
     "sharing:test": "node scripts/test-sharing.mjs",
