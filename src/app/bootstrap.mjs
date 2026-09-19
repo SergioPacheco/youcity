@@ -603,6 +603,7 @@ export function startApplication() {
     elements,
     onBeforeDrawerOpen: () => resetForOpen()
   });
+  const isCityDrawerOpen = () => elements.drawer?.classList.contains("is-open") === true;
   const { open: openLayer, close: closeLayer, closeMoreMenu } = layersController;
 
   const travelController = createTravelController({
@@ -821,7 +822,7 @@ export function startApplication() {
     scheduleClockUpdate();
     radioController.setRadio(0, state.radioPlaying || state.radioWantsPlay || options.autoplayRadio);
     renderRail();
-    renderGrid(elements.search.value);
+    if (isCityDrawerOpen()) renderGrid(elements.search.value);
 
     // Novas funcionalidades
     updateFavoriteButton();
@@ -992,7 +993,6 @@ export function startApplication() {
     // Inicializa UI
     elements.cityTotal.textContent = pad(cities.length);
     renderRail();
-    renderGrid();
 
     // Seleciona a rota compartilhada ou uma cidade aleatória ao abrir o site.
     const route = loadRouteFromURL();
