@@ -564,6 +564,7 @@ export function startApplication() {
     setFilter,
     syncDrawerFilterToRide,
     setContinent,
+    resetForOpen,
     renderRail,
     renderGrid
   } = cityBrowser;
@@ -599,7 +600,7 @@ export function startApplication() {
   const layersController = createLayersController({
     document,
     elements,
-    onBeforeDrawerOpen: () => syncDrawerFilterToRide()
+    onBeforeDrawerOpen: () => resetForOpen()
   });
   const { open: openLayer, close: closeLayer, closeMoreMenu } = layersController;
 

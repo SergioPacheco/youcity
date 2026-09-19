@@ -78,6 +78,13 @@ export function createCityBrowser({
     renderGrid(elements.search?.value || "");
   }
 
+  function resetForOpen() {
+    if (elements.search) elements.search.value = "";
+    if (elements.filterContinent) elements.filterContinent.value = "";
+    state.currentContinent = "";
+    setFilter(config.filters.ALL);
+  }
+
   function renderRail() {
     if (!elements.rail || !cities.length) return;
     const current = getCurrentCityIndex();
@@ -148,6 +155,7 @@ export function createCityBrowser({
     setFilter,
     syncDrawerFilterToRide,
     setContinent,
+    resetForOpen,
     renderRail,
     renderGrid,
     onSelectCity
