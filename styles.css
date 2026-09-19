@@ -1502,6 +1502,13 @@ button:focus-visible, input:focus-visible {
 
 /* Ensure the privacy button is accessible in the overflow menu on mobile */
 @media (max-width: 800px) {
+  /* Keep the most-used global navigation actions available as top-level icons
+     while More Options stays reserved for secondary controls. */
+  .top-actions > #map-button,
+  .top-actions > #theme-button {
+    display: grid;
+  }
+
   .top-actions > .icon-button,
   .top-actions > .share-fan-wrapper,
   .top-actions > .menu-button,
