@@ -1,8 +1,9 @@
 const LANGUAGES = new Set(["en", "es", "pt", "fr", "de", "it"]);
 
-export function createCityGuideController({ window, document, elements, getCity, openLayer, ensureDiscoverCarsCatalog, sitePath, isStaticLocalPreview }) {
+export function createCityGuideController({ window, document, elements, getCity, openLayer, sitePath, isStaticLocalPreview, renderCommerce = {} }) {
   let currentRequestId = 0;
   const cityGuideCache = new Map();
+  let lastRendered = null;
   const normalizeSearch = (value) => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("en-US");
   const escapeHtml = (value) => String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 
@@ -237,56 +238,112 @@ export function createCityGuideController({ window, document, elements, getCity,
     }
   }
 
-  function renderCityGuide(data, city) {
+  function normalizedText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function sentenceAwareExcerpt(value, maxLength = 420) {
+    const text = normalizedText(value);
+    if (text.length <= maxLength) return text;
+    const sentences = text.match(/[^.!?]+[.!?]+/g) || [];
+    let complete = "";
+    for (const sentence of sentences) {
+      const candidate = `${complete}${complete ? " " : ""}${sentence.trim()}`;
+      if (candidate.length > maxLength) break;
+      complete = candidate;
+    }
+    if (complete) return complete;
+    const clipped = text.slice(0, maxLength - 1).replace(/\s+\S*$/, "").trim();
+    return `${clipped || text.slice(0, maxLength - 1).trim()}…`;
+  }
+
+  function destinationIntro(city, wikipedia) {
+    return wikipedia?.description || city.note || "A short guide to this destination.";
+  }
+
+  function placeMarkup(place, position) {
+    const url = trustedCityGuideUrl(place.url);
+    const name = escapeHtml(place.name);
+    const description = normalizedText(place.description || "Point of interest nearby");
+    const imageUrl = trustedCommonsImageUrl(place.image?.thumbnailUrl);
+    const sourceUrl = trustedCommonsSourceUrl(place.image?.sourceUrl);
+    const imageMarkup = imageUrl
+      ? `<img class="city-guide-place-image" src="${escapeHtml(imageUrl)}" alt="" loading="lazy" />`
+      : `<span class="city-guide-place-image city-guide-place-image-empty" aria-hidden="true"></span>`;
+    const copyMarkup = `<span class="city-guide-place-copy"><strong>${name}</strong><p>${escapeHtml(description)}</p><span class="city-guide-place-more">Learn more →</span></span>`;
+    const primaryMarkup = url
+      ? `<a class="city-guide-place-main" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" data-city-guide-place-click="true" data-city-guide-place="${name}" data-city-guide-position="${position}">${imageMarkup}${copyMarkup}</a>`
+      : `<div class="city-guide-place-main">${imageMarkup}${copyMarkup}</div>`;
+    const photoCredit = sourceUrl
+      ? `<a class="city-guide-photo-credit" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Photo source ↗</a>`
+      : "";
+    return `<li><article class="city-guide-place-card">${primaryMarkup}${photoCredit}</article></li>`;
+  }
+
+  function renderCityGuide(data, city, status = "ready") {
     const wikipedia = data?.wikipedia;
     const places = Array.isArray(data?.places) ? data.places.slice(0, 5) : [];
-    const summary = wikipedia?.extract ? wikipedia.extract.slice(0, 620) : "A short guide to this destination will be available soon.";
     const wikipediaUrl = trustedCityGuideUrl(wikipedia?.url);
+    const topActions = String(renderCommerce.topActions?.(city) || "");
+    const afterPlaces = String(renderCommerce.afterPlaces?.(city) || "");
     const placesMarkup = places.length
-      ? `<section class="city-guide-section" aria-labelledby="city-guide-places-title"><div class="city-guide-section-heading"><span class="drawer-kicker">Worth exploring</span><h3 id="city-guide-places-title">Places to explore</h3></div><ul class="city-guide-places">${places.map((place) => {
-        const url = trustedCityGuideUrl(place.url);
-        const name = escapeHtml(place.name);
-        const description = place.description ? `<small>${escapeHtml(place.description)}</small>` : "";
-        const content = `<span class="city-guide-place-copy"><strong>${name}</strong>${description}</span>`;
-        const imageUrl = trustedCommonsImageUrl(place.image?.thumbnailUrl);
-        const imageSource = trustedCommonsSourceUrl(place.image?.sourceUrl) || imageUrl;
-        const imageMarkup = imageUrl
-          ? `<a class="city-guide-place-photo" href="${escapeHtml(imageSource)}" target="_blank" rel="noopener noreferrer" aria-label="View photo source on Wikimedia Commons"><img src="${escapeHtml(imageUrl)}" alt="" loading="lazy" /></a>`
-          : "";
-        const placeLink = url
-          ? `<a class="city-guide-place-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${content}<span aria-hidden="true">↗</span></a>`
-          : content;
-        return `<li><div class="city-guide-place-row">${imageMarkup}${placeLink}</div></li>`;
-      }).join("")}</ul></section>`
-      : `<section class="city-guide-section city-guide-empty-section"><p>We could not find notable places nearby yet.</p></section>`;
-    elements.cityGuideContent.innerHTML = `<section class="city-guide-section city-guide-about"><div class="city-guide-section-heading"><span class="drawer-kicker">A first impression</span><h3>About ${escapeHtml(city.name)}</h3></div><p>${escapeHtml(summary)}</p>${wikipediaUrl ? `<a class="city-guide-source" href="${escapeHtml(wikipediaUrl)}" target="_blank" rel="noopener noreferrer">Read more on Wikipedia ↗</a>` : ""}</section>${placesMarkup}`;
+      ? `<section class="city-guide-section city-guide-places-section" aria-labelledby="city-guide-places-title"><div class="city-guide-section-heading"><span class="drawer-kicker">Worth exploring</span><h3 id="city-guide-places-title">Places to explore</h3></div><ul class="city-guide-places">${places.map(placeMarkup).join("")}</ul></section>`
+      : status === "loading"
+        ? `<section class="city-guide-section city-guide-loading-section"><p class="city-guide-loading" role="status">Loading places…</p></section>`
+        : status === "error"
+          ? `<section class="city-guide-section city-guide-error-section"><p class="city-guide-error" role="alert">City guide information is temporarily unavailable.</p></section>`
+          : `<section class="city-guide-section city-guide-empty-section"><p>We could not find notable places nearby yet.</p></section>`;
+    const aboutMarkup = wikipedia
+      ? `<section class="city-guide-section city-guide-about"><div class="city-guide-section-heading"><span class="drawer-kicker">About the city</span><h3>About ${escapeHtml(city.name)}</h3></div><p>${escapeHtml(sentenceAwareExcerpt(wikipedia.extract))}</p>${wikipediaUrl ? `<a class="city-guide-source" href="${escapeHtml(wikipediaUrl)}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a>` : ""}</section>`
+      : "";
+    elements.cityGuideContent.innerHTML = `<section class="city-guide-destination"><span class="destination-kicker">${escapeHtml(city.name)} · ${escapeHtml(city.country)}</span><h2>${escapeHtml(city.name)}</h2><p>${escapeHtml(destinationIntro(city, wikipedia))}</p></section>${topActions ? `<section class="city-guide-section city-guide-quick-section"><div class="city-guide-section-heading"><span class="drawer-kicker">Plan your visit</span></div>${topActions}</section>` : ""}${placesMarkup}${afterPlaces}${aboutMarkup}`;
   }
 
-  function renderCityGuideLoading() {
-    elements.cityGuideContent.innerHTML = '<p class="city-guide-loading" role="status">Loading city guide…</p>';
+  function bindPlaceAnalytics() {
+    if (typeof elements.cityGuideContent?.addEventListener !== "function") return;
+    elements.cityGuideContent.addEventListener("click", (event) => {
+      const target = event.target?.closest?.("[data-city-guide-place-click]");
+      if (!target) return;
+      const city = getCity();
+      window.YOUCITY_ANALYTICS?.track?.({
+        event: "city_guide_place_click",
+        city: city?.name || "",
+        country: city?.country || "",
+        place: target.dataset.cityGuidePlace || "",
+        source: "wikipedia",
+        position: Number(target.dataset.cityGuidePosition)
+      });
+    });
   }
 
-  function renderCityGuideError() {
-    elements.cityGuideContent.innerHTML = '<p class="city-guide-error" role="alert">City guide data is temporarily unavailable. Try again later.</p>';
+  function renderCityGuideLoading(city) {
+    renderCityGuide(null, city, "loading");
   }
+
+  function renderCityGuideError(city) {
+    renderCityGuide(null, city, "error");
+  }
+
+  bindPlaceAnalytics();
 
   async function openCityGuide() {
     const city = getCity();
     if (!elements.travelDrawer || !elements.cityGuideContent || !city) return;
     const language = cityGuideLanguage();
     const cacheKey = `${city.id}|${language}`;
+    const requestId = ++currentRequestId;
     openLayer(elements.travelDrawer);
     elements.travelButton?.setAttribute("aria-expanded", "true");
-    ensureDiscoverCarsCatalog();
+    renderCityGuideLoading(city);
 
     const cached = cityGuideCache.get(cacheKey);
     if (cached && cached.expiresAt > Date.now()) {
+      if (requestId !== currentRequestId) return;
+      lastRendered = { cacheKey, value: cached.value, status: "ready" };
       renderCityGuide(cached.value, city);
       return;
     }
 
-    const requestId = ++currentRequestId;
-    renderCityGuideLoading();
     try {
       let data;
       if (isStaticLocalPreview()) {
@@ -301,17 +358,32 @@ export function createCityGuideController({ window, document, elements, getCity,
         data = await fetchCityGuideJson(endpoint);
       }
       if (requestId !== currentRequestId) return;
-      if (!data?.wikipedia && !data?.places?.length) throw new Error("City guide returned no content");
-      cityGuideCache.set(cacheKey, { value: data, expiresAt: Date.now() + 24 * 60 * 60 * 1000 });
-      renderCityGuide(data, city);
+      const hasEditorial = Boolean(data?.wikipedia || data?.places?.length);
+      if (hasEditorial) {
+        cityGuideCache.set(cacheKey, { value: data, expiresAt: Date.now() + 24 * 60 * 60 * 1000 });
+        lastRendered = { cacheKey, value: data, status: "ready" };
+        renderCityGuide(data, city);
+      } else {
+        lastRendered = { cacheKey, value: data || {}, status: "error" };
+        renderCityGuideError(city);
+      }
     } catch (error) {
       if (requestId !== currentRequestId) return;
-      renderCityGuideError();
+      lastRendered = { cacheKey, value: {}, status: "error" };
+      renderCityGuideError(city);
       console.warn(`[YouCity] Could not load city guide for ${city.name}:`, error.message);
     }
   }
 
+  function refresh() {
+    const city = getCity();
+    const language = cityGuideLanguage();
+    const cacheKey = city ? `${city.id}|${language}` : "";
+    if (!city || !lastRendered || lastRendered.cacheKey !== cacheKey) return;
+    renderCityGuide(lastRendered.value, city, lastRendered.status);
+  }
+
   // -----------------------------------------------------------------------------
 
-  return { open: openCityGuide, invalidate: () => { currentRequestId += 1; } };
+  return { open: openCityGuide, refresh, invalidate: () => { currentRequestId += 1; } };
 }
