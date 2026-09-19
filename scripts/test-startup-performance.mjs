@@ -13,4 +13,19 @@ assert.match(selectCity, /if\s*\(isCityDrawerOpen\(\)\)\s*renderGrid\(elements\.
 assert.doesNotMatch(initialization, /renderGrid\(\)/);
 assert.match(bootstrap, /onBeforeDrawerOpen:\s*\(\)\s*=>\s*resetForOpen\(\)/);
 
-console.log("Startup performance contracts passed: city catalog rendering is drawer-scoped.");
+const video = readFileSync(resolve(root, "src/player/video-controller.mjs"), "utf8");
+const html = readFileSync(resolve(root, "index.html"), "utf8");
+const css = readFileSync(resolve(root, "styles.css"), "utf8");
+const headers = readFileSync(resolve(root, "_headers"), "utf8");
+
+assert.doesNotMatch(video, /maxresdefault\.jpg/);
+assert.match(video, /hqdefault\.jpg/);
+assert.match(html, /class="source-link"[^>]*aria-label="View ride source"/);
+assert.match(bootstrap, /setAttribute\("aria-label", "View ride source"\)/);
+assert.match(css, /\.rail-dot\s*\{[^}]*width:\s*24px[^}]*height:\s*24px/s);
+assert.match(headers, /\/styles\.css[\s\S]*max-age=31536000, immutable/);
+assert.match(headers, /\/\*\.js[\s\S]*max-age=31536000, immutable/);
+assert.match(headers, /\/\*\.mjs[\s\S]*max-age=31536000, immutable/);
+assert.match(headers, /\/api\/\*[\s\S]*Cache-Control: no-store/);
+
+console.log("Startup performance contracts passed: startup, poster, controls, and cache behavior are guarded.");

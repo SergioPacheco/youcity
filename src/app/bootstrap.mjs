@@ -409,7 +409,7 @@ export function startApplication() {
 
     elements.sourceLink.href = buildYoutubeWatchUrl(ride);
     elements.sourceLink.removeAttribute("aria-disabled");
-    elements.sourceLink.setAttribute("aria-label", `View the source video for ${currentCity().name}`);
+    elements.sourceLink.setAttribute("aria-label", "View ride source");
   }
 
   // -----------------------------------------------------------------------------
