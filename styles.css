@@ -266,6 +266,8 @@ button:focus-visible, input:focus-visible {
 .radio-media-heading span { color: rgba(0,255,102,.55); font-size: 8px; }
 .radio-now-playing-status { display: block; min-height: 18px; margin-top: 7px; color: #e8f8e9; font: 600 11px Manrope, sans-serif; }
 .radio-now-playing-status.is-busy::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border: 1px solid var(--lcd-green); border-top-color: transparent; border-radius: 50%; animation: video-loading-spin .7s linear infinite; vertical-align: 1px; }
+.radio-media-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.radio-media-close { border: 0; background: transparent; color: rgba(0,255,102,.7); cursor: pointer; font: 700 16px/1 Manrope, sans-serif; }
 .radio-youtube-search { margin-top: 7px; padding: 7px 9px; border: 1px solid rgba(0,255,102,.3); border-radius: 3px; background: rgba(0,255,102,.06); color: var(--lcd-green); cursor: pointer; font: 700 9px "DM Mono", monospace; text-transform: uppercase; }
 .radio-youtube-search:disabled { cursor: not-allowed; opacity: .45; }
 .radio-youtube-results { display: grid; gap: 6px; margin-top: 8px; }

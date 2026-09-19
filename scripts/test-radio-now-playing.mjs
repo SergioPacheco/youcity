@@ -259,19 +259,65 @@ const mediaFeature = createRadioMediaFeature({
 assert.equal(mediaElements.panel.hidden, true, "media panel should start closed");
 await mediaFeature.identify();
 assert.equal(nowPlayingCallsFromFeature, 1, "identification must happen only after the explicit action");
-assert.equal(mediaElements.status.textContent, "A — B");
+assert.match(mediaElements.status.textContent, /^A — B/);
 assert.equal(mediaElements.searchButton.disabled, false);
-await mediaFeature.identify();
-assert.equal(mediaElements.panel.hidden, true, "the identify button should close an open Now Playing panel");
-assert.equal(nowPlayingCallsFromFeature, 1, "closing Now Playing should not repeat metadata lookup");
-await mediaFeature.identify();
-assert.equal(nowPlayingCallsFromFeature, 2, "identification should run again after reopening the panel");
-await mediaFeature.searchVideos();
-assert.equal(youtubeSearchCalls, 1, "YouTube search must happen only after the explicit action");
+assert.equal(youtubeSearchCalls, 1, "YouTube search must start automatically after identification");
 assert.equal(mediaElements.results.children.length, 1);
 assert.equal(mediaElements.videoHost.hidden, true, "YouTube iframe must remain lazy until a result is selected");
+await mediaFeature.identify();
+assert.equal(mediaElements.panel.hidden, false, "the identify button should keep the Now Playing panel open");
+assert.equal(nowPlayingCallsFromFeature, 2, "a second click should refresh identification");
+assert.equal(youtubeSearchCalls, 2, "each identification refresh should search YouTube once");
+await mediaFeature.searchVideos();
+assert.equal(youtubeSearchCalls, 3, "the secondary button should remain available for an explicit retry");
+assert.equal(mediaElements.results.children.length, 1);
 mediaFeature.selectVideo("video-1");
 assert.equal(mediaElements.videoHost.hidden, false);
 assert.equal(mediaElements.videoHost.children[0].src, "https://www.youtube-nocookie.com/embed/video-1?rel=0");
+
+const noMetadataElements = {
+  identifyButton: fakeElement(),
+  panel: fakeElement(),
+  status: fakeElement(),
+  searchButton: fakeElement(),
+  results: fakeElement(),
+  videoHost: fakeElement()
+};
+let noMetadataSearches = 0;
+const noMetadataFeature = createRadioMediaFeature({
+  document: { createElement: () => fakeElement() },
+  elements: noMetadataElements,
+  getStation: () => station,
+  nowPlayingClient: { findForStation: async () => null },
+  youtubeClient: { search: async () => { noMetadataSearches += 1; return []; } }
+});
+await noMetadataFeature.identify();
+assert.equal(noMetadataSearches, 0, "missing metadata must not trigger YouTube search");
+assert.match(noMetadataElements.status.textContent, /not sending current-song metadata/);
+
+const staleElements = {
+  identifyButton: fakeElement(),
+  panel: fakeElement(),
+  status: fakeElement(),
+  searchButton: fakeElement(),
+  results: fakeElement(),
+  videoHost: fakeElement()
+};
+let activeStation = station;
+let releaseStaleTrack;
+const staleTrackPending = new Promise((resolve) => { releaseStaleTrack = resolve; });
+let staleSearches = 0;
+const staleFeature = createRadioMediaFeature({
+  document: { createElement: () => fakeElement() },
+  elements: staleElements,
+  getStation: () => activeStation,
+  nowPlayingClient: { findForStation: async () => { await staleTrackPending; return { artist: "Old", title: "Track", display: "Old — Track", source: "icy" }; } },
+  youtubeClient: { search: async () => { staleSearches += 1; return []; } }
+});
+const staleIdentification = staleFeature.identify();
+activeStation = { ...station, stationRef: "radio-browser:station-2" };
+releaseStaleTrack();
+await staleIdentification;
+assert.equal(staleSearches, 0, "stale identification must not search or update the new station");
 
 console.log("Radio now-playing tests passed: metadata, YouTube normalization, base paths, and request deduplication.");

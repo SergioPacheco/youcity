@@ -2,7 +2,7 @@ import { createNowPlayingClient } from "./radio-now-playing.mjs";
 import { createYouTubeSearchClient } from "./radio-youtube.mjs";
 
 function stationKey(station) {
-  return `${station?.stationuuid || ""}|${station?.url || ""}`;
+  return station?.stationRef || "";
 }
 
 export function createRadioMediaFeature({
@@ -74,11 +74,19 @@ export function createRadioMediaFeature({
     setStatus(`Video selected: ${result.title}`);
   }
 
+  async function searchVideosForTrack(track, station, activeRequestId, signal) {
+    const query = [track.artist, track.title, "official music video"].filter(Boolean).join(" ");
+    const options = { signal };
+    const regionCode = station.countryCode || station.countrycode || "";
+    if (regionCode) options.regionCode = regionCode;
+    setStatus("Finding YouTube music videos…", true);
+    const results = await youtubeClient.search(query, options);
+    if (activeRequestId !== requestId || currentStationKey !== stationKey(getStation?.())) return;
+    renderResults(results);
+    setStatus(results.length ? `${track.display} · Choose a video to load it here.` : `${track.display} · No matching YouTube videos found.`);
+  }
+
   async function identify() {
-    if (!elements.panel.hidden) {
-      reset();
-      return;
-    }
     const station = getStation?.();
     if (!station) {
       setPanelVisible(true);
@@ -91,6 +99,7 @@ export function createRadioMediaFeature({
     currentStationKey = stationKey(station);
     currentTrack = null;
     currentResults = [];
+    elements.identifyButton.disabled = true;
     elements.searchButton.disabled = true;
     elements.results.replaceChildren();
     clearVideo();
@@ -105,13 +114,17 @@ export function createRadioMediaFeature({
         return;
       }
       setStatus(track.display);
-      elements.searchButton.disabled = false;
+      await searchVideosForTrack(track, station, activeRequestId, requestController.signal);
     } catch (error) {
       if (error.name === "AbortError") return;
-      setStatus("Could not identify the current song.");
-      showToast?.("Current song information is unavailable.");
+      setStatus(currentTrack ? "YouTube search is unavailable." : "Could not identify the current song.");
+      showToast?.(currentTrack ? "Could not search YouTube right now." : "Current song information is unavailable.");
     } finally {
-      if (activeRequestId === requestId) elements.identifyButton.disabled = false;
+      if (activeRequestId === requestId) {
+        requestController = null;
+        elements.identifyButton.disabled = false;
+        elements.searchButton.disabled = !currentTrack;
+      }
     }
   }
 
@@ -122,20 +135,18 @@ export function createRadioMediaFeature({
     requestController = new AbortController();
     const activeRequestId = ++requestId;
     currentStationKey = stationKey(station);
-    const query = [currentTrack.artist, currentTrack.title, "official music video"].filter(Boolean).join(" ");
     elements.searchButton.disabled = true;
-    setStatus("Finding YouTube music videos…", true);
     try {
-      const results = await youtubeClient.search(query, { signal: requestController.signal, regionCode: station.countrycode });
-      if (activeRequestId !== requestId || currentStationKey !== stationKey(getStation?.())) return;
-      renderResults(results);
-      setStatus(results.length ? "Choose a video to load it here." : "No matching YouTube videos found.");
+      await searchVideosForTrack(currentTrack, station, activeRequestId, requestController.signal);
     } catch (error) {
       if (error.name === "AbortError") return;
       setStatus("YouTube search is unavailable.");
       showToast?.("Could not search YouTube right now.");
     } finally {
-      if (activeRequestId === requestId) elements.searchButton.disabled = false;
+      if (activeRequestId === requestId) {
+        requestController = null;
+        elements.searchButton.disabled = false;
+      }
     }
   }
 
@@ -159,10 +170,15 @@ export function createRadioMediaFeature({
     setPanelVisible(false);
   }
 
+  function close() {
+    reset();
+  }
+
   function destroy() {
     reset();
     elements.identifyButton.removeEventListener("click", identify);
     elements.searchButton.removeEventListener("click", searchVideos);
+    elements.closeButton?.removeEventListener("click", close);
     elements.results.removeEventListener("click", handleResultClick);
   }
 
@@ -173,7 +189,8 @@ export function createRadioMediaFeature({
 
   elements.identifyButton.addEventListener("click", identify);
   elements.searchButton.addEventListener("click", searchVideos);
+  elements.closeButton?.addEventListener("click", close);
   elements.results.addEventListener("click", handleResultClick);
   reset();
-  return { identify, searchVideos, selectVideo, reset, destroy };
+  return { identify, searchVideos, selectVideo, reset, close, destroy };
 }

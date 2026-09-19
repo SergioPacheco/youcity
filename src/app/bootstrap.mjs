@@ -502,6 +502,7 @@ export function startApplication() {
     elements: {
       identifyButton: elements.radioNowPlaying,
       panel: elements.radioMediaPanel,
+      closeButton: elements.radioMediaClose,
       status: elements.radioNowPlayingStatus,
       searchButton: elements.radioYouTubeSearch,
       results: elements.radioYouTubeResults,
