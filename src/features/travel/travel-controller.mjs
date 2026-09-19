@@ -4,6 +4,7 @@ import { airportsFromDiscoverCars, buildFlightSearchUrl, createFlightOriginResol
 
 const PRIMARY_DEFAULTS = ["hotels", "activities", "cars"];
 const QUICK_CATEGORIES = ["hotels", "activities", "cars", "flights"];
+const DEFAULT_FLIGHT_ORIGIN_WAIT_MS = 1_200;
 const ACTION_LABELS = {
   hotels: "Find a place to stay",
   "vacation-rentals": "Find vacation rentals",
@@ -33,6 +34,7 @@ export function createTravelController({
   closeLayer,
   selectCity,
   showToast,
+  flightOriginWaitMs = DEFAULT_FLIGHT_ORIGIN_WAIT_MS,
   isStaticLocalPreview = () => false
 } = {}) {
   const categories = affiliate?.getVerticals?.() || {};
@@ -244,15 +246,40 @@ export function createTravelController({
       || null;
   }
 
+  function resolveFlightOriginQuickly() {
+    return new Promise((resolve) => {
+      let settled = false;
+      const finish = (value) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve(value);
+      };
+      const timer = setTimeout(() => finish(null), Math.max(0, Number(flightOriginWaitMs) || 0));
+      flightOriginResolver.resolve().then(finish).catch(() => finish(null));
+    });
+  }
+
+  function showFlightLoading(popup, city) {
+    try {
+      if (!popup?.document?.body) return;
+      popup.document.title = `Opening flights to ${city?.name || "your destination"}`;
+      popup.document.body.textContent = `Opening flight search for ${city?.name || "your destination"}…`;
+    } catch {}
+  }
+
   async function openFlightOffer(target, city = currentCity()) {
     if (!target?.href) return "";
+    const destination = destinationAirport(city);
+    const fallbackUrl = buildFlightSearchUrl(target.href, { toIata: destination?.code });
+    if (!fallbackUrl) return "";
     const popup = (() => {
       try { return window.open?.("", "_blank", "noopener,noreferrer"); } catch { return null; }
     })();
-    const origin = await flightOriginResolver.resolve();
-    const destination = destinationAirport(city);
+    showFlightLoading(popup, city);
+    const origin = await resolveFlightOriginQuickly();
     const fromIata = origin?.code && origin.code !== destination?.code ? origin.code : "";
-    const url = buildFlightSearchUrl(target.href, { fromIata, toIata: destination?.code });
+    const url = buildFlightSearchUrl(fallbackUrl, { fromIata, toIata: destination?.code });
     if (!url) return "";
     if (popup && !popup.closed) {
       popup.location.href = url;

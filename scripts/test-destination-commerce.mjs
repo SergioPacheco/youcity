@@ -197,6 +197,35 @@ assert.equal(emptyCommerce.secondary(city), "");
   assert.equal(new URL(openedFlightUrl).searchParams.get("fromiata"), "CGH");
   assert.equal(new URL(openedFlightUrl).searchParams.get("toiata"), "GRX");
   assert.equal(popup.location.href, openedFlightUrl);
+
+  const slowPopup = {
+    closed: false,
+    location: { href: "" },
+    document: { title: "", body: { textContent: "" } }
+  };
+  const slowTravel = createTravelController({
+    window: {
+      YOUCITY_DISCOVERCARS_LOCATIONS: integrationWindow.YOUCITY_DISCOVERCARS_LOCATIONS,
+      navigator: {
+        geolocation: {
+          getCurrentPosition(success) {
+            setTimeout(() => success({ coords: { latitude: -23.5505, longitude: -46.6333 } }), 50);
+          }
+        }
+      },
+      open: () => slowPopup
+    },
+    document: { querySelector: () => null },
+    elements,
+    state: { currentMode: "drive" },
+    affiliate,
+    currentCity: () => city,
+    flightOriginWaitMs: 1
+  });
+  const fastFallbackUrl = await slowTravel.openFlightOffer({ href: "https://example.test/flights?category=flight" }, city);
+  assert.equal(new URL(fastFallbackUrl).searchParams.get("fromiata"), null, "slow location lookup must not block the flight search");
+  assert.equal(new URL(fastFallbackUrl).searchParams.get("toiata"), "GRX");
+  assert.match(slowPopup.document.body.textContent, /Opening flight search/);
 }
 
 {
