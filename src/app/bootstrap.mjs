@@ -925,7 +925,7 @@ export function startApplication() {
       about: () => openLayer(elements.about),
       "comment-assistant": openCommentAssistantForCurrentRide,
       random: selectRandomCity,
-      privacy: () => window.YOUCITY_CONSENT?.showBanner?.()
+      privacy: () => window.YOUCITY_CONSENT?.showSettings?.()
     };
     actions[action]?.();
   }
@@ -1059,7 +1059,7 @@ export function startApplication() {
     $("#about-button").addEventListener("click", () => openLayer(elements.about));
 
     elements.privacySettingsButton?.addEventListener("click", () => {
-      window.YOUCITY_CONSENT?.showBanner?.();
+      window.YOUCITY_CONSENT?.showSettings?.();
     });
 
     elements.commentAssistantButton?.addEventListener("click", openCommentAssistantForCurrentRide);

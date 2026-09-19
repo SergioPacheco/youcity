@@ -354,6 +354,7 @@ function createConsentSettings(global = globalThis) {
   const advertisingCheckbox = modal.querySelector("#consent-advertising");
 
   function closeSettings() {
+    document.removeEventListener("keydown", handleKeyDown);
     modal.classList.remove("is-visible");
     modal.classList.add("consent-settings-hidden");
     setTimeout(() => modal.remove(), 300);
@@ -391,7 +392,6 @@ function createConsentSettings(global = globalThis) {
   const handleKeyDown = (event) => {
     if (event.key === "Escape") {
       closeSettings();
-      document.removeEventListener("keydown", handleKeyDown);
     }
   };
   document.addEventListener("keydown", handleKeyDown);
