@@ -638,6 +638,8 @@ button:focus-visible, input:focus-visible {
   .menu-button { width: auto; min-width: 0; height: 46px; padding: 0 18px; gap: 20px; justify-content: flex-start; }
   .menu-button span { display: inline; }
   .menu-button svg { width: 19px; }
+  #cities-button { width: 44px; min-width: 44px; padding: 0; gap: 0; justify-content: center; }
+  #cities-button span { display: none; }
   /* Keep the assistant reachable without letting the crowded desktop topbar
      push the action outside the viewport. The title remains as a tooltip. */
   .top-actions > .comment-assistant-button { display: inline-flex; width: 44px; height: 44px; min-width: 44px; padding: 0; justify-content: center; border-radius: 50%; }
@@ -1502,6 +1504,13 @@ button:focus-visible, input:focus-visible {
 
 /* Ensure the privacy button is accessible in the overflow menu on mobile */
 @media (max-width: 800px) {
+  /* Keep the most-used global navigation actions available as top-level icons
+     while More Options stays reserved for secondary controls. */
+  .top-actions > #map-button,
+  .top-actions > #theme-button {
+    display: grid;
+  }
+
   .top-actions > .icon-button,
   .top-actions > .share-fan-wrapper,
   .top-actions > .menu-button,
