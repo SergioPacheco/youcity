@@ -96,6 +96,7 @@ const STATIC_ASSETS = [
   "src/features/map/map-controller.mjs",
   "src/features/map/map-feature-loader.mjs",
   "src/features/city-guide/city-guide-controller.mjs",
+  "src/features/travel/destination-commerce.mjs",
   "src/features/travel/secondary-providers-loader.mjs",
   "src/features/travel/travel-controller.mjs",
   "src/weather/weather-controller.mjs"
