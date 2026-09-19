@@ -180,11 +180,6 @@ function createConsentBanner(global = globalThis) {
   const existing = document.getElementById("consent-banner");
   if (existing) existing.remove();
 
-  // Read consent state once, before creating HTML
-  const currentConsent = getCurrentConsent(global);
-  const analyticsChecked = currentConsent.analytics_storage === "granted" ? "checked" : "";
-  const advertisingChecked = currentConsent.ad_storage === "granted" ? "checked" : "";
-
   const banner = document.createElement("div");
   banner.id = "consent-banner";
   banner.className = "consent-banner";
@@ -241,7 +236,168 @@ function createConsentBanner(global = globalThis) {
   return banner;
 }
 
+function createConsentSettings(global = globalThis) {
+  const document = global.document;
+  if (!document) return null;
 
+  const existing = document.getElementById("consent-settings");
+  if (existing) existing.remove();
+
+  const current = getCurrentConsent(global);
+  const analyticsGranted = current.analytics_storage === "granted";
+  const advertisingGranted = current.ad_storage === "granted";
+
+  const modal = document.createElement("div");
+  modal.id = "consent-settings";
+  modal.className = "consent-settings";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.setAttribute("aria-label", "Privacy preferences");
+
+  modal.innerHTML = `
+    <div class="consent-settings-overlay"></div>
+    <div class="consent-settings-panel">
+      <button
+        type="button"
+        class="consent-settings-close"
+        id="consent-settings-close"
+        aria-label="Close privacy preferences"
+      >
+        ×
+      </button>
+
+      <span class="consent-eyebrow">YOUCITY</span>
+
+      <h2>Privacy preferences</h2>
+
+      <p class="consent-settings-intro">
+        Choose how YouCity may use analytics and advertising technologies.
+      </p>
+
+      <div class="consent-setting">
+        <div>
+          <strong>Analytics</strong>
+          <p>Helps us understand how people use YouCity.</p>
+        </div>
+        <label class="consent-switch">
+          <input
+            type="checkbox"
+            id="consent-analytics"
+            ${analyticsGranted ? "checked" : ""}
+          >
+          <span class="consent-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="consent-setting">
+        <div>
+          <strong>Advertising</strong>
+          <p>Allows advertising measurement and personalization.</p>
+        </div>
+        <label class="consent-switch">
+          <input
+            type="checkbox"
+            id="consent-advertising"
+            ${advertisingGranted ? "checked" : ""}
+          >
+          <span class="consent-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="consent-settings-actions">
+        <button
+          type="button"
+          id="consent-settings-reject"
+          class="consent-btn consent-btn-secondary"
+          aria-label="Reject all cookies"
+        >
+          Reject all
+        </button>
+
+        <button
+          type="button"
+          id="consent-settings-save"
+          class="consent-btn consent-btn-primary"
+          aria-label="Save preferences"
+        >
+          Save preferences
+        </button>
+      </div>
+
+      <button
+        type="button"
+        id="consent-settings-accept"
+        class="consent-accept-all-link"
+        aria-label="Accept all cookies"
+      >
+        Accept all
+      </button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Show with animation
+  const show = () => modal.classList.add("is-visible");
+  if (typeof global.requestAnimationFrame === "function") {
+    global.requestAnimationFrame(() => global.requestAnimationFrame(show));
+  } else {
+    show();
+  }
+
+  const closeBtn = modal.querySelector("#consent-settings-close");
+  const rejectBtn = modal.querySelector("#consent-settings-reject");
+  const saveBtn = modal.querySelector("#consent-settings-save");
+  const acceptBtn = modal.querySelector("#consent-settings-accept");
+  const overlay = modal.querySelector(".consent-settings-overlay");
+  const analyticsCheckbox = modal.querySelector("#consent-analytics");
+  const advertisingCheckbox = modal.querySelector("#consent-advertising");
+
+  function closeSettings() {
+    modal.classList.remove("is-visible");
+    modal.classList.add("consent-settings-hidden");
+    setTimeout(() => modal.remove(), 300);
+  }
+
+  closeBtn?.addEventListener("click", closeSettings);
+  overlay?.addEventListener("click", closeSettings);
+
+  rejectBtn?.addEventListener("click", () => {
+    rejectAll(global);
+    closeSettings();
+  });
+
+  acceptBtn?.addEventListener("click", () => {
+    acceptAll(global);
+    closeSettings();
+  });
+
+  saveBtn?.addEventListener("click", () => {
+    const analyticsEnabled = analyticsCheckbox?.checked ?? false;
+    const advertisingEnabled = advertisingCheckbox?.checked ?? false;
+
+    const nextConsent = {
+      analytics_storage: analyticsEnabled ? "granted" : "denied",
+      ad_storage: advertisingEnabled ? "granted" : "denied",
+      ad_user_data: advertisingEnabled ? "granted" : "denied",
+      ad_personalization: advertisingEnabled ? "granted" : "denied",
+    };
+
+    applyConsent(nextConsent, global);
+    closeSettings();
+  });
+
+  // Close on ESC key
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeSettings();
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+  };
+  document.addEventListener("keydown", handleKeyDown);
+
+  return modal;
+}
 
 export function initializeYouCityConsent(global = globalThis) {
   // The synchronous inline snippet in index.html already registered the
@@ -281,5 +437,6 @@ export function initializeYouCityConsent(global = globalThis) {
     getCurrentConsent: () => getCurrentConsent(global),
     hasValidConsent: () => hasValidStoredConsent(global),
     showBanner: () => createConsentBanner(global),
+    showSettings: () => createConsentSettings(global),
   };
 }
