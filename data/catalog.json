@@ -13243,7 +13243,13 @@
     "videos": {
       "drive": [],
       "bike": [],
-      "walk": [],
+      "walk": [
+        {
+          "id": "UN4UTkhkajo",
+          "start": 0,
+          "title": "Nerja, Spain — 4K Walking Tour"
+        }
+      ],
       "drone": [],
       "beach_walk": [
         {
@@ -13359,7 +13365,14 @@
       "drive": [],
       "bike": [],
       "walk": [],
-      "drone": [],
+      "drone": [
+        {
+          "id": "oaYPWbJgpuI",
+          "start": 0,
+          "title": "Elafonisi Beach, Crete, Greece — Drone View 4K",
+          "confidence": "B"
+        }
+      ],
       "beach_walk": [
         {
           "id": "z3bmlh8uCyc",
@@ -13401,8 +13414,21 @@
     "videos": {
       "drive": [],
       "bike": [],
-      "walk": [],
-      "drone": [],
+      "walk": [
+        {
+          "id": "bWhSxsjwLs4",
+          "start": 0,
+          "title": "Fort Myers Beach — Florida 4K Walking Tour"
+        }
+      ],
+      "drone": [
+        {
+          "id": "_N_nJmW9i1g",
+          "start": 0,
+          "title": "Fort Myers Beach — Florida 4K Drone",
+          "confidence": "B"
+        }
+      ],
       "beach_walk": [
         {
           "id": "tsVwRbrMjTs",
@@ -13440,7 +13466,13 @@
     "videos": {
       "drive": [],
       "bike": [],
-      "walk": [],
+      "walk": [
+        {
+          "id": "xRu_O6KPmN0",
+          "start": 0,
+          "title": "Lassi — Kefalonia, Greece 4K Walking Tour"
+        }
+      ],
       "drone": [],
       "beach_walk": [
         {
@@ -13526,7 +13558,13 @@
     "videos": {
       "drive": [],
       "bike": [],
-      "walk": [],
+      "walk": [
+        {
+          "id": "oK2967-MN4I",
+          "start": 0,
+          "title": "St. Pete Beach — Florida 4K Walking Tour"
+        }
+      ],
       "drone": [],
       "beach_walk": [
         {
@@ -13565,8 +13603,21 @@
     "videos": {
       "drive": [],
       "bike": [],
-      "walk": [],
-      "drone": [],
+      "walk": [
+        {
+          "id": "y7_sn5tW794",
+          "start": 0,
+          "title": "Skopelos Town — Greece 4K Walking Tour"
+        }
+      ],
+      "drone": [
+        {
+          "id": "bM2rrmRraSY",
+          "start": 0,
+          "title": "Skopelos — Greece 4K Scenic Flyover",
+          "confidence": "B"
+        }
+      ],
       "beach_walk": [
         {
           "id": "F9gYnIXpK58",
@@ -13606,9 +13657,21 @@
     "name": "Malibu",
     "country": "USA",
     "videos": {
-      "drive": [],
+      "drive": [
+        {
+          "id": "gAqKmqYlwv8",
+          "start": 0,
+          "title": "Malibu to Santa Monica — Pacific Coast Highway 4K Drive"
+        }
+      ],
       "bike": [],
-      "walk": [],
+      "walk": [
+        {
+          "id": "HD9bJOtMJvg",
+          "start": 0,
+          "title": "Malibu — California 4K Walking Tour"
+        }
+      ],
       "drone": [],
       "beach_walk": [
         {
