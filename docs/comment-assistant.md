@@ -19,7 +19,7 @@ Created:
 - `src/features/comment-assistant/share-destinations.mjs` — curated share-link
   registry with 50 destinations and copy-first fallbacks for networks without a
   reliable public web composer.
-- `src/features/comment-assistant/history.mjs` — local history and city-candidate storage.
+- `src/features/comment-assistant/history.mjs` — local comment history storage.
 - `src/features/comment-assistant/comment-assistant-controller.mjs` — ESM UI
   controller mounted in the existing modal/menu and analytics adapter.
 - `src/features/comment-assistant/comment-assistant-loader.mjs` — deduplicated
@@ -96,9 +96,8 @@ node scripts/build-static.js
 SEO_SITE_URL=https://youcity.app node scripts/seo-check.js
 ```
 
-The local history uses `localStorage` under the keys
-`youcity-comment-assistant-history-v1` and
-`youcity-comment-assistant-candidates-v1`. Entries include the video ID, URL,
+The local history uses `localStorage` under the key
+`youcity-comment-assistant-history-v1`. Entries include the video ID, URL,
 title, detected city/country/area, mode, generated alternatives, language,
 timestamp, and status (`GENERATED`, `COPIED`, `APPROVED`, or the future
 `PUBLISHED`).
@@ -131,8 +130,7 @@ message.
   title/description.
 - City matching uses only the canonical catalog. It derives safe forms from a
   catalog name itself (for example, the `NYC` acronym from `New York City`);
-  unknown cities are saved only as local candidates and never receive a
-  YouCity URL.
+  unknown cities never receive a YouCity URL.
 - Area detection derives nearby title/description words around the matched
   catalog city. There is no hardcoded neighborhood list because the catalog
   currently has no neighborhood dataset.

@@ -1,7 +1,6 @@
 import { COMMENT_HISTORY_STORAGE_KEY, findShareComment } from "../../sharing/comment-share.mjs";
 
 const STORAGE_KEY = COMMENT_HISTORY_STORAGE_KEY;
-const CANDIDATES_KEY = "youcity-comment-assistant-candidates-v1";
 
 function readArray(storage, key) {
   try {
@@ -63,12 +62,6 @@ export class CommentHistoryService {
     return this.save({ ...current, ...patch });
   }
 
-  addCandidate(candidate) {
-    const items = readArray(this.storage, CANDIDATES_KEY).filter((item) => item.videoId !== candidate.videoId);
-    const saved = { ...candidate, createdAt: candidate.createdAt || new Date().toISOString() };
-    writeArray(this.storage, CANDIDATES_KEY, [saved, ...items].slice(0, 100));
-    return saved;
-  }
 }
 
-export { CANDIDATES_KEY, STORAGE_KEY };
+export { STORAGE_KEY };

@@ -61,8 +61,6 @@ export function createCommentAssistant({
     videoLink: $("#comment-assistant-video-link"),
     detection: $("#comment-assistant-detection"),
     detectedGrid: $("#comment-assistant-detected-grid"),
-    candidate: $("#comment-assistant-candidate"),
-    addCandidate: $("#comment-assistant-add-candidate"),
     settings: $("#comment-assistant-settings"),
     tone: $("#comment-assistant-tone"),
     language: $("#comment-assistant-language"),
@@ -225,7 +223,7 @@ export function createCommentAssistant({
   function renderMetadata(metadata) {
     elements.video.hidden = false;
     elements.videoTitle.textContent = metadata.title;
-    elements.videoChannel.textContent = metadata.channel ? `by ${metadata.channel}` : "";
+    elements.videoChannel.textContent = metadata.channel === "YouCity catalog" ? "YouCity catalog" : (metadata.channel ? `by ${metadata.channel}` : "");
     elements.videoLink.href = metadata.videoUrl;
     const thumbnail = metadata.thumbnails?.high?.url || metadata.thumbnails?.medium?.url || `https://i.ytimg.com/vi/${metadata.videoId}/hqdefault.jpg`;
     elements.thumb.replaceChildren();
@@ -259,7 +257,6 @@ export function createCommentAssistant({
     addDetectedItem("Content", MODE_LABELS[detectedMode] || detectedMode);
     addDetectedItem("Language", ({ en: "English", es: "Spanish", pt: "Portuguese" }[detectLanguage(state.metadata.title, state.metadata.description)] || "English"));
     elements.detection.hidden = false;
-    elements.candidate.hidden = Boolean(city);
     elements.settings.hidden = !city;
     elements.generateActions.hidden = !city;
     if (city) {
@@ -477,8 +474,6 @@ export function createCommentAssistant({
     elements.generateActions.hidden = true;
     elements.generate.textContent = "Generate comments";
     closeSharePicker();
-    elements.addCandidate.disabled = false;
-    elements.addCandidate.textContent = "Add to city candidates";
     state.metadata = null;
     state.detection = null;
     state.context = null;
@@ -508,22 +503,6 @@ export function createCommentAssistant({
     }
   }
 
-  function addCandidate() {
-    if (!state.metadata || state.detection?.city) return;
-    history.addCandidate({
-      videoId: state.metadata.videoId,
-      videoUrl: state.metadata.videoUrl,
-      videoTitle: state.metadata.title,
-      city: state.detection?.cityCandidate || "",
-      country: state.detection?.country || "",
-      area: state.detection?.area || ""
-    });
-    track("city_candidate_added");
-    elements.addCandidate.disabled = true;
-    elements.addCandidate.textContent = "Added to city candidates";
-    setStatus("City saved locally as a candidate for future catalog review.");
-  }
-
   function handleOptionAction(event) {
     const button = event.target.closest("[data-comment-action]");
     if (!button) return;
@@ -549,7 +528,6 @@ export function createCommentAssistant({
     if (!elements.modal) return;
     elements.form.addEventListener("submit", analyzeVideo);
     elements.generate.addEventListener("click", generateComments);
-    elements.addCandidate.addEventListener("click", addCandidate);
     elements.options.addEventListener("click", handleOptionAction);
     elements.shareDestinations.addEventListener("click", (event) => {
       const destination = event.target.closest("[data-share-destination]");
