@@ -10,6 +10,7 @@ export function createYouTubePlayer({
   onReady,
   onBuffering,
   onPlaying,
+  onEnded,
   onAutoplayBlocked,
   onError
 }) {
@@ -102,6 +103,7 @@ export function createYouTubePlayer({
             onStateChange: (event) => {
               if (event.data === window.YT?.PlayerState?.BUFFERING) onBuffering?.();
               if (event.data === window.YT?.PlayerState?.PLAYING) onPlaying?.();
+              if (event.data === window.YT?.PlayerState?.ENDED) onEnded?.();
             },
             onAutoplayBlocked: () => onAutoplayBlocked?.(),
             onError: (event) => {
