@@ -1,6 +1,6 @@
 # YouCity Destination Hub Design
 
-**Date:** 2026-09-19  
+**Date:** 2026-09-19
 **Branch:** `feat/destination-hub`
 
 ## Goal
