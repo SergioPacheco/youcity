@@ -23,9 +23,9 @@ assert.match(video, /hqdefault\.jpg/);
 assert.match(html, /class="source-link"[^>]*aria-label="View ride source"/);
 assert.match(bootstrap, /setAttribute\("aria-label", "View ride source"\)/);
 assert.match(css, /\.rail-dot\s*\{[^}]*width:\s*24px[^}]*height:\s*24px/s);
-assert.match(headers, /\/styles\.css[\s\S]*max-age=31536000, immutable/);
-assert.match(headers, /\/\*\.js[\s\S]*max-age=31536000, immutable/);
-assert.match(headers, /\/\*\.mjs[\s\S]*max-age=31536000, immutable/);
+assert.match(headers, /\/styles\.css\n\s+Cache-Control: public, max-age=31536000, immutable/);
+assert.match(headers, /\/\*\.js\n\s+Cache-Control: public, max-age=31536000, immutable/);
+assert.match(headers, /\/\*\.mjs\n\s+Cache-Control: public, max-age=31536000, immutable/);
 assert.match(headers, /\/api\/\*[\s\S]*Cache-Control: no-store/);
 
 console.log("Startup performance contracts passed: startup, poster, controls, and cache behavior are guarded.");
