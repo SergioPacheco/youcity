@@ -17,6 +17,7 @@ for (const action of ["share", "about", "random", "map", "theme"]) {
 }
 assert.match(overflowMenu, /data-overflow-action="fullscreen"/);
 assert.match(overflowMenu, /data-overflow-action="privacy"/);
+assert.ok(indexHtml.indexOf('id="privacy-settings-button"') < indexHtml.indexOf('id="map-button"'), "World Map should appear after Privacy in the top actions");
 
 const mobileCss = stylesCss.match(/@media \(max-width: 800px\) \{[\s\S]*?\n\}/g)?.at(-1) || "";
 assert.match(mobileCss, /#map-button[\s\S]*#theme-button\s*\{\s*display:\s*grid;/, "World Map and Theme icons should be visible on mobile");
