@@ -175,13 +175,15 @@ assert.equal(typeof radioController.setAdditionalStations, "undefined");
 
 function browserElement() {
   const classes = new Set();
+  const listeners = new Map();
   return {
     hidden: true,
     disabled: false,
     dataset: {},
     classList: { toggle(name, force) { if (force) classes.add(name); else classes.delete(name); } },
     setAttribute(name, value) { this[name] = value; },
-    addEventListener() {},
+    addEventListener(type, handler) { listeners.set(type, handler); },
+    dispatchEvent(event) { listeners.get(event.type)?.(event); },
     replaceChildren(...children) { this.children = children; },
     append(...children) { this.children = [...(this.children || []), ...children]; }
   };
@@ -190,7 +192,8 @@ const discoverElements = {
   trigger: browserElement(),
   panel: browserElement(),
   status: browserElement(),
-  results: browserElement()
+  results: browserElement(),
+  closeButton: browserElement()
 };
 let discoveryCalls = 0;
 const browserStationRepository = createRadioStationRepository({ getCity: () => playbackCity });
@@ -207,7 +210,7 @@ assert.equal(discoverElements.panel.hidden, false);
 assert.ok(discoverElements.results.children.some((item) => item.dataset?.stationGroup === "recommended"), "curated stations should render immediately");
 assert.equal(discoverElements.results.children.filter((item) => item.dataset?.stationRef === "catalog:sao-paulo:0").length, 1);
 assert.match(discoverElements.status.textContent, /No additional nearby stations found/);
-await browserFeature.search();
+discoverElements.closeButton.dispatchEvent({ type: "click" });
 assert.equal(discoverElements.panel.hidden, true, "the local-radio icon should close an open result list");
 assert.equal(discoveryCalls, 1, "closing the list should not repeat the Radio Browser request");
 

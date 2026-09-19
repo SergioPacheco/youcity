@@ -250,6 +250,8 @@ button:focus-visible, input:focus-visible {
 .radio-browser-panel { margin-top: 2px; padding: 10px; border: 1px solid rgba(0,255,102,.2); border-radius: 4px; background: rgba(0,0,0,.2); }
 .radio-browser-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--lcd-green); font: 700 9px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .radio-browser-heading span { color: rgba(0,255,102,.55); font-size: 8px; }
+.radio-browser-close { margin-left: auto; border: 0; background: transparent; color: rgba(0,255,102,.7); cursor: pointer; font: 700 16px/1 Manrope, sans-serif; }
+.radio-browser-close:hover, .radio-browser-close:focus-visible, .radio-media-close:hover, .radio-media-close:focus-visible { color: var(--lcd-green); outline: none; }
 .radio-browser-status { display: block; min-height: 16px; margin-top: 7px; color: rgba(232,248,233,.65); font: 400 9px "DM Mono", monospace; }
 .radio-browser-status.is-busy::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border: 1px solid var(--lcd-green); border-top-color: transparent; border-radius: 50%; animation: video-loading-spin .7s linear infinite; vertical-align: -1px; }
 .radio-browser-results { display: grid; gap: 5px; max-height: 150px; margin-top: 3px; overflow: auto; }
@@ -268,8 +270,6 @@ button:focus-visible, input:focus-visible {
 .radio-now-playing-status.is-busy::before { content: ""; display: inline-block; width: 7px; height: 7px; margin-right: 6px; border: 1px solid var(--lcd-green); border-top-color: transparent; border-radius: 50%; animation: video-loading-spin .7s linear infinite; vertical-align: 1px; }
 .radio-media-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .radio-media-close { border: 0; background: transparent; color: rgba(0,255,102,.7); cursor: pointer; font: 700 16px/1 Manrope, sans-serif; }
-.radio-youtube-search { margin-top: 7px; padding: 7px 9px; border: 1px solid rgba(0,255,102,.3); border-radius: 3px; background: rgba(0,255,102,.06); color: var(--lcd-green); cursor: pointer; font: 700 9px "DM Mono", monospace; text-transform: uppercase; }
-.radio-youtube-search:disabled { cursor: not-allowed; opacity: .45; }
 .radio-youtube-results { display: grid; gap: 6px; margin-top: 8px; }
 .radio-youtube-result { display: flex; align-items: center; gap: 8px; width: 100%; padding: 5px; border: 1px solid rgba(0,255,102,.16); border-radius: 3px; background: rgba(0,255,102,.04); color: #e8f8e9; cursor: pointer; text-align: left; }
 .radio-youtube-result:hover, .radio-youtube-result:focus-visible { border-color: var(--lcd-green); background: rgba(0,255,102,.12); outline: none; }

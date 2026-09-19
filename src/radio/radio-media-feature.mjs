@@ -115,7 +115,7 @@ export function createRadioMediaFeature({
     currentTrack = null;
     currentResults = [];
     elements.identifyButton.disabled = true;
-    elements.searchButton.disabled = true;
+    if (elements.searchButton) elements.searchButton.disabled = true;
     elements.results.replaceChildren();
     clearVideo();
     setPanelVisible(true);
@@ -138,7 +138,7 @@ export function createRadioMediaFeature({
       if (activeRequestId === requestId) {
         requestController = null;
         elements.identifyButton.disabled = false;
-        elements.searchButton.disabled = !currentTrack;
+        if (elements.searchButton) elements.searchButton.disabled = !currentTrack;
       }
     }
   }
@@ -150,7 +150,7 @@ export function createRadioMediaFeature({
     requestController = new AbortController();
     const activeRequestId = ++requestId;
     currentStationKey = stationKey(station);
-    elements.searchButton.disabled = true;
+    if (elements.searchButton) elements.searchButton.disabled = true;
     try {
       await searchVideosForTrack(currentTrack, station, activeRequestId, requestController.signal);
     } catch (error) {
@@ -160,7 +160,7 @@ export function createRadioMediaFeature({
     } finally {
       if (activeRequestId === requestId) {
         requestController = null;
-        elements.searchButton.disabled = false;
+        if (elements.searchButton) elements.searchButton.disabled = false;
       }
     }
   }
@@ -178,7 +178,7 @@ export function createRadioMediaFeature({
     currentTrack = null;
     currentResults = [];
     elements.identifyButton.disabled = false;
-    elements.searchButton.disabled = true;
+    if (elements.searchButton) elements.searchButton.disabled = true;
     elements.results.replaceChildren();
     clearVideo();
     setStatus("");
@@ -192,7 +192,7 @@ export function createRadioMediaFeature({
   function destroy() {
     reset();
     elements.identifyButton.removeEventListener("click", identify);
-    elements.searchButton.removeEventListener("click", searchVideos);
+    elements.searchButton?.removeEventListener("click", searchVideos);
     elements.closeButton?.removeEventListener("click", close);
     elements.results.removeEventListener("click", handleResultClick);
   }
@@ -203,7 +203,7 @@ export function createRadioMediaFeature({
   }
 
   elements.identifyButton.addEventListener("click", identify);
-  elements.searchButton.addEventListener("click", searchVideos);
+  elements.searchButton?.addEventListener("click", searchVideos);
   elements.closeButton?.addEventListener("click", close);
   elements.results.addEventListener("click", handleResultClick);
   reset();
