@@ -106,6 +106,20 @@ async function runSyncUnitTests() {
   });
   assert.deepEqual(retained, previous);
 
+  const insufficientRequest = async (endpoint) => {
+    const url = new URL(endpoint);
+    if (url.pathname.endsWith("/search/page")) return { ok: true, status: 200, json: async () => ({ pages: [{ title: "Granada" }] }) };
+    if (url.pathname.includes("/summary/")) return { ok: true, status: 200, json: async () => ({ title: "Granada", extract: validEntry.summary.extract, content_urls: { desktop: { page: validEntry.summary.url } } }) };
+    return { ok: true, status: 200, json: async () => ({ query: { geosearch: [], pages: {} } }) };
+  };
+  const retainedAfterInsufficientData = await syncCity(city, {
+    previous,
+    request: insufficientRequest,
+    sleep: async () => {},
+    preserveOnFailure: true
+  });
+  assert.deepEqual(retainedAfterInsufficientData, previous);
+
   const requested = [];
   const request = async (endpoint) => {
     const url = new URL(endpoint);
@@ -162,6 +176,22 @@ async function runSyncUnitTests() {
   await throttled("https://example.test/one");
   await throttled("https://example.test/two");
   assert.deepEqual(pauses, [100]);
+
+  const startTimes = [];
+  const queued = createThrottledRequest(async () => {
+    startTimes.push(clock);
+    return { ok: true, status: 200, json: async () => ({}) };
+  }, {
+    minimumInterval: 100,
+    sleep: async (milliseconds) => { clock += milliseconds; },
+    now: () => clock
+  });
+  await Promise.all([
+    queued("https://example.test/a"),
+    queued("https://example.test/b"),
+    queued("https://example.test/c")
+  ]);
+  assert.deepEqual(startTimes, [1000, 1100, 1200]);
 
   const incompleteOnly = selectSyncCities(
     [{ name: "Granada" }, { name: "London" }],

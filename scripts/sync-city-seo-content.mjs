@@ -74,13 +74,18 @@ export async function mapWithConcurrency(items, concurrency, worker) {
 
 export function createThrottledRequest(request, { minimumInterval = 100, sleep = delay, now = () => Date.now() } = {}) {
   let lastRequestAt = null;
+  let queue = Promise.resolve();
   return async (endpoint, init) => {
-    if (lastRequestAt !== null) {
-      const wait = minimumInterval - (now() - lastRequestAt);
-      if (wait > 0) await sleep(wait);
-    }
-    lastRequestAt = now();
-    return request(endpoint, init);
+    const task = queue.then(async () => {
+      if (lastRequestAt !== null) {
+        const wait = minimumInterval - (now() - lastRequestAt);
+        if (wait > 0) await sleep(wait);
+      }
+      lastRequestAt = now();
+      return request(endpoint, init);
+    });
+    queue = task.catch(() => {});
+    return task;
   };
 }
 
@@ -239,10 +244,13 @@ export async function syncCity(city, {
   preserveOnFailure = false
 } = {}) {
   const requestOptions = { request, sleep };
+  const incomplete = (reason) => preserveOnFailure && previous?.status === "complete"
+    ? previous
+    : { status: "incomplete", reason };
   try {
     const summary = await wikipediaSummary(city, language, requestOptions);
     if (!summary || summary.extract.trim().length < 120 || !isTrustedEditorialUrl(summary.url)) {
-      return { status: "incomplete", reason: "NO_VALID_SUMMARY" };
+      return incomplete("NO_VALID_SUMMARY");
     }
     const places = await nearbyPlaces(city, language, requestOptions);
     const candidate = {
@@ -256,9 +264,9 @@ export async function syncCity(city, {
     };
     const errors = validateCompleteEntry(candidate, city);
     if (errors.some((error) => error.startsWith("place") || error.includes("places"))) {
-      return { status: "incomplete", reason: "NOT_ENOUGH_PLACES" };
+      return incomplete("NOT_ENOUGH_PLACES");
     }
-    if (errors.length) return { status: "incomplete", reason: "AMBIGUOUS_CITY" };
+    if (errors.length) return incomplete("AMBIGUOUS_CITY");
     if (previous?.status === "complete" && !editorialContentChanged(previous, candidate)) return previous;
     return candidate;
   } catch (error) {
