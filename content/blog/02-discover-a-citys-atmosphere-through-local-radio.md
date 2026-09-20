@@ -2,15 +2,15 @@
 title: "Discovering a City's Atmosphere Through Local Radio"
 slug: "discovering-a-citys-atmosphere-through-local-radio"
 description: "Pair a virtual city experience with local radio to explore the feeling of a destination, while keeping expectations grounded in what a recording can show."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Project-created editorial cover for listening while exploring a city"
+image: "/assets/blog/local-radio-atmosphere-1440.webp"
+imageAlt: "Abstract project-created illustration of waveform lines over a dark city-like geometry"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T10:30:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["explore-a-city-virtually-before-travelling"]
 draft: false
 sources: ["https://docs.radio-browser.info/"]
-imageCredit: "YouCity project-created local cover image."
+imageCredit: "YouCity project-created non-documentary illustration generated for this article."
 ctaLabel: "Listen and explore London on YouCity"
 ---
 
@@ -33,4 +33,3 @@ Try the same video with and without radio. Note what is actually visible, what t
 ## Listen and explore London on YouCity
 
 London is one of the catalog cities with recorded video experiences and radio options. Open [London on YouCity](/city/london), choose an available mode, and let the atmosphere unfold at your own pace. The videos and stations are external material linked by YouCity; they are not owned by the project.
-

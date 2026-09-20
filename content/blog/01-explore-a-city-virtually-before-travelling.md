@@ -2,15 +2,15 @@
 title: "How to Explore a City Virtually Before Travelling"
 slug: "explore-a-city-virtually-before-travelling"
 description: "Use real street videos and local radio to notice a destination's pace, texture, and atmosphere before choosing where to go."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Project-created editorial cover for exploring a city virtually"
+image: "/assets/blog/youcity-virtual-exploration-1440.webp"
+imageAlt: "Project-created editorial cover showing an abstract city atmosphere"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T10:00:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["discovering-a-citys-atmosphere-through-local-radio"]
 draft: false
 sources: ["https://www.youtube.com/watch?v=QI4_dGvZ5yE", "https://www.youtube.com/watch?v=aBOsIVU9mms"]
-imageCredit: "YouCity project-created local cover image."
+imageCredit: "YouCity project-created cover, derived locally from the existing project hero image."
 ctaLabel: "Explore London on YouCity"
 ---
 
@@ -39,4 +39,3 @@ Local radio can change how you pay attention. Let it play while you explore a vi
 The London catalog entry includes several recorded video perspectives and local radio options. Open the city page to choose the available experience for yourself: [Explore London on YouCity](/city/london).
 
 For the underlying media, see the recorded [London drive source](https://www.youtube.com/watch?v=QI4_dGvZ5yE) and [London walking source](https://www.youtube.com/watch?v=aBOsIVU9mms). YouCity links to third-party videos and radio streams; it does not own those recordings or stations.
-
