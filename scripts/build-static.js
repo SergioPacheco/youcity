@@ -394,7 +394,7 @@ function homeSeo(catalog) {
         "@type": "Organization",
         name: SITE_NAME,
         url: `${SITE_URL}${sitePath("/")}`,
-        logo: `${SITE_URL}${sitePath("/assets/favicon.svg")}`
+        logo: `${SITE_URL}${sitePath("/assets/logo.png")}`
       },
       {
         "@context": "https://schema.org",
