@@ -35,6 +35,9 @@ const validEntry = {
 function runUnitTests() {
   assert.equal(canonicalCitySlug("São Paulo"), "sao-paulo");
   assert.deepEqual(validateCompleteEntry(validEntry, { name: "Granada", country: "Spain" }), []);
+  const fabricatedDescription = structuredClone(validEntry);
+  fabricatedDescription.places[0].description = "Point of interest nearby";
+  assert.match(validateCompleteEntry(fabricatedDescription, { name: "Granada", country: "Spain" }).join("\n"), /factual|generic|nearby/i);
   assert.equal(isTrustedEditorialUrl("https://en.wikipedia.org/wiki/Granada"), true);
   assert.equal(isTrustedEditorialUrl("https://example.com/granada"), false);
 
@@ -166,6 +169,12 @@ async function runSyncUnitTests() {
     true
   );
   assert.deepEqual(incompleteOnly.map((city) => city.name), ["London"]);
+  const needsRefresh = selectSyncCities(
+    [{ name: "Granada" }, { name: "London" }],
+    { granada: { status: "complete", places: [{ description: "Point of interest nearby" }] }, london: { status: "complete", places: [{ description: "Historic landmark in London" }] } },
+    true
+  );
+  assert.deepEqual(needsRefresh.map((city) => city.name), ["Granada"]);
 }
 
 function runCoverageTest() {

@@ -1288,9 +1288,9 @@
         "url": "https://en.wikipedia.org/wiki/Bras%C3%ADlia_TV_Tower"
       },
       {
-        "name": "Kubitschek Plaza",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Kubitschek_Plaza"
+        "name": "Ministry of Foreign Affairs (Brazil)",
+        "description": "Ministry of Brazil",
+        "url": "https://en.wikipedia.org/wiki/Ministry_of_Foreign_Affairs_(Brazil)"
       }
     ],
     "source": {
@@ -1554,11 +1554,6 @@
     },
     "places": [
       {
-        "name": "Headquarters of the Arab League",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Headquarters_of_the_Arab_League"
-      },
-      {
         "name": "Collège des Frères (Bab al-Louq)",
         "description": "Private school in Egypt",
         "url": "https://en.wikipedia.org/wiki/Coll%C3%A8ge_des_Fr%C3%A8res_(Bab_al-Louq)"
@@ -1577,6 +1572,11 @@
         "name": "Khairy Pasha Palace",
         "description": "Neo-Mameluk building in Cairo, Egypt",
         "url": "https://en.wikipedia.org/wiki/Khairy_Pasha_Palace"
+      },
+      {
+        "name": "Tahrir Square",
+        "description": "Town square in Downtown Cairo, Egypt",
+        "url": "https://en.wikipedia.org/wiki/Tahrir_Square"
       }
     ],
     "source": {
@@ -2103,9 +2103,9 @@
         "url": "https://en.wikipedia.org/wiki/Grand_Mosque_of_Dakar"
       },
       {
-        "name": "Association des Jeunes pour la Sensibilisation et la Solidarité",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Association_des_Jeunes_pour_la_Sensibilisation_et_la_Solidarit%C3%A9"
+        "name": "Place de l'Obélisque",
+        "description": "Central plaza in Dakar, Senegal",
+        "url": "https://en.wikipedia.org/wiki/Place_de_l%27Ob%C3%A9lisque"
       }
     ],
     "source": {
@@ -2250,11 +2250,6 @@
         "url": "https://en.wikipedia.org/wiki/Colorado_State_Capitol"
       },
       {
-        "name": "List of mayors of Denver",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/List_of_mayors_of_Denver"
-      },
-      {
         "name": "Colorado General Assembly",
         "description": "Legislative branch of the state government of Colorado",
         "url": "https://en.wikipedia.org/wiki/Colorado_General_Assembly"
@@ -2268,6 +2263,11 @@
         "name": "Colorado Senate",
         "description": "Upper house of Colorado General Assembly",
         "url": "https://en.wikipedia.org/wiki/Colorado_Senate"
+      },
+      {
+        "name": "Sports in Denver",
+        "description": "Overview of sports traditions and activities in Denver, Colorado, United States",
+        "url": "https://en.wikipedia.org/wiki/Sports_in_Denver"
       }
     ],
     "source": {
@@ -2445,11 +2445,6 @@
         "url": "https://en.wikipedia.org/wiki/Presbytery_of_Edinburgh"
       },
       {
-        "name": "National Archives of Scotland",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/National_Archives_of_Scotland"
-      },
-      {
         "name": "Regent Bridge",
         "description": "Arch bridge in Edinburgh, Scotland",
         "url": "https://en.wikipedia.org/wiki/Regent_Bridge"
@@ -2463,6 +2458,11 @@
         "name": "St. James Centre",
         "description": "Former shopping centre in Edinburgh, Scotland",
         "url": "https://en.wikipedia.org/wiki/St._James_Centre"
+      },
+      {
+        "name": "Trinity College Kirk",
+        "description": "Royal collegiate church in Edinburgh, Scotland",
+        "url": "https://en.wikipedia.org/wiki/Trinity_College_Kirk"
       }
     ],
     "source": {
@@ -2584,14 +2584,14 @@
         "url": "https://en.wikipedia.org/wiki/R%C3%B6mer"
       },
       {
-        "name": "Frankfurter Kunstverein",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Frankfurter_Kunstverein"
-      },
-      {
         "name": "Schirn Kunsthalle Frankfurt",
         "description": "Art museum in Frankfurt, Germany",
         "url": "https://en.wikipedia.org/wiki/Schirn_Kunsthalle_Frankfurt"
+      },
+      {
+        "name": "Free City of Frankfurt",
+        "description": "Former city-state of Germany",
+        "url": "https://en.wikipedia.org/wiki/Free_City_of_Frankfurt"
       }
     ],
     "source": {
@@ -2908,9 +2908,9 @@
         "url": "https://en.wikipedia.org/wiki/St._James%27_Church,_Hamburg"
       },
       {
-        "name": "Schnitger organ (Hamburg)",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Schnitger_organ_(Hamburg)"
+        "name": "St. Mary's Cathedral, Hamburg",
+        "description": "Church in Old Town, Germany",
+        "url": "https://en.wikipedia.org/wiki/St._Mary%27s_Cathedral,_Hamburg"
       }
     ],
     "source": {
@@ -3605,14 +3605,14 @@
         "url": "https://en.wikipedia.org/wiki/College_Street_(Kolkata)"
       },
       {
-        "name": "Geography of Kolkata",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Geography_of_Kolkata"
-      },
-      {
         "name": "Calcutta North West Lok Sabha constituency",
         "description": "Former Constituency of the Indian parliament in West Bengal",
         "url": "https://en.wikipedia.org/wiki/Calcutta_North_West_Lok_Sabha_constituency"
+      },
+      {
+        "name": "Kolkata Dakshin Lok Sabha constituency",
+        "description": "Lok Sabha Constituency in West Bengal, India",
+        "url": "https://en.wikipedia.org/wiki/Kolkata_Dakshin_Lok_Sabha_constituency"
       }
     ],
     "source": {
@@ -4659,11 +4659,6 @@
         "url": "https://en.wikipedia.org/wiki/FedEx_Express_Flight_80"
       },
       {
-        "name": "Narita Wholesale Market",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Narita_Wholesale_Market"
-      },
-      {
         "name": "Narita Kokusai High School",
         "description": "Public high school",
         "url": "https://en.wikipedia.org/wiki/Narita_Kokusai_High_School"
@@ -5252,32 +5247,8 @@
     "updatedAt": "2026-09-20"
   },
   "presidente-prudente": {
-    "status": "complete",
-    "city": "Presidente Prudente",
-    "country": "Brazil",
-    "summary": {
-      "title": "Presidente Prudente",
-      "description": "Municipality in São Paulo, Brazil",
-      "extract": "Presidente Prudente is a Brazilian municipality located in the interior of São Paulo, approximately 558 kilometers from the state capital, São Paulo.",
-      "url": "https://en.wikipedia.org/wiki/Presidente_Prudente"
-    },
-    "places": [
-      {
-        "name": "Estádio Prudentão",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Est%C3%A1dio_Prudent%C3%A3o"
-      },
-      {
-        "name": "Presidente Prudente Formation",
-        "description": "Geological formation in Brazil",
-        "url": "https://en.wikipedia.org/wiki/Presidente_Prudente_Formation"
-      }
-    ],
-    "source": {
-      "name": "Wikipedia",
-      "url": "https://en.wikipedia.org/wiki/Presidente_Prudente"
-    },
-    "updatedAt": "2026-09-20"
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
   },
   "puebla": {
     "status": "incomplete",
@@ -5409,11 +5380,6 @@
     },
     "places": [
       {
-        "name": "Recife Antigo",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Recife_Antigo"
-      },
-      {
         "name": "Ricardo Brennand Institute",
         "description": "Art museum in Recife, Brazil",
         "url": "https://en.wikipedia.org/wiki/Ricardo_Brennand_Institute"
@@ -5432,6 +5398,11 @@
         "name": "Mercado de São José",
         "description": "Historic site in Recife, Pernambuco",
         "url": "https://en.wikipedia.org/wiki/Mercado_de_S%C3%A3o_Jos%C3%A9"
+      },
+      {
+        "name": "Catholic University of Pernambuco",
+        "description": "University in Brazil",
+        "url": "https://en.wikipedia.org/wiki/Catholic_University_of_Pernambuco"
       }
     ],
     "source": {
@@ -5470,11 +5441,6 @@
         "name": "Trapicheiros River",
         "description": "River in Brazil",
         "url": "https://en.wikipedia.org/wiki/Trapicheiros_River"
-      },
-      {
-        "name": "January 2011 Rio de Janeiro floods and mudslides",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/January_2011_Rio_de_Janeiro_floods_and_mudslides"
       }
     ],
     "source": {
@@ -5558,9 +5524,9 @@
         "url": "https://en.wikipedia.org/wiki/Arena_Fonte_Nova"
       },
       {
-        "name": "Itaigara (neighbourhood)",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Itaigara_(neighbourhood)"
+        "name": "Historic Center of Salvador",
+        "description": "UNESCO World Heritage Site in Bahia, Brazil",
+        "url": "https://en.wikipedia.org/wiki/Historic_Center_of_Salvador"
       }
     ],
     "source": {
@@ -5601,9 +5567,9 @@
         "url": "https://en.wikipedia.org/wiki/Samarkand_Oblast"
       },
       {
-        "name": "Siyob Bazaar",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Siyob_Bazaar"
+        "name": "Ulugh Beg Madrasa",
+        "description": "Religious educational institution in Samarkand, Uzbekistan",
+        "url": "https://en.wikipedia.org/wiki/Ulugh_Beg_Madrasa"
       }
     ],
     "source": {
@@ -6366,11 +6332,6 @@
         "url": "https://en.wikipedia.org/wiki/Jewish_Museum_of_Thessaloniki"
       },
       {
-        "name": "Museum of Ancient Greek, Byzantine and Post-Byzantine Musical Instruments",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Museum_of_Ancient_Greek,_Byzantine_and_Post-Byzantine_Musical_Instruments"
-      },
-      {
         "name": "Monastir Synagogue (Thessaloniki)",
         "description": "Former Orthodox synagogue in Thessaloniki, Greece",
         "url": "https://en.wikipedia.org/wiki/Monastir_Synagogue_(Thessaloniki)"
@@ -6379,6 +6340,11 @@
         "name": "Church of the Holy Apostles, Thessaloniki",
         "description": "Church and heritage site in Thessaloniki, Greece",
         "url": "https://en.wikipedia.org/wiki/Church_of_the_Holy_Apostles,_Thessaloniki"
+      },
+      {
+        "name": "Hamza Bey Mosque",
+        "description": "Former mosque in Thessaloniki, Greece",
+        "url": "https://en.wikipedia.org/wiki/Hamza_Bey_Mosque"
       }
     ],
     "source": {
@@ -6822,9 +6788,9 @@
         "url": "https://en.wikipedia.org/wiki/Autov%C3%ADa_LZ-3"
       },
       {
-        "name": "Ciudad Deportiva de Lanzarote",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Ciudad_Deportiva_de_Lanzarote"
+        "name": "Tahíche",
+        "description": "Village located in Teguise, Lanzarote, Spain",
+        "url": "https://en.wikipedia.org/wiki/Tah%C3%ADche"
       }
     ],
     "source": {
@@ -7035,11 +7001,6 @@
         "url": "https://en.wikipedia.org/wiki/Pelayo_trinquet"
       },
       {
-        "name": "Valencia (DO)",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Valencia_(DO)"
-      },
-      {
         "name": "Plaza de Toros de Valencia",
         "description": "Bullring in Valencia, Spain",
         "url": "https://en.wikipedia.org/wiki/Plaza_de_Toros_de_Valencia"
@@ -7053,6 +7014,11 @@
         "name": "Valencia Catholic University Saint Vincent Martyr",
         "description": "University in Valencia, Spain",
         "url": "https://en.wikipedia.org/wiki/Valencia_Catholic_University_Saint_Vincent_Martyr"
+      },
+      {
+        "name": "La Nau",
+        "description": "Cultural property in Valencia, Spain",
+        "url": "https://en.wikipedia.org/wiki/La_Nau"
       }
     ],
     "source": {
@@ -7390,16 +7356,6 @@
         "name": "Artemis (island)",
         "description": "Island in Greece",
         "url": "https://en.wikipedia.org/wiki/Artemis_(island)"
-      },
-      {
-        "name": "Rhamnus (Crete)",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Rhamnus_(Crete)"
-      },
-      {
-        "name": "Biennus",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Biennus"
       }
     ],
     "source": {
@@ -7571,11 +7527,6 @@
         "name": "Skopelos (town)",
         "description": "Community in Greece",
         "url": "https://en.wikipedia.org/wiki/Skopelos_(town)"
-      },
-      {
-        "name": "Panormus (Skopelos)",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Panormus_(Skopelos)"
       }
     ],
     "source": {
@@ -7720,14 +7671,14 @@
         "url": "https://en.wikipedia.org/wiki/El_Volador_hill"
       },
       {
-        "name": "Tecnológico de Antioquia",
-        "description": "Point of interest nearby",
-        "url": "https://en.wikipedia.org/wiki/Tecnol%C3%B3gico_de_Antioquia"
-      },
-      {
         "name": "Coliseo Iván de Bedout",
         "description": "Sports arena in Medellín, Colombia",
         "url": "https://en.wikipedia.org/wiki/Coliseo_Iv%C3%A1n_de_Bedout"
+      },
+      {
+        "name": "Medellín Sports Coliseum",
+        "description": "Sport coliseum in Colombia",
+        "url": "https://en.wikipedia.org/wiki/Medell%C3%ADn_Sports_Coliseum"
       }
     ],
     "source": {

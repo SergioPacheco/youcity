@@ -88,6 +88,7 @@ export function validateCompleteEntry(entry, city) {
       if (descriptionLength < MIN_PLACE_DESCRIPTION_LENGTH || descriptionLength > MAX_PLACE_DESCRIPTION_LENGTH) {
         errors.push(`place ${index + 1} description must be ${MIN_PLACE_DESCRIPTION_LENGTH}-${MAX_PLACE_DESCRIPTION_LENGTH} characters`);
       }
+      if (comparable(place?.description) === "point of interest nearby") errors.push(`place ${index + 1} description must contain factual source text`);
       if (place?.url && !isTrustedEditorialUrl(place.url)) errors.push(`place ${index + 1} URL is not trusted`);
     });
   }

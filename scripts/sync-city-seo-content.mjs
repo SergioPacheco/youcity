@@ -218,7 +218,7 @@ async function nearbyPlaces(city, language, requestOptions) {
       .filter((place) => comparable(place.title) !== comparable(city.name) && !genericDescription.test(`${place.title} ${place.description || ""}`))
       .map((place) => ({
         name: place.title,
-        description: place.description || "Point of interest nearby",
+        description: place.description || "",
         url: place.fullurl || place.canonicalurl || placeUrl(language, place.title)
       }))
       .filter((place) => place.description.trim().length >= 15 && place.description.trim().length <= 180);
@@ -270,7 +270,10 @@ export async function syncCity(city, {
 
 export function selectSyncCities(catalog, previousCache, onlyIncomplete = false) {
   if (!onlyIncomplete) return catalog;
-  return catalog.filter((city) => previousCache[canonicalCitySlug(city.name)]?.status !== "complete");
+  return catalog.filter((city) => {
+    const entry = previousCache[canonicalCitySlug(city.name)];
+    return entry?.status !== "complete" || entry.places?.some((place) => String(place.description || "").trim().toLowerCase() === "point of interest nearby");
+  });
 }
 
 function readJson(path, fallback) {
