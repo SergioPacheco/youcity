@@ -2,7 +2,8 @@
 
 YouCity is a static site. The build creates the deployable `dist/` directory,
 including the interactive application, one prerendered HTML page per city,
-`robots.txt`, `sitemap.xml`, `404.html`, `_headers`, and `_redirects`.
+the prerendered blog listing and published articles, `robots.txt`,
+`sitemap.xml`, `404.html`, `_headers`, and `_redirects`.
 
 ## Cloudflare Pages settings
 
@@ -25,6 +26,8 @@ is only needed here to generate the city pages and SEO files.
 - `/` — generic YouCity landing page; the application still starts in a random city.
 - `/city/<slug>` — one stable page for every catalog city; only cities with at
   least one video experience are included in the sitemap.
+- `/blog` — the static editorial listing.
+- `/blog/<slug>` — one static page for each non-draft, non-future article.
 - Each page includes one title, description, robots directive, canonical URL,
   Open Graph tags, Twitter Card tags, H1, and JSON-LD.
 - Query-string variants such as `?city=` and `?preview=` are disallowed in
@@ -39,8 +42,9 @@ node scripts/seo-check.js
 ```
 
 The validator checks every generated HTML file, canonical uniqueness, required
-metadata, valid JSON-LD, city-page coverage, robots, sitemap, and deployable
-Cloudflare files.
+metadata, valid JSON-LD, city-page coverage, public blog coverage, draft/future
+exclusion, robots, sitemap, and deployable Cloudflare files. See
+[`docs/blog.md`](blog.md) for authoring and publishing details.
 
 ## After deployment
 

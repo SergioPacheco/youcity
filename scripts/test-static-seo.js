@@ -3,6 +3,7 @@
 const assert = require("node:assert/strict");
 const { resolve } = require("node:path");
 const { readFileSync } = require("node:fs");
+const { join } = require("node:path");
 const {
   cityModes,
   citySeoDescription,
@@ -10,6 +11,8 @@ const {
   relatedCities,
   renderDestinationContent
 } = require("./build-static");
+const { loadBlogArticles } = require("./blog-content");
+const { renderBlogIndex, renderBlogPost } = require("./build-blog");
 const { loadCatalog } = require("./load-catalog");
 
 const ROOT_DIR = resolve(__dirname, "..");
@@ -92,5 +95,37 @@ const related = relatedCities(granada, catalog);
 assert.ok(related.length <= 8);
 assert.ok(related.every((city) => city.country === granada.country));
 assert.ok(!related.some((city) => city.name === granada.name && city.country === granada.country));
+
+const blog = loadBlogArticles({
+  contentDir: resolve(ROOT_DIR, "content/blog"),
+  assetRoot: ROOT_DIR,
+  catalog,
+  now: new Date("2026-09-21T00:00:00Z")
+});
+assert.equal(blog.all.length, 12, "blog editorial grid should contain 12 files");
+assert.equal(blog.published.length, 2, "only two complete example articles should be public");
+const blogIndex = renderBlogIndex({
+  template: readFileSync(resolve(ROOT_DIR, "templates/blog-index.html"), "utf8"),
+  articles: blog.published,
+  siteUrl: "https://youcity.app",
+  sitePath: ""
+});
+assert.match(blogIndex, /<meta property="og:site_name" content="YouCity"/);
+assert.match(blogIndex, /Travel inspiration/);
+assert.match(blogIndex, /CollectionPage/);
+assert.match(blogIndex, /ItemList/);
+for (const article of blog.published) {
+  const html = renderBlogPost({
+    template: readFileSync(join(ROOT_DIR, "templates/blog-post.html"), "utf8"),
+    article,
+    relations: blog.resolveArticleRelations(article),
+    siteUrl: "https://youcity.app",
+    sitePath: ""
+  });
+  assert.match(html, /<main[\s\S]*<article[\s\S]*<\/article>[\s\S]*<\/main>/);
+  assert.match(html, /BlogPosting/);
+  assert.match(html, /BreadcrumbList/);
+  assert.doesNotMatch(html, /src\/main\.mjs|youtube\.com\/embed|leaflet|type="module"/);
+}
 
 console.log("Static SEO tests passed: titles, descriptions, destination content, and related cities.");

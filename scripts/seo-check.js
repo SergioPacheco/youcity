@@ -6,6 +6,7 @@
 const { existsSync, readdirSync, readFileSync } = require("node:fs");
 const { join, resolve } = require("node:path");
 const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
+const { loadBlogArticles } = require("./blog-content");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const OUTPUT_DIR = resolve(ROOT_DIR, "dist");
@@ -248,13 +249,65 @@ function hasVideoExperience(city) {
   return Object.values(city.videos || {}).some((rides) => Array.isArray(rides) && rides.length > 0);
 }
 
-function checkSitemap(catalog) {
+function checkSitemap(catalog, blogUrls = []) {
   const sitemap = read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   const sitemapCatalog = catalog.filter(hasVideoExperience);
-  const expected = [`${SITE_URL}${sitePath("/")}`, ...sitemapCatalog.map(cityUrl)];
+  const expected = [
+    `${SITE_URL}${sitePath("/")}`,
+    ...sitemapCatalog.map(cityUrl),
+    ...blogUrls.map((path) => `${SITE_URL}${sitePath(path)}`)
+  ];
   if (urls.length !== expected.length) fail(`sitemap.xml: expected ${expected.length} URLs, found ${urls.length}`);
   for (const url of expected) if (!urls.includes(url)) fail(`sitemap.xml: missing ${url}`);
+}
+
+function checkBlogOutput(blog) {
+  const expectedFiles = new Set(["blog/index.html", ...blog.published.map((article) => `blog/${article.slug}.html`)]);
+  const actualFiles = new Set(allHtmlFiles(join(OUTPUT_DIR, "blog"), "blog"));
+  for (const file of expectedFiles) if (!existsSync(join(OUTPUT_DIR, file))) fail(`${file}: missing generated blog document`);
+  for (const file of actualFiles) if (!expectedFiles.has(file)) fail(`${file}: unexpected draft or future blog document`);
+
+  const listing = existsSync(join(OUTPUT_DIR, "blog/index.html")) ? read("blog/index.html") : "";
+  if (listing && !/<html\b[^>]*lang=["']en["']/i.test(listing)) fail("blog/index.html: expected lang=\"en\"");
+  for (const article of blog.published) {
+    const file = `blog/${article.slug}.html`;
+    if (!existsSync(join(OUTPUT_DIR, file))) continue;
+    const html = read(file);
+    const expectedCanonical = `${SITE_URL}${sitePath(`/blog/${article.slug}`)}`;
+    const canonical = html.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] || "";
+    if (canonical !== expectedCanonical) fail(`${file}: canonical should be ${expectedCanonical}`);
+    if (!/<html\b[^>]*lang=["']en["']/i.test(html)) fail(`${file}: expected lang=\"en\"`);
+    if (!/<main\b[\s\S]*<article\b[\s\S]*<\/article>[\s\S]*<\/main>/i.test(html)) fail(`${file}: article body must be inside main/article`);
+    if (firstMeta(html, "property", "og:type") !== "article") fail(`${file}: expected og:type=article`);
+    if (/src\/main\.mjs|type=["']module["']|youtube\.com\/embed|leaflet/i.test(html)) fail(`${file}: blog must not load the interactive application`);
+    const jsonLd = html.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)?.[1];
+    if (jsonLd) {
+      try {
+        const graph = JSON.parse(jsonLd)["@graph"] || [];
+        const types = graph.map((entry) => entry["@type"]);
+        if (!types.includes("BlogPosting") || !types.includes("BreadcrumbList")) fail(`${file}: JSON-LD graph must contain BlogPosting and BreadcrumbList`);
+      } catch {
+        // checkPage already reports invalid JSON-LD; avoid a duplicate error here.
+      }
+    }
+    for (const city of article.relatedCities) {
+      if (!html.includes(`href="${sitePath(`/city/${slugify(city)}`)}"`)) fail(`${file}: missing related city link for ${city}`);
+    }
+  }
+  if (listing) {
+    const jsonLd = listing.match(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/i)?.[1];
+    try {
+      const graph = JSON.parse(jsonLd)["@graph"] || [];
+      const types = graph.map((entry) => entry["@type"]);
+      if (!types.includes("CollectionPage") || !types.includes("ItemList")) fail("blog/index.html: JSON-LD graph must contain CollectionPage and ItemList");
+    } catch {
+      // checkPage reports the parse failure.
+    }
+    for (const article of blog.published) {
+      if (!listing.includes(`href="${sitePath(`/blog/${article.slug}`)}"`)) fail(`blog/index.html: missing ${article.slug} card link`);
+    }
+  }
 }
 
 function checkHomeCatalogSummary(catalog) {
@@ -280,6 +333,12 @@ function main() {
 
   checkRequiredFiles();
   const catalog = expectedCities();
+  const blog = loadBlogArticles({
+    contentDir: join(ROOT_DIR, "content/blog"),
+    assetRoot: ROOT_DIR,
+    catalog,
+    now: new Date()
+  });
   const editorialPath = join(ROOT_DIR, "data/city-seo-content.json");
   if (!existsSync(editorialPath)) {
     fail("Missing data/city-seo-content.json");
@@ -293,7 +352,8 @@ function main() {
 
   const pageData = files.filter((file) => file !== "404.html").map((file) => ({ file, ...checkPage(file) }));
   checkPage("404.html", { indexable: false });
-  checkSitemap(catalog);
+  checkBlogOutput(blog);
+  checkSitemap(catalog, ["/blog", ...blog.published.map((article) => `/blog/${article.slug}`)]);
   checkHomeCatalogSummary(catalog);
 
   for (const file of cityFiles) {
