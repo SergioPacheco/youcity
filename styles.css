@@ -387,9 +387,22 @@ button:focus-visible, input:focus-visible {
 .about-modal.is-open .about-card { opacity: 1; transform: translateY(0); }
 .about-card .drawer-close { position: absolute; top: 22px; right: 22px; }
 .about-card p { color: rgba(255,255,255,.7); line-height: 1.7; }
+.about-socials { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 24px 0; }
+.about-social-link { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 11px; border: 1px solid rgba(255,255,255,.14); border-radius: 7px; background: rgba(255,255,255,.04); color: rgba(255,255,255,.78); font: 600 10px "DM Mono", monospace; text-decoration: none; transition: border-color .2s, background .2s, color .2s, transform .2s; }
+.about-social-link:hover, .about-social-link:focus-visible { border-color: currentColor; background: rgba(255,255,255,.1); color: #fff; transform: translateY(-1px); }
+.about-social-link svg { width: 20px; height: 20px; flex: 0 0 20px; fill: currentColor; }
+.about-social-link-instagram:hover, .about-social-link-instagram:focus-visible { color: #f77737; }
+.about-social-link-youtube:hover, .about-social-link-youtube:focus-visible { color: #ff4b4b; }
+.about-social-link-facebook:hover, .about-social-link-facebook:focus-visible { color: #5890ff; }
+.about-social-link-tiktok:hover, .about-social-link-tiktok:focus-visible { color: #69e8e8; }
+.about-social-link-bluesky:hover, .about-social-link-bluesky:focus-visible { color: #65b7ff; }
+.about-social-link-instagram svg { fill: none; stroke: currentColor; stroke-width: 1.8; }
+.about-social-link-instagram .about-social-dot { fill: currentColor; stroke: none; }
+.about-social-link-youtube svg path + path { fill: #080a09; }
 .about-card .about-small { padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.4); font: 400 10px/1.55 "DM Mono", monospace; }
 .about-card a { color: var(--lcd-green); text-decoration: none; }
 .about-card a:hover { text-decoration: underline; }
+.about-card .about-social-link:hover, .about-card .about-social-link:focus-visible { text-decoration: none; }
 
 /* World map */
 .map-modal { position: fixed; z-index: 35; inset: 0; display: block; width: auto; max-width: none; height: auto; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: inherit; visibility: hidden; pointer-events: none; }

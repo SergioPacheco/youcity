@@ -44,6 +44,7 @@ export function createTravelController({
   const secondaryCategories = Object.entries(categories).filter(([, info]) => info.placement === "secondary").map(([id]) => id);
   let discoverCarsCatalogPromise = null;
   let cityGuidePromise = null;
+  let travelPromptsRevealed = false;
   const flightOriginResolver = createFlightOriginResolver({
     geolocation: window?.navigator?.geolocation,
     getAirports: () => airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS)
@@ -112,11 +113,12 @@ export function createTravelController({
     return { offers, actions, hasOffers: Boolean(actions) };
   }
 
-  function renderTravelPrompts(city) {
+  function renderTravelPrompts(city, { reveal = false } = {}) {
+    if (reveal) travelPromptsRevealed = true;
     const { actions, hasOffers } = renderQuickTravelActions(city);
     updateMainTravelCta(city, hasOffers);
     if (!elements.travelPrompts || !elements.travelQuickActions) return;
-    elements.travelPrompts.hidden = !hasOffers;
+    elements.travelPrompts.hidden = !hasOffers || !travelPromptsRevealed;
     if (!hasOffers) {
       elements.travelQuickActions.replaceChildren();
       return;
@@ -331,7 +333,7 @@ export function createTravelController({
       ensureDiscoverCarsCatalog();
       await stay22Promise;
       refreshDestinationHub(currentCity());
-      renderTravelPrompts(currentCity());
+      renderTravelPrompts(currentCity(), { reveal: true });
 
       // Analytics: travel_planner_open
       window.YOUCITY_ANALYTICS?.track?.({
