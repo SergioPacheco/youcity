@@ -9,6 +9,7 @@ const { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeF
 const { spawnSync } = require("node:child_process");
 const { dirname, join, resolve, relative } = require("node:path");
 const { loadCatalog: loadCanonicalCatalog } = require("./load-catalog");
+const { buildBlog } = require("./build-blog");
 
 const ROOT_DIR = resolve(__dirname, "..");
 const OUTPUT_DIR = resolve(ROOT_DIR, "dist");
@@ -510,11 +511,12 @@ function xmlEscape(value) {
   return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 }
 
-function buildSitemap(catalog) {
+function buildSitemap(catalog, blogUrls = []) {
   const sitemapCatalog = catalog.filter(hasVideoExperience);
   const urls = [
     `${SITE_URL}${sitePath("/")}`,
-    ...sitemapCatalog.map((city) => `${SITE_URL}${cityPath(city)}`)
+    ...sitemapCatalog.map((city) => `${SITE_URL}${cityPath(city)}`),
+    ...blogUrls.map((path) => `${SITE_URL}${sitePath(path)}`)
   ];
   const entries = urls.map((url) => `  <url>\n    <loc>${xmlEscape(url)}</loc>\n  </url>`).join("\n");
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries}\n</urlset>\n`;
@@ -650,6 +652,7 @@ function main() {
   }
   writeAffiliateOverridesAsset();
   cpSync(resolve(ROOT_DIR, "assets"), join(OUTPUT_DIR, "assets"), { recursive: true });
+  cpSync(resolve(ROOT_DIR, "blog.css"), join(OUTPUT_DIR, "blog.css"));
   for (const file of ["_headers", "_redirects"]) {
     if (existsSync(resolve(ROOT_DIR, file))) cpSync(resolve(ROOT_DIR, file), join(OUTPUT_DIR, file));
   }
@@ -664,6 +667,15 @@ function main() {
     }
     cpSync(source, destination);
   }
+
+  const blogBuild = buildBlog({
+    rootDir: ROOT_DIR,
+    outputDir: OUTPUT_DIR,
+    siteUrl: SITE_URL,
+    sitePath: SITE_PATH,
+    catalog,
+    now: new Date()
+  });
 
   const baseHtml = versionStaticAssets(
     injectRuntimeBasePath(rewriteInternalPaths(readFileSync(resolve(ROOT_DIR, "index.html"), "utf8")))
@@ -682,7 +694,7 @@ function main() {
   });
 
   writeFileSync(join(OUTPUT_DIR, "robots.txt"), buildRobots());
-  writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog));
+  writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog, blogBuild.urls));
   writeFileSync(join(OUTPUT_DIR, "404.html"), buildNotFound());
   writeFileSync(join(OUTPUT_DIR, ".nojekyll"), "");
   
@@ -690,7 +702,7 @@ function main() {
   validateModuleImports();
   
   const sitemapCityCount = catalog.filter(hasVideoExperience).length;
-  console.log(`Built ${catalog.length + 1} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1} URLs, assets: ${ASSET_VERSION})`);
+  console.log(`Built ${catalog.length + 1 + blogBuild.articles.length} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1 + blogBuild.urls.length} URLs, blog: ${blogBuild.articles.length} articles, assets: ${ASSET_VERSION})`);
 }
 
 if (require.main === module) main();
