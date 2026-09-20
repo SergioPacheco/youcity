@@ -195,21 +195,92 @@ function cityPath(city) {
   return sitePath(`/city/${slugify(city.name)}${CITY_SUFFIX}`);
 }
 
-function cityNote(city) {
-  const name = displayCityName(city);
-  const modes = cityModes(city);
-  const modeText = modes.length ? modes.join(", ") : "city";
-  return `Explore ${name}, ${countryName(city.country)} through real streets, local radio, and immersive ${modeText} rides.`;
+const CITY_MODE_DEFINITIONS = [
+  { key: "walk", label: "Walk", description: "walking", content: (name) => `Walk through ${name}` },
+  { key: "drive", label: "Drive", description: "driving", content: (name) => `Drive through ${name}` },
+  { key: "drone", label: "Drone", description: "drone", content: (name) => `See ${name} from above` },
+  { key: "bike", label: "Bike", description: "cycling", content: (name) => `Cycle through ${name}` },
+  { key: "beach_walk", label: "Beach Walk", description: "beach walks", content: (name) => `Take a beach walk in ${name}` }
+];
+
+const DESCRIPTION_MODE_KEYS = ["beach_walk", "walk", "drive", "drone", "bike"];
+
+function cityModeKeys(city, order = CITY_MODE_DEFINITIONS.map((mode) => mode.key)) {
+  return order.filter((key) => Array.isArray(city.videos?.[key]) && city.videos[key].length > 0);
 }
 
 function cityModes(city) {
-  return [
-    city.videos?.drive?.length ? "Drive" : null,
-    city.videos?.bike?.length ? "Bike" : null,
-    city.videos?.walk?.length ? "Walk" : null,
-    city.videos?.beach_walk?.length ? "Beach Walk" : null,
-    city.videos?.drone?.length ? "Drone" : null
-  ].filter(Boolean);
+  return CITY_MODE_DEFINITIONS
+    .filter((mode) => cityModeKeys(city).includes(mode.key))
+    .map((mode) => mode.label);
+}
+
+function formatList(values) {
+  if (values.length <= 1) return values[0] || "";
+  if (values.length === 2) return `${values[0]} and ${values[1]}`;
+  return `${values.slice(0, -1).join(", ")} and ${values.at(-1)}`;
+}
+
+function formatTitleList(values) {
+  if (values.length <= 1) return values[0] || "";
+  if (values.length === 2) return `${values[0]} & ${values[1]}`;
+  return `${values.slice(0, -1).join(", ")} & ${values.at(-1)}`;
+}
+
+function cityModeDefinitions(city, order = DESCRIPTION_MODE_KEYS) {
+  const available = cityModeKeys(city, order);
+  return order
+    .filter((key) => available.includes(key))
+    .map((key) => CITY_MODE_DEFINITIONS.find((mode) => mode.key === key));
+}
+
+function citySeoTitle(city) {
+  const name = displayCityName(city);
+  const modes = cityModes(city);
+  const majorModes = modes.filter((mode) => mode !== "Beach Walk");
+  if (modes.includes("Beach Walk") && majorModes.length <= 2) {
+    return `${name} Beach Walk & Virtual Tour | YouCity`;
+  }
+  if (!modes.length) return `${name} Virtual Tour | YouCity`;
+  return `${name} Virtual Tour — ${formatTitleList(modes.slice(0, 3))} | YouCity`;
+}
+
+function citySeoDescription(city) {
+  const name = displayCityName(city);
+  const country = countryName(city.country);
+  const modeText = formatList(cityModeDefinitions(city).map((mode) => mode.description));
+  const experienceText = modeText ? `immersive ${modeText} tours` : "immersive virtual tours";
+  const firstSentence = `Explore ${name}, ${country} through ${experienceText}.`;
+  const radioSentence = city.radios?.length
+    ? "Experience the city virtually with local radio on YouCity."
+    : "Experience the destination virtually with YouCity.";
+  return `${firstSentence} ${radioSentence}`;
+}
+
+function relatedCities(city, catalog) {
+  return catalog
+    .filter((candidate) => candidate !== city && candidate.name !== city.name && candidate.country === city.country)
+    .slice(0, 8);
+}
+
+function renderDestinationContent(city, catalog) {
+  const name = displayCityName(city);
+  const country = countryName(city.country);
+  const modeDefinitions = cityModeDefinitions(city);
+  const modeText = formatList(modeDefinitions.map((mode) => mode.description));
+  const radioText = city.radios?.length ? " with local radio" : "";
+  const experiences = modeDefinitions
+    .map((mode) => `<li>${escapeHtml(mode.content(name))}</li>`)
+    .join("");
+  const radioSection = city.radios?.length
+    ? `<h2>Listen to local radio in ${escapeHtml(name)}</h2><p>Explore ${escapeHtml(name)} while listening to local stations available on YouCity.</p><ul>${city.radios.slice(0, 3).map((radio) => `<li>${escapeHtml(radio.name)}</li>`).join("")}</ul>`
+    : "";
+  const related = relatedCities(city, catalog);
+  const relatedSection = related.length
+    ? `<h2>More destinations in ${escapeHtml(country)}</h2><ul class="destination-related">${related.map((candidate) => `<li><a href="${escapeHtml(cityPath(candidate))}">${escapeHtml(displayCityName(candidate))}</a></li>`).join("")}</ul>`
+    : "";
+  const experienceText = modeText ? `immersive ${modeText} experiences` : "immersive virtual experiences";
+  return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul>${radioSection}${relatedSection}</section>`;
 }
 
 function hasVideoExperience(city) {
@@ -221,19 +292,20 @@ function citySeo(city) {
   const country = countryName(city.country);
   const path = cityPath(city);
   const canonical = `${SITE_URL}${path}`;
-  const description = cityNote(city);
+  const title = citySeoTitle(city);
+  const description = citySeoDescription(city);
   return {
     id: slugify(city.name),
     rawCountry: city.country,
     countryCode: city.countryCode || null,
-    title: `${name} — YouCity`,
+    title,
     description,
     canonical,
     jsonLd: [
       {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        name: `${name} — YouCity`,
+        name: title,
         description,
         url: canonical,
         isPartOf: { "@type": "WebSite", name: SITE_NAME, url: `${SITE_URL}${sitePath("/")}` }
@@ -339,7 +411,15 @@ function replaceSeoFallback(html, body) {
   return pattern.test(html) ? html.replace(pattern, content) : html.replace("</body>", `  ${content}\n</body>`);
 }
 
-function renderPage(baseHtml, seo, fallback) {
+function replaceDestinationContent(html, city, catalog) {
+  const content = renderDestinationContent(city, catalog);
+  const pattern = /<noscript\b[^>]*data-seo-fallback[^>]*>/i;
+  return pattern.test(html)
+    ? html.replace(pattern, `${content}\n\n    $&`)
+    : html.replace("</body>", `  ${content}\n</body>`);
+}
+
+function renderPage(baseHtml, seo, fallback, { city = null, catalog = [] } = {}) {
   let html = replaceTitle(baseHtml, seo.title);
   html = replaceMeta(html, 'name="description"', seo.description);
   html = replaceMeta(html, 'name="robots"', "index,follow");
@@ -354,6 +434,10 @@ function renderPage(baseHtml, seo, fallback) {
   html = replaceMeta(html, 'name="twitter:image:alt"', SOCIAL_ALT);
   html = replaceLink(html, "canonical", seo.canonical);
   html = replaceJsonLd(html, seo.jsonLd);
+  if (city) {
+    html = html.replace(/<html\b([^>]*)>/i, '<html$1 class="seo-city-page">');
+    html = replaceDestinationContent(html, city, catalog);
+  }
   if (fallback) html = replaceSeoFallback(html, fallback);
   return html;
 }
@@ -380,10 +464,10 @@ function buildNotFound() {
   return versionStaticAssets(`<!doctype html>\n<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found — YouCity</title><meta name="robots" content="noindex,follow"><link rel="stylesheet" href="${sitePath("/styles.css")}"></head><body><main class="seo-fallback"><h1>Page not found</h1><p>The city page you requested does not exist.</p><p><a href="${sitePath("/")}">Return to YouCity</a></p></main></body></html>\n`);
 }
 
-function cityFallback(seo, catalog, discoverCarsCatalog) {
-  const links = catalog.map((city) => {
-    const name = displayCityName(city);
-    return `<li><a href="${cityPath(city)}">${escapeHtml(name)}</a></li>`;
+function cityFallback(seo, city, catalog, discoverCarsCatalog) {
+  const links = relatedCities(city, catalog).map((related) => {
+    const name = displayCityName(related);
+    return `<li><a href="${cityPath(related)}">${escapeHtml(name)}</a></li>`;
   }).join("");
   const planner = [
     ["Things to do", "Viator"],
@@ -398,7 +482,7 @@ function cityFallback(seo, catalog, discoverCarsCatalog) {
     planner.splice(2, 0, ["Get around", "DiscoverCars"]);
   }
   const plannerMarkup = planner.map(([label, providers]) => `<li><strong>${label}</strong> — ${providers} <em>(preview)</em></li>`).join("");
-  return `<section class="seo-fallback"><h2>${escapeHtml(seo.name)}, ${escapeHtml(seo.country)}</h2><p>${escapeHtml(seo.description)}</p><p>Available modes: ${escapeHtml(seo.modes.join(", "))}.</p><h2>Plan your trip to ${escapeHtml(seo.name)}</h2><ul>${plannerMarkup}</ul><p>Travel options preview. Affiliate links will be added after provider approval.</p><p><a href="${sitePath("/")}">Explore all cities</a></p><h2>More destinations</h2><ul>${links}</ul></section>`;
+  return `<section class="seo-fallback"><h2>${escapeHtml(seo.name)}, ${escapeHtml(seo.country)}</h2><p>${escapeHtml(seo.description)}</p><p>Available modes: ${escapeHtml(seo.modes.join(", "))}.</p><h2>Plan your trip to ${escapeHtml(seo.name)}</h2><ul>${plannerMarkup}</ul><p>Travel options preview. Affiliate links will be added after provider approval.</p><p><a href="${sitePath("/")}">Explore all cities</a></p><h2>More destinations in ${escapeHtml(seo.country)}</h2><ul>${links}</ul></section>`;
 }
 
 function homeFallback(catalog) {
@@ -469,7 +553,14 @@ function validateModuleImports(outputDir = OUTPUT_DIR, { checkRequired = outputD
   console.log("✓ Module import validation passed");
 }
 
-module.exports = { validateModuleImports };
+module.exports = {
+  cityModes,
+  citySeoDescription,
+  citySeoTitle,
+  relatedCities,
+  renderDestinationContent,
+  validateModuleImports
+};
 
 function main() {
   const catalogBuild = spawnSync(process.execPath, [resolve(ROOT_DIR, "scripts/build-catalog.js")], { stdio: "inherit" });
@@ -516,7 +607,7 @@ function main() {
   catalog.forEach((city, index) => {
     const seo = citySeo(city);
     const cityHtml = replaceStaticCity(
-      renderPage(baseHtml, seo, cityFallback(seo, catalog, discoverCarsCatalog)),
+      renderPage(baseHtml, seo, cityFallback(seo, city, catalog, discoverCarsCatalog), { city, catalog }),
       seo,
       index + 1,
       catalog.length

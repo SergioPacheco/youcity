@@ -1648,6 +1648,35 @@ button:focus-visible, input:focus-visible {
   .comment-assistant-share-destinations { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
+html.seo-city-page, html.seo-city-page body {
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+html.seo-city-page .app { height: 100vh; }
+
+.destination-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 64px 24px;
+  color: #e8e6e1;
+  background: #111411;
+}
+
+.destination-content h2 {
+  margin: 32px 0 12px;
+  color: #fff;
+  font: 300 32px/1.1 "Newsreader", serif;
+}
+
+.destination-content h2:first-child { margin-top: 0; }
+.destination-content p, .destination-content li { line-height: 1.7; }
+.destination-content p { max-width: 680px; color: var(--text-muted); }
+.destination-content ul { padding-left: 22px; }
+.destination-content a { color: var(--acid); }
+
 /* Accessible fallback when JavaScript is disabled. */
 .seo-fallback {
   box-sizing: border-box;

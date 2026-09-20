@@ -70,6 +70,7 @@ function checkRequiredFiles() {
 
 function checkPage(file, { indexable = true } = {}) {
   const html = read(file);
+  if (html.includes("youcity.pages.dev")) fail(`${file}: contains legacy pages.dev SEO reference`);
   const title = html.match(/<title>([\s\S]*?)<\/title>/i)?.[1].trim() || "";
   const h1 = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map((match) => stripTags(match[1])).filter(Boolean);
 
@@ -136,6 +137,45 @@ function cityUrl(city) {
   return SITE_URL + sitePath(path);
 }
 
+function displayCityName(city) {
+  return { "Sao Paulo": "São Paulo" }[city.name] || city.name;
+}
+
+function destinationSection(html) {
+  const match = html.match(/<section\b[^>]*class=["'][^"']*\bdestination-content\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i);
+  return match?.[0] || "";
+}
+
+function checkDestinationContent(file, city) {
+  const html = read(file);
+  const sections = [...html.matchAll(/<section\b[^>]*class=["'][^"']*\bdestination-content\b[^"']*["'][^>]*>/gi)];
+  if (sections.length !== 1) {
+    fail(`${file}: expected exactly one <section class="destination-content">`);
+    return;
+  }
+
+  const section = destinationSection(html);
+  const name = displayCityName(city);
+  if (!section.includes(name)) fail(`${file}: destination content does not contain ${name}`);
+
+  const requiredExperiences = {
+    walk: `Walk through ${name}`,
+    drive: `Drive through ${name}`,
+    bike: `Cycle through ${name}`,
+    drone: `See ${name} from above`,
+    beach_walk: `Take a beach walk in ${name}`
+  };
+  for (const [mode, text] of Object.entries(requiredExperiences)) {
+    if (city.videos?.[mode]?.length && !section.includes(text)) {
+      fail(`${file}: destination content is missing ${text}`);
+    }
+  }
+
+  const relatedLists = [...section.matchAll(/<ul\b[^>]*class=["'][^"']*\bdestination-related\b[^"']*["'][^>]*>([\s\S]*?)<\/ul>/gi)];
+  const relatedLinks = relatedLists.flatMap((match) => [...match[1].matchAll(/<a\b[^>]*href=["'][^"']+["'][^>]*>/gi)]);
+  if (relatedLinks.length > 8) fail(`${file}: destination-related contains ${relatedLinks.length} links; maximum is 8`);
+}
+
 function hasVideoExperience(city) {
   return Object.values(city.videos || {}).some((rides) => Array.isArray(rides) && rides.length > 0);
 }
@@ -165,6 +205,11 @@ function main() {
   const pageData = files.filter((file) => file !== "404.html").map((file) => ({ file, ...checkPage(file) }));
   checkPage("404.html", { indexable: false });
   checkSitemap(catalog);
+
+  for (const file of cityFiles) {
+    const city = catalog.find((candidate) => `city/${slugify(candidate.name)}.html` === file);
+    if (city) checkDestinationContent(file, city);
+  }
 
   for (const key of ["title", "canonical", "description"]) {
     const seen = new Map();
