@@ -1,4 +1,5 @@
-const { readFileSync } = require("node:fs");
+const { existsSync, readdirSync, readFileSync } = require("node:fs");
+const { join, resolve, relative } = require("node:path");
 
 const ALLOWED_KEYS = new Set([
   "title",
@@ -166,6 +167,85 @@ function parseArticleFile(filePath, { now = new Date() } = {}) {
   return validateArticle({ ...parsed.frontmatter, body: parsed.body, sourcePath: filePath }, { filePath, now });
 }
 
+function slugifyCity(value) {
+  let slug = String(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-");
+  while (slug.startsWith("-")) slug = slug.slice(1);
+  while (slug.endsWith("-")) slug = slug.slice(0, -1);
+  return slug;
+}
+
+function getPublishedArticles(articles, now = new Date()) {
+  const timestamp = now.getTime();
+  return articles.filter((article) => !article.draft && Date.parse(article.datePublished) <= timestamp);
+}
+
+function checkLocalImage(article, assetRoot) {
+  if (typeof article.image !== "string" || !article.image.startsWith("/")) {
+    throw sourceError(article.sourcePath, "image must be a root-relative local path");
+  }
+  const relativeImage = article.image.slice(1);
+  const imagePath = resolve(assetRoot, relativeImage);
+  const rootPath = resolve(assetRoot);
+  if (relative(rootPath, imagePath).startsWith("..") || relativeImage.includes("?")) {
+    throw sourceError(article.sourcePath, `image '${article.image}' is outside the local asset root`);
+  }
+  if (!existsSync(imagePath)) throw sourceError(article.sourcePath, `image '${article.image}' does not exist`);
+}
+
+function resolveArticleRelations(article, { catalog = [], allBySlug = new Map(), bySlug = new Map() } = {}) {
+  const citiesBySlug = new Map(catalog.map((city) => [slugifyCity(city.name), city]));
+  const cities = article.relatedCities.map((slug) => citiesBySlug.get(slug));
+  const missingCity = article.relatedCities.find((slug) => !citiesBySlug.has(slug));
+  if (missingCity) throw sourceError(article.sourcePath, `related city '${missingCity}' does not exist in the catalog`);
+  if (!article.draft && !article.isFuture && !cities.length) {
+    throw sourceError(article.sourcePath, "published article must relate to at least one catalog city");
+  }
+
+  const posts = [];
+  for (const slug of article.relatedPosts) {
+    const candidate = allBySlug.get(slug);
+    if (!candidate) throw sourceError(article.sourcePath, `related post '${slug}' does not exist`);
+    if (bySlug.has(slug)) posts.push(bySlug.get(slug));
+  }
+  return { cities, posts };
+}
+
+function loadBlogArticles({ contentDir, assetRoot, catalog = [], now = new Date() }) {
+  if (!contentDir) throw new Error("Blog content directory is required");
+  const files = readdirSync(contentDir, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && entry.name.endsWith(".md"))
+    .map((entry) => entry.name)
+    .sort();
+  const all = files.map((file) => {
+    const article = parseArticleFile(join(contentDir, file), { now });
+    checkLocalImage(article, assetRoot || resolve(contentDir, "../.."));
+    return article;
+  });
+  const slugOwners = new Map();
+  for (const article of all) {
+    const owner = slugOwners.get(article.slug);
+    if (owner) throw sourceError(article.sourcePath, `duplicate slug '${article.slug}' also appears in ${owner}`);
+    slugOwners.set(article.slug, article.sourcePath);
+  }
+  const published = getPublishedArticles(all, now);
+  const bySlug = new Map(published.map((article) => [article.slug, article]));
+  const allBySlug = new Map(all.map((article) => [article.slug, article]));
+  const relations = new Map();
+  for (const article of published) {
+    relations.set(article.slug, resolveArticleRelations(article, { catalog, allBySlug, bySlug }));
+  }
+  return {
+    all,
+    published,
+    bySlug,
+    resolveArticleRelations: (article) => relations.get(article.slug) || resolveArticleRelations(article, { catalog, allBySlug, bySlug })
+  };
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -325,9 +405,12 @@ function renderMarkdown(markdown, { sitePath = "", sourcePath = "" } = {}) {
 
 module.exports = {
   escapeHtml,
+  getPublishedArticles,
+  loadBlogArticles,
   parseArticleFile,
   parseFrontmatter,
   renderMarkdown,
+  resolveArticleRelations,
   validateArticle,
   validateSlug
 };

@@ -6,6 +6,8 @@ const { join } = require("node:path");
 const { tmpdir } = require("node:os");
 
 const {
+  getPublishedArticles,
+  loadBlogArticles,
   parseArticleFile,
   parseFrontmatter,
   renderMarkdown,
@@ -15,7 +17,7 @@ const {
 
 function expectFailure(label, callback, expectedText = "") {
   assert.throws(callback, (error) => {
-    assert.match(error.message, /blog\/article\.md/);
+    assert.match(error.message, /\.md:/);
     if (expectedText) assert.match(error.message, new RegExp(expectedText));
     return true;
   }, label);
@@ -96,5 +98,106 @@ expectFailure("unsafe local URL", () => renderMarkdown("[bad](/../secret)", { so
 expectFailure("missing required field", () => validateArticle({
   title: "Only a title"
 }, { filePath: sourcePath, now: new Date("2026-09-21T00:00:00Z") }), "required");
+
+function fixtureArticle({ slug, title = slug, draft = false, datePublished = "2026-09-20T10:00:00+00:00", relatedCities = ["london"], relatedPosts = [] }) {
+  return `---
+title: "${title}"
+slug: "${slug}"
+description: "Description for ${slug}."
+image: "/assets/blog/cover.webp"
+imageAlt: "Cover for ${slug}"
+author: "YouCity"
+datePublished: "${datePublished}"
+relatedCities: ${JSON.stringify(relatedCities)}
+relatedPosts: ${JSON.stringify(relatedPosts)}
+draft: ${draft}
+---
+
+## ${title}
+
+Useful article body for ${slug}.
+`;
+}
+
+function createFixture(files) {
+  const root = mkdtempSync(join(tmpdir(), "youcity-blog-loader-"));
+  const contentDir = join(root, "content");
+  const assetPath = join(root, "assets/blog");
+  require("node:fs").mkdirSync(contentDir, { recursive: true });
+  require("node:fs").mkdirSync(assetPath, { recursive: true });
+  writeFileSync(join(assetPath, "cover.webp"), "fixture");
+  for (const [name, content] of Object.entries(files)) writeFileSync(join(contentDir, name), content);
+  return { root, contentDir, assetRoot: root };
+}
+
+const fixtureCatalog = [{
+  name: "London",
+  videos: { walk: [{ id: "video" }] },
+  radios: [{ name: "Local station", url: "https://example.com/stream" }]
+}];
+
+const loaderFixture = createFixture({
+  "01-public.md": fixtureArticle({ slug: "public-one", relatedPosts: ["public-two", "draft-post"] }),
+  "02-public.md": fixtureArticle({ slug: "public-two", relatedPosts: ["public-one"] }),
+  "03-draft.md": fixtureArticle({ slug: "draft-post", draft: true }),
+  "04-future.md": fixtureArticle({ slug: "future-post", datePublished: "2099-01-01T00:00:00+00:00" })
+});
+try {
+  const loaded = loadBlogArticles({
+    contentDir: loaderFixture.contentDir,
+    assetRoot: loaderFixture.assetRoot,
+    catalog: fixtureCatalog,
+    now: new Date("2026-09-21T00:00:00Z")
+  });
+  assert.equal(loaded.all.length, 4);
+  assert.equal(loaded.published.length, 2);
+  assert.deepEqual([...loaded.bySlug.keys()].sort(), ["public-one", "public-two"]);
+  assert.deepEqual(getPublishedArticles(loaded.all, new Date("2026-09-21T00:00:00Z")).map((article) => article.slug), ["public-one", "public-two"]);
+} finally {
+  rmSync(loaderFixture.root, { recursive: true, force: true });
+}
+
+const relationFixture = createFixture({
+  "public.md": fixtureArticle({ slug: "public-post", relatedPosts: ["draft-post"] }),
+  "draft.md": fixtureArticle({ slug: "draft-post", draft: true })
+});
+try {
+  const loaded = loadBlogArticles({ contentDir: relationFixture.contentDir, assetRoot: relationFixture.assetRoot, catalog: fixtureCatalog, now: new Date("2026-09-21T00:00:00Z") });
+  const relations = loaded.resolveArticleRelations(loaded.bySlug.get("public-post"));
+  assert.deepEqual(relations.posts, []);
+} finally {
+  rmSync(relationFixture.root, { recursive: true, force: true });
+}
+
+const missingImageFixture = createFixture({
+  "missing.md": fixtureArticle({ slug: "missing-image" }).replace("/assets/blog/cover.webp", "/assets/blog/missing.webp")
+});
+expectFailure("missing image", () => loadBlogArticles({ contentDir: missingImageFixture.contentDir, assetRoot: missingImageFixture.assetRoot, catalog: fixtureCatalog, now: new Date("2026-09-21T00:00:00Z") }), "image");
+rmSync(missingImageFixture.root, { recursive: true, force: true });
+
+const missingCityFixture = createFixture({ "missing-city.md": fixtureArticle({ slug: "missing-city", relatedCities: ["paris"] }) });
+expectFailure("missing catalog city", () => loadBlogArticles({ contentDir: missingCityFixture.contentDir, assetRoot: missingCityFixture.assetRoot, catalog: fixtureCatalog, now: new Date("2026-09-21T00:00:00Z") }), "city");
+rmSync(missingCityFixture.root, { recursive: true, force: true });
+
+const missingPostFixture = createFixture({ "missing-post.md": fixtureArticle({ slug: "missing-post", relatedPosts: ["does-not-exist"] }) });
+expectFailure("missing published related post", () => loadBlogArticles({ contentDir: missingPostFixture.contentDir, assetRoot: missingPostFixture.assetRoot, catalog: fixtureCatalog, now: new Date("2026-09-21T00:00:00Z") }), "related");
+rmSync(missingPostFixture.root, { recursive: true, force: true });
+
+const duplicateFixture = createFixture({
+  "one.md": fixtureArticle({ slug: "duplicate" }),
+  "two.md": fixtureArticle({ slug: "duplicate" })
+});
+expectFailure("duplicate slug", () => loadBlogArticles({ contentDir: duplicateFixture.contentDir, assetRoot: duplicateFixture.assetRoot, catalog: fixtureCatalog, now: new Date("2026-09-21T00:00:00Z") }), "duplicate");
+rmSync(duplicateFixture.root, { recursive: true, force: true });
+
+const repositoryArticles = loadBlogArticles({
+  contentDir: join(__dirname, "../content/blog"),
+  assetRoot: join(__dirname, ".."),
+  catalog: require("../data/catalog.json"),
+  now: new Date("2026-09-21T00:00:00Z")
+});
+assert.equal(repositoryArticles.all.length, 12);
+assert.equal(repositoryArticles.published.length, 2);
+assert.equal(repositoryArticles.bySlug.size, 2);
 
 console.log("Blog parser tests passed.");
