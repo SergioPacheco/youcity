@@ -9,6 +9,7 @@ import {
   validateCache,
   validateCompleteEntry
 } from "./city-seo-content.mjs";
+import { createThrottledRequest, mapWithConcurrency, retryJson, selectSyncCities, syncCity } from "./sync-city-seo-content.mjs";
 
 const validEntry = {
   status: "complete",
@@ -60,7 +61,116 @@ function runUnitTests() {
   assert.equal(editorialContentChanged(validEntry, { ...validEntry, summary: { ...validEntry.summary, title: "Granada city" } }), true);
 }
 
+async function runSyncUnitTests() {
+  let attempts = 0;
+  const retryResult = await retryJson("https://example.test/retry", {
+    request: async () => {
+      attempts += 1;
+      if (attempts < 3) throw Object.assign(new Error("busy"), { status: 429 });
+      return { ok: true, status: 200, json: async () => ({ ok: true }) };
+    },
+    sleep: async () => {}
+  });
+  assert.deepEqual(retryResult, { ok: true });
+  assert.equal(attempts, 3);
+
+  let active = 0;
+  let maximumActive = 0;
+  await mapWithConcurrency([1, 2, 3, 4, 5, 6, 7], 4, async (value) => {
+    active += 1;
+    maximumActive = Math.max(maximumActive, active);
+    await new Promise((resolve) => setTimeout(resolve, 1));
+    active -= 1;
+    return value * 2;
+  });
+  assert.ok(maximumActive <= 4);
+
+  const city = { name: "Granada", country: "Spain", coordinates: [37.1765, -3.5979] };
+  const previous = { ...validEntry, updatedAt: "2026-09-18" };
+  await assert.rejects(() => syncCity(city, {
+    previous,
+    request: async () => { throw Object.assign(new Error("offline"), { status: 503 }); },
+    sleep: async () => {}
+  }));
+  const retained = await syncCity(city, {
+    previous,
+    request: async () => { throw Object.assign(new Error("offline"), { status: 503 }); },
+    sleep: async () => {},
+    preserveOnFailure: true
+  });
+  assert.deepEqual(retained, previous);
+
+  const requested = [];
+  const request = async (endpoint) => {
+    const url = new URL(endpoint);
+    requested.push(url.href);
+    if (url.pathname.endsWith("/search/page")) {
+      return { ok: true, status: 200, json: async () => url.searchParams.get("q") === "Granada, Spain" ? { pages: [] } : { pages: [{ title: "Granada" }] } };
+    }
+    if (url.pathname.includes("/summary/")) {
+      return { ok: true, status: 200, json: async () => ({ title: "Granada", description: "city in Andalusia, Spain", extract: validEntry.summary.extract, content_urls: { desktop: { page: validEntry.summary.url } } }) };
+    }
+    if (url.hostname === "www.wikidata.org" && url.searchParams.get("list") === "geosearch") {
+      return { ok: true, status: 200, json: async () => ({ query: { geosearch: [{ title: "Q1" }, { title: "Q2" }, { title: "Q3" }] } }) };
+    }
+    if (url.hostname === "www.wikidata.org" && url.searchParams.get("action") === "wbgetentities") {
+      return { ok: true, status: 200, json: async () => ({ entities: {
+        Q1: { labels: { en: { value: "Alhambra" } }, descriptions: { en: { value: "Palace and fortress complex in Granada." } }, sitelinks: { enwiki: { title: "Alhambra" } } },
+        Q2: { labels: { en: { value: "Granada Cathedral" } }, descriptions: { en: { value: "Roman Catholic cathedral in Granada." } }, sitelinks: { enwiki: { title: "Granada Cathedral" } } },
+        Q3: { labels: { en: { value: "Short Description Stadium" } }, descriptions: { en: { value: "stadium" } }, sitelinks: { enwiki: { title: "Short Description Stadium" } } }
+      } }) };
+    }
+    if (url.hostname.endsWith("wikipedia.org") && url.pathname.endsWith("/w/api.php")) {
+      return { ok: true, status: 200, json: async () => ({ query: { pages: {} } }) };
+    }
+    throw new Error(`Unexpected endpoint ${url.href}`);
+  };
+  const synced = await syncCity(city, { request, sleep: async () => {}, now: () => "2026-09-19" });
+  assert.equal(synced.status, "complete");
+  assert.ok(synced.places.length >= 2);
+  assert.ok(!synced.places.some((place) => place.name === "Short Description Stadium"));
+  assert.ok(requested.every((url) => !url.includes("commons.wikimedia.org")));
+  assert.ok(requested.every((url) => !url.includes("generator=geosearch")), "Wikipedia geosearch should only run when Wikidata has fewer than two places");
+
+  let usedActionSearch = false;
+  const restLimitedRequest = async (endpoint, init) => {
+    const url = new URL(endpoint);
+    if (url.pathname.endsWith("/search/page")) throw Object.assign(new Error("busy"), { status: 429 });
+    if (url.pathname.endsWith("/w/api.php") && url.searchParams.get("list") === "search") {
+      usedActionSearch = true;
+      return { ok: true, status: 200, json: async () => ({ query: { search: [{ title: "Granada" }] } }) };
+    }
+    return request(endpoint, init);
+  };
+  const fallbackSynced = await syncCity(city, { request: restLimitedRequest, sleep: async () => {}, now: () => "2026-09-19" });
+  assert.equal(fallbackSynced.status, "complete");
+  assert.equal(usedActionSearch, true);
+
+  const pauses = [];
+  let clock = 1_000;
+  const throttled = createThrottledRequest(async () => ({ ok: true, status: 200, json: async () => ({}) }), {
+    minimumInterval: 100,
+    sleep: async (milliseconds) => { pauses.push(milliseconds); },
+    now: () => clock
+  });
+  await throttled("https://example.test/one");
+  await throttled("https://example.test/two");
+  assert.deepEqual(pauses, [100]);
+
+  const incompleteOnly = selectSyncCities(
+    [{ name: "Granada" }, { name: "London" }],
+    { granada: { status: "complete" }, london: { status: "incomplete", reason: "REQUEST_FAILED" } },
+    true
+  );
+  assert.deepEqual(incompleteOnly.map((city) => city.name), ["London"]);
+}
+
 if (process.argv.includes("--unit")) {
   runUnitTests();
   console.log("City SEO content unit tests passed.");
+}
+
+if (process.argv.includes("--sync-unit")) {
+  await runSyncUnitTests();
+  console.log("City SEO synchronization unit tests passed.");
 }
