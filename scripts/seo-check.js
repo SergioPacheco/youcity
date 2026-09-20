@@ -257,6 +257,20 @@ function checkSitemap(catalog) {
   for (const url of expected) if (!urls.includes(url)) fail(`sitemap.xml: missing ${url}`);
 }
 
+function checkHomeCatalogSummary(catalog) {
+  const home = read("index.html");
+  const count = String(catalog.length);
+  if (!new RegExp(`<span[^>]+id=["']city-total["'][^>]*>${count}<\\/span>`, "i").test(home)) {
+    fail(`index.html: city-total should reflect ${count} catalog cities`);
+  }
+  if (!home.includes(`Explore ${count} cities through real streets`)) {
+    fail(`index.html: city-note should reflect ${count} catalog cities`);
+  }
+  if (!home.includes(`id="map-result-count">${count} cities`)) {
+    fail(`index.html: map-result-count should reflect ${count} catalog cities`);
+  }
+}
+
 function main() {
   if (!existsSync(OUTPUT_DIR)) {
     console.error("SEO check failed: dist/ does not exist. Run node scripts/build-static.js first.");
@@ -280,6 +294,7 @@ function main() {
   const pageData = files.filter((file) => file !== "404.html").map((file) => ({ file, ...checkPage(file) }));
   checkPage("404.html", { indexable: false });
   checkSitemap(catalog);
+  checkHomeCatalogSummary(catalog);
 
   for (const file of cityFiles) {
     const city = catalog.find((candidate) => `city/${slugify(candidate.name)}.html` === file);

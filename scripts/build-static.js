@@ -461,6 +461,14 @@ function replaceStaticCity(html, seo, index, total) {
   return output;
 }
 
+function replaceHomeCatalogSummary(html, catalogCount) {
+  let output = html;
+  output = replaceElementText(output, "span", "city-total", String(catalogCount));
+  output = replaceElementText(output, "p", "city-note", `Explore ${catalogCount} cities through real streets, local radio, and the rhythm of the world.`);
+  output = replaceElementText(output, "span", "map-result-count", `${catalogCount} cities`);
+  return output;
+}
+
 function replaceSeoFallback(html, body) {
   const pattern = /<noscript\b[^>]*data-seo-fallback[^>]*>[\s\S]*?<\/noscript>/i;
   const content = `<noscript data-seo-fallback>${body}</noscript>`;
@@ -493,7 +501,7 @@ function renderPage(baseHtml, seo, fallback, { city = null, catalog = [], editor
   if (city) {
     html = html.replace(/<html\b([^>]*)>/i, '<html$1 class="seo-city-page">');
     html = replaceDestinationContent(html, city, catalog, editorialContent);
-  }
+  } else html = replaceHomeCatalogSummary(html, catalog.length);
   if (fallback) html = replaceSeoFallback(html, fallback);
   return html;
 }
@@ -660,7 +668,7 @@ function main() {
   const baseHtml = versionStaticAssets(
     injectRuntimeBasePath(rewriteInternalPaths(readFileSync(resolve(ROOT_DIR, "index.html"), "utf8")))
   );
-  writeFileSync(join(OUTPUT_DIR, "index.html"), renderPage(baseHtml, homeSeo(catalog), homeFallback(catalog)));
+  writeFileSync(join(OUTPUT_DIR, "index.html"), renderPage(baseHtml, homeSeo(catalog), homeFallback(catalog), { catalog }));
 
   catalog.forEach((city, index) => {
     const seo = citySeo(city);
