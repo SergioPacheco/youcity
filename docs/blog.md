@@ -79,7 +79,9 @@ Before publishing:
 6. run the build and validation commands.
 
 The build does not fetch media, sources, APIs, or images. Editorial assets must
-already be versioned locally.
+already be versioned locally. The repository currently has seven published
+articles and ten structured drafts; new manually written posts must follow the
+frontmatter contract before they can be public.
 
 ## Update or rename an article
 

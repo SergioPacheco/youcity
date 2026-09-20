@@ -1,7 +1,7 @@
 ---
 title: "Paris on Foot: Choosing Areas to Explore"
 slug: "paris-on-foot-choosing-areas-to-explore"
-description: "An editorial brief for comparing Paris walking footage without treating recorded scenes as current travel information."
+description: "Plan a Paris walk around the places and surroundings you enjoy. Compare route ideas, choose a main stop and leave room for discoveries along the way."
 image: "/assets/hero-saopaulo.webp"
 imageAlt: "Cover placeholder for a Paris walking article"
 author: "Sergio Pacheco"
@@ -14,11 +14,46 @@ imageCredit: "Cover pending editorial image review."
 ctaLabel: "Explore Paris on YouCity"
 ---
 
-## Editorial brief
+Your Paris map is filling up with saved places. Connecting them all would produce a route, but would it produce an afternoon you want to spend walking?
 
-Audience: first-time visitors comparing walking moods in Paris. Primary question: how can different recorded routes help narrow a personal shortlist? Keep this distinct from London by focusing on comparing route character and personal walking preferences.
+Start by choosing the kind of outing you want. A walk built around architecture will look different from one centred on food, shops or time outdoors. That choice can help you turn a long list into something manageable.
 
-- Verify the selected Paris walk before describing visible scenes.
-- Avoid naming an area unless the video source confirms it.
-- CTA: Explore Paris on YouCity.
+## Choose the purpose of your walk
 
+Finish this sentence: “I would be happy with this afternoon if I…”
+
+Perhaps your answer is “had time to look at buildings”, “found somewhere pleasant for lunch” or “explored around the museum after my visit”.
+
+Use that answer to select one main stop. Add only the nearby places that support the same outing. Keep the others for a different day.
+
+## Compare the spaces between attractions
+
+Open [Paris on YouCity](/city/paris) and explore the available walking footage. Look at the connections between places, not only the moments that resemble postcards.
+
+Ask whether the type of surroundings appeals to you. Would you want to keep moving, pause frequently or find somewhere to sit? Are you interested in the route itself or mainly in a destination along it?
+
+If you compare recordings, check the context supplied by each creator. Weather, time of day and the selected route can affect your impression. One busy recording and one quiet recording cannot establish which neighbourhood is usually less crowded.
+
+## Create a route with three decisions
+
+Give your walk a starting point, a main stop and a finish. The finish might be somewhere to eat or a convenient transport connection.
+
+Check the walking directions between those points. Then mark extra stops as optional rather than appointments.
+
+| Part of the outing | Decide in advance | Leave open |
+| --- | --- | --- |
+| Start | How you will get there | Time to look around |
+| Main stop | Entry arrangements if needed | How long you stay |
+| Finish | A practical route back | A meal or another short walk |
+
+## Make the plan fit your energy
+
+Separate walking time from visiting time. A museum, lunch and a few browsing stops all need space beyond the estimate on your map.
+
+Check specific access requirements and current opening information before leaving. If you need a shorter outing, remove an optional detour first.
+
+## Find your starting point
+
+[Preview Paris on YouCity](/city/paris), then choose one area to research more closely. Identify locations through reliable route information rather than guessing from the footage.
+
+You do not need to settle your whole Paris itinerary today. A walk you are looking forward to is a useful place to begin.

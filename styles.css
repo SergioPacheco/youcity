@@ -86,10 +86,6 @@ button:focus-visible, input:focus-visible {
 .overflow-menu.is-open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 .overflow-menu button { min-height: 40px; padding: 0 12px; border: 0; border-radius: 5px; background: transparent; color: rgba(255,255,255,.78); cursor: pointer; font: 500 10px "DM Mono", monospace; text-align: left; }
 .overflow-menu button:hover, .overflow-menu button:focus-visible { background: rgba(215,255,67,.12); color: var(--acid); }
-.blog-nav-link { display: inline-flex; min-height: 44px; align-items: center; padding: 0 12px; border: 1px solid rgba(215,255,67,.42); border-radius: 22px; color: var(--acid); font: 600 10px "DM Mono", monospace; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
-.blog-nav-link:hover, .blog-nav-link:focus-visible { background: rgba(215,255,67,.12); color: var(--acid); }
-.overflow-menu-link { display: flex; min-height: 40px; align-items: center; padding: 0 12px; border-radius: 5px; color: rgba(255,255,255,.78); font: 500 10px "DM Mono", monospace; text-decoration: none; }
-.overflow-menu-link:hover, .overflow-menu-link:focus-visible { background: rgba(215,255,67,.12); color: var(--acid); }
 .icon-button, .menu-button { border: 1px solid var(--line); background: rgba(9,12,10,.28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); cursor: pointer; position: relative; z-index: 1; }
 .comment-assistant-button[hidden], #more-menu [data-overflow-action="comment-assistant"][hidden] { display: none !important; }
 .icon-button { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; }
@@ -392,6 +388,11 @@ button:focus-visible, input:focus-visible {
 .about-card .drawer-close { position: absolute; top: 22px; right: 22px; }
 .about-card p { color: rgba(255,255,255,.7); line-height: 1.7; }
 .about-description { max-width: 58ch; margin: 0; }
+.about-blog-link { display: flex; max-width: 560px; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; margin: 20px 0 6px; padding: 12px 14px; border: 1px solid rgba(215,255,67,.42); border-radius: 7px; color: var(--lcd-green); text-decoration: none; }
+.about-blog-link:hover, .about-blog-link:focus-visible { background: rgba(215,255,67,.1); border-color: var(--acid); color: var(--acid); text-decoration: none; }
+.about-blog-link:focus-visible { outline: 3px solid var(--acid); outline-offset: 3px; }
+.about-blog-link__label { font: 500 9px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+.about-blog-link__action { font: 600 11px "DM Mono", monospace; }
 .about-card .about-small { padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); color: rgba(255,255,255,.4); font: 400 10px/1.55 "DM Mono", monospace; }
 .about-card a { color: var(--lcd-green); text-decoration: none; }
 .about-card a:hover { text-decoration: underline; }
@@ -736,7 +737,6 @@ button:focus-visible, input:focus-visible {
 
 @media (max-width: 800px) {
   .top-actions > .comment-assistant-button { display: none !important; }
-  .blog-nav-link { display: none; }
   #cities-button svg { display: none; }
   #cities-button::before { content: ""; position: absolute; top: 10px; left: 10px; width: 9px; height: 9px; border: 1.5px solid currentColor; border-radius: 50%; }
   #cities-button::after { content: ""; position: absolute; top: 19px; left: 19px; width: 5px; height: 1.5px; border-radius: 2px; background: currentColor; transform: rotate(45deg); transform-origin: left center; }
@@ -1236,7 +1236,6 @@ button:focus-visible, input:focus-visible {
 }
 
 @media (min-width: 801px) {
-  .overflow-menu-link { display: none; }
   .privacy-settings-label {
     display: inline;
   }

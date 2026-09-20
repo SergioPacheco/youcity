@@ -337,6 +337,43 @@ function isOrdered(line) {
   return index > 0 && line[index] === "." && line[index + 1] === " ";
 }
 
+function splitTableRow(line) {
+  let value = line.trim();
+  if (value.startsWith("|")) value = value.slice(1);
+  if (value.endsWith("|")) value = value.slice(0, -1);
+  return value.split("|").map((cell) => cell.trim());
+}
+
+function isTableSeparator(line) {
+  const cells = splitTableRow(line);
+  return cells.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+}
+
+function isTableStart(lines, index) {
+  return index + 1 < lines.length && lines[index].includes("|") && isTableSeparator(lines[index + 1]);
+}
+
+function renderTable(lines, index, options) {
+  const headings = splitTableRow(lines[index]);
+  if (headings.length === 0 || headings.some((heading) => !heading)) {
+    markdownError(options.sourcePath, "table headings cannot be empty");
+  }
+  index += 2;
+  const rows = [];
+  while (index < lines.length && lines[index].trim() && lines[index].includes("|")) {
+    const cells = splitTableRow(lines[index]);
+    if (cells.length !== headings.length) markdownError(options.sourcePath, "table rows must have the same number of cells as the heading");
+    rows.push(cells);
+    index += 1;
+  }
+  const header = headings.map((heading) => `<th scope="col">${renderInline(heading, options)}</th>`).join("");
+  const body = rows.map((row) => `<tr>${row.map((cell) => `<td>${renderInline(cell, options)}</td>`).join("")}</tr>`).join("");
+  return {
+    html: `<div class="blog-table-wrap"><table class="blog-table"><thead><tr>${header}</tr></thead><tbody>${body}</tbody></table></div>`,
+    index
+  };
+}
+
 function isBlockStart(line) {
   return line.startsWith("## ") || line.startsWith("### ") || line.startsWith("#") || isUnordered(line) || isOrdered(line) || line.startsWith("> ");
 }
@@ -373,6 +410,12 @@ function renderMarkdown(markdown, { sitePath = "", sourcePath = "" } = {}) {
       if (!content) markdownError(sourcePath, "heading cannot be empty");
       output.push(`<h${level}>${renderInline(content, { sitePath, sourcePath })}</h${level}>`);
       index += 1;
+      continue;
+    }
+    if (isTableStart(lines, index)) {
+      const table = renderTable(lines, index, { sitePath, sourcePath });
+      output.push(table.html);
+      index = table.index;
       continue;
     }
     if (isUnordered(line) || isOrdered(line)) {

@@ -14,22 +14,46 @@ imageCredit: "YouCity project-created non-documentary illustration generated for
 ctaLabel: "Listen and explore London on YouCity"
 ---
 
-A city is more than what appears in a frame. The sound around a place can slow the experience down, give it a different mood, and make a virtual visit feel less like a checklist. YouCity brings recorded city videos and local radio together so you can explore that layer before planning a trip.
+Before you decide where to travel, try listening to somewhere else.
 
-## Let the picture set the route
+A presenter introduces a song. A conversation catches your ear. You hear a name you want to look up. Paired with a city video, radio gives you another starting point for discovery—one you would not get from a list of attractions.
 
-Start with a city video and give yourself a simple question: does this place feel like somewhere you would enjoy wandering? Watch the movement, the spaces between buildings, and the way the route changes. The video is a record of one moment, so use it to form questions rather than conclusions about current conditions.
+YouCity lets you combine the two. Here is a simple way to enjoy that experience without confusing the soundtrack with life on the street.
 
-## Use radio as atmosphere
+## Choose the picture first
 
-Choose a local station and let it play beside the video. News, music, conversation, and silence can each change what you notice. You do not need to identify every track or understand every word. The point is to sense how sound affects your idea of a destination.
+Open a destination and start an available video. Spend a little time watching before choosing a station.
 
-Internet radio is provided by third parties and availability can change. A stream may be offline, geo-limited, or different when you return. Radio Browser's public documentation describes station data and stream fields, but it does not make any individual broadcast permanent: [read the Radio Browser documentation](https://docs.radio-browser.info/).
+What holds your attention? Perhaps it is the architecture, the movement along the route or a view opening up between buildings. You do not have to turn the session into travel research. It can simply be a break somewhere unfamiliar.
 
-## Keep the comparison honest
+Then add a station from the city's available radio options.
 
-Try the same video with and without radio. Note what is actually visible, what the sound suggests, and what still needs checking elsewhere. Recorded media cannot establish today's weather, traffic, prices, opening hours, safety conditions, or accessibility.
+## Give a station time to surprise you
 
-## Listen and explore London on YouCity
+Resist changing stations after the first few seconds. Stay through a song or a short segment and see whether something interests you.
 
-London is one of the catalog cities with recorded video experiences and radio options. Open [London on YouCity](/city/london), choose an available mode, and let the atmosphere unfold at your own pace. The videos and stations are external material linked by YouCity; they are not owned by the project.
+You do not need to understand every word. You might enjoy the music, recognise a phrase or become curious about a programme. If you discover an artist, make a note to explore their work later.
+
+A station offers a particular editorial voice. It does not represent everyone in a city, and music played there is not necessarily music produced there. Enjoy what you hear without treating one broadcast as a complete cultural portrait.
+
+## Try the same view with a different sound
+
+Keep the video and change the station, if another option is available. Then try watching without radio.
+
+Ask yourself what changed. Did a song make the journey feel more energetic? Did speech draw your attention away from the buildings? Did silence make a detail easier to notice?
+
+These are observations about your experience. The video is recorded, while the radio plays independently. They are not synchronised, and the broadcast is not the original sound from the street.
+
+## Follow one discovery beyond the session
+
+If something stays with you, give it a small next step. Look up a musician, read about a programme or learn how to pronounce a place name you heard.
+
+For travel planning, return to the visual details and verify practical questions separately. A soundtrack can make a scene appealing, but it cannot tell you whether a route suits your needs.
+
+If a station does not load, try another available option. Streams are operated by third parties and can change or become unavailable. You do not need to troubleshoot your whole trip around one station.
+
+## Listen to London for a while
+
+Start with [London on YouCity](/city/london), choose a video and add an available station. There is no checklist to finish. Stay with whatever makes you curious.
+
+Prefer a more practical session? Follow our guide to [exploring a city virtually before travelling](/blog/explore-a-city-virtually-before-travelling).

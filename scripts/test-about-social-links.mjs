@@ -16,6 +16,7 @@ assert.match(aboutCard, /<span class="drawer-kicker">ABOUT YOUCITY<\/span>/, "Ab
 assert.match(normalizedAbout, /Travel the feeling, before the trip\./, "About modal should lead with the approved headline");
 assert.match(normalizedAbout, /YouCity lets you explore cities through real street videos and local radio\. Wander, listen, and discover the atmosphere of a place before deciding where to go next\./, "About modal should use the approved body copy");
 assert.doesNotMatch(aboutCard, /A static experience inspired by virtual urban tours/, "About modal should not retain the generic project copy");
+assert.match(aboutCard, /<a class="about-blog-link" href="\/blog">[\s\S]*Open the YouCity blog/, "About modal should contain the blog link");
 
 assert.match(aboutCard, /class="about-social"/, "About modal should contain a social section");
 assert.match(aboutCard, /FOLLOW THE JOURNEY/, "Social section should have a clear eyebrow");

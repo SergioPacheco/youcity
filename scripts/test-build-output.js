@@ -42,7 +42,12 @@ const REQUIRED_FILES = [
   "index.html",
   "blog/index.html",
   "blog/explore-a-city-virtually-before-travelling.html",
-  "blog/discovering-a-citys-atmosphere-through-local-radio.html"
+  "blog/discovering-a-citys-atmosphere-through-local-radio.html",
+  "blog/paris-in-3-days.html",
+  "blog/lisbon-or-porto.html",
+  "blog/how-to-choose-hotel-location.html",
+  "blog/plan-weekend-city-break.html",
+  "blog/plan-self-guided-city-walk.html"
 ];
 
 console.log("Build Output Validation\n");
@@ -71,7 +76,12 @@ if (failed > 0) {
 const blogDocuments = [
   "blog/index.html",
   "blog/explore-a-city-virtually-before-travelling.html",
-  "blog/discovering-a-citys-atmosphere-through-local-radio.html"
+  "blog/discovering-a-citys-atmosphere-through-local-radio.html",
+  "blog/paris-in-3-days.html",
+  "blog/lisbon-or-porto.html",
+  "blog/how-to-choose-hotel-location.html",
+  "blog/plan-weekend-city-break.html",
+  "blog/plan-self-guided-city-walk.html"
 ];
 for (const file of blogDocuments) {
   const source = readFileSync(resolve(OUTPUT_DIR, file), "utf8");
@@ -84,7 +94,16 @@ for (const file of blogDocuments) {
 }
 
 const sitemap = readFileSync(resolve(OUTPUT_DIR, "sitemap.xml"), "utf8");
-for (const path of ["/blog", "/blog/explore-a-city-virtually-before-travelling", "/blog/discovering-a-citys-atmosphere-through-local-radio"]) {
+for (const path of [
+  "/blog",
+  "/blog/explore-a-city-virtually-before-travelling",
+  "/blog/discovering-a-citys-atmosphere-through-local-radio",
+  "/blog/paris-in-3-days",
+  "/blog/lisbon-or-porto",
+  "/blog/how-to-choose-hotel-location",
+  "/blog/plan-weekend-city-break",
+  "/blog/plan-self-guided-city-walk"
+]) {
   if (!sitemap.includes(`https://youcity.app${path}`)) {
     console.log(`  ✗ sitemap.xml — missing ${path}`);
     process.exitCode = 1;
@@ -103,7 +122,12 @@ const expectedSitemap = new Set([
   ...catalog.filter((city) => Object.values(city.videos || {}).some((videos) => Array.isArray(videos) && videos.length)).map((city) => `https://youcity.app/city/${slugify(city.name)}`),
   "https://youcity.app/blog",
   "https://youcity.app/blog/explore-a-city-virtually-before-travelling",
-  "https://youcity.app/blog/discovering-a-citys-atmosphere-through-local-radio"
+  "https://youcity.app/blog/discovering-a-citys-atmosphere-through-local-radio",
+  "https://youcity.app/blog/paris-in-3-days",
+  "https://youcity.app/blog/lisbon-or-porto",
+  "https://youcity.app/blog/how-to-choose-hotel-location",
+  "https://youcity.app/blog/plan-weekend-city-break",
+  "https://youcity.app/blog/plan-self-guided-city-walk"
 ]);
 const actualSitemap = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));
 if (actualSitemap.size !== expectedSitemap.size || [...expectedSitemap].some((url) => !actualSitemap.has(url))) {

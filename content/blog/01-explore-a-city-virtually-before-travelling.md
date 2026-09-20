@@ -14,28 +14,46 @@ imageCredit: "YouCity project-created cover, derived locally from the existing p
 ctaLabel: "Explore London on YouCity"
 ---
 
-A trip often begins before a ticket is booked. A real street video can give you a first sense of pace, scale, and texture, while local radio adds another layer to the moment. Together, they help you ask better questions about a destination.
+You have saved the landmark photographs. You know which museum interests you. But you are still wondering what you would enjoy between those planned stops.
 
-## Start with the pace, not a checklist
+A recorded city walk gives you another way to research a trip: following a journey instead of jumping between highlights. Use it to discover what catches your attention, then turn those observations into a shortlist you can investigate.
 
-Choose one experience and watch long enough to notice how the scene moves. A drive, bike ride, walk, or aerial view can each reveal a different rhythm. Look for transitions, crossings, open spaces, and the distance between one place and the next.
+## Begin with one question
 
-The footage is recorded material, not a live window. It can help you imagine a place, but it cannot confirm today's traffic, weather, opening hours, prices, or accessibility.
+Choose a question that matters to your trip. Perhaps you want inspiration for an afternoon outdoors, or you are deciding whether you would enjoy exploring on foot.
 
-## Compare perspectives
+Open one city and choose an available video. Watch a continuous section before skipping ahead. Notice how the surroundings change and where you would want to pause.
 
-Use a second mode when it is available in the city entry. A street-level video can make a route feel immediate; an aerial view can help you understand the wider shape of a city. The useful comparison is not which mode is best, but which question each one helps you ask.
+Your first useful discovery may be a preference: you keep looking at side streets, open squares or stretches beside the water. That is something you can plan around.
 
-- What kind of pace feels comfortable to you?
-- Do you want a central route, a quieter edge, or a mix of both?
-- Which details would you want to verify with a current source before travelling?
+## Watch once for interest, then again for detail
 
-## Add sound to the picture
+On the first pass, let yourself enjoy the journey. On the second, take three short notes:
 
-Local radio can change how you pay attention. Let it play while you explore a video, then try the same city with a different station or without sound. Treat the result as atmosphere and discovery, not as a promise that the broadcast will always be available.
+- **Something that appealed to you:** a type of street, view or public space.
+- **Something you want to understand:** where the route goes or how it connects to another area.
+- **Something to verify:** access, transport or an attraction's current opening arrangements.
 
-## Explore London on YouCity
+For example, seeing a staircase might prompt you to check for a step-free alternative. It does not establish whether the surrounding neighbourhood is accessible as a whole.
 
-The London catalog entry includes several recorded video perspectives and local radio options. Open the city page to choose the available experience for yourself: [Explore London on YouCity](/city/london).
+## Change perspective when you need another answer
 
-For the underlying media, see the recorded [London drive source](https://www.youtube.com/watch?v=QI4_dGvZ5yE) and [London walking source](https://www.youtube.com/watch?v=aBOsIVU9mms). YouCity links to third-party videos and radio streams; it does not own those recordings or stations.
+A walk can help you examine street-level details. A drive offers a different sequence of surroundings. An aerial view, when available, can help you orient yourself around larger features.
+
+Choose the mode to match your question. A beautiful skyline is a reason to investigate a destination, but it cannot tell you what the walk from your hotel will involve.
+
+You can also try [exploring with local radio](/blog/discovering-a-citys-atmosphere-through-local-radio). Listen for a while, then switch it off and see whether you notice different things. The broadcast is a separate listening experience, not the original sound of the recording.
+
+## Turn curiosity into a practical next step
+
+Finish with one small action: locate a place that interested you, compare two accommodation areas or save an outing to research.
+
+Keep your notes specific. “Check the route between this square and my hotel” is more useful than “the city looks easy to walk around”.
+
+Recorded footage reflects a particular route and moment. Check current information separately for opening hours, transport, accessibility and other details that could affect your trip.
+
+## Try it with London
+
+Open [London on YouCity](/city/london) and choose an available experience. Start with a simple question: where would you want to stop if you were there?
+
+The article's media references include a [London drive](https://www.youtube.com/watch?v=QI4_dGvZ5yE) and a [London walk](https://www.youtube.com/watch?v=aBOsIVU9mms). Video and radio availability depends on their external providers.

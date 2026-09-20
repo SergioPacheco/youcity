@@ -71,6 +71,11 @@ const external = renderMarkdown("[Source](https://example.com/a)", { sourcePath 
 assert.match(external, /target="_blank"/);
 assert.match(external, /rel="noopener noreferrer"/);
 
+const table = renderMarkdown("| Focus | Choice |\n| --- | --- |\n| Walk | Lisbon |", { sourcePath });
+assert.match(table, /<table class="blog-table">/);
+assert.match(table, /<th scope="col">Focus<\/th>/);
+assert.match(table, /<td>Lisbon<\/td>/);
+
 const escaped = renderMarkdown("Text & <word> \"quoted\"", { sourcePath });
 assert.match(escaped, /Text &amp; &lt;word&gt; &quot;quoted&quot;/);
 
@@ -197,9 +202,9 @@ const repositoryArticles = loadBlogArticles({
   catalog: require("../data/catalog.json"),
   now: new Date("2026-09-21T00:00:00Z")
 });
-assert.equal(repositoryArticles.all.length, 12);
-assert.equal(repositoryArticles.published.length, 2);
-assert.equal(repositoryArticles.bySlug.size, 2);
+assert.equal(repositoryArticles.all.length, 17);
+assert.equal(repositoryArticles.published.length, 7);
+assert.equal(repositoryArticles.bySlug.size, 7);
 
 const templateRoot = join(__dirname, "../templates");
 const indexHtml = renderBlogIndex({
@@ -236,8 +241,9 @@ assert.match(postHtml, /application\/ld\+json/);
 assert.doesNotMatch(postHtml, /src\/main\.mjs|youtube\.com\/embed|leaflet|<script[^>]+type="module"/);
 
 const homeMarkup = readFileSync(join(__dirname, "../index.html"), "utf8");
-assert.match(homeMarkup, /class="blog-nav-link"[^>]+href="\/blog"[^>]*>Blog<\/a>/);
-assert.match(homeMarkup, /class="overflow-menu-link"[^>]+href="\/blog"[^>]*>Blog<\/a>/);
+assert.doesNotMatch(homeMarkup, /class="blog-nav-link"[^>]+href="\/blog"/);
+assert.doesNotMatch(homeMarkup, /class="overflow-menu-link"[^>]+href="\/blog"/);
+assert.match(homeMarkup, /class="about-blog-link"[^>]+href="\/blog"[\s\S]*Open the YouCity blog/);
 assert.match(homeMarkup, /href="\/privacy\.html"/);
 assert.match(homeMarkup, /href="\/terms\.html"/);
 
