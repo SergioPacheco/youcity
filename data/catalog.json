@@ -6043,6 +6043,11 @@
           "id": "TUhDzKgdrGU",
           "start": 0,
           "confidence": "A"
+        },
+        {
+          "id": "qUBTjukvoUI",
+          "start": 0,
+          "confidence": "B"
         }
       ],
       "beach_walk": []
@@ -8889,6 +8894,11 @@
           "id": "7dnLjw9dBCk",
           "start": 0,
           "confidence": "B"
+        },
+        {
+          "id": "Y280f0K75p8",
+          "start": 0,
+          "confidence": "A"
         }
       ],
       "beach_walk": []
@@ -12663,6 +12673,10 @@
         {
           "id": "TZWwjpNj42k",
           "start": 0
+        },
+        {
+          "id": "bir37qTl7_Q",
+          "start": 0
         }
       ],
       "drone": [],
@@ -12951,7 +12965,7 @@
       "walk": [],
       "drone": [
         {
-          "id": "Lm9ZxasfHh0",
+          "id": "BFS9n4B_2xA",
           "start": 0,
           "confidence": "A"
         }
@@ -13672,7 +13686,13 @@
           "title": "Malibu — California 4K Walking Tour"
         }
       ],
-      "drone": [],
+      "drone": [
+        {
+          "id": "bdliFtQ-wrM",
+          "start": 0,
+          "confidence": "A"
+        }
+      ],
       "beach_walk": [
         {
           "id": "5pSbYITH0iM",
@@ -14278,6 +14298,653 @@
     "coordinates": [
       -33.858228,
       121.8931606
+    ]
+  },
+  {
+    "name": "Santorini",
+    "country": "Greece",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "5YCWlMSM3vI",
+          "start": 0,
+          "confidence": "B"
+        },
+        {
+          "id": "QpKakorT55A",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Vanilla Radio Fresh Flavors",
+        "url": "https://fresh.vanillaradio.com:8009/live"
+      },
+      {
+        "name": "Best 92.6",
+        "url": "https://netradio.live24.gr/best1222"
+      },
+      {
+        "name": "HiT 88.9",
+        "url": "https://stream.radiojar.com/hit889"
+      },
+      {
+        "name": "98.6",
+        "url": "https://politismedia-sec.live24.gr/streameepride"
+      },
+      {
+        "name": "Real FM",
+        "url": "https://netradio.live24.gr/realfm"
+      }
+    ],
+    "coordinates": [
+      36.395556,
+      25.459167
+    ]
+  },
+  {
+    "name": "Malta",
+    "country": "Malta",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [
+        {
+          "id": "MTkX0_htW-I",
+          "start": 0
+        }
+      ],
+      "drone": [
+        {
+          "id": "Hcrga5YLh-E",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "89.7 Bay",
+        "url": "https://stream.v3.network:18022/;stream.mp3"
+      },
+      {
+        "name": "Bay Easy",
+        "url": "https://stream.v3.network/proxy/easy/stream.mp3"
+      },
+      {
+        "name": "Campus 103.7",
+        "url": "https://campusfm.radioca.st/campusfm_live"
+      }
+    ],
+    "coordinates": [
+      35.916667,
+      14.433333
+    ]
+  },
+  {
+    "name": "Maupiti",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "ITZKil9gNNI",
+          "start": 0,
+          "title": "Maupiti Residence — 4K UHD Drone",
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -16.417,
+      -152.25
+    ]
+  },
+  {
+    "name": "Bora Bora",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "Fmw-F4r5sc8",
+          "start": 0,
+          "title": "Bora Bora, French Polynesia — by drone 4K",
+          "confidence": "B"
+        },
+        {
+          "id": "dQYIMiqWZjI",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -16.498,
+      -151.736
+    ]
+  },
+  {
+    "name": "Taha’a",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "OSosgSCeTTk",
+          "start": 0,
+          "title": "Le Tahaa by drone, 4K",
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -16.61,
+      -151.5
+    ]
+  },
+  {
+    "name": "Raiatea",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "oqbHrBqihoY",
+          "start": 0,
+          "title": "Raiatea sacred island from Above — 4K Cinematic Drone",
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -16.82,
+      -151.44
+    ]
+  },
+  {
+    "name": "Huahine",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "YN2RlMnzYho",
+          "start": 0,
+          "title": "Huahine Drone Footage — French Polynesia 4K",
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -16.733,
+      -151.033
+    ]
+  },
+  {
+    "name": "Mo’orea",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "Iq3YSsnXD3M",
+          "start": 0,
+          "title": "Moorea, French Polynesia by Drone — 4K",
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -17.517,
+      -149.817
+    ]
+  },
+  {
+    "name": "Tahiti",
+    "country": "French Polynesia",
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "ffLqoCzrH10",
+          "start": 0,
+          "title": "Flying Over Tahiti — 4K UHD",
+          "confidence": "B"
+        },
+        {
+          "id": "XUdedFpy9Xg",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio 1 Tahiti",
+        "url": "https://live.radio1.pf:8443/radio1"
+      },
+      {
+        "name": "NRJ Tahiti",
+        "url": "https://listen.radioking.com/radio/397660/stream/449635"
+      }
+    ],
+    "coordinates": [
+      -17.667,
+      -149.467
+    ]
+  },
+  {
+    "name": "Tulum",
+    "country": "Mexico",
+    "coordinates": [
+      20.2114,
+      -87.4654
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "mEGPzZ7PLZQ",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Cadena Ke Buena Cancún",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/KEBUENA.mp3"
+      },
+      {
+        "name": "Exa FM Cancún",
+        "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/XHMA.mp3"
+      }
+    ]
+  },
+  {
+    "name": "Zanzibar",
+    "country": "Tanzania",
+    "coordinates": [
+      -6.1659,
+      39.2026
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "XRFZCvNASAs",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Capital Radio Tanzania — Stone Town",
+        "url": "https://capitalradio.radioca.st/stream"
+      }
+    ]
+  },
+  {
+    "name": "Cook Islands",
+    "country": "Cook Islands",
+    "coordinates": [
+      -21.2367,
+      -159.7777
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "lraHevapN6Y",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Life FM Cook Islands",
+        "url": "https://streams3.vision.org.au/cookislands.aac"
+      }
+    ]
+  },
+  {
+    "name": "Ushuaia",
+    "country": "Argentina",
+    "coordinates": [
+      -54.8019,
+      -68.303
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "7vyl8dYAtAo",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "LRA 10 Radio Nacional Ushuaia e Islas Malvinas",
+        "url": "https://sa.mp3.icecast.magma.edge-access.net/sc_rad10"
+      }
+    ]
+  },
+  {
+    "name": "Capri",
+    "country": "Italy",
+    "coordinates": [
+      40.5532,
+      14.2222
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "x4M_1257o4A",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio Napoli Doc",
+        "url": "https://ice08.fluidstream.net/RadioNapoli.aac"
+      },
+      {
+        "name": "Radio Marte",
+        "url": "https://stream1.xdevel.com/audio0s975753-313/stream/icecast.audio"
+      }
+    ]
+  },
+  {
+    "name": "Phi Phi Islands",
+    "country": "Thailand",
+    "coordinates": [
+      7.7407,
+      98.7784
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "fprcVZ9Tafg",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Phuket LIVE 89.5",
+        "url": "https://4118.radio4.thzhost.com/"
+      },
+      {
+        "name": "Radio Red Phuket",
+        "url": "https://stream.chiliradio.app/radiored"
+      }
+    ]
+  },
+  {
+    "name": "Krabi",
+    "country": "Thailand",
+    "coordinates": [
+      8.0863,
+      98.9063
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "HI-qyWXmPe8",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Phuket LIVE 89.5",
+        "url": "https://4118.radio4.thzhost.com/"
+      },
+      {
+        "name": "Radio Red Phuket",
+        "url": "https://stream.chiliradio.app/radiored"
+      }
+    ]
+  },
+  {
+    "name": "Siargao",
+    "country": "Philippines",
+    "coordinates": [
+      9.8007,
+      126.1636
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "YhxMzodLaaw",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "RPN DXKS Surigao",
+        "url": "https://dxks-rpnradio.radioca.st/stream"
+      },
+      {
+        "name": "93.3 Infinite Radio Surigao",
+        "url": "https://stream.zeno.fm/yy0d3w86zxhvv"
+      }
+    ]
+  },
+  {
+    "name": "Punta Cana",
+    "country": "Dominican Republic",
+    "coordinates": [
+      18.5601,
+      -68.3725
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "JpYQa8o-vaI",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "FieraMix — República Dominicana",
+        "url": "https://c11.radioboss.fm:18269/stream"
+      }
+    ]
+  },
+  {
+    "name": "Koh Samui",
+    "country": "Thailand",
+    "coordinates": [
+      9.512,
+      100.0136
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "8Pa6dcG7UEc",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Radio Samui",
+        "url": "https://stream.mixadance.fm/radiosamui"
+      }
+    ]
+  },
+  {
+    "name": "Florianópolis",
+    "country": "Brazil",
+    "coordinates": [
+      -27.5949,
+      -48.5482
+    ],
+    "videos": {
+      "drive": [],
+      "bike": [],
+      "walk": [],
+      "drone": [
+        {
+          "id": "zggpwftlesE",
+          "start": 0,
+          "confidence": "B"
+        }
+      ],
+      "beach_walk": []
+    },
+    "radios": [
+      {
+        "name": "Jovem Pan FM Florianópolis",
+        "url": "https://live.paineldj.com.br/proxy/jfloripa?mp=/stream"
+      },
+      {
+        "name": "Rádio Atlântida Florianópolis",
+        "url": "https://24383.live.streamtheworld.com:443/ATL_FLO.mp3"
+      },
+      {
+        "name": "CBN Floripa",
+        "url": "https://26673.live.streamtheworld.com/CBN_FLOAAC.aac"
+      }
     ]
   }
 ]

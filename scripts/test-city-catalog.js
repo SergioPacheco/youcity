@@ -9,7 +9,7 @@ const catalog = loadCatalog(ROOT_DIR);
 const granada = catalog.find((city) => city.name === "Granada" && city.country === "Spain");
 assert.ok(granada, "Granada, Spain must be in the city catalog");
 assert.equal(granada.countryCode, "ES");
-assert.equal(catalog.length, 228, "catalog should contain 228 cities including Beach Walk destinations");
+assert.equal(catalog.length, 248, "catalog should contain 248 cities including Beach Walk destinations");
 assert.deepEqual(Array.from(granada.videos.drive, (video) => video.id), ["zMTHYYszb94"]);
 assert.deepEqual(Array.from(granada.videos.walk, (video) => video.id), ["X1unB-eKnB4", "thvjqM6ksHI"]);
 assert.deepEqual(Array.from(granada.videos.drone, (video) => video.id), ["c6u22gDXtYw"]);
@@ -23,7 +23,7 @@ assert.ok(beachWalkRides.every((video) => beachWalkIds.has(video.id)), "Beach Wa
 assert.ok(catalog.filter((city) => city.videos.beach_walk.length).length >= 14, "Beach Walk rides should cover the curated destinations");
 assert.ok(catalog.filter((city) => city.videos.beach_walk.length).every((city) => city.radios.length > 0), "every Beach Walk destination should have a radio station");
 assert.ok(catalog.every((city) => city.radios.length <= 5), "canonical catalog should cap radios at five per city");
-assert.ok(catalog.every((city) => city.radios.length > 0), "every catalog city should have at least one radio station");
+assert.ok(catalog.every((city) => city.radios.length > 0), "every catalog city should have a radio station");
 assert.ok(catalog.every((city) => Object.values(city.videos).every((videos) => new Set(videos.map((video) => video.id)).size === videos.length)), "canonical catalog should deduplicate ride IDs");
 assert.equal(new Set(catalog.map((city) => `${city.name}\u0000${city.country}`)).size, catalog.length, "canonical catalog should not contain duplicate city keys");
 assert.ok(catalog.every((city) => Array.isArray(city.coordinates)), "canonical catalog should provide coordinates for every city");

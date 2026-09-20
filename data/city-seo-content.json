@@ -8458,5 +8458,421 @@
       "url": "https://en.wikipedia.org/wiki/Esperance%2C_Western_Australia"
     },
     "updatedAt": "2026-09-20"
+  },
+  "santorini": {
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
+  },
+  "malta": {
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
+  },
+  "maupiti": {
+    "status": "complete",
+    "city": "Maupiti",
+    "country": "French Polynesia",
+    "summary": {
+      "title": "Maupiti",
+      "description": "Atoll in French Polynesia",
+      "extract": "Maupiti is an island in the western Leeward Islands in French Polynesia. It is the westernmost volcanic island in the archipelago, 315 kilometres northwest of Tahiti and 40 kilometres west of Bora Bora. It has a population of 1,286 people. The largest town is Vaiea.",
+      "url": "https://en.wikipedia.org/wiki/Maupiti"
+    },
+    "places": [
+      {
+        "name": "Vaiea",
+        "description": "Largest town on the island of Maupiti in French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Maupiti"
+      },
+      {
+        "name": "Maupiti Airport",
+        "description": "Airport serving the island of Maupiti in the Leeward Islands of French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Maupiti_Airport"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Maupiti"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "bora-bora": {
+    "status": "complete",
+    "city": "Bora Bora",
+    "country": "French Polynesia",
+    "summary": {
+      "title": "Bora Bora",
+      "description": "Island in French Polynesia",
+      "extract": "Bora Bora is a French island group in the Leeward Islands, comprising the western part of the Society Islands of French Polynesia, an overseas collectivity of the French Republic in the South Pacific. Bora Bora has a total land area of 30.55 km2. The main island is surrounded by a lagoon and a barrier reef, and its extinct volcano rises to Mount Otemanu.",
+      "url": "https://en.wikipedia.org/wiki/Bora_Bora"
+    },
+    "places": [
+      {
+        "name": "Mount Otemanu",
+        "description": "Highest point and extinct volcano on the island of Bora Bora.",
+        "url": "https://en.wikipedia.org/wiki/Mount_Otemanu"
+      },
+      {
+        "name": "Mount Pahia",
+        "description": "Mountain peak on Bora Bora in French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Mount_Pahia"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Bora_Bora"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "taha-a": {
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
+  },
+  "raiatea": {
+    "status": "complete",
+    "city": "Raiatea",
+    "country": "French Polynesia",
+    "summary": {
+      "title": "Raʻiātea",
+      "description": "Island in French Polynesia",
+      "extract": "Raʻiātea or Raiatea is the second largest of the Society Islands, after Tahiti, in French Polynesia, in the South Pacific Ocean. The island is widely regarded as the centre of the eastern islands in ancient Polynesia, and it is likely that organised migrations to the Hawaiian Islands and other parts of East Polynesia started at Raʻiātea.",
+      "url": "https://en.wikipedia.org/wiki/Ra%CA%BBi%C4%81tea"
+    },
+    "places": [
+      {
+        "name": "Taputapuatea marae",
+        "description": "Large marae complex on the eastern coast of Raiatea in French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Taputapuatea_marae"
+      },
+      {
+        "name": "Opoa",
+        "description": "Village on the eastern coast of Raiatea in French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Raiatea"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ra%CA%BBi%C4%81tea"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "huahine": {
+    "status": "complete",
+    "city": "Huahine",
+    "country": "French Polynesia",
+    "summary": {
+      "title": "Huahine",
+      "description": "Island in French Polynesia",
+      "extract": "Huahine is an island located among the Society Islands, in French Polynesia, an overseas territory of France in the South Pacific Ocean. It is part of the Leeward Islands group. At the 2022 census, it had a population of 6,263. The administrative centre of the commune is the settlement of Fare, on Huahine Nui.",
+      "url": "https://en.wikipedia.org/wiki/Huahine"
+    },
+    "places": [
+      {
+        "name": "Fare",
+        "description": "Administrative centre and principal settlement of Huahine in French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Huahine"
+      },
+      {
+        "name": "Maeva",
+        "description": "Associated commune on Huahine Nui in the Leeward Islands of French Polynesia.",
+        "url": "https://en.wikipedia.org/wiki/Huahine"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Huahine"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "mo-orea": {
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
+  },
+  "tahiti": {
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
+  },
+  "tulum": {
+    "status": "complete",
+    "city": "Tulum",
+    "country": "Mexico",
+    "summary": {
+      "title": "Tulum",
+      "description": "City in Quintana Roo, Mexico",
+      "extract": "Tulum is a city on the Caribbean coast of Mexico, in the state of Quintana Roo. It is known for the nearby Maya archaeological site, coastal landscape, cenotes, and tourism. The modern city serves as a regional centre for the municipality and a gateway to the Riviera Maya.",
+      "url": "https://en.wikipedia.org/wiki/Tulum_(city)"
+    },
+    "places": [
+      {
+        "name": "Tulum archaeological site",
+        "description": "Maya archaeological site on the Caribbean coast of Quintana Roo, Mexico.",
+        "url": "https://en.wikipedia.org/wiki/Tulum_(archaeological_site)"
+      },
+      {
+        "name": "Gran Cenote",
+        "description": "Cenote and swimming site near Tulum in the Mexican state of Quintana Roo.",
+        "url": "https://en.wikipedia.org/wiki/Cenote"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Tulum_(city)"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "zanzibar": {
+    "status": "complete",
+    "city": "Zanzibar",
+    "country": "Tanzania",
+    "summary": {
+      "title": "Zanzibar City",
+      "description": "Capital of Zanzibar, Tanzania",
+      "extract": "Zanzibar City is the capital and largest city of Zanzibar, Tanzania. It lies on the western coast of Unguja, the largest island in the Zanzibar Archipelago, and is the administrative and commercial centre of the islands. The historic core of the city is Stone Town.",
+      "url": "https://en.wikipedia.org/wiki/Zanzibar_City"
+    },
+    "places": [
+      {
+        "name": "Stone Town",
+        "description": "Historic quarter of Zanzibar City and a UNESCO World Heritage Site.",
+        "url": "https://en.wikipedia.org/wiki/Stone_Town"
+      },
+      {
+        "name": "House of Wonders",
+        "description": "Historic palace and landmark in Stone Town, Zanzibar City.",
+        "url": "https://en.wikipedia.org/wiki/House_of_Wonders"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Zanzibar_City"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "cook-islands": {
+    "status": "complete",
+    "city": "Cook Islands",
+    "country": "Cook Islands",
+    "summary": {
+      "title": "Cook Islands",
+      "description": "Self-governing island country in the South Pacific",
+      "extract": "The Cook Islands is a self-governing island country in free association with New Zealand, located in the South Pacific Ocean. Its fifteen islands are spread over a large area, with Rarotonga as the most populous island and Avarua as the national capital. Tourism is a major part of the economy.",
+      "url": "https://en.wikipedia.org/wiki/Cook_Islands"
+    },
+    "places": [
+      {
+        "name": "Avarua",
+        "description": "Capital and main settlement of the Cook Islands on Rarotonga.",
+        "url": "https://en.wikipedia.org/wiki/Avarua"
+      },
+      {
+        "name": "Rarotonga",
+        "description": "Most populous island and political centre of the Cook Islands.",
+        "url": "https://en.wikipedia.org/wiki/Rarotonga"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Cook_Islands"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "ushuaia": {
+    "status": "complete",
+    "city": "Ushuaia",
+    "country": "Argentina",
+    "summary": {
+      "title": "Ushuaia",
+      "description": "City in Tierra del Fuego, Argentina",
+      "extract": "Ushuaia is a city in Argentina and the capital of Tierra del Fuego Province. It is located on the southern coast of Isla Grande de Tierra del Fuego, on the Beagle Channel, and is commonly described as one of the world's southernmost cities. The surrounding region is known for mountains, forests, and maritime scenery.",
+      "url": "https://en.wikipedia.org/wiki/Ushuaia"
+    },
+    "places": [
+      {
+        "name": "Tierra del Fuego National Park",
+        "description": "Protected area of forests, mountains, lakes, and coast near Ushuaia.",
+        "url": "https://en.wikipedia.org/wiki/Tierra_del_Fuego_National_Park"
+      },
+      {
+        "name": "Martial Mountains",
+        "description": "Mountain range overlooking Ushuaia and the Beagle Channel in Argentina.",
+        "url": "https://en.wikipedia.org/wiki/Martial_Mountains"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ushuaia"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "capri": {
+    "status": "complete",
+    "city": "Capri",
+    "country": "Italy",
+    "summary": {
+      "title": "Capri",
+      "description": "Island in the Bay of Naples, Italy",
+      "extract": "Capri is an island located in the Tyrrhenian Sea off the Sorrento Peninsula, in the Campania region of Italy. It has long been a destination known for its rugged coastline, sea caves, villas, and tourism. The island contains the municipalities of Capri and Anacapri.",
+      "url": "https://en.wikipedia.org/wiki/Capri"
+    },
+    "places": [
+      {
+        "name": "Blue Grotto",
+        "description": "Sea cave on the island of Capri known for its blue light.",
+        "url": "https://en.wikipedia.org/wiki/Blue_Grotto_(Capri)"
+      },
+      {
+        "name": "Villa Jovis",
+        "description": "Roman palace and archaeological site on the island of Capri.",
+        "url": "https://en.wikipedia.org/wiki/Villa_Jovis"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Capri"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "phi-phi-islands": {
+    "status": "complete",
+    "city": "Phi Phi Islands",
+    "country": "Thailand",
+    "summary": {
+      "title": "Phi Phi Islands",
+      "description": "Island group in Thailand",
+      "extract": "The Phi Phi Islands are an island group in Thailand, in the Andaman Sea. They are part of Krabi Province and lie between the island of Phuket and the mainland. The group is known for limestone cliffs, bays, beaches, coral reefs, and the main inhabited island of Ko Phi Phi Don.",
+      "url": "https://en.wikipedia.org/wiki/Phi_Phi_Islands"
+    },
+    "places": [
+      {
+        "name": "Maya Bay",
+        "description": "Bay on Ko Phi Phi Leh in Thailand's Phi Phi Islands.",
+        "url": "https://en.wikipedia.org/wiki/Maya_Bay"
+      },
+      {
+        "name": "Ko Phi Phi Don",
+        "description": "Largest and only permanently inhabited island of the Phi Phi group.",
+        "url": "https://en.wikipedia.org/wiki/Ko_Phi_Phi_Don"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Phi_Phi_Islands"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "krabi": {
+    "status": "complete",
+    "city": "Krabi",
+    "country": "Thailand",
+    "summary": {
+      "title": "Krabi",
+      "description": "City in southern Thailand",
+      "extract": "Krabi is the capital of Krabi Province in southern Thailand. The city lies near the mouth of the Krabi River and serves as a gateway to the province's islands, beaches, limestone formations, and national parks. The wider area is an important destination for coastal tourism.",
+      "url": "https://en.wikipedia.org/wiki/Krabi"
+    },
+    "places": [
+      {
+        "name": "Railay Beach",
+        "description": "Beach and peninsula known for limestone cliffs near Krabi, Thailand.",
+        "url": "https://en.wikipedia.org/wiki/Railay"
+      },
+      {
+        "name": "Tiger Cave Temple",
+        "description": "Buddhist temple and pilgrimage site in Krabi Province, Thailand.",
+        "url": "https://en.wikipedia.org/wiki/Tiger_Cave_Temple"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Krabi"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "siargao": {
+    "status": "complete",
+    "city": "Siargao",
+    "country": "Philippines",
+    "summary": {
+      "title": "Siargao",
+      "description": "Island in the Philippines",
+      "extract": "Siargao is an island in the northeastern part of Mindanao in the Philippines. It is part of Surigao del Norte province and is known for surfing, lagoons, mangrove forests, and tropical coastline. General Luna is a major tourism centre on the island.",
+      "url": "https://en.wikipedia.org/wiki/Siargao"
+    },
+    "places": [
+      {
+        "name": "Cloud 9",
+        "description": "Surf break and tourism area in General Luna on Siargao island.",
+        "url": "https://en.wikipedia.org/wiki/Siargao"
+      },
+      {
+        "name": "Sugba Lagoon",
+        "description": "Lagoon and tourism site on the island of Siargao in the Philippines.",
+        "url": "https://en.wikipedia.org/wiki/Siargao"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Siargao"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "punta-cana": {
+    "status": "complete",
+    "city": "Punta Cana",
+    "country": "Dominican Republic",
+    "summary": {
+      "title": "Punta Cana",
+      "description": "Resort town in the Dominican Republic",
+      "extract": "Punta Cana is a resort town at the eastern tip of the Dominican Republic. It is known for beaches along the Caribbean Sea and Atlantic Ocean, coral reefs, tourism infrastructure, and nearby natural areas. The destination is part of the La Altagracia Province.",
+      "url": "https://en.wikipedia.org/wiki/Punta_Cana"
+    },
+    "places": [
+      {
+        "name": "Bávaro Beach",
+        "description": "Long sandy beach and resort area near Punta Cana in the Dominican Republic.",
+        "url": "https://en.wikipedia.org/wiki/Punta_Cana"
+      },
+      {
+        "name": "Indigenous Eyes Ecological Park",
+        "description": "Private nature reserve with trails and freshwater lagoons near Punta Cana.",
+        "url": "https://en.wikipedia.org/wiki/Punta_Cana"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Punta_Cana"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "koh-samui": {
+    "status": "complete",
+    "city": "Koh Samui",
+    "country": "Thailand",
+    "summary": {
+      "title": "Ko Samui",
+      "description": "Island in Surat Thani Province, Thailand",
+      "extract": "Ko Samui is an island off the east coast of the Kra Isthmus in Thailand. It is part of Surat Thani Province and is known for beaches, coconut groves, coral reefs, and tourism. The island is the largest in the Chumphon Archipelago and has a developed network of resorts and communities.",
+      "url": "https://en.wikipedia.org/wiki/Ko_Samui"
+    },
+    "places": [
+      {
+        "name": "Big Buddha Temple",
+        "description": "Buddhist temple and landmark on Ko Samui in southern Thailand.",
+        "url": "https://en.wikipedia.org/wiki/Wat_Phra_Yai"
+      },
+      {
+        "name": "Ang Thong National Marine Park",
+        "description": "Protected archipelago and marine park in the Gulf of Thailand.",
+        "url": "https://en.wikipedia.org/wiki/Ang_Thong_National_Marine_Park"
+      }
+    ],
+    "source": {
+      "name": "Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Ko_Samui"
+    },
+    "updatedAt": "2026-09-20"
+  },
+  "florianopolis": {
+    "status": "incomplete",
+    "reason": "NOT_ENOUGH_PLACES"
   }
 }

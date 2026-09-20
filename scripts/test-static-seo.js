@@ -28,14 +28,14 @@ assert.ok(sampleCities.every(Boolean), "generic SEO sample cities should exist i
 assert.deepEqual(cityModes(granada), ["Walk", "Drive", "Drone"]);
 assert.equal(citySeoTitle(granada), "Granada Virtual Tour — Walk, Drive & Drone | YouCity");
 assert.equal(citySeoTitle(london), "London Virtual Tour — Walk, Drive & Drone | YouCity");
-assert.equal(citySeoTitle(malibu), "Malibu Beach Walk & Virtual Tour | YouCity");
+assert.equal(citySeoTitle(malibu), "Malibu Virtual Tour — Walk, Drive & Drone | YouCity");
 assert.equal(
   citySeoDescription(granada),
   "Explore Granada, Spain through immersive walking, driving and drone tours. Experience the city virtually with local radio on YouCity."
 );
 assert.equal(
   citySeoDescription(malibu),
-  "Explore Malibu, United States through immersive beach walks, walking and driving tours. Experience the city virtually with local radio on YouCity."
+  "Explore Malibu, United States through immersive beach walks, walking, driving and drone tours. Experience the city virtually with local radio on YouCity."
 );
 
 const granadaContent = renderDestinationContent(granada, catalog);
