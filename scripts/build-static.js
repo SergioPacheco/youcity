@@ -440,6 +440,13 @@ function rewriteInternalPaths(html) {
   return html.replace(/\b(href|src)=(['"])\/(?!\/)/g, `$1=$2${SITE_PATH}/`);
 }
 
+function prepareStaticHtmlPage(html, fileName, { siteUrl = SITE_URL, sitePath = SITE_PATH } = {}) {
+  let output = String(html);
+  if (sitePath) output = output.replace(/\b(href|src)=(['"])\/(?!\/)/g, `$1=$2${sitePath}/`);
+  const canonicalRoot = `${trimTrailingSlashes(siteUrl)}${sitePath}/`;
+  return output.replaceAll("https://youcity.app/", canonicalRoot);
+}
+
 function injectRuntimeBasePath(html) {
   const script = `<script>window.YOUCITY_BASE_PATH = ${jsonForHtml(SITE_PATH)}; window.YOUCITY_ASSET_VERSION = ${jsonForHtml(ASSET_VERSION)};</script>`;
   return html.replace("</head>", `    ${script}\n  </head>`);
@@ -625,6 +632,7 @@ module.exports = {
   citySeoTitle,
   relatedCities,
   renderDestinationContent,
+  prepareStaticHtmlPage,
   trustedEditorialUrl,
   validateModuleImports
 };
@@ -665,7 +673,7 @@ function main() {
     if (!existsSync(source)) {
       throw new Error(`Required static page not found: ${file}`);
     }
-    cpSync(source, destination);
+    writeFileSync(destination, prepareStaticHtmlPage(readFileSync(source, "utf8"), file));
   }
 
   const blogBuild = buildBlog({

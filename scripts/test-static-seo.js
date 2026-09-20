@@ -11,6 +11,7 @@ const {
   relatedCities,
   renderDestinationContent
 } = require("./build-static");
+const { prepareStaticHtmlPage } = require("./build-static");
 const { loadBlogArticles } = require("./blog-content");
 const { renderBlogIndex, renderBlogPost } = require("./build-blog");
 const { loadCatalog } = require("./load-catalog");
@@ -90,6 +91,15 @@ for (const city of sampleCities) {
     assert.match(content, /destination-places/);
   }
 }
+
+const preparedLegal = prepareStaticHtmlPage(
+  '<link rel="canonical" href="https://youcity.app/privacy.html"><meta property="og:url" content="https://youcity.app/privacy.html"><meta property="og:image" content="https://youcity.app/assets/hero-saopaulo.webp"><a href="/privacy.html">Privacy</a>',
+  "privacy.html",
+  { siteUrl: "https://example.com", sitePath: "/youcity" }
+);
+assert.match(preparedLegal, /href="https:\/\/example\.com\/youcity\/privacy\.html"/);
+assert.match(preparedLegal, /href="\/youcity\/privacy\.html"/);
+assert.match(preparedLegal, /content="https:\/\/example\.com\/youcity\/assets\/hero-saopaulo\.webp"/);
 
 const related = relatedCities(granada, catalog);
 assert.ok(related.length <= 8);
