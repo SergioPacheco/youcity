@@ -936,7 +936,6 @@ export function startApplication() {
       about: () => openLayer(elements.about),
       "comment-assistant": openCommentAssistantForCurrentRide,
       random: selectRandomCity,
-      privacy: () => window.YOUCITY_CONSENT?.showSettings?.()
     };
     actions[action]?.();
   }

@@ -16,8 +16,12 @@ for (const action of ["share", "about", "random", "map", "theme"]) {
   assert.doesNotMatch(overflowMenu, new RegExp(`data-overflow-action="${action}"`), `${action} should not be in More Options`);
 }
 assert.match(overflowMenu, /data-overflow-action="fullscreen"/);
-assert.match(overflowMenu, /data-overflow-action="privacy"/);
-assert.ok(indexHtml.indexOf('id="privacy-settings-button"') < indexHtml.indexOf('id="map-button"'), "World Map should appear after Privacy in the top actions");
+assert.doesNotMatch(overflowMenu, /data-overflow-action="privacy"/, "Privacy settings should live in About YouCity");
+const topbar = indexHtml.match(/<header class="topbar">[\s\S]*?<\/header>/)?.[0] || "";
+assert.doesNotMatch(topbar, /id="privacy-settings-button"/, "Privacy settings should not remain in the top actions");
+const aboutCard = indexHtml.match(/<div class="about-card">[\s\S]*?<!-- World map with city video links -->/)?.[0] || "";
+assert.match(aboutCard, /id="privacy-settings-button"/, "Privacy settings should appear inside About YouCity");
+assert.match(aboutCard, /aria-label="Privacy & cookie settings"/, "Privacy settings should retain its accessible label");
 
 const mobileCss = stylesCss.match(/@media \(max-width: 800px\) \{[\s\S]*?\n\}/g)?.at(-1) || "";
 assert.match(mobileCss, /#map-button[\s\S]*#theme-button\s*\{\s*display:\s*grid;/, "World Map and Theme icons should be visible on mobile");

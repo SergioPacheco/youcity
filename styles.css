@@ -394,6 +394,8 @@ button:focus-visible, input:focus-visible {
 .about-legal-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 4px; }
 .about-legal-links a { color: rgba(255,255,255,.55); font: 500 9px "DM Mono", monospace; letter-spacing: .04em; text-transform: uppercase; }
 .about-legal-links a:hover, .about-legal-links a:focus-visible { color: var(--lcd-green); }
+.about-privacy-button { width: max-content; max-width: 100%; margin-top: 16px; }
+.about-privacy-button .privacy-settings-label { display: inline; }
 .about-social { margin: 20px 0 18px; }
 .about-social__eyebrow { margin: 0 0 9px !important; color: var(--text-subtle) !important; font: 500 8px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
 .about-social__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; max-width: 560px; }

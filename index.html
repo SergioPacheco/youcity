@@ -172,12 +172,6 @@
           <button class="icon-button secondary-action" id="fullscreen-button" type="button" aria-label="Fullscreen">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"></path></svg>
           </button>
-          <button class="privacy-settings-button secondary-action" id="privacy-settings-button" type="button" aria-label="Privacy & cookie settings" title="Privacy & cookie settings" aria-expanded="false" aria-haspopup="dialog">
-            <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
-            </svg>
-            <span class="privacy-settings-label">Privacy</span>
-          </button>
           <button class="icon-button secondary-action" id="map-button" type="button" aria-label="Open world map" title="World map (M)">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.2 2.4 3.3 5.4 3.3 9s-1.1 6.6-3.3 9c-2.2-2.4-3.3-6.6-3.3-9S9.8 5.4 12 3zM5.2 6.5c2 .9 4.3 1.3 6.8 1.3s4.8-.4 6.8-1.3M5.2 17.5c2-.9 4.3-1.3 6.8-1.3s4.8.4 6.8 1.3"></path></svg>
           </button>
@@ -199,7 +193,6 @@
             <div class="overflow-menu" id="more-menu" role="menu" aria-label="More options">
               <button type="button" role="menuitem" data-overflow-action="fullscreen">Fullscreen</button>
               <button type="button" role="menuitem" data-overflow-action="comment-assistant" hidden>Comment Assistant</button>
-              <button type="button" role="menuitem" data-overflow-action="privacy">Privacy & cookies</button>
             </div>
           </div>
         </div>
@@ -535,6 +528,12 @@
             <a href="/privacy.html">Privacy Policy <span aria-hidden="true">↗</span></a>
             <a href="/terms.html">Terms of Use <span aria-hidden="true">↗</span></a>
           </nav>
+          <button class="privacy-settings-button about-privacy-button" id="privacy-settings-button" type="button" aria-label="Privacy & cookie settings" title="Privacy & cookie settings" aria-expanded="false" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/>
+            </svg>
+            <span class="privacy-settings-label">Privacy &amp; cookie settings</span>
+          </button>
           <p class="about-small">No ticket. No rush.</p>
         </div>
       </section>
