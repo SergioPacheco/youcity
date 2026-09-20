@@ -296,7 +296,7 @@ export function createCityGuideController({ window, document, elements, getCity,
     const aboutMarkup = wikipedia
       ? `<section class="city-guide-section city-guide-about"><div class="city-guide-section-heading"><span class="drawer-kicker">About the city</span><h3>About ${escapeHtml(city.name)}</h3></div><p>${escapeHtml(sentenceAwareExcerpt(wikipedia.extract))}</p>${wikipediaUrl ? `<a class="city-guide-source" href="${escapeHtml(wikipediaUrl)}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a>` : ""}</section>`
       : "";
-    elements.cityGuideContent.innerHTML = `<section class="city-guide-destination"><span class="destination-kicker">${escapeHtml(city.name)} · ${escapeHtml(city.country)}</span><h2>${escapeHtml(city.name)}</h2><p>${escapeHtml(destinationIntro(city, wikipedia))}</p></section>${topActions ? `<section class="city-guide-section city-guide-quick-section"><div class="city-guide-section-heading"><span class="drawer-kicker">Plan your visit</span></div>${topActions}</section>` : ""}${placesMarkup}${afterPlaces}${aboutMarkup}`;
+    elements.cityGuideContent.innerHTML = `<section class="city-guide-destination"><h2>${escapeHtml(city.name)}</h2><p>${escapeHtml(destinationIntro(city, wikipedia))}</p></section>${topActions ? `<section class="city-guide-section city-guide-quick-section"><div class="city-guide-section-heading"><span class="drawer-kicker">Plan your visit</span></div>${topActions}</section>` : ""}${placesMarkup}${afterPlaces}${aboutMarkup}`;
   }
 
   function bindPlaceAnalytics() {

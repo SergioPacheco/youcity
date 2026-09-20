@@ -307,7 +307,7 @@ button:focus-visible, input:focus-visible {
 .city-drawer.is-open, .travel-drawer.is-open, .about-modal.is-open { visibility: visible; pointer-events: auto; }
 .drawer-backdrop, .about-backdrop { position: absolute; inset: 0; background: rgba(4,6,5,.36); opacity: 0; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: opacity .4s; }
 .is-open .drawer-backdrop, .is-open .about-backdrop { opacity: 1; }
-.drawer-panel { position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 100%; overflow-y: auto; padding: 28px 18px calc(20px + var(--safe-bottom)); background: linear-gradient(180deg, rgba(13,16,14,.48) 0%, rgba(8,10,9,.34) 100%); -webkit-backdrop-filter: blur(14px) saturate(1.1); backdrop-filter: blur(14px) saturate(1.1); color: #e8e6e1; transform: translateX(100%); transition: transform .5s cubic-bezier(.77,0,.18,1); }
+.drawer-panel { position: absolute; top: 0; right: 0; bottom: 0; width: 100%; max-width: 100%; overflow-y: auto; padding: 28px 18px calc(20px + var(--safe-bottom)); background: linear-gradient(180deg, #0d100e 0%, #080a09 100%); color: #e8e6e1; transform: translateX(100%); transition: transform .5s cubic-bezier(.77,0,.18,1); }
 .city-drawer.is-open .drawer-panel, .travel-drawer.is-open .drawer-panel { transform: translateX(0); }
 .drawer-header { display: flex; justify-content: space-between; gap: 30px; align-items: start; }
 .drawer-kicker { color: var(--lcd-green); font: 500 9px "DM Mono", monospace; text-transform: uppercase; letter-spacing: .12em; }
@@ -341,7 +341,6 @@ button:focus-visible, input:focus-visible {
 
 .city-guide-content { display: grid; gap: 22px; }
 .city-guide-destination { padding-bottom: 2px; }
-.destination-kicker { display: block; color: var(--lcd-green); font: 500 9px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; overflow-wrap: anywhere; }
 .city-guide-destination h2 { margin: 7px 0 8px; color: #fff; font: 300 42px/.95 "Newsreader", serif; letter-spacing: -.04em; }
 .city-guide-destination p { max-width: 34em; margin: 0; color: rgba(255,255,255,.74); font-size: 13px; line-height: 1.55; }
 .city-guide-section { padding-top: 20px; border-top: 1px solid rgba(255,255,255,.12); }

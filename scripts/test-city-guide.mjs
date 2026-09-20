@@ -21,6 +21,7 @@ assert.match(stylesCss, /\.city-guide-places\s*\{[^}]*grid-template-columns:\s*r
 assert.match(stylesCss, /\.city-guide-place-main\s*\{[^}]*grid-template-columns:\s*1fr/, "place cards should stack image and copy");
 assert.match(stylesCss, /\.city-guide-place-image\s*\{[^}]*width:\s*100%[^}]*aspect-ratio:\s*4\s*\/\s*3/, "place images should use the card width and a larger ratio");
 assert.match(stylesCss, /@media \(max-width: 360px\)[\s\S]*\.city-guide-places\s*\{[^}]*grid-template-columns:\s*1fr/, "very narrow screens should use one place per row");
+assert.match(stylesCss, /\.drawer-panel\s*\{[^}]*background:\s*linear-gradient\(180deg, #0d100e 0%, #080a09 100%\)/, "city guide and Explore Cities panels should use the opaque gradient");
 
 const city = {
   id: "granada",
@@ -91,6 +92,7 @@ const commerce = {
     await controller.open();
     const html = elements.cityGuideContent.innerHTML;
     assert.match(html, /Granada/);
+    assert.doesNotMatch(html, /destination-kicker/, "the city guide should not repeat the city/country kicker");
     assert.match(html, /Alhambra/);
     assert.match(html, /Learn more/);
     assert.match(html, /Source: Wikipedia/);

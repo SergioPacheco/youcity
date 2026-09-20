@@ -111,6 +111,32 @@ assert.equal(collapseButton["aria-expanded"], "true");
 panelWithCollapseControl.setExpanded(false);
 assert.equal(collapseButton["aria-expanded"], "false");
 
+let autoCollapseCallback = null;
+const activityListeners = new Map();
+const interactivePlayerCard = {
+  classList: { toggle() {} },
+  addEventListener: (type, listener) => activityListeners.set(type, listener),
+  removeEventListener: () => {}
+};
+const autoPanel = createRadioPanelController({
+  playerCard: interactivePlayerCard,
+  playerCardMain,
+  expandButton,
+  inactivityTimeout: 30_000,
+  setTimeoutImpl: (callback, delay) => {
+    assert.equal(delay, 30_000, "radio auto-collapse should wait 30 seconds");
+    autoCollapseCallback = callback;
+    return "auto-collapse";
+  },
+  clearTimeoutImpl: () => {}
+});
+autoPanel.setExpanded(true);
+assert.ok(autoCollapseCallback, "expanded radio should schedule automatic collapse");
+activityListeners.get("pointerdown")();
+assert.ok(autoCollapseCallback, "radio activity should restart the inactivity timer");
+autoCollapseCallback();
+assert.equal(autoPanel.isExpanded(), false, "inactive expanded radio should return to compact mode");
+
 let audioSrc = "";
 let audioLoadCount = 0;
 let audioPauseCount = 0;
