@@ -1,6 +1,7 @@
 const CACHE_TTL = 24 * 60 * 60 * 1000;
 const RATE_WINDOW = 10 * 60 * 1000;
 const MAX_REQUESTS = 30;
+const MAX_NEARBY_DISTANCE_METERS = 10_000;
 const cache = new Map();
 const rateLimits = new Map();
 const SUPPORTED_LANGUAGES = new Set(["en", "es", "pt", "fr", "de", "it"]);
@@ -47,6 +48,23 @@ function normalizedLanguage(value) {
 
 function comparable(value) {
   return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+}
+
+function distanceInMeters(firstLatitude, firstLongitude, secondLatitude, secondLongitude) {
+  const radians = Math.PI / 180;
+  const latitudeDelta = (secondLatitude - firstLatitude) * radians;
+  const longitudeDelta = (secondLongitude - firstLongitude) * radians;
+  const firstLatitudeRadians = firstLatitude * radians;
+  const secondLatitudeRadians = secondLatitude * radians;
+  const arc = Math.sin(latitudeDelta / 2) ** 2
+    + Math.cos(firstLatitudeRadians) * Math.cos(secondLatitudeRadians) * Math.sin(longitudeDelta / 2) ** 2;
+  return 6_371_000 * 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
+}
+
+function isNearbyCoordinate(cityLatitude, cityLongitude, candidateLatitude, candidateLongitude) {
+  return Number.isFinite(candidateLatitude)
+    && Number.isFinite(candidateLongitude)
+    && distanceInMeters(cityLatitude, cityLongitude, candidateLatitude, candidateLongitude) <= MAX_NEARBY_DISTANCE_METERS;
 }
 
 async function fetchJson(endpoint, timeout = 8_000) {
@@ -128,16 +146,20 @@ function wikidataEntitiesEndpoint(ids, language) {
 async function nearbyPlaces(latitude, longitude, language, city) {
   try {
     const nearby = await fetchJson(wikidataGeosearchEndpoint(latitude, longitude), 2_500);
-    const ids = (nearby.query?.geosearch || []).map((place) => place.title).filter((id) => /^Q\d+$/.test(id));
+    const geosearch = nearby.query?.geosearch || [];
+    const ids = geosearch.map((place) => place.title).filter((id) => /^Q\d+$/.test(id));
+    const locations = new Map(geosearch.map((place) => [place.title, place]));
     const entities = await fetchJson(wikidataEntitiesEndpoint(ids, language), 2_500);
     const genericDescription = /\b(area|district|borough|county|region|metropolitan|municipality|conurbation|event|championship|pandemic|treaty|timeline|council|historical|festival|subprefecture|prefecture|administration|authority|office|transport|bus|railway|rail|film)\b|trolley\w*/i;
     const placeDescription = /\b(attraction|building|bridge|castle|cathedral|church|column|fort|gallery|garden|landmark|market|monument|museum|palace|park|square|stadium|statue|temple|theatre|tower)\b/i;
     const places = ids.map((id) => {
       const entity = entities.entities?.[id];
+      const location = locations.get(id);
       const label = entity?.labels?.[language]?.value || entity?.labels?.en?.value || "";
       const description = entity?.descriptions?.[language]?.value || entity?.descriptions?.en?.value || "";
       const article = entity?.sitelinks?.[`${language}wiki`]?.title || entity?.sitelinks?.enwiki?.title || "";
-      if (!label || !article || genericDescription.test(`${label} ${description}`) || !placeDescription.test(`${label} ${description}`)) return null;
+      if (!isNearbyCoordinate(latitude, longitude, Number(location?.lat), Number(location?.lon))
+        || !label || !article || genericDescription.test(`${label} ${description}`) || !placeDescription.test(`${label} ${description}`)) return null;
       return {
         name: label,
         description,
@@ -169,7 +191,7 @@ async function wikipediaNearbyPlaces(latitude, longitude, language, city) {
   endpoint.searchParams.set("ggscoord", `${latitude}|${longitude}`);
   endpoint.searchParams.set("ggsradius", "10000");
   endpoint.searchParams.set("ggslimit", "20");
-  endpoint.searchParams.set("prop", "description|info");
+  endpoint.searchParams.set("prop", "coordinates|description|info");
   endpoint.searchParams.set("inprop", "url");
   endpoint.searchParams.set("format", "json");
   endpoint.searchParams.set("origin", "*");
@@ -178,6 +200,10 @@ async function wikipediaNearbyPlaces(latitude, longitude, language, city) {
   return Object.values(payload.query?.pages || {})
     .sort((first, second) => (first.index || 0) - (second.index || 0))
     .filter((place) => comparable(place.title) !== comparable(city) && !genericText.test(`${place.title} ${place.description || ""}`))
+    .filter((place) => {
+      const location = place.coordinates?.[0];
+      return isNearbyCoordinate(latitude, longitude, Number(location?.lat), Number(location?.lon));
+    })
     .slice(0, 5).map((place) => ({
       name: place.title,
       description: place.description || "Point of interest nearby",

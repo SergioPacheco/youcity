@@ -19,21 +19,6 @@
         "name": "São Paulo Cathedral",
         "description": "Cathedral in Brazil",
         "url": "https://en.wikipedia.org/wiki/S%C3%A3o_Paulo_Cathedral"
-      },
-      {
-        "name": "Igreja da Ordem Terceira do Carmo (São Paulo)",
-        "description": "Catholic Temple in São Paulo, Brazil",
-        "url": "https://en.wikipedia.org/wiki/Igreja_da_Ordem_Terceira_do_Carmo_(S%C3%A3o_Paulo)"
-      },
-      {
-        "name": "Marco Zero (São Paulo)",
-        "description": "Geographic monument in São Paulo, Brazil",
-        "url": "https://en.wikipedia.org/wiki/Marco_Zero_(S%C3%A3o_Paulo)"
-      },
-      {
-        "name": "Bahia State University",
-        "description": "University in Bahia, Brazil",
-        "url": "https://en.wikipedia.org/wiki/Bahia_State_University"
       }
     ],
     "source": {

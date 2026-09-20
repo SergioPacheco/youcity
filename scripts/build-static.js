@@ -521,7 +521,7 @@ function buildSitemap(catalog) {
 }
 
 function buildRobots() {
-  return `User-agent: *\nAllow: /\n\n# Query-string variants are client-side state; city pages use stable paths.\nDisallow: /*?city=\nDisallow: /*?preview=\nDisallow: /*?*\n\nSitemap: ${SITE_URL}${sitePath("/sitemap.xml")}\n`;
+  return `User-agent: *\nAllow: /\n\nDisallow: /*?city=\nDisallow: /*?preview=\n\nSitemap: ${SITE_URL}${sitePath("/sitemap.xml")}\n`;
 }
 
 function buildNotFound() {

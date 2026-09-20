@@ -19,6 +19,7 @@ const MAX_RETRIES = 2;
 const REQUEST_TIMEOUT = 8_000;
 const WORKER_COUNT = 3;
 const USER_AGENT = "YouCity/1.0 (https://youcity.app)";
+const MAX_NEARBY_DISTANCE_METERS = 10_000;
 
 function delay(milliseconds) {
   return new Promise((resolvePromise) => setTimeout(resolvePromise, milliseconds));
@@ -142,7 +143,7 @@ function wikipediaNearbyEndpoint(latitude, longitude, language) {
   endpoint.searchParams.set("ggscoord", `${latitude}|${longitude}`);
   endpoint.searchParams.set("ggsradius", "10000");
   endpoint.searchParams.set("ggslimit", "20");
-  endpoint.searchParams.set("prop", "description|info");
+  endpoint.searchParams.set("prop", "coordinates|description|info");
   endpoint.searchParams.set("inprop", "url");
   endpoint.searchParams.set("format", "json");
   endpoint.searchParams.set("origin", "*");
@@ -155,6 +156,23 @@ function comparable(value) {
 
 function placeUrl(language, article) {
   return `https://${language}.wikipedia.org/wiki/${encodeURIComponent(String(article).replaceAll(" ", "_"))}`;
+}
+
+function distanceInMeters(firstLatitude, firstLongitude, secondLatitude, secondLongitude) {
+  const radians = Math.PI / 180;
+  const latitudeDelta = (secondLatitude - firstLatitude) * radians;
+  const longitudeDelta = (secondLongitude - firstLongitude) * radians;
+  const firstLatitudeRadians = firstLatitude * radians;
+  const secondLatitudeRadians = secondLatitude * radians;
+  const arc = Math.sin(latitudeDelta / 2) ** 2
+    + Math.cos(firstLatitudeRadians) * Math.cos(secondLatitudeRadians) * Math.sin(longitudeDelta / 2) ** 2;
+  return 6_371_000 * 2 * Math.atan2(Math.sqrt(arc), Math.sqrt(1 - arc));
+}
+
+function isNearbyCoordinate(cityLatitude, cityLongitude, candidateLatitude, candidateLongitude) {
+  return Number.isFinite(candidateLatitude)
+    && Number.isFinite(candidateLongitude)
+    && distanceInMeters(cityLatitude, cityLongitude, candidateLatitude, candidateLongitude) <= MAX_NEARBY_DISTANCE_METERS;
 }
 
 const genericDescription = /\b(area|district|borough|county|region|metropolitan|municipality|conurbation|event|championship|pandemic|treaty|timeline|council|historical|festival|subprefecture|prefecture|administration|authority|office|transport|bus|railway|rail|film|station|hotel|neighborhood|jurisdiction|archdiocese)\b|trolley\w*/i;
@@ -203,11 +221,16 @@ async function nearbyPlaces(city, language, requestOptions) {
   const places = [];
   try {
     const nearby = await retryJson(wikidataGeosearchEndpoint(latitude, longitude), { ...requestOptions, timeout: 2_500 });
-    const ids = (nearby.query?.geosearch || []).map((place) => place.title).filter((id) => /^Q\d+$/.test(id));
+    const geosearch = nearby.query?.geosearch || [];
+    const ids = geosearch.map((place) => place.title).filter((id) => /^Q\d+$/.test(id));
+    const locations = new Map(geosearch.map((place) => [place.title, place]));
     if (ids.length) {
       const entities = await retryJson(wikidataEntitiesEndpoint(ids, language), { ...requestOptions, timeout: 2_500 });
       for (const id of ids) {
-        const place = entityPlace(entities.entities?.[id], language);
+        const location = locations.get(id);
+        const place = isNearbyCoordinate(latitude, longitude, Number(location?.lat), Number(location?.lon))
+          ? entityPlace(entities.entities?.[id], language)
+          : null;
         if (place && !places.some((existing) => comparable(existing.name) === comparable(place.name))) places.push(place);
         if (places.length === 5) break;
       }
@@ -221,12 +244,17 @@ async function nearbyPlaces(city, language, requestOptions) {
     const fallback = Object.values(nearby.query?.pages || {})
       .sort((first, second) => (first.index || 0) - (second.index || 0))
       .filter((place) => comparable(place.title) !== comparable(city.name) && !genericDescription.test(`${place.title} ${place.description || ""}`))
+      .filter((place) => {
+        const location = place.coordinates?.[0];
+        return isNearbyCoordinate(latitude, longitude, Number(location?.lat), Number(location?.lon));
+      })
       .map((place) => ({
         name: place.title,
         description: place.description || "",
         url: place.fullurl || place.canonicalurl || placeUrl(language, place.title)
       }))
-      .filter((place) => place.description.trim().length >= 15 && place.description.trim().length <= 180);
+      .filter((place) => place.description.trim().length >= 15 && place.description.trim().length <= 180)
+      .slice(0, 5);
     for (const place of fallback) {
       if (!places.some((existing) => comparable(existing.name) === comparable(place.name))) places.push(place);
       if (places.length === 5) break;

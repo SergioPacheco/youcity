@@ -131,13 +131,19 @@ async function runSyncUnitTests() {
       return { ok: true, status: 200, json: async () => ({ title: "Granada", description: "city in Andalusia, Spain", extract: validEntry.summary.extract, content_urls: { desktop: { page: validEntry.summary.url } } }) };
     }
     if (url.hostname === "www.wikidata.org" && url.searchParams.get("list") === "geosearch") {
-      return { ok: true, status: 200, json: async () => ({ query: { geosearch: [{ title: "Q1" }, { title: "Q2" }, { title: "Q3" }] } }) };
+      return { ok: true, status: 200, json: async () => ({ query: { geosearch: [
+        { title: "Q1", lat: 37.1766, lon: -3.5980 },
+        { title: "Q2", lat: 37.1767, lon: -3.5981 },
+        { title: "Q3", lat: 37.1768, lon: -3.5982 },
+        { title: "Q4" }
+      ] } }) };
     }
     if (url.hostname === "www.wikidata.org" && url.searchParams.get("action") === "wbgetentities") {
       return { ok: true, status: 200, json: async () => ({ entities: {
         Q1: { labels: { en: { value: "Alhambra" } }, descriptions: { en: { value: "Palace and fortress complex in Granada." } }, sitelinks: { enwiki: { title: "Alhambra" } } },
         Q2: { labels: { en: { value: "Granada Cathedral" } }, descriptions: { en: { value: "Roman Catholic cathedral in Granada." } }, sitelinks: { enwiki: { title: "Granada Cathedral" } } },
-        Q3: { labels: { en: { value: "Short Description Stadium" } }, descriptions: { en: { value: "stadium" } }, sitelinks: { enwiki: { title: "Short Description Stadium" } } }
+        Q3: { labels: { en: { value: "Short Description Stadium" } }, descriptions: { en: { value: "stadium" } }, sitelinks: { enwiki: { title: "Short Description Stadium" } } },
+        Q4: { labels: { en: { value: "Bahia State University" } }, descriptions: { en: { value: "University in Bahia, Brazil" } }, sitelinks: { enwiki: { title: "Bahia State University" } } }
       } }) };
     }
     if (url.hostname.endsWith("wikipedia.org") && url.pathname.endsWith("/w/api.php")) {
@@ -149,8 +155,30 @@ async function runSyncUnitTests() {
   assert.equal(synced.status, "complete");
   assert.ok(synced.places.length >= 2);
   assert.ok(!synced.places.some((place) => place.name === "Short Description Stadium"));
+  assert.ok(!synced.places.some((place) => place.name === "Bahia State University"));
   assert.ok(requested.every((url) => !url.includes("commons.wikimedia.org")));
   assert.ok(requested.every((url) => !url.includes("generator=geosearch")), "Wikipedia geosearch should only run when Wikidata has fewer than two places");
+
+  const fallbackRequested = [];
+  const fallbackRequest = async (endpoint, init) => {
+    const url = new URL(endpoint);
+    fallbackRequested.push(url.href);
+    if (url.hostname === "www.wikidata.org" && url.searchParams.get("list") === "geosearch") {
+      return { ok: true, status: 200, json: async () => ({ query: { geosearch: [{ title: "Q1", lat: 37.1766, lon: -3.5980 }] } }) };
+    }
+    if (url.hostname.endsWith("wikipedia.org") && url.searchParams.get("generator") === "geosearch") {
+      return { ok: true, status: 200, json: async () => ({ query: { pages: {
+        1: { index: 1, title: "Bahia State University", description: "University in Bahia, Brazil" },
+        2: { index: 2, title: "Granada Cathedral", description: "Roman Catholic cathedral in Granada.", coordinates: [{ lat: 37.1767, lon: -3.5981 }], fullurl: "https://en.wikipedia.org/wiki/Granada_Cathedral" }
+      } } }) };
+    }
+    return request(endpoint, init);
+  };
+  const fallbackFiltered = await syncCity(city, { request: fallbackRequest, sleep: async () => {}, now: () => "2026-09-19" });
+  assert.equal(fallbackFiltered.status, "complete");
+  assert.ok(fallbackFiltered.places.some((place) => place.name === "Granada Cathedral"));
+  assert.ok(!fallbackFiltered.places.some((place) => place.name === "Bahia State University"));
+  assert.ok(fallbackRequested.some((url) => url.includes("generator=geosearch") && url.includes("prop=coordinates%7Cdescription%7Cinfo")), "Wikipedia fallback must request coordinates");
 
   let usedActionSearch = false;
   const restLimitedRequest = async (endpoint, init) => {
