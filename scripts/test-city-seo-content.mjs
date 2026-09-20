@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   canonicalCitySlug,
   editorialContentChanged,
@@ -165,6 +168,34 @@ async function runSyncUnitTests() {
   assert.deepEqual(incompleteOnly.map((city) => city.name), ["London"]);
 }
 
+function runCoverageTest() {
+  const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
+  const catalog = JSON.parse(readFileSync(resolve(root, "data/catalog.json"), "utf8"));
+  const cache = JSON.parse(readFileSync(resolve(root, "data/city-seo-content.json"), "utf8"));
+  const errors = validateCache(cache, catalog);
+  if (errors.length) throw new Error(`SEO content validation failed:\n${errors.join("\n")}`);
+  const complete = catalog.filter((city) => cache[canonicalCitySlug(city.name)]?.status === "complete");
+  const incomplete = catalog.filter((city) => cache[canonicalCitySlug(city.name)]?.status !== "complete");
+  const coverage = catalog.length ? (complete.length / catalog.length) * 100 : 0;
+  console.log("SEO editorial coverage");
+  console.log(`Catalog cities: ${catalog.length}`);
+  console.log(`Complete editorial entries: ${complete.length}`);
+  console.log(`Incomplete entries: ${incomplete.length}`);
+  console.log(`Coverage: ${coverage.toFixed(1)}%`);
+  if (incomplete.length) {
+    console.log("Incomplete cities:");
+    incomplete.forEach((city) => console.log(`- ${city.name}, ${city.country} (${cache[canonicalCitySlug(city.name)]?.reason})`));
+  }
+  for (const name of ["Granada", "London", "Sao Paulo", "Medellín", "Nairobi", "Perth", "Malibu"]) {
+    const city = catalog.find((candidate) => candidate.name === name);
+    assert.ok(city, `${name} should exist in catalog`);
+    assert.equal(cache[canonicalCitySlug(city.name)]?.status, "complete", `${name} should have complete editorial content`);
+  }
+  if (coverage < 95 && !process.argv.includes("--allow-incomplete")) {
+    throw new Error(`Editorial coverage ${coverage.toFixed(1)}% is below the required 95.0%`);
+  }
+}
+
 if (process.argv.includes("--unit")) {
   runUnitTests();
   console.log("City SEO content unit tests passed.");
@@ -174,3 +205,5 @@ if (process.argv.includes("--sync-unit")) {
   await runSyncUnitTests();
   console.log("City SEO synchronization unit tests passed.");
 }
+
+if (!process.argv.includes("--unit") && !process.argv.includes("--sync-unit")) runCoverageTest();

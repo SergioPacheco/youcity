@@ -142,11 +142,62 @@ function displayCityName(city) {
 }
 
 function destinationSection(html) {
-  const match = html.match(/<section\b[^>]*class=["'][^"']*\bdestination-content\b[^"']*["'][^>]*>[\s\S]*?<\/section>/i);
-  return match?.[0] || "";
+  return sectionWithClass(html, "destination-content");
 }
 
-function checkDestinationContent(file, city) {
+function sectionWithClass(html, className) {
+  const openPattern = new RegExp(`<section\\b[^>]*class=["'][^"']*\\b${className}\\b[^"']*["'][^>]*>`, "i");
+  const open = html.match(openPattern);
+  if (!open || open.index === undefined) return "";
+  const start = open.index;
+  const tagPattern = /<\/?section\b[^>]*>/gi;
+  tagPattern.lastIndex = start;
+  let depth = 0;
+  let match;
+  while ((match = tagPattern.exec(html))) {
+    depth += /^<\/?section\b/i.test(match[0]) && !/^<\//.test(match[0]) ? 1 : -1;
+    if (depth === 0) return html.slice(start, tagPattern.lastIndex);
+  }
+  return "";
+}
+
+function visibleText(value) {
+  return String(value)
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/gi, "'")
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function trustedEditorialUrl(value) {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+    return url.protocol === "https:" && (host === "wikipedia.org" || host.endsWith(".wikipedia.org") || host === "wikidata.org" || host.endsWith(".wikidata.org"));
+  } catch {
+    return false;
+  }
+}
+
+function normalizedEditorialText(value, city, country) {
+  return visibleText(value)
+    .toLowerCase()
+    .replaceAll(String(city).toLowerCase(), "")
+    .replaceAll(String(country).toLowerCase(), "")
+    .replace(/[\p{P}\p{S}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function checkDestinationContent(file, city, editorialContent, duplicateTexts, wordStats) {
   const html = read(file);
   const sections = [...html.matchAll(/<section\b[^>]*class=["'][^"']*\bdestination-content\b[^"']*["'][^>]*>/gi)];
   if (sections.length !== 1) {
@@ -174,6 +225,23 @@ function checkDestinationContent(file, city) {
   const relatedLists = [...section.matchAll(/<ul\b[^>]*class=["'][^"']*\bdestination-related\b[^"']*["'][^>]*>([\s\S]*?)<\/ul>/gi)];
   const relatedLinks = relatedLists.flatMap((match) => [...match[1].matchAll(/<a\b[^>]*href=["'][^"']+["'][^>]*>/gi)]);
   if (relatedLinks.length > 8) fail(`${file}: destination-related contains ${relatedLinks.length} links; maximum is 8`);
+
+  const editorial = editorialContent[slugify(city.name)];
+  if (editorial?.status !== "complete") return;
+  const about = sectionWithClass(section, "destination-about");
+  const places = sectionWithClass(section, "destination-places");
+  if (!about) fail(`${file}: missing .destination-about`);
+  if (!places) fail(`${file}: missing .destination-places`);
+  if (!about.includes(`About ${name}`)) fail(`${file}: missing About ${name}`);
+  if (!places.includes(`Places to discover in ${name}`)) fail(`${file}: missing Places to discover in ${name}`);
+  if (!/Source:\s*Wikipedia/i.test(about)) fail(`${file}: missing visible Wikipedia attribution`);
+  if (about && !trustedEditorialUrl(about.match(/href=["']([^"']+)["']/i)?.[1] || "")) fail(`${file}: About source URL is not trusted`);
+  const words = visibleText(section).split(/\s+/).filter(Boolean).length;
+  wordStats.push({ file, words });
+  if (words < 100) fail(`${file}: complete destination content has ${words} words; minimum is 100`);
+  const normalized = `${normalizedEditorialText(about, name, city.country)} ${normalizedEditorialText(places, name, city.country)}`.trim();
+  if (duplicateTexts.has(normalized)) fail(`${file}: duplicate normalized editorial content with ${duplicateTexts.get(normalized)}`);
+  else duplicateTexts.set(normalized, file);
 }
 
 function hasVideoExperience(city) {
@@ -198,6 +266,13 @@ function main() {
 
   checkRequiredFiles();
   const catalog = expectedCities();
+  const editorialPath = join(ROOT_DIR, "data/city-seo-content.json");
+  if (!existsSync(editorialPath)) {
+    fail("Missing data/city-seo-content.json");
+  }
+  const editorialContent = existsSync(editorialPath) ? JSON.parse(readFileSync(editorialPath, "utf8")) : {};
+  const duplicateTexts = new Map();
+  const wordStats = [];
   const files = allHtmlFiles(OUTPUT_DIR).sort();
   const cityFiles = files.filter((file) => file.startsWith("city/"));
   if (cityFiles.length !== catalog.length) fail(`Expected ${catalog.length} city pages, found ${cityFiles.length}`);
@@ -208,7 +283,7 @@ function main() {
 
   for (const file of cityFiles) {
     const city = catalog.find((candidate) => `city/${slugify(candidate.name)}.html` === file);
-    if (city) checkDestinationContent(file, city);
+    if (city) checkDestinationContent(file, city, editorialContent, duplicateTexts, wordStats);
   }
 
   for (const key of ["title", "canonical", "description"]) {
@@ -226,6 +301,13 @@ function main() {
     return;
   }
 
+  if (wordStats.length) {
+    const words = wordStats.map((entry) => entry.words);
+    const average = words.reduce((total, count) => total + count, 0) / words.length;
+    console.log(`Average destination-content words: ${average.toFixed(1)}`);
+    console.log(`Minimum words: ${Math.min(...words)}`);
+    console.log(`Maximum words: ${Math.max(...words)}`);
+  }
   console.log(`SEO check passed: ${pageData.length} indexable pages, ${cityFiles.length} city pages, sitemap verified for ${SITE_URL}${SITE_PATH}`);
 }
 
