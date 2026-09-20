@@ -163,6 +163,12 @@ function loadDiscoverCarsCatalog() {
   return JSON.parse(readFileSync(file, "utf8")).locations || {};
 }
 
+function loadCitySeoContent() {
+  const file = resolve(ROOT_DIR, "data/city-seo-content.json");
+  if (!existsSync(file)) return {};
+  return JSON.parse(readFileSync(file, "utf8"));
+}
+
 function writeAffiliateOverridesAsset() {
   const source = resolve(ROOT_DIR, "data/affiliate-overrides.json");
   const overrides = existsSync(source) ? JSON.parse(readFileSync(source, "utf8")) : {};
@@ -263,7 +269,48 @@ function relatedCities(city, catalog) {
     .slice(0, 8);
 }
 
-function renderDestinationContent(city, catalog) {
+function trustedEditorialUrl(value) {
+  try {
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+    return url.protocol === "https:" && (host === "wikipedia.org" || host.endsWith(".wikipedia.org") || host === "wikidata.org" || host.endsWith(".wikidata.org"));
+  } catch {
+    return false;
+  }
+}
+
+function sentenceAwareExcerpt(value, minLength = 250, maxLength = 700) {
+  const text = String(value || "").replace(/\s+/g, " ").trim();
+  if (text.length <= maxLength) return text;
+  const boundary = text.slice(0, maxLength + 1);
+  const sentenceEnds = [...boundary.matchAll(/[.!?](?=\s|$)/g)].map((match) => match.index + 1);
+  const preferred = sentenceEnds.filter((end) => end >= minLength).at(-1);
+  if (preferred) return text.slice(0, preferred).trim();
+  const wordBoundary = boundary.lastIndexOf(" ");
+  return (wordBoundary > 0 ? boundary.slice(0, wordBoundary) : boundary).trimEnd();
+}
+
+function editorialPlaceMarkup(place) {
+  const name = escapeHtml(place.name);
+  const label = trustedEditorialUrl(place.url)
+    ? `<a href="${escapeHtml(place.url)}" target="_blank" rel="noopener noreferrer">${name}</a>`
+    : name;
+  return `<li><strong>${label}</strong><span>${escapeHtml(place.description)}</span></li>`;
+}
+
+function validEditorialContent(editorialContent, city) {
+  if (editorialContent?.status !== "complete") return null;
+  if (editorialContent.city !== city.name || editorialContent.country !== city.country) return null;
+  if (!editorialContent.summary || !trustedEditorialUrl(editorialContent.summary.url)) return null;
+  if (String(editorialContent.summary.extract || "").trim().length < 120) return null;
+  const places = Array.isArray(editorialContent.places)
+    ? editorialContent.places.filter((place) => String(place?.name || "").trim() && String(place?.description || "").trim().length >= 15 && String(place.description).trim().length <= 180).slice(0, 5)
+    : [];
+  if (places.length < 2) return null;
+  return { ...editorialContent, places };
+}
+
+function renderDestinationContent(city, catalog, editorialContent = null) {
   const name = displayCityName(city);
   const country = countryName(city.country);
   const modeDefinitions = cityModeDefinitions(city);
@@ -280,7 +327,16 @@ function renderDestinationContent(city, catalog) {
     ? `<h2>More destinations in ${escapeHtml(country)}</h2><ul class="destination-related">${related.map((candidate) => `<li><a href="${escapeHtml(cityPath(candidate))}">${escapeHtml(displayCityName(candidate))}</a></li>`).join("")}</ul>`
     : "";
   const experienceText = modeText ? `immersive ${modeText} experiences` : "immersive virtual experiences";
-  return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul>${radioSection}${relatedSection}</section>`;
+  const editorial = validEditorialContent(editorialContent, city);
+  if (!editorial) {
+    return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul>${radioSection}${relatedSection}</section>`;
+  }
+  const about = `<section class="destination-about"><h2>About ${escapeHtml(name)}</h2><p>${escapeHtml(sentenceAwareExcerpt(editorial.summary.extract, 250, 700))}</p><p><a href="${escapeHtml(editorial.summary.url)}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a></p></section>`;
+  const experienceSection = `<section class="destination-experiences"><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul></section>`;
+  const places = `<section class="destination-places"><h2>Places to discover in ${escapeHtml(name)}</h2><ul>${editorial.places.map(editorialPlaceMarkup).join("")}</ul></section>`;
+  const radioEditorial = radioSection ? `<section class="destination-radio">${radioSection}</section>` : "";
+  const relatedEditorial = relatedSection ? `<section class="destination-related">${relatedSection}</section>` : "";
+  return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p>${about}${experienceSection}${places}${radioEditorial}${relatedEditorial}</section>`;
 }
 
 function hasVideoExperience(city) {
@@ -411,15 +467,15 @@ function replaceSeoFallback(html, body) {
   return pattern.test(html) ? html.replace(pattern, content) : html.replace("</body>", `  ${content}\n</body>`);
 }
 
-function replaceDestinationContent(html, city, catalog) {
-  const content = renderDestinationContent(city, catalog);
+function replaceDestinationContent(html, city, catalog, editorialContent) {
+  const content = renderDestinationContent(city, catalog, editorialContent);
   const pattern = /<noscript\b[^>]*data-seo-fallback[^>]*>/i;
   return pattern.test(html)
     ? html.replace(pattern, `${content}\n\n    $&`)
     : html.replace("</body>", `  ${content}\n</body>`);
 }
 
-function renderPage(baseHtml, seo, fallback, { city = null, catalog = [] } = {}) {
+function renderPage(baseHtml, seo, fallback, { city = null, catalog = [], editorialContent = null } = {}) {
   let html = replaceTitle(baseHtml, seo.title);
   html = replaceMeta(html, 'name="description"', seo.description);
   html = replaceMeta(html, 'name="robots"', "index,follow");
@@ -436,7 +492,7 @@ function renderPage(baseHtml, seo, fallback, { city = null, catalog = [] } = {})
   html = replaceJsonLd(html, seo.jsonLd);
   if (city) {
     html = html.replace(/<html\b([^>]*)>/i, '<html$1 class="seo-city-page">');
-    html = replaceDestinationContent(html, city, catalog);
+    html = replaceDestinationContent(html, city, catalog, editorialContent);
   }
   if (fallback) html = replaceSeoFallback(html, fallback);
   return html;
@@ -559,6 +615,7 @@ module.exports = {
   citySeoTitle,
   relatedCities,
   renderDestinationContent,
+  trustedEditorialUrl,
   validateModuleImports
 };
 
@@ -566,6 +623,7 @@ function main() {
   const catalogBuild = spawnSync(process.execPath, [resolve(ROOT_DIR, "scripts/build-catalog.js")], { stdio: "inherit" });
   if (catalogBuild.status !== 0) throw new Error("Catalog build failed.");
   const catalog = loadCanonicalCatalog(ROOT_DIR);
+  const citySeoContent = loadCitySeoContent();
   const discoverCarsCatalog = loadDiscoverCarsCatalog();
   if (!catalog.length) throw new Error("The city catalog is empty.");
 
@@ -607,7 +665,7 @@ function main() {
   catalog.forEach((city, index) => {
     const seo = citySeo(city);
     const cityHtml = replaceStaticCity(
-      renderPage(baseHtml, seo, cityFallback(seo, city, catalog, discoverCarsCatalog), { city, catalog }),
+      renderPage(baseHtml, seo, cityFallback(seo, city, catalog, discoverCarsCatalog), { city, catalog, editorialContent: citySeoContent[slugify(city.name)] || null }),
       seo,
       index + 1,
       catalog.length
