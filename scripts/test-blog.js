@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const assert = require("node:assert/strict");
-const { mkdtempSync, rmSync, writeFileSync } = require("node:fs");
+const { mkdtempSync, readFileSync, rmSync, writeFileSync } = require("node:fs");
 const { join } = require("node:path");
 const { tmpdir } = require("node:os");
 
@@ -14,6 +14,7 @@ const {
   validateArticle,
   validateSlug
 } = require("./blog-content");
+const { renderBlogIndex, renderBlogPost } = require("./build-blog");
 
 function expectFailure(label, callback, expectedText = "") {
   assert.throws(callback, (error) => {
@@ -199,5 +200,39 @@ const repositoryArticles = loadBlogArticles({
 assert.equal(repositoryArticles.all.length, 12);
 assert.equal(repositoryArticles.published.length, 2);
 assert.equal(repositoryArticles.bySlug.size, 2);
+
+const templateRoot = join(__dirname, "../templates");
+const indexHtml = renderBlogIndex({
+  template: readFileSync(join(templateRoot, "blog-index.html"), "utf8"),
+  articles: repositoryArticles.published,
+  siteUrl: "https://youcity.app",
+  sitePath: ""
+});
+assert.match(indexHtml, /<!doctype html>/i);
+assert.match(indexHtml, /<html lang="en">/);
+assert.match(indexHtml, /<h1[^>]*>Travel inspiration<\/h1>/);
+assert.match(indexHtml, /href="\/blog\/explore-a-city-virtually-before-travelling"/);
+assert.match(indexHtml, /href="\/blog\/discovering-a-citys-atmosphere-through-local-radio"/);
+assert.match(indexHtml, /application\/ld\+json/);
+assert.doesNotMatch(indexHtml, /src\/main\.mjs|type="module"/);
+
+const post = repositoryArticles.published[0];
+const postHtml = renderBlogPost({
+  template: readFileSync(join(templateRoot, "blog-post.html"), "utf8"),
+  article: post,
+  relations: repositoryArticles.resolveArticleRelations(post),
+  siteUrl: "https://youcity.app",
+  sitePath: ""
+});
+assert.match(postHtml, /<main[\s\S]*<article[\s\S]*<\/article>[\s\S]*<\/main>/);
+assert.match(postHtml, /<h1[^>]*>How to Explore a City Virtually Before Travelling<\/h1>/);
+assert.match(postHtml, /<meta property="og:type" content="article"/);
+assert.match(postHtml, /<meta property="og:image" content="https:\/\/youcity\.app\/assets\/blog\/youcity-virtual-exploration-1440\.webp"/);
+assert.match(postHtml, /srcset="[^"]*youcity-virtual-exploration-640\.webp 640w/);
+assert.match(postHtml, /href="\/city\/london"/);
+assert.match(postHtml, /href="\/privacy\.html"/);
+assert.match(postHtml, /href="\/terms\.html"/);
+assert.match(postHtml, /application\/ld\+json/);
+assert.doesNotMatch(postHtml, /src\/main\.mjs|youtube\.com\/embed|leaflet|<script[^>]+type="module"/);
 
 console.log("Blog parser tests passed.");

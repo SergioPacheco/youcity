@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{TITLE}}</title>
+    <meta name="description" content="{{DESCRIPTION}}" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="{{CANONICAL}}" />
+    <meta property="og:title" content="{{TITLE}}" />
+    <meta property="og:description" content="{{DESCRIPTION}}" />
+    <meta property="og:url" content="{{CANONICAL}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{SOCIAL_IMAGE}}" />
+    <meta property="og:image:alt" content="{{SOCIAL_IMAGE_ALT}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{TITLE}}" />
+    <meta name="twitter:description" content="{{DESCRIPTION}}" />
+    <meta name="twitter:image" content="{{SOCIAL_IMAGE}}" />
+    <meta name="twitter:image:alt" content="{{SOCIAL_IMAGE_ALT}}" />
+    <link rel="stylesheet" href="{{CSS_URL}}" />
+    <script type="application/ld+json" data-blog-jsonld>{{JSONLD}}</script>
+  </head>
+  <body class="blog-page">
+    <header class="blog-site-header">
+      <a class="blog-brand" href="{{HOME_URL}}" aria-label="YouCity home">
+        <img src="{{LOGO_URL}}" width="32" height="32" alt="" aria-hidden="true" />
+        <span>YouCity</span>
+      </a>
+      <nav class="blog-site-nav" aria-label="Primary navigation">
+        <a href="{{EXPLORE_URL}}">Explore cities</a>
+        <a href="{{BLOG_URL}}" aria-current="page">Blog</a>
+      </nav>
+    </header>
+    <main class="blog-main blog-main--index">
+      {{CONTENT}}
+    </main>
+    <footer class="blog-site-footer">
+      <span>© YouCity</span>
+      <nav aria-label="Legal information">
+        <a href="{{PRIVACY_URL}}">Privacy Policy</a>
+        <a href="{{TERMS_URL}}">Terms of Use</a>
+      </nav>
+    </footer>
+  </body>
+</html>
