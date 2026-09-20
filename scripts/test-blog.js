@@ -235,4 +235,10 @@ assert.match(postHtml, /href="\/terms\.html"/);
 assert.match(postHtml, /application\/ld\+json/);
 assert.doesNotMatch(postHtml, /src\/main\.mjs|youtube\.com\/embed|leaflet|<script[^>]+type="module"/);
 
+const homeMarkup = readFileSync(join(__dirname, "../index.html"), "utf8");
+assert.match(homeMarkup, /class="blog-nav-link"[^>]+href="\/blog"[^>]*>Blog<\/a>/);
+assert.match(homeMarkup, /class="overflow-menu-link"[^>]+href="\/blog"[^>]*>Blog<\/a>/);
+assert.match(homeMarkup, /href="\/privacy\.html"/);
+assert.match(homeMarkup, /href="\/terms\.html"/);
+
 console.log("Blog parser tests passed.");
