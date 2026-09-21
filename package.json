@@ -3,6 +3,8 @@
   "private": true,
   "scripts": {
     "catalog:build": "node scripts/build-catalog.js",
+    "youtube:metadata:sync": "node scripts/youtube-video-metadata.mjs",
+    "youtube:metadata:test": "node scripts/test-youtube-video-metadata.mjs",
     "discovercars:update": "node scripts/update-discovercars-locations.js",
     "discovercars:test": "node scripts/test-discovercars.js",
     "affiliate:test": "node scripts/test-affiliates.js",
@@ -22,7 +24,7 @@
     "mobile-menu:test": "node scripts/test-mobile-menu.mjs",
     "about:test": "node scripts/test-about-social-links.mjs",
     "city-browser:test": "node scripts/test-city-browser-reset.mjs",
-    "video:test": "node scripts/test-video-playback.mjs",
+    "video:test": "node scripts/test-video-playback.mjs && node scripts/test-youtube-video-metadata.mjs",
     "flight-origin:test": "node scripts/test-flight-origin.mjs",
     "stay22:loader:test": "node scripts/test-stay22-loader.mjs",
     "architecture:test": "node scripts/test-architecture.mjs",

@@ -25,6 +25,19 @@ export function createVideoController({
   function buildPlayerVars(ride) {
     return { autoplay: 1, mute: 1, controls: 0, loop: 0, playlist: ride.id, modestbranding: 1, rel: 0, playsinline: 1, disablekb: 1, fs: 0, cc_load_policy: 0, iv_load_policy: 3, hl: "en-US", start: Math.floor(getStartSeconds(ride)), origin: window.location.origin };
   }
+  function normalizeAspectRatio(value) {
+    const match = String(value || "").trim().match(/^(\d+(?:\.\d+)?):(\d+(?:\.\d+)?)$/);
+    if (!match) return "";
+    const width = Number(match[1]);
+    const height = Number(match[2]);
+    if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) return "";
+    return `${width} / ${height}`;
+  }
+  function applyVideoAspectRatio(ride) {
+    const aspectRatio = normalizeAspectRatio(ride?.aspectRatio);
+    if (aspectRatio) elements.videoShell?.style?.setProperty("--city-video-aspect-ratio", aspectRatio);
+    else elements.videoShell?.style?.removeProperty("--city-video-aspect-ratio");
+  }
   function showVideoLoading(loading, message = "Loading video…") {
     clearTimeout(runtime.statusTimer);
     elements.videoLoading?.classList.toggle("is-visible", loading);
@@ -83,12 +96,14 @@ export function createVideoController({
     const ride = getCurrentRide(city);
     updateSourceLink(ride);
     if (!ride) {
+      applyVideoAspectRatio(null);
       setVideoState(videoStates.UNAVAILABLE, `No ${modeLabels[state.currentMode] || state.currentMode} video is currently available. Try another mode.`);
       elements.videoShell?.classList.remove("is-ready");
       if (elements.poster) elements.poster.style.backgroundImage = "";
       showToast(messages.noVideo);
       return;
     }
+    applyVideoAspectRatio(ride);
     if (elements.poster) elements.poster.style.backgroundImage = `url("https://i.ytimg.com/vi/${ride.id}/hqdefault.jpg")`;
     if ((playerManager.getCurrentVideoId() || state.currentVideoId) === ride.id) return;
     clearTimeout(runtime.changeTimer);

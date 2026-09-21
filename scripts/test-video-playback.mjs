@@ -63,12 +63,18 @@ const windowRef = {
 function createController({ mobile = false, startDelay = 0 } = {}) {
   const state = createState();
   const controllerWindow = { ...windowRef, matchMedia: () => ({ matches: mobile }) };
+  const shellStyle = {
+    values: new Map(),
+    setProperty(name, value) { this.values.set(name, value); },
+    removeProperty(name) { this.values.delete(name); }
+  };
+  const videoShell = { classList: { add() {}, remove() {} }, dataset: {}, style: shellStyle };
   const controller = createVideoController({
     window: controllerWindow,
     document: { scripts: [] },
     elements: {
       videoContainer: {},
-      videoShell: { classList: { add() {}, remove() {} }, dataset: {} }
+      videoShell
     },
     state,
     config: {
@@ -89,7 +95,7 @@ function createController({ mobile = false, startDelay = 0 } = {}) {
     updateSourceLink() {},
     showToast() {}
   });
-  return { controller, state };
+  return { controller, state, shellStyle };
 }
 
 const originalRandom = Math.random;
@@ -126,6 +132,7 @@ try {
   desktop.controller.startPlayback();
   await new Promise((resolve) => setTimeout(resolve, 0));
   assert.deepEqual(fakePlayer.loadedIds, ["walk-current"]);
+  assert.equal(desktop.shellStyle.values.get("--city-video-aspect-ratio"), undefined, "videos without catalog aspect ratio should keep the CSS fallback");
 
   fakePlayer.options.events.onStateChange({ data: windowRef.YT.PlayerState.ENDED });
   await new Promise((resolve) => setTimeout(resolve, 5));
@@ -152,6 +159,15 @@ try {
   await new Promise((resolve) => setTimeout(resolve, 50));
   assert.deepEqual(fakePlayer.loadedIds, ["walk-current"], "the canceled timer must not load twice");
   gesture.controller.destroy();
+
+  city.videos.walk[0].aspectRatio = "4:3";
+  fakePlayer = undefined;
+  const catalogAspectRatio = createController();
+  catalogAspectRatio.controller.startPlayback();
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(catalogAspectRatio.shellStyle.values.get("--city-video-aspect-ratio"), "4 / 3", "catalog aspect ratio should be applied as a CSS ratio");
+  catalogAspectRatio.controller.destroy();
+  delete city.videos.walk[0].aspectRatio;
 } finally {
   Math.random = originalRandom;
 }
