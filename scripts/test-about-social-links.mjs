@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import {
+  connectionQualityFromNetworkInformation,
+  createConnectionQualityController
+} from "../src/ui/connection-quality.mjs";
 
 const [html, styles] = await Promise.all([
   readFile(new URL("../index.html", import.meta.url), "utf8"),
@@ -18,6 +22,9 @@ assert.match(normalizedAbout, /YouCity lets you explore cities through real stre
 assert.doesNotMatch(aboutCard, /A static experience inspired by virtual urban tours/, "About modal should not retain the generic project copy");
 assert.match(aboutCard, /<a class="about-blog-link"[^>]*href="\/blog\/"[^>]*>[\s\S]*Open the YouCity blog/, "About modal should contain the blog link");
 assert.match(aboutCard, /<a class="about-blog-link"[^>]*target="_blank"[^>]*rel="noopener noreferrer"/, "Blog link should open securely in a new tab");
+assert.match(aboutCard, /id="connection-quality"/, "About modal should show the user's current connection quality");
+assert.match(aboutCard, /id="connection-quality-status"/, "Connection quality status should have a dedicated live value");
+assert.match(aboutCard, /id="connection-quality-detail"/, "Connection quality details should explain why video quality may change");
 
 assert.match(aboutCard, /class="about-social"/, "About modal should contain a social section");
 assert.match(aboutCard, /FOLLOW THE JOURNEY/, "Social section should have a clear eyebrow");
@@ -52,5 +59,67 @@ assert.match(aboutCard, /href="\/privacy\.html"/, "Privacy Policy link should re
 assert.match(aboutCard, /href="\/terms\.html"/, "Terms of Use link should remain available");
 assert.match(styles, /@media \(max-width: 640px\)[\s\S]*\.about-social__grid[\s\S]*grid-template-columns: 1fr/, "Social links should stack on narrow screens");
 assert.match(styles, /prefers-reduced-motion: reduce[\s\S]*\.social-cta[\s\S]*transform: none/, "Social link motion should respect reduced-motion preferences");
+
+assert.deepEqual(
+  connectionQualityFromNetworkInformation({ effectiveType: "4g", downlink: 8.4, rtt: 80, saveData: false }),
+  {
+    level: "good",
+    status: "Good connection",
+    detail: "4G estimate · 8.4 Mbps · 80 ms latency. YouTube should be able to choose higher quality when available."
+  }
+);
+assert.deepEqual(
+  connectionQualityFromNetworkInformation({ effectiveType: "3g", downlink: 1.2, rtt: 420, saveData: false }),
+  {
+    level: "limited",
+    status: "Limited connection",
+    detail: "3G estimate · 1.2 Mbps · 420 ms latency. Video may start in lower quality or buffer."
+  }
+);
+assert.deepEqual(
+  connectionQualityFromNetworkInformation({ effectiveType: "4g", downlink: 12, rtt: 40, saveData: true }),
+  {
+    level: "save-data",
+    status: "Data saver is on",
+    detail: "Your browser asks sites to reduce data use. YouTube may prefer lower video quality."
+  }
+);
+assert.deepEqual(
+  connectionQualityFromNetworkInformation(null),
+  {
+    level: "unknown",
+    status: "Connection estimate unavailable",
+    detail: "This browser does not expose a reliable connection estimate. YouTube will still adjust video quality automatically."
+  }
+);
+
+{
+  const listeners = new Map();
+  const connection = {
+    effectiveType: "4g",
+    downlink: 6,
+    rtt: 90,
+    saveData: false,
+    addEventListener: (eventName, handler) => listeners.set(eventName, handler),
+    removeEventListener: (eventName) => listeners.delete(eventName)
+  };
+  const elements = {
+    status: { textContent: "" },
+    detail: { textContent: "" },
+    root: { dataset: {} }
+  };
+  const controller = createConnectionQualityController({ navigator: { connection }, elements });
+  controller.start();
+  assert.equal(elements.status.textContent, "Good connection");
+  assert.equal(elements.root.dataset.connectionQuality, "good");
+  connection.effectiveType = "2g";
+  connection.downlink = 0.4;
+  connection.rtt = 1200;
+  listeners.get("change")();
+  assert.equal(elements.status.textContent, "Poor connection");
+  assert.equal(elements.root.dataset.connectionQuality, "poor");
+  controller.destroy();
+  assert.equal(listeners.has("change"), false);
+}
 
 console.log("About project copy and links: all checks passed");

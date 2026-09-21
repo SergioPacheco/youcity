@@ -22,6 +22,7 @@ import { findShareComment } from "../sharing/comment-share.mjs";
 import { createNavigationController } from "../navigation/navigation-controller.mjs";
 import { createCityBrowser } from "../ui/city-browser.mjs";
 import { createMediaControls } from "../ui/media-controls.mjs";
+import { createConnectionQualityController } from "../ui/connection-quality.mjs";
 import { createTravelController } from "../features/travel/travel-controller.mjs";
 import { createStay22Loader } from "../features/travel/stay22-loader.mjs";
 import { createMapFeatureLoader } from "../features/map/map-feature-loader.mjs";
@@ -118,6 +119,7 @@ export function startApplication() {
     rideSpeed: (speed) => `Ride speed: ${speed}`,
     qualityTitle: "Quality: Auto, best available",
     qualityAuto: "Quality: Auto. YouTube chooses the best available resolution.",
+    qualityManagedByYoutube: "YouTube adjusts video quality automatically based on connection and device.",
     themeDefault: "Theme: Default",
     themeSepia: "Theme: Sepia",
     themeContrast: "Theme: High contrast",
@@ -455,10 +457,19 @@ export function startApplication() {
     restorePlayerFromStorage,
     cycleTheme,
     loadTheme,
-    cycleQuality,
+    showQualityInfo,
     updateVolumeFromKnob,
     setupVolumeKnobListeners
   } = mediaControls;
+
+  const connectionQualityController = createConnectionQualityController({
+    navigator,
+    elements: {
+      root: elements.connectionQuality,
+      status: elements.connectionQualityStatus,
+      detail: elements.connectionQualityDetail
+    }
+  });
 
   // -----------------------------------------------------------------------------
   const radioStationRepository = createRadioStationRepository({ getCity: currentCity });
@@ -968,6 +979,7 @@ export function startApplication() {
     state.favorites = loadFavorites();
     state.visitedCities = loadRecentCities();
     loadTheme();
+    connectionQualityController.start();
 
     // Restaura estado
     if (prefs.volume !== undefined) {
@@ -1357,7 +1369,7 @@ export function startApplication() {
     elements.themeBtn.addEventListener("click", cycleTheme);
 
     // Qualidade
-    elements.qualityBtn.addEventListener("click", cycleQuality);
+    elements.qualityBtn.addEventListener("click", showQualityInfo);
 
     // Compartilhar
     elements.shareBtn.addEventListener("click", shareCity);

@@ -111,7 +111,8 @@ try {
   const youtubePlayerSource = readFileSync(new URL("../src/player/youtube-player.mjs", import.meta.url), "utf8");
   const mediaControlsSource = readFileSync(new URL("../src/ui/media-controls.mjs", import.meta.url), "utf8");
   assert.doesNotMatch(youtubePlayerSource, /setPlaybackQuality|getPlaybackQuality|getAvailableQualityLevels/, "unsupported YouTube quality APIs must not be called in player");
-  assert.match(mediaControlsSource, /cycleQuality|setPlaybackQuality/, "quality control must be present");
+  assert.doesNotMatch(mediaControlsSource, /setPlaybackQuality|getPlaybackQuality|getAvailableQualityLevels/, "quality controls must not call unsupported YouTube quality APIs");
+  assert.match(mediaControlsSource, /showQualityInfo/, "quality control should explain YouTube automatic quality selection");
 
   const expectedFrames = [
     { viewport: [360, 800] },
@@ -185,11 +186,13 @@ assert.doesNotMatch(
 );
 
 const qualityCommands = [];
+const qualityToasts = [];
+const qualityState = { currentQuality: "auto" };
 const mediaControls = createMediaControls({
   window: {},
   document: { addEventListener() {}, removeEventListener() {} },
   elements: { qualityBtn: { textContent: "", title: "", setAttribute() {} } },
-  state: { currentQuality: "auto" },
+  state: qualityState,
   storage: { readJson: () => ({}), writeJson() {} },
   storageKeys: { prefs: "prefs", playerHidden: "hidden", theme: "theme" },
   config: {
@@ -201,11 +204,16 @@ const mediaControls = createMediaControls({
     themes: { DEFAULT: "", SEPIA: "sepia", CONTRAST: "contrast" }
   },
   themeNames: {},
-  messages: { qualityAuto: "Quality: Auto. YouTube chooses the best available resolution." },
+  messages: {
+    qualityAuto: "Quality: Auto. YouTube chooses the best available resolution.",
+    qualityManagedByYoutube: "YouTube adjusts video quality automatically based on connection and device."
+  },
   getPlayerManager: () => ({ command: (method, args) => qualityCommands.push({ method, args }) }),
-  showToast() {}
+  showToast: (message) => qualityToasts.push(message)
 });
-mediaControls.cycleQuality();
-assert.deepEqual(qualityCommands, [{ method: "setPlaybackQuality", args: ["hd720"] }], "quality changes should command the lazily resolved video player");
+mediaControls.showQualityInfo();
+assert.equal(qualityState.currentQuality, "auto");
+assert.equal(qualityCommands.length, 0, "quality info must not command unsupported YouTube quality APIs");
+assert.deepEqual(qualityToasts, ["YouTube adjusts video quality automatically based on connection and device."]);
 
 console.log("Video playback tests passed: startup, ended rides, mobile delay, and metadata contracts are covered.");

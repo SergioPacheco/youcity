@@ -51,34 +51,14 @@ export function createMediaControls({
     if (state.currentTheme) elements.app?.classList.add(state.currentTheme);
   }
 
-  function cycleQuality() {
-    const qualities = Object.values(config.qualities);
-    const currentIndex = qualities.indexOf(state.currentQuality);
-    state.currentQuality = qualities[(currentIndex + 1) % qualities.length];
-    
-    const labels = {
-      [config.qualities.AUTO]: "AUTO",
-      [config.qualities.SMALL]: "240p",
-      [config.qualities.MEDIUM]: "360p",
-      [config.qualities.LARGE]: "480p",
-      [config.qualities.HD720]: "720p",
-      [config.qualities.HD1080]: "1080p",
-      [config.qualities.HIGH_RES]: "High Res"
-    };
-    
+  function showQualityInfo() {
+    state.currentQuality = config.qualities?.AUTO || "auto";
     if (elements.qualityBtn) {
-      elements.qualityBtn.textContent = labels[state.currentQuality] || "AUTO";
+      elements.qualityBtn.textContent = "AUTO";
       elements.qualityBtn.title = messages.qualityAuto;
       elements.qualityBtn.setAttribute("aria-label", messages.qualityAuto);
     }
-    
-    showToast(`Quality: ${labels[state.currentQuality] || "AUTO"}`);
-    
-    // Aplica a qualidade ao player se estiver pronto
-    const activePlayerManager = getPlayerManager?.() || playerManager;
-    if (activePlayerManager?.command) {
-      activePlayerManager.command("setPlaybackQuality", [state.currentQuality]);
-    }
+    showToast(messages.qualityManagedByYoutube || messages.qualityAuto);
   }
 
   function updateVolumeFromKnob(newVolume) {
@@ -128,7 +108,7 @@ export function createMediaControls({
     restorePlayerFromStorage,
     cycleTheme,
     loadTheme,
-    cycleQuality,
+    showQualityInfo,
     updateVolumeFromKnob,
     setupVolumeKnobListeners
   };
