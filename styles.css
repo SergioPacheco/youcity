@@ -630,14 +630,14 @@ button:focus-visible, input:focus-visible {
 @keyframes equalize { from { height: 25%; } to { height: 100%; } }
 @keyframes drift { from { transform: scale(1.08); } to { transform: scale(1); } }
 
-/* Limit lateral crop on tall screens while preserving the 16:9 YouTube frame. */
+/* Mobile video player: maximize vertical fill, allow horizontal letterboxing for quality */
 .city-video-shell iframe.city-video {
-  --city-video-target-width: min(max(100vw, calc(100vh * (var(--city-video-aspect-ratio)))), calc(100vw * var(--city-video-max-width-factor)));
+  --city-video-target-height: min(100vh, calc(100vw / (var(--city-video-aspect-ratio))));
   position: absolute;
   top: 50%;
   left: 50%;
-  width: var(--city-video-target-width);
-  height: calc(var(--city-video-target-width) / (var(--city-video-aspect-ratio)));
+  width: calc(var(--city-video-target-height) * (var(--city-video-aspect-ratio)));
+  height: var(--city-video-target-height);
   max-width: none;
   max-height: none;
   transform: translate(-50%, -50%);
@@ -645,7 +645,7 @@ button:focus-visible, input:focus-visible {
 
 @supports (height: 100dvh) {
   .city-video-shell iframe.city-video {
-    --city-video-target-width: min(max(100vw, calc(100dvh * (var(--city-video-aspect-ratio)))), calc(100vw * var(--city-video-max-width-factor)));
+    --city-video-target-height: min(100dvh, calc(100vw / (var(--city-video-aspect-ratio))));
   }
 }
 
