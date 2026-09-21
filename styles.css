@@ -218,6 +218,7 @@ button:focus-visible, input:focus-visible {
 .radio-summary-nav:disabled { cursor: not-allowed; opacity: .28; }
 .radio-summary-play { margin-left: auto; }
 .radio-expand { border: 0; font-size: 18px; }
+.mobile-volume-control { display: none; }
 
 /* 3D volume knob */
 .volume-knob-section { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; flex-shrink: 0; }
@@ -697,6 +698,15 @@ button:focus-visible, input:focus-visible {
   .stereo-top-bar .speed-control { display: flex; }
   .player-card.is-expanded .player-card-main, .player-card-main.is-visible { display: flex; padding: 12px 14px; gap: 14px; }
   .player-card.is-expanded .radio-summary { display: none; }
+  .radio-summary strong { flex: 1 1 120px; max-width: 36%; }
+  .radio-summary .mobile-volume-control {
+    display: block;
+    flex: 1 1 128px;
+    min-width: 100px;
+    max-width: 180px;
+    height: 24px;
+    accent-color: var(--acid);
+  }
   .volume-knob-section { flex-direction: column; gap: 5px; }
   .volume-knob { width: 52px; height: 52px; }
   .lcd-screen { height: 62px; padding: 8px 12px; }
@@ -769,6 +779,15 @@ button:focus-visible, input:focus-visible {
   .stereo-top-bar .mode-control { height: 32px !important; padding: 2px; }
   .stereo-top-bar .mode-control button { height: 26px; min-height: 26px !important; }
   .radio-summary { min-height: 42px; padding: 0 8px; gap: 5px; }
+  .radio-summary strong { flex: 1 1 86px; max-width: 34%; }
+  .radio-summary .mobile-volume-control {
+    display: block;
+    flex: 1 1 92px;
+    min-width: 72px;
+    max-width: 138px;
+    height: 24px;
+    accent-color: var(--acid);
+  }
   .radio-summary > span { font-size: 14px; }
   .radio-summary-play, .radio-summary-nav, .radio-expand {
     min-width: 36px !important;

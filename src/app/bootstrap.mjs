@@ -974,6 +974,7 @@ export function startApplication() {
       elements.volume.value = prefs.volume;
       elements.volumeKnob.style.transform = `rotate(${(prefs.volume - 50) * CONFIG.VOLUME_ROTATION_FACTOR}deg)`;
       elements.volumeAccessible.value = prefs.volume;
+      if (elements.mobileVolume) elements.mobileVolume.value = prefs.volume;
     }
 
     if (prefs.currentMode && Object.values(CONFIG.modes).includes(prefs.currentMode)) {

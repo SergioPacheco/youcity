@@ -148,6 +148,22 @@ const commerce = {
 
 {
   let currentCity = { ...city };
+  const { controller, elements, restoreFetch } = createController({ getCity: () => currentCity, commerce });
+  try {
+    await controller.open();
+    assert.match(elements.cityGuideContent.innerHTML, /Granada/);
+    currentCity = { ...city, id: "malaga", name: "Málaga", note: "Sea light and old streets." };
+    controller.invalidate();
+    assert.match(elements.cityGuideContent.innerHTML, /Málaga/);
+    assert.match(elements.cityGuideContent.innerHTML, /Sea light and old streets\./);
+    assert.doesNotMatch(elements.cityGuideContent.innerHTML, /Granada/);
+  } finally {
+    restoreFetch();
+  }
+}
+
+{
+  let currentCity = { ...city };
   const pending = new Map();
   const { controller, elements, restoreFetch } = createController({
     getCity: () => currentCity,

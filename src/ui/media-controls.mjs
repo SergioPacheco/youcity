@@ -85,6 +85,7 @@ export function createMediaControls({
     const volume = Math.max(0, Math.min(100, newVolume));
     if (elements.volume) elements.volume.value = volume;
     if (elements.volumeAccessible) elements.volumeAccessible.value = volume;
+    if (elements.mobileVolume) elements.mobileVolume.value = volume;
     if (elements.radio) elements.radio.volume = volume / 100;
     if (elements.volumeKnob) elements.volumeKnob.style.transform = `rotate(${(volume - 50) * config.VOLUME_ROTATION_FACTOR}deg)`;
     storage.writeJson(storageKeys.prefs, { ...storage.readJson(storageKeys.prefs, {}), volume });
@@ -116,6 +117,8 @@ export function createMediaControls({
       event.preventDefault();
       updateVolumeFromKnob(Number(elements.volume?.value || 0) + (event.deltaY > 0 ? -config.VOLUME_WHEEL_STEP : config.VOLUME_WHEEL_STEP));
     });
+    elements.volumeAccessible?.addEventListener("input", (event) => updateVolumeFromKnob(Number(event.target.value)));
+    elements.mobileVolume?.addEventListener("input", (event) => updateVolumeFromKnob(Number(event.target.value)));
     updateVolumeFromKnob(Number(elements.volume?.value || 0));
   }
 

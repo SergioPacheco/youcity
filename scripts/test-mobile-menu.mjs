@@ -24,7 +24,17 @@ assert.match(aboutCard, /id="privacy-settings-button"/, "Privacy settings should
 assert.match(aboutCard, /aria-label="Privacy & cookie settings"/, "Privacy settings should retain its accessible label");
 
 const mobileCss = stylesCss.match(/@media \(max-width: 800px\) \{[\s\S]*?\n\}/g)?.at(-1) || "";
+const desktopCss = stylesCss.slice(stylesCss.indexOf("@media (min-width: 801px) {"), stylesCss.indexOf("@media (min-width: 801px) and (max-width: 1050px)"));
 assert.match(mobileCss, /#map-button[\s\S]*#theme-button\s*\{\s*display:\s*grid;/, "World Map and Theme icons should be visible on mobile");
+
+const radioSummary = indexHtml.match(/<div class="radio-summary" id="radio-summary">[\s\S]*?<\/div>/)?.[0] || "";
+assert.match(radioSummary, /id="mobile-volume"/, "Minimized radio summary should include a mobile volume slider");
+assert.match(radioSummary, /type="range"/, "Mobile volume control should be a sliding range input");
+assert.match(radioSummary, /aria-label="Radio volume"/, "Mobile volume slider should retain an accessible label");
+assert.match(stylesCss, /\.mobile-volume-control\s*\{\s*display:\s*none;/, "Mobile volume slider should be hidden outside mobile summary layouts by default");
+assert.match(stylesCss, /@media \(max-width: 800px\)[\s\S]*\.radio-summary \.mobile-volume-control\s*\{[^}]*display:\s*block/, "Mobile volume slider should appear inside the minimized radio summary on mobile");
+assert.match(desktopCss, /\.radio-summary \.mobile-volume-control\s*\{[^}]*display:\s*block/, "Volume slider should also appear inside the minimized radio summary on desktop");
+assert.match(stylesCss, /\.player-card\.is-expanded \.radio-summary\s*\{\s*display:\s*none;/, "Summary volume slider should be hidden with the minimized summary when the radio is expanded");
 
 const citiesButton = indexHtml.match(/<button class="menu-button" id="cities-button"[\s\S]*?<\/button>/)?.[0] || "";
 assert.match(citiesButton, /aria-label="Explore cities"/);

@@ -385,5 +385,12 @@ export function createCityGuideController({ window, document, elements, getCity,
 
   // -----------------------------------------------------------------------------
 
-  return { open: openCityGuide, refresh, invalidate: () => { currentRequestId += 1; } };
+  function invalidate() {
+    currentRequestId += 1;
+    lastRendered = null;
+    const city = getCity();
+    if (city && elements.travelDrawer && elements.cityGuideContent) renderCityGuideLoading(city);
+  }
+
+  return { open: openCityGuide, refresh, invalidate };
 }
