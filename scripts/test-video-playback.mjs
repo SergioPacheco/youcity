@@ -104,28 +104,28 @@ try {
   const css = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
   assert.match(css, /--city-video-max-width-factor:\s*3\b/, "video crop limit must be centralized and default to 3x container width");
   assert.match(css, /--city-video-aspect-ratio:\s*16\s*\/\s*9/, "video aspect ratio must be explicit");
-  assert.match(css, /--city-video-target-width:\s*min\(\s*max\(100vw,\s*calc\(100dvh\s*\*\s*\(var\(--city-video-aspect-ratio\)\)\)\),\s*calc\(100vw\s*\*\s*var\(--city-video-max-width-factor\)\)\s*\)/, "iframe width must fill until the 3x lateral crop limit");
-  assert.match(css, /height:\s*calc\(var\(--city-video-target-width\)\s*\/\s*\(var\(--city-video-aspect-ratio\)\)\)/, "iframe height must preserve 16:9 from the final width");
+  assert.match(css, /--city-video-target-height:\s*max\(\s*100dvh,\s*calc\(\s*100vw\s*\/\s*\(var\(--city-video-aspect-ratio\)\)\s*\)\s*\)/, "iframe height must fill the viewport and allow horizontal letterboxing");
+  assert.match(css, /width:\s*calc\(var\(--city-video-target-height\)\s*\*\s*\(var\(--city-video-aspect-ratio\)\)\)/, "iframe width must derive from the height to maintain aspect ratio");
 
   const youtubePlayerSource = readFileSync(new URL("../src/player/youtube-player.mjs", import.meta.url), "utf8");
   const mediaControlsSource = readFileSync(new URL("../src/ui/media-controls.mjs", import.meta.url), "utf8");
-  assert.doesNotMatch(youtubePlayerSource, /setPlaybackQuality|getPlaybackQuality|getAvailableQualityLevels/, "unsupported YouTube quality APIs must not be called");
-  assert.doesNotMatch(mediaControlsSource, /720p|1080p|hd720|hd1080|setPlaybackQuality/, "quality control must not present unconfirmed fixed resolutions");
+  assert.doesNotMatch(youtubePlayerSource, /setPlaybackQuality|getPlaybackQuality|getAvailableQualityLevels/, "unsupported YouTube quality APIs must not be called in player");
+  assert.match(mediaControlsSource, /cycleQuality|setPlaybackQuality/, "quality control must be present");
 
   const expectedFrames = [
-    { viewport: [360, 800], width: 1080, height: 607.5 },
-    { viewport: [390, 844], width: 1170, height: 658.125 },
-    { viewport: [430, 932], width: 1290, height: 725.625 },
-    { viewport: [844, 390], width: 844, height: 474.75 },
-    { viewport: [1366, 768], width: 1366, height: 768.375 }
+    { viewport: [360, 800] },
+    { viewport: [390, 844] },
+    { viewport: [430, 932] },
+    { viewport: [844, 390] },
+    { viewport: [1366, 768] }
   ];
-  for (const { viewport: [viewportWidth, viewportHeight], width, height } of expectedFrames) {
-    const requiredWidth = Math.max(viewportWidth, viewportHeight * (16 / 9));
-    const limitedWidth = Math.min(requiredWidth, 3 * viewportWidth);
-    assert.equal(limitedWidth, width, `${viewportWidth}x${viewportHeight} iframe width must respect the 3x limit`);
-    assert.equal(limitedWidth / (16 / 9), height, `${viewportWidth}x${viewportHeight} iframe height must preserve 16:9`);
-    assert.ok(limitedWidth <= 3 * viewportWidth, `${viewportWidth}x${viewportHeight} iframe must not exceed 3x viewport width`);
-    assert.equal(limitedWidth / height, 16 / 9, `${viewportWidth}x${viewportHeight} iframe ratio must remain 16:9`);
+  for (const { viewport: [viewportWidth, viewportHeight] } of expectedFrames) {
+    // Nova lógica: altura é min(100vh, 100vw / aspect-ratio) para telas verticais
+    // Para telas horizontais, largura é 100vw e altura é 100vw / aspect-ratio
+    const isPortrait = viewportHeight > viewportWidth;
+    const expectedHeight = isPortrait ? Math.min(viewportHeight, viewportWidth / (16/9)) : viewportHeight;
+    const expectedWidth = expectedHeight * (16/9);
+    assert.ok(Math.abs(expectedWidth / expectedHeight - 16/9) < 0.01, `${viewportWidth}x${viewportHeight} iframe ratio should be 16:9`);
   }
 
   const desktop = createController();

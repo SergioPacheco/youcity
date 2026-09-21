@@ -632,7 +632,7 @@ button:focus-visible, input:focus-visible {
 
 /* Mobile video player: maximize vertical fill, allow horizontal letterboxing for quality */
 .city-video-shell iframe.city-video {
-  --city-video-target-height: min(100vh, calc(100vw / (var(--city-video-aspect-ratio))));
+  --city-video-target-height: max(100vh, calc(100vw / (var(--city-video-aspect-ratio))));
   position: absolute;
   top: 50%;
   left: 50%;
@@ -645,7 +645,7 @@ button:focus-visible, input:focus-visible {
 
 @supports (height: 100dvh) {
   .city-video-shell iframe.city-video {
-    --city-video-target-height: min(100dvh, calc(100vw / (var(--city-video-aspect-ratio))));
+    --city-video-target-height: max(100dvh, calc(100vw / (var(--city-video-aspect-ratio))));
   }
 }
 

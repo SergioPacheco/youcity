@@ -80,6 +80,12 @@ export function startApplication() {
     },
     qualities: {
       AUTO: "auto",
+      SMALL: "small",      // 240p
+      MEDIUM: "medium",     // 360p
+      LARGE: "large",       // 480p
+      HD720: "hd720",       // 720p
+      HD1080: "hd1080",     // 1080p
+      HIGH_RES: "highres"   // 1440p/2160p (se disponível)
     },
     modes: {
       DRIVE: "drive",
@@ -441,6 +447,7 @@ export function startApplication() {
     config: CONFIG,
     themeNames: THEME_NAMES,
     messages: MESSAGES,
+    playerManager: videoController.playerManager,
   });
   const {
     showToast,

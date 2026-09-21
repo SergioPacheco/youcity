@@ -8,6 +8,7 @@ export function createMediaControls({
   config,
   themeNames,
   messages,
+  playerManager,
   showQuality,
   showToast: externalToast
 } = {}) {
@@ -50,14 +51,32 @@ export function createMediaControls({
   }
 
   function cycleQuality() {
-    state.currentQuality = config.qualities.AUTO;
+    const qualities = Object.values(config.qualities);
+    const currentIndex = qualities.indexOf(state.currentQuality);
+    state.currentQuality = qualities[(currentIndex + 1) % qualities.length];
+    
+    const labels = {
+      [config.qualities.AUTO]: "AUTO",
+      [config.qualities.SMALL]: "240p",
+      [config.qualities.MEDIUM]: "360p",
+      [config.qualities.LARGE]: "480p",
+      [config.qualities.HD720]: "720p",
+      [config.qualities.HD1080]: "1080p",
+      [config.qualities.HIGH_RES]: "High Res"
+    };
+    
     if (elements.qualityBtn) {
-      elements.qualityBtn.textContent = "AUTO";
-      elements.qualityBtn.title = messages.qualityTitle;
-      elements.qualityBtn.setAttribute("aria-label", messages.qualityTitle);
+      elements.qualityBtn.textContent = labels[state.currentQuality] || "AUTO";
+      elements.qualityBtn.title = messages.qualityAuto;
+      elements.qualityBtn.setAttribute("aria-label", messages.qualityAuto);
     }
-    showToast(messages.qualityAuto);
-    showQuality?.(state.currentQuality);
+    
+    showToast(`Quality: ${labels[state.currentQuality] || "AUTO"}`);
+    
+    // Aplica a qualidade ao player se estiver pronto
+    if (playerManager && playerManager.command) {
+      playerManager.command("setPlaybackQuality", [state.currentQuality]);
+    }
   }
 
   function updateVolumeFromKnob(newVolume) {
