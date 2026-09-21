@@ -72,6 +72,7 @@ const STATIC_ASSETS = [
   "src/ui/layers-controller.mjs",
   "src/ui/city-browser.mjs",
   "src/ui/media-controls.mjs",
+  "src/ui/connection-quality.mjs",
   "src/core/video-policy.mjs",
   "src/core/async-guard.mjs",
   "src/core/lazy-module.mjs",
