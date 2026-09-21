@@ -59,7 +59,7 @@ button:focus-visible, input:focus-visible {
 .media-layer, .poster, .city-video-shell, .city-video-shell iframe, .color-wash, .vignette, .grain { position: absolute; inset: 0; width: 100%; height: 100%; }
 .media-layer { z-index: -2; overflow: hidden; background: #0e1311; }
 .poster { background-size: cover; background-position: center; transform: scale(1.02); transition: background-image .6s ease, opacity .7s ease; }
-.city-video-shell { border: 0; pointer-events: none; opacity: 0; overflow: hidden; background: #050706; transition: opacity 1.2s ease; }
+.city-video-shell { border: 0; pointer-events: none; opacity: 0; overflow: visible; background: #050706; transition: opacity 1.2s ease; }
 .city-video-shell.is-ready { opacity: 1; }
 .city-video-shell iframe { border: 0; pointer-events: none; }
 .color-wash { background: linear-gradient(108deg, rgba(7, 10, 8, .45) 0%, rgba(7, 10, 8, .08) 48%, rgba(7, 10, 8, .25) 100%); mix-blend-mode: multiply; pointer-events: none; }
@@ -640,6 +640,7 @@ button:focus-visible, input:focus-visible {
   height: var(--city-video-target-height);
   max-width: none;
   max-height: none;
+  object-fit: contain;
   transform: translate(-50%, -50%);
 }
 
