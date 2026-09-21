@@ -9,7 +9,6 @@ export function createMediaControls({
   themeNames,
   messages,
   showQuality,
-  setPlaybackQuality,
   showToast: externalToast
 } = {}) {
   let toastTimer = null;
@@ -51,12 +50,13 @@ export function createMediaControls({
   }
 
   function cycleQuality() {
-    const qualities = [config.qualities.AUTO, config.qualities.HD720, config.qualities.HD1080];
-    const currentIndex = qualities.indexOf(state.currentQuality);
-    state.currentQuality = qualities[(currentIndex + 1) % qualities.length];
-    if (elements.qualityBtn) elements.qualityBtn.textContent = state.currentQuality === config.qualities.AUTO ? "HD" : `${state.currentQuality}p`;
-    setPlaybackQuality(state.currentQuality === config.qualities.AUTO ? "default" : `hd${state.currentQuality}`);
-    showToast(state.currentQuality === config.qualities.AUTO ? messages.qualityAuto : messages.qualitySet(state.currentQuality));
+    state.currentQuality = config.qualities.AUTO;
+    if (elements.qualityBtn) {
+      elements.qualityBtn.textContent = "AUTO";
+      elements.qualityBtn.title = messages.qualityTitle;
+      elements.qualityBtn.setAttribute("aria-label", messages.qualityTitle);
+    }
+    showToast(messages.qualityAuto);
     showQuality?.(state.currentQuality);
   }
 

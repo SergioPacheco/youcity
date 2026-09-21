@@ -16,6 +16,8 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-left: env(safe-area-inset-left, 0px);
   --safe-right: env(safe-area-inset-right, 0px);
+  --city-video-aspect-ratio: 16 / 9;
+  --city-video-max-width-factor: 3;
   font-family: "Manrope", sans-serif;
   font-synthesis: none;
 }
@@ -57,7 +59,7 @@ button:focus-visible, input:focus-visible {
 .media-layer, .poster, .city-video-shell, .city-video-shell iframe, .color-wash, .vignette, .grain { position: absolute; inset: 0; width: 100%; height: 100%; }
 .media-layer { z-index: -2; overflow: hidden; background: #0e1311; }
 .poster { background-size: cover; background-position: center; transform: scale(1.02); transition: background-image .6s ease, opacity .7s ease; }
-.city-video-shell { border: 0; pointer-events: none; opacity: 0; transition: opacity 1.2s ease; }
+.city-video-shell { border: 0; pointer-events: none; opacity: 0; overflow: hidden; background: #050706; transition: opacity 1.2s ease; }
 .city-video-shell.is-ready { opacity: 1; }
 .city-video-shell iframe { border: 0; pointer-events: none; }
 .color-wash { background: linear-gradient(108deg, rgba(7, 10, 8, .45) 0%, rgba(7, 10, 8, .08) 48%, rgba(7, 10, 8, .25) 100%); mix-blend-mode: multiply; pointer-events: none; }
@@ -628,23 +630,22 @@ button:focus-visible, input:focus-visible {
 @keyframes equalize { from { height: 25%; } to { height: 100%; } }
 @keyframes drift { from { transform: scale(1.08); } to { transform: scale(1); } }
 
-/* Keep the YouTube iframe at cover dimensions so wide screens do not show
-   pillarbox bars and narrow screens do not show letterbox bars. The selector
-   includes the iframe element to override the base iframe dimensions above. */
+/* Limit lateral crop on tall screens while preserving the 16:9 YouTube frame. */
 .city-video-shell iframe.city-video {
+  --city-video-target-width: min(max(100vw, calc(100vh * (var(--city-video-aspect-ratio)))), calc(100vw * var(--city-video-max-width-factor)));
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 177.78vh;
-  height: 100vh;
+  width: var(--city-video-target-width);
+  height: calc(var(--city-video-target-width) / (var(--city-video-aspect-ratio)));
   max-width: none;
+  max-height: none;
   transform: translate(-50%, -50%);
 }
 
-@media (min-aspect-ratio: 16/9) {
+@supports (height: 100dvh) {
   .city-video-shell iframe.city-video {
-    width: 100vw;
-    height: 56.25vw;
+    --city-video-target-width: min(max(100vw, calc(100dvh * (var(--city-video-aspect-ratio)))), calc(100vw * var(--city-video-max-width-factor)));
   }
 }
 

@@ -151,8 +151,6 @@ export function createYouTubePlayer({
     currentVideoId = ride.id;
     player.loadVideoById({ videoId: ride.id, startSeconds: getStartSeconds(ride) });
     player.playVideo?.();
-    const quality = getQuality?.();
-    if (quality && quality !== "auto") player.setPlaybackQuality?.(`hd${quality}`);
   }
 
   function command(method, args = []) {
@@ -162,10 +160,6 @@ export function createYouTubePlayer({
 
   function getPlayerState() {
     return player && typeof player.getPlayerState === "function" ? player.getPlayerState() : null;
-  }
-
-  function setPlaybackQuality(quality) {
-    if (player && typeof player.setPlaybackQuality === "function") player.setPlaybackQuality(quality);
   }
 
   function destroy() {
@@ -182,7 +176,6 @@ export function createYouTubePlayer({
     init,
     load,
     command,
-    setPlaybackQuality,
     getCurrentVideoId: () => currentVideoId,
     getPlayerState,
     isInitialized: () => initialized && playerReady && Boolean(player),

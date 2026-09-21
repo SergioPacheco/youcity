@@ -80,8 +80,6 @@ export function startApplication() {
     },
     qualities: {
       AUTO: "auto",
-      HD720: "720",
-      HD1080: "1080",
     },
     modes: {
       DRIVE: "drive",
@@ -112,8 +110,8 @@ export function startApplication() {
     favoriteRemoved: (city) => `${city} removed from favorites`,
     randomDestination: (city) => `Random destination: ${city}`,
     rideSpeed: (speed) => `Ride speed: ${speed}`,
-    qualityAuto: "Quality: Auto",
-    qualitySet: (quality) => `Quality: ${quality}p`,
+    qualityTitle: "Quality: Auto, best available",
+    qualityAuto: "Quality: Auto. YouTube chooses the best available resolution.",
     themeDefault: "Theme: Default",
     themeSepia: "Theme: Sepia",
     themeContrast: "Theme: High contrast",
@@ -443,7 +441,6 @@ export function startApplication() {
     config: CONFIG,
     themeNames: THEME_NAMES,
     messages: MESSAGES,
-    setPlaybackQuality: (quality) => youtubePlayerManager.setPlaybackQuality(quality)
   });
   const {
     showToast,
