@@ -2,15 +2,15 @@
 title: "Lisbon or Porto? Find Your Kind of City Break"
 slug: "lisbon-or-porto"
 description: "Compare the shape of a short Portugal city break and choose between Lisbon and Porto based on the trip you want."
-image: "/assets/blog/lisbon-porto-comparison-1440.webp"
-imageAlt: "Editorial illustration comparing two riverside city patterns with hillside streets and bridges"
+image: "/assets/blog/4-1440.webp"
+imageAlt: "Split illustration of Lisbon and Porto streets, waterfronts, and bridges"
 author: "YouCity"
 datePublished: "2026-09-20T11:15:00-03:00"
 relatedCities: ["lisbon"]
 relatedPosts: ["plan-weekend-city-break", "plan-self-guided-city-walk"]
 draft: false
 sources: ["https://www.visitlisboa.com/en/places/alfama", "https://www.visitlisboa.com/en/regions/belem", "https://visitporto.travel/en-GB/districts/historic"]
-imageCredit: "YouCity editorial illustration, generated for this article; non-documentary."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Explore Lisbon on YouCity"
 ---
 

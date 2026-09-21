@@ -1,48 +1,29 @@
 # Blog image provenance
 
-The initial public articles use local WebP covers. They are editorial covers,
-not evidence of current conditions in a destination.
+## Current published covers
 
-## `youcity-virtual-exploration-*`
+The seven published articles use the AI-generated PNG covers supplied in
+`assets/blog/1.png` through `assets/blog/7.png`. The build uses local WebP
+variants derived from those files:
 
-- Source: the existing project-created `assets/hero-saopaulo.webp`.
-- Derivative: resized and re-encoded locally into 1440×960, 960×640, and
-  640×427 WebP variants.
-- License/permission: project-created local asset; no external image license
-  is claimed or required.
-- Use: general virtual-exploration editorial cover, not a documentary claim
-  about any specific city.
+- `1-*`: virtual city exploration (`explore-a-city-virtually-before-travelling`).
+- `2-*`: local radio and city atmosphere (`discovering-a-citys-atmosphere-through-local-radio`).
+- `3-*`: Paris itinerary (`paris-in-3-days`).
+- `4-*`: Lisbon or Porto comparison (`lisbon-or-porto`).
+- `5-*`: hotel location (`how-to-choose-hotel-location`).
+- `6-*`: weekend city break (`plan-weekend-city-break`).
+- `7-*`: self-guided city walk (`plan-self-guided-city-walk`).
 
-## `local-radio-atmosphere-*`
+Each source image is 1536×1024 (3:2). The generated WebP variants are
+640×427, 960×640, and 1440×960. These are AI-generated editorial
+illustrations supplied for YouCity, not documentary evidence of current
+conditions, exact streets, landmarks, or accessibility.
 
-- Source: a YouCity project-created editorial illustration generated for this
-  article and stored locally.
-- Derivative: resized and re-encoded locally into 1440×960, 960×640, and
-  640×427 WebP variants.
-- License/permission: project-created illustration for YouCity editorial use.
-- Use: abstract, non-documentary visual about sound and atmosphere; it does
-  not depict a real city, station, person, or landmark.
+These illustrations are labeled as non-documentary in article credits and alt
+text; they do not represent exact streets, landmarks, or current conditions.
+The 21 WebP variants were checked with ImageMagick `identify`.
 
-## New article-specific covers
-
-The following covers were generated as original, non-documentary editorial
-illustrations for YouCity and stored locally. They contain no readable text,
-logos, or external assets. Each has 1440×960, 960×640, and 640×427 WebP
-variants created with ImageMagick:
-
-- `paris-itinerary-*`: layered river-city illustration for `paris-in-3-days`.
-- `lisbon-porto-comparison-*`: split riverside-city illustration for
-  `lisbon-or-porto`.
-- `hotel-neighbourhood-*`: city-block and route illustration for
-  `how-to-choose-hotel-location`.
-- `weekend-city-break-*`: relaxed route illustration for
-  `plan-weekend-city-break`.
-- `self-guided-walk-*`: winding pedestrian-route illustration for
-  `plan-self-guided-city-walk`.
-
-These illustrations are intentionally labeled as non-documentary in article
-credits and alt text; they do not represent exact streets, landmarks, or
-current conditions. All 21 local files were checked with ImageMagick
-`identify`. Draft articles still point to the existing project hero as a
-temporary local placeholder and must receive an editorially reviewed cover
-before publication.
+Older generated covers remain in `assets/blog/` for repository history but are
+not referenced by the seven published articles. Draft articles still point to
+the existing project hero as a temporary local placeholder and must receive an
+editorially reviewed cover before publication.

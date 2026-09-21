@@ -2,14 +2,14 @@
 title: "How to Explore a City Virtually Before Travelling"
 slug: "explore-a-city-virtually-before-travelling"
 description: "Use real street videos and local radio to notice a destination's pace, texture, and atmosphere before choosing where to go."
-image: "/assets/blog/youcity-virtual-exploration-1440.webp"
-imageAlt: "Project-created editorial cover showing an abstract city atmosphere"
+image: "/assets/blog/1-1440.webp"
+imageAlt: "Laptop displaying a city street scene beside a coffee cup and travel notebook"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T10:00:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["discovering-a-citys-atmosphere-through-local-radio"]
 draft: false
-imageCredit: "YouCity project-created cover, derived locally from the existing project hero image."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Explore London on YouCity"
 ---
 

@@ -2,14 +2,14 @@
 title: "Before You Book the Hotel, Take a Look at the Neighbourhood"
 slug: "how-to-choose-hotel-location"
 description: "Use a practical neighbourhood checklist and virtual city exploration to compare where you might stay before booking a hotel."
-image: "/assets/blog/hotel-neighbourhood-1440.webp"
-imageAlt: "Editorial illustration of a city block, doorway, and intersecting walking routes"
+image: "/assets/blog/5-1440.webp"
+imageAlt: "Hotel entrance and pedestrian square with cafés in an urban neighbourhood"
 author: "YouCity"
 datePublished: "2026-09-20T11:30:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["explore-a-city-virtually-before-travelling"]
 draft: false
-imageCredit: "YouCity editorial illustration, generated for this article; non-documentary."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Explore London before choosing a base"
 ---
 

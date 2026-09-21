@@ -234,8 +234,8 @@ const postHtml = renderBlogPost({
 assert.match(postHtml, /<main[\s\S]*<article[\s\S]*<\/article>[\s\S]*<\/main>/);
 assert.match(postHtml, /<h1[^>]*>How to Explore a City Virtually Before Travelling<\/h1>/);
 assert.match(postHtml, /<meta property="og:type" content="article"/);
-assert.match(postHtml, /<meta property="og:image" content="https:\/\/youcity\.app\/assets\/blog\/youcity-virtual-exploration-1440\.webp"/);
-assert.match(postHtml, /srcset="[^"]*youcity-virtual-exploration-640\.webp 640w/);
+assert.match(postHtml, /<meta property="og:image" content="https:\/\/youcity\.app\/assets\/blog\/1-1440\.webp"/);
+assert.match(postHtml, /srcset="[^"]*1-640\.webp 640w/);
 assert.match(postHtml, /href="\/city\/london"/);
 assert.match(postHtml, /href="\/privacy\.html"/);
 assert.match(postHtml, /href="\/terms\.html"/);

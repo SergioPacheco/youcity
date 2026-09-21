@@ -2,15 +2,15 @@
 title: "Discovering a City's Atmosphere Through Local Radio"
 slug: "discovering-a-citys-atmosphere-through-local-radio"
 description: "Pair a virtual city experience with local radio to explore the feeling of a destination, while keeping expectations grounded in what a recording can show."
-image: "/assets/blog/local-radio-atmosphere-1440.webp"
-imageAlt: "Abstract project-created illustration of waveform lines over a dark city-like geometry"
+image: "/assets/blog/2-1440.webp"
+imageAlt: "Vintage radio on a balcony overlooking a city at dusk with glowing sound waves"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T10:30:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["explore-a-city-virtually-before-travelling"]
 draft: false
 sources: ["https://docs.radio-browser.info/"]
-imageCredit: "YouCity project-created non-documentary illustration generated for this article."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Listen and explore London on YouCity"
 ---
 

@@ -2,14 +2,14 @@
 title: "How to Plan a Weekend City Break You’ll Actually Enjoy"
 slug: "plan-weekend-city-break"
 description: "Plan a realistic 48-hour city break by choosing priorities, grouping nearby experiences, and leaving room to enjoy the place."
-image: "/assets/blog/weekend-city-break-1440.webp"
-imageAlt: "Editorial illustration of a relaxed route through a layered city with two highlighted pauses"
+image: "/assets/blog/6-1440.webp"
+imageAlt: "Travel bag and map on a table overlooking a riverside city at sunset"
 author: "YouCity"
 datePublished: "2026-09-20T11:45:00-03:00"
 relatedCities: ["lisbon"]
 relatedPosts: ["plan-self-guided-city-walk", "how-to-choose-hotel-location"]
 draft: false
-imageCredit: "YouCity editorial illustration, generated for this article; non-documentary."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Find your next city break on YouCity"
 ---
 

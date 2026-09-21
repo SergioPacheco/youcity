@@ -2,14 +2,14 @@
 title: "How to Plan a Self-Guided City Walk Worth Taking Slowly"
 slug: "plan-self-guided-city-walk"
 description: "Build a self-guided city walk around one clear interest, a manageable area, and enough room for useful detours."
-image: "/assets/blog/self-guided-walk-1440.webp"
-imageAlt: "Editorial illustration of a winding pedestrian route with wayfinding points and a place to pause"
+image: "/assets/blog/7-1440.webp"
+imageAlt: "Illustrated riverside city route with marked walking points"
 author: "YouCity"
 datePublished: "2026-09-20T12:00:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["plan-weekend-city-break", "explore-a-city-virtually-before-travelling"]
 draft: false
-imageCredit: "YouCity editorial illustration, generated for this article; non-documentary."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Explore a city before your next walk"
 ---
 

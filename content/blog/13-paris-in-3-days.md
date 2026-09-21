@@ -2,15 +2,15 @@
 title: "Paris in 3 Days: A First-Time Itinerary with Room to Wander"
 slug: "paris-in-3-days"
 description: "Build a flexible first visit to Paris around a few meaningful places, realistic travel time, and room to wander."
-image: "/assets/blog/paris-itinerary-1440.webp"
-imageAlt: "Editorial illustration of a river city at dusk with layered streets and a figure pausing above the water"
+image: "/assets/blog/3-1440.webp"
+imageAlt: "Illustrated Paris street with café tables and the Eiffel Tower in the distance"
 author: "YouCity"
 datePublished: "2026-09-20T11:00:00-03:00"
 relatedCities: ["paris"]
 relatedPosts: ["plan-weekend-city-break"]
 draft: false
 sources: ["https://www.louvre.fr/en/visit/hours-admission", "https://www.toureiffel.paris/en/planning-smooth-visit"]
-imageCredit: "YouCity editorial illustration, generated for this article; non-documentary."
+imageCredit: "AI-generated editorial illustration supplied for YouCity; non-documentary."
 ctaLabel: "Explore Paris on YouCity"
 ---
 
