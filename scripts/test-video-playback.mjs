@@ -70,12 +70,14 @@ function createController({ mobile = false, startDelay = 0 } = {}) {
     removeProperty(name) { this.values.delete(name); }
   };
   const videoShell = { classList: { add() {}, remove() {} }, dataset: {}, style: shellStyle };
+  const poster = { style: { backgroundImage: "" } };
   const controller = createVideoController({
     window: controllerWindow,
     document: { scripts: [] },
     elements: {
       videoContainer: {},
-      videoShell
+      videoShell,
+      poster
     },
     state,
     config: {
@@ -96,7 +98,7 @@ function createController({ mobile = false, startDelay = 0 } = {}) {
     updateSourceLink() {},
     showToast() {}
   });
-  return { controller, state, shellStyle };
+  return { controller, state, shellStyle, poster };
 }
 
 const originalRandom = Math.random;
@@ -134,6 +136,7 @@ try {
   desktop.controller.startPlayback();
   await new Promise((resolve) => setTimeout(resolve, 0));
   assert.deepEqual(fakePlayer.loadedIds, ["walk-current"]);
+  assert.equal(desktop.poster.style.backgroundImage, 'url("/assets/hero-saopaulo.webp")', "loading poster should use the curated YouCity placeholder");
   assert.equal(desktop.shellStyle.values.get("--city-video-aspect-ratio"), undefined, "videos without catalog aspect ratio should keep the CSS fallback");
 
   fakePlayer.options.events.onStateChange({ data: windowRef.YT.PlayerState.ENDED });

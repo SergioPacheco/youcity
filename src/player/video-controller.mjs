@@ -1,5 +1,7 @@
 import { createYouTubePlayer } from "./youtube-player.mjs";
 
+const VIDEO_POSTER_IMAGE = "/assets/hero-saopaulo.webp";
+
 export function createVideoController({
   window,
   document,
@@ -104,7 +106,7 @@ export function createVideoController({
       return;
     }
     applyVideoAspectRatio(ride);
-    if (elements.poster) elements.poster.style.backgroundImage = `url("https://i.ytimg.com/vi/${ride.id}/hqdefault.jpg")`;
+    if (elements.poster) elements.poster.style.backgroundImage = `url("${VIDEO_POSTER_IMAGE}")`;
     if ((playerManager.getCurrentVideoId() || state.currentVideoId) === ride.id) return;
     clearTimeout(runtime.changeTimer);
     clearTimeout(runtime.readyTimer);

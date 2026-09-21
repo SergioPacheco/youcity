@@ -19,7 +19,8 @@ const css = readFileSync(resolve(root, "styles.css"), "utf8");
 const headers = readFileSync(resolve(root, "_headers"), "utf8");
 
 assert.doesNotMatch(video, /maxresdefault\.jpg/);
-assert.match(video, /hqdefault\.jpg/);
+assert.doesNotMatch(video, /i\.ytimg\.com\/vi\/\$\{ride\.id\}\/hqdefault\.jpg/, "video loading poster should not use noisy YouTube thumbnails");
+assert.match(video, /assets\/hero-saopaulo\.webp/, "video loading poster should use the curated YouCity placeholder image");
 assert.match(html, /class="source-link"[^>]*aria-label="View ride source"/);
 assert.match(bootstrap, /setAttribute\("aria-label", "View ride source"\)/);
 assert.match(css, /\.rail-dot\s*\{[^}]*width:\s*24px[^}]*height:\s*24px/s);
