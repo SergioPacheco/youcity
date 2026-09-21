@@ -3,6 +3,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createVideoController } from "../src/player/video-controller.mjs";
+import { createMediaControls } from "../src/ui/media-controls.mjs";
 
 let fakePlayer;
 class FakeYouTubePlayer {
@@ -172,4 +173,39 @@ try {
   Math.random = originalRandom;
 }
 
-console.log("Video playback tests passed: an ended ride selects and loads another video.");
+const bootstrapSource = readFileSync(new URL("../src/app/bootstrap.mjs", import.meta.url), "utf8");
+const videoControllerIndex = bootstrapSource.indexOf("const videoController = createVideoController");
+const mediaControlsIndex = bootstrapSource.indexOf("const mediaControls = createMediaControls");
+assert.ok(videoControllerIndex >= 0, "bootstrap should create a video controller");
+assert.ok(mediaControlsIndex >= 0, "bootstrap should create media controls");
+assert.doesNotMatch(
+  bootstrapSource,
+  /playerManager:\s*videoController\.playerManager/,
+  "bootstrap must not eagerly read videoController.playerManager before videoController initialization"
+);
+
+const qualityCommands = [];
+const mediaControls = createMediaControls({
+  window: {},
+  document: { addEventListener() {}, removeEventListener() {} },
+  elements: { qualityBtn: { textContent: "", title: "", setAttribute() {} } },
+  state: { currentQuality: "auto" },
+  storage: { readJson: () => ({}), writeJson() {} },
+  storageKeys: { prefs: "prefs", playerHidden: "hidden", theme: "theme" },
+  config: {
+    TOAST_DURATION: 0,
+    VOLUME_ROTATION_FACTOR: 1,
+    VOLUME_DRAG_SENSITIVITY: 1,
+    VOLUME_WHEEL_STEP: 1,
+    qualities: { AUTO: "auto", HD720: "hd720" },
+    themes: { DEFAULT: "", SEPIA: "sepia", CONTRAST: "contrast" }
+  },
+  themeNames: {},
+  messages: { qualityAuto: "Quality: Auto. YouTube chooses the best available resolution." },
+  getPlayerManager: () => ({ command: (method, args) => qualityCommands.push({ method, args }) }),
+  showToast() {}
+});
+mediaControls.cycleQuality();
+assert.deepEqual(qualityCommands, [{ method: "setPlaybackQuality", args: ["hd720"] }], "quality changes should command the lazily resolved video player");
+
+console.log("Video playback tests passed: startup, ended rides, mobile delay, and metadata contracts are covered.");

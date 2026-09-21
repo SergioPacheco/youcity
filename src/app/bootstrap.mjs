@@ -447,7 +447,7 @@ export function startApplication() {
     config: CONFIG,
     themeNames: THEME_NAMES,
     messages: MESSAGES,
-    playerManager: videoController.playerManager,
+    getPlayerManager: () => videoController.playerManager,
   });
   const {
     showToast,

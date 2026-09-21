@@ -9,6 +9,7 @@ export function createMediaControls({
   themeNames,
   messages,
   playerManager,
+  getPlayerManager,
   showQuality,
   showToast: externalToast
 } = {}) {
@@ -74,8 +75,9 @@ export function createMediaControls({
     showToast(`Quality: ${labels[state.currentQuality] || "AUTO"}`);
     
     // Aplica a qualidade ao player se estiver pronto
-    if (playerManager && playerManager.command) {
-      playerManager.command("setPlaybackQuality", [state.currentQuality]);
+    const activePlayerManager = getPlayerManager?.() || playerManager;
+    if (activePlayerManager?.command) {
+      activePlayerManager.command("setPlaybackQuality", [state.currentQuality]);
     }
   }
 
