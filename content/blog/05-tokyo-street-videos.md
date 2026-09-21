@@ -2,15 +2,15 @@
 title: "A First Look at Tokyo Through Street Videos"
 slug: "first-look-at-tokyo-through-street-videos"
 description: "Use Tokyo street videos to organise your first-trip research. Notice what interests you, identify locations carefully and build a focused planning shortlist."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a Tokyo street-video article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T11:20:00-03:00"
 relatedCities: ["tokyo"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=JeEfI7pCkXU"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of Tokyo."
 ctaLabel: "Explore Tokyo on YouCity"
 ---
 

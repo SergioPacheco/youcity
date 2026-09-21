@@ -2,15 +2,15 @@
 title: "Planning a City Break with Virtual Exploration"
 slug: "planning-a-city-break-with-virtual-exploration"
 description: "Turn virtual city exploration into a realistic short break. Identify what interests you, check your available time and build a flexible plan before booking."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for planning a city break virtually"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T12:20:00-03:00"
 relatedCities: ["lisbon"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://github.com/SergioPacheco/youcity"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of Lisbon."
 ctaLabel: "Start with Lisbon on YouCity"
 ---
 

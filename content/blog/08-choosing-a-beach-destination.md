@@ -2,15 +2,15 @@
 title: "Choosing a Beach Destination Through Walking Videos"
 slug: "choosing-a-beach-destination-through-walking-videos"
 description: "Look beyond beach photographs. Use walking videos to refine your seaside shortlist, then check access, facilities and current conditions before booking."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a beach destination article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T11:50:00-03:00"
 relatedCities: ["malibu"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=5pSbYITH0iM"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of Malibu."
 ctaLabel: "Explore Malibu on YouCity"
 ---
 

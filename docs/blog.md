@@ -66,8 +66,8 @@ build. This prevents broken public links while allowing a draft companion.
 
 Set `draft: true` while an article is incomplete. Drafts are parsed and
 validated, but do not appear in HTML, the listing, related links, the sitemap,
-or public content assets. The initial repository contains two complete public
-examples and ten structured drafts.
+or public content assets. The repository currently contains seventeen
+published articles.
 
 Before publishing:
 
@@ -79,9 +79,9 @@ Before publishing:
 6. run the build and validation commands.
 
 The build does not fetch media, sources, APIs, or images. Editorial assets must
-already be versioned locally. The repository currently has seven published
-articles and ten structured drafts; new manually written posts must follow the
-frontmatter contract before they can be public.
+already be versioned locally. All seventeen current articles are published.
+New manually written posts must follow the frontmatter contract and remain
+drafts until their content and assets are reviewed.
 
 ## Update or rename an article
 

@@ -2,15 +2,15 @@
 title: "London Before You Go: What to Observe on a Virtual Walk"
 slug: "london-before-you-go"
 description: "Preview London through walking videos, identify the surroundings you enjoy and turn your observations into a practical shortlist for your first visit."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a London virtual walk article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T11:00:00-03:00"
 relatedCities: ["london"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=aBOsIVU9mms"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of London."
 ctaLabel: "Explore London on YouCity"
 ---
 

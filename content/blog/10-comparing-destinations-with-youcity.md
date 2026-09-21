@@ -2,15 +2,15 @@
 title: "How to Compare Destinations Using YouCity"
 slug: "comparing-destinations-with-youcity"
 description: "Narrow your travel shortlist with a fair city comparison. Use the same questions for each destination, explore available videos and check practical trade-offs."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for comparing destinations on YouCity"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T12:10:00-03:00"
 relatedCities: ["sao-paulo"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://github.com/SergioPacheco/youcity"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of São Paulo."
 ctaLabel: "Explore São Paulo on YouCity"
 ---
 

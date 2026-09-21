@@ -21,9 +21,12 @@ conditions, exact streets, landmarks, or accessibility.
 
 These illustrations are labeled as non-documentary in article credits and alt
 text; they do not represent exact streets, landmarks, or current conditions.
-The 21 WebP variants were checked with ImageMagick `identify`.
+The ten articles released from draft status use the optimized
+`hero-blog-cover-*` variants. This is a general YouCity project image and is
+explicitly credited as not depicting those destinations. The seven source
+cover sets and three generic variants were checked with ImageMagick `identify`.
 
 Older generated covers remain in `assets/blog/` for repository history but are
-not referenced by the seven published articles. Draft articles still point to
-the existing project hero as a temporary local placeholder and must receive an
-editorially reviewed cover before publication.
+not referenced by the current article metadata. New articles should use a
+destination-specific or clearly labeled non-documentary cover before
+publication.

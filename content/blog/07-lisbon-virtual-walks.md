@@ -2,15 +2,15 @@
 title: "Lisbon Through Virtual Walks: What the Footage Can Show"
 slug: "lisbon-through-virtual-walks"
 description: "Preview a Lisbon walk with your own pace in mind. Learn what to notice in recorded footage and what to check before turning an idea into a real route."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a Lisbon virtual-walk article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T11:40:00-03:00"
 relatedCities: ["lisbon"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=vNvjqoGbcgs"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of Lisbon."
 ctaLabel: "Explore Lisbon on YouCity"
 ---
 

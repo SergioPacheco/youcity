@@ -2,15 +2,15 @@
 title: "Barcelona Before Your Trip: Streets and Seafront"
 slug: "barcelona-before-your-trip-streets-and-seafront"
 description: "Plan a Barcelona day that balances city exploring and time by the sea. Choose your priorities, check the connections and leave room for a proper break."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a Barcelona streets article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T11:30:00-03:00"
 relatedCities: ["barcelona"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=1i0V8PfrSC8"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of Barcelona."
 ctaLabel: "Explore Barcelona on YouCity"
 ---
 

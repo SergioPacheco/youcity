@@ -2,15 +2,15 @@
 title: "Paris on Foot: Choosing Areas to Explore"
 slug: "paris-on-foot-choosing-areas-to-explore"
 description: "Plan a Paris walk around the places and surroundings you enjoy. Compare route ideas, choose a main stop and leave room for discoveries along the way."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a Paris walking article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T11:10:00-03:00"
 relatedCities: ["paris"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=9hDEJK-zzUk"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of Paris."
 ctaLabel: "Explore Paris on YouCity"
 ---
 

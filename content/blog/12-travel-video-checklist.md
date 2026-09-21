@@ -2,15 +2,15 @@
 title: "A Practical Checklist for Watching Travel Videos"
 slug: "practical-checklist-for-watching-travel-videos"
 description: "Use this travel-video checklist to separate what you see from what you assume. Check context, record useful observations and turn inspiration into better questions."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a travel-video checklist article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T12:30:00-03:00"
 relatedCities: ["london"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://github.com/SergioPacheco/youcity"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of London."
 ctaLabel: "Use the checklist with YouCity"
 ---
 

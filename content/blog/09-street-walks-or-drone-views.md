@@ -2,15 +2,15 @@
 title: "Street Walks or Drone Views: Which Helps You Plan?"
 slug: "street-walks-or-drone-views"
 description: "Street walk or drone view? Compare what each perspective can help you notice and choose the right starting point for your virtual city exploration."
-image: "/assets/hero-saopaulo.webp"
-imageAlt: "Cover placeholder for a street and drone comparison article"
+image: "/assets/blog/hero-blog-cover-1440.webp"
+imageAlt: "A broad city avenue between high-rise buildings at dusk"
 author: "Sergio Pacheco"
 datePublished: "2026-09-20T12:00:00-03:00"
 relatedCities: ["london"]
 relatedPosts: []
-draft: true
+draft: false
 sources: ["https://www.youtube.com/watch?v=aBOsIVU9mms", "https://www.youtube.com/watch?v=G5V4wBjR880"]
-imageCredit: "Cover pending editorial image review."
+imageCredit: "YouCity project cover image; a general editorial cover, not a current view of London."
 ctaLabel: "Compare London views on YouCity"
 ---
 

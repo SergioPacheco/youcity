@@ -203,8 +203,8 @@ const repositoryArticles = loadBlogArticles({
   now: new Date("2026-09-21T00:00:00Z")
 });
 assert.equal(repositoryArticles.all.length, 17);
-assert.equal(repositoryArticles.published.length, 7);
-assert.equal(repositoryArticles.bySlug.size, 7);
+assert.equal(repositoryArticles.published.length, 17);
+assert.equal(repositoryArticles.bySlug.size, 17);
 
 const templateRoot = join(__dirname, "../templates");
 const indexHtml = renderBlogIndex({
