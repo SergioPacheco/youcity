@@ -8,6 +8,7 @@ const {
 
 const BLOG_DESCRIPTION = "Travel inspiration for discovering destinations through real city videos and local radio before the trip.";
 const SOCIAL_IMAGE_ALT = "YouCity editorial cover";
+const BLOG_PATH = "/blog/";
 
 function joinSitePath(sitePath, path) {
   return `${sitePath || ""}${path}`;
@@ -78,7 +79,7 @@ function commonReplacements({ title, description, canonical, socialImage, social
     CSS_URL: escapeHtml(joinSitePath(sitePath, "/blog.css")),
     HOME_URL: escapeHtml(joinSitePath(sitePath, "/")),
     EXPLORE_URL: escapeHtml(joinSitePath(sitePath, "/")),
-    BLOG_URL: escapeHtml(joinSitePath(sitePath, "/blog")),
+    BLOG_URL: escapeHtml(joinSitePath(sitePath, BLOG_PATH)),
     PRIVACY_URL: escapeHtml(joinSitePath(sitePath, "/privacy.html")),
     TERMS_URL: escapeHtml(joinSitePath(sitePath, "/terms.html")),
     LOGO_URL: escapeHtml(joinSitePath(sitePath, "/assets/logo.png")),
@@ -89,14 +90,19 @@ function commonReplacements({ title, description, canonical, socialImage, social
 
 function renderBreadcrumb(article, siteUrl, sitePath) {
   const articleUrl = absoluteUrl(siteUrl, sitePath, `/blog/${article.slug}`);
-  return `<nav class="blog-breadcrumb" aria-label="Breadcrumb"><a href="${escapeHtml(joinSitePath(sitePath, "/"))}">Home</a><span aria-hidden="true">→</span><a href="${escapeHtml(joinSitePath(sitePath, "/blog"))}">Blog</a><span aria-hidden="true">→</span><span aria-current="page">${escapeHtml(article.title)}</span></nav>`;
+  return `<nav class="blog-breadcrumb" aria-label="Breadcrumb"><a href="${escapeHtml(joinSitePath(sitePath, "/"))}">Home</a><span aria-hidden="true">→</span><a href="${escapeHtml(joinSitePath(sitePath, BLOG_PATH))}">Blog</a><span aria-hidden="true">→</span><span aria-current="page">${escapeHtml(article.title)}</span></nav>`;
+}
+
+function articleAuthorJsonLd(article, homeUrl) {
+  if (article.author === "YouCity") return { "@type": "Organization", name: article.author, url: homeUrl };
+  return { "@type": "Person", name: article.author };
 }
 
 function articleJsonLd(article, relations, siteUrl, sitePath) {
   const articleUrl = absoluteUrl(siteUrl, sitePath, `/blog/${article.slug}`);
   const imageUrl = absoluteUrl(siteUrl, sitePath, article.image);
   const homeUrl = absoluteUrl(siteUrl, sitePath, "/");
-  const blogUrl = absoluteUrl(siteUrl, sitePath, "/blog");
+  const blogUrl = absoluteUrl(siteUrl, sitePath, BLOG_PATH);
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -108,7 +114,7 @@ function articleJsonLd(article, relations, siteUrl, sitePath) {
         image: [imageUrl],
         datePublished: article.datePublished,
         ...(article.dateModified ? { dateModified: article.dateModified } : {}),
-        author: { "@type": "Person", name: article.author },
+        author: articleAuthorJsonLd(article, homeUrl),
         publisher: { "@type": "Organization", name: "YouCity", url: homeUrl },
         mainEntityOfPage: { "@type": "WebPage", "@id": articleUrl },
         isPartOf: { "@type": "WebSite", name: "YouCity", url: homeUrl },
@@ -127,7 +133,7 @@ function articleJsonLd(article, relations, siteUrl, sitePath) {
 }
 
 function listingJsonLd(articles, siteUrl, sitePath) {
-  const blogUrl = absoluteUrl(siteUrl, sitePath, "/blog");
+  const blogUrl = absoluteUrl(siteUrl, sitePath, BLOG_PATH);
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -147,12 +153,12 @@ function listingJsonLd(articles, siteUrl, sitePath) {
 
 function articleCard(article, sitePath) {
   const cardImage = imageVariants(article.image, sitePath);
-  return `<article class="blog-card"><a class="blog-card__link" href="${escapeHtml(joinSitePath(sitePath, `/blog/${article.slug}`))}"><img class="blog-card__image" src="${escapeHtml(cardImage.src)}" srcset="${escapeHtml(cardImage.srcset)}" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 900px) 45vw, 30vw" width="1440" height="960" loading="lazy" alt="${escapeHtml(article.imageAlt)}" /><span class="blog-card__content"><span class="blog-card__eyebrow">${escapeHtml(formatDate(article.datePublished))}</span><span class="blog-card__title">${escapeHtml(article.title)}</span><span class="blog-card__description">${escapeHtml(article.description)}</span><span class="blog-card__read">Open article <span aria-hidden="true">↗</span></span></span></a></article>`;
+  return `<article class="blog-card"><a class="blog-card__link" href="${escapeHtml(joinSitePath(sitePath, `/blog/${article.slug}`))}"><img class="blog-card__image" src="${escapeHtml(cardImage.src)}" srcset="${escapeHtml(cardImage.srcset)}" sizes="(max-width: 600px) calc(100vw - 32px), (max-width: 900px) 45vw, 30vw" width="1440" height="960" loading="lazy" alt="${escapeHtml(article.imageAlt)}" /><span class="blog-card__content"><span class="blog-card__eyebrow">${escapeHtml(formatDate(article.datePublished))}</span><h2 class="blog-card__title">${escapeHtml(article.title)}</h2><span class="blog-card__description">${escapeHtml(article.description)}</span><span class="blog-card__read">Open article <span aria-hidden="true">↗</span></span></span></a></article>`;
 }
 
 function renderBlogIndex({ template, articles, siteUrl, sitePath = "" }) {
   const title = "Travel inspiration | YouCity";
-  const canonical = absoluteUrl(siteUrl, sitePath, "/blog");
+  const canonical = absoluteUrl(siteUrl, sitePath, BLOG_PATH);
   const socialImage = absoluteUrl(siteUrl, sitePath, articles[0]?.image || "/assets/hero-saopaulo.webp");
   const content = `<section class="blog-index-intro"><p class="blog-eyebrow">YOUCITY JOURNAL</p><h1>Travel inspiration</h1><p>Discover destinations through real city videos and local radio. Start with the feeling of a place, then decide what is worth exploring in person.</p></section><section aria-labelledby="blog-list-heading"><h2 id="blog-list-heading" class="blog-section-heading">Latest stories</h2><div class="blog-grid">${articles.map((article) => articleCard(article, sitePath)).join("")}</div></section>`;
   return fillTemplate(template, commonReplacements({
@@ -213,7 +219,7 @@ function buildBlog({ rootDir, outputDir, siteUrl, sitePath = "", catalog, now = 
       sitePath
     }));
   }
-  return { articles: blog.published, urls: ["/blog", ...blog.published.map((article) => `/blog/${article.slug}`)], blog };
+  return { articles: blog.published, urls: [BLOG_PATH, ...blog.published.map((article) => `/blog/${article.slug}`)], blog };
 }
 
 module.exports = {

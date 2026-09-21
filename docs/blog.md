@@ -2,7 +2,7 @@
 
 The blog is a build-time, file-backed publishing system. It has no database,
 login, comments, search, pagination, browser hydration, or production
-publishing step. Public pages are generated at `/blog` and `/blog/<slug>` by
+publishing step. Public pages are generated at `/blog/` and `/blog/<slug>` by
 `node scripts/build-static.js`.
 
 ## Create an article
@@ -108,7 +108,7 @@ npm run build:validate
 python3 -m http.server 4174 --directory dist
 ```
 
-Open `/blog` and an article in the static preview. A plain Python server also
+Open `/blog/` and an article in the static preview. A plain Python server also
 allows direct inspection of the generated `.html` files. Cloudflare Pages
 resolves the extensionless URLs from `blog/index.html` and article files.
 

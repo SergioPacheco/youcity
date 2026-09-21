@@ -218,6 +218,8 @@ assert.match(indexHtml, /<html lang="en">/);
 assert.match(indexHtml, /<h1[^>]*>Travel inspiration<\/h1>/);
 assert.match(indexHtml, /href="\/blog\/explore-a-city-virtually-before-travelling"/);
 assert.match(indexHtml, /href="\/blog\/discovering-a-citys-atmosphere-through-local-radio"/);
+assert.match(indexHtml, /<h2 class="blog-card__title">How to Explore a City Virtually Before Travelling<\/h2>/);
+assert.match(indexHtml, /<link rel="canonical" href="https:\/\/youcity\.app\/blog\/" \/>/);
 assert.match(indexHtml, /application\/ld\+json/);
 assert.doesNotMatch(indexHtml, /src\/main\.mjs|type="module"/);
 
@@ -239,11 +241,22 @@ assert.match(postHtml, /href="\/privacy\.html"/);
 assert.match(postHtml, /href="\/terms\.html"/);
 assert.match(postHtml, /application\/ld\+json/);
 assert.doesNotMatch(postHtml, /src\/main\.mjs|youtube\.com\/embed|leaflet|<script[^>]+type="module"/);
+assert.doesNotMatch(postHtml, /youtube\.com\/watch/);
+
+const brandArticle = repositoryArticles.published.find((article) => article.author === "YouCity");
+const brandPostHtml = renderBlogPost({
+  template: readFileSync(join(templateRoot, "blog-post.html"), "utf8"),
+  article: brandArticle,
+  relations: repositoryArticles.resolveArticleRelations(brandArticle),
+  siteUrl: "https://youcity.app",
+  sitePath: ""
+});
+assert.match(brandPostHtml, /"@type":"Organization","name":"YouCity"/);
 
 const homeMarkup = readFileSync(join(__dirname, "../index.html"), "utf8");
 assert.doesNotMatch(homeMarkup, /class="blog-nav-link"[^>]+href="\/blog"/);
 assert.doesNotMatch(homeMarkup, /class="overflow-menu-link"[^>]+href="\/blog"/);
-assert.match(homeMarkup, /class="about-blog-link"[^>]+href="\/blog"[\s\S]*Open the YouCity blog/);
+assert.match(homeMarkup, /class="about-blog-link"[^>]+href="\/blog\/"[^>]*>[\s\S]*Open the YouCity blog/);
 assert.match(homeMarkup, /href="\/privacy\.html"/);
 assert.match(homeMarkup, /href="\/terms\.html"/);
 

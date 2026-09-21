@@ -74,7 +74,7 @@ GitHub Pages is also supported through [`.github/workflows/deploy-pages.yml`](.g
 After pushing the repository, enable **Settings → Pages → Source: GitHub Actions**. The workflow builds
 the same static output with Node.js 24 and deploys it automatically on every push to `main`.
 
-The build creates the home page, one crawlable `/city/<city-slug>` page per city, the static `/blog` listing and published `/blog/<slug>` articles, `robots.txt`, `sitemap.xml`, `404.html`, `_headers`, and `_redirects`. It also publishes the map coordinate/provider configuration and the empty travel-recommendation hooks. The production default is `https://youcity.app`; set `SEO_SITE_URL` when building another environment. See [docs/SEO.md](docs/SEO.md) for the release checklist and [docs/blog.md](docs/blog.md) for editorial publishing.
+The build creates the home page, one crawlable `/city/<city-slug>` page per city, the static `/blog/` listing and published `/blog/<slug>` articles, `robots.txt`, `sitemap.xml`, `404.html`, `_headers`, and `_redirects`. It also publishes the map coordinate/provider configuration and the empty travel-recommendation hooks. The production default is `https://youcity.app`; set `SEO_SITE_URL` when building another environment. See [docs/SEO.md](docs/SEO.md) for the release checklist and [docs/blog.md](docs/blog.md) for editorial publishing.
 
 For other static hosts, upload the generated `dist/` directory rather than the source files directly.
 

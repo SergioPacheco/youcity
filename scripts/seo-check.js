@@ -270,6 +270,11 @@ function checkBlogOutput(blog) {
 
   const listing = existsSync(join(OUTPUT_DIR, "blog/index.html")) ? read("blog/index.html") : "";
   if (listing && !/<html\b[^>]*lang=["']en["']/i.test(listing)) fail("blog/index.html: expected lang=\"en\"");
+  if (listing) {
+    const listingCanonical = listing.match(/<link\b[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["'][^>]*>/i)?.[1] || "";
+    const expectedListingCanonical = `${SITE_URL}${sitePath("/blog/")}`;
+    if (listingCanonical !== expectedListingCanonical) fail(`blog/index.html: canonical should be ${expectedListingCanonical}`);
+  }
   for (const article of blog.published) {
     const file = `blog/${article.slug}.html`;
     if (!existsSync(join(OUTPUT_DIR, file))) continue;
@@ -353,7 +358,7 @@ function main() {
   const pageData = files.filter((file) => file !== "404.html").map((file) => ({ file, ...checkPage(file) }));
   checkPage("404.html", { indexable: false });
   checkBlogOutput(blog);
-  checkSitemap(catalog, ["/blog", ...blog.published.map((article) => `/blog/${article.slug}`)]);
+  checkSitemap(catalog, ["/blog/", ...blog.published.map((article) => `/blog/${article.slug}`)]);
   checkHomeCatalogSummary(catalog);
 
   for (const file of cityFiles) {

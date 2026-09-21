@@ -9,7 +9,6 @@ datePublished: "2026-09-20T10:00:00-03:00"
 relatedCities: ["london"]
 relatedPosts: ["discovering-a-citys-atmosphere-through-local-radio"]
 draft: false
-sources: ["https://www.youtube.com/watch?v=QI4_dGvZ5yE", "https://www.youtube.com/watch?v=aBOsIVU9mms"]
 imageCredit: "YouCity project-created cover, derived locally from the existing project hero image."
 ctaLabel: "Explore London on YouCity"
 ---
@@ -56,4 +55,4 @@ Recorded footage reflects a particular route and moment. Check current informati
 
 Open [London on YouCity](/city/london) and choose an available experience. Start with a simple question: where would you want to stop if you were there?
 
-The article's media references include a [London drive](https://www.youtube.com/watch?v=QI4_dGvZ5yE) and a [London walk](https://www.youtube.com/watch?v=aBOsIVU9mms). Video and radio availability depends on their external providers.
+The London experience on YouCity brings the available recorded perspectives together. [Explore London on YouCity](/city/london) to choose an available mode; video and radio availability depends on external providers.

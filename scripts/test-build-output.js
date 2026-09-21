@@ -95,7 +95,7 @@ for (const file of blogDocuments) {
 
 const sitemap = readFileSync(resolve(OUTPUT_DIR, "sitemap.xml"), "utf8");
 for (const path of [
-  "/blog",
+  "/blog/",
   "/blog/explore-a-city-virtually-before-travelling",
   "/blog/discovering-a-citys-atmosphere-through-local-radio",
   "/blog/paris-in-3-days",
@@ -120,7 +120,7 @@ function slugify(value) {
 const expectedSitemap = new Set([
   "https://youcity.app/",
   ...catalog.filter((city) => Object.values(city.videos || {}).some((videos) => Array.isArray(videos) && videos.length)).map((city) => `https://youcity.app/city/${slugify(city.name)}`),
-  "https://youcity.app/blog",
+  "https://youcity.app/blog/",
   "https://youcity.app/blog/explore-a-city-virtually-before-travelling",
   "https://youcity.app/blog/discovering-a-citys-atmosphere-through-local-radio",
   "https://youcity.app/blog/paris-in-3-days",
