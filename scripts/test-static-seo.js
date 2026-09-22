@@ -113,7 +113,7 @@ const blog = loadBlogArticles({
   now: new Date("2026-09-21T00:00:00Z")
 });
 assert.equal(blog.all.length, 17, "blog editorial grid should contain 17 files");
-assert.equal(blog.published.length, 7, "seven complete articles should be public");
+assert.equal(blog.published.length, 17, "all 17 complete articles should be public");
 const blogIndex = renderBlogIndex({
   template: readFileSync(resolve(ROOT_DIR, "templates/blog-index.html"), "utf8"),
   articles: blog.published,

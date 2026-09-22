@@ -221,6 +221,10 @@ assert.match(indexHtml, /href="\/blog\/discovering-a-citys-atmosphere-through-lo
 assert.match(indexHtml, /<h2 class="blog-card__title">How to Explore a City Virtually Before Travelling<\/h2>/);
 assert.match(indexHtml, /<link rel="canonical" href="https:\/\/youcity\.app\/blog\/" \/>/);
 assert.match(indexHtml, /application\/ld\+json/);
+assert.match(indexHtml, /googletagmanager\.com\/gtm\.js/);
+assert.match(indexHtml, /GTM-M64MQRNM/);
+assert.match(indexHtml, /googletagmanager\.com\/ns\.html\?id=GTM-M64MQRNM/);
+assert.match(indexHtml, /gtag\("consent", "default"/);
 assert.doesNotMatch(indexHtml, /src\/main\.mjs|type="module"/);
 
 const post = repositoryArticles.published[0];
@@ -240,6 +244,10 @@ assert.match(postHtml, /href="\/city\/london"/);
 assert.match(postHtml, /href="\/privacy\.html"/);
 assert.match(postHtml, /href="\/terms\.html"/);
 assert.match(postHtml, /application\/ld\+json/);
+assert.match(postHtml, /googletagmanager\.com\/gtm\.js/);
+assert.match(postHtml, /GTM-M64MQRNM/);
+assert.match(postHtml, /googletagmanager\.com\/ns\.html\?id=GTM-M64MQRNM/);
+assert.match(postHtml, /gtag\("consent", "default"/);
 assert.doesNotMatch(postHtml, /src\/main\.mjs|youtube\.com\/embed|leaflet|<script[^>]+type="module"/);
 assert.doesNotMatch(postHtml, /youtube\.com\/watch/);
 
