@@ -82,7 +82,7 @@ function commonReplacements({ title, description, canonical, socialImage, social
     BLOG_URL: escapeHtml(joinSitePath(sitePath, BLOG_PATH)),
     PRIVACY_URL: escapeHtml(joinSitePath(sitePath, "/privacy.html")),
     TERMS_URL: escapeHtml(joinSitePath(sitePath, "/terms.html")),
-    LOGO_URL: escapeHtml(joinSitePath(sitePath, "/assets/logo.png")),
+    LOGO_URL: escapeHtml(joinSitePath(sitePath, "/assets/logo-64.webp")),
     SITE_URL: escapeHtml(siteUrl),
     CONTENT
   };

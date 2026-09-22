@@ -22,9 +22,28 @@ export function createYouTubePlayer({
   let initPromise = null;
   let readyPromise = null;
 
+  function ensurePlayerPreconnect() {
+    // O preconnect do YouTube saiu do <head> para não competir com o LCP;
+    // é injetado aqui, somente quando o player vai mesmo carregar.
+    try {
+      const head = document.head || document.getElementsByTagName?.("head")?.[0];
+      if (!head || typeof document.createElement !== "function") return;
+      for (const href of ["https://www.youtube-nocookie.com", "https://i.ytimg.com"]) {
+        const exists = typeof document.querySelector === "function"
+          && document.querySelector(`link[rel="preconnect"][href="${href}"]`);
+        if (exists) continue;
+        const link = document.createElement("link");
+        link.rel = "preconnect";
+        link.href = href;
+        head.appendChild(link);
+      }
+    } catch {}
+  }
+
   function loadApi() {
     if (window.YT?.Player) return Promise.resolve(window.YT);
     if (apiPromise) return apiPromise;
+    ensurePlayerPreconnect();
 
     apiPromise = new Promise((resolve, reject) => {
       let settled = false;
@@ -80,9 +99,13 @@ export function createYouTubePlayer({
       });
       playerReady = false;
       try {
+        const containerWidth = container.clientWidth || 640;
+        const containerHeight = container.clientHeight || 360;
         player = new YTApi.Player(container, {
           host: "https://www.youtube-nocookie.com",
           videoId: ride.id,
+          width: containerWidth,
+          height: containerHeight,
           playerVars: getPlayerVars(ride),
           events: {
             onReady: (event) => {

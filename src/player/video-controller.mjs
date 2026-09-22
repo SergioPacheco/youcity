@@ -107,6 +107,10 @@ export function createVideoController({
     }
     applyVideoAspectRatio(ride);
     if (elements.poster) elements.poster.style.backgroundImage = `url("${VIDEO_POSTER_IMAGE}")`;
+    // Antes da primeira sessão de playback (bootstrap diferido para depois do
+    // LCP), o updateVideo só pinta o poster/link: o player do YouTube — e seu
+    // custo de rede/CPU — fica para o startPlayback em idle.
+    if (!state.playbackSessionStarted) return;
     if ((playerManager.getCurrentVideoId() || state.currentVideoId) === ride.id) return;
     clearTimeout(runtime.changeTimer);
     clearTimeout(runtime.readyTimer);
@@ -215,6 +219,19 @@ export function createVideoController({
     if (!getCurrentRide()) {
       onNoRide();
       return;
+    }
+    // O poster é a imagem de LCP: pinta imediatamente, sem esperar o player
+    // (no mobile há um delay antes do beginPlayback).
+    if (elements.poster && !elements.poster.style.backgroundImage) {
+      elements.poster.style.backgroundImage = `url("${VIDEO_POSTER_IMAGE}")`;
+    }
+    // O <img> hero é o candidato de LCP: NÃO removê-lo do DOM (nó removido
+    // deixa de contar para o LCP e o h1 populado por JS vira o LCP em ~3s).
+    // Apenas esconde atrás do pôster/vídeo, mantendo a candidatura intacta.
+    const heroPoster = document.getElementById ? document.getElementById("hero-poster") : null;
+    if (heroPoster) {
+      heroPoster.style.opacity = "0";
+      heroPoster.setAttribute("aria-hidden", "true");
     }
     const userGesture = options.userGesture === true;
     if (userGesture) {

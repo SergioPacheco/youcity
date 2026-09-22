@@ -1,14 +1,25 @@
 const MODE_ORDER = ["drive", "bike", "walk", "beach_walk", "drone"];
 
 export function createCatalogRepository(rawCatalog = []) {
-  const cities = rawCatalog.map((city) => ({
-    ...city,
-    videos: Object.fromEntries(MODE_ORDER.map((mode) => [
-      mode,
-      Array.isArray(city?.videos?.[mode]) ? city.videos[mode] : []
-    ])),
-    radios: Array.isArray(city?.radios) ? city.radios : []
-  }));
+  const cities = [];
+  replaceAll(rawCatalog);
+
+  function normalizeCity(city) {
+    return {
+      ...city,
+      videos: Object.fromEntries(MODE_ORDER.map((mode) => [
+        mode,
+        Array.isArray(city?.videos?.[mode]) ? city.videos[mode] : []
+      ])),
+      radios: Array.isArray(city?.radios) ? city.radios : []
+    };
+  }
+
+  function replaceAll(nextCatalog = []) {
+    const normalized = nextCatalog.map(normalizeCity);
+    cities.splice(0, cities.length, ...normalized);
+    return cities;
+  }
 
   function getCity(index) {
     return cities[index];
@@ -38,7 +49,8 @@ export function createCatalogRepository(rawCatalog = []) {
     getCity,
     availableModes,
     firstAvailableMode,
-    selectRide
+    selectRide,
+    replaceAll
   };
 }
 

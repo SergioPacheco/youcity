@@ -8,6 +8,8 @@ const requiredFiles = [
   "src/app/bootstrap.mjs",
   "src/app/dom.mjs",
   "src/catalog/catalog.mjs",
+  "src/catalog/catalog-initial.mjs",
+  "src/catalog/catalog-repository.mjs",
   "src/integrations/analytics.mjs",
   "src/navigation/navigation-controller.mjs",
   "src/sharing/sharing-controller.mjs",

@@ -124,12 +124,14 @@ try {
     { viewport: [1366, 768] }
   ];
   for (const { viewport: [viewportWidth, viewportHeight] } of expectedFrames) {
-    // Nova lógica: altura é min(100vh, 100vw / aspect-ratio) para telas verticais
-    // Para telas horizontais, largura é 100vw e altura é 100vw / aspect-ratio
-    const isPortrait = viewportHeight > viewportWidth;
-    const expectedHeight = isPortrait ? Math.min(viewportHeight, viewportWidth / (16/9)) : viewportHeight;
+    // Cover logic: the iframe must always cover the viewport while preserving
+    // the catalog aspect ratio, so height is the larger of viewport height and
+    // the height needed to cover viewport width.
+    const expectedHeight = Math.max(viewportHeight, viewportWidth / (16/9));
     const expectedWidth = expectedHeight * (16/9);
     assert.ok(Math.abs(expectedWidth / expectedHeight - 16/9) < 0.01, `${viewportWidth}x${viewportHeight} iframe ratio should be 16:9`);
+    assert.ok(expectedWidth >= viewportWidth, `${viewportWidth}x${viewportHeight} iframe width should cover viewport`);
+    assert.ok(expectedHeight >= viewportHeight, `${viewportWidth}x${viewportHeight} iframe height should cover viewport`);
   }
 
   const desktop = createController();

@@ -28,10 +28,11 @@
     "flight-origin:test": "node scripts/test-flight-origin.mjs",
     "stay22:loader:test": "node scripts/test-stay22-loader.mjs",
     "architecture:test": "node scripts/test-architecture.mjs",
+    "startup:performance:test": "node scripts/test-startup-performance.mjs",
     "consent:test": "node scripts/test-consent.mjs",
     "build:validate": "node scripts/test-build-output.js",
     "blog:test": "node scripts/test-blog.js",
-    "test": "npm run catalog:build && npm run architecture:test && npm run core:test && npm run consent:test && npm run sharing:test && npm run mobile-menu:test && npm run about:test && npm run city-browser:test && npm run video:test && npm run flight-origin:test && npm run affiliate:test && npm run stay22:loader:test && npm run destination:commerce:test && npm run discovercars:test && npm run city:test && npm run seo:content:test && npm run seo:test && npm run blog:test && npm run comment:test && npm run comment:ui:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
+    "test": "npm run catalog:build && npm run architecture:test && npm run startup:performance:test && npm run core:test && npm run consent:test && npm run sharing:test && npm run mobile-menu:test && npm run about:test && npm run city-browser:test && npm run video:test && npm run flight-origin:test && npm run affiliate:test && npm run stay22:loader:test && npm run destination:commerce:test && npm run discovercars:test && npm run city:test && npm run seo:content:test && npm run seo:test && npm run blog:test && npm run comment:test && npm run comment:ui:test && npm run comment:sharing:test && npm run radio:test && npm run radio:now-playing:test"
   },
   "devDependencies": {
     "jsdom": "^27.0.1"

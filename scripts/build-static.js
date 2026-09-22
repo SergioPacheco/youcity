@@ -38,6 +38,7 @@ const SOCIAL_ALT = "YouCity — immersive city rides around the world";
 const STATIC_ASSETS = [
   "styles.css",
   "src/catalog/catalog.mjs",
+  "src/catalog/catalog-initial.mjs",
   "src/features/map/map-config.mjs",
   "affiliate/affiliate-config.js",
   "affiliate/affiliate-overrides.js",
@@ -178,6 +179,22 @@ function writeAffiliateOverridesAsset() {
     join(OUTPUT_DIR, "affiliate/affiliate-overrides.js"),
     `// Generated from data/affiliate-overrides.json.\nwindow.YOUCITY_AFFILIATE_OVERRIDES = ${JSON.stringify(overrides)};\n`
   );
+}
+
+function copyStaticAssets(outputDir) {
+  const EXCLUDED = ["assets/ad"];
+  const isExcluded = (sourcePath) => EXCLUDED.some((dir) => sourcePath === resolve(ROOT_DIR, dir));
+  function copyDir(sourceDir, destDir) {
+    if (isExcluded(sourceDir)) return;
+    mkdirSync(destDir, { recursive: true });
+    for (const entry of readdirSync(sourceDir, { withFileTypes: true })) {
+      const sourcePath = join(sourceDir, entry.name);
+      const destPath = join(destDir, entry.name);
+      if (entry.isDirectory()) copyDir(sourcePath, destPath);
+      else cpSync(sourcePath, destPath);
+    }
+  }
+  copyDir(join(ROOT_DIR, "assets"), join(outputDir, "assets"));
 }
 
 function countryName(country) {
@@ -396,7 +413,7 @@ function homeSeo(catalog) {
         "@type": "Organization",
         name: SITE_NAME,
         url: `${SITE_URL}${sitePath("/")}`,
-        logo: `${SITE_URL}${sitePath("/assets/logo.png")}`
+        logo: `${SITE_URL}${sitePath("/assets/logo-180.png")}`
       },
       {
         "@context": "https://schema.org",
@@ -660,7 +677,7 @@ function main() {
     }
   }
   writeAffiliateOverridesAsset();
-  cpSync(resolve(ROOT_DIR, "assets"), join(OUTPUT_DIR, "assets"), { recursive: true });
+  copyStaticAssets(OUTPUT_DIR);
   cpSync(resolve(ROOT_DIR, "blog.css"), join(OUTPUT_DIR, "blog.css"));
   for (const file of ["_headers", "_redirects"]) {
     if (existsSync(resolve(ROOT_DIR, file))) cpSync(resolve(ROOT_DIR, file), join(OUTPUT_DIR, file));

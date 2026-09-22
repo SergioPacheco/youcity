@@ -1,5 +1,5 @@
 import { getEffectiveStartSeconds } from "../core/video-policy.mjs";
-import { slugify as slugifyContract } from "../core/url.mjs";
+import { slugify as slugifyContract, parseRoute } from "../core/url.mjs";
 import { createRadioController } from "../radio/radio-controller.mjs";
 import { createRadioPanelController } from "../radio/radio-panel.mjs";
 import { createRadioBrowserClient } from "../radio/radio-browser.mjs";
@@ -27,7 +27,7 @@ import { createTravelController } from "../features/travel/travel-controller.mjs
 import { createStay22Loader } from "../features/travel/stay22-loader.mjs";
 import { createMapFeatureLoader } from "../features/map/map-feature-loader.mjs";
 import { createDom, createSitePath, hasAdminRole } from "./dom.mjs";
-import CATALOG from "../catalog/catalog.mjs";
+import INITIAL_CATALOG from "../catalog/catalog-initial.mjs";
 import MAP_CONFIG from "../features/map/map-config.mjs";
 
 // =============================================================================
@@ -298,7 +298,12 @@ export function startApplication() {
   // -----------------------------------------------------------------------------
   // City catalog processing
   // -----------------------------------------------------------------------------
-  const catalogRepository = createCatalogRepository(CATALOG.map((item) => {
+  // First paint uses a minimal catalog (~12 cities, ~10 KB). The full catalog
+  // (~248 cities) loads in the background after LCP so its download, parse and
+  // object allocation don't compete with the critical path. `cities` is a live
+  // array: replaceAll() mutates it in place, so every consumer (rail, grid,
+  // map, travel, navigation) sees the full list without re-wiring.
+  function enrichCatalogItem(item) {
     const [country, region, countryTimeZone] = COUNTRY_INFO[item.country] || [item.country, "World", "UTC"];
     return {
       ...item,
@@ -313,9 +318,12 @@ export function startApplication() {
       videos: item.videos,
       radios: (item.radios || []).map((radio) => ({ ...radio, mark: stationMark(radio.name) }))
     };
-  }));
+  }
+  const catalogRepository = createCatalogRepository(INITIAL_CATALOG.map(enrichCatalogItem));
   const cities = catalogRepository.list();
   const citySelection = createCitySelection(catalogRepository);
+  let fullCatalogPromise = null;
+  let fullCatalogLoaded = false;
 
   const { $, elements } = createDom(document);
 
@@ -849,7 +857,7 @@ export function startApplication() {
     renderTravelPlanner(city);
     renderTravelPrompts(city);
     trackVisit(state.cityIndex);
-    syncURL({ replace: options.replaceURL || false });
+    if (options.syncURL !== false) syncURL({ replace: options.replaceURL || false });
 
     // Salva preferência
     savePreferences({ cityIndex: state.cityIndex, currentMode: state.currentMode });
@@ -893,6 +901,45 @@ export function startApplication() {
     showToast(MESSAGES.modeSwitch(MODE_LABELS[mode], currentCity().name));
   }
 
+  /**
+   * Carrega o catálogo completo em background, após o primeiro paint/LCP.
+   * Chamado uma única vez pelo initApp via requestIdleCallback. Quando o
+   * módulo chega, a lista viva `cities` é substituída in place e a UI que
+   * depende da contagem (rail, total, grid) é atualizada. Se o usuário abriu
+   * um deep link para uma cidade fora do catálogo inicial, navegamos para
+   * ela assim que os dados existirem.
+   * @param {Object} [options]
+   * @param {string} [options.pendingSlug] - slug de deep link ausente no catálogo inicial
+   * @param {string|null} [options.pendingMode] - modo pedido na URL
+   * @param {number} [options.pendingVideoIndex] - índice de vídeo pedido na URL
+   */
+  function loadFullCatalogInBackground({ pendingSlug = "", pendingMode = null, pendingVideoIndex = 0 } = {}) {
+    if (fullCatalogPromise) return fullCatalogPromise;
+    fullCatalogPromise = import("../catalog/catalog.mjs").then((module) => {
+      const full = module?.default || module?.CATALOG || [];
+      if (!Array.isArray(full) || !full.length) return false;
+      catalogRepository.replaceAll(full.map(enrichCatalogItem));
+      fullCatalogLoaded = true;
+      // A largura do índice (pad) muda de 2 para 3 dígitos: atualiza tudo.
+      elements.cityTotal.textContent = pad(cities.length);
+      elements.cityIndex.textContent = pad(state.cityIndex + 1);
+      renderRail();
+      if (isCityDrawerOpen()) renderGrid(elements.search.value);
+      if (pendingSlug) {
+        const target = cities.findIndex((city) => city.id === pendingSlug || citySlug(city.rawName) === pendingSlug);
+        if (target >= 0 && target !== state.cityIndex) {
+          selectCity(target, { silent: true, mode: pendingMode || undefined, videoIndex: pendingVideoIndex, replaceURL: true });
+        }
+      }
+      return true;
+    }).catch((error) => {
+      fullCatalogPromise = null;
+      console.warn("[YouCity] Full catalog unavailable, keeping initial set:", error.message);
+      return false;
+    });
+    return fullCatalogPromise;
+  }
+
   async function openCommentAssistantForCurrentRide() {
     if (!state.isAdmin) return;
     let assistant;
@@ -903,7 +950,7 @@ export function startApplication() {
         document,
         navigator,
         fetchImpl: window.fetch?.bind(window),
-        catalog: CATALOG,
+        catalog: cities,
         basePath: BASE_PATH,
         analytics: window.YOUCITY_ANALYTICS,
         isAdmin: state.isAdmin,
@@ -1014,20 +1061,60 @@ export function startApplication() {
     renderRail();
 
     // Seleciona a rota compartilhada ou uma cidade aleatória ao abrir o site.
+    // O catálogo inicial é pequeno: se o deep link pedir uma cidade fora dele,
+    // começamos no conjunto inicial sem reescrever a URL e navegamos ao destino
+    // quando o catálogo completo chegar em background.
     const route = loadRouteFromURL();
-    const initialCity = route.cityIndex !== null
+    let requestedSlug = "";
+    try {
+      requestedSlug = parseRoute(window.location, BASE_PATH).citySlug || "";
+    } catch { requestedSlug = ""; }
+    const pendingSlug = requestedSlug && route.cityIndex === null ? requestedSlug : "";
+    const resolvedRoute = route.cityIndex !== null;
+    const initialCity = resolvedRoute
       ? route.cityIndex
       : Math.floor(Math.random() * cities.length);
     selectCity(initialCity, {
       silent: true,
-      mode: route.mode || undefined,
-      videoIndex: route.videoIndex,
-      replaceURL: true
+      mode: resolvedRoute ? route.mode || undefined : undefined,
+      videoIndex: resolvedRoute ? route.videoIndex : 0,
+      replaceURL: !pendingSlug,
+      ...(pendingSlug ? { syncURL: false } : {})
     });
 
-    // Start the muted video immediately. The radio is released on the first
-    // user gesture when the browser allows audible media.
-    startPlayback();
+    // O poster inline no HTML já cobre o LCP. O catálogo completo entra no
+    // idle após o primeiro paint; o player do YouTube fica ainda mais fora do
+    // caminho crítico: só liga depois do `load` + idle, para não competir com
+    // o fim do LCP/TBT (o download do player/stream do YouTube e o parse do
+    // gtm.js atrasariam interactive e TBT na simulação mobile).
+    const scheduleAfterFirstPaint = (task) => {
+      const run = () => {
+        if (typeof window.requestIdleCallback === "function") {
+          window.requestIdleCallback(task, { timeout: 2500 });
+        } else {
+          setTimeout(task, 1200);
+        }
+      };
+      if (typeof window.requestAnimationFrame === "function") window.requestAnimationFrame(run);
+      else run();
+    };
+    scheduleAfterFirstPaint(() => loadFullCatalogInBackground({ pendingSlug, pendingMode: route.mode, pendingVideoIndex: route.videoIndex }));
+
+    const armDeferredPlayback = () => {
+      scheduleAfterFirstPaint(() => {
+        try {
+          startPlayback();
+        } catch (error) {
+          console.warn("[YouCity] Deferred playback start failed:", error.message);
+        }
+      });
+    };
+    if (typeof window.addEventListener === "function") {
+      if (document.readyState === "complete") armDeferredPlayback();
+      else window.addEventListener("load", armDeferredPlayback, { once: true });
+    } else {
+      armDeferredPlayback();
+    }
 
     // Preview mode para QA
     const previewMode = new URLSearchParams(window.location.search).get("preview");
