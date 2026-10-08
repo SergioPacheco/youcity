@@ -33,6 +33,20 @@ const blogPublished = loadBlogArticles({
 const blogSlugs = blogPublished.map((article) => article.slug);
 const blogPaths = ["/blog/", ...blogSlugs.map((slug) => `/blog/${slug}`)];
 
+// Food guides are emitted only for cities with published dishes (same rule).
+let streetFood = null;
+try {
+  streetFood = JSON.parse(readFileSync(join(ROOT_DIR, "data/street-food.json"), "utf8"));
+} catch {
+  streetFood = null;
+}
+const foodPaths = (catalog || [])
+  .filter((city) => {
+    const entry = (streetFood?.cities || []).find((item) => item?.slug === slugify(city.name));
+    return (entry?.dishes || []).some((dish) => dish?.status === "published" && dish?.name && String(dish.description || "").trim());
+  })
+  .map((city) => `/city/${slugify(city.name)}/food`);
+
 const REQUIRED_FILES = [
   "src/main.mjs",
   "src/integrations/analytics.mjs",
@@ -51,6 +65,10 @@ const REQUIRED_FILES = [
   "src/radio/radio-catalog-index.mjs",
   "src/features/travel/destination-commerce.mjs",
   "src/features/travel/flight-origin.mjs",
+  "src/features/street-food/street-food-repository.mjs",
+  "src/features/street-food/street-food-loader.mjs",
+  "src/features/street-food/street-food-controller.mjs",
+  "data/street-food.json",
   "styles.css",
   "blog.css",
   "privacy.html",
@@ -120,6 +138,7 @@ if (process.exitCode) process.exit(1);
 const expectedSitemap = new Set([
   "https://youcity.app/",
   ...catalog.filter((city) => Object.values(city.videos || {}).some((videos) => Array.isArray(videos) && videos.length)).map((city) => `https://youcity.app/city/${slugify(city.name)}`),
+  ...foodPaths.map((path) => `https://youcity.app${path}`),
   ...blogPaths.map((path) => `https://youcity.app${path}`)
 ]);
 const actualSitemap = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]));

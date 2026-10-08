@@ -14,7 +14,12 @@ export function createMapController({
 }) {
   let worldMap = null;
   let markers = new Map();
+  let venueLayer = null;
   let assetsPromise = null;
+
+  function escapeVenueHtml(value) {
+    return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
 
   function loadLeafletAssets() {
     if (window.L) return Promise.resolve(window.L);
@@ -147,13 +152,56 @@ export function createMapController({
   elements.mapContainer?.addEventListener("click", handleClick);
   elements.mapDirectory?.addEventListener("click", handleClick);
 
+  // STREET food venues. Only records with verified coordinates are pinned;
+  // anything else never reaches this layer (see street-food-repository).
+  function venuePopup(venue) {
+    const dishes = Array.isArray(venue.dishNames) && venue.dishNames.length
+      ? `<span>${venue.dishNames.map(escapeVenueHtml).join(" · ")}</span>`
+      : "";
+    return `<div class="map-popup map-venue-popup"><div class="map-popup-title"><strong>${escapeVenueHtml(venue.name)}</strong><span>${escapeVenueHtml(venue.kindLabel || "Local spot")}</span></div>${dishes}</div>`;
+  }
+
+  function showFoodVenues(venues) {
+    clearFoodVenues();
+    if (!worldMap || !window.L) return 0;
+    venueLayer = window.L.layerGroup().addTo(worldMap);
+    let added = 0;
+    for (const venue of Array.isArray(venues) ? venues : []) {
+      const lat = venue?.coordinates?.lat;
+      const lng = venue?.coordinates?.lng;
+      if (!Number.isFinite(lat) || !Number.isFinite(lng) || lat < -90 || lat > 90 || lng < -180 || lng > 180) continue;
+      window.L.circleMarker([lat, lng], { radius: 5, color: "#ffffff", weight: 2, fillColor: "#ff9f43", fillOpacity: 0.95, bubblingMouseEvents: false })
+        .bindPopup(venuePopup(venue), { maxWidth: 240, minWidth: 180 })
+        .addTo(venueLayer);
+      added += 1;
+    }
+    return added;
+  }
+
+  function clearFoodVenues() {
+    if (venueLayer) {
+      try { venueLayer.remove(); } catch {}
+      venueLayer = null;
+    }
+  }
+
+  function focusFoodVenue(venue) {
+    const lat = venue?.coordinates?.lat;
+    const lng = venue?.coordinates?.lng;
+    if (!worldMap || !Number.isFinite(lat) || !Number.isFinite(lng)) return false;
+    showFoodVenues([venue]);
+    worldMap.setView([lat, lng], Math.max(worldMap.getZoom(), 13), { animate: true });
+    return true;
+  }
+
   function destroy() {
     elements.mapContainer?.removeEventListener("click", handleClick);
     elements.mapDirectory?.removeEventListener("click", handleClick);
+    clearFoodVenues();
     worldMap?.remove();
     worldMap = null;
     markers.clear();
   }
 
-  return { initialize, updateCurrentCity, destroy };
+  return { initialize, updateCurrentCity, showFoodVenues, clearFoodVenues, focusFoodVenue, destroy };
 }

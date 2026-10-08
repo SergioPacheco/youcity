@@ -99,6 +99,9 @@ const STATIC_ASSETS = [
   "src/features/map/map-controller.mjs",
   "src/features/map/map-feature-loader.mjs",
   "src/features/city-guide/city-guide-controller.mjs",
+  "src/features/street-food/street-food-repository.mjs",
+  "src/features/street-food/street-food-loader.mjs",
+  "src/features/street-food/street-food-controller.mjs",
   "src/features/travel/destination-commerce.mjs",
   "src/features/travel/flight-origin.mjs",
   "src/features/travel/stay22-loader.mjs",
@@ -170,6 +173,16 @@ function loadCitySeoContent() {
   const file = resolve(ROOT_DIR, "data/city-seo-content.json");
   if (!existsSync(file)) return {};
   return JSON.parse(readFileSync(file, "utf8"));
+}
+
+function loadStreetFoodCatalog() {
+  const file = resolve(ROOT_DIR, "data/street-food.json");
+  if (!existsSync(file)) return null;
+  try {
+    return JSON.parse(readFileSync(file, "utf8"));
+  } catch {
+    return null;
+  }
 }
 
 function writeAffiliateOverridesAsset() {
@@ -329,7 +342,102 @@ function validEditorialContent(editorialContent, city) {
   return { ...editorialContent, places };
 }
 
-function renderDestinationContent(city, catalog, editorialContent = null) {
+// Static SEO teaser for published street-food dishes. Empty string when the
+// city has no published records, so pages without curation are unchanged.
+function streetFoodTeaser(city, streetCatalog) {
+  const entry = (streetCatalog?.cities || []).find((item) => item?.slug === slugify(city.name));
+  const dishes = (entry?.dishes || [])
+    .filter((dish) => dish?.status === "published" && dish?.name && String(dish.description || "").trim())
+    .slice(0, 5);
+  if (!dishes.length) return "";
+  const items = dishes
+    .map((dish) => `<li><strong>${escapeHtml(dish.name)}</strong><span>${escapeHtml(sentenceAwareExcerpt(dish.description, 40, 180))}</span></li>`)
+    .join("");
+  return `<section class="destination-food"><h2>Local food in ${escapeHtml(displayCityName(city))}</h2><ul>${items}</ul><p><a href="${escapeHtml(sitePath(`/city/${slugify(city.name)}/food`))}">See the ${escapeHtml(displayCityName(city))} food guide →</a></p></section>`;
+}
+
+// Cities entitled to a dedicated /city/<slug>/food page: only those with
+// at least one published dish. No published records, no page, no sitemap URL.
+function streetFoodPagePlan(streetCatalog, catalog) {
+  const plan = [];
+  for (const city of catalog || []) {
+    const entry = (streetCatalog?.cities || []).find((item) => item?.slug === slugify(city.name));
+    const dishes = (entry?.dishes || []).filter(
+      (dish) => dish?.status === "published" && dish?.name && String(dish.description || "").trim()
+    );
+    if (dishes.length) plan.push({ city, slug: slugify(city.name), dishes });
+  }
+  return plan;
+}
+
+function cityFoodSeo(city, dishes) {
+  const name = displayCityName(city);
+  const country = countryName(city.country);
+  const path = sitePath(`/city/${slugify(city.name)}/food`);
+  const canonical = `${SITE_URL}${path}`;
+  const dishNames = dishes.slice(0, 5).map((dish) => dish.name).join(", ");
+  const title = `${name} Food Guide | YouCity`;
+  const description = `Taste ${name}, ${country}: ${dishNames}. Local dishes, markets and food videos curated by YouCity.`;
+  return {
+    id: slugify(city.name),
+    rawCountry: city.country,
+    countryCode: city.countryCode || null,
+    title,
+    description,
+    canonical,
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: title,
+        description,
+        url: canonical,
+        isPartOf: { "@type": "WebSite", name: SITE_NAME, url: `${SITE_URL}${sitePath("/")}` }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: SITE_NAME, item: `${SITE_URL}${sitePath("/")}` },
+          { "@type": "ListItem", position: 2, name, item: `${SITE_URL}${cityPath(city)}` },
+          { "@type": "ListItem", position: 3, name: `${name} Food Guide`, item: canonical }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: `${name} local dishes`,
+        itemListElement: dishes.slice(0, 10).map((dish, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: String(dish.name)
+        }))
+      }
+    ],
+    name,
+    country,
+    path,
+    modes: cityModes(city)
+  };
+}
+
+function replaceStaticFoodCity(html, seo) {
+  let output = replaceElementText(html, "h1", "city-name", escapeHtml(`${seo.name} Food Guide`));
+  output = replaceElementText(output, "p", "city-note", escapeHtml(seo.description));
+  output = replaceElementText(output, "span", "travel-button-full", `Plan a trip to ${escapeHtml(seo.name)}`);
+  output = replaceElementText(output, "h2", "travel-planner-title", `Plan your trip to ${escapeHtml(seo.name)}`);
+  return output;
+}
+
+function foodPageFallback(seo, dishes) {
+  const items = dishes
+    .slice(0, 10)
+    .map((dish) => `<li><strong>${escapeHtml(dish.name)}</strong><span>${escapeHtml(sentenceAwareExcerpt(dish.description, 40, 200))}</span></li>`)
+    .join("");
+  return `<section class="seo-fallback"><h2>${escapeHtml(seo.name)} food guide</h2><p>${escapeHtml(seo.description)}</p><ul>${items}</ul><p><a href="${escapeHtml(sitePath(`/city/${seo.id}`))}">Back to ${escapeHtml(seo.name)}</a></p></section>`;
+}
+
+function renderDestinationContent(city, catalog, editorialContent = null, streetCatalog = null) {
   const name = displayCityName(city);
   const country = countryName(city.country);
   const modeDefinitions = cityModeDefinitions(city);
@@ -347,15 +455,16 @@ function renderDestinationContent(city, catalog, editorialContent = null) {
     : "";
   const experienceText = modeText ? `immersive ${modeText} experiences` : "immersive virtual experiences";
   const editorial = validEditorialContent(editorialContent, city);
+  const foodSection = streetFoodTeaser(city, streetCatalog);
   if (!editorial) {
-    return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul>${radioSection}${relatedSection}</section>`;
+    return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul>${radioSection}${relatedSection}${foodSection}</section>`;
   }
   const about = `<section class="destination-about"><h2>About ${escapeHtml(name)}</h2><p>${escapeHtml(sentenceAwareExcerpt(editorial.summary.extract, 250, 700))}</p><p><a href="${escapeHtml(editorial.summary.url)}" target="_blank" rel="noopener noreferrer">Source: Wikipedia ↗</a></p></section>`;
   const experienceSection = `<section class="destination-experiences"><h2>Experience ${escapeHtml(name)}</h2><ul>${experiences}</ul></section>`;
   const places = `<section class="destination-places"><h2>Places to discover in ${escapeHtml(name)}</h2><ul>${editorial.places.map(editorialPlaceMarkup).join("")}</ul></section>`;
   const radioEditorial = radioSection ? `<section class="destination-radio">${radioSection}</section>` : "";
   const relatedEditorial = relatedSection ? `<section class="destination-related">${relatedSection}</section>` : "";
-  return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p>${about}${experienceSection}${places}${radioEditorial}${relatedEditorial}</section>`;
+  return `<section class="destination-content"><h2>Explore ${escapeHtml(name)} virtually</h2><p>Explore ${escapeHtml(name)}, ${escapeHtml(country)} through ${experienceText}${radioText}.</p>${about}${experienceSection}${places}${foodSection}${radioEditorial}${relatedEditorial}</section>`;
 }
 
 function hasVideoExperience(city) {
@@ -501,15 +610,15 @@ function replaceSeoFallback(html, body) {
   return pattern.test(html) ? html.replace(pattern, content) : html.replace("</body>", `  ${content}\n</body>`);
 }
 
-function replaceDestinationContent(html, city, catalog, editorialContent) {
-  const content = renderDestinationContent(city, catalog, editorialContent);
+function replaceDestinationContent(html, city, catalog, editorialContent, streetCatalog = null) {
+  const content = renderDestinationContent(city, catalog, editorialContent, streetCatalog);
   const pattern = /<noscript\b[^>]*data-seo-fallback[^>]*>/i;
   return pattern.test(html)
     ? html.replace(pattern, `${content}\n\n    $&`)
     : html.replace("</body>", `  ${content}\n</body>`);
 }
 
-function renderPage(baseHtml, seo, fallback, { city = null, catalog = [], editorialContent = null } = {}) {
+function renderPage(baseHtml, seo, fallback, { city = null, catalog = [], editorialContent = null, streetCatalog = null } = {}) {
   let html = replaceTitle(baseHtml, seo.title);
   html = replaceMeta(html, 'name="description"', seo.description);
   html = replaceMeta(html, 'name="robots"', "index,follow");
@@ -526,7 +635,7 @@ function renderPage(baseHtml, seo, fallback, { city = null, catalog = [], editor
   html = replaceJsonLd(html, seo.jsonLd);
   if (city) {
     html = html.replace(/<html\b([^>]*)>/i, '<html$1 class="seo-city-page">');
-    html = replaceDestinationContent(html, city, catalog, editorialContent);
+    html = replaceDestinationContent(html, city, catalog, editorialContent, streetCatalog);
   } else html = replaceHomeCatalogSummary(html, catalog.length);
   if (fallback) html = replaceSeoFallback(html, fallback);
   return html;
@@ -536,11 +645,12 @@ function xmlEscape(value) {
   return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 }
 
-function buildSitemap(catalog, blogUrls = []) {
+function buildSitemap(catalog, blogUrls = [], foodPaths = []) {
   const sitemapCatalog = catalog.filter(hasVideoExperience);
   const urls = [
     `${SITE_URL}${sitePath("/")}`,
     ...sitemapCatalog.map((city) => `${SITE_URL}${cityPath(city)}`),
+    ...foodPaths.map((path) => `${SITE_URL}${sitePath(path)}`),
     ...blogUrls.map((path) => `${SITE_URL}${sitePath(path)}`)
   ];
   const entries = urls.map((url) => `  <url>\n    <loc>${xmlEscape(url)}</loc>\n  </url>`).join("\n");
@@ -650,6 +760,9 @@ module.exports = {
   citySeoTitle,
   relatedCities,
   renderDestinationContent,
+  streetFoodTeaser,
+  streetFoodPagePlan,
+  cityFoodSeo,
   prepareStaticHtmlPage,
   trustedEditorialUrl,
   validateModuleImports
@@ -660,6 +773,7 @@ function main() {
   if (catalogBuild.status !== 0) throw new Error("Catalog build failed.");
   const catalog = loadCanonicalCatalog(ROOT_DIR);
   const citySeoContent = loadCitySeoContent();
+  const streetFoodCatalog = loadStreetFoodCatalog();
   const discoverCarsCatalog = loadDiscoverCarsCatalog();
   if (!catalog.length) throw new Error("The city catalog is empty.");
 
@@ -678,6 +792,9 @@ function main() {
   }
   writeAffiliateOverridesAsset();
   copyStaticAssets(OUTPUT_DIR);
+  mkdirSync(join(OUTPUT_DIR, "data"), { recursive: true });
+  const streetSource = resolve(ROOT_DIR, "data/street-food.json");
+  if (existsSync(streetSource)) cpSync(streetSource, join(OUTPUT_DIR, "data/street-food.json"));
   cpSync(resolve(ROOT_DIR, "blog.css"), join(OUTPUT_DIR, "blog.css"));
   for (const file of ["_headers", "_redirects"]) {
     if (existsSync(resolve(ROOT_DIR, file))) cpSync(resolve(ROOT_DIR, file), join(OUTPUT_DIR, file));
@@ -711,7 +828,7 @@ function main() {
   catalog.forEach((city, index) => {
     const seo = citySeo(city);
     const cityHtml = replaceStaticCity(
-      renderPage(baseHtml, seo, cityFallback(seo, city, catalog, discoverCarsCatalog), { city, catalog, editorialContent: citySeoContent[slugify(city.name)] || null }),
+      renderPage(baseHtml, seo, cityFallback(seo, city, catalog, discoverCarsCatalog), { city, catalog, editorialContent: citySeoContent[slugify(city.name)] || null, streetCatalog: streetFoodCatalog }),
       seo,
       index + 1,
       catalog.length
@@ -719,8 +836,21 @@ function main() {
     writeFileSync(join(OUTPUT_DIR, "city", `${slugify(city.name)}.html`), cityHtml);
   });
 
+  const foodPlan = streetFoodPagePlan(streetFoodCatalog, catalog);
+  const foodPaths = [];
+  for (const { city, slug, dishes } of foodPlan) {
+    const seo = cityFoodSeo(city, dishes);
+    const foodHtml = replaceStaticFoodCity(
+      renderPage(baseHtml, seo, foodPageFallback(seo, dishes), { city, catalog, editorialContent: citySeoContent[slug] || null, streetCatalog: streetFoodCatalog }),
+      seo
+    );
+    mkdirSync(join(OUTPUT_DIR, "city", slug), { recursive: true });
+    writeFileSync(join(OUTPUT_DIR, "city", slug, "food.html"), foodHtml);
+    foodPaths.push(`/city/${slug}/food`);
+  }
+
   writeFileSync(join(OUTPUT_DIR, "robots.txt"), buildRobots());
-  writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog, blogBuild.urls));
+  writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog, blogBuild.urls, foodPaths));
   writeFileSync(join(OUTPUT_DIR, "404.html"), buildNotFound());
   writeFileSync(join(OUTPUT_DIR, ".nojekyll"), "");
   
@@ -728,7 +858,7 @@ function main() {
   validateModuleImports();
   
   const sitemapCityCount = catalog.filter(hasVideoExperience).length;
-  console.log(`Built ${catalog.length + 1 + blogBuild.articles.length} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1 + blogBuild.urls.length} URLs, blog: ${blogBuild.articles.length} articles, assets: ${ASSET_VERSION})`);
+  console.log(`Built ${catalog.length + 1 + blogBuild.articles.length + foodPaths.length} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1 + blogBuild.urls.length + foodPaths.length} URLs, blog: ${blogBuild.articles.length} articles, food guides: ${foodPaths.length}, assets: ${ASSET_VERSION})`);
 }
 
 if (require.main === module) main();

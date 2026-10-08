@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 1,
+  "cities": [
+    {
+      "slug": "tokyo",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia sources, Wikidata/Wikipedia coordinates, YouTube oEmbed embed check). Market coordinates are representative points; see sourceUrl.",
+      "dishes": [
+        {
+          "id": "sushi",
+          "name": "Sushi",
+          "category": "seafood",
+          "description": "Vinegared rice served with raw fish, seafood or vegetables. Tokyo's Edo-mae tradition shaped the compact hand-pressed style served at counters and markets.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Sushi", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ramen",
+          "name": "Ramen",
+          "category": "noodles",
+          "description": "Wheat noodles in broth topped with pork, egg, seaweed or vegetables. Tokyo hosts hundreds of shops, from classic shoyu counters to rich tonkotsu bowls.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Ramen", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tempura",
+          "name": "Tempura",
+          "category": "fried",
+          "description": "Lightly battered seafood and vegetables, fried crisp and served with dipping sauce. An Edo-period Tokyo street-food classic still served at counters across the city.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tempura", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "tsukiji-outer-market",
+          "name": "Tsukiji Outer Market",
+          "kind": "market",
+          "dishIds": ["sushi"],
+          "coordinates": { "lat": 35.6682, "lng": 139.7739 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Tsukiji",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "toyosu-market",
+          "name": "Toyosu Market",
+          "kind": "market",
+          "dishIds": ["sushi"],
+          "coordinates": { "lat": 35.6433, "lng": 139.7817 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Toyosu_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "LyxSj3O4hLs",
+          "dishIds": ["ramen"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "CSeqv96hpTw",
+          "dishIds": ["sushi"],
+          "placeIds": ["tsukiji-outer-market"],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "EVgVdCrJGgc",
+          "dishIds": ["ramen"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "istanbul",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "doner-kebab",
+          "name": "Döner Kebab",
+          "category": "grill",
+          "description": "Seasoned meat roasted on a vertical spit and shaved into flatbread or plates with salad. Istanbul's ubiquitous lunch, ancestor of shawarma and gyros.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Doner_kebab", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "baklava",
+          "name": "Baklava",
+          "category": "sweets",
+          "description": "Paper-thin pastry layered with pistachio or walnuts and soaked in syrup. Ottoman palace dessert, sold by weight in specialist shops.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Baklava", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "simit",
+          "name": "Simit",
+          "category": "bakery",
+          "description": "Sesame-crusted bread ring, crunchy outside and soft inside. Sold from red carts across Istanbul, usually with tea.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Simit", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "turkish-delight",
+          "name": "Turkish Delight",
+          "category": "sweets",
+          "description": "Starch-and-sugar jelly cubes flavored with rose, mastic or nuts and dusted in sugar. The classic farewell gift from the Spice Bazaar.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Turkish_delight", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "spice-bazaar",
+          "name": "Spice Bazaar",
+          "kind": "market",
+          "dishIds": ["turkish-delight", "baklava"],
+          "coordinates": { "lat": 41.0164, "lng": 28.9706 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Spice_Bazaar",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "grand-bazaar",
+          "name": "Grand Bazaar",
+          "kind": "market",
+          "dishIds": ["baklava", "simit"],
+          "coordinates": { "lat": 41.0106, "lng": 28.9679 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Grand_Bazaar,_Istanbul",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "bBkXkBgWl4E",
+          "dishIds": ["doner-kebab"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "_VR2ovm9pHY",
+          "dishIds": ["doner-kebab", "baklava"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "k0qo9ruqL_Q",
+          "dishIds": ["doner-kebab", "baklava"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "mexico-city",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia and Mexico City official sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "tacos-al-pastor",
+          "name": "Tacos al Pastor",
+          "category": "tacos",
+          "description": "Marinated pork shaved off a vertical trompo onto corn tortillas with onion, cilantro and pineapple. Mexico City's signature taco.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Taco_al_pastor", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tamale",
+          "name": "Tamale",
+          "category": "masa",
+          "description": "Masa dough steamed in corn husks or banana leaves, filled with meats, chilies or sweets. Breakfast staple sold from pots on street corners.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tamale", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "chilaquiles",
+          "name": "Chilaquiles",
+          "category": "masa",
+          "description": "Fried tortilla chips simmered in salsa and topped with cream, cheese and onion. A classic Mexican breakfast plate.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Chilaquiles", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "san-juan-market",
+          "name": "San Juan Market",
+          "kind": "market",
+          "dishIds": ["tacos-al-pastor"],
+          "coordinates": { "lat": 19.43, "lng": -99.1447 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/San_Juan_Market,_Mexico_City",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-roma",
+          "name": "Mercado Roma",
+          "kind": "food_hall",
+          "dishIds": ["tacos-al-pastor"],
+          "coordinates": { "lat": 19.4141, "lng": -99.1646 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Mercado_Roma",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "dHnqNOvDi44",
+          "dishIds": ["tacos-al-pastor"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "0hgLggc7vWI",
+          "dishIds": ["tacos-al-pastor"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "seoul",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia and Seoul Metropolitan Government sources, Wikidata/Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "kimchi",
+          "name": "Kimchi",
+          "category": "fermented",
+          "description": "Fermented napa cabbage and radish seasoned with chili, garlic and ginger. Served with nearly every Korean meal, including market stalls.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Kimchi", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "bibimbap",
+          "name": "Bibimbap",
+          "category": "rice",
+          "description": "Warm rice topped with seasoned vegetables, egg and chili paste, mixed at the table. A balanced bowl found at stalls and counters citywide.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Bibimbap", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tteokbokki",
+          "name": "Tteokbokki",
+          "category": "street_snack",
+          "description": "Chewy rice cakes simmered in sweet-spicy chili sauce. Seoul's defining street snack, sold from bubbling trays at every market.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tteokbokki", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "gimbap",
+          "name": "Gimbap",
+          "category": "rolls",
+          "description": "Rice and fillings rolled in seaweed and sliced into bites. Gwangjang's mini mayak rolls are famously addictive.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Gimbap", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "gwangjang-market",
+          "name": "Gwangjang Market",
+          "kind": "market",
+          "dishIds": ["tteokbokki", "gimbap", "bibimbap"],
+          "coordinates": { "lat": 37.5711, "lng": 126.9936 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Gwangjang_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "namdaemun-market",
+          "name": "Namdaemun Market",
+          "kind": "market",
+          "dishIds": ["bibimbap", "kimchi", "tteokbokki"],
+          "coordinates": { "lat": 37.559, "lng": 126.977 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/List_of_markets_in_South_Korea",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "MUnAV-w5_-I",
+          "dishIds": ["tteokbokki"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "WGrKS1V_PbI",
+          "dishIds": ["tteokbokki"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "f9X9-3CetaM",
+          "dishIds": ["gimbap"],
+          "placeIds": ["gwangjang-market"],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "taipei",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia and Taipei City Government sources, Wikipedia/Wikidata coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "beef-noodle-soup",
+          "name": "Beef Noodle Soup",
+          "category": "noodles",
+          "description": "Slow-braised beef in rich broth with wheat noodles and pickled greens. Taiwan's national bowl, with shops competing for the title of best.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Beef_noodle_soup", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "xiaolongbao",
+          "name": "Xiaolongbao",
+          "category": "dumplings",
+          "description": "Thin-skinned soup dumplings filled with pork and hot broth, eaten with ginger and vinegar. A Taipei obsession from night markets to famed dining rooms.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Xiaolongbao", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "oyster-omelette",
+          "name": "Oyster Omelette",
+          "category": "seafood",
+          "description": "Eggs fried with oysters and starch into a chewy omelet with sweet sauce. A night-market classic queued for across Taipei.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Oyster_omelette", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "shilin-night-market",
+          "name": "Shilin Night Market",
+          "kind": "market",
+          "dishIds": ["oyster-omelette"],
+          "coordinates": { "lat": 25.0866, "lng": 121.5254 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Shilin_Night_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "raohe-night-market",
+          "name": "Raohe Street Night Market",
+          "kind": "market",
+          "dishIds": ["xiaolongbao", "oyster-omelette"],
+          "coordinates": { "lat": 25.0475, "lng": 121.5686 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://www.wikidata.org/wiki/Q707622",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "C5YVbly3fu4",
+          "dishIds": ["beef-noodle-soup"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "2R3BOoazCtA",
+          "dishIds": ["xiaolongbao"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "PxXKTd0BifI",
+          "dishIds": ["xiaolongbao"],
+          "placeIds": ["raohe-night-market"],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    }
+  ]
+}

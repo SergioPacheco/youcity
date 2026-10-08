@@ -678,6 +678,13 @@ export function startApplication() {
   });
   const initializeWorldMap = mapFeatureLoader.initialize;
   const playMapRide = mapFeatureLoader.playRide;
+  // STREET venue pins reuse the world map: opening it closes the guide layer.
+  travelController.setMapVenues({
+    openVenue: async (venue) => {
+      openLayer(elements.mapModal);
+      return mapFeatureLoader.focusFoodVenue(venue);
+    }
+  });
 
   /**
    * Carrega cidade da URL (com sanitização)

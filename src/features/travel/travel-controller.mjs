@@ -5,6 +5,9 @@ import { airportsFromDiscoverCars, buildFlightSearchUrl, createFlightOriginResol
 const PRIMARY_DEFAULTS = ["hotels", "activities", "cars"];
 const QUICK_CATEGORIES = ["hotels", "activities", "cars", "flights"];
 const DEFAULT_FLIGHT_ORIGIN_WAIT_MS = 1_200;
+// Bounded wait for the third-party Stay22 script: the guide must keep
+// working (and hydrate sections such as STREET) even when it hangs.
+const DEFAULT_STAY22_WAIT_MS = 5_000;
 const ACTION_LABELS = {
   hotels: "Find a place to stay",
   "vacation-rentals": "Find vacation rentals",
@@ -16,6 +19,18 @@ const QUICK_LABELS = { hotels: "Stay", activities: "Things to do", cars: "Cars",
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function isStreetFoodEnabled(window) {
+  return window?.YOUCITY_AFFILIATE_CONFIG?.features?.streetFood?.enabled === true;
+}
+
+// Sync placeholder for the STREET section. The full renderer stays lazy so
+// the city guide opens without waiting for the street-food catalog.
+function streetFoodPlaceholder(window, city) {
+  if (!isStreetFoodEnabled(window) || !city?.id) return "";
+  const slug = escapeHtml(city.id);
+  return `<section class="city-guide-section street-food-section" data-street-food-section="${slug}" data-street-token="${slug}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
 }
 
 export function createTravelController({
@@ -36,6 +51,7 @@ export function createTravelController({
   showToast,
   loadStay22 = async () => false,
   flightOriginWaitMs = DEFAULT_FLIGHT_ORIGIN_WAIT_MS,
+  stay22WaitMs = DEFAULT_STAY22_WAIT_MS,
   isStaticLocalPreview = () => false
 } = {}) {
   const categories = affiliate?.getVerticals?.() || {};
@@ -45,6 +61,7 @@ export function createTravelController({
   let discoverCarsCatalogPromise = null;
   let cityGuidePromise = null;
   let travelPromptsRevealed = false;
+  let mapVenuesBridge = null;
   const flightOriginResolver = createFlightOriginResolver({
     geolocation: window?.navigator?.geolocation,
     getAirports: () => airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS)
@@ -242,6 +259,14 @@ export function createTravelController({
     if (target) affiliate.trackClick(target, { mode: state.currentMode });
   }
 
+  // Resolves with the loader result, or the fallback when it hangs/fails.
+  function settleWithin(promise, waitMs, fallback = false) {
+    return Promise.race([
+      Promise.resolve(promise).catch(() => fallback),
+      new Promise((resolve) => setTimeout(() => resolve(fallback), Math.max(0, Number(waitMs) || 0)))
+    ]);
+  }
+
   function destinationAirport(city) {
     const airports = airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS);
     return airports.find((airport) => airport.cityId === city?.id)
@@ -313,6 +338,44 @@ export function createTravelController({
     return `<div class="map-popup"><div class="map-popup-title"><strong>${escapeHtml(city.name)}</strong><span>${escapeHtml(city.country)}</span></div><div class="map-popup-availability"><span>${availableModes(city).length ? "Available" : "No video yet"}</span></div><div class="map-popup-videos">${modeSections || "<p>No videos available.</p>"}</div>${travel ? `<details class="map-trip-plan"><summary>Plan this trip</summary>${travel.replace('<div class="map-travel">', '<div class="map-travel map-travel-inside">')}</details>` : ""}</div>`;
   }
 
+  async function hydrateStreetFood(city) {
+    if (!isStreetFoodEnabled(window) || !city?.id || !elements.cityGuideContent) return false;
+    try {
+      const street = await lazyModules.load("street-food-controller", () => import("../street-food/street-food-controller.mjs"));
+      return await street.hydrateStreetFoodSection(elements.cityGuideContent, city, {
+        window,
+        document,
+        sitePath,
+        affiliate,
+        mode: state.currentMode,
+        mapVenues: mapVenuesBridge,
+        renderOffer: (entry, offerCity, options) => offerMarkup(entry, offerCity, options)
+      });
+    } catch (error) {
+      console.warn("[YouCity] Street food unavailable:", error?.message || error);
+      return false;
+    }
+  }
+
+  function setMapVenues(bridge) {
+    mapVenuesBridge = bridge || null;
+  }
+
+  // Re-hydrates when a guide refresh replaced the section node after (or
+  // before) hydration. Skips when content is already rendered.
+  // Token-aware: ignores placeholders from a stale city switch.
+  function rehydrateStreetFood(city) {
+    if (!isStreetFoodEnabled(window) || !city?.id || !elements.cityGuideContent) return;
+    const nodes = elements.cityGuideContent.querySelectorAll?.("[data-street-food-section]");
+    const list = nodes ? Array.from(nodes) : [];
+    const live =
+      list.find((node) => (node?.dataset?.streetToken || node?.dataset?.streetFoodSection) === city.id && node?.isConnected !== false) ||
+      list.find((node) => (node?.dataset?.streetToken || node?.dataset?.streetFoodSection) === city.id) ||
+      elements.cityGuideContent.querySelector?.("[data-street-food-section]");
+    if (!live || live.querySelector?.(".street-food-content")) return;
+    hydrateStreetFood(city).catch(() => {});
+  }
+
   async function openCityGuide() {
     if (!elements.travelDrawer || !elements.cityGuideContent || !currentCity()) return;
     const stay22Promise = Promise.resolve(loadStay22()).catch(() => false);
@@ -321,7 +384,8 @@ export function createTravelController({
         window, document, elements, getCity: currentCity, openLayer, sitePath, isStaticLocalPreview,
         renderCommerce: {
           topActions: (city) => commerce.topActions(city),
-          afterPlaces: (city) => commerce.afterPlaces(city)
+          afterPlaces: (city) => commerce.afterPlaces(city),
+          streetFood: (city) => streetFoodPlaceholder(window, city)
         }
       }));
     }
@@ -331,8 +395,9 @@ export function createTravelController({
       const city = currentCity();
       renderTravelPlanner(city);
       ensureDiscoverCarsCatalog();
-      await stay22Promise;
+      await settleWithin(stay22Promise, stay22WaitMs, false);
       refreshDestinationHub(currentCity());
+      hydrateStreetFood(currentCity()).catch(() => {});
       renderTravelPrompts(currentCity(), { reveal: true });
 
       // Analytics: travel_planner_open
@@ -351,7 +416,7 @@ export function createTravelController({
         mode: state.currentMode
       });
 
-      loadSecondaryProviders({ document, sitePath }).then(() => { refreshDestinationHub(currentCity()); renderTravelPrompts(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
+      loadSecondaryProviders({ document, sitePath }).then(() => { refreshDestinationHub(currentCity()); renderTravelPrompts(currentCity()); rehydrateStreetFood(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
     } catch (error) {
       cityGuidePromise = null;
       elements.cityGuideContent.innerHTML = '<p class="city-guide-error" role="alert">City guide data is temporarily unavailable. Try again later.</p>';
@@ -363,5 +428,5 @@ export function createTravelController({
     cityGuidePromise?.then((controller) => controller.invalidate?.()).catch(() => {});
   }
 
-  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, openFlightOffer, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide };
+  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, openFlightOffer, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide, setMapVenues };
 }
