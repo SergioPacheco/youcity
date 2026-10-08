@@ -42,7 +42,7 @@ function dishCard(dish, places, videos) {
     ? `<ul class="street-food-places">${places
         .map((place) => {
           const osmUrl = `https://www.openstreetmap.org/?mlat=${place.coordinates.lat}&mlon=${place.coordinates.lng}#map=16/${place.coordinates.lat}/${place.coordinates.lng}`;
-          return `<li><button type="button" class="street-food-place" data-street-map-click="${escapeHtml(place.id)}" data-street-osm="${escapeHtml(osmUrl)}"><strong>${escapeHtml(place.name)}</strong><span>${escapeHtml(placeKindLabel(place.kind))}</span></button></li>`;
+          return `<li><button type="button" class="street-food-place" data-street-map-click="${escapeHtml(place.id)}" data-street-osm="${escapeHtml(osmUrl)}" aria-label="Show ${escapeHtml(place.name)} on map"><strong>${escapeHtml(place.name)}</strong><span>${escapeHtml(placeKindLabel(place.kind))} · map</span></button></li>`;
         })
         .join("")}</ul>`
     : "";
@@ -118,9 +118,10 @@ function trackEvent(window, event, city, extra = {}) {
   } catch {}
 }
 
-function bindSection(section, city, { window: win, document: doc } = {}) {
+function bindSection(section, city, { window: win, document: doc, venues = [], mapVenues = null } = {}) {
   if (typeof section?.addEventListener !== "function") return;
   const ownerDocument = doc || (typeof document !== "undefined" ? document : null);
+  const venueById = new Map((Array.isArray(venues) ? venues : []).map((venue) => [venue?.id, venue]));
   section.addEventListener("click", (event) => {
     const filter = event.target?.closest?.("[data-street-filter]");
     if (filter && section.contains(filter)) {
@@ -150,8 +151,16 @@ function bindSection(section, city, { window: win, document: doc } = {}) {
     }
     const place = event.target?.closest?.("[data-street-map-click]");
     if (place && section.contains(place)) {
+      const venue = venueById.get(place.dataset.streetMapClick);
       trackEvent(win, "street_food_map_click", city, { place: place.dataset.streetMapClick });
-      win?.open?.(place.dataset.streetOsm, "_blank", "noopener,noreferrer");
+      // Prefer the in-app Leaflet map; fall back to OpenStreetMap externally.
+      if (venue && typeof mapVenues?.openVenue === "function") {
+        Promise.resolve()
+          .then(() => mapVenues.openVenue(venue))
+          .catch(() => win?.open?.(place.dataset.streetOsm, "_blank", "noopener,noreferrer"));
+      } else {
+        win?.open?.(place.dataset.streetOsm, "_blank", "noopener,noreferrer");
+      }
     }
   });
 }
@@ -159,7 +168,7 @@ function bindSection(section, city, { window: win, document: doc } = {}) {
 export async function hydrateStreetFoodSection(
   root,
   city,
-  { window, document: documentRef = document, sitePath = (path) => path, affiliate, mode = "walk", renderOffer = () => "" } = {}
+  { window, document: documentRef = document, sitePath = (path) => path, affiliate, mode = "walk", mapVenues = null, renderOffer = () => "" } = {}
 ) {
   const section = root?.querySelector?.(SECTION_SELECTOR);
   if (!section || !city?.id) return false;
@@ -174,8 +183,12 @@ export async function hydrateStreetFoodSection(
     }
     const data = getPublishedStreetFood(catalog, city.id);
     const offers = foodTourOffers(affiliate, city, mode);
+    const venues = data.places.map((place) => ({
+      ...place,
+      dishNames: data.dishes.filter((dish) => place.dishIds?.includes(dish.id)).map((dish) => dish.name)
+    }));
     section.innerHTML = sectionMarkup(city, data, { offers, renderOffer });
-    bindSection(section, city, { window, document: documentRef });
+    bindSection(section, city, { window, document: documentRef, venues, mapVenues });
     trackEvent(window, "street_food_view", city, { dishes: data.dishes.length });
     return true;
   } catch {

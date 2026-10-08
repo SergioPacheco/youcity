@@ -12,6 +12,9 @@ import {
 import { clearStreetFoodCache, loadStreetFoodCatalog } from "../src/features/street-food/street-food-loader.mjs";
 import { isStreetFoodEnabled, streetFoodPlaceholder } from "../src/features/street-food/street-food-controller.mjs";
 import { validateStreetFood } from "./validate-street-food.mjs";
+import buildStatic from "./build-static.js";
+
+const { streetFoodPagePlan, cityFoodSeo, streetFoodTeaser } = buildStatic;
 
 const root = resolve(import.meta.dirname, "..");
 const catalog = JSON.parse(readFileSync(resolve(root, "data/catalog.json"), "utf8"));
@@ -146,5 +149,24 @@ assert.equal(isStreetFoodEnabled({ YOUCITY_AFFILIATE_CONFIG: { features: { stree
 const placeholder = streetFoodPlaceholder({ id: 'tokyo"><img src=x>' });
 assert.ok(placeholder.includes("data-street-food-section"), "placeholder carries the hook attribute");
 assert.ok(!placeholder.includes("<img src=x>"), "placeholder escapes the city slug");
+
+// Food pages: only cities with published dishes earn a page; teaser links it.
+assert.deepEqual(streetFoodPagePlan(streetFood, catalog), [], "no food pages without published dishes");
+const foodPlan = streetFoodPagePlan(
+  { cities: [{ slug: "tokyo", dishes: [{ id: "ramen", name: "Ramen", description: "Noodle soup with broth.", status: "published" }], places: [], videos: [] }] },
+  [{ name: "Tokyo", country: "Japan" }]
+);
+assert.equal(foodPlan.length, 1);
+assert.equal(foodPlan[0].slug, "tokyo");
+const foodSeo = cityFoodSeo(foodPlan[0].city, foodPlan[0].dishes);
+assert.equal(foodSeo.title, "Tokyo Food Guide | YouCity");
+assert.equal(foodSeo.canonical, "https://youcity.app/city/tokyo/food");
+assert.ok(foodSeo.description.length >= 50, "food description satisfies the SEO minimum");
+assert.equal(foodSeo.jsonLd.length, 3, "single JSON-LD block with WebPage, BreadcrumbList and ItemList");
+const teaser = streetFoodTeaser(foodPlan[0].city, {
+  cities: [{ slug: "tokyo", dishes: foodPlan[0].dishes }]
+});
+assert.ok(teaser.includes("/city/tokyo/food"), "city teaser links the food guide");
+assert.equal(streetFoodTeaser({ name: "Tokyo" }, { cities: [] }), "", "no teaser without published dishes");
 
 console.log("Street food tests passed: schema, validator, repository, loader and controller placeholder.");

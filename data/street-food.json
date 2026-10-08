@@ -3,8 +3,27 @@
   "cities": [
     {
       "slug": "tokyo",
-      "note": "Pilot city. Editorial curation pending verification; no published records yet.",
-      "dishes": [],
+      "note": "Pilot city. Candidates below are UNVERIFIED drafts: no sources, coordinates or videos confirmed. Nothing renders until status becomes published with verifiedAt and sources.",
+      "dishes": [
+        {
+          "id": "sushi",
+          "name": "Sushi",
+          "status": "draft",
+          "note": "Candidate pending verification: description, sources and video evidence required."
+        },
+        {
+          "id": "ramen",
+          "name": "Ramen",
+          "status": "draft",
+          "note": "Candidate pending verification: description, sources and video evidence required."
+        },
+        {
+          "id": "tempura",
+          "name": "Tempura",
+          "status": "draft",
+          "note": "Candidate pending verification: description, sources and video evidence required."
+        }
+      ],
       "places": [],
       "videos": []
     },

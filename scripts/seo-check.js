@@ -249,17 +249,35 @@ function hasVideoExperience(city) {
   return Object.values(city.videos || {}).some((rides) => Array.isArray(rides) && rides.length > 0);
 }
 
-function checkSitemap(catalog, blogUrls = []) {
+function checkSitemap(catalog, blogUrls = [], foodPaths = []) {
   const sitemap = read("sitemap.xml");
   const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
   const sitemapCatalog = catalog.filter(hasVideoExperience);
   const expected = [
     `${SITE_URL}${sitePath("/")}`,
     ...sitemapCatalog.map(cityUrl),
+    ...foodPaths.map((path) => `${SITE_URL}${sitePath(path)}`),
     ...blogUrls.map((path) => `${SITE_URL}${sitePath(path)}`)
   ];
   if (urls.length !== expected.length) fail(`sitemap.xml: expected ${expected.length} URLs, found ${urls.length}`);
   for (const url of expected) if (!urls.includes(url)) fail(`sitemap.xml: missing ${url}`);
+}
+
+function expectedFoodPaths(catalog) {
+  const streetPath = join(ROOT_DIR, "data/street-food.json");
+  if (!existsSync(streetPath)) return [];
+  let street = null;
+  try {
+    street = JSON.parse(readFileSync(streetPath, "utf8"));
+  } catch {
+    return [];
+  }
+  return (catalog || [])
+    .filter((city) => {
+      const entry = (street.cities || []).find((item) => item?.slug === slugify(city.name));
+      return (entry?.dishes || []).some((dish) => dish?.status === "published" && dish?.name && String(dish.description || "").trim());
+    })
+    .map((city) => `/city/${slugify(city.name)}/food`);
 }
 
 function checkBlogOutput(blog) {
@@ -352,18 +370,34 @@ function main() {
   const duplicateTexts = new Map();
   const wordStats = [];
   const files = allHtmlFiles(OUTPUT_DIR).sort();
-  const cityFiles = files.filter((file) => file.startsWith("city/"));
+  const cityFiles = files.filter((file) => file.startsWith("city/") && file.split("/").length === 2);
   if (cityFiles.length !== catalog.length) fail(`Expected ${catalog.length} city pages, found ${cityFiles.length}`);
+  const foodPaths = expectedFoodPaths(catalog);
+  const foodFiles = files.filter((file) => file.startsWith("city/") && file.endsWith("/food.html"));
+  if (foodFiles.length !== foodPaths.length) fail(`Expected ${foodPaths.length} food pages, found ${foodFiles.length}`);
 
   const pageData = files.filter((file) => file !== "404.html").map((file) => ({ file, ...checkPage(file) }));
   checkPage("404.html", { indexable: false });
   checkBlogOutput(blog);
-  checkSitemap(catalog, ["/blog/", ...blog.published.map((article) => `/blog/${article.slug}`)]);
+  checkSitemap(catalog, ["/blog/", ...blog.published.map((article) => `/blog/${article.slug}`)], foodPaths);
   checkHomeCatalogSummary(catalog);
 
   for (const file of cityFiles) {
     const city = catalog.find((candidate) => `city/${slugify(candidate.name)}.html` === file);
     if (city) checkDestinationContent(file, city, editorialContent, duplicateTexts, wordStats);
+  }
+
+  for (const foodPath of foodPaths) {
+    const file = `${foodPath.slice(1)}.html`;
+    const city = catalog.find((candidate) => `/city/${slugify(candidate.name)}/food` === foodPath);
+    const page = pageData.find((entry) => entry.file === file);
+    if (!city || !page) {
+      fail(`${file}: food page without matching catalog city`);
+      continue;
+    }
+    if (page.canonical !== `${SITE_URL}${sitePath(foodPath)}`) fail(`${file}: food canonical should be ${foodPath}`);
+    const html = read(file);
+    if (!html.includes(displayCityName(city))) fail(`${file}: food page does not mention ${displayCityName(city)}`);
   }
 
   for (const key of ["title", "canonical", "description"]) {

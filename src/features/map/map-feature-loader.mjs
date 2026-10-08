@@ -44,12 +44,36 @@ export function createMapFeatureLoader({
       }));
     }
     try {
-      await (await controllerPromise).initialize();
+      const active = await controllerPromise;
+      await active.initialize();
+      // Plain opens never inherit venues from another city; the focus flow
+      // re-adds its venue right after this.
+      active.clearFoodVenues();
     } catch (error) {
       controllerPromise = null;
       console.warn("[YouCity] Map library unavailable:", error.message);
     }
   }
 
-  return { initialize, playRide, availableModes };
+  // STREET venue pins. No-ops until the Leaflet map initializes.
+  async function showFoodVenues(venues) {
+    await initialize();
+    if (!controllerPromise) return 0;
+    return (await controllerPromise).showFoodVenues(venues);
+  }
+
+  async function clearFoodVenues() {
+    if (!controllerPromise) return;
+    try {
+      (await controllerPromise).clearFoodVenues();
+    } catch {}
+  }
+
+  async function focusFoodVenue(venue) {
+    await initialize();
+    if (!controllerPromise) return false;
+    return (await controllerPromise).focusFoodVenue(venue);
+  }
+
+  return { initialize, playRide, availableModes, showFoodVenues, clearFoodVenues, focusFoodVenue };
 }

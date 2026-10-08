@@ -353,7 +353,88 @@ function streetFoodTeaser(city, streetCatalog) {
   const items = dishes
     .map((dish) => `<li><strong>${escapeHtml(dish.name)}</strong><span>${escapeHtml(sentenceAwareExcerpt(dish.description, 40, 180))}</span></li>`)
     .join("");
-  return `<section class="destination-food"><h2>Local food in ${escapeHtml(displayCityName(city))}</h2><ul>${items}</ul></section>`;
+  return `<section class="destination-food"><h2>Local food in ${escapeHtml(displayCityName(city))}</h2><ul>${items}</ul><p><a href="${escapeHtml(sitePath(`/city/${slugify(city.name)}/food`))}">See the ${escapeHtml(displayCityName(city))} food guide →</a></p></section>`;
+}
+
+// Cities entitled to a dedicated /city/<slug>/food page: only those with
+// at least one published dish. No published records, no page, no sitemap URL.
+function streetFoodPagePlan(streetCatalog, catalog) {
+  const plan = [];
+  for (const city of catalog || []) {
+    const entry = (streetCatalog?.cities || []).find((item) => item?.slug === slugify(city.name));
+    const dishes = (entry?.dishes || []).filter(
+      (dish) => dish?.status === "published" && dish?.name && String(dish.description || "").trim()
+    );
+    if (dishes.length) plan.push({ city, slug: slugify(city.name), dishes });
+  }
+  return plan;
+}
+
+function cityFoodSeo(city, dishes) {
+  const name = displayCityName(city);
+  const country = countryName(city.country);
+  const path = sitePath(`/city/${slugify(city.name)}/food`);
+  const canonical = `${SITE_URL}${path}`;
+  const dishNames = dishes.slice(0, 5).map((dish) => dish.name).join(", ");
+  const title = `${name} Food Guide | YouCity`;
+  const description = `Taste ${name}, ${country}: ${dishNames}. Local dishes, markets and food videos curated by YouCity.`;
+  return {
+    id: slugify(city.name),
+    rawCountry: city.country,
+    countryCode: city.countryCode || null,
+    title,
+    description,
+    canonical,
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: title,
+        description,
+        url: canonical,
+        isPartOf: { "@type": "WebSite", name: SITE_NAME, url: `${SITE_URL}${sitePath("/")}` }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: SITE_NAME, item: `${SITE_URL}${sitePath("/")}` },
+          { "@type": "ListItem", position: 2, name, item: `${SITE_URL}${cityPath(city)}` },
+          { "@type": "ListItem", position: 3, name: `${name} Food Guide`, item: canonical }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: `${name} local dishes`,
+        itemListElement: dishes.slice(0, 10).map((dish, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: String(dish.name)
+        }))
+      }
+    ],
+    name,
+    country,
+    path,
+    modes: cityModes(city)
+  };
+}
+
+function replaceStaticFoodCity(html, seo) {
+  let output = replaceElementText(html, "h1", "city-name", escapeHtml(`${seo.name} Food Guide`));
+  output = replaceElementText(output, "p", "city-note", escapeHtml(seo.description));
+  output = replaceElementText(output, "span", "travel-button-full", `Plan a trip to ${escapeHtml(seo.name)}`);
+  output = replaceElementText(output, "h2", "travel-planner-title", `Plan your trip to ${escapeHtml(seo.name)}`);
+  return output;
+}
+
+function foodPageFallback(seo, dishes) {
+  const items = dishes
+    .slice(0, 10)
+    .map((dish) => `<li><strong>${escapeHtml(dish.name)}</strong><span>${escapeHtml(sentenceAwareExcerpt(dish.description, 40, 200))}</span></li>`)
+    .join("");
+  return `<section class="seo-fallback"><h2>${escapeHtml(seo.name)} food guide</h2><p>${escapeHtml(seo.description)}</p><ul>${items}</ul><p><a href="${escapeHtml(sitePath(`/city/${seo.id}`))}">Back to ${escapeHtml(seo.name)}</a></p></section>`;
 }
 
 function renderDestinationContent(city, catalog, editorialContent = null, streetCatalog = null) {
@@ -564,11 +645,12 @@ function xmlEscape(value) {
   return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&apos;");
 }
 
-function buildSitemap(catalog, blogUrls = []) {
+function buildSitemap(catalog, blogUrls = [], foodPaths = []) {
   const sitemapCatalog = catalog.filter(hasVideoExperience);
   const urls = [
     `${SITE_URL}${sitePath("/")}`,
     ...sitemapCatalog.map((city) => `${SITE_URL}${cityPath(city)}`),
+    ...foodPaths.map((path) => `${SITE_URL}${sitePath(path)}`),
     ...blogUrls.map((path) => `${SITE_URL}${sitePath(path)}`)
   ];
   const entries = urls.map((url) => `  <url>\n    <loc>${xmlEscape(url)}</loc>\n  </url>`).join("\n");
@@ -679,6 +761,8 @@ module.exports = {
   relatedCities,
   renderDestinationContent,
   streetFoodTeaser,
+  streetFoodPagePlan,
+  cityFoodSeo,
   prepareStaticHtmlPage,
   trustedEditorialUrl,
   validateModuleImports
@@ -752,8 +836,21 @@ function main() {
     writeFileSync(join(OUTPUT_DIR, "city", `${slugify(city.name)}.html`), cityHtml);
   });
 
+  const foodPlan = streetFoodPagePlan(streetFoodCatalog, catalog);
+  const foodPaths = [];
+  for (const { city, slug, dishes } of foodPlan) {
+    const seo = cityFoodSeo(city, dishes);
+    const foodHtml = replaceStaticFoodCity(
+      renderPage(baseHtml, seo, foodPageFallback(seo, dishes), { city, catalog, editorialContent: citySeoContent[slug] || null, streetCatalog: streetFoodCatalog }),
+      seo
+    );
+    mkdirSync(join(OUTPUT_DIR, "city", slug), { recursive: true });
+    writeFileSync(join(OUTPUT_DIR, "city", slug, "food.html"), foodHtml);
+    foodPaths.push(`/city/${slug}/food`);
+  }
+
   writeFileSync(join(OUTPUT_DIR, "robots.txt"), buildRobots());
-  writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog, blogBuild.urls));
+  writeFileSync(join(OUTPUT_DIR, "sitemap.xml"), buildSitemap(catalog, blogBuild.urls, foodPaths));
   writeFileSync(join(OUTPUT_DIR, "404.html"), buildNotFound());
   writeFileSync(join(OUTPUT_DIR, ".nojekyll"), "");
   

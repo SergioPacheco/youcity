@@ -56,6 +56,7 @@ export function createTravelController({
   let discoverCarsCatalogPromise = null;
   let cityGuidePromise = null;
   let travelPromptsRevealed = false;
+  let mapVenuesBridge = null;
   const flightOriginResolver = createFlightOriginResolver({
     geolocation: window?.navigator?.geolocation,
     getAirports: () => airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS)
@@ -334,12 +335,17 @@ export function createTravelController({
         sitePath,
         affiliate,
         mode: state.currentMode,
+        mapVenues: mapVenuesBridge,
         renderOffer: (entry, offerCity, options) => offerMarkup(entry, offerCity, options)
       });
     } catch (error) {
       console.warn("[YouCity] Street food unavailable:", error?.message || error);
       return false;
     }
+  }
+
+  function setMapVenues(bridge) {
+    mapVenuesBridge = bridge || null;
   }
 
   async function openCityGuide() {
@@ -394,5 +400,5 @@ export function createTravelController({
     cityGuidePromise?.then((controller) => controller.invalidate?.()).catch(() => {});
   }
 
-  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, openFlightOffer, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide };
+  return { renderTravelPlanner, renderDestinationCommerce, renderTravelPrompts, ensureDiscoverCarsCatalog, trackTravelClick, openFlightOffer, trackStay22Action, destroyStay22Map, mapPopup, openCityGuide, invalidateCityGuide, setMapVenues };
 }
