@@ -20,7 +20,7 @@
     "radio:test": "node scripts/test-radio-station-repository.mjs && node scripts/test-radio-browser.mjs",
     "radio:now-playing:test": "node scripts/test-radio-now-playing.mjs",
     "social:test": "node scripts/test-social-publisher.mjs",
-    "street:test": "node scripts/test-street-food.mjs && node scripts/validate-street-food.mjs",
+    "street:test": "node scripts/test-street-food.mjs && node scripts/test-street-food-ui.mjs && node scripts/validate-street-food.mjs",
     "map:test": "node scripts/test-map-venues.mjs",
     "core:test": "node scripts/test-core-contracts.mjs && node scripts/test-async-guards.mjs",
     "sharing:test": "node scripts/test-sharing.mjs",
