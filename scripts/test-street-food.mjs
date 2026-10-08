@@ -27,7 +27,8 @@ for (const slug of ["tokyo", "istanbul", "mexico-city", "seoul", "taipei"]) {
 }
 assert.ok(!getStreetFoodEntry(streetFood, "bangkok"), "bangkok is not in the city catalog and must not be an entry");
 assert.equal(hasPublishedStreetFood(streetFood, "tokyo"), true, "tokyo pilot is published");
-assert.equal(hasPublishedStreetFood(streetFood, "seoul"), false, "seoul has no published records yet");
+assert.equal(hasPublishedStreetFood(streetFood, "seoul"), true, "seoul pilot is published");
+assert.equal(hasPublishedStreetFood(streetFood, "taipei"), true, "taipei pilot is published");
 assert.deepEqual(
   getPublishedStreetFood(streetFood, "tokyo").dishes.map((dish) => dish.id).sort(),
   ["ramen", "sushi", "tempura"]
@@ -159,7 +160,14 @@ assert.ok(!placeholder.includes("<img src=x>"), "placeholder escapes the city sl
 
 // Food pages: only cities with published dishes earn a page; teaser links it.
 const realPlan = streetFoodPagePlan(streetFood, catalog);
-assert.deepEqual(realPlan.map((entry) => entry.slug), ["tokyo"], "only tokyo has published dishes");
+assert.deepEqual(
+  realPlan.map((entry) => entry.slug).sort(),
+  ["istanbul", "mexico-city", "seoul", "taipei", "tokyo"],
+  "all five pilot cities have published dishes"
+);
+for (const entry of realPlan) {
+  assert.ok(entry.dishes.length >= 3, `${entry.slug} has at least 3 published dishes`);
+}
 const foodPlan = streetFoodPagePlan(
   { cities: [{ slug: "tokyo", dishes: [{ id: "ramen", name: "Ramen", description: "Noodle soup with broth.", status: "published" }], places: [], videos: [] }] },
   [{ name: "Tokyo", country: "Japan" }]
