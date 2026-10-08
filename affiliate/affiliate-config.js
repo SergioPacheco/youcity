@@ -72,6 +72,11 @@ window.YOUCITY_AFFILIATE_CONFIG = {
     Uzbekistan: "UZ"
   },
   features: {
+    // STREET (local food discovery) is curated editorial content, not an
+    // affiliate vertical. Off until the pilot catalog has published records.
+    streetFood: {
+      enabled: false
+    },
     providers: {
       expedia: true,
       booking: true,

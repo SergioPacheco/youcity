@@ -18,6 +18,17 @@ function escapeHtml(value) {
   return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
+function isStreetFoodEnabled(window) {
+  return window?.YOUCITY_AFFILIATE_CONFIG?.features?.streetFood?.enabled === true;
+}
+
+// Sync placeholder for the STREET section. The full renderer stays lazy so
+// the city guide opens without waiting for the street-food catalog.
+function streetFoodPlaceholder(window, city) {
+  if (!isStreetFoodEnabled(window) || !city?.id) return "";
+  return `<section class="city-guide-section street-food-section" data-street-food-section="${escapeHtml(city.id)}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
+}
+
 export function createTravelController({
   window,
   document,
@@ -313,6 +324,24 @@ export function createTravelController({
     return `<div class="map-popup"><div class="map-popup-title"><strong>${escapeHtml(city.name)}</strong><span>${escapeHtml(city.country)}</span></div><div class="map-popup-availability"><span>${availableModes(city).length ? "Available" : "No video yet"}</span></div><div class="map-popup-videos">${modeSections || "<p>No videos available.</p>"}</div>${travel ? `<details class="map-trip-plan"><summary>Plan this trip</summary>${travel.replace('<div class="map-travel">', '<div class="map-travel map-travel-inside">')}</details>` : ""}</div>`;
   }
 
+  async function hydrateStreetFood(city) {
+    if (!isStreetFoodEnabled(window) || !city?.id || !elements.cityGuideContent) return false;
+    try {
+      const street = await lazyModules.load("street-food-controller", () => import("../street-food/street-food-controller.mjs"));
+      return await street.hydrateStreetFoodSection(elements.cityGuideContent, city, {
+        window,
+        document,
+        sitePath,
+        affiliate,
+        mode: state.currentMode,
+        renderOffer: (entry, offerCity, options) => offerMarkup(entry, offerCity, options)
+      });
+    } catch (error) {
+      console.warn("[YouCity] Street food unavailable:", error?.message || error);
+      return false;
+    }
+  }
+
   async function openCityGuide() {
     if (!elements.travelDrawer || !elements.cityGuideContent || !currentCity()) return;
     const stay22Promise = Promise.resolve(loadStay22()).catch(() => false);
@@ -321,7 +350,8 @@ export function createTravelController({
         window, document, elements, getCity: currentCity, openLayer, sitePath, isStaticLocalPreview,
         renderCommerce: {
           topActions: (city) => commerce.topActions(city),
-          afterPlaces: (city) => commerce.afterPlaces(city)
+          afterPlaces: (city) => commerce.afterPlaces(city),
+          streetFood: (city) => streetFoodPlaceholder(window, city)
         }
       }));
     }
@@ -333,6 +363,7 @@ export function createTravelController({
       ensureDiscoverCarsCatalog();
       await stay22Promise;
       refreshDestinationHub(currentCity());
+      hydrateStreetFood(currentCity()).catch(() => {});
       renderTravelPrompts(currentCity(), { reveal: true });
 
       // Analytics: travel_planner_open

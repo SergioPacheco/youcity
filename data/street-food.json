@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "cities": [
+    {
+      "slug": "tokyo",
+      "note": "Pilot city. Editorial curation pending verification; no published records yet.",
+      "dishes": [],
+      "places": [],
+      "videos": []
+    },
+    {
+      "slug": "istanbul",
+      "note": "Pilot city. Editorial curation pending verification; no published records yet.",
+      "dishes": [],
+      "places": [],
+      "videos": []
+    },
+    {
+      "slug": "mexico-city",
+      "note": "Pilot city. Editorial curation pending verification; no published records yet.",
+      "dishes": [],
+      "places": [],
+      "videos": []
+    },
+    {
+      "slug": "seoul",
+      "note": "Pilot city. Editorial curation pending verification; no published records yet.",
+      "dishes": [],
+      "places": [],
+      "videos": []
+    }
+  ]
+}
