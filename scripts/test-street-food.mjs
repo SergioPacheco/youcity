@@ -22,11 +22,18 @@ const streetFood = JSON.parse(readFileSync(resolve(root, "data/street-food.json"
 
 // Real catalog: pilot slugs must resolve, validation must be clean.
 assert.deepEqual(validateStreetFood(catalog, streetFood), []);
-for (const slug of ["tokyo", "istanbul", "mexico-city", "seoul"]) {
+for (const slug of ["tokyo", "istanbul", "mexico-city", "seoul", "taipei"]) {
   assert.ok(getStreetFoodEntry(streetFood, slug), `${slug} must be a pilot entry`);
 }
 assert.ok(!getStreetFoodEntry(streetFood, "bangkok"), "bangkok is not in the city catalog and must not be an entry");
-assert.equal(hasPublishedStreetFood(streetFood, "tokyo"), false, "no published records exist yet");
+assert.equal(hasPublishedStreetFood(streetFood, "tokyo"), true, "tokyo pilot is published");
+assert.equal(hasPublishedStreetFood(streetFood, "seoul"), false, "seoul has no published records yet");
+assert.deepEqual(
+  getPublishedStreetFood(streetFood, "tokyo").dishes.map((dish) => dish.id).sort(),
+  ["ramen", "sushi", "tempura"]
+);
+assert.equal(getPublishedStreetFood(streetFood, "tokyo").places.length, 2);
+assert.equal(getPublishedStreetFood(streetFood, "tokyo").videos.length, 3);
 
 // Repository fixtures: drafts never surface, pins require coordinates.
 const fixture = {
@@ -151,7 +158,8 @@ assert.ok(placeholder.includes("data-street-food-section"), "placeholder carries
 assert.ok(!placeholder.includes("<img src=x>"), "placeholder escapes the city slug");
 
 // Food pages: only cities with published dishes earn a page; teaser links it.
-assert.deepEqual(streetFoodPagePlan(streetFood, catalog), [], "no food pages without published dishes");
+const realPlan = streetFoodPagePlan(streetFood, catalog);
+assert.deepEqual(realPlan.map((entry) => entry.slug), ["tokyo"], "only tokyo has published dishes");
 const foodPlan = streetFoodPagePlan(
   { cities: [{ slug: "tokyo", dishes: [{ id: "ramen", name: "Ramen", description: "Noodle soup with broth.", status: "published" }], places: [], videos: [] }] },
   [{ name: "Tokyo", country: "Japan" }]

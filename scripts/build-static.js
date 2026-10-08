@@ -858,7 +858,7 @@ function main() {
   validateModuleImports();
   
   const sitemapCityCount = catalog.filter(hasVideoExperience).length;
-  console.log(`Built ${catalog.length + 1 + blogBuild.articles.length} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1 + blogBuild.urls.length} URLs, blog: ${blogBuild.articles.length} articles, assets: ${ASSET_VERSION})`);
+  console.log(`Built ${catalog.length + 1 + blogBuild.articles.length + foodPaths.length} SEO pages in ${OUTPUT_DIR} using ${SITE_URL} (sitemap: ${sitemapCityCount + 1 + blogBuild.urls.length + foodPaths.length} URLs, blog: ${blogBuild.articles.length} articles, food guides: ${foodPaths.length}, assets: ${ASSET_VERSION})`);
 }
 
 if (require.main === module) main();

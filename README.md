@@ -9,7 +9,7 @@ The radio panel also supports user-triggered current-song detection and
 YouTube music-video matching when the selected station publishes ICY metadata;
 see [`docs/radio-browser-integration.md`](docs/radio-browser-integration.md).
 
-The catalog currently includes 206 cities. Each city exposes only the `Drive`, `Bike`, `Walk`, `Beach Walk`, and `Drone` modes that have a valid video; the world map uses static city-center coordinates and links to the catalog's YouTube videos.
+The catalog currently includes 248 cities. Each city exposes only the `Drive`, `Bike`, `Walk`, `Beach Walk`, and `Drone` modes that have a valid video; the world map uses static city-center coordinates and links to the catalog's YouTube videos.
 
 The canonical city, video and radio source is `data/catalog.json`. Run
 `npm run catalog:build` after editing it to validate the records and regenerate

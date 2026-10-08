@@ -73,9 +73,9 @@ window.YOUCITY_AFFILIATE_CONFIG = {
   },
   features: {
     // STREET (local food discovery) is curated editorial content, not an
-    // affiliate vertical. Off until the pilot catalog has published records.
+    // affiliate vertical. Enabled with the Tokyo pilot published.
     streetFood: {
-      enabled: false
+      enabled: true
     },
     providers: {
       expedia: true,

@@ -3,29 +3,91 @@
   "cities": [
     {
       "slug": "tokyo",
-      "note": "Pilot city. Candidates below are UNVERIFIED drafts: no sources, coordinates or videos confirmed. Nothing renders until status becomes published with verifiedAt and sources.",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia sources, Wikidata/Wikipedia coordinates, YouTube oEmbed embed check). Market coordinates are representative points; see sourceUrl.",
       "dishes": [
         {
           "id": "sushi",
           "name": "Sushi",
-          "status": "draft",
-          "note": "Candidate pending verification: description, sources and video evidence required."
+          "category": "seafood",
+          "description": "Vinegared rice served with raw fish, seafood or vegetables. Tokyo's Edo-mae tradition shaped the compact hand-pressed style served at counters and markets.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Sushi", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
         },
         {
           "id": "ramen",
           "name": "Ramen",
-          "status": "draft",
-          "note": "Candidate pending verification: description, sources and video evidence required."
+          "category": "noodles",
+          "description": "Wheat noodles in broth topped with pork, egg, seaweed or vegetables. Tokyo hosts hundreds of shops, from classic shoyu counters to rich tonkotsu bowls.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Ramen", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
         },
         {
           "id": "tempura",
           "name": "Tempura",
-          "status": "draft",
-          "note": "Candidate pending verification: description, sources and video evidence required."
+          "category": "fried",
+          "description": "Lightly battered seafood and vegetables, fried crisp and served with dipping sauce. An Edo-period Tokyo street-food classic still served at counters across the city.",
+          "dietaryClaims": [],
+          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tempura", "checkedAt": "2026-10-08" }],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
         }
       ],
-      "places": [],
-      "videos": []
+      "places": [
+        {
+          "id": "tsukiji-outer-market",
+          "name": "Tsukiji Outer Market",
+          "kind": "market",
+          "dishIds": ["sushi"],
+          "coordinates": { "lat": 35.6682, "lng": 139.7739 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Tsukiji",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "toyosu-market",
+          "name": "Toyosu Market",
+          "kind": "market",
+          "dishIds": ["sushi"],
+          "coordinates": { "lat": 35.6433, "lng": 139.7817 },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Toyosu_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "LyxSj3O4hLs",
+          "dishIds": ["ramen"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "CSeqv96hpTw",
+          "dishIds": ["sushi"],
+          "placeIds": ["tsukiji-outer-market"],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "EVgVdCrJGgc",
+          "dishIds": ["ramen"],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
     },
     {
       "slug": "istanbul",
@@ -44,6 +106,13 @@
     {
       "slug": "seoul",
       "note": "Pilot city. Editorial curation pending verification; no published records yet.",
+      "dishes": [],
+      "places": [],
+      "videos": []
+    },
+    {
+      "slug": "taipei",
+      "note": "Pilot city (replaces Bangkok, which is not in data/catalog.json). Editorial curation pending verification; no published records yet.",
       "dishes": [],
       "places": [],
       "videos": []
