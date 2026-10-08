@@ -230,5 +230,26 @@
       "autor": "M McBey",
       "licenca": "CC BY 2.0"
     }
+  },
+  {
+    "city_slug": "stockholm",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "STOCKHOLM",
+    "pais": "SWEDEN",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122108898693493232",
+    "scheduled_for": "2026-10-08 16:30",
+    "published_at": "2026-10-08T20:02:19.842302+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/stockholm?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=stockholm",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Steven Lek",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
