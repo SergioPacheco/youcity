@@ -83,11 +83,12 @@ function deps(harness, extra = {}) {
   clearStreetFoodCache();
 }
 
-// City without published food: placeholder removes itself, no crash.
+// City without published food (granada has no curation yet):
+// placeholder removes itself, no crash.
 {
   clearStreetFoodCache();
   const harness = createHarness();
-  const ok = await hydrateStreetFoodSection(harness.root, { id: "paris", name: "Paris", country: "France" }, deps(harness));
+  const ok = await hydrateStreetFoodSection(harness.root, { id: "granada", name: "Granada", country: "Spain" }, deps(harness));
   assert.equal(ok, true);
   assert.equal(harness.section.removed, true, "empty section removes itself");
   assert.equal(harness.section.innerHTML, "", "nothing renders for cities without curation");
