@@ -5,6 +5,9 @@ import { airportsFromDiscoverCars, buildFlightSearchUrl, createFlightOriginResol
 const PRIMARY_DEFAULTS = ["hotels", "activities", "cars"];
 const QUICK_CATEGORIES = ["hotels", "activities", "cars", "flights"];
 const DEFAULT_FLIGHT_ORIGIN_WAIT_MS = 1_200;
+// Bounded wait for the third-party Stay22 script: the guide must keep
+// working (and hydrate sections such as STREET) even when it hangs.
+const DEFAULT_STAY22_WAIT_MS = 5_000;
 const ACTION_LABELS = {
   hotels: "Find a place to stay",
   "vacation-rentals": "Find vacation rentals",
@@ -47,6 +50,7 @@ export function createTravelController({
   showToast,
   loadStay22 = async () => false,
   flightOriginWaitMs = DEFAULT_FLIGHT_ORIGIN_WAIT_MS,
+  stay22WaitMs = DEFAULT_STAY22_WAIT_MS,
   isStaticLocalPreview = () => false
 } = {}) {
   const categories = affiliate?.getVerticals?.() || {};
@@ -254,6 +258,14 @@ export function createTravelController({
     if (target) affiliate.trackClick(target, { mode: state.currentMode });
   }
 
+  // Resolves with the loader result, or the fallback when it hangs/fails.
+  function settleWithin(promise, waitMs, fallback = false) {
+    return Promise.race([
+      Promise.resolve(promise).catch(() => fallback),
+      new Promise((resolve) => setTimeout(() => resolve(fallback), Math.max(0, Number(waitMs) || 0)))
+    ]);
+  }
+
   function destinationAirport(city) {
     const airports = airportsFromDiscoverCars(window?.YOUCITY_DISCOVERCARS_LOCATIONS);
     return airports.find((airport) => airport.cityId === city?.id)
@@ -367,7 +379,7 @@ export function createTravelController({
       const city = currentCity();
       renderTravelPlanner(city);
       ensureDiscoverCarsCatalog();
-      await stay22Promise;
+      await settleWithin(stay22Promise, stay22WaitMs, false);
       refreshDestinationHub(currentCity());
       hydrateStreetFood(currentCity()).catch(() => {});
       renderTravelPrompts(currentCity(), { reveal: true });
