@@ -29,7 +29,8 @@ function isStreetFoodEnabled(window) {
 // the city guide opens without waiting for the street-food catalog.
 function streetFoodPlaceholder(window, city) {
   if (!isStreetFoodEnabled(window) || !city?.id) return "";
-  return `<section class="city-guide-section street-food-section" data-street-food-section="${escapeHtml(city.id)}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
+  const slug = escapeHtml(city.id);
+  return `<section class="city-guide-section street-food-section" data-street-food-section="${slug}" data-street-token="${slug}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
 }
 
 export function createTravelController({
@@ -360,6 +361,21 @@ export function createTravelController({
     mapVenuesBridge = bridge || null;
   }
 
+  // Re-hydrates when a guide refresh replaced the section node after (or
+  // before) hydration. Skips when content is already rendered.
+  // Token-aware: ignores placeholders from a stale city switch.
+  function rehydrateStreetFood(city) {
+    if (!isStreetFoodEnabled(window) || !city?.id || !elements.cityGuideContent) return;
+    const nodes = elements.cityGuideContent.querySelectorAll?.("[data-street-food-section]");
+    const list = nodes ? Array.from(nodes) : [];
+    const live =
+      list.find((node) => (node?.dataset?.streetToken || node?.dataset?.streetFoodSection) === city.id && node?.isConnected !== false) ||
+      list.find((node) => (node?.dataset?.streetToken || node?.dataset?.streetFoodSection) === city.id) ||
+      elements.cityGuideContent.querySelector?.("[data-street-food-section]");
+    if (!live || live.querySelector?.(".street-food-content")) return;
+    hydrateStreetFood(city).catch(() => {});
+  }
+
   async function openCityGuide() {
     if (!elements.travelDrawer || !elements.cityGuideContent || !currentCity()) return;
     const stay22Promise = Promise.resolve(loadStay22()).catch(() => false);
@@ -400,7 +416,7 @@ export function createTravelController({
         mode: state.currentMode
       });
 
-      loadSecondaryProviders({ document, sitePath }).then(() => { refreshDestinationHub(currentCity()); renderTravelPrompts(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
+      loadSecondaryProviders({ document, sitePath }).then(() => { refreshDestinationHub(currentCity()); renderTravelPrompts(currentCity()); rehydrateStreetFood(currentCity()); }).catch((error) => console.warn("[YouCity] Optional travel providers unavailable:", error.message));
     } catch (error) {
       cityGuidePromise = null;
       elements.cityGuideContent.innerHTML = '<p class="city-guide-error" role="alert">City guide data is temporarily unavailable. Try again later.</p>';

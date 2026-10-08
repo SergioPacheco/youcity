@@ -17,6 +17,19 @@ import { loadStreetFoodCatalog } from "./street-food-loader.mjs";
 
 const SECTION_SELECTOR = "[data-street-food-section]";
 
+function nodeToken(node) {
+  return node?.dataset?.streetToken || node?.dataset?.streetFoodSection || "";
+}
+
+function findLiveSection(root, token) {
+  const nodes = root?.querySelectorAll?.(SECTION_SELECTOR);
+  const list = nodes ? Array.from(nodes) : [];
+  const matches = list.filter((node) => nodeToken(node) === token);
+  // Prefer the connected node: after a guide refresh() the old node is
+  // detached and a new placeholder (stamped with the same token) is live.
+  return matches.find((node) => node?.isConnected !== false) || matches[0] || null;
+}
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replace(/&/g, "&amp;")
@@ -32,9 +45,11 @@ export function isStreetFoodEnabled(window) {
 
 // Sync placeholder so the city guide can render without waiting for the
 // catalog. Content is hydrated lazily via hydrateStreetFoodSection().
+// data-street-token mirrors data-street-food-section so hydrate can adopt
+// the live node after a guide refresh() replaces it mid-fetch.
 export function streetFoodPlaceholder(city) {
   const slug = escapeHtml(city?.id || "");
-  return `<section class="city-guide-section street-food-section" data-street-food-section="${slug}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
+  return `<section class="city-guide-section street-food-section" data-street-food-section="${slug}" data-street-token="${slug}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
 }
 
 function dishCard(dish, places, videos) {
@@ -172,28 +187,34 @@ export async function hydrateStreetFoodSection(
 ) {
   const section = root?.querySelector?.(SECTION_SELECTOR);
   if (!section || !city?.id) return false;
+  // The token is stamped on the placeholder at render time, so after the
+  // async fetch we adopt whatever node is live: the city guide re-renders
+  // its content (refresh) and may have replaced our node meanwhile.
   const token = `${city.id}`;
   section.dataset.streetToken = token;
   try {
     const catalog = await loadStreetFoodCatalog({ fetchImpl: window?.fetch?.bind(window) || fetch, sitePath });
-    if (section.dataset.streetToken !== token || section.isConnected === false) return false; // stale city, discard
+    const live = findLiveSection(root, token);
+    if (!live || live.isConnected === false) return false; // stale city, discard
     if (!hasPublishedStreetFood(catalog, city.id)) {
-      section.remove();
+      live.remove();
       return true;
     }
+    if (live.querySelector?.(".street-food-content")) return true; // already rendered
     const data = getPublishedStreetFood(catalog, city.id);
     const offers = foodTourOffers(affiliate, city, mode);
     const venues = data.places.map((place) => ({
       ...place,
       dishNames: data.dishes.filter((dish) => place.dishIds?.includes(dish.id)).map((dish) => dish.name)
     }));
-    section.innerHTML = sectionMarkup(city, data, { offers, renderOffer });
-    bindSection(section, city, { window, document: documentRef, venues, mapVenues });
+    live.innerHTML = sectionMarkup(city, data, { offers, renderOffer });
+    bindSection(live, city, { window, document: documentRef, venues, mapVenues });
     trackEvent(window, "street_food_view", city, { dishes: data.dishes.length });
     return true;
   } catch {
-    if (section.dataset.streetToken === token) {
-      section.innerHTML = `<p class="city-guide-error" role="alert">Local food is temporarily unavailable.</p>`;
+    const live = findLiveSection(root, token);
+    if (live && nodeToken(live) === token && !live.querySelector?.(".street-food-content")) {
+      live.innerHTML = `<p class="city-guide-error" role="alert">Local food is temporarily unavailable.</p>`;
     }
     return false;
   }

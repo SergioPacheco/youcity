@@ -18,6 +18,9 @@ function createSection() {
     removed: false,
     isConnected: true,
     handlers: {},
+    querySelector() {
+      return null;
+    },
     querySelectorAll() {
       return [];
     },
@@ -34,7 +37,7 @@ function createHarness() {
   const section = createSection();
   return {
     section,
-    root: { querySelector: () => section },
+    root: { querySelector: () => section, querySelectorAll: () => [section] },
     tracked: [],
     window: {
       fetch: async () => ({ ok: true, json: async () => streetFood }),
@@ -110,10 +113,57 @@ function deps(harness, extra = {}) {
   clearStreetFoodCache();
 }
 
-// Placeholder used by the hub is escaped and carries the hook.
+// Guide refresh mid-flight: hydrate adopts the live node, never the detached one.
+{
+  clearStreetFoodCache();
+  const makeNode = () => ({
+    dataset: {},
+    innerHTML: "",
+    removed: false,
+    isConnected: true,
+    querySelector: () => null,
+    querySelectorAll: () => [],
+    addEventListener() {},
+    remove() {
+      this.removed = true;
+    }
+  });
+  let release;
+  const gate = new Promise((resolveFetch) => {
+    release = resolveFetch;
+  });
+  let live = makeNode();
+  const detached = live;
+  const root = { querySelector: () => live, querySelectorAll: () => [live] };
+  const win = {
+    fetch: () => gate.then(() => ({ ok: true, json: async () => streetFood })),
+    YOUCITY_ANALYTICS: { track() {} }
+  };
+  const pending = hydrateStreetFoodSection(root, tokyo, {
+    window: win,
+    document: {},
+    sitePath: (path) => path,
+    affiliate: { createContext: () => ({}), getAffiliateOffers: () => [] },
+    mode: "walk",
+    renderOffer: () => ""
+  });
+  // City-guide refresh() replaces innerHTML: new placeholder stamped with the token.
+  live = makeNode();
+  live.dataset.streetToken = "tokyo";
+  detached.isConnected = false;
+  release();
+  const ok = await pending;
+  assert.equal(ok, true);
+  assert.ok(live.innerHTML.includes("Explore Local Food"), "hydrate adopts the live node after refresh");
+  assert.equal(detached.innerHTML, "", "detached node is never written to");
+  clearStreetFoodCache();
+}
+
+// Placeholder used by the hub is escaped and carries the hook + token.
 {
   const placeholder = streetFoodPlaceholder({ id: "tokyo" });
   assert.ok(placeholder.includes('data-street-food-section="tokyo"'));
+  assert.ok(placeholder.includes('data-street-token="tokyo"'), "placeholder stamps the hydration token");
 }
 
 console.log("Street food UI tests passed: tokyo renders, empty cities self-remove, stale guard holds.");

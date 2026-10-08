@@ -11,13 +11,14 @@ const streetSection = {
   dataset: {},
   innerHTML: "",
   isConnected: true,
+  querySelector: () => null,
   querySelectorAll: () => [],
   addEventListener() {},
   remove() {}
 };
 const elements = {
   travelDrawer: { classList: { contains: () => true } },
-  cityGuideContent: { innerHTML: "", querySelector: () => streetSection }
+  cityGuideContent: { innerHTML: "", querySelector: () => streetSection, querySelectorAll: () => [streetSection] }
 };
 const tracked = [];
 const window = {
@@ -45,7 +46,7 @@ const lazyModules = {
         createCityGuideController: () => ({
           open: async () => {
             elements.cityGuideContent.innerHTML =
-              '<section class="city-guide-section street-food-section" data-street-food-section="tokyo" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>';
+              '<section class="city-guide-section street-food-section" data-street-food-section="tokyo" data-street-token="tokyo" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>';
           },
           refresh() {},
           invalidate() {}
