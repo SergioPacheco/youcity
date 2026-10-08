@@ -159,15 +159,21 @@ assert.ok(placeholder.includes("data-street-food-section"), "placeholder carries
 assert.ok(!placeholder.includes("<img src=x>"), "placeholder escapes the city slug");
 
 // Food pages: only cities with published dishes earn a page; teaser links it.
+// The five original pilots must always be present; every catalog entry must
+// meet the curation floor (3+ dishes, 2+ places with verified coordinates,
+// 2+ videos) so coverage can only grow from here.
 const realPlan = streetFoodPagePlan(streetFood, catalog);
-assert.deepEqual(
-  realPlan.map((entry) => entry.slug).sort(),
-  ["istanbul", "mexico-city", "seoul", "taipei", "tokyo"],
-  "all five pilot cities have published dishes"
-);
+for (const slug of ["istanbul", "mexico-city", "seoul", "taipei", "tokyo"]) {
+  assert.ok(realPlan.some((entry) => entry.slug === slug), `${slug} pilot keeps its food guide`);
+}
 for (const entry of realPlan) {
   assert.ok(entry.dishes.length >= 3, `${entry.slug} has at least 3 published dishes`);
+  const published = getPublishedStreetFood(streetFood, entry.slug);
+  assert.ok(published.places.length >= 2, `${entry.slug} has at least 2 pinned places`);
+  assert.ok(published.places.every(hasVerifiedCoordinates), `${entry.slug} pins all carry verified coordinates`);
+  assert.ok(published.videos.length >= 2, `${entry.slug} has at least 2 videos`);
 }
+assert.ok(realPlan.length >= 5, `at least the 5 pilot guides exist (found ${realPlan.length})`);
 const foodPlan = streetFoodPagePlan(
   { cities: [{ slug: "tokyo", dishes: [{ id: "ramen", name: "Ramen", description: "Noodle soup with broth.", status: "published" }], places: [], videos: [] }] },
   [{ name: "Tokyo", country: "Japan" }]

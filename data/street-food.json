@@ -2,86 +2,1910 @@
   "schemaVersion": 1,
   "cities": [
     {
-      "slug": "tokyo",
-      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia sources, Wikidata/Wikipedia coordinates, YouTube oEmbed embed check). Market coordinates are representative points; see sourceUrl.",
+      "slug": "abu-dhabi",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
         {
-          "id": "sushi",
-          "name": "Sushi",
-          "category": "seafood",
-          "description": "Vinegared rice served with raw fish, seafood or vegetables. Tokyo's Edo-mae tradition shaped the compact hand-pressed style served at counters and markets.",
-          "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Sushi", "checkedAt": "2026-10-08" }],
+          "id": "harees",
+          "name": "Harees",
+          "category": "porridge",
+          "description": "Wheat and slow-cooked meat pounded to a silky porridge with ghee and cardamom. A traditional Emirati comfort dish served at local eateries.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Harees",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
         {
-          "id": "ramen",
-          "name": "Ramen",
-          "category": "noodles",
-          "description": "Wheat noodles in broth topped with pork, egg, seaweed or vegetables. Tokyo hosts hundreds of shops, from classic shoyu counters to rich tonkotsu bowls.",
-          "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Ramen", "checkedAt": "2026-10-08" }],
+          "id": "machboos",
+          "name": "Machboos",
+          "category": "rice",
+          "description": "Spiced rice cooked with meat or fish, dried lime and baharat. The Gulf's fragrant answer to biryani, common in Abu Dhabi cafeterias.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Machboos",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
         {
-          "id": "tempura",
-          "name": "Tempura",
-          "category": "fried",
-          "description": "Lightly battered seafood and vegetables, fried crisp and served with dipping sauce. An Edo-period Tokyo street-food classic still served at counters across the city.",
-          "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tempura", "checkedAt": "2026-10-08" }],
+          "id": "tharid",
+          "name": "Tharid",
+          "category": "stew",
+          "description": "Slow meat and vegetable stew ladled over torn flatbread that soaks up the broth. A historic Emirati home-style street-canteen dish.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tharid",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         }
       ],
       "places": [
         {
-          "id": "tsukiji-outer-market",
-          "name": "Tsukiji Outer Market",
+          "id": "mina-fish-market",
+          "name": "Mina Fish Market",
           "kind": "market",
-          "dishIds": ["sushi"],
-          "coordinates": { "lat": 35.6682, "lng": 139.7739 },
+          "dishIds": [
+            "machboos",
+            "tharid"
+          ],
+          "coordinates": {
+            "lat": 24.5253,
+            "lng": 54.3769
+          },
           "osmType": null,
           "osmId": null,
-          "sourceUrl": "https://en.wikipedia.org/wiki/Tsukiji",
+          "sourceUrl": "https://en.wikipedia.org/wiki/Zayed_Port",
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
         {
-          "id": "toyosu-market",
-          "name": "Toyosu Market",
+          "id": "central-market-souk",
+          "name": "Central Market Souk",
           "kind": "market",
-          "dishIds": ["sushi"],
-          "coordinates": { "lat": 35.6433, "lng": 139.7817 },
+          "dishIds": [
+            "harees",
+            "machboos"
+          ],
+          "coordinates": {
+            "lat": 24.4835,
+            "lng": 54.353
+          },
           "osmType": null,
           "osmId": null,
-          "sourceUrl": "https://en.wikipedia.org/wiki/Toyosu_Market",
+          "sourceUrl": "https://en.wikipedia.org/wiki/World_Trade_Center_Abu_Dhabi",
           "verifiedAt": "2026-10-08",
           "status": "published"
         }
       ],
       "videos": [
         {
-          "id": "LyxSj3O4hLs",
-          "dishIds": ["ramen"],
+          "id": "oesDQgT78Uk",
+          "dishIds": [
+            "machboos",
+            "tharid"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
         {
-          "id": "CSeqv96hpTw",
-          "dishIds": ["sushi"],
-          "placeIds": ["tsukiji-outer-market"],
+          "id": "-LEFg08VOOo",
+          "dishIds": [
+            "harees",
+            "machboos"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "acapulco",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "pozole",
+          "name": "Pozole",
+          "category": "soup",
+          "description": "Hominy soup with pork or chicken in green or white Guerrero-style broth, finished with onion, oregano, radish and avocado. Acapulco's Thursday pozole tradition centers on market fondas.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pozole",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "taco",
+          "name": "Taco",
+          "category": "tacos",
+          "description": "Corn tortillas filled with grilled meats, fish or stews, topped with onion, cilantro, lime and salsa. Acapulco taco stands range from trompo pastor to fish tacos.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Taco",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tamale",
+          "name": "Tamale",
+          "category": "masa",
+          "description": "Corn masa stuffed with chicken, pork or sweet fillings, steamed in banana leaves or corn husks. Sold in Acapulco markets as a breakfast and pozole-night companion.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tamale",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-central-acapulco",
+          "name": "Mercado Central de Acapulco",
+          "kind": "market",
+          "dishIds": [
+            "pozole",
+            "tamale"
+          ],
+          "coordinates": {
+            "lat": 16.8558,
+            "lng": -99.9015
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Acapulco",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-la-diana",
+          "name": "Mercado de Artesanias La Diana",
+          "kind": "market",
+          "dishIds": [
+            "taco",
+            "tamale"
+          ],
+          "coordinates": {
+            "lat": 16.8578,
+            "lng": -99.8995
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Acapulco",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "rnwWCCKGrLg",
+          "dishIds": [
+            "taco",
+            "pozole"
+          ],
+          "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
         {
-          "id": "EVgVdCrJGgc",
-          "dishIds": ["ramen"],
+          "id": "5LC0ArhTAjA",
+          "dishIds": [
+            "taco",
+            "tamale"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "amsterdam",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "stroopwafel",
+          "name": "Stroopwafel",
+          "category": "sweets",
+          "description": "Two thin waffles sandwiching caramel syrup, best eaten warm from market irons with coffee. A Gouda invention now pressed fresh at Amsterdam street stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Stroopwafel",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "bitterballen",
+          "name": "Bitterballen",
+          "category": "fried",
+          "description": "Crisp-fried balls of beef ragout served with mustard, the essential Dutch bar snack. Market fry stalls serve them hot alongside kroketten and fries.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Bitterballen",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hollandse-nieuwe",
+          "name": "Hollandse Nieuwe",
+          "category": "seafood",
+          "description": "Lightly salted raw herring eaten by the tail with chopped onion and pickles. Amsterdam fish stalls celebrate the new catch each season as a point of pride.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hollandse_Nieuwe",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "albert-cuyp-market",
+          "name": "Albert Cuyp Market",
+          "kind": "market",
+          "dishIds": [
+            "stroopwafel",
+            "hollandse-nieuwe"
+          ],
+          "coordinates": {
+            "lat": 52.3557,
+            "lng": 4.8941
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Albert_Cuyp_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "bloemenmarkt",
+          "name": "Bloemenmarkt",
+          "kind": "market",
+          "dishIds": [
+            "stroopwafel",
+            "bitterballen"
+          ],
+          "coordinates": {
+            "lat": 52.3671,
+            "lng": 4.889
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Bloemenmarkt",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "A6MDCqKcXI0",
+          "dishIds": [
+            "stroopwafel",
+            "bitterballen"
+          ],
+          "placeIds": [
+            "albert-cuyp-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "r7eaaBqw9uY",
+          "dishIds": [
+            "stroopwafel",
+            "bitterballen",
+            "hollandse-nieuwe"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "athens",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "souvlaki",
+          "name": "Souvlaki",
+          "category": "grill",
+          "description": "Small skewers of seasoned pork or chicken grilled over coals and often tucked into pita with tomato, onion and tzatziki. Athens tavernas and grill stalls serve it as the city's everyday hand-held meal.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Souvlaki",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "gyros",
+          "name": "Gyros",
+          "category": "grill",
+          "description": "Meat roasted on a vertical spit, shaved thin and wrapped in pita with fries, tomato, onion and tzatziki. Found on nearly every central Athens street, it is a late-night staple around Monastiraki and Omonia.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Gyros",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "spanakopita",
+          "name": "Spanakopita",
+          "category": "bakery",
+          "description": "Flaky phyllo pastry filled with spinach, feta, onion and herbs, baked golden. Athenian bakeries and pie shops sell it as a breakfast and lunch snack.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Spanakopita",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "monastiraki-flea-market",
+          "name": "Monastiraki Flea Market",
+          "kind": "market",
+          "dishIds": [
+            "souvlaki",
+            "gyros"
+          ],
+          "coordinates": {
+            "lat": 37.9764,
+            "lng": 23.7257
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Monastiraki",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "plaka-market-streets",
+          "name": "Plaka Market Streets",
+          "kind": "market",
+          "dishIds": [
+            "spanakopita",
+            "souvlaki"
+          ],
+          "coordinates": {
+            "lat": 37.9725,
+            "lng": 23.7295
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Plaka",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "l4_7ub1o8nk",
+          "dishIds": [
+            "souvlaki",
+            "gyros"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "Kvg9kJ35jEY",
+          "dishIds": [
+            "souvlaki"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "barcelona",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "pa-amb-tomaquet",
+          "name": "Pa amb Tomàquet",
+          "category": "bread",
+          "description": "Rustic bread rubbed with ripe tomato, olive oil and salt, the foundation of Catalan tables and tapas bars. Often topped with jamón or cheese at market bars.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pa_amb_tom%C3%A0quet",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "churro",
+          "name": "Churro",
+          "category": "fried",
+          "description": "Ridged fried-dough sticks dusted with sugar, eaten for breakfast dipped in thick hot chocolate. Barcelona xurrerias fry them fresh all morning.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Churro",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "jamon-iberico",
+          "name": "Jamón Ibérico",
+          "category": "cured",
+          "description": "Dry-cured ham from acorn-fed Ibérico pigs, hand-carved into thin slices at market counters. Spain's most prized charcuterie, sold by weight across La Boqueria.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Jam%C3%B3n_ib%C3%A9rico",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "la-boqueria",
+          "name": "La Boqueria",
+          "kind": "market",
+          "dishIds": [
+            "jamon-iberico",
+            "pa-amb-tomaquet"
+          ],
+          "coordinates": {
+            "lat": 41.3818,
+            "lng": 2.1721
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/La_Boqueria",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercat-de-santa-caterina",
+          "name": "Mercat de Santa Caterina",
+          "kind": "market",
+          "dishIds": [
+            "pa-amb-tomaquet",
+            "churro"
+          ],
+          "coordinates": {
+            "lat": 41.3837,
+            "lng": 2.1785
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/List_of_markets_in_Barcelona",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "RXG2VUCMPVA",
+          "dishIds": [
+            "pa-amb-tomaquet",
+            "churro",
+            "jamon-iberico"
+          ],
+          "placeIds": [
+            "la-boqueria"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hAzpfFFUQB4",
+          "dishIds": [
+            "jamon-iberico"
+          ],
+          "placeIds": [
+            "la-boqueria"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "beijing",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "jianbing",
+          "name": "Jianbing",
+          "category": "pancake",
+          "description": "Thin mung-bean crepe spread with egg, brushed with bean paste and chili, wrapped around a crisp cracker. Beijing breakfast stalls cook it to order on big round griddles.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Jianbing",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "zhajiangmian",
+          "name": "Zhajiangmian",
+          "category": "noodles",
+          "description": "Thick wheat noodles tossed with fermented soybean paste, minced pork and crunchy cucumber and radish. A salty-sweet Beijing noodle-shop classic with strong hutong roots.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Zhajiangmian",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tanghulu",
+          "name": "Tanghulu",
+          "category": "sweets",
+          "description": "Hawthorn berries or mixed fruit skewered and coated in hardened sugar syrup. Sold from Beijing street carts, especially in winter, as a crisp sweet-sour snack.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tanghulu",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "wangfujing-snack-street",
+          "name": "Wangfujing Snack Street",
+          "kind": "market",
+          "dishIds": [
+            "jianbing",
+            "tanghulu"
+          ],
+          "coordinates": {
+            "lat": 39.915,
+            "lng": 116.4015
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Wangfujing",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "nanluoguxiang",
+          "name": "Nanluoguxiang",
+          "kind": "market",
+          "dishIds": [
+            "jianbing",
+            "zhajiangmian"
+          ],
+          "coordinates": {
+            "lat": 39.936,
+            "lng": 116.403
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Nanluoguxiang",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "jKXOh5wrzK4",
+          "dishIds": [
+            "jianbing",
+            "zhajiangmian"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "HnKOg6bpyBw",
+          "dishIds": [
+            "jianbing",
+            "tanghulu"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "berlin",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "currywurst",
+          "name": "Currywurst",
+          "category": "sausage",
+          "description": "Pork sausage sliced and doused in curry-spiced ketchup, invented in Berlin in 1949. Sold with fries at Imbiss stands citywide as the capital's signature snack.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Currywurst",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "doner-kebab",
+          "name": "Döner Kebab",
+          "category": "kebab",
+          "description": "Seasoned meat roasted on a vertical spit and stuffed into flatbread with salad and sauce. Berlin's Turkish community turned it into the city's favorite street food.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Doner_kebab",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "berliner",
+          "name": "Berliner",
+          "category": "pastry",
+          "description": "Jam-filled fried doughnut dusted with sugar, known as Pfannkuchen in Berlin itself. A carnival and bakery staple found at markets and street stands.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Berliner_(doughnut)",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "hackescher-markt",
+          "name": "Hackescher Markt",
+          "kind": "market",
+          "dishIds": [
+            "currywurst",
+            "doner-kebab"
+          ],
+          "coordinates": {
+            "lat": 52.5233,
+            "lng": 13.4022
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Hackescher_Markt",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "kadewe",
+          "name": "KaDeWe",
+          "kind": "food_hall",
+          "dishIds": [
+            "currywurst",
+            "berliner"
+          ],
+          "coordinates": {
+            "lat": 52.5014,
+            "lng": 13.3412
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Kaufhaus_des_Westens",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "mdLwPnoDet4",
+          "dishIds": [
+            "doner-kebab",
+            "currywurst"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "QR_wA3uGlwY",
+          "dishIds": [
+            "currywurst"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "budapest",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "langos",
+          "name": "Lángos",
+          "category": "fried",
+          "description": "Deep-fried flatbread topped with sour cream, cheese and garlic. Hungary's most famous street-food, sold at Budapest markets and stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/L%C3%A1ngos",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "goulash",
+          "name": "Goulash",
+          "category": "stew",
+          "description": "Paprika-spiced beef soup-stew with potatoes and vegetables. Served in cups as hearty street food at Budapest halls and Christmas markets.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Goulash",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "kurtoskalacs",
+          "name": "Kürtőskalács",
+          "category": "bakery",
+          "description": "Chimney cake roasted over coals and coated with cinnamon sugar. A sweet spiral pastry sold fresh on Budapest streets.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/K%C3%BCrt%C5%91skal%C3%A1cs",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "great-market-hall",
+          "name": "Great Market Hall",
+          "kind": "market",
+          "dishIds": [
+            "langos",
+            "goulash"
+          ],
+          "coordinates": {
+            "lat": 47.4867,
+            "lng": 19.0589
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Great_Market_Hall",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "karavan-street-food",
+          "name": "Karaván Street Food",
+          "kind": "food_hall",
+          "dishIds": [
+            "langos",
+            "kurtoskalacs"
+          ],
+          "coordinates": {
+            "lat": 47.4985,
+            "lng": 19.061
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Budapest",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "VX9z-KZzNMs",
+          "dishIds": [
+            "langos",
+            "kurtoskalacs"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "feQUZ3yh8nA",
+          "dishIds": [
+            "goulash",
+            "langos"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "buenos-aires",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "empanada",
+          "name": "Empanada",
+          "category": "pastry",
+          "description": "A half-moon pastry stuffed with beef, chicken, cheese or vegetables. The ultimate portable Argentine street food.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Empanada",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "choripan",
+          "name": "Choripán",
+          "category": "sandwich",
+          "description": "Grilled chorizo sausage in crusty bread, typically finished with chimichurri. Argentina's iconic asado and street-corner sandwich.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chorip%C3%A1n",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "milanesa",
+          "name": "Milanesa Sandwich",
+          "category": "sandwich",
+          "description": "A breaded cutlet, often beef, served in a sandwich or with lemon. A deeply loved everyday Argentine comfort food derived from Italian immigration.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Milanesa",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "san-telmo",
+          "name": "San Telmo Market",
+          "kind": "market",
+          "dishIds": [
+            "empanada",
+            "choripan",
+            "milanesa"
+          ],
+          "coordinates": {
+            "lat": -34.6217,
+            "lng": -58.3731
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/San_Telmo",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "caminito",
+          "name": "Caminito Street Stalls",
+          "kind": "street_stall",
+          "dishIds": [
+            "empanada",
+            "choripan",
+            "milanesa"
+          ],
+          "coordinates": {
+            "lat": -34.6393,
+            "lng": -58.3628
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Caminito",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "UmDx6vYqejI",
+          "dishIds": [
+            "empanada",
+            "choripan",
+            "milanesa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "Ob26V1zbEaA",
+          "dishIds": [
+            "empanada",
+            "choripan",
+            "milanesa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "cairo",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "kushari",
+          "name": "Kushari",
+          "category": "rice",
+          "description": "Egypt's national street dish of rice, lentils, macaroni and chickpeas topped with spiced tomato sauce and fried onions. Hearty, vegan and served from carts and shops across Cairo.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Kushari",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ful-medames",
+          "name": "Ful medames",
+          "category": "stew",
+          "description": "Slow-cooked fava beans mashed with cumin, lemon and olive oil, eaten with baladi bread. A staple Cairo breakfast sold at street foul carts.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Ful_medames",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hawawshi",
+          "name": "Hawawshi",
+          "category": "sandwich",
+          "description": "Baladi bread stuffed with spiced minced meat and baked or griddled until crisp. A favorite working-class street sandwich in Cairo.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hawawshi",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "khan-el-khalili",
+          "name": "Khan el-Khalili",
+          "kind": "market",
+          "dishIds": [
+            "kushari",
+            "ful-medames",
+            "hawawshi"
+          ],
+          "coordinates": {
+            "lat": 30.0475,
+            "lng": 31.2622
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Khan_el-Khalili",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "muizz-street",
+          "name": "Muizz Street food stalls",
+          "kind": "street_stall",
+          "dishIds": [
+            "kushari",
+            "hawawshi"
+          ],
+          "coordinates": {
+            "lat": 30.049,
+            "lng": 31.2635
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Muizz_Street",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "pIwCc7RuaQU",
+          "dishIds": [
+            "kushari",
+            "ful-medames",
+            "hawawshi"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "H_TK4ObpQnA",
+          "dishIds": [
+            "kushari",
+            "hawawshi"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "cancun",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "tacos-al-pastor",
+          "name": "Tacos al Pastor",
+          "category": "tacos",
+          "description": "Thin pork shaved from a vertical trompo, marinated in achiote and chili, served on corn tortillas with onion, cilantro and pineapple. Cancun taquerias adopted this street classic as a local favorite.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Al_pastor",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "cochinita-pibil",
+          "name": "Cochinita Pibil",
+          "category": "grill",
+          "description": "Slow-roasted pork marinated in sour orange and achiote, cooked until melting. A Yucatan specialty widely served in Cancun as tacos, tortas and market plates.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Cochinita_pibil",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ceviche",
+          "name": "Ceviche",
+          "category": "seafood",
+          "description": "Raw fish or shrimp cured in lime juice with onion, chili, tomato and cilantro. Cancun seafood stalls serve Caribbean-style ceviche with tostadas.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Ceviche",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-23",
+          "name": "Mercado 23",
+          "kind": "market",
+          "dishIds": [
+            "tacos-al-pastor",
+            "cochinita-pibil"
+          ],
+          "coordinates": {
+            "lat": 21.1611,
+            "lng": -86.8456
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Canc%C3%BAn",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-28",
+          "name": "Mercado 28",
+          "kind": "market",
+          "dishIds": [
+            "tacos-al-pastor",
+            "ceviche"
+          ],
+          "coordinates": {
+            "lat": 21.1605,
+            "lng": -86.842
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Canc%C3%BAn",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "WImXab-5Etw",
+          "dishIds": [
+            "tacos-al-pastor"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ZzYXw4rAFU0",
+          "dishIds": [
+            "tacos-al-pastor",
+            "cochinita-pibil"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "cape-town",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "bunny-chow",
+          "name": "Bunny chow",
+          "category": "curry",
+          "description": "Hollowed loaf filled with curry, eaten by hand with the scooped bread. A Durban-origin street classic now widespread in Cape Town takeaways.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Bunny_chow",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "gatsby",
+          "name": "Gatsby",
+          "category": "sandwich",
+          "description": "Long roll packed with chips, meat or fish, salad and sauces, cut for sharing. Cape Town's iconic oversized submarine sandwich.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Gatsby_(sandwich)",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "boerewors",
+          "name": "Boerewors roll",
+          "category": "sausage",
+          "description": "Coiled spiced beef sausage grilled and served in a roll with onions and chutney. The centerpiece of braai culture and street grills.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Boerewors",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "greenmarket-square",
+          "name": "Greenmarket Square",
+          "kind": "market",
+          "dishIds": [
+            "bunny-chow",
+            "gatsby",
+            "boerewors"
+          ],
+          "coordinates": {
+            "lat": -33.9249,
+            "lng": 18.4231
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Greenmarket_Square",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "va-waterfront",
+          "name": "V&A Waterfront Food Market",
+          "kind": "food_hall",
+          "dishIds": [
+            "bunny-chow",
+            "gatsby",
+            "boerewors"
+          ],
+          "coordinates": {
+            "lat": -33.9036,
+            "lng": 18.4207
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Victoria_%26_Alfred_Waterfront",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "jM80u2ZtkI8",
+          "dishIds": [
+            "gatsby",
+            "bunny-chow",
+            "boerewors"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tN5gEwy90MU",
+          "dishIds": [
+            "boerewors",
+            "bunny-chow"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "chicago",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "chicago-hot-dog",
+          "name": "Chicago-Style Hot Dog",
+          "category": "sausage",
+          "description": "An all-beef frankfurter on a poppy seed bun piled with mustard, relish, onion, tomato, pickle, sport peppers and celery salt. Traditionally made without ketchup, it is Chicago's defining street dog.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chicago-style_hot_dog",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "deep-dish-pizza",
+          "name": "Deep-Dish Pizza",
+          "category": "pizza",
+          "description": "A thick, buttery-crusted pizza baked in a deep pan with cheese, chunky tomato sauce and sausage. Iconic Chicago comfort food served in slices across the city.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Deep-dish_pizza",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "italian-beef",
+          "name": "Italian Beef",
+          "category": "sandwich",
+          "description": "Thin-sliced roast beef simmered in seasoned jus and served on French bread with sweet peppers or spicy giardiniera. A juicy Chicago-origin sandwich often ordered dipped.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Italian_beef",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "maxwell-street-market",
+          "name": "Maxwell Street Market",
+          "kind": "market",
+          "dishIds": [
+            "chicago-hot-dog",
+            "deep-dish-pizza",
+            "italian-beef"
+          ],
+          "coordinates": {
+            "lat": 41.8644,
+            "lng": -87.6469
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Maxwell_Street",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "navy-pier",
+          "name": "Navy Pier",
+          "kind": "food_hall",
+          "dishIds": [
+            "chicago-hot-dog",
+            "deep-dish-pizza",
+            "italian-beef"
+          ],
+          "coordinates": {
+            "lat": 41.8919,
+            "lng": -87.6061
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Navy_Pier",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "7Uh39m4KI0M",
+          "dishIds": [
+            "chicago-hot-dog",
+            "deep-dish-pizza",
+            "italian-beef"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "cK9gdUSIra8",
+          "dishIds": [
+            "chicago-hot-dog",
+            "deep-dish-pizza",
+            "italian-beef"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "dakar",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "thieboudienne",
+          "name": "Thieboudienne",
+          "category": "rice",
+          "description": "Senegal's national dish of marinated fish, broken rice and vegetables in tomato broth. Sold in generous lunch portions at Dakar street stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Thieboudienne",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "yassa",
+          "name": "Yassa",
+          "category": "grill",
+          "description": "Chicken or fish marinated in lemon and onion, then grilled and simmered into a tangy sauce over rice. Bright, savory and widely served in Dakar canteens.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Yassa_(food)",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mafe",
+          "name": "Mafé",
+          "category": "stew",
+          "description": "Rich peanut sauce stew with meat and root vegetables, served over rice or fonio. A comforting West African street-canteen staple.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Maf%C3%A9",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "marche-kermel",
+          "name": "Marché Kermel",
+          "kind": "market",
+          "dishIds": [
+            "thieboudienne",
+            "yassa",
+            "mafe"
+          ],
+          "coordinates": {
+            "lat": 14.6709,
+            "lng": -17.4367
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Dakar",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "goree-market",
+          "name": "Gorée Island Market",
+          "kind": "market",
+          "dishIds": [
+            "thieboudienne",
+            "yassa"
+          ],
+          "coordinates": {
+            "lat": 14.6699,
+            "lng": -17.3983
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Gor%C3%A9e",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "KCF7OeGD1b4",
+          "dishIds": [
+            "thieboudienne",
+            "yassa",
+            "mafe"
+          ],
+          "placeIds": [
+            "marche-kermel"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "D1GXUWUNeRE",
+          "dishIds": [
+            "thieboudienne",
+            "yassa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "delhi",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "chole-bhature",
+          "name": "Chole Bhature",
+          "category": "curry",
+          "description": "Spiced chickpea curry served with fluffy deep-fried bhature bread. A hearty Old Delhi street and market staple.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chole_bhature",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "aloo-tikki",
+          "name": "Aloo Tikki",
+          "category": "fried",
+          "description": "Crisp potato patties topped with chutneys, yogurt and chickpeas. A tangy chaat favorite from Delhi's street stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Aloo_tikki",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "samosa",
+          "name": "Samosa",
+          "category": "fried",
+          "description": "A crisp fried pastry filled with spiced potatoes and peas. Ubiquitous across Delhi as a portable street snack.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Samosa",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "chandni-chowk",
+          "name": "Chandni Chowk",
+          "kind": "market",
+          "dishIds": [
+            "chole-bhature",
+            "aloo-tikki",
+            "samosa"
+          ],
+          "coordinates": {
+            "lat": 28.6506,
+            "lng": 77.2334
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Chandni_Chowk",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "connaught-place",
+          "name": "Connaught Place",
+          "kind": "market",
+          "dishIds": [
+            "chole-bhature",
+            "aloo-tikki",
+            "samosa"
+          ],
+          "coordinates": {
+            "lat": 28.6315,
+            "lng": 77.2167
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Connaught_Place,_New_Delhi",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "bDFheqlFo5I",
+          "dishIds": [
+            "chole-bhature",
+            "aloo-tikki",
+            "samosa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "2ciJlFm6SKY",
+          "dishIds": [
+            "chole-bhature",
+            "aloo-tikki",
+            "samosa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "dubai",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "shawarma",
+          "name": "Shawarma",
+          "category": "wrap",
+          "description": "Marinated meat shaved from a vertical spit and wrapped with garlic sauce, pickles and fries. Dubai's defining late-night street wrap.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Shawarma",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "falafel",
+          "name": "Falafel",
+          "category": "fried",
+          "description": "Crisp chickpea or fava fritters with tahini, salad and bread. A Levantine street staple across Deira cafeterias.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Falafel",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "luqaimat",
+          "name": "Luqaimat",
+          "category": "sweets",
+          "description": "Crisp golden dough balls drizzled with date syrup and sesame. A beloved Emirati street sweet, especially during festivals.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Luqaimat",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "spice-souk",
+          "name": "Dubai Spice Souk",
+          "kind": "market",
+          "dishIds": [
+            "shawarma",
+            "falafel",
+            "luqaimat"
+          ],
+          "coordinates": {
+            "lat": 25.2675,
+            "lng": 55.2976
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Dubai_Spice_Souk",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "gold-souk",
+          "name": "Dubai Gold Souk",
+          "kind": "market",
+          "dishIds": [
+            "shawarma",
+            "falafel"
+          ],
+          "coordinates": {
+            "lat": 25.2678,
+            "lng": 55.297
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Dubai_Gold_Souk",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "W6W1vxdH9IE",
+          "dishIds": [
+            "shawarma",
+            "falafel",
+            "luqaimat"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "P8NuVm1E6sQ",
+          "dishIds": [
+            "shawarma",
+            "luqaimat"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "havana",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "ropa-vieja",
+          "name": "Ropa Vieja",
+          "category": "stew",
+          "description": "Shredded beef slow-cooked with peppers, onion, garlic and tomato until tender. Considered Cuba's national dish and served in Havana paladares with rice and black beans.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Ropa_vieja",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tostones",
+          "name": "Tostones",
+          "category": "fried",
+          "description": "Twice-fried green plantain slices, flattened and salted for a crisp outside and soft inside. Havana street stalls serve them as a snack or side with garlic dipping sauce.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tostones",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "cuban-sandwich",
+          "name": "Cuban Sandwich",
+          "category": "sandwich",
+          "description": "Pressed sandwich of roast pork, ham, Swiss cheese, pickles and mustard on Cuban bread. A Havana bar and cafe staple shaped by Spanish-Caribbean bakery tradition.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Cuban_sandwich",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-san-jose",
+          "name": "Mercado San Jose (Old Havana)",
+          "kind": "market",
+          "dishIds": [
+            "tostones",
+            "ropa-vieja"
+          ],
+          "coordinates": {
+            "lat": 23.1367,
+            "lng": -82.3483
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Old_Havana",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "vedado-coppelia-area",
+          "name": "Vedado Coppelia Area",
+          "kind": "food_hall",
+          "dishIds": [
+            "cuban-sandwich",
+            "tostones"
+          ],
+          "coordinates": {
+            "lat": 23.1378,
+            "lng": -82.3819
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Vedado",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "Grj8lZ7AupI",
+          "dishIds": [
+            "ropa-vieja",
+            "tostones"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "8bKzcwbKi40",
+          "dishIds": [
+            "tostones",
+            "cuban-sandwich"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -99,7 +1923,12 @@
           "category": "grill",
           "description": "Seasoned meat roasted on a vertical spit and shaved into flatbread or plates with salad. Istanbul's ubiquitous lunch, ancestor of shawarma and gyros.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Doner_kebab", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Doner_kebab",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -109,7 +1938,12 @@
           "category": "sweets",
           "description": "Paper-thin pastry layered with pistachio or walnuts and soaked in syrup. Ottoman palace dessert, sold by weight in specialist shops.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Baklava", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Baklava",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -119,7 +1953,12 @@
           "category": "bakery",
           "description": "Sesame-crusted bread ring, crunchy outside and soft inside. Sold from red carts across Istanbul, usually with tea.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Simit", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Simit",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -129,7 +1968,12 @@
           "category": "sweets",
           "description": "Starch-and-sugar jelly cubes flavored with rose, mastic or nuts and dusted in sugar. The classic farewell gift from the Spice Bazaar.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Turkish_delight", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Turkish_delight",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         }
@@ -139,8 +1983,14 @@
           "id": "spice-bazaar",
           "name": "Spice Bazaar",
           "kind": "market",
-          "dishIds": ["turkish-delight", "baklava"],
-          "coordinates": { "lat": 41.0164, "lng": 28.9706 },
+          "dishIds": [
+            "turkish-delight",
+            "baklava"
+          ],
+          "coordinates": {
+            "lat": 41.0164,
+            "lng": 28.9706
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/Spice_Bazaar",
@@ -151,8 +2001,14 @@
           "id": "grand-bazaar",
           "name": "Grand Bazaar",
           "kind": "market",
-          "dishIds": ["baklava", "simit"],
-          "coordinates": { "lat": 41.0106, "lng": 28.9679 },
+          "dishIds": [
+            "baklava",
+            "simit"
+          ],
+          "coordinates": {
+            "lat": 41.0106,
+            "lng": 28.9679
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/Grand_Bazaar,_Istanbul",
@@ -163,7 +2019,9 @@
       "videos": [
         {
           "id": "bBkXkBgWl4E",
-          "dishIds": ["doner-kebab"],
+          "dishIds": [
+            "doner-kebab"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -171,7 +2029,10 @@
         },
         {
           "id": "_VR2ovm9pHY",
-          "dishIds": ["doner-kebab", "baklava"],
+          "dishIds": [
+            "doner-kebab",
+            "baklava"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -179,7 +2040,682 @@
         },
         {
           "id": "k0qo9ruqL_Q",
-          "dishIds": ["doner-kebab", "baklava"],
+          "dishIds": [
+            "doner-kebab",
+            "baklava"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "kyiv",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "varenyky",
+          "name": "Varenyky",
+          "category": "dumplings",
+          "description": "Ukrainian dumplings filled with potato, cabbage, cherries or cheese, served with sour cream. A Kyiv comfort-food staple.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Vareniki",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "chicken-kyiv",
+          "name": "Chicken Kyiv",
+          "category": "meat",
+          "description": "Breaded chicken fillet stuffed with garlic herb butter. Kyiv's world-famous dish, also sold as street takeaway.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chicken_Kiev",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "borscht",
+          "name": "Borscht",
+          "category": "soup",
+          "description": "Beetroot soup with cabbage, potatoes and meat, topped with sour cream and dill. Served hot in cups at Kyiv markets.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Borscht",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "bessarabsky-market",
+          "name": "Bessarabsky Market",
+          "kind": "market",
+          "dishIds": [
+            "varenyky",
+            "borscht"
+          ],
+          "coordinates": {
+            "lat": 50.4422,
+            "lng": 30.5206
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Bessarabska_Square",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "zhytniy-market",
+          "name": "Zhytniy Market",
+          "kind": "market",
+          "dishIds": [
+            "varenyky",
+            "chicken-kyiv"
+          ],
+          "coordinates": {
+            "lat": 50.4645,
+            "lng": 30.5085
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Podil",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "Pj6-OGo05ic",
+          "dishIds": [
+            "varenyky",
+            "borscht"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "-83r6v-ISZc",
+          "dishIds": [
+            "chicken-kyiv",
+            "varenyky"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "lisbon",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "pastel-de-nata",
+          "name": "Pastel de Nata",
+          "category": "pastry",
+          "description": "Flaky custard tart with a caramelized top, created by Belém monks in the 19th century. Eaten warm with cinnamon at Lisbon bakeries and market stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pastel_de_nata",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "bifana",
+          "name": "Bifana",
+          "category": "sandwich",
+          "description": "Thin pork cutlets marinated in garlic and wine, served in a crusty roll with mustard or piri-piri. Lisbon's classic tasca sandwich and late-night street bite.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Bifana",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "caldo-verde",
+          "name": "Caldo Verde",
+          "category": "soup",
+          "description": "Potato and kale broth with slices of chouriço, Portugal's most emblematic soup. Served in bowls at markets and festivals, often with a drizzle of olive oil.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Caldo_verde",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "feira-da-ladra",
+          "name": "Feira da Ladra",
+          "kind": "market",
+          "dishIds": [
+            "bifana",
+            "caldo-verde"
+          ],
+          "coordinates": {
+            "lat": 38.7119,
+            "lng": -9.1268
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Feira_da_Ladra",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-de-campo-de-ourique",
+          "name": "Mercado de Campo de Ourique",
+          "kind": "market",
+          "dishIds": [
+            "pastel-de-nata",
+            "bifana"
+          ],
+          "coordinates": {
+            "lat": 38.7167,
+            "lng": -9.1658
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Mercado_de_Campo_de_Ourique",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "x6reCeRqZnA",
+          "dishIds": [
+            "pastel-de-nata",
+            "bifana"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "DpLe4k75Tr0",
+          "dishIds": [
+            "pastel-de-nata",
+            "caldo-verde"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "london",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "fish-and-chips",
+          "name": "Fish and Chips",
+          "category": "fried",
+          "description": "Battered fried fish with thick-cut chips, Britain's defining takeaway since the 19th century. London chippies serve it with salt, vinegar and mushy peas.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Fish_and_chips",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pie-and-mash",
+          "name": "Pie and Mash",
+          "category": "pie",
+          "description": "Minced-beef pie with mashed potato and parsley liquor, the historic working-class meal of East and South London. Still served in traditional pie shops and market stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pie_and_mash",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "scotch-egg",
+          "name": "Scotch Egg",
+          "category": "snack",
+          "description": "A boiled egg wrapped in sausage meat, breaded and fried, eaten cold as a picnic and pub snack. Fortnum & Mason claims its invention in 18th-century London.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Scotch_egg",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "borough-market",
+          "name": "Borough Market",
+          "kind": "market",
+          "dishIds": [
+            "fish-and-chips",
+            "scotch-egg"
+          ],
+          "coordinates": {
+            "lat": 51.5055,
+            "lng": -0.0909
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Borough_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "camden-market",
+          "name": "Camden Market",
+          "kind": "market",
+          "dishIds": [
+            "fish-and-chips",
+            "pie-and-mash"
+          ],
+          "coordinates": {
+            "lat": 51.5416,
+            "lng": -0.1463
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Camden_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "8frIFTQJg1c",
+          "dishIds": [
+            "fish-and-chips",
+            "scotch-egg"
+          ],
+          "placeIds": [
+            "borough-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ibnV0jKQrxI",
+          "dishIds": [
+            "fish-and-chips"
+          ],
+          "placeIds": [
+            "borough-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "madrid",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "churro",
+          "name": "Churro",
+          "category": "fried",
+          "description": "Ridged fried-dough sticks dusted with sugar, eaten for breakfast dipped in thick hot chocolate. San Ginés has fried them in Madrid since 1894.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Churro",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "spanish-omelette",
+          "name": "Spanish Omelette",
+          "category": "eggs",
+          "description": "Thick tortilla of egg, potato and onion, served in wedges at room temperature in every Madrid bar. The pincho de tortilla is the city's default tapa.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Spanish_omelette",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "jamon-iberico",
+          "name": "Jamón Ibérico",
+          "category": "cured",
+          "description": "Dry-cured ham from acorn-fed Ibérico pigs, hand-carved at Madrid market counters and tapas bars. Sold by weight with bread as the classic vermouth accompaniment.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Jam%C3%B3n_ib%C3%A9rico",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-de-san-miguel",
+          "name": "Mercado de San Miguel",
+          "kind": "food_hall",
+          "dishIds": [
+            "spanish-omelette",
+            "jamon-iberico"
+          ],
+          "coordinates": {
+            "lat": 40.4154,
+            "lng": -3.7087
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Mercado_de_San_Miguel",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "el-rastro",
+          "name": "El Rastro",
+          "kind": "market",
+          "dishIds": [
+            "churro",
+            "spanish-omelette"
+          ],
+          "coordinates": {
+            "lat": 40.4075,
+            "lng": -3.7075
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/El_Rastro",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "xFo6NI12fjc",
+          "dishIds": [
+            "churro",
+            "spanish-omelette",
+            "jamon-iberico"
+          ],
+          "placeIds": [
+            "mercado-de-san-miguel"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "obVCWHn-bOk",
+          "dishIds": [
+            "churro",
+            "spanish-omelette"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "manila",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
+      "dishes": [
+        {
+          "id": "balut",
+          "name": "Balut",
+          "category": "snack",
+          "description": "Fertilized duck egg boiled and eaten with salt, chili and vinegar. A famous Manila night-market street food.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Balut",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "isaw",
+          "name": "Isaw",
+          "category": "grill",
+          "description": "Charcoal-grilled chicken or pork intestines skewered and dipped in spiced vinegar. A smoky Manila barbecue-stall staple.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Isaw",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "halo-halo",
+          "name": "Halo-Halo",
+          "category": "sweets",
+          "description": "Shaved ice layered with sweet beans, fruits, leche flan, ube and milk. Manila's iconic cold dessert for hot days.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Halo-halo",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "divisoria-market",
+          "name": "Divisoria Market",
+          "kind": "market",
+          "dishIds": [
+            "isaw",
+            "balut"
+          ],
+          "coordinates": {
+            "lat": 14.5978,
+            "lng": 120.9744
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Divisoria",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "quiapo-market",
+          "name": "Quiapo Market",
+          "kind": "market",
+          "dishIds": [
+            "isaw",
+            "halo-halo"
+          ],
+          "coordinates": {
+            "lat": 14.5988,
+            "lng": 120.9847
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Quiapo,_Manila",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "GVt-y6tmhPY",
+          "dishIds": [
+            "isaw",
+            "halo-halo"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "RldcZRJf59o",
+          "dishIds": [
+            "balut",
+            "isaw"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "marrakech",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "tajine",
+          "name": "Tajine",
+          "category": "stew",
+          "description": "Meat and vegetables slow-cooked in a conical clay pot with preserved lemon, olives and warm spices. Served with bread at medina stalls and grill squares.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tajine",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "harira",
+          "name": "Harira",
+          "category": "soup",
+          "description": "Tomato, lentil and chickpea soup with coriander and warming spices, often finished with a drizzle of lemon. A classic evening starter around Jemaa el-Fnaa.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Harira",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "msemen",
+          "name": "Msemen",
+          "category": "bakery",
+          "description": "Flaky square griddled flatbread, crisp outside and chewy inside, served plain or stuffed. A ubiquitous Marrakech street breakfast and snack.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Msemen",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "jemaa-el-fnaa",
+          "name": "Jemaa el-Fnaa",
+          "kind": "market",
+          "dishIds": [
+            "tajine",
+            "harira",
+            "msemen"
+          ],
+          "coordinates": {
+            "lat": 31.6258,
+            "lng": -7.9894
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Jemaa_el-Fnaa",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "medina-souks",
+          "name": "Medina Souks",
+          "kind": "market",
+          "dishIds": [
+            "tajine",
+            "msemen"
+          ],
+          "coordinates": {
+            "lat": 31.6275,
+            "lng": -7.989
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Marrakesh",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "RZkQJxetafg",
+          "dishIds": [
+            "tajine",
+            "harira"
+          ],
+          "placeIds": [
+            "jemaa-el-fnaa"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mNqNF0iiWR0",
+          "dishIds": [
+            "tajine",
+            "msemen"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -197,7 +2733,12 @@
           "category": "tacos",
           "description": "Marinated pork shaved off a vertical trompo onto corn tortillas with onion, cilantro and pineapple. Mexico City's signature taco.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Taco_al_pastor", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Taco_al_pastor",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -207,7 +2748,12 @@
           "category": "masa",
           "description": "Masa dough steamed in corn husks or banana leaves, filled with meats, chilies or sweets. Breakfast staple sold from pots on street corners.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tamale", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tamale",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -217,7 +2763,12 @@
           "category": "masa",
           "description": "Fried tortilla chips simmered in salsa and topped with cream, cheese and onion. A classic Mexican breakfast plate.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Chilaquiles", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chilaquiles",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         }
@@ -227,8 +2778,13 @@
           "id": "san-juan-market",
           "name": "San Juan Market",
           "kind": "market",
-          "dishIds": ["tacos-al-pastor"],
-          "coordinates": { "lat": 19.43, "lng": -99.1447 },
+          "dishIds": [
+            "tacos-al-pastor"
+          ],
+          "coordinates": {
+            "lat": 19.43,
+            "lng": -99.1447
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/San_Juan_Market,_Mexico_City",
@@ -239,8 +2795,13 @@
           "id": "mercado-roma",
           "name": "Mercado Roma",
           "kind": "food_hall",
-          "dishIds": ["tacos-al-pastor"],
-          "coordinates": { "lat": 19.4141, "lng": -99.1646 },
+          "dishIds": [
+            "tacos-al-pastor"
+          ],
+          "coordinates": {
+            "lat": 19.4141,
+            "lng": -99.1646
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/Mercado_Roma",
@@ -251,7 +2812,9 @@
       "videos": [
         {
           "id": "dHnqNOvDi44",
-          "dishIds": ["tacos-al-pastor"],
+          "dishIds": [
+            "tacos-al-pastor"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -259,7 +2822,1021 @@
         },
         {
           "id": "0hgLggc7vWI",
-          "dishIds": ["tacos-al-pastor"],
+          "dishIds": [
+            "tacos-al-pastor"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "moscow",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "blini",
+          "name": "Blini",
+          "category": "pancake",
+          "description": "Thin buckwheat or wheat pancakes with sour cream, jam, caviar or smoked salmon. A Russian Maslenitsa staple sold at Moscow kiosks.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Blini",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pirozhki",
+          "name": "Pirozhki",
+          "category": "pastry",
+          "description": "Small baked or fried hand pies filled with cabbage, potato, meat or jam. A classic Moscow on-the-go snack from bakeries and stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pirozhki",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "chebureki",
+          "name": "Chebureki",
+          "category": "fried",
+          "description": "Crisp half-moon fried turnover with juicy minced meat and onions. Popular Soviet-era street food still sold across Moscow.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chebureki",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "danilovsky-market",
+          "name": "Danilovsky Market",
+          "kind": "market",
+          "dishIds": [
+            "blini",
+            "pirozhki"
+          ],
+          "coordinates": {
+            "lat": 55.709,
+            "lng": 37.618
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Danilovsky_District",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "depo-lesnaya",
+          "name": "Depo Lesnaya Food Mall",
+          "kind": "food_hall",
+          "dishIds": [
+            "chebureki",
+            "blini"
+          ],
+          "coordinates": {
+            "lat": 55.7765,
+            "lng": 37.586
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Moscow",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "Pik8x_SSig0",
+          "dishIds": [
+            "blini",
+            "pirozhki"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "Iyve7Rj7k0E",
+          "dishIds": [
+            "blini",
+            "chebureki"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "mumbai",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "vada-pav",
+          "name": "Vada Pav",
+          "category": "sandwich",
+          "description": "A spiced potato fritter tucked in a soft bun with chutneys. Known as Mumbai's beloved street burger.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Vada_pav",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pav-bhaji",
+          "name": "Pav Bhaji",
+          "category": "curry",
+          "description": "Buttery mashed vegetable curry scooped up with toasted pav buns. A sizzling street-griddle classic from Mumbai.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pav_bhaji",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "bhel-puri",
+          "name": "Bhel Puri",
+          "category": "chaat",
+          "description": "Puffed rice tossed with vegetables, tamarind and chili chutneys. A light, crunchy beachside chaat of Mumbai.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Bhel_puri",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "crawford-market",
+          "name": "Crawford Market",
+          "kind": "market",
+          "dishIds": [
+            "vada-pav",
+            "pav-bhaji",
+            "bhel-puri"
+          ],
+          "coordinates": {
+            "lat": 18.947,
+            "lng": 72.834
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Crawford_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "juhu-beach",
+          "name": "Juhu Beach",
+          "kind": "street_stall",
+          "dishIds": [
+            "vada-pav",
+            "pav-bhaji",
+            "bhel-puri"
+          ],
+          "coordinates": {
+            "lat": 19.1075,
+            "lng": 72.8263
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Juhu",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "w3VJdHiLWTI",
+          "dishIds": [
+            "vada-pav",
+            "pav-bhaji",
+            "bhel-puri"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "yNQo1RnMLCw",
+          "dishIds": [
+            "vada-pav",
+            "pav-bhaji",
+            "bhel-puri"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "new-york-city",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "hot-dog",
+          "name": "Hot Dog",
+          "category": "sausage",
+          "description": "An all-beef frankfurter in a soft bun, a classic New York cart food topped with mustard, sauerkraut or onions. One of the most recognizable street symbols of the city.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hot_dog",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ny-pizza",
+          "name": "New York-Style Pizza",
+          "category": "pizza",
+          "description": "Large, thin, foldable cheese or pepperoni slices with a crisp yet chewy crust. Sold by the slice, it is the definitive New York street lunch.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/New_York-style_pizza",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "soft-pretzel",
+          "name": "Soft Pretzel",
+          "category": "snack",
+          "description": "A salted, chewy twisted bread snack sold warm from street carts across Manhattan. A New York sidewalk staple for generations.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pretzel",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "chelsea-market",
+          "name": "Chelsea Market",
+          "kind": "food_hall",
+          "dishIds": [
+            "hot-dog",
+            "ny-pizza",
+            "soft-pretzel"
+          ],
+          "coordinates": {
+            "lat": 40.7424,
+            "lng": -74.0061
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Chelsea_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "queens-night-market",
+          "name": "Queens Night Market",
+          "kind": "market",
+          "dishIds": [
+            "hot-dog",
+            "ny-pizza",
+            "soft-pretzel"
+          ],
+          "coordinates": {
+            "lat": 40.7481,
+            "lng": -73.8506
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Queens_Night_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "oMWA97OYmMM",
+          "dishIds": [
+            "hot-dog",
+            "ny-pizza",
+            "soft-pretzel"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "8oBhLR68TSY",
+          "dishIds": [
+            "hot-dog",
+            "ny-pizza",
+            "soft-pretzel"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "oslo",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "polse-i-lompe",
+          "name": "Pølse i lompe",
+          "category": "sausage",
+          "description": "Norwegian grilled hot dog wrapped in a soft potato flatbread (lompe) with mustard, ketchup and crispy onions. A staple late-night street snack across Oslo.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hot_dog",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "fiskekaker",
+          "name": "Fiskekaker",
+          "category": "seafood",
+          "description": "Pan-fried Norwegian fish cakes made from cod, haddock or pollock, served in a bun or on paper. Common at Oslo harbour stalls and fast-food counters.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Fishcake",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "kanelbolle",
+          "name": "Kanelbolle",
+          "category": "bakery",
+          "description": "Norwegian cinnamon bun, soft and aromatic with cinnamon and cardamom. Sold in Oslo bakeries, kiosks and street markets as a sweet on-the-go bite.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Cinnamon_roll",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mathallen-oslo",
+          "name": "Mathallen Oslo",
+          "kind": "food_hall",
+          "dishIds": [
+            "polse-i-lompe",
+            "fiskekaker"
+          ],
+          "coordinates": {
+            "lat": 59.9235,
+            "lng": 10.7517
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Gr%C3%BCnerl%C3%B8kka",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "vippa-oslo",
+          "name": "Vippa Oslo",
+          "kind": "food_hall",
+          "dishIds": [
+            "fiskekaker",
+            "kanelbolle"
+          ],
+          "coordinates": {
+            "lat": 59.9019,
+            "lng": 10.7414
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Aker_Brygge",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "oPX040-omnc",
+          "dishIds": [
+            "polse-i-lompe",
+            "fiskekaker"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "aJ2R3tieNNk",
+          "dishIds": [
+            "polse-i-lompe",
+            "kanelbolle"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "paris",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "jambon-beurre",
+          "name": "Jambon-beurre",
+          "category": "sandwich",
+          "description": "A baguette spread with butter and filled with ham, France's best-selling sandwich with millions sold daily. The default order at Parisian boulangeries and street counters.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Jambon-beurre",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "crepe",
+          "name": "Crêpe",
+          "category": "pancakes",
+          "description": "Thin wheat pancakes cooked on a hot plate, sold sweet with sugar or Nutella and savory as buckwheat galettes. Paris street stands and crêperies serve them folded to go.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Cr%C3%AApe",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "croque-monsieur",
+          "name": "Croque-monsieur",
+          "category": "toast",
+          "description": "Toasted ham and cheese sandwich topped with béchamel or grated cheese, a Paris café classic since the early 1900s. Served hot at counters, bars and market stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Croque_monsieur",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "marche-des-enfants-rouges",
+          "name": "Marché des Enfants Rouges",
+          "kind": "market",
+          "dishIds": [
+            "crepe",
+            "croque-monsieur"
+          ],
+          "coordinates": {
+            "lat": 48.8628,
+            "lng": 2.362
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/March%C3%A9_des_Enfants_Rouges",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "les-halles",
+          "name": "Les Halles",
+          "kind": "market",
+          "dishIds": [
+            "jambon-beurre",
+            "crepe"
+          ],
+          "coordinates": {
+            "lat": 48.8627,
+            "lng": 2.3366
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Les_Halles",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "k0B7Va-te44",
+          "dishIds": [
+            "jambon-beurre",
+            "crepe",
+            "croque-monsieur"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "h13cCP9wCpw",
+          "dishIds": [
+            "jambon-beurre",
+            "crepe"
+          ],
+          "placeIds": [
+            "marche-des-enfants-rouges"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "prague",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "trdelnik",
+          "name": "Trdelník",
+          "category": "pastry",
+          "description": "Sweet dough wrapped around a spit, grilled and dusted with sugar and cinnamon. A ubiquitous Old Town street pastry, often filled to order.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Trdeln%C3%ADk",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "smazeny-syr",
+          "name": "Smažený sýr",
+          "category": "fried",
+          "description": "Breaded deep-fried cheese served in a bun with tartar sauce. Prague's beloved vegetarian street snack.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Sma%C5%BEen%C3%BD_s%C3%BDr",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "chlebicky",
+          "name": "Obložené chlebíčky",
+          "category": "sandwich",
+          "description": "Open-faced baguette slices topped with egg, ham, cheese or salads. A Czech deli classic sold at bakeries and market stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Oblo%C5%BEen%C3%A9_chleb%C3%AD%C4%8Dky",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "old-town-square-market",
+          "name": "Old Town Square markets",
+          "kind": "market",
+          "dishIds": [
+            "trdelnik",
+            "smazeny-syr",
+            "chlebicky"
+          ],
+          "coordinates": {
+            "lat": 50.0875,
+            "lng": 14.4213
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Old_Town_Square",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "wenceslas-stalls",
+          "name": "Wenceslas Square stalls",
+          "kind": "street_stall",
+          "dishIds": [
+            "trdelnik",
+            "smazeny-syr"
+          ],
+          "coordinates": {
+            "lat": 50.0755,
+            "lng": 14.4228
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Wenceslas_Square",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "lYyVzzogfrw",
+          "dishIds": [
+            "trdelnik",
+            "smazeny-syr",
+            "chlebicky"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "aVidArARqHY",
+          "dishIds": [
+            "smazeny-syr",
+            "chlebicky"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "rio-de-janeiro",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "feijoada",
+          "name": "Feijoada",
+          "category": "stew",
+          "description": "A hearty black-bean stew with pork, served with rice, greens and orange slices. Brazil's national dish, widely enjoyed in Rio's casual eateries.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Feijoada",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tapioca",
+          "name": "Tapioca Crepe",
+          "category": "crepe",
+          "description": "A gluten-free crepe made from cassava starch, filled with cheese, coconut or chocolate. A light beach and street-fair favorite.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tapioca",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pao-de-queijo",
+          "name": "Pão de Queijo",
+          "category": "snack",
+          "description": "Small baked cheese breads with a crisp crust and chewy center, made with cassava flour. A beloved portable snack across Rio.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/P%C3%A3o_de_queijo",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "copacabana",
+          "name": "Copacabana Beach Kiosks",
+          "kind": "street_stall",
+          "dishIds": [
+            "feijoada",
+            "tapioca",
+            "pao-de-queijo"
+          ],
+          "coordinates": {
+            "lat": -22.9711,
+            "lng": -43.1822
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Copacabana,_Rio_de_Janeiro",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ipanema",
+          "name": "Ipanema Beach Kiosks",
+          "kind": "street_stall",
+          "dishIds": [
+            "feijoada",
+            "tapioca",
+            "pao-de-queijo"
+          ],
+          "coordinates": {
+            "lat": -22.9831,
+            "lng": -43.2096
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Ipanema",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "H74hKRe4FlY",
+          "dishIds": [
+            "feijoada",
+            "tapioca",
+            "pao-de-queijo"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "DNn3e1teX3U",
+          "dishIds": [
+            "feijoada",
+            "tapioca",
+            "pao-de-queijo"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "rome",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "suppli",
+          "name": "Supplì",
+          "category": "fried",
+          "description": "Fried risotto balls in tomato ragù with a mozzarella heart that stretches like a telephone wire when hot. Rome's most popular street snack, named from the French 'surprise'.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Suppl%C3%AC",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pizza-al-taglio",
+          "name": "Pizza al Taglio",
+          "category": "pizza",
+          "description": "Pizza baked in large rectangular trays and sold in slices priced by weight. Developed in Rome, it is eaten folded as a casual takeaway across the city.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pizza_al_taglio",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "porchetta",
+          "name": "Porchetta",
+          "category": "roast",
+          "description": "Boneless pork roasted with garlic, rosemary and fennel, sliced into panini at markets and roadside vans. A Lazio festival staple found across Rome's street stalls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Porchetta",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "campo-de-fiori",
+          "name": "Campo de' Fiori",
+          "kind": "market",
+          "dishIds": [
+            "suppli",
+            "pizza-al-taglio"
+          ],
+          "coordinates": {
+            "lat": 41.8952,
+            "lng": 12.4723
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Campo_de%27_Fiori",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "eataly-rome",
+          "name": "Eataly Rome",
+          "kind": "food_hall",
+          "dishIds": [
+            "suppli",
+            "porchetta"
+          ],
+          "coordinates": {
+            "lat": 41.8697,
+            "lng": 12.4746
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Eataly",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "vPVqo3MvfVo",
+          "dishIds": [
+            "suppli",
+            "pizza-al-taglio",
+            "porchetta"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hALkrwDTcDA",
+          "dishIds": [
+            "suppli",
+            "porchetta"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "sao-paulo",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "coxinha",
+          "name": "Coxinha",
+          "category": "fried",
+          "description": "A teardrop-shaped fried croquette of dough filled with shredded chicken. The quintessential Brazilian street salgado.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Coxinha",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pastel",
+          "name": "Pastel de Feira",
+          "category": "fried",
+          "description": "A thin, crispy fried turnover stuffed with cheese, meat or palm heart. A must-eat at São Paulo's open-air street markets.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pastel_(Brazilian_food)",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "bauru",
+          "name": "Bauru",
+          "category": "sandwich",
+          "description": "A French-bun sandwich with roast beef, melted cheese, tomato and pickles. Created in São Paulo, it is a classic market sandwich.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Bauru_(sandwich)",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercadao",
+          "name": "Municipal Market of São Paulo",
+          "kind": "market",
+          "dishIds": [
+            "coxinha",
+            "pastel",
+            "bauru"
+          ],
+          "coordinates": {
+            "lat": -23.5417,
+            "lng": -46.6292
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Municipal_Market_of_S%C3%A3o_Paulo",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "liberdade",
+          "name": "Liberdade Street Market",
+          "kind": "market",
+          "dishIds": [
+            "coxinha",
+            "pastel",
+            "bauru"
+          ],
+          "coordinates": {
+            "lat": -23.5558,
+            "lng": -46.6333
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Liberdade_(district_of_S%C3%A3o_Paulo)",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "tIdfgAaztMk",
+          "dishIds": [
+            "coxinha",
+            "pastel",
+            "bauru"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "Wtx9W5AQYoQ",
+          "dishIds": [
+            "coxinha",
+            "pastel",
+            "bauru"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -277,7 +3854,12 @@
           "category": "fermented",
           "description": "Fermented napa cabbage and radish seasoned with chili, garlic and ginger. Served with nearly every Korean meal, including market stalls.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Kimchi", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Kimchi",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -287,7 +3869,12 @@
           "category": "rice",
           "description": "Warm rice topped with seasoned vegetables, egg and chili paste, mixed at the table. A balanced bowl found at stalls and counters citywide.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Bibimbap", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Bibimbap",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -297,7 +3884,12 @@
           "category": "street_snack",
           "description": "Chewy rice cakes simmered in sweet-spicy chili sauce. Seoul's defining street snack, sold from bubbling trays at every market.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Tteokbokki", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tteokbokki",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -307,7 +3899,12 @@
           "category": "rolls",
           "description": "Rice and fillings rolled in seaweed and sliced into bites. Gwangjang's mini mayak rolls are famously addictive.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Gimbap", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Gimbap",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         }
@@ -317,8 +3914,15 @@
           "id": "gwangjang-market",
           "name": "Gwangjang Market",
           "kind": "market",
-          "dishIds": ["tteokbokki", "gimbap", "bibimbap"],
-          "coordinates": { "lat": 37.5711, "lng": 126.9936 },
+          "dishIds": [
+            "tteokbokki",
+            "gimbap",
+            "bibimbap"
+          ],
+          "coordinates": {
+            "lat": 37.5711,
+            "lng": 126.9936
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/Gwangjang_Market",
@@ -329,8 +3933,15 @@
           "id": "namdaemun-market",
           "name": "Namdaemun Market",
           "kind": "market",
-          "dishIds": ["bibimbap", "kimchi", "tteokbokki"],
-          "coordinates": { "lat": 37.559, "lng": 126.977 },
+          "dishIds": [
+            "bibimbap",
+            "kimchi",
+            "tteokbokki"
+          ],
+          "coordinates": {
+            "lat": 37.559,
+            "lng": 126.977
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/List_of_markets_in_South_Korea",
@@ -341,7 +3952,9 @@
       "videos": [
         {
           "id": "MUnAV-w5_-I",
-          "dishIds": ["tteokbokki"],
+          "dishIds": [
+            "tteokbokki"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -349,7 +3962,9 @@
         },
         {
           "id": "WGrKS1V_PbI",
-          "dishIds": ["tteokbokki"],
+          "dishIds": [
+            "tteokbokki"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -357,8 +3972,236 @@
         },
         {
           "id": "f9X9-3CetaM",
-          "dishIds": ["gimbap"],
-          "placeIds": ["gwangjang-market"],
+          "dishIds": [
+            "gimbap"
+          ],
+          "placeIds": [
+            "gwangjang-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "singapore",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "chicken-rice",
+          "name": "Hainanese Chicken Rice",
+          "category": "rice",
+          "description": "Poached chicken served with fragrant oiled rice, chili sauce and ginger paste. Considered Singapore's national hawker dish.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hainanese_chicken_rice",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "laksa",
+          "name": "Laksa",
+          "category": "noodles",
+          "description": "A spicy coconut-curry noodle soup with shrimp, fish cake and bean sprouts. Rich and aromatic, it is a hawker-centre favorite.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Laksa",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "satay",
+          "name": "Satay",
+          "category": "grill",
+          "description": "Grilled marinated meat skewers served with peanut sauce, cucumber and rice cakes. A smoky evening street and hawker classic.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Satay",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "lau-pa-sat",
+          "name": "Lau Pa Sat",
+          "kind": "food_hall",
+          "dishIds": [
+            "chicken-rice",
+            "laksa",
+            "satay"
+          ],
+          "coordinates": {
+            "lat": 1.2825,
+            "lng": 103.8507
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Lau_Pa_Sat",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "maxwell-food-centre",
+          "name": "Maxwell Food Centre",
+          "kind": "food_hall",
+          "dishIds": [
+            "chicken-rice",
+            "laksa",
+            "satay"
+          ],
+          "coordinates": {
+            "lat": 1.2803,
+            "lng": 103.8447
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Maxwell_Food_Centre",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "V0LvbAdgX6I",
+          "dishIds": [
+            "chicken-rice",
+            "laksa",
+            "satay"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "rayQtLLlp8M",
+          "dishIds": [
+            "chicken-rice",
+            "laksa",
+            "satay"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "stockholm",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "tunnbrodsrulle",
+          "name": "Tunnbrödsrulle",
+          "category": "sausage",
+          "description": "Hot dog and mashed potatoes rolled in tunnbröd flatbread with shrimp salad, ketchup, mustard and crispy onions. Stockholm's most famous street-food mash-up.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hot_dog_variations",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "toast-skagen",
+          "name": "Toast Skagen",
+          "category": "seafood",
+          "description": "Toasted bread topped with prawns, mayonnaise, dill and lemon, named after Skagen. Served as an upscale street and market snack in Stockholm halls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Toast_Skagen",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "kottbullar",
+          "name": "Swedish meatballs",
+          "category": "meat",
+          "description": "Small seasoned meatballs served with lingonberries, gravy and mashed potatoes. Offered in Stockholm food halls as a lunch box and street portion.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Swedish_meatballs",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "ostermalmshallen",
+          "name": "Östermalms Saluhall",
+          "kind": "food_hall",
+          "dishIds": [
+            "toast-skagen",
+            "kottbullar"
+          ],
+          "coordinates": {
+            "lat": 59.3355,
+            "lng": 18.0885
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/%C3%96stermalm",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hotorgshallen",
+          "name": "Hötorgshallen",
+          "kind": "food_hall",
+          "dishIds": [
+            "tunnbrodsrulle",
+            "kottbullar"
+          ],
+          "coordinates": {
+            "lat": 59.3349,
+            "lng": 18.0629
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/H%C3%B6torget",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "UvwoBBSQ3Zc",
+          "dishIds": [
+            "tunnbrodsrulle",
+            "kottbullar"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "S_C_rS6cFUw",
+          "dishIds": [
+            "toast-skagen",
+            "kottbullar"
+          ],
+          "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
           "status": "published"
@@ -375,7 +4218,12 @@
           "category": "noodles",
           "description": "Slow-braised beef in rich broth with wheat noodles and pickled greens. Taiwan's national bowl, with shops competing for the title of best.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Beef_noodle_soup", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Beef_noodle_soup",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -385,7 +4233,12 @@
           "category": "dumplings",
           "description": "Thin-skinned soup dumplings filled with pork and hot broth, eaten with ginger and vinegar. A Taipei obsession from night markets to famed dining rooms.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Xiaolongbao", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Xiaolongbao",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         },
@@ -395,7 +4248,12 @@
           "category": "seafood",
           "description": "Eggs fried with oysters and starch into a chewy omelet with sweet sauce. A night-market classic queued for across Taipei.",
           "dietaryClaims": [],
-          "sources": [{ "url": "https://en.wikipedia.org/wiki/Oyster_omelette", "checkedAt": "2026-10-08" }],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Oyster_omelette",
+              "checkedAt": "2026-10-08"
+            }
+          ],
           "verifiedAt": "2026-10-08",
           "status": "published"
         }
@@ -405,8 +4263,13 @@
           "id": "shilin-night-market",
           "name": "Shilin Night Market",
           "kind": "market",
-          "dishIds": ["oyster-omelette"],
-          "coordinates": { "lat": 25.0866, "lng": 121.5254 },
+          "dishIds": [
+            "oyster-omelette"
+          ],
+          "coordinates": {
+            "lat": 25.0866,
+            "lng": 121.5254
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://en.wikipedia.org/wiki/Shilin_Night_Market",
@@ -417,8 +4280,14 @@
           "id": "raohe-night-market",
           "name": "Raohe Street Night Market",
           "kind": "market",
-          "dishIds": ["xiaolongbao", "oyster-omelette"],
-          "coordinates": { "lat": 25.0475, "lng": 121.5686 },
+          "dishIds": [
+            "xiaolongbao",
+            "oyster-omelette"
+          ],
+          "coordinates": {
+            "lat": 25.0475,
+            "lng": 121.5686
+          },
           "osmType": null,
           "osmId": null,
           "sourceUrl": "https://www.wikidata.org/wiki/Q707622",
@@ -429,7 +4298,9 @@
       "videos": [
         {
           "id": "C5YVbly3fu4",
-          "dishIds": ["beef-noodle-soup"],
+          "dishIds": [
+            "beef-noodle-soup"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -437,7 +4308,9 @@
         },
         {
           "id": "2R3BOoazCtA",
-          "dishIds": ["xiaolongbao"],
+          "dishIds": [
+            "xiaolongbao"
+          ],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -445,8 +4318,357 @@
         },
         {
           "id": "PxXKTd0BifI",
-          "dishIds": ["xiaolongbao"],
-          "placeIds": ["raohe-night-market"],
+          "dishIds": [
+            "xiaolongbao"
+          ],
+          "placeIds": [
+            "raohe-night-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "tokyo",
+      "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia sources, Wikidata/Wikipedia coordinates, YouTube oEmbed embed check). Market coordinates are representative points; see sourceUrl.",
+      "dishes": [
+        {
+          "id": "sushi",
+          "name": "Sushi",
+          "category": "seafood",
+          "description": "Vinegared rice served with raw fish, seafood or vegetables. Tokyo's Edo-mae tradition shaped the compact hand-pressed style served at counters and markets.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Sushi",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "ramen",
+          "name": "Ramen",
+          "category": "noodles",
+          "description": "Wheat noodles in broth topped with pork, egg, seaweed or vegetables. Tokyo hosts hundreds of shops, from classic shoyu counters to rich tonkotsu bowls.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Ramen",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tempura",
+          "name": "Tempura",
+          "category": "fried",
+          "description": "Lightly battered seafood and vegetables, fried crisp and served with dipping sauce. An Edo-period Tokyo street-food classic still served at counters across the city.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Tempura",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "tsukiji-outer-market",
+          "name": "Tsukiji Outer Market",
+          "kind": "market",
+          "dishIds": [
+            "sushi"
+          ],
+          "coordinates": {
+            "lat": 35.6682,
+            "lng": 139.7739
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Tsukiji",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "toyosu-market",
+          "name": "Toyosu Market",
+          "kind": "market",
+          "dishIds": [
+            "sushi"
+          ],
+          "coordinates": {
+            "lat": 35.6433,
+            "lng": 139.7817
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Toyosu_Market",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "LyxSj3O4hLs",
+          "dishIds": [
+            "ramen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "CSeqv96hpTw",
+          "dishIds": [
+            "sushi"
+          ],
+          "placeIds": [
+            "tsukiji-outer-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "EVgVdCrJGgc",
+          "dishIds": [
+            "ramen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "vienna",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "wiener-schnitzel",
+          "name": "Wiener Schnitzel",
+          "category": "cutlet",
+          "description": "Thin veal cutlet breaded and pan-fried golden, served with lemon and potato salad. Vienna's classic, also sold in portable schnitzel rolls.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Wiener_schnitzel",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "kaseskrainer",
+          "name": "Käsekrainer",
+          "category": "sausage",
+          "description": "Smoked pork sausage filled with cheese cubes that melt when grilled. The star of Vienna's Würstelstände, served with mustard and bread.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/K%C3%A4sekrainer",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "wiener-wurstchen",
+          "name": "Wiener Würstchen",
+          "category": "sausage",
+          "description": "Slender smoked frankfurter-type sausage, ancestor of the hot dog. Ordered sliced or in a roll at sausage stands citywide.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Wiener_W%C3%BCrstchen",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "naschmarkt",
+          "name": "Naschmarkt",
+          "kind": "market",
+          "dishIds": [
+            "wiener-schnitzel",
+            "kaseskrainer",
+            "wiener-wurstchen"
+          ],
+          "coordinates": {
+            "lat": 48.1995,
+            "lng": 16.3624
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Naschmarkt",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "stephansplatz-stands",
+          "name": "Stephansplatz Würstelstände",
+          "kind": "street_stall",
+          "dishIds": [
+            "kaseskrainer",
+            "wiener-wurstchen"
+          ],
+          "coordinates": {
+            "lat": 48.2082,
+            "lng": 16.3738
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Stephansplatz",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "1md9KcnhrUk",
+          "dishIds": [
+            "wiener-schnitzel",
+            "kaseskrainer"
+          ],
+          "placeIds": [
+            "naschmarkt"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "6rLJ3_fFRe4",
+          "dishIds": [
+            "wiener-schnitzel",
+            "kaseskrainer",
+            "wiener-wurstchen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "warsaw",
+      "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
+      "dishes": [
+        {
+          "id": "zapiekanka",
+          "name": "Zapiekanka",
+          "category": "sandwich",
+          "description": "Toasted open baguette topped with mushrooms, cheese and ketchup. Poland's iconic communist-era street toast, still dominant in Warsaw.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Zapiekanka",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pierogi",
+          "name": "Pierogi",
+          "category": "dumplings",
+          "description": "Boiled or fried dumplings filled with potato and cheese, meat, cabbage or berries. Served with sour cream at Warsaw milk bars and street stands.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Pierogi",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "kielbasa",
+          "name": "Kiełbasa",
+          "category": "sausage",
+          "description": "Polish smoked sausage grilled and served in a bun with mustard and pickles. A Warsaw street-grill and market staple.",
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Kielbasa",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "hala-koszyki",
+          "name": "Hala Koszyki",
+          "kind": "food_hall",
+          "dishIds": [
+            "zapiekanka",
+            "pierogi"
+          ],
+          "coordinates": {
+            "lat": 52.2215,
+            "lng": 21.0118
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Koszyki_Hall",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hala-mirowska",
+          "name": "Hala Mirowska",
+          "kind": "market",
+          "dishIds": [
+            "pierogi",
+            "kielbasa"
+          ],
+          "coordinates": {
+            "lat": 52.233,
+            "lng": 21.001
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Hale_Mirowskie",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "bPFQhISuTYQ",
+          "dishIds": [
+            "pierogi",
+            "zapiekanka"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "Kq5nc4cPPUc",
+          "dishIds": [
+            "pierogi",
+            "kielbasa"
+          ],
+          "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
           "status": "published"
