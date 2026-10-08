@@ -74,7 +74,7 @@ button:focus-visible, input:focus-visible {
 
 .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; height: 70px; padding: 0 18px; border-bottom: 1px solid rgba(255,255,255,.13); }
 .brand { display: inline-flex; min-width: 0; overflow: hidden; justify-self: start; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; cursor: pointer; font-weight: 700; font-size: 16px; letter-spacing: .18em; white-space: nowrap; }
-.brand-logo { display: block; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; object-fit: cover; }
+.brand-logo { display: block; width: 24px; height: 24px; flex: 0 0 24px; object-fit: contain; }
 .journey-state { display: none; align-items: center; gap: 9px; font: 400 11px "DM Mono", monospace; letter-spacing: .08em; text-transform: uppercase; }
 .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 0 4px rgba(215,255,67,.12); animation: pulse 1.8s infinite; }
 .top-time { margin-left: 10px; color: var(--text-muted); }
@@ -762,6 +762,10 @@ button:focus-visible, input:focus-visible {
   .city-intro { left: 42px; width: 45vw; }
   .city-intro h1 { font-size: clamp(40px, 5.5vw, 58px); }
   .hint { left: 42px; }
+}
+
+@media (max-width: 500px) {
+  .brand span { display: none; }
 }
 
 @media (max-width: 800px) {

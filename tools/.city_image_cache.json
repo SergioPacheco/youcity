@@ -1,0 +1,1746 @@
+{
+  "lisbon": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Lisboa_-_Portugal_%2852597836992%29.jpg/1920px-Lisboa_-_Portugal_%2852597836992%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18091",
+    "author": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:49:55.269164+00:00"
+  },
+  "berlin": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg/1920px-Museumsinsel_Berlin_Juli_2021_1_%28cropped%29_b.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=3354",
+    "author": "Kasa Fue derivative work: Georgfotoart",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:04.990733+00:00"
+  },
+  "sao-paulo": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Marginal_Pinheiros_e_Jockey_Club.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=390875",
+    "author": "Agent010",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:05.719861+00:00"
+  },
+  "abu-dhabi": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Abu_dhabi_skylines_2014.jpg/1920px-Abu_dhabi_skylines_2014.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18950756",
+    "author": "Wadiia",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:06.325716+00:00"
+  },
+  "acapulco": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Skyscrapers_in_Acapulco_Diamante.jpg/1920px-Skyscrapers_in_Acapulco_Diamante.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1446",
+    "author": "Mitrush",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:50:06.945213+00:00"
+  },
+  "ahmedabad": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8e/Sabarmati_riverside.jpg/1920px-Sabarmati_riverside.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=206337",
+    "author": "Tarun802",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:07.454613+00:00"
+  },
+  "albuquerque": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Albuquerque%2C_New_Mexico_skyline.jpg/1920px-Albuquerque%2C_New_Mexico_skyline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=51278",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:08.068472+00:00"
+  },
+  "amritsar": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Golden_Temple_Amritsar_Gurudwara_%28cropped%29.jpg/1920px-Golden_Temple_Amritsar_Gurudwara_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=447472",
+    "author": "Shubhashish",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:08.649992+00:00"
+  },
+  "amsterdam": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png/1920px-Imagen_de_los_canales_conc%C3%A9ntricos_en_%C3%81msterdam.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=844",
+    "author": "Andrés Barrios",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:09.195955+00:00"
+  },
+  "anchorage": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Anchorage%2C_Alaska_skyline.jpg/1920px-Anchorage%2C_Alaska_skyline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=7004698",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:09.910717+00:00"
+  },
+  "angeles-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Angeles_Lourdes_Sur%2C_Mount_Arayat_drone_%28Angeles%2C_Pampanga%3B_02-15-2026%29.jpg/1920px-Angeles_Lourdes_Sur%2C_Mount_Arayat_drone_%28Angeles%2C_Pampanga%3B_02-15-2026%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=842728",
+    "author": "Patrickroque01",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:10.505281+00:00"
+  },
+  "ankara": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Ankara_from_bus_station.jpg/1920px-Ankara_from_bus_station.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=802",
+    "author": "Boubacar Amadou Cisse",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:11.037458+00:00"
+  },
+  "antalya": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Falezlerden_Antalya_Konyaalt%C4%B1_Plaj%C4%B1na_do%C4%9Fru_bir_g%C3%B6r%C3%BCn%C3%BCm.jpg/1920px-Falezlerden_Antalya_Konyaalt%C4%B1_Plaj%C4%B1na_do%C4%9Fru_bir_g%C3%B6r%C3%BCn%C3%BCm.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=361527",
+    "author": "Esginmurat",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:11.687157+00:00"
+  },
+  "asheville": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Asheville%2C_North_Carolina.jpg/1920px-Asheville%2C_North_Carolina.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=127718",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:12.370881+00:00"
+  },
+  "aspen": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Snowbowlaspens.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=33908941",
+    "author": "Doug Dolde at English Wikipedia",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:50:12.982872+00:00"
+  },
+  "athens": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Athens_Acropolis_at_Daybreak.jpg/1920px-Athens_Acropolis_at_Daybreak.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1216",
+    "author": "Andrew Parlette",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:13.563541+00:00"
+  },
+  "atlanta": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/A2ATL20250614-0721_%28cropped%29.jpg/1920px-A2ATL20250614-0721_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=3138",
+    "author": "AtlChampion",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:14.212849+00:00"
+  },
+  "atlantic-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/A_sunset_view_of_the_beach_in_Atlantic_City%2C_NJ.jpg/1920px-A_sunset_view_of_the_beach_in_Atlantic_City%2C_NJ.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=106211",
+    "author": "Bruce Emmerling",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:14.724012+00:00"
+  },
+  "auckland": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Auckland_skyline_-_May_2024_%282%29.jpg/1920px-Auckland_skyline_-_May_2024_%282%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18660332",
+    "author": "elpinto007",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:50:15.339819+00:00"
+  },
+  "bacolod": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/San_Sebastian_Cathedral_Bacolod_%28Rizal_Street%2C_Bacolod%2C_Negros_Occidental%3B_10-31-2022%29.jpg/1920px-San_Sebastian_Cathedral_Bacolod_%28Rizal_Street%2C_Bacolod%2C_Negros_Occidental%3B_10-31-2022%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=298840",
+    "author": "Patrickroque01",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:16.135408+00:00"
+  },
+  "baguio": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Baguio_city_proper_overlooking_Burnham-Harrison_side_%28Baguio_city%3B_12-04-2022%29.jpg/1920px-Baguio_city_proper_overlooking_Burnham-Harrison_side_%28Baguio_city%3B_12-04-2022%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=162480",
+    "author": "Patrickroque01",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:16.785596+00:00"
+  },
+  "baltimore": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Fell%27s_Point_Aerial_2022.jpg/1920px-Fell%27s_Point_Aerial_2022.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=26997138",
+    "author": "Matthew Binebrink",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:17.489208+00:00"
+  },
+  "bangalore": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/View_from_Visvesvaraya_Industrial_and_Technological_Museum_%282025%29_02.jpg/1920px-View_from_Visvesvaraya_Industrial_and_Technological_Museum_%282025%29_02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=44275267",
+    "author": "Gpkp",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:18.104009+00:00"
+  },
+  "barcelona": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Evening_light_over_Barcelona.jpg/1920px-Evening_light_over_Barcelona.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=4443",
+    "author": "M McBey",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:18.720337+00:00"
+  },
+  "basel": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/Basel_-_M%C3%BCnsterpfalz1.jpg/1920px-Basel_-_M%C3%BCnsterpfalz1.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=4911",
+    "author": "Taxiarchos228",
+    "license": "FAL",
+    "fetched_at": "2026-10-07T22:50:19.311893+00:00"
+  },
+  "beijing": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Skyline_of_Beijing_CBD_with_B-5906_approaching_%2820211016171955%29_%281%29.jpg/1920px-Skyline_of_Beijing_CBD_with_B-5906_approaching_%2820211016171955%29_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18603746",
+    "author": "N509FZ",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:20.049736+00:00"
+  },
+  "belem": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/L1010748-L1010765_copie_%28cropped%29.jpg/1920px-L1010748-L1010765_copie_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=409573",
+    "author": "Burn86",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:50:20.683978+00:00"
+  },
+  "belfast": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Belfast_Skyline_City_Quays.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=5046",
+    "author": "Davidw1406",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:50:21.278499+00:00"
+  },
+  "belo-horizonte": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Praca_do_Papa%2C_Belo_Horizonte_%28cropped%292.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=82198",
+    "author": "Marina Campos Vinhal",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:21.891739+00:00"
+  },
+  "beverly-hills": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/Beverly_Wilshire_Hotel_%2815676919512%29.jpg/1920px-Beverly_Wilshire_Hotel_%2815676919512%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=75346",
+    "author": "Tony Hisgett from Birmingham, UK",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:22.614045+00:00"
+  },
+  "bhopal": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/32/Deewali_New_market.jpg/1920px-Deewali_New_market.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=47946",
+    "author": "Deepak sankat",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:23.326198+00:00"
+  },
+  "bordeaux": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Bordeaux_Place_de_la_Bourse_de_nuit.jpg/1920px-Bordeaux_Place_de_la_Bourse_de_nuit.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=4097",
+    "author": "Mariette",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:50:24.043325+00:00"
+  },
+  "boston": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/ISH_WC_Boston4.jpg/1920px-ISH_WC_Boston4.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=24437894",
+    "author": "Ian Howard",
+    "license": "CC BY 2.5",
+    "fetched_at": "2026-10-07T22:50:24.557018+00:00"
+  },
+  "brasilia": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Planalto_Central_%28cropped%29.jpg/1920px-Planalto_Central_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=4752",
+    "author": "Arturdiasr",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:25.109705+00:00"
+  },
+  "brisbane": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg/1920px-Brisbane_CBD_seen_from_Kangaroo_Point%2C_2024%2C_01_%282%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=192093",
+    "author": "Chris Olszewski",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:25.680452+00:00"
+  },
+  "bristol": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Clifton_Suspension_Bridge_and_the_Observatory_in_Bristol%2C_England.jpg/1920px-Clifton_Suspension_Bridge_and_the_Observatory_in_Bristol%2C_England.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=36741",
+    "author": "Chris Lathom-Sharp",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:26.193941+00:00"
+  },
+  "bronx": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Yankee_Stadium_overhead_2010.jpg/1920px-Yankee_Stadium_overhead_2010.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=3338",
+    "author": "vtravelled.com",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:26.728066+00:00"
+  },
+  "brooklyn": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Brooklyn_skyline.jpg/1920px-Brooklyn_skyline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=47384",
+    "author": "Sashimi-b",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:27.402194+00:00"
+  },
+  "budapest": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/View_from_Gell%C3%A9rt_Hill_to_the_Danube%2C_Hungary_-_Budapest_%2828493220635%29.jpg/1920px-View_from_Gell%C3%A9rt_Hill_to_the_Danube%2C_Hungary_-_Budapest_%2828493220635%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=36787",
+    "author": "Visions of Domino",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:28.036224+00:00"
+  },
+  "buenos-aires": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Puerto_Madero%2C_Buenos_Aires_%2840689219792%29_%28cropped%29.jpg/1920px-Puerto_Madero%2C_Buenos_Aires_%2840689219792%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=255919",
+    "author": "Deensel",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:28.614889+00:00"
+  },
+  "cairo": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/Cairo_Opera_House%2C_Al_Hurriyah_Park_and_the_Nile_river_%2814797782354%29.jpg/1920px-Cairo_Opera_House%2C_Al_Hurriyah_Park_and_the_Nile_river_%2814797782354%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=6293",
+    "author": "Jorge Láscar from Melbourne, Australia",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:29.265110+00:00"
+  },
+  "campinas": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/250717_Fotos_Centro_de_Campinas_foto_Carlos_Bassan_004_%2836029962481%29.jpg/1920px-250717_Fotos_Centro_de_Campinas_foto_Carlos_Bassan_004_%2836029962481%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=63514",
+    "author": "Prefeitura Campinas",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:50:29.881095+00:00"
+  },
+  "cancun": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d8/Cancun_Strand_Luftbild_%2822143397586%29.jpg/1920px-Cancun_Strand_Luftbild_%2822143397586%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=288134",
+    "author": "dronepicr",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:30.596551+00:00"
+  },
+  "cape-town": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/Camps_bay_%2853460319478%29_%28cropped%29.jpg/1920px-Camps_bay_%2853460319478%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=6653",
+    "author": "Der Berzerker from Washington, DC, USA",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:50:31.108492+00:00"
+  },
+  "cebu-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Cebu_city_skyline_2025.jpg/1920px-Cebu_city_skyline_2025.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=285868",
+    "author": "DisRaptor18",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:50:31.727735+00:00"
+  },
+  "chandigarh": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/76/Open_Hand_monument%2C_Chandigarh.jpg/1920px-Open_Hand_monument%2C_Chandigarh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=211915",
+    "author": "Raakesh Blokhra",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:50:32.336447+00:00"
+  },
+  "chicago": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Chicago_River_ferry_b.jpg/1920px-Chicago_River_ferry_b.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=6886",
+    "author": "John Picken derivative work: Georgfotoart",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:33.377459+00:00"
+  },
+  "cincinnati": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Downtown_Cincinnati_viewed_from_Devou_Park_%28cropped%29.jpg/1920px-Downtown_Cincinnati_viewed_from_Devou_Park_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18522615",
+    "author": "EEJCC",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:33.974995+00:00"
+  },
+  "cleveland": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Cleveland_skyline_from_Lakewood_Park%2C_January_2026.jpg/1920px-Cleveland_skyline_from_Lakewood_Park%2C_January_2026.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=5951",
+    "author": "Erik Drost",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:34.589778+00:00"
+  },
+  "curitiba": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/Tangu%C3%A1_Curitiba.jpg/1920px-Tangu%C3%A1_Curitiba.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=439002",
+    "author": "Vitor Hirota",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:50:35.614521+00:00"
+  },
+  "dakar": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/46/Dakar-Ind%C3%A9pendance.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=44251",
+    "author": "mostroneddo",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:37.456917+00:00"
+  },
+  "dallas": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Dallas_Texas_skyline_from_Reunion_Tower_September_2025_%28cropped%29.png/1920px-Dallas_Texas_skyline_from_Reunion_Tower_September_2025_%28cropped%29.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=53838",
+    "author": "IcedCowboyCoffee",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:50:38.015127+00:00"
+  },
+  "davos": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/50/City_of_Davos.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=99184",
+    "author": "MadGeographer",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:50:38.584785+00:00"
+  },
+  "delhi": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/Jama_Masjid_2011.jpg/1920px-Jama_Masjid_2011.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=37756",
+    "author": "Marcin Białek",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:39.191698+00:00"
+  },
+  "denver": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/37/Denver%2C_Colorado_skyline_%28cropped_3x5%29.jpg/1920px-Denver%2C_Colorado_skyline_%28cropped_3x5%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=8522",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:39.914997+00:00"
+  },
+  "detroit": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Detroit_Skyline_from_Windsor_2025-09-01.jpg/1920px-Detroit_Skyline_from_Windsor_2025-09-01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=8687",
+    "author": "TheWxResearcher",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:50:40.631898+00:00"
+  },
+  "dubai": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/c/c7/Burj_Khalifa_2021.jpg/1920px-Burj_Khalifa_2021.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=211583",
+    "author": "Francisco Anzola",
+    "license": "CC-BY-2.0",
+    "fetched_at": "2026-10-07T22:50:41.349626+00:00"
+  },
+  "dublin": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Dublin_-_aerial_-_2025-07-07_01.jpg/1920px-Dublin_-_aerial_-_2025-07-07_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=8504",
+    "author": "瑞丽江的河水",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:41.835759+00:00"
+  },
+  "dunedin": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Dunedin-Nueva_Zelanda01.JPG/1920px-Dunedin-Nueva_Zelanda01.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=628345",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:50:42.361620+00:00"
+  },
+  "edinburgh": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Skyline_of_Edinburgh.jpg/1920px-Skyline_of_Edinburgh.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=9602",
+    "author": "Andrew Colin",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:42.986209+00:00"
+  },
+  "faisalabad": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f1/Clock_Tower_Faisalabad_by_Usman_Nadeem.jpg/1920px-Clock_Tower_Faisalabad_by_Usman_Nadeem.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=401880",
+    "author": "Usman Nadeem",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:43.603950+00:00"
+  },
+  "fortaleza": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Fortaleza%2C_Brazil_%284%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=11169",
+    "author": "ME/Portal da Copa",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:50:44.317222+00:00"
+  },
+  "frankfurt": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Frankfurt_am_Main%2C_Central_business_district_%282024%29.jpg/1920px-Frankfurt_am_Main%2C_Central_business_district_%282024%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=10992",
+    "author": "Dr. Thomas Liptak",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:45.137187+00:00"
+  },
+  "general-santos-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Gensan_Dadiangas_South%2C_P._Acharon_Boulevard%2C_Gensan_Public_Market_drone_%28General_Santos_City%3B_03-24-2026%29.jpg/1920px-Gensan_Dadiangas_South%2C_P._Acharon_Boulevard%2C_Gensan_Public_Market_drone_%28General_Santos_City%3B_03-24-2026%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=308142",
+    "author": "Patrickroque01",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:45.752565+00:00"
+  },
+  "geneva": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Geneve_2005_001_Ork.ch.jpg/1920px-Geneve_2005_001_Ork.ch.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=12521",
+    "author": "fr:Utilisateur:Stéphane_Pecorini",
+    "license": "CC BY-SA 2.0 fr",
+    "fetched_at": "2026-10-07T22:50:46.367512+00:00"
+  },
+  "goa": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/BeachFun.jpg/1920px-BeachFun.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=40010153",
+    "author": "Sam 8393",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:46.980505+00:00"
+  },
+  "guadalajara": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Panor%C3%A1mica_Guadalajara_desde_edificio_Bansi_hacia_norte_%28cropped%29.jpg/1920px-Panor%C3%A1mica_Guadalajara_desde_edificio_Bansi_hacia_norte_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=73209",
+    "author": "Isacdaavid",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:47.803216+00:00"
+  },
+  "guatemala": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ec/Flag_of_Guatemala.svg/1920px-Flag_of_Guatemala.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=17238567",
+    "author": "K21edgo",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:50:48.338728+00:00"
+  },
+  "guwahati": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/11/Guwahati_citysky.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=839289",
+    "author": "Rituraj Bhuyan from Guwahati, India",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:50:48.893995+00:00"
+  },
+  "hamburg": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Hamburg%2C_Landungsbr%C3%BCcken_--_2016_--_3131-7.jpg/1920px-Hamburg%2C_Landungsbr%C3%BCcken_--_2016_--_3131-7.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=13467",
+    "author": "Dietmar Rabich",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:49.402890+00:00"
+  },
+  "havana": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/1/12/DJI_0197_crp_wiki.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=49719",
+    "author": "RenaatPeeters",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:50.359627+00:00"
+  },
+  "hawaii": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Flag_of_Hawaii.svg/1920px-Flag_of_Hawaii.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=13270",
+    "author": "Dbenbenn",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:50:50.940816+00:00"
+  },
+  "houston": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Texas_medical_center.jpg/1920px-Texas_medical_center.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=13774",
+    "author": "Katie Haugland Brown",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:51.690508+00:00"
+  },
+  "hyderabad": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Aerial_view_of_Durgam_cheruvu_and_Hitech_CIty.jpg/1920px-Aerial_view_of_Durgam_cheruvu_and_Hitech_CIty.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=37534",
+    "author": "iMahesh",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:52.408143+00:00"
+  },
+  "ibiza": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/02/Ibiza_flag.svg/1920px-Ibiza_flag.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=63624",
+    "author": "Javitomad , HansenBCN",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:53.021636+00:00"
+  },
+  "indianapolis": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Indianapolis-1872529_1920_%28cropped%29.jpg/1920px-Indianapolis-1872529_1920_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=57707",
+    "author": "Carol M. Highsmith",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:50:53.630477+00:00"
+  },
+  "innsbruck": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/B%C3%BCrgerstra%C3%9Fe_26%2B24_%28BT0A2830%29.jpg/1920px-B%C3%BCrgerstra%C3%9Fe_26%2B24_%28BT0A2830%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=55857",
+    "author": "Simon Legner ( User:simon04 )",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:54.251919+00:00"
+  },
+  "islamabad": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Faisal_Mosque%2C_Islamabad_III.jpg/1920px-Faisal_Mosque%2C_Islamabad_III.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=51153",
+    "author": "Fassifarooq",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:55.275235+00:00"
+  },
+  "istanbul": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/Historical_peninsula_and_modern_skyline_of_Istanbul.jpg/1920px-Historical_peninsula_and_modern_skyline_of_Istanbul.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=3391396",
+    "author": "Hunanuk",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:50:55.891761+00:00"
+  },
+  "izmir": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/50/Cumhuriyet_Square.jpg/1920px-Cumhuriyet_Square.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=580279",
+    "author": "Michael ksk",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:50:56.386377+00:00"
+  },
+  "jacksonville": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a1/Jacksonville_skyline.jpg/1920px-Jacksonville_skyline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=60613",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:57.015639+00:00"
+  },
+  "jaipur": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg/1920px-East_facade_Hawa_Mahal_Jaipur_from_ground_level_%28July_2022%29_-_img_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=166537",
+    "author": "Chainwit.",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:50:57.630568+00:00"
+  },
+  "jakarta": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Bundaran_Hotel_Indonesia_%282025%29_%28cropped%29.jpg/1920px-Bundaran_Hotel_Indonesia_%282025%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=16275",
+    "author": "Medelam",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:50:58.154848+00:00"
+  },
+  "johannesburg": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Johannesburg_skyline_2017.jpg/1920px-Johannesburg_skyline_2017.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=58893",
+    "author": "Mark Hillary",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:50:58.962186+00:00"
+  },
+  "karachi": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Clifton_Karachi_View.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=17123",
+    "author": "Ktownboy103",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:50:59.485784+00:00"
+  },
+  "kochi": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8f/Kochi_Skyline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=56274",
+    "author": "Fsquares (The Ibrahims)",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:00.190736+00:00"
+  },
+  "kolkata": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Kolkata_maidan.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=47905",
+    "author": "NalGup20",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:00.688526+00:00"
+  },
+  "kuala-lumpur": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Bukit_Bintang_junction_in_2024_2.jpg/1920px-Bukit_Bintang_junction_in_2024_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=16854",
+    "author": "Renek78",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:51:01.418538+00:00"
+  },
+  "kyiv": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%B7_%D1%85%D0%B8%D0%BC%D0%B5%D1%80%D0%B0%D0%BC%D0%B8%2C_%D1%81%D0%B5%D1%80%D0%BF%D0%B5%D0%BD%D1%8C_2019.jpg/1920px-%D0%91%D1%83%D0%B4%D0%B8%D0%BD%D0%BE%D0%BA_%D0%B7_%D1%85%D0%B8%D0%BC%D0%B5%D1%80%D0%B0%D0%BC%D0%B8%2C_%D1%81%D0%B5%D1%80%D0%BF%D0%B5%D0%BD%D1%8C_2019.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=585629",
+    "author": "Larmarphoto",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:02.136794+00:00"
+  },
+  "lahore": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Lahore_Fort_view_from_Baradari.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=125315",
+    "author": "Rohaan Bhatti",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:02.868884+00:00"
+  },
+  "las-vegas": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/da/Las_Vegas_from_above_%2840064746644%29.jpg/1920px-Las_Vegas_from_above_%2840064746644%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=47737",
+    "author": "Mike McBey",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:03.422764+00:00"
+  },
+  "lauterbrunnen": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/1_lauterbrunnen_valley_wengen_2022.jpg/1920px-1_lauterbrunnen_valley_wengen_2022.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=290566",
+    "author": "Chensiyuan",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:03.933591+00:00"
+  },
+  "liverpool": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Pier_Head%2C_Liverpool_-_geograph.org.uk_-_3059094.jpg/1920px-Pier_Head%2C_Liverpool_-_geograph.org.uk_-_3059094.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18081",
+    "author": "Peter Tarleton",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:51:04.465471+00:00"
+  },
+  "ljubljana": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Ljubljana_Old_Town%2C_Slovenia_%28Old_Camera%29_%2833286165680%29.jpg/1920px-Ljubljana_Old_Town%2C_Slovenia_%28Old_Camera%29_%2833286165680%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=42374",
+    "author": "Andrew Milligan Sumo",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:04.997027+00:00"
+  },
+  "london": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/London_Skyline_%28125508655%29.jpeg/1920px-London_Skyline_%28125508655%29.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=17867",
+    "author": "Ilya Grigorik",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:05.720282+00:00"
+  },
+  "los-angeles": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Hollywood_sign_%288485145044%29.jpg/1920px-Hollywood_sign_%288485145044%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18110",
+    "author": "Gnaphron",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:51:06.328044+00:00"
+  },
+  "lyon": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Lyon-part-dieu-2023.jpg/1920px-Lyon-part-dieu-2023.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=8638634",
+    "author": "Aldg692VX",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:06.855813+00:00"
+  },
+  "madrid": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Madrid_-_Sky_Bar_360%C2%BA_%28Hotel_Riu_Plaza_Espa%C3%B1a%29%2C_vistas_19.jpg/1920px-Madrid_-_Sky_Bar_360%C2%BA_%28Hotel_Riu_Plaza_Espa%C3%B1a%29%2C_vistas_19.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=41188263",
+    "author": "Zarateman",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:51:07.433633+00:00"
+  },
+  "makati": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Ayala_Avenue%2C_Makati_Avenue%2C_PSE_%28Makati%3B_01-31-2021%29.jpg/1920px-Ayala_Avenue%2C_Makati_Avenue%2C_PSE_%28Makati%3B_01-31-2021%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=210279",
+    "author": "patrickroque01",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:07.946023+00:00"
+  },
+  "manila": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Cityscape_of_Manila%2C_2025_%2801%29.jpg/1920px-Cityscape_of_Manila%2C_2025_%2801%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=184334",
+    "author": "Bahnfrend",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:08.498510+00:00"
+  },
+  "melbourne": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Melbourne_skyline_sor.jpg/1920px-Melbourne_skyline_sor.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=17306237",
+    "author": "Melbpal",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:09.098942+00:00"
+  },
+  "metro-manila": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/BGC_skyline%2C_BF_Homes_drone_distant_AU_%28Para%C3%B1aque_City%3B_01-04-2026%29.jpg/1920px-BGC_skyline%2C_BF_Homes_drone_distant_AU_%28Para%C3%B1aque_City%3B_01-04-2026%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=72340",
+    "author": "Patrickroque01",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:09.725713+00:00"
+  },
+  "mexico-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Sobrevuelos_CDMX_HJ2A4913_%2825514321687%29_%28cropped%29.jpg/1920px-Sobrevuelos_CDMX_HJ2A4913_%2825514321687%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18987",
+    "author": "Gobierno CDMX",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:51:10.430048+00:00"
+  },
+  "miami": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/25/Villa_Vizcaya_20110228.jpg/1920px-Villa_Vizcaya_20110228.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=53846",
+    "author": "Averette",
+    "license": "CC BY 3.0",
+    "fetched_at": "2026-10-07T22:51:11.044018+00:00"
+  },
+  "milan": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg/1920px-Milan_Cathedral_from_Piazza_del_Duomo.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=36511",
+    "author": "Jiuguang Wang",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:11.554528+00:00"
+  },
+  "minneapolis": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Minneapolis_Skyline_looking_south.jpg/1920px-Minneapolis_Skyline_looking_south.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=6097240",
+    "author": "BpA9543",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:12.304926+00:00"
+  },
+  "monaco": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Flag_of_Monaco.svg/1920px-Flag_of_Monaco.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=19261",
+    "author": "Drawn by User:SKopp",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:51:12.831618+00:00"
+  },
+  "monterrey": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/View_of_Monterrey_%282015%29.jpg/1920px-View_of_Monterrey_%282015%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=40455",
+    "author": "Rick González",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:13.505963+00:00"
+  },
+  "montevideo": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/5/59/PALACIO_LEGISLATIVO_01.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=38261",
+    "author": "Eduardo Ruggieri",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:14.012027+00:00"
+  },
+  "moscow": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg/1920px-Saint_Basil%27s_Cathedral_and_the_Red_Square.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=19004",
+    "author": "U.S. Department of State",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:51:14.628129+00:00"
+  },
+  "mumbai": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Mumbai_Bandra-Worli_Sea_Link.jpg/1920px-Mumbai_Bandra-Worli_Sea_Link.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=19189",
+    "author": "Rutiknatekar",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:15.242373+00:00"
+  },
+  "munich": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1920px-Stadtbild_M%C3%BCnchen.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=19058",
+    "author": "Thomas Wolf , www.foto-tw.de",
+    "license": "CC BY-SA 3.0 de",
+    "fetched_at": "2026-10-07T22:51:15.958294+00:00"
+  },
+  "nashville": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Nashville%2C_Tennessee_%28cropped%29.jpg/1920px-Nashville%2C_Tennessee_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=22018",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:51:16.660558+00:00"
+  },
+  "new-orleans": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cb/New_Orleans_from_the_Air_September_2019_-_Central_Business_District_Skyline_%28cropped%29.jpg/1920px-New_Orleans_from_the_Air_September_2019_-_Central_Business_District_Skyline_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=53842",
+    "author": "George Bannister",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:17.190658+00:00"
+  },
+  "new-taipei-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Xinban_Special_District_20241203_%2854182542495%29.jpg/1920px-Xinban_Special_District_20241203_%2854182542495%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=333440",
+    "author": "xiangyang17",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:17.804804+00:00"
+  },
+  "new-york-city": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg/1920px-View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=645042",
+    "author": "Dllu",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:18.522404+00:00"
+  },
+  "niagara-falls": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/3Falls_Niagara.jpg/1920px-3Falls_Niagara.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=52028",
+    "author": "Saffron Blaze",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:19.134133+00:00"
+  },
+  "nice": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Promenade_des_Anglais_Nice_IMG_1255.jpg/1920px-Promenade_des_Anglais_Nice_IMG_1255.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=47088",
+    "author": "Alexander Migl",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:19.749515+00:00"
+  },
+  "nizhny-novgorod": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Nizhny_Novgorod_2025-04-29_Minin_and_Pozharsky_square_01.jpg/1920px-Nizhny_Novgorod_2025-04-29_Minin_and_Pozharsky_square_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=65430",
+    "author": "AlexTref871",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:20.364227+00:00"
+  },
+  "novosibirsk": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Opera-and-Ballet-theatre-Novosibirsk.jpg/1920px-Opera-and-Ballet-theatre-Novosibirsk.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=63065",
+    "author": "Boris Sakic",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:20.875958+00:00"
+  },
+  "oslo": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Nationaltheatret_evening.jpg/1920px-Nationaltheatret_evening.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=22309",
+    "author": "Orjanarvola",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:21.663607+00:00"
+  },
+  "paris": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg/1920px-La_Tour_Eiffel_vue_de_la_Tour_Saint-Jacques%2C_Paris_ao%C3%BBt_2014_%282%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=22989",
+    "author": "Yann Caradec from Paris, France",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:51:22.514388+00:00"
+  },
+  "philadelphia": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/Philadelphia_skyline_20240528_%28cropped_2-1%29.jpg/1920px-Philadelphia_skyline_20240528_%28cropped_2-1%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=50585",
+    "author": "颐园居",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:23.231548+00:00"
+  },
+  "pittsburgh": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Ascending_the_Duquesne_Incline.jpg/1920px-Ascending_the_Duquesne_Incline.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=25101",
+    "author": "Dllu",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:24.052442+00:00"
+  },
+  "porto-alegre": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/IBPA_17398_-_Vista_a%C3%A9rea_da_Orla_Moacyr_Scliar%2C_na_capital._O_-_2018-10-02_-_Luciano_Lanes-PMPA_%28cropped%29.jpg/1920px-IBPA_17398_-_Vista_a%C3%A9rea_da_Orla_Moacyr_Scliar%2C_na_capital._O_-_2018-10-02_-_Luciano_Lanes-PMPA_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=172237",
+    "author": "Luciano Lanes/PMPA",
+    "license": "Attribution",
+    "fetched_at": "2026-10-07T22:51:24.636989+00:00"
+  },
+  "prague": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/Prague_%286365119737%29.jpg/1920px-Prague_%286365119737%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=23844",
+    "author": "Moyan Brenn from Italy",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:25.278893+00:00"
+  },
+  "presidente-prudente": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Presidente_Prudente.JPG/1920px-Presidente_Prudente.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1136302",
+    "author": "Zekialves",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:25.995233+00:00"
+  },
+  "puebla": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Mexico-Popocatepetl.jpg/1920px-Mexico-Popocatepetl.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=413436",
+    "author": "Jakub Hejtmánek",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:26.565602+00:00"
+  },
+  "pune": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c5/Pune_West_skyline_-_March_2017.jpg/1920px-Pune_West_skyline_-_March_2017.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=164634",
+    "author": "Ujjawal.Gayakwad",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:27.121351+00:00"
+  },
+  "qatar": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Flag_of_Qatar.svg/1920px-Flag_of_Qatar.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=8238258",
+    "author": "See File history below for details.",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:51:27.815767+00:00"
+  },
+  "queretaro": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/Pinal_de_Amoles%2C_Qro%2C_M%C3%A9xico.jpg/1920px-Pinal_de_Amoles%2C_Qro%2C_M%C3%A9xico.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=222250",
+    "author": "Flores 1299",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:28.554858+00:00"
+  },
+  "recife": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/82/Antonio_Vaz_island_-_Recife%2C_Pernambuco%2C_Brazil_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=65670",
+    "author": "Portal da Copa/ME",
+    "license": "CC BY 3.0 br",
+    "fetched_at": "2026-10-07T22:51:29.169031+00:00"
+  },
+  "rio-de-janeiro": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Cidade_Maravilhosa.jpg/1920px-Cidade_Maravilhosa.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=25936",
+    "author": "Rafael Rabello de Barros",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:29.783806+00:00"
+  },
+  "rome": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg/1920px-Trevi_Fountain%2C_Rome%2C_Italy_2_-_May_2007.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=25458",
+    "author": "Diliff",
+    "license": "CC BY 3.0",
+    "fetched_at": "2026-10-07T22:51:30.500294+00:00"
+  },
+  "samarkand": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/8c/RegistanSquare_Samarkand.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=51491",
+    "author": "Registan_-_Gusjer.jpg : Gustavo Jeronimo from Aranjuez, Spain derivative work: M",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:32.038219+00:00"
+  },
+  "san-diego": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ea/La_Jolla_Shores_view_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=28504",
+    "author": "Dirk Hansen",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:32.650759+00:00"
+  },
+  "san-fernando-pampanga": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/San_Fernando_City_Hall%2C_Pampanga%2C_Nov_2025_%281%29.jpg/1920px-San_Fernando_City_Hall%2C_Pampanga%2C_Nov_2025_%281%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=2136433",
+    "author": "Ralff Nestor Nacor",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:33.265228+00:00"
+  },
+  "san-francisco": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Zeppelin-ride-020100925-195_%285029394846%29.jpg/1920px-Zeppelin-ride-020100925-195_%285029394846%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=49728",
+    "author": "Craig Howell from San Carlos, CA, USA",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:33.981728+00:00"
+  },
+  "sanliurfa": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Mevlid-i_Halil_Mosque_19.jpg/1920px-Mevlid-i_Halil_Mosque_19.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=285533",
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:34.613839+00:00"
+  },
+  "santiago-de-los-caballeros": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/SantiagoCitySkyline2.jpg/1920px-SantiagoCitySkyline2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1022671",
+    "author": "derivative work: Fogster ( talk ) [2] : ChezSant",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:35.210524+00:00"
+  },
+  "santo-domingo": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e3/SantoDomingoedit.JPG/1920px-SantoDomingoedit.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=57638",
+    "author": "Jose Juan C",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:51:35.828119+00:00"
+  },
+  "seattle": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/58/Seattle_Center_as_night_falls.jpg/1920px-Seattle_Center_as_night_falls.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=11388236",
+    "author": "Jeffery Hayes",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:36.354925+00:00"
+  },
+  "seoul": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg/1920px-%EC%A4%91%ED%99%94%EC%A0%84%EC%9D%98_%EB%82%AE.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=19159283",
+    "author": "Eunmi Park",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:36.874561+00:00"
+  },
+  "singapore": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Flag_of_Singapore.svg/1920px-Flag_of_Singapore.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=27318",
+    "author": "Original: Government of Singapore Vector: Zscout370",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:51:37.465977+00:00"
+  },
+  "sofia": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Panoramic_view_over_central_Sofia_and_the_Vitosha_Mountain_2017-10-08.jpg/1920px-Panoramic_view_over_central_Sofia_and_the_Vitosha_Mountain_2017-10-08.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=57644",
+    "author": "Deensel",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:37.993328+00:00"
+  },
+  "st-petersburg": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/41/Spb_06-2017_img20_StMichael_Castle_%28cropped%29.jpg/1920px-Spb_06-2017_img20_StMichael_Castle_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=24320051",
+    "author": "A.Savin",
+    "license": "FAL",
+    "fetched_at": "2026-10-07T22:51:38.560160+00:00"
+  },
+  "stockholm": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Royal_Dramatic_Theatre_Stockholm.jpg/1920px-Royal_Dramatic_Theatre_Stockholm.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=26741",
+    "author": "Steven Lek",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:39.051020+00:00"
+  },
+  "stuttgart": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e1/Neues_Schloss_Schlossplatzspringbrunnen_Schlossplatz_Stuttgart_2015_01.jpg/1920px-Neues_Schloss_Schlossplatzspringbrunnen_Schlossplatz_Stuttgart_2015_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=28565",
+    "author": "Julian Herzog ( Website )",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:51:39.614647+00:00"
+  },
+  "sydney": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Sydney_Opera_House_and_Harbour_Bridge_Dusk_%282%29_2019-06-21.jpg/1920px-Sydney_Opera_House_and_Harbour_Bridge_Dusk_%282%29_2019-06-21.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=27862",
+    "author": "Benh LIEU SONG ( Flickr )",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:40.228858+00:00"
+  },
+  "taipei": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Taipei_Skyline_2022.06.29.jpg/1920px-Taipei_Skyline_2022.06.29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=57648",
+    "author": "毛貓大少爺",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:51:40.813007+00:00"
+  },
+  "tampa": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Downtown_Tampa%2C_Florida.jpg/1920px-Downtown_Tampa%2C_Florida.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=92995",
+    "author": "Clément Bardot",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:41.560119+00:00"
+  },
+  "tashkent": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/en/f/f6/Nest_One_Tashkent.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=57533",
+    "author": "Muso1996",
+    "license": "CC-BY-SA-4.0",
+    "fetched_at": "2026-10-07T22:51:42.270886+00:00"
+  },
+  "tehran": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/North_of_Tehran_Skyline_view.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=57654",
+    "author": "Ninara from Helsinki, Finland",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:42.754926+00:00"
+  },
+  "tel-aviv": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Sarona_CBD_01_%28cropped%29.jpg/1920px-Sarona_CBD_01_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=31453",
+    "author": "Ynhockey",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:43.403079+00:00"
+  },
+  "thessaloniki": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Tessaloniki_BW_2017-10-05_18-22-47.jpg/1920px-Tessaloniki_BW_2017-10-05_18-22-47.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=40471",
+    "author": "Berthold Werner",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:44.018867+00:00"
+  },
+  "tokyo": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Skyscrapers_of_Shinjuku_2009_January.jpg/1920px-Skyscrapers_of_Shinjuku_2009_January.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=30057",
+    "author": "Morio",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:44.608860+00:00"
+  },
+  "toronto": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8b/Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg/1920px-Toronto_Skyline_from_Snake_Island%2C_September_11_2026_%2801%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=64646",
+    "author": "Dillan Payne",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:45.245832+00:00"
+  },
+  "trabzon": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Trebisonda%2C_ex-chiesa_della_panagia_Chrysokephalos%2C_oggi_moschea_fatih%2C_esterno_01.jpg/1920px-Trebisonda%2C_ex-chiesa_della_panagia_Chrysokephalos%2C_oggi_moschea_fatih%2C_esterno_01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=62653",
+    "author": "Francesco Bini",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:45.860516+00:00"
+  },
+  "vancouver": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Skyline_of_Vancouver%2C_Canada.jpg/1920px-Skyline_of_Vancouver%2C_Canada.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=32706",
+    "author": "Quintin Soloviev",
+    "license": "CC BY 4.0",
+    "fetched_at": "2026-10-07T22:51:46.475159+00:00"
+  },
+  "vienna": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Schoenbrunn_philharmoniker_2012.jpg/1920px-Schoenbrunn_philharmoniker_2012.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=55866",
+    "author": "Superbass",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:47.089205+00:00"
+  },
+  "warsaw": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Aleja_Niepdleglosci_Warsaw_2022_aerial_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=32908",
+    "author": "Emptywords",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:47.675091+00:00"
+  },
+  "washington-dc": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/12-07-13-washington-by-RalfR-08.jpg/1920px-12-07-13-washington-by-RalfR-08.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=108956",
+    "author": "Ralf Roletschek ( talk ) - Infos über Fahrräder auf fahrradmonteur.de Wikis in d",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:48.216564+00:00"
+  },
+  "wuhan": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/%E6%AD%A6%E6%B1%89%E9%BB%84%E9%B9%A4%E6%A5%BC%E4%BF%AF%E7%9E%B0.jpg/1920px-%E6%AD%A6%E6%B1%89%E9%BB%84%E9%B9%A4%E6%A5%BC%E4%BF%AF%E7%9E%B0.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=82138",
+    "author": "螺钉",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:48.830525+00:00"
+  },
+  "yekaterinburg": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/E-burg_asv2019-05_img46_view_from_VysotSky.jpg/1920px-E-burg_asv2019-05_img46_view_from_VysotSky.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=66524",
+    "author": "A.Savin",
+    "license": "FAL",
+    "fetched_at": "2026-10-07T22:51:49.446454+00:00"
+  },
+  "zurich": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Altstadt_Z%C3%BCrich_2015.jpg/1920px-Altstadt_Z%C3%BCrich_2015.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=40334603",
+    "author": "Thomas Wolf , www.foto-tw.de",
+    "license": "CC BY-SA 3.0 de",
+    "fetched_at": "2026-10-07T22:51:50.060111+00:00"
+  },
+  "arrecife": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/Arrecife%2C_en_Lanzarote_%28Las_Palmas%2C_Espa%C3%B1a%29.jpg/1920px-Arrecife%2C_en_Lanzarote_%28Las_Palmas%2C_Espa%C3%B1a%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1145387",
+    "author": "Holger Uwe Schmitt",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:50.878741+00:00"
+  },
+  "las-palmas-de-gran-canaria": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/Canteras_EM1B2907_%2840642755393%29.jpg/1920px-Canteras_EM1B2907_%2840642755393%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=163701",
+    "author": "Bengt Nyman from Vaxholm, Sweden",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:51.455921+00:00"
+  },
+  "malaga": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/94/Da_Gibralfaro_%28cropped%292.jpg/1920px-Da_Gibralfaro_%28cropped%292.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=184763",
+    "author": "Kiban",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:52.006065+00:00"
+  },
+  "palma-de-mallorca": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/Kathedrale_von_Palma.jpg/1920px-Kathedrale_von_Palma.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=74592",
+    "author": "Thomas Wolf , www.foto-tw.de",
+    "license": "CC BY-SA 3.0 de",
+    "fetched_at": "2026-10-07T22:51:52.607347+00:00"
+  },
+  "santa-cruz-de-tenerife": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/At_Palmetum_de_Santa_Cruz_de_Tenerife_2022_028.jpg/1920px-At_Palmetum_de_Santa_Cruz_de_Tenerife_2022_028.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=300063",
+    "author": "Photograph by Mike Peel ( www.mikepeel.net ).",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:53.233734+00:00"
+  },
+  "seville": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Sevilla_Cathedral_-_Southeast.jpg/1920px-Sevilla_Cathedral_-_Southeast.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=37770",
+    "author": "Ingo Mehling",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:53.848127+00:00"
+  },
+  "valencia": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Malvarrosa_Beach%2C_Valencia%2C_Spain_%2829812271043%29.jpg/1920px-Malvarrosa_Beach%2C_Valencia%2C_Spain_%2829812271043%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=63861",
+    "author": "Boris Dzhingarov",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:51:54.464247+00:00"
+  },
+  "funchal": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg/1920px-Funchal%2C_Jardins_da_Quinta_Vigia_%28lookout%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=185219",
+    "author": "Dr. Thomas Liptak",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:54.958676+00:00"
+  },
+  "bali": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Bali_in_Indonesia_%28special_marker%29.svg/1920px-Bali_in_Indonesia_%28special_marker%29.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=4147",
+    "author": "TUBS",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:55.860582+00:00"
+  },
+  "lombok": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Camping_above_the_clouds_at_Rinjani.jpg/1920px-Camping_above_the_clouds_at_Rinjani.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=18360",
+    "author": "Paxson Woelber",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:56.523487+00:00"
+  },
+  "nusa-penida": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/Broken_Bay%2C_Nusa_Penida.jpg/1920px-Broken_Bay%2C_Nusa_Penida.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=3998385",
+    "author": "Georgi Kovachev",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:57.082986+00:00"
+  },
+  "gili-islands": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Gili_Islands_Region_map.png/1920px-Gili_Islands_Region_map.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1268975",
+    "author": "User:(WT-shared) Burmesedays , OpenStreetMap",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:57.724775+00:00"
+  },
+  "sumba": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Sumba_Topography.png/1920px-Sumba_Topography.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=26668",
+    "author": "Sadalmelik",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:51:58.665639+00:00"
+  },
+  "granada": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Granada_%2825987961022%29.jpg/1920px-Granada_%2825987961022%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=38264",
+    "author": "Brett Hodnett",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:51:59.275839+00:00"
+  },
+  "nerja": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Nerja.jpg/1920px-Nerja.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=458678",
+    "author": "kallerna",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:51:59.811807+00:00"
+  },
+  "elafonisi": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/%CE%95%CE%BB%CE%B1%CF%86%CE%BF%CE%BD%CE%AE%CF%83%CE%B9_1287.jpg/1920px-%CE%95%CE%BB%CE%B1%CF%86%CE%BF%CE%BD%CE%AE%CF%83%CE%B9_1287.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=30161954",
+    "author": "C messier",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:00.661023+00:00"
+  },
+  "fort-myers": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Fort_Myers_FL_Downtown_HD_1933_crths_pano01.jpg/1920px-Fort_Myers_FL_Downtown_HD_1933_crths_pano01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=109328",
+    "author": "Ebyabe",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:01.326390+00:00"
+  },
+  "kefalonia": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Asos%2C_Kefalonia.jpg/1920px-Asos%2C_Kefalonia.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=212191",
+    "author": "Matt Sims",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:52:01.857880+00:00"
+  },
+  "saint-tropez": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Saint-Tropez_-_Vue_g%C3%A9n%C3%A9rale%2C_%C3%A9glise%2C_phare.jpg/1920px-Saint-Tropez_-_Vue_g%C3%A9n%C3%A9rale%2C_%C3%A9glise%2C_phare.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=929821",
+    "author": "Starus",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:02.452204+00:00"
+  },
+  "st-pete-beach": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/40/St._Pete_Beach%2C_Florida_City_Hall.jpg/1920px-St._Pete_Beach%2C_Florida_City_Hall.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=109689",
+    "author": "Gabriel Classon ( gabeclasson on Flickr)",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:52:03.064032+00:00"
+  },
+  "skopelos": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Panoramic_view_of_Skopelos_city.jpg/1920px-Panoramic_view_of_Skopelos_city.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1653275",
+    "author": "Chris Taklis",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:03.781864+00:00"
+  },
+  "lima": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Bas%C3%ADlica_Catedral_Metropolitana_de_Lima_%28cropped%29.jpg/1920px-Bas%C3%ADlica_Catedral_Metropolitana_de_Lima_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=85423",
+    "author": "David Felipe Ruiz Hoyos",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:04.599840+00:00"
+  },
+  "cusco": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Vista_Calle_Suecia.jpg/1920px-Vista_Calle_Suecia.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=72735",
+    "author": "tomscoffin",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:52:05.163565+00:00"
+  },
+  "medellin": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/El_Poblado_Medell%C3%ADn.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=340197",
+    "author": "Daniel-1-1",
+    "license": "CC BY 3.0",
+    "fetched_at": "2026-10-07T22:52:05.837231+00:00"
+  },
+  "quito": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5b/FACHADA_ASAMBLEA_NACIONAL._QUITO%2C_20_DE_FEBRERO_2020._01.jpg/1920px-FACHADA_ASAMBLEA_NACIONAL._QUITO%2C_20_DE_FEBRERO_2020._01.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=209982",
+    "author": "Asamblea Nacional del Ecuador",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:52:06.792918+00:00"
+  },
+  "la-paz": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Vista_del_centro_de_La_Paz.jpg/1920px-Vista_del_centro_de_La_Paz.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=42821",
+    "author": "Parallelepiped09",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:07.439111+00:00"
+  },
+  "nairobi": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Nairobi_skyline_from_Gem_Hotel.jpg/1920px-Nairobi_skyline_from_Gem_Hotel.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=21482",
+    "author": "Daniel Case",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:08.288883+00:00"
+  },
+  "mombasa": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Mombasa_Island.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=200152",
+    "author": "Leo Hempstone",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:52:08.900559+00:00"
+  },
+  "stone-town": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/7/73/Zanzibar_sultan_palace.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=611866",
+    "author": "No machine-readable author provided. Mbz1 assumed (based on copyright claims).",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:09.515940+00:00"
+  },
+  "marrakech": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Pavillon_Menarag%C3%A4rten.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=20513",
+    "author": "Acp",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:10.232128+00:00"
+  },
+  "casablanca": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Casa_finance_city_6_%28cropped%29.jpg/1920px-Casa_finance_city_6_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=7301",
+    "author": "Chah.salah",
+    "license": "CC0",
+    "fetched_at": "2026-10-07T22:52:10.846676+00:00"
+  },
+  "abuja": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Abuja_heritages_30.jpg/1920px-Abuja_heritages_30.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=56823",
+    "author": "MediaMOF",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:11.430410+00:00"
+  },
+  "kigali": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/High_Angle_View_Of_Kigali_City_Street_on_November_29%2C_2018._Emmanuel_Kwizera.jpg/1920px-High_Angle_View_Of_Kigali_City_Street_on_November_29%2C_2018._Emmanuel_Kwizera.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=56690",
+    "author": "Emmanuelkwizera",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:12.078167+00:00"
+  },
+  "perth": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/Perth_CBD_skyline_from_State_War_Memorial_Lookout%2C_2023%2C_04_b.jpg/1920px-Perth_CBD_skyline_from_State_War_Memorial_Lookout%2C_2023%2C_04_b.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=24355",
+    "author": "Kgbo derivative work: Georgfotoart",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:12.587229+00:00"
+  },
+  "hobart": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/Franklin_Wharf_2015_b_%28cropped%29.jpg/1920px-Franklin_Wharf_2015_b_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=13699",
+    "author": "Michael fromholtz derivative work: Georgfotoart",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:13.202613+00:00"
+  },
+  "adelaide": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/Adelaide_skyline%2C_December_2022_b.jpg/1920px-Adelaide_skyline%2C_December_2022_b.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1148",
+    "author": "Ardash Muradian from Australia derivative work: Georgfotoart",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:52:13.815185+00:00"
+  },
+  "canberra": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Canberra_panorama_from_Mount_Ainslie.jpg/1920px-Canberra_panorama_from_Mount_Ainslie.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=51983",
+    "author": "The 3B's",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:52:14.532780+00:00"
+  },
+  "cairns": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Cairns_%28Queensland%29_%28cropped%29.jpg/1920px-Cairns_%28Queensland%29_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=305553",
+    "author": "Bernard Gagnon",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:15.249645+00:00"
+  },
+  "santorini": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/2011_Dimos_Thiras.png/1920px-2011_Dimos_Thiras.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=28377",
+    "author": "Pitichinaccio",
+    "license": "CC BY 3.0",
+    "fetched_at": "2026-10-07T22:52:16.170927+00:00"
+  },
+  "malta": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Flag_of_Malta.svg/1920px-Flag_of_Malta.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=19137",
+    "author": "See File history below for details.",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:52:16.785867+00:00"
+  },
+  "maupiti": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Maupiti_ISS002.jpg/1920px-Maupiti_ISS002.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=2680108",
+    "author": "NASA",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:52:17.383980+00:00"
+  },
+  "bora-bora": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2a/Bora_Bora_ISS006.jpg/1920px-Bora_Bora_ISS006.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=510628",
+    "author": "NASA Johnson Space Center",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:52:17.956235+00:00"
+  },
+  "tahiti": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Flag_of_Tahiti.svg/1920px-Flag_of_Tahiti.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=65153",
+    "author": "Fred the Oyster",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:52:19.346820+00:00"
+  },
+  "tulum": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Tulum_2.jpg/1920px-Tulum_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=355338",
+    "author": "Popo le Chien",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:19.839898+00:00"
+  },
+  "zanzibar": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Zanzibar.svg/1920px-Flag_of_Zanzibar.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=34414",
+    "author": "Mysid",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:52:21.924532+00:00"
+  },
+  "cook-islands": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/35/Flag_of_the_Cook_Islands.svg/1920px-Flag_of_the_Cook_Islands.svg.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=7067",
+    "author": "Odder",
+    "license": "Public domain",
+    "fetched_at": "2026-10-07T22:52:22.475564+00:00"
+  },
+  "ushuaia": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Ushuaia_aerial_panorama.jpg/1920px-Ushuaia_aerial_panorama.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=352107",
+    "author": "Deensel",
+    "license": "CC BY 2.0",
+    "fetched_at": "2026-10-07T22:52:23.003676+00:00"
+  },
+  "capri": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Capri_in_Cartolina_-_Vista_da_Termini_%28Massa_Lubrense%29.jpg/1920px-Capri_in_Cartolina_-_Vista_da_Termini_%28Massa_Lubrense%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=295223",
+    "author": "Mario Apuzzo",
+    "license": "CC BY-SA 4.0",
+    "fetched_at": "2026-10-07T22:52:23.527499+00:00"
+  },
+  "phi-phi-islands": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e7/KohPhiPhi.JPG/1920px-KohPhiPhi.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=457583",
+    "author": "Luxure",
+    "license": "CC BY 3.0 au",
+    "fetched_at": "2026-10-07T22:52:24.100926+00:00"
+  },
+  "krabi": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/44/Wat_Tham_Sua_18.jpg/1920px-Wat_Tham_Sua_18.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1288246",
+    "author": "kallerna",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:24.802523+00:00"
+  },
+  "punta-cana": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Cap_Cana_Marina_Dominican_Republic.jpg/1920px-Cap_Cana_Marina_Dominican_Republic.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=1740446",
+    "author": "https://www.flickr.com/photos/uira/",
+    "license": "CC BY-SA 2.0",
+    "fetched_at": "2026-10-07T22:52:25.557658+00:00"
+  },
+  "koh-samui": {
+    "provider": "wikipedia",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Koh_Samui_Lipa_Noi2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+    "page_url": "https://en.wikipedia.org/?curid=694210",
+    "author": "Manfred Werner",
+    "license": "CC BY-SA 3.0",
+    "fetched_at": "2026-10-07T22:52:26.098513+00:00"
+  },
+  "florianopolis": {
+    "provider": "wikipedia",
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Morro_da_Cruz%2C_Florian%C3%B3polis_-_SC%2C_Brazil_-_panoramio_%28cropped%29.jpg/1920px-Morro_da_Cruz%2C_Florian%C3%B3polis_-_SC%2C_Brazil_-_panoramio_%28cropped%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail",
+    "page_url": "https://en.wikipedia.org/?curid=311130",
+    "author": "oscar fava",
+    "license": "CC BY 3.0",
+    "fetched_at": "2026-10-07T22:52:26.699179+00:00"
+  }
+}

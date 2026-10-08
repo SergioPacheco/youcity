@@ -16,3 +16,15 @@ node_modules/
 # Build (se adicionar no futuro)
 dist/
 build/
+out/
+
+# Secrets locais (publicador social usa FB_SYSTEM_USER_TOKEN via .env ou env)
+.env
+.env.*
+!.env.example
+
+# Python (publicador social em tools/social/)
+__pycache__/
+*.pyc
+.venv*/
+

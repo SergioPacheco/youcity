@@ -91,3 +91,20 @@ See [`docs/affiliate-architecture.md`](docs/affiliate-architecture.md) for the
 provider contract and rollout model.
 
 The cover image in `assets/hero-saopaulo.webp` was created specifically for the project and remains local.
+
+## Daily social posts (Facebook)
+
+The social publisher picks a random catalog city 4 times a day and posts
+it to the configured Facebook page with a real-photo card (feed
+1080×1350 + story 1080×1920, photos via Wikipedia, credited on card
+and caption). It mirrors the Imovue publisher: slot grid,
+idempotency, anti-duplicates, weighted draw and history in
+`social/published.json`. See [`docs/SOCIAL_PUBLISHER.md`](docs/SOCIAL_PUBLISHER.md).
+
+```bash
+pip install -r requirements-social.txt
+python tools/social/post_daily.py --all --dry-run
+```
+
+The `WORLD` page ships disabled; publishing requires the
+`FB_SYSTEM_USER_TOKEN` secret (see the doc above).

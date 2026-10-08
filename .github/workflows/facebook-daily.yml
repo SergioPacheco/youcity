@@ -1,0 +1,77 @@
+name: Facebook - Cities of the day
+
+on:
+  # Union of every possible slot (Brasília time +3h = UTC).
+  # The script decides whether "now" is an active slot of the configured
+  # grid (YOUCITY_FACEBOOK_POSTS_PER_DAY) and publishes at most 1 post
+  # per run.
+  schedule:
+    - cron: '30 12 * * *'  # 09:30 BRT
+    - cron: '0 13 * * *'   # 10:00 BRT
+    - cron: '30 14 * * *'  # 11:30 BRT
+    - cron: '30 15 * * *'  # 12:30 BRT
+    - cron: '30 17 * * *'  # 14:30 BRT
+    - cron: '30 19 * * *'  # 16:30 BRT
+    - cron: '0 22 * * *'   # 19:00 BRT
+    - cron: '30 22 * * *'  # 19:30 BRT
+    - cron: '0 23 * * *'   # 20:00 BRT
+  workflow_dispatch:
+
+concurrency:
+  group: youcity-facebook-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    # Single System User token (no expiry, with access to every Business
+    # page). A missing secret becomes an empty string and the scopes are
+    # skipped without error. Applies to the prune and to publishing.
+    env:
+      FB_SYSTEM_USER_TOKEN: ${{ secrets.FB_SYSTEM_USER_TOKEN }}
+      META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
+      YOUCITY_FACEBOOK_TIMEZONE: America/Sao_Paulo
+      YOUCITY_FACEBOOK_POSTS_PER_DAY: '4'
+      YOUCITY_FACEBOOK_REPOST_AFTER_DAYS: '30'
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install social dependencies
+        run: python -m pip install -r requirements-social.txt
+
+      - name: Remove posts of cities outside the catalog
+        # Never blocks publishing when the cleanup fails.
+        continue-on-error: true
+        run: python tools/social/prune_stale.py
+
+      - name: Publish the slot city
+        # Publishes on every enabled page (enabled + pageId + token).
+        # Unconfigured scopes are skipped without error.
+        run: python tools/social/post_daily.py --all --publish
+
+      - name: Persist the publication history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Both files change on publish; the photo cache changes when a
+          # city is (re-)resolved during the run.
+          if [ -f social/published.json ]; then
+            git add social/published.json
+          fi
+          if [ -f tools/.city_image_cache.json ]; then
+            git add tools/.city_image_cache.json
+          fi
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(social): record daily publications"
+            git push
+          else
+            echo "No new history to persist."
+          fi

@@ -168,7 +168,7 @@
       .video-loading.is-visible { opacity: 1; }
       .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; height: 70px; padding: 0 18px; border-bottom: 1px solid rgba(255,255,255,.13); }
       .brand { display: inline-flex; min-width: 0; overflow: hidden; justify-self: start; align-items: center; gap: 10px; padding: 0; border: 0; background: transparent; cursor: pointer; font-weight: 700; font-size: 16px; letter-spacing: .18em; white-space: nowrap; }
-      .brand-logo { display: block; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; object-fit: cover; }
+      .brand-logo { display: block; width: 24px; height: 24px; flex: 0 0 24px; object-fit: contain; }
       .city-intro { position: absolute; z-index: 2; top: 39%; left: 24px; width: calc(100% - 80px); transform: translateY(-50%); }
       .city-count { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; font: 400 10px "DM Mono", monospace; }
       .city-count i { display: block; width: 54px; height: 1px; background: rgba(255,255,255,.48); }
@@ -217,6 +217,9 @@
         .city-info { margin-top: 9px; }
         .player-card { right: 10px; bottom: calc(10px + var(--safe-bottom)); left: 10px; border-width: 3px; border-radius: 7px; }
         .topbar { background: linear-gradient(180deg, rgba(5,8,6,.78) 0%, rgba(5,8,6,.46) 100%); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+      }
+      @media (max-width: 500px) {
+        .brand span { display: none; }
       }
     </style>
     <link rel="stylesheet" href="/styles.css" />
