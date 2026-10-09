@@ -677,6 +677,363 @@
       ]
     },
     {
+      "slug": "belem",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "tacaca",
+          "name": "Tacacá",
+          "category": "soup",
+          "description": "A hot Amazonian broth combining tucupi, cassava starch, jambu leaves and dried shrimp. Served in a cuia, it is one of Belém’s distinctive street-food experiences.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Tacac%C3%A1",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://agencia.belem.pa.gov.br/inscricoes-ao-selo-belem-gastronomia-vao-ate-3-de-agosto/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "manicoba",
+          "name": "Maniçoba",
+          "category": "stew",
+          "description": "Ground cassava leaves cooked for a long time before being combined with pork and other meats. This rich Pará stew is part of Belém’s regional food tradition.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Mani%C3%A7oba",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://agencia.belem.pa.gov.br/inscricoes-ao-selo-belem-gastronomia-vao-ate-3-de-agosto/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "acai-com-peixe",
+          "name": "Açaí com peixe",
+          "category": "fish",
+          "description": "Unsweetened açaí pulp served with fried fish and cassava flour. This savory combination reflects the Pará tradition of treating açaí as part of a meal rather than only a dessert.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://viajeleve.net/mercado-ver-o-peso/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://pt.wikipedia.org/wiki/A%C3%A7a%C3%AD_na_tigela",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "ver-o-peso",
+          "name": "Mercado Ver-o-Peso",
+          "kind": "market",
+          "dishIds": [
+            "acai-com-peixe"
+          ],
+          "coordinates": {
+            "lat": -1.45222,
+            "lng": -48.50361
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://pt.wikipedia.org/wiki/Mercado_Ver-o-Peso",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-sao-bras",
+          "name": "Mercado de São Brás",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -1.4514311,
+            "lng": -48.4685174
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://pt.wikipedia.org/wiki/Mercado_de_S%C3%A3o_Br%C3%A1s",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "8yfkENiAXFM",
+          "dishIds": [
+            "tacaca"
+          ],
+          "placeIds": [
+            "ver-o-peso"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "q9jiGKKGkT8",
+          "dishIds": [
+            "tacaca"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "belfast",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "ulster-fry",
+          "name": "Ulster fry",
+          "category": "breakfast",
+          "description": "A Northern Irish cooked breakfast combining potato bread and soda bread with sausages, bacon and eggs. The breads are a defining feature of this substantial breakfast found in Belfast cafés.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitbelfast.com/blog/post/local-cuisine-in-belfast/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "belfast-bap",
+          "name": "Belfast bap",
+          "category": "sandwich",
+          "description": "A bread bun filled with cooked breakfast ingredients such as egg, sausage and bacon. Visit Belfast highlights this handheld meal at St George’s Market as a local food to try.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitbelfast.com/blog/post/local-cuisine-in-belfast/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "boxty",
+          "name": "Boxty",
+          "category": "potato pancake",
+          "description": "A traditional Irish potato pancake combining grated raw potato and mashed potato with flour, buttermilk and baking soda. This regional preparation also appears on Belfast restaurant menus.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitbelfast.com/blog/post/local-cuisine-in-belfast/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "st-georges-market",
+          "name": "St George’s Market",
+          "kind": "market",
+          "dishIds": [
+            "belfast-bap"
+          ],
+          "coordinates": {
+            "lat": 54.5958866,
+            "lng": -5.922018
+          },
+          "osmType": "way",
+          "osmId": 26342055,
+          "sourceUrl": "https://visitbelfast.com/blog/post/local-cuisine-in-belfast/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "common-market",
+          "name": "Common Market",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 54.6024317,
+            "lng": -5.9261832
+          },
+          "osmType": "way",
+          "osmId": 267256602,
+          "sourceUrl": "https://commonmarketbelfast.com/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "V_zZSOxa00o",
+          "dishIds": [
+            "ulster-fry",
+            "belfast-bap"
+          ],
+          "placeIds": [
+            "st-georges-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "oneCC5LAj88",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "belo-horizonte",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "pao-de-queijo",
+          "name": "Pão de queijo",
+          "category": "bread",
+          "description": "Small baked cheese breads made with cassava starch, with a tender center and chewy crust. A Minas Gerais staple found in Belo Horizonte’s cafés, bakeries and market counters.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/P%C3%A3o_de_queijo",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://portalbelohorizonte.com.br/creativecity/pratos-e-ingredientes-tipicos",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "feijao-tropeiro",
+          "name": "Feijão tropeiro",
+          "category": "beans",
+          "description": "Cooked beans mixed with cassava flour, eggs and pork ingredients such as sausage or bacon. Rooted in the food of travelling drovers, it remains a signature of Minas Gerais cooking.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Feij%C3%A3o-tropeiro",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://portalbelohorizonte.com.br/creativecity/pratos-e-ingredientes-tipicos",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "figado-com-jilo",
+          "name": "Fígado com jiló",
+          "category": "offal",
+          "description": "Strips of liver cooked with onion and jiló, a small bitter fruit. A classic Belo Horizonte bar-counter dish, closely associated with the Mercado Central.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://portalbelohorizonte.com.br/bienaldagastronomia/receitastradicionais/figado-com-jilo",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://portalbelohorizonte.com.br/blog/2026/blog/conheca-belo-horizonte-por-suas-pessoas-sabores-e-encontros",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=T2lwQaqZ2NA",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-central-bh",
+          "name": "Mercado Central de Belo Horizonte",
+          "kind": "market",
+          "dishIds": [
+            "pao-de-queijo",
+            "figado-com-jilo"
+          ],
+          "coordinates": {
+            "lat": -19.9225,
+            "lng": -43.943055555556
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://mercadocentral.com.br/o-mercado/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-novo-bh",
+          "name": "Mercado Novo",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -19.92064,
+            "lng": -43.94529
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://portalbelohorizonte.com.br/o-que-fazer/comer-e-beber/mercados-gastronomicos/velho-mercado-novo",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "T2lwQaqZ2NA",
+          "dishIds": [
+            "pao-de-queijo",
+            "figado-com-jilo"
+          ],
+          "placeIds": [
+            "mercado-central-bh"
+          ],
+          "startSeconds": 160,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "BQ490deUsHA",
+          "dishIds": [],
+          "placeIds": [
+            "mercado-central-bh",
+            "mercado-novo-bh"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "berlin",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -781,6 +1138,117 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "bordeaux",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "canele",
+          "name": "Canelé",
+          "category": "pastry",
+          "description": "A small fluted pastry with a dark caramelized crust and a soft center scented with rum and vanilla. This Bordeaux specialty is made with flour, milk, eggs, sugar and butter.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.bordeaux-tourism.co.uk/local-specialities/cannele-and-bordeaux-delicacies",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "dunes-blanches",
+          "name": "Dunes blanches",
+          "category": "pastry",
+          "description": "Light choux pastries with a crisp shell and an airy cream filling. Originally associated with Cap Ferret on the Atlantic coast, these regional sweets are also sold in Bordeaux.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.bordeaux-tourism.co.uk/local-specialities/cannele-and-bordeaux-delicacies",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://dunesblanches.fr/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "lamproie-a-la-bordelaise",
+          "name": "Lamproie à la bordelaise",
+          "category": "fish stew",
+          "description": "Lamprey cooked in wine with leeks, onions and aromatics. This traditional Gironde preparation belongs to the regional cuisine explored in Bordeaux, alongside the city’s better-known pastries.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://fr.wikipedia.org/wiki/Lamproie_%C3%A0_la_bordelaise",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.bordeaux-tourism.co.uk/sites/bordeaux_tourisme/files/inline-files/Bordeaux_press_kit2023_compressed.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "marche-des-capucins",
+          "name": "Marché des Capucins",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 44.8304433,
+            "lng": -0.5677867
+          },
+          "osmType": "way",
+          "osmId": 116175344,
+          "sourceUrl": "https://www.bordeaux-tourism.co.uk/sites/bordeaux_tourisme/files/inline-files/Bordeaux_press_kit2023_compressed.pdf",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "halles-de-bacalan",
+          "name": "Les Halles de Bacalan",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 44.8630888,
+            "lng": -0.5514394
+          },
+          "osmType": "way",
+          "osmId": 543106039,
+          "sourceUrl": "https://www.bordeaux-tourisme.com/activite-equipement-loisirs/halles-bacalan.html",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "WePwAEfxIB8",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "sE2rOTndWcc",
+          "dishIds": [
+            "canele"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]
@@ -1347,6 +1815,121 @@
       ]
     },
     {
+      "slug": "cartagena",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "arepa-de-huevo",
+          "name": "Arepa de huevo",
+          "category": "fritters",
+          "description": "A fried corn arepa with an egg inside. This Caribbean Colombian specialty is part of Cartagena’s street-food tradition, with variations offered by individual vendors.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://colombia.travel/es/cartagena/que-comer-en-cartagena-de-indias",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://colombia.travel/es/blog/guia-de-viaje-5-destinos-para-viajar-en-familia-cartagena?page=3",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "arroz-con-coco",
+          "name": "Arroz con coco",
+          "category": "rice",
+          "description": "Rice prepared with coconut, a characteristic accompaniment in Cartagena’s Caribbean cooking. It is often paired with fish; sweetness and browning vary with the recipe.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://regions.colombia.travel/en/greater-colombian-caribbean/bolivar",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://colombia.travel/es/blog/planes-para-disfrutar-cartagena-en-un-fin-de-semana-1",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "cocadas",
+          "name": "Cocadas",
+          "category": "sweets",
+          "description": "Coconut sweets made in several local variations, with flavors such as panela, milk or tropical fruit. Cartagena’s Portal de los Dulces is one place to discover this confectionery tradition.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://regions.colombia.travel/en/greater-colombian-caribbean/bolivar",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://colombia.travel/es/blog/planes-para-disfrutar-cartagena-en-un-fin-de-semana-1",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-bazurto",
+          "name": "Mercado de Bazurto",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 10.4126304,
+            "lng": -75.5246392
+          },
+          "osmType": "way",
+          "osmId": 94687123,
+          "sourceUrl": "https://www.openstreetmap.org/way/94687123",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "portal-dulces",
+          "name": "Portal de los Dulces",
+          "kind": "market",
+          "dishIds": [
+            "cocadas"
+          ],
+          "coordinates": {
+            "lat": 10.4229837,
+            "lng": -75.5494977
+          },
+          "osmType": "way",
+          "osmId": 25442420,
+          "sourceUrl": "https://colombia.travel/es/blog/planes-para-disfrutar-cartagena-en-un-fin-de-semana-1",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "cr-SITyHsNI",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "X5Qroc5eCck",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "chicago",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -1454,6 +2037,236 @@
             "italian-beef"
           ],
           "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "curitiba",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "carne-de-onca",
+          "name": "Carne de onça",
+          "category": "beef",
+          "description": "Seasoned raw beef served on rye bread with onion and chives. Despite its name, this Curitiba bar snack uses beef; it is part of the city’s local food heritage.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://turismo.curitiba.pr.gov.br/noticias/prato-curitibano-recebe-indicacao-geografica-e-entra-para-o-time-dos-imortais/77454",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pierogi",
+          "name": "Pierogi",
+          "category": "dumplings",
+          "description": "Boiled dumplings with fillings such as potato, cheese or meat, sometimes finished in butter. Polish food traditions have made pierogi part of Curitiba’s gastronomic-fair offering.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Pierogi",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.curitiba.pr.gov.br/noticias/feiras-gastronomicas/42335",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "pastel-de-feira",
+          "name": "Pastel de feira",
+          "category": "pastry",
+          "description": "Thin pastry folded around a savory or sweet filling and fried until crisp. A handheld market snack, with vendor-specific fillings, represented in Curitiba’s food-fair culture.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Pastel_(culin%C3%A1ria)",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://mid-turismo.curitiba.pr.gov.br/2025/8/pdf/00013403.pdf",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-municipal-curitiba",
+          "name": "Mercado Municipal de Curitiba",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -25.434823754464105,
+            "lng": -49.257044509073395
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://pt.wikipedia.org/wiki/Mercado_Municipal_de_Curitiba",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "feira-largo-ordem",
+          "name": "Feira do Largo da Ordem",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -25.4274472,
+            "lng": -49.2738639
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://pt.wikipedia.org/wiki/Feira_do_Largo_da_Ordem",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "EcCY8h5c3IY",
+          "dishIds": [],
+          "placeIds": [
+            "feira-largo-ordem"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "p1EwdzXJoVk",
+          "dishIds": [],
+          "placeIds": [
+            "feira-largo-ordem"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "cusco",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "chiri-uchu",
+          "name": "Chiri uchu",
+          "category": "platter",
+          "description": "A cold Cusco platter combining meats, toasted corn, cheese and rocoto, with variations that include guinea pig and chicken. Particularly associated with the city’s Corpus Christi food tradition.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.peru.travel/es/inspirate/para-chuparse-los-dedos-los-mejores-potajes-de-la-gastronomia-cusquena",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.peru.travel/es/inspirate/mercado-san-pedro-el-mas-antiguo-y-pintoresco-de-cusco",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "trucha-frita",
+          "name": "Trucha frita",
+          "category": "fish",
+          "description": "Fried trout served with potatoes, corn and salad. An Andean fish dish described in Cusco’s official food guide and among the meals available at Mercado San Pedro.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.peru.travel/es/inspirate/para-chuparse-los-dedos-los-mejores-potajes-de-la-gastronomia-cusquena",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.peru.travel/es/inspirate/mercado-san-pedro-el-mas-antiguo-y-pintoresco-de-cusco",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "choclo-con-queso",
+          "name": "Choclo con queso",
+          "category": "corn",
+          "description": "Andean corn paired with cheese, a simple combination built around the region’s large corn kernels. A familiar market snack listed among Cusco’s Mercado San Pedro specialties.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.peru.travel/es/inspirate/mercado-san-pedro-el-mas-antiguo-y-pintoresco-de-cusco",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-san-pedro",
+          "name": "Mercado Central de San Pedro",
+          "kind": "market",
+          "dishIds": [
+            "chiri-uchu",
+            "trucha-frita",
+            "choclo-con-queso"
+          ],
+          "coordinates": {
+            "lat": -13.520997,
+            "lng": -71.982618
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://www.peru.travel/es/inspirate/mercado-san-pedro-el-mas-antiguo-y-pintoresco-de-cusco",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-san-blas",
+          "name": "Mercado de San Blas",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -13.5155828,
+            "lng": -71.9728947
+          },
+          "osmType": "relation",
+          "osmId": 9045217,
+          "sourceUrl": "https://www.peru.travel/es/inspirate/cuales-son-los-mercados-mas-emblematicos-y-pintorescos-de-cusco",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "TXYVdKXxtP0",
+          "dishIds": [],
+          "placeIds": [
+            "mercado-san-pedro"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "IORgNPa573I",
+          "dishIds": [],
+          "placeIds": [
+            "mercado-san-pedro"
+          ],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
           "status": "published"
@@ -1801,6 +2614,793 @@
       ]
     },
     {
+      "slug": "dublin",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "boxty",
+          "name": "Boxty",
+          "category": "pancakes",
+          "description": "An Irish potato pancake using grated raw potato, commonly mixed with flour and cooked on a griddle. Rooted in northern and midland traditions, it is also served in Dublin with savory fillings.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Boxty",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.boxtyhouse.ie/_files/ugd/a670ee_f25aa4cf804c4c28a8fdae60ea8ab080.pdf",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "dublin-coddle",
+          "name": "Dublin coddle",
+          "category": "stew",
+          "description": "A gently cooked mixture of pork sausages, bacon, potatoes and onion. Closely associated with Dublin, this comforting dish developed as a way to turn simple ingredients into a filling meal.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitdublin.com/guides/irish-food",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Coddle",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "spice-bag",
+          "name": "Spice bag",
+          "category": "takeaway",
+          "description": "A takeaway combination of fried chicken, chips, peppers and onions tossed with salt, chilli and spices. Popular in Dublin’s Chinese takeaways, it is usually served in a bag or box.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Spice_bag",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "georges-street-arcade",
+          "name": "George’s Street Arcade",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 53.3426039,
+            "lng": -6.2643955
+          },
+          "osmType": "way",
+          "osmId": 27805936,
+          "sourceUrl": "https://georgesstreetarcade.ie/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "moore-street-market",
+          "name": "Moore Street Market",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 53.3502396,
+            "lng": -6.2625549
+          },
+          "osmType": "way",
+          "osmId": 25902366,
+          "sourceUrl": "https://dublin.ie/live/things-to-do/markets/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "EYLvcQSdV1w",
+          "dishIds": [
+            "boxty"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "NrgHTGQ9TUQ",
+          "dishIds": [
+            "dublin-coddle"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "edinburgh",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "haggis",
+          "name": "Haggis",
+          "category": "savory pudding",
+          "description": "Haggis combines meat, oatmeal, onion and spices in a savory pudding, traditionally accompanied by turnips and potatoes. A Scottish staple also served in Edinburgh, rather than a dish claimed to originate in the capital.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitscotland.com/things-to-do/food-drink/must-try-food",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://edinburgh.org/blog/things-to-do-on-burns-night-in-edinburgh/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "cullen-skink",
+          "name": "Cullen skink",
+          "category": "soup",
+          "description": "A creamy Scottish soup of smoked haddock, potatoes and onions, originating in Cullen in the northeast. Edinburgh restaurants also serve this warming coastal specialty.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitscotland.com/things-to-do/food-drink/must-try-food",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://edinburgh.org/blog/things-to-do-on-burns-night-in-edinburgh/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "cranachan",
+          "name": "Cranachan",
+          "category": "dessert",
+          "description": "A Scottish dessert combining raspberries, toasted oats, honey and cream flavored with whisky. It brings together tart fruit and rich dairy and also appears on Edinburgh menus.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitscotland.com/things-to-do/food-drink/must-try-food",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://edinburgh.org/blog/things-to-do-on-burns-night-in-edinburgh/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "edinburgh-farmers-market",
+          "name": "Edinburgh Farmers’ Market",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 55.9477605,
+            "lng": -3.2034828
+          },
+          "osmType": "node",
+          "osmId": 574304142,
+          "sourceUrl": "https://edinburgh.org/things-to-do/markets/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "stockbridge-market",
+          "name": "Stockbridge Market",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 55.9576289,
+            "lng": -3.208443
+          },
+          "osmType": "node",
+          "osmId": 2338447599,
+          "sourceUrl": "https://edinburgh.org/things-to-do/markets/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "lFjQXzLBhXM",
+          "dishIds": [
+            "haggis"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "RguWYaxlwp0",
+          "dishIds": [
+            "haggis"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "fortaleza",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "baiao-de-dois",
+          "name": "Baião de dois",
+          "category": "rice",
+          "description": "Rice cooked with beans, often finished with queijo coalho. This northeastern dish is prominent in Ceará, with accompaniments and additions varying across kitchens.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Bai%C3%A3o_de_dois",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.fortaleza.ce.gov.br/noticias/com-requalificacao-de-espacos-publicos-fortaleza-ganha-novos-polos-gastronomicos-de-comida-de-rua",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "panelada",
+          "name": "Panelada",
+          "category": "offal",
+          "description": "A slowly cooked stew of beef tripe and other offal. A traditional Ceará dish served at Fortaleza’s Mercado São Sebastião, where regional cooking is part of the market experience.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.fortaleza.ce.gov.br/noticias/fortaleza-298-anos-mercados-publicos-sao-boas-opcoes-de-passeio",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://acervo.fortaleza.ce.gov.br/download-file/documentById?id=0e2e70cc-cee9-4ee3-9aa8-f3408c1cf522",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "camarao-mucuripe",
+          "name": "Camarão do Mucuripe",
+          "category": "seafood",
+          "description": "Fresh shrimp selected at Mucuripe’s fish market and taken to nearby stalls for cooking. The preparation varies by stall, making this a waterfront seafood experience rather than a fixed recipe.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visit-fortaleza.com/experiencias/mercado-dos-peixes/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=kvu4Kec5S14",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-peixes-mucuripe",
+          "name": "Mercado dos Peixes do Mucuripe",
+          "kind": "market",
+          "dishIds": [
+            "camarao-mucuripe"
+          ],
+          "coordinates": {
+            "lat": -3.7215759,
+            "lng": -38.4797459
+          },
+          "osmType": "way",
+          "osmId": 509654793,
+          "sourceUrl": "https://visit-fortaleza.com/experiencias/mercado-dos-peixes/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-sao-sebastiao",
+          "name": "Mercado São Sebastião",
+          "kind": "market",
+          "dishIds": [
+            "panelada"
+          ],
+          "coordinates": {
+            "lat": -3.7300486,
+            "lng": -38.5391596
+          },
+          "osmType": "relation",
+          "osmId": 16025914,
+          "sourceUrl": "https://www.fortaleza.ce.gov.br/noticias/fortaleza-298-anos-mercados-publicos-sao-boas-opcoes-de-passeio",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "kvu4Kec5S14",
+          "dishIds": [
+            "camarao-mucuripe"
+          ],
+          "placeIds": [
+            "mercado-peixes-mucuripe"
+          ],
+          "startSeconds": 379,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "zUOffHaXNlM",
+          "dishIds": [],
+          "placeIds": [
+            "mercado-sao-sebastiao"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "frankfurt",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "frankfurter-grune-sosse",
+          "name": "Frankfurter Grüne Soße",
+          "category": "sauce",
+          "description": "A cold sauce built around seven fresh herbs, including chives, parsley, chervil, borage, sorrel, burnet and cress. This Frankfurt specialty accompanies boiled eggs and potatoes, or is served alongside schnitzel and fish.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitfrankfurt.travel/en/experience/cuisine/frankfurt-specialities",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "handkas-mit-musik",
+          "name": "Handkäs mit Musik",
+          "category": "cheese",
+          "description": "Small sour-milk cheeses marinated with vinegar, oil and spices, with raw onions providing the “music” in the name. Part of Hessian food culture and Frankfurt’s apple-wine tavern tradition, often served with bread.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitfrankfurt.travel/en/experience/cuisine/frankfurt-specialities",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "frankfurter-wurstchen",
+          "name": "Frankfurter Würstchen",
+          "category": "sausage",
+          "description": "Slim smoked sausages traditionally served in pairs with mustard or horseradish. A specialty of Frankfurt and the surrounding region, they feature in the city’s apple-wine taverns and simple meals.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitfrankfurt.travel/en/experience/cuisine/frankfurt-specialities",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "kleinmarkthalle",
+          "name": "Kleinmarkthalle",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 50.1127197,
+            "lng": 8.6830441
+          },
+          "osmType": "way",
+          "osmId": 449377753,
+          "sourceUrl": "https://www.openstreetmap.org/way/449377753",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "erzeugermarkt-konstablerwache",
+          "name": "Erzeugermarkt Konstablerwache",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 50.1144122,
+            "lng": 8.6868941
+          },
+          "osmType": "way",
+          "osmId": 391367266,
+          "sourceUrl": "https://www.visitfrankfurt.travel/en/event/producer-market-konstablerwache",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "MEZijttOfP8",
+          "dishIds": [
+            "frankfurter-grune-sosse"
+          ],
+          "placeIds": [
+            "kleinmarkthalle"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "7HstJqjGzFg",
+          "dishIds": [
+            "frankfurter-wurstchen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "funchal",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "bolo-do-caco",
+          "name": "Bolo do caco",
+          "category": "bread",
+          "description": "A round Madeiran flatbread, traditionally cooked on a hot stone and often served warm with garlic butter. Some recipes include sweet potato; it also becomes the bread for local sandwiches.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitmadeira.com/en/what-to-do/food-and-wine-enthusiasts/traditional-madeira-food/bolo-do-caco/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Bolo_do_caco",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "espada-com-banana",
+          "name": "Espada com banana",
+          "category": "fish",
+          "description": "Fried black scabbardfish fillets paired with banana, sometimes accompanied by passion fruit sauce. This sweet and savory combination draws on Madeira’s Atlantic fishing and tropical produce.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitmadeira.com/en/what-to-do/food-and-wine-enthusiasts/traditional-madeira-food/filete-de-espada/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Espada_com_banana",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "lapas-grelhadas",
+          "name": "Lapas grelhadas",
+          "category": "seafood",
+          "description": "Limpets grilled in their shells with butter and garlic, often finished with lemon. A Madeiran seafood starter commonly served in the pan with bread for the juices.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitmadeira.com/en/what-to-do/food-and-wine-enthusiasts/traditional-madeira-food/grilled-limpets/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-lavradores",
+          "name": "Mercado dos Lavradores",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 32.64863889,
+            "lng": -16.90388889
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Mercado_dos_Lavradores",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-penteada",
+          "name": "Mercado da Penteada",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 32.663314,
+            "lng": -16.9286933
+          },
+          "osmType": "way",
+          "osmId": 165351446,
+          "sourceUrl": "https://cmfdoc.funchal.pt/media/k2/attachments/Programa_proced_Mercado_Penteada.pdf",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "q7t5Fh3nJuA",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "Aw0aGo84Im4",
+          "dishIds": [],
+          "placeIds": [
+            "mercado-lavradores"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "granada",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "pionono",
+          "name": "Pionono",
+          "category": "pastry",
+          "description": "A small rolled sponge pastry topped with toasted cream. Closely associated with nearby Santa Fe, this sweet is also found in Granada’s pastry shops and offers a bite-sized introduction to regional confectionery.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pionono.eu/catalogo/Catalogo-Rey-Fernando.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "habas-con-jamon",
+          "name": "Habas con jamón",
+          "category": "vegetable and ham dish",
+          "description": "Broad beans cooked with cured ham, a classic of Granada’s regional cuisine. The city’s tourism office highlights the version with ham from Trevélez, linking this simple dish to the surrounding province.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://turismo.granada.org/es/turismo-gastronomico",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "tortilla-del-sacromonte",
+          "name": "Tortilla del Sacromonte",
+          "category": "omelette",
+          "description": "An omelette traditionally made with eggs, brains and other pork or lamb offal. Named for Granada’s Sacromonte district, it is a distinctive local preparation whose ingredients differ from a standard potato tortilla.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.spain.info/es/receta/tortilla-sacromonte/",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://turismo.granada.org/es/turismo-gastronomico",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-de-san-agustin",
+          "name": "Mercado de San Agustín",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 37.1777822,
+            "lng": -3.5993827
+          },
+          "osmType": "way",
+          "osmId": 124074948,
+          "sourceUrl": "https://turismo.granada.org/en/mercado-san-agustin-gourmet",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "plaza-larga-market",
+          "name": "Plaza Larga Market",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 37.1826353,
+            "lng": -3.5933153
+          },
+          "osmType": "way",
+          "osmId": 41337205,
+          "sourceUrl": "https://www.granada.org/inet/sonidos.nsf/byclave/0402",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "CVamh8QoGeo",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "A9Gi2apTRbo",
+          "dishIds": [
+            "pionono"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "hamburg",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "fischbroetchen",
+          "name": "Fischbrötchen",
+          "category": "sandwich",
+          "description": "A bread roll filled with fish such as herring or smoked salmon, with toppings that may include onion and pickles. A portable snack reflecting Hamburg’s maritime food culture.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.hamburg.com/visitors/dine-and-drink/fischbroetchen-1022232",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "labskaus",
+          "name": "Labskaus",
+          "category": "meat",
+          "description": "A northern German sailor’s dish combining preserved beef, potatoes and often beetroot. Hamburg versions commonly arrive with a fried egg, pickles and herring alongside.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.hamburg.com/visitors/dine-and-drink/labskaus-1022236",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.hamburg.de/freizeit/essen-trinken/hamburger-kueche/restaurants-labskaus-313168",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "franzbroetchen",
+          "name": "Franzbrötchen",
+          "category": "pastry",
+          "description": "A buttery, folded yeast pastry with cinnamon and sugar, baked until its edges caramelize. Closely associated with Hamburg’s bakeries and enjoyed for breakfast or with coffee.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.hamburg.com/visitors/dine-and-drink/hamburg-s-sweet-obsession-the-franzbroetchen-1019148",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "altona-fischmarkt",
+          "name": "Altonaer Fischmarkt",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 53.54561,
+            "lng": 9.95427
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://de.wikipedia.org/wiki/Altonaer_Fischmarkt",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "rindermarkthalle-st-pauli",
+          "name": "Rindermarkthalle St. Pauli",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 53.55666667,
+            "lng": 9.96611111
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://de.wikipedia.org/wiki/Rindermarkthalle_St._Pauli",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "sGRw--AduNI",
+          "dishIds": [],
+          "placeIds": [
+            "altona-fischmarkt"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "FGimLkw45j0",
+          "dishIds": [
+            "fischbroetchen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "havana",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube oEmbed embed check).",
       "dishes": [
@@ -1909,6 +3509,115 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "innsbruck",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "tiroler-grostl",
+          "name": "Tiroler Gröstl",
+          "category": "potato skillet",
+          "description": "Potatoes, onions, bacon and cooked meat browned together in a pan and topped with a fried egg. This Tyrolean dish grew from using leftover roast meat and is part of Innsbruck’s regional cooking.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.tirol.at/aktivitaeten/kulinarik/rezepte/tiroler-groestl",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.innsbruck.info/blog/en/food-drink/must-eat-the-5-classics-of-tyrolean-cuisine/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "kaspressknodel",
+          "name": "Kaspressknödel",
+          "category": "dumplings",
+          "description": "Flat cheese dumplings cooked until golden, with a crisp outside and a soft interior. Innsbruck’s tourism office highlights them served in hot beef stock as a classic way to sample the city’s Tyrolean cuisine.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.innsbruck.info/en/destinations/travel-tips/eating-drinking-and-shopping.html",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "kiachl",
+          "name": "Kiachl",
+          "category": "fried dough",
+          "description": "Deep-fried yeast dough served with savory sauerkraut or sweet toppings such as cranberry preserves and sugar. This Tyrolean specialty has a long tradition in Innsbruck, including its Christmas markets.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.innsbruck.info/blog/en/food-drink/tradition-to-go-the-innsbruck-kiachl/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "markthalle-innsbruck",
+          "name": "Markthalle Innsbruck",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 47.267186,
+            "lng": 11.3895995
+          },
+          "osmType": "way",
+          "osmId": 60366210,
+          "sourceUrl": "https://www.openstreetmap.org/way/60366210",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "stiftskeller",
+          "name": "Stiftskeller Innsbruck",
+          "kind": "restaurant",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 47.2683628,
+            "lng": 11.3947996
+          },
+          "osmType": "node",
+          "osmId": 373271375,
+          "sourceUrl": "https://www.stiftskeller.eu/en/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "xhopeAzGL4o",
+          "dishIds": [],
+          "placeIds": [
+            "stiftskeller"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "zKHpB_oESDo",
+          "dishIds": [],
+          "placeIds": [
+            "markthalle-innsbruck"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]
@@ -2162,6 +3871,126 @@
       ]
     },
     {
+      "slug": "lima",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "ceviche",
+          "name": "Ceviche",
+          "category": "seafood",
+          "description": "Fresh raw fish dressed with lime juice, onion and ají, commonly accompanied by corn and sweet potato. Lima’s ceviche tradition highlights the city’s connection with the Pacific coast.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Ceviche",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.peru.travel/gastronomy/en/peruvian-cuisine/cuisine-of-lima.html",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "anticuchos",
+          "name": "Anticuchos",
+          "category": "skewers",
+          "description": "Marinated beef-heart pieces grilled on skewers over charcoal. Associated with Lima’s street-food tradition, they combine a smoky crust with a deeply seasoned interior.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Anticucho",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.peru.travel/gastronomy/en/peruvian-cuisine/cuisine-of-lima.html",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "picarones",
+          "name": "Picarones",
+          "category": "sweets",
+          "description": "Fried rings made with squash and sweet potato, served with chancaca syrup. A Lima dessert with a light, crisp exterior, often eaten after a savory street-food meal.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Picarones",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.peru.travel/gastronomy/en/peruvian-cuisine/cuisine-of-lima.html",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-central-lima",
+          "name": "Mercado Central de Lima",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -12.050063,
+            "lng": -77.025994
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://es.wikipedia.org/wiki/Mercado_Central_de_Lima",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-surquillo-1",
+          "name": "Mercado de Surquillo N.º 1",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -12.1180304,
+            "lng": -77.0254758
+          },
+          "osmType": "way",
+          "osmId": 220048425,
+          "sourceUrl": "https://www.peru.travel/lima2019/es/conoce-lima/imperdibles.html",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "Il3NjMlQ_dk",
+          "dishIds": [
+            "ceviche",
+            "anticuchos",
+            "picarones"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "USgtb0ULCd0",
+          "dishIds": [
+            "anticuchos",
+            "picarones"
+          ],
+          "placeIds": [],
+          "startSeconds": 365,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "lisbon",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -2267,6 +4096,131 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "ljubljana",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "kranjska-klobasa",
+          "name": "Kranjska klobasa",
+          "category": "sausage",
+          "description": "Carniolan sausage is one of Slovenia’s best-known specialties and is also part of Ljubljana’s food scene. Served as a hearty snack or meal, it connects the capital with the country’s broader culinary traditions.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitljubljana.com/en/visitors/food-and-drink/slovenian-cuisine",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.visitljubljana.com/en/visitors/food-and-drink/street-food-in-ljubljana",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "struklji",
+          "name": "Štruklji",
+          "category": "dumplings",
+          "description": "Rolled dough with sweet or savory fillings, such as cottage cheese, walnuts, apples or tarragon. Boiled or baked, these Slovenian rolls can be a main dish, a side or a sweet course, and are served at Ljubljana’s Central Market.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitljubljana.com/en/visitors/food-and-drink/slovenian-cuisine",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.visitljubljana.com/en/visitors/food-and-drink/street-food-in-ljubljana",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "potica",
+          "name": "Potica",
+          "category": "sweet pastry",
+          "description": "A Slovenian cake made from yeast dough rolled around a filling, with walnut and tarragon among the traditional choices. Ljubljana shares this national baking tradition, offering a slice alongside other local sweets.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitljubljana.com/en/visitors/food-and-drink/slovenian-cuisine",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.visitljubljana.com/en/visitors/food-and-drink/taste-ljubljana",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "ljubljana-central-market",
+          "name": "Ljubljana Central Market",
+          "kind": "market",
+          "dishIds": [
+            "struklji"
+          ],
+          "coordinates": {
+            "lat": 46.05166667,
+            "lng": 14.50972222
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://www.visitljubljana.com/en/visitors/food-and-drink/street-food-in-ljubljana",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "klobasarna",
+          "name": "Klobasarna",
+          "kind": "restaurant",
+          "dishIds": [
+            "kranjska-klobasa"
+          ],
+          "coordinates": {
+            "lat": 46.0504117,
+            "lng": 14.5078841
+          },
+          "osmType": "node",
+          "osmId": 3076553064,
+          "sourceUrl": "https://www.visitljubljana.com/en/visitors/food-and-drink/street-food-in-ljubljana",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "2yPcX_ifALc",
+          "dishIds": [
+            "kranjska-klobasa",
+            "struklji",
+            "potica"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "DW7SNhmWX9U",
+          "dishIds": [
+            "struklji"
+          ],
+          "placeIds": [
+            "ljubljana-central-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]
@@ -2385,6 +4339,120 @@
       ]
     },
     {
+      "slug": "lyon",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "quenelle-lyonnaise",
+          "name": "Quenelle lyonnaise",
+          "category": "dumplings",
+          "description": "Light, oval dumplings made plain or with fish such as pike, typically served with sauce and browned in the oven. A classic dish of Lyon’s traditional bouchons.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.visiterlyon.com/taste-the-finest/bons-plans/lyon-s-specialities",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Quenelle",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.halles-de-lyon-paulbocuse.com/nos-commercants/giraudet/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "saucisson-brioche",
+          "name": "Saucisson brioché",
+          "category": "sausage",
+          "description": "A cooked Lyonnais sausage wrapped in soft brioche bread and sliced to serve. Some versions include pistachios, combining savory charcuterie with a rich bread crust.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.visiterlyon.com/taste-the-finest/bons-plans/lyon-s-specialities",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tarte-praline",
+          "name": "Tarte à la praline",
+          "category": "sweets",
+          "description": "A tart filled with a vivid pink praline mixture. This sweet specialty has become part of Lyon’s pastry identity and is found in local bakeries and traditional restaurants.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.visiterlyon.com/taste-the-finest/bons-plans/lyon-s-specialities",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "halles-paul-bocuse",
+          "name": "Halles de Lyon Paul Bocuse",
+          "kind": "food_hall",
+          "dishIds": [
+            "quenelle-lyonnaise",
+            "tarte-praline"
+          ],
+          "coordinates": {
+            "lat": 45.763242,
+            "lng": 4.850486
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://fr.wikipedia.org/wiki/Halles_de_Lyon-Paul_Bocuse",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "marche-saint-antoine",
+          "name": "Marché Saint-Antoine Célestins",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 45.7615248,
+            "lng": 4.831339
+          },
+          "osmType": "node",
+          "osmId": 2911180061,
+          "sourceUrl": "https://www.visiterlyon.com/sortir/boutiques-et-shopping/marches-alimentaires/marche-alimentaire-saint-antoine-celestins",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "5yWufPQVmy8",
+          "dishIds": [],
+          "placeIds": [
+            "halles-paul-bocuse"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "yShrWL54wIU",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "madrid",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -2493,6 +4561,112 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "malaga",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "espeto-de-sardinas",
+          "name": "Espeto de sardinas",
+          "category": "grilled fish",
+          "description": "Sardines threaded onto long skewers and roasted beside a wood fire on the sand. This Málaga coastal specialty is closely associated with beachside cooking and the city’s seafood traditions.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.spain.info/export/sites/gcc/gcc/.content/comun/documentos/Malaga_EN.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "ajoblanco",
+          "name": "Ajoblanco",
+          "category": "cold soup",
+          "description": "A chilled soup made from almonds, garlic, bread, olive oil and vinegar. This Andalusian preparation is one of the traditional dishes highlighted by Spain’s tourism guide to Málaga.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.spain.info/export/sites/gcc/gcc/.content/comun/documentos/Malaga_EN.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "pescaito-frito",
+          "name": "Pescaíto frito",
+          "category": "fried fish",
+          "description": "Small fried fish served as a seafood dish to share or eat in portions. Spain’s tourism guide names pescaíto frito among Málaga’s characteristic foods, alongside sardine skewers and chilled soups.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.spain.info/export/sites/gcc/gcc/.content/comun/documentos/Malaga_EN.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-de-atarazanas",
+          "name": "Mercado de Atarazanas",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 36.718408,
+            "lng": -4.4240607
+          },
+          "osmType": "way",
+          "osmId": 404636182,
+          "sourceUrl": "https://www.spain.info/export/sites/segtur/.content/Folletos/folletos/Malaga_ES.pdf",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "mercado-de-el-carmen",
+          "name": "Mercado de El Carmen",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 36.713894,
+            "lng": -4.4297273
+          },
+          "osmType": "way",
+          "osmId": 348528070,
+          "sourceUrl": "https://www.spain.info/export/sites/segtur/.content/Folletos/folletos/Malaga_ES.pdf",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "nbIqAUdwyAk",
+          "dishIds": [
+            "ajoblanco",
+            "pescaito-frito"
+          ],
+          "placeIds": [
+            "mercado-de-atarazanas"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "oQIXJTT3feI",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]
@@ -2724,6 +4898,118 @@
       ]
     },
     {
+      "slug": "medellin",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "bandeja-paisa",
+          "name": "Bandeja paisa",
+          "category": "platter",
+          "description": "A generous Antioquia platter bringing together beans, rice, meat, egg, avocado and plantain. Medellín’s traditional kitchens serve it as a substantial meal with components that vary by establishment.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.medellin.travel/sabores/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Bandeja_paisa",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "arepa-de-chocolo",
+          "name": "Arepa de chócolo",
+          "category": "corn",
+          "description": "A corn cake made with tender maize, often enjoyed with cheese. One of Medellín’s many arepa varieties, reflecting the importance of corn in everyday Antioquia cooking.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.medellin.travel/sabores/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Arepa",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "empanada-paisa",
+          "name": "Empanada paisa",
+          "category": "pastry",
+          "description": "A thin turnover commonly filled with potato and meat. This handheld snack is part of Medellín’s neighborhood food culture, with fillings varying across stalls and kitchens.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.medellin.travel/sabores/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "plaza-minorista",
+          "name": "Plaza Minorista José María Villa",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 6.2576308,
+            "lng": -75.5734559
+          },
+          "osmType": "way",
+          "osmId": 433081101,
+          "sourceUrl": "https://www.medellin.travel/sabores/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "placita-florez",
+          "name": "Placita de Flórez",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 6.245919,
+            "lng": -75.5599993
+          },
+          "osmType": "way",
+          "osmId": 263305157,
+          "sourceUrl": "https://www.medellin.travel/placita-de-florez/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "3bkQroIAQm4",
+          "dishIds": [
+            "empanada-paisa",
+            "arepa-de-chocolo"
+          ],
+          "placeIds": [],
+          "startSeconds": 108,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "8gnNP9nSmVE",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "mexico-city",
       "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia and Mexico City official sources, Wikipedia coordinates, YouTube oEmbed embed check).",
       "dishes": [
@@ -2825,6 +5111,230 @@
           "dishIds": [
             "tacos-al-pastor"
           ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "milan",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "risotto-alla-milanese",
+          "name": "Risotto alla milanese",
+          "category": "rice",
+          "description": "A creamy risotto colored and flavored with saffron, finished with butter and grated cheese. One of Milan’s signature rice dishes, rooted in the cooking traditions of Lombardy.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://it.wikipedia.org/wiki/Risotto_alla_milanese",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.yesmilano.it/en/food",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "cotoletta-alla-milanese",
+          "name": "Cotoletta alla milanese",
+          "category": "meat",
+          "description": "A veal cutlet coated in breadcrumbs and fried in butter. Milan’s traditional version is associated with a bone-in chop, though the city also serves thinner variations.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://it.wikipedia.org/wiki/Cotoletta_alla_milanese",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.yesmilano.it/en/food",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "panettone",
+          "name": "Panettone",
+          "category": "sweets",
+          "description": "A tall, airy sweet bread with raisins and candied fruit, traditionally associated with Milan and the Christmas season. Its long fermentation gives the crumb its distinctive light texture.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://it.wikipedia.org/wiki/Panettone",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.yesmilano.it/en/food",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercato-wagner",
+          "name": "Mercato Comunale Wagner",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 45.4682784,
+            "lng": 9.1557439
+          },
+          "osmType": "way",
+          "osmId": 169834097,
+          "sourceUrl": "https://store.mercatidiquartiere.it/it_IT/mercato/mercato-wagner",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercato-centrale-milano",
+          "name": "Mercato Centrale Milano",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 45.4872904,
+            "lng": 9.204061
+          },
+          "osmType": "node",
+          "osmId": 9054003062,
+          "sourceUrl": "https://www.mercatocentrale.it/milano/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "Dlh1aR_hWQM",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "7Oz7aTAeqgk",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "montevideo",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "chivito",
+          "name": "Chivito",
+          "category": "sandwich",
+          "description": "A Uruguayan beef sandwich layered with ingredients such as ham, bacon, mozzarella, lettuce, tomato and egg. Despite the name, the classic Montevideo chivito is built around beef rather than goat.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.descubrimontevideo.uy/el-chivito",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "choripan",
+          "name": "Choripán",
+          "category": "sandwich",
+          "description": "Grilled chorizo tucked into a crusty bread roll. A simple street-food favorite in Uruguay, also documented in the food stalls of Montevideo’s Tristán Narvaja fair.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Chorip%C3%A1n",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=9wZe2kxDyGw",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "asado",
+          "name": "Asado",
+          "category": "grill",
+          "description": "Meat cooked over embers on a parrilla, with cuts and accompaniments chosen by the kitchen. Uruguay’s grilling tradition is a central part of Montevideo’s gastronomic identity.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Asado",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.descubrimontevideo.uy/descubri-montevideu-gastronomico",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-puerto",
+          "name": "Mercado del Puerto",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -34.905673,
+            "lng": -56.211784
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://es.wikipedia.org/wiki/Mercado_del_Puerto",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-agricola",
+          "name": "Mercado Agrícola de Montevideo",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -34.88694444,
+            "lng": -56.18333333
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://es.wikipedia.org/wiki/Mercado_Agr%C3%ADcola_de_Montevideo",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "9wZe2kxDyGw",
+          "dishIds": [
+            "choripan"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "y2pky9SUB98",
+          "dishIds": [],
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
@@ -3057,6 +5567,128 @@
       ]
     },
     {
+      "slug": "munich",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "weisswurst",
+          "name": "Weißwurst",
+          "category": "sausage",
+          "description": "A pale Bavarian sausage traditionally made with veal and pork, gently heated in water. In Munich it is commonly served with sweet mustard and a pretzel.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.munich.travel/en/topics/eat-drink/bavarian-food",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Wei%C3%9Fwurst",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "obatzda",
+          "name": "Obatzda",
+          "category": "cheese",
+          "description": "A Bavarian spread mixing soft cheese with butter and paprika, often finished with onion. A familiar beer-garden snack in Munich, eaten with bread or a pretzel.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Obatzda",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.munich.travel/en/pois/urban-districts/viktualienmarkt",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "leberkaessemmel",
+          "name": "Leberkässemmel",
+          "category": "sandwich",
+          "description": "A warm slice of finely ground, baked meat loaf tucked into a bread roll. This Bavarian takeaway staple comes in different meat varieties and is found at Munich market counters.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Leberk%C3%A4se",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.munich.travel/en/topics/urban-districts/local-love-munich/altstadt-s-fast-eats",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "viktualienmarkt",
+          "name": "Viktualienmarkt",
+          "kind": "market",
+          "dishIds": [
+            "obatzda",
+            "leberkaessemmel"
+          ],
+          "coordinates": {
+            "lat": 48.13527778,
+            "lng": 11.57611111
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://www.munich.travel/en/pois/urban-districts/viktualienmarkt",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "elisabethmarkt",
+          "name": "Elisabethmarkt",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 48.15694444,
+            "lng": 11.57444444
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://en.wikipedia.org/wiki/Elisabethmarkt",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "XUBT8h2ympg",
+          "dishIds": [
+            "weisswurst"
+          ],
+          "placeIds": [
+            "viktualienmarkt"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "jl-B7lFqL8c",
+          "dishIds": [],
+          "placeIds": [
+            "viktualienmarkt"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "new-york-city",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -3171,6 +5803,125 @@
       ]
     },
     {
+      "slug": "nice",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "socca",
+          "name": "Socca",
+          "category": "flatbread",
+          "description": "A thin chickpea-flour pancake baked in a very hot oven with water and olive oil. Served hot in pieces with pepper, this Niçoise snack combines crisp edges with a softer center.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.explorenicecotedazur.com/en/explore/art-of-living/gastronomy-and-local-produce/nicoise-recipes/la-socca/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "pan-bagnat",
+          "name": "Pan bagnat",
+          "category": "sandwich",
+          "description": "A round bread roll filled with tomatoes, raw vegetables, tuna, hard-boiled egg, anchovies and olives. Tomato juices and olive oil soak into the bread, giving this Nice sandwich its distinctive texture.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.explorenicecotedazur.com/en/explore/art-of-living/gastronomy-and-local-produce/nicoise-recipes/pan-bagnat/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "pissaladiere",
+          "name": "Pissaladière",
+          "category": "savory pastry",
+          "description": "A bread-dough tart topped with slowly cooked onions, anchovies and black olives. This savory Niçoise specialty is cut into portions for a snack or to share before a meal.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.explorenicecotedazur.com/explorer/art-de-vivre/gastronomie-et-terroir/recettes-de-cuisine-nicoise/la-pissaladiere/",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.chezpipo.fr/fr",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "cours-saleya-market",
+          "name": "Cours Saleya Market",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 43.6956096,
+            "lng": 7.2751036
+          },
+          "osmType": "way",
+          "osmId": 25449022,
+          "sourceUrl": "https://www.explorenicecotedazur.com/en/event/marche-aux-fruits-legumes-et-maree-du-cours-saleya/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "chez-pipo",
+          "name": "Chez Pipo",
+          "kind": "restaurant",
+          "dishIds": [
+            "socca",
+            "pissaladiere"
+          ],
+          "coordinates": {
+            "lat": 43.6999467,
+            "lng": 7.2855034
+          },
+          "osmType": "node",
+          "osmId": 539387779,
+          "sourceUrl": "https://www.chezpipo.fr/fr",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "9tN53C-q4BA",
+          "dishIds": [
+            "socca"
+          ],
+          "placeIds": [
+            "cours-saleya-market"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "BmCd-jHq4AM",
+          "dishIds": [
+            "socca",
+            "pan-bagnat",
+            "pissaladiere"
+          ],
+          "placeIds": [
+            "cours-saleya-market",
+            "chez-pipo"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "oslo",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -3276,6 +6027,113 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "palma-de-mallorca",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "ensaimada",
+          "name": "Ensaïmada",
+          "category": "pastry",
+          "description": "A light, spiral-shaped Mallorcan pastry made with lard and dusted with icing sugar. Sold plain or with fillings, it is a familiar specialty of Palma’s bakeries and pastry shops.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitpalma.com/en/dir/ensaimadas-light-airy-and-delicate-pastry/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "sobrasada",
+          "name": "Sobrasada",
+          "category": "cured sausage",
+          "description": "A soft cured pork sausage seasoned with paprika, pepper and salt. This Balearic specialty is spread on bread and is one of the regional products to explore while eating in Palma.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.spain.info/en/top/all-the-mouthwatering-gastronomy-of-the-balearic-islands/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "tumbet",
+          "name": "Tumbet",
+          "category": "vegetable dish",
+          "description": "A Mallorcan dish combining potatoes, fried peppers and eggplant with tomato sauce. Palma’s tourism office lists tumbet among the traditional dishes that draw on the island’s produce.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.spain.info/es/destino/deya/",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://visitpalma.com/es/dir/restaurantes-y-vida-nocturna/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercat-de-lolivar",
+          "name": "Mercat de l’Olivar",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 39.5738656,
+            "lng": 2.6535029
+          },
+          "osmType": "way",
+          "osmId": 33845347,
+          "sourceUrl": "https://www.mercatolivar.com/es/inicio/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "mercat-de-santa-catalina",
+          "name": "Mercat de Santa Catalina",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 39.5712307,
+            "lng": 2.6382653
+          },
+          "osmType": "way",
+          "osmId": 49196899,
+          "sourceUrl": "https://mercatdesantacatalina.com/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "JO-ixKNyh4I",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "hN8BGIKxre8",
+          "dishIds": [
+            "ensaimada"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]
@@ -3506,6 +6364,238 @@
       ]
     },
     {
+      "slug": "quito",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "locro-de-papa",
+          "name": "Locro de papa",
+          "category": "soup",
+          "description": "A creamy Andean potato soup finished with cheese and avocado. A traditional Quito dish that turns a highland staple into a comforting bowl.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitquito.ec/es/quito-donde-el-tiempo-respira-entre-los-andes/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://en.wikipedia.org/wiki/Locro",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "hornado",
+          "name": "Hornado",
+          "category": "pork",
+          "description": "Slow-roasted pork served with accompaniments such as mote and potato cakes. A classic of Ecuador’s highland markets, including food stalls at Quito’s Mercado Santa Clara.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Hornado",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.youtube.com/watch?v=lWDy2GgjYtQ",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "fritada",
+          "name": "Fritada",
+          "category": "pork",
+          "description": "Pork cooked until the liquid reduces and the meat browns in its own fat. In Quito’s food tradition it is served with accompaniments such as corn and plantain.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Fritada",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://visitquito.ec/es/quito-donde-el-tiempo-respira-entre-los-andes/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-central-quito",
+          "name": "Mercado Central de Quito",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -0.2198886,
+            "lng": -78.5069701
+          },
+          "osmType": "way",
+          "osmId": 335664092,
+          "sourceUrl": "https://visitquito.ec/es/ruta-de-los-mercados-quito/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-santa-clara",
+          "name": "Mercado Santa Clara",
+          "kind": "market",
+          "dishIds": [
+            "hornado"
+          ],
+          "coordinates": {
+            "lat": -0.199998,
+            "lng": -78.4993644
+          },
+          "osmType": "node",
+          "osmId": 6512691585,
+          "sourceUrl": "https://visitquito.ec/es/ruta-de-los-mercados-quito/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "lWDy2GgjYtQ",
+          "dishIds": [
+            "hornado"
+          ],
+          "placeIds": [
+            "mercado-santa-clara"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "un7urWfZvSM",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "recife",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "bolo-de-rolo",
+          "name": "Bolo de rolo",
+          "category": "sweets",
+          "description": "Very thin layers of cake rolled with guava paste into a tight spiral. A Pernambuco specialty, sliced to reveal the fine alternating bands of cake and fruit filling.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Bolo_de_rolo",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www2.recife.pe.gov.br/noticias/19/07/2012/variedade-qualidade-e-quantidade-comidas-tipicas-do-recife",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "tapioca",
+          "name": "Tapioca",
+          "category": "flatbread",
+          "description": "Cassava-starch grains set into a soft folded pancake on a hot griddle. Fillings vary; cheese and coconut are among the combinations associated with Pernambuco’s everyday food.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Tapioca",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www2.recife.pe.gov.br/noticias/19/07/2012/variedade-qualidade-e-quantidade-comidas-tipicas-do-recife",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www2.recife.pe.gov.br/noticias/23/05/2011/prodarte-entrega-carteiras-de-identificacao-artesaos",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "cartola",
+          "name": "Cartola",
+          "category": "sweets",
+          "description": "Fried banana topped with warmed queijo coalho or queijo manteiga, then finished with sugar and cinnamon. A traditional Pernambuco dessert that combines fruit, cheese and a sweet spiced finish.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www2.recife.pe.gov.br/noticias/19/07/2012/variedade-qualidade-e-quantidade-comidas-tipicas-do-recife",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-sao-jose",
+          "name": "Mercado de São José",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -8.06852,
+            "lng": -34.87768
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://pt.wikipedia.org/wiki/Mercado_de_S%C3%A3o_Jos%C3%A9",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-boa-vista",
+          "name": "Mercado da Boa Vista",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -8.0632928,
+            "lng": -34.8886107
+          },
+          "osmType": "relation",
+          "osmId": 11377204,
+          "sourceUrl": "https://www.openstreetmap.org/relation/11377204",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "k2FJoi8O0Pg",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "yW47i4Z9VXE",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "rio-de-janeiro",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -3722,6 +6812,128 @@
           "dishIds": [
             "suppli",
             "porchetta"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "salvador",
+      "note": "Expansion batch 2 curated on 2026-10-08. Food sources, place coordinates and YouTube embed availability checked; associations use publisher descriptions or chapters.",
+      "dishes": [
+        {
+          "id": "acaraje",
+          "name": "Acarajé",
+          "category": "fritters",
+          "description": "Black-eyed pea fritters fried in dendê oil and split for fillings such as vatapá, dried shrimp and pepper. A defining snack of Salvador’s Afro-Brazilian food culture.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.salvadordabahia.com/roteiros/o-mapa-dos-acarajes/",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://pt.wikipedia.org/wiki/Acaraj%C3%A9",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "moqueca-baiana",
+          "name": "Moqueca baiana",
+          "category": "seafood",
+          "description": "Fish or seafood simmered with coconut milk and dendê oil. This Bahian stew brings together coastal ingredients and Afro-Brazilian cooking traditions, usually served as a meal to share.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Moqueca",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.salvadordabahia.com/experiencias/restaurante-o-coliseu-gastronomia-cultura-e-show-folclorico/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "vatapa",
+          "name": "Vatapá",
+          "category": "stew",
+          "description": "A thick, creamy preparation with bread or flour, nuts, coconut milk and dendê oil. In Salvador it appears alongside rice and as one of the fillings of acarajé.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://pt.wikipedia.org/wiki/Vatap%C3%A1",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.salvadordabahia.com/roteiros/o-mapa-dos-acarajes/",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "feira-sao-joaquim",
+          "name": "Feira de São Joaquim",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -12.951,
+            "lng": -38.50161111111111
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://pt.wikipedia.org/wiki/Feira_de_S%C3%A3o_Joaquim",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-rio-vermelho",
+          "name": "Mercado do Rio Vermelho",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": -13.0017083,
+            "lng": -38.4818353
+          },
+          "osmType": "way",
+          "osmId": 310356391,
+          "sourceUrl": "https://www.openstreetmap.org/way/310356391",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "Nyr7kL3s91w",
+          "dishIds": [
+            "acaraje",
+            "moqueca-baiana",
+            "vatapa"
+          ],
+          "placeIds": [
+            "feira-sao-joaquim"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "uXrsnLjBjwc",
+          "dishIds": [
+            "acaraje",
+            "moqueca-baiana"
           ],
           "placeIds": [],
           "startSeconds": 0,
@@ -3985,6 +7197,121 @@
       ]
     },
     {
+      "slug": "seville",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "espinacas-garbanzos",
+          "name": "Espinacas con garbanzos",
+          "category": "vegetables",
+          "description": "Spinach and chickpeas cooked together with garlic and spices, often including cumin. A classic warm tapa of Seville, reflecting the city’s long-standing Andalusian cooking traditions.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://visitasevilla.es/wp-content/uploads/2023/06/SEVILLA_GASTRONOMICA_compressed.pdf",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://es.wikipedia.org/wiki/Sevilla",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "serranito",
+          "name": "Serranito",
+          "category": "sandwich",
+          "description": "A warm sandwich typically combining grilled pork or chicken, cured ham and fried green pepper. This Seville favorite is served as a substantial quick meal, with variations in fillings and sauces.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Serranito",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://visitasevilla.es/wp-content/uploads/2023/06/SEVILLA_GASTRONOMICA_compressed.pdf",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "torrijas",
+          "name": "Torrijas",
+          "category": "sweets",
+          "description": "Slices of bread soaked in milk or wine, coated in egg and fried, then sweetened. In Seville these pastries are especially associated with Lent and Holy Week.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://es.wikipedia.org/wiki/Sevilla",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://tic.visitasevilla.es/vsev/Web_php/imatges/guias/1425165a51fa093898966467942.pdf",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-triana",
+          "name": "Mercado de Triana",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 37.3857499,
+            "lng": -6.0035503
+          },
+          "osmType": "way",
+          "osmId": 696646033,
+          "sourceUrl": "https://visitasevilla.es/en/traditional-markets/",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "lonja-barranco",
+          "name": "Mercado Lonja del Barranco",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 37.3876492,
+            "lng": -6.0021317
+          },
+          "osmType": "way",
+          "osmId": 120418445,
+          "sourceUrl": "https://www.legacy.visitasevilla.es/mercados-tradicionales/mercado-gourmet-lonja-del-barranco",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "yK9xHogNzHc",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "8Tl39wMfq8o",
+          "dishIds": [],
+          "placeIds": [
+            "mercado-triana"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "singapore",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -4099,6 +7426,113 @@
       ]
     },
     {
+      "slug": "sofia",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "banitsa",
+          "name": "Banitsa",
+          "category": "savory pastry",
+          "description": "Layers of pastry baked with white cheese, eggs, yogurt and butter. This Bulgarian staple can be arranged in a spiral or layered in a pan and is a familiar breakfast choice in Sofia.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.tourism.government.bg/sites/trsm.gateway.bg/archive/files/useruploads/files/reklamno-informacionni-materiali/BULGARIA_Gourmet_ENG.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "shopska-salad",
+          "name": "Shopska salad",
+          "category": "salad",
+          "description": "A Bulgarian salad of tomatoes, cucumber, peppers and onion topped with grated white cheese. Oil and vinegar dress the vegetables, while the cheese gives this regional staple a salty finish.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.tourism.government.bg/sites/trsm.gateway.bg/archive/files/useruploads/files/reklamno-informacionni-materiali/BULGARIA_Gourmet_ENG.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "kebapche",
+          "name": "Kebapche",
+          "category": "grilled meat",
+          "description": "Minced meat seasoned with cumin, salt and pepper, shaped into short cylinders and grilled. Made with beef or a beef-and-pork mixture, kebapche is a Bulgarian grill classic to explore in Sofia.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.tourism.government.bg/sites/trsm.gateway.bg/archive/files/useruploads/files/reklamno-informacionni-materiali/BULGARIA_Gourmet_ENG.pdf",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "central-sofia-market-hall",
+          "name": "Central Sofia Market Hall",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 42.7,
+            "lng": 23.32166667
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://sofia-hali.bg/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "zhenski-pazar",
+          "name": "Zhenski Pazar (Women’s Market)",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 42.702862,
+            "lng": 23.3198428
+          },
+          "osmType": "way",
+          "osmId": 267646679,
+          "sourceUrl": "https://www.openstreetmap.org/way/267646679",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "jcSXIkn_ZOs",
+          "dishIds": [
+            "banitsa"
+          ],
+          "placeIds": [
+            "zhenski-pazar"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "vwOeiXqWwIY",
+          "dishIds": [
+            "banitsa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "stockholm",
       "note": "Pilot expansion verified on 2026-10-08 (Wikipedia sources, Wikipedia coordinates, YouTube search-result verification).",
       "dishes": [
@@ -4204,6 +7638,117 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "stuttgart",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "maultaschen",
+          "name": "Maultaschen",
+          "category": "dumplings",
+          "description": "Swabian pasta pockets traditionally filled with meat, spinach, onions and herbs. They can be served in broth, with cooked onions, or sliced and fried with egg; fillings vary across Stuttgart’s menus.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.stuttgart-tourist.de/en/eat-and-drink/from-spaetzle-to-maultaschen",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "linsen-mit-spatzle-und-saiten",
+          "name": "Linsen mit Spätzle und Saiten",
+          "category": "lentil dish",
+          "description": "A Swabian plate of simmered lentils, Spätzle noodles and slender frankfurter-style sausages. The lentils are seasoned with vinegar, giving a tangy contrast to the noodles and meat.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.stuttgart-tourist.de/en/eat-and-drink/from-spaetzle-to-maultaschen",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.stuttgart-tourist.de/en/eat-and-drink/swabian-cuisine-in-stuttgart/9",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "zwiebelrostbraten",
+          "name": "Zwiebelrostbraten",
+          "category": "beef dish",
+          "description": "Seared beef served with gravy and cooked or crisp fried onions. This Swabian restaurant classic is part of Stuttgart’s regional cuisine and is commonly paired with Spätzle.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.linde-stuttgart.de/rezept-zwiebelrostbraten",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.stuttgart-tourist.de/en/eat-and-drink/swabian-cuisine-in-stuttgart/9",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "markthalle-stuttgart",
+          "name": "Markthalle Stuttgart",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 48.7761399,
+            "lng": 9.1793463
+          },
+          "osmType": "way",
+          "osmId": 9725108,
+          "sourceUrl": "https://www.openstreetmap.org/way/9725108",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "carls-brauhaus",
+          "name": "Carls Brauhaus",
+          "kind": "restaurant",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 48.7793589,
+            "lng": 9.1802132
+          },
+          "osmType": "node",
+          "osmId": 2790423495,
+          "sourceUrl": "https://www.stuttgart-tourist.de/en/eat-and-drink/swabian-cuisine-in-stuttgart/9",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "3Fi2_4Evun4",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "om5Ab5nkGJM",
+          "dishIds": [
+            "maultaschen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]
@@ -4331,6 +7876,112 @@
       ]
     },
     {
+      "slug": "thessaloniki",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "bougatsa",
+          "name": "Bougatsa",
+          "category": "pastry",
+          "description": "Thin phyllo pastry wrapped around a sweet cream or savory filling such as cheese, spinach or minced meat. Thessaloniki’s bougatsa shops serve it as a breakfast or snack, continuing a tradition shaped by migration from Asia Minor.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://cityofgastronomy.thessaloniki.gr/en/proionta-thessalonikis/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "koulouri-thessalonikis",
+          "name": "Koulouri Thessalonikis",
+          "category": "bread",
+          "description": "A sesame-covered bread ring closely associated with Thessaloniki. Sold in bakeries and by street vendors, it is a portable snack whose crispness and softness vary from one baker to another.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://cityofgastronomy.thessaloniki.gr/en/proionta-thessalonikis/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "trigona-panoramatos",
+          "name": "Trigona Panoramatos",
+          "category": "dessert",
+          "description": "Crisp phyllo cones soaked in syrup and filled with custard cream. Associated with Panorama, a suburb of Thessaloniki, these triangular pastries are among the area’s characteristic sweets.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://cityofgastronomy.thessaloniki.gr/en/proionta-thessalonikis/",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "kapani-market",
+          "name": "Kapani Market",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 40.6359292,
+            "lng": 22.9426345
+          },
+          "osmType": "way",
+          "osmId": 110163670,
+          "sourceUrl": "https://thessaloniki.travel/it/esplorare-la-citta/distretti-interessanti/modiano-kapani-louloudadika/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "modiano-market",
+          "name": "Modiano Market",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 40.6349721,
+            "lng": 22.941878
+          },
+          "osmType": "relation",
+          "osmId": 17416084,
+          "sourceUrl": "https://thessaloniki.travel/it/esplorare-la-citta/distretti-interessanti/modiano-kapani-louloudadika/",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "YWjSjWnBmNA",
+          "dishIds": [
+            "bougatsa"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "QpA8B5G1iIc",
+          "dishIds": [
+            "bougatsa",
+            "trigona-panoramatos"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ]
+    },
+    {
       "slug": "tokyo",
       "note": "Pilot city. Published records verified on 2026-10-08 (Wikipedia sources, Wikidata/Wikipedia coordinates, YouTube oEmbed embed check). Market coordinates are representative points; see sourceUrl.",
       "dishes": [
@@ -4443,6 +8094,115 @@
           "id": "EVgVdCrJGgc",
           "dishIds": [
             "ramen"
+          ],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "valencia",
+      "note": "European expansion curated on 2026-10-08. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "paella-valenciana",
+          "name": "Paella valenciana",
+          "category": "rice",
+          "description": "Rice cooked in a wide, shallow pan with chicken, rabbit and local beans. The Valencian tradition focuses on the rice and its stock, with a lightly toasted layer at the bottom.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://blog.visitvalencia.com/en/paella-horchata-or-esgarraet-valencian-recipes-prepare-at-home",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "horchata-chufa",
+          "name": "Horchata de chufa",
+          "category": "drink",
+          "description": "A cold, sweet drink made from soaked and ground tiger nuts. Strongly associated with Valencia and nearby Alboraya, it is often enjoyed with a fartón for dipping.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.visitvalencia.com/en/what-to-do-valencia/gastronomy/where-to-drink/horchata",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "fartons",
+          "name": "Fartons",
+          "category": "pastry",
+          "description": "Soft, elongated sweet buns with a sugary glaze, originating in nearby Alboraya. Their shape and airy crumb make them a traditional accompaniment to Valencian horchata.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://en.wikipedia.org/wiki/Fartons",
+              "checkedAt": "2026-10-08"
+            },
+            {
+              "url": "https://www.visitvalencia.com/en/what-to-do-valencia/gastronomy/where-to-drink/horchata",
+              "checkedAt": "2026-10-08"
+            }
+          ],
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "mercado-central-valencia",
+          "name": "Mercado Central de Valencia",
+          "kind": "market",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 39.473503,
+            "lng": -0.378942
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://es.wikipedia.org/wiki/Mercado_Central_de_Valencia",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "mercado-colon",
+          "name": "Mercado de Colón",
+          "kind": "food_hall",
+          "dishIds": [
+            "horchata-chufa"
+          ],
+          "coordinates": {
+            "lat": 39.46888889,
+            "lng": -0.36833333
+          },
+          "osmType": null,
+          "osmId": null,
+          "sourceUrl": "https://www.visitvalencia.com/en/what-to-do-valencia/gastronomy/where-to-drink/horchata",
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "gSFLNjUjoB4",
+          "dishIds": [],
+          "placeIds": [],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-08",
+          "status": "published"
+        },
+        {
+          "id": "7ZaZsjWVz4k",
+          "dishIds": [
+            "paella-valenciana"
           ],
           "placeIds": [],
           "startSeconds": 0,
@@ -4671,6 +8431,119 @@
           "placeIds": [],
           "startSeconds": 0,
           "verifiedAt": "2026-10-08",
+          "status": "published"
+        }
+      ]
+    },
+    {
+      "slug": "zurich",
+      "note": "European expansion curated on 2026-10-09. Dish sources, place coordinates and YouTube embed availability checked; links require publisher evidence.",
+      "dishes": [
+        {
+          "id": "zurcher-geschnetzeltes",
+          "name": "Zürcher Geschnetzeltes",
+          "category": "meat dish",
+          "description": "Thinly sliced veal cooked briefly and served in a cream sauce. Known locally as Züri Gschnätzlets, this Zurich classic is typically accompanied by rösti and appears in restaurants across the city and region.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.zuerich.com/en/zurcher-geschnetzeltes",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "rosti",
+          "name": "Rösti",
+          "category": "potatoes",
+          "description": "Coarsely grated potatoes formed into a cake with a browned surface. A Swiss specialty also served in Zurich, especially alongside Zürcher Geschnetzeltes, rather than a recipe unique to the city.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://www.zuerich.com/en/zurcher-geschnetzeltes",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "luxemburgerli",
+          "name": "Luxemburgerli",
+          "category": "sweet pastry",
+          "description": "Small, airy filled macarons associated with Zurich’s Confiserie Sprüngli. These delicate sweets come in different flavors and are a distinctive part of the city’s confectionery tradition.",
+          "dietaryClaims": [],
+          "sources": [
+            {
+              "url": "https://spruengli.ch/en/spruengli-world/luxemburgerli.html",
+              "checkedAt": "2026-10-09"
+            },
+            {
+              "url": "https://www.zuerich.com/en/visit/shopping/sprungli-boutique-at-paradeplatz",
+              "checkedAt": "2026-10-09"
+            }
+          ],
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "places": [
+        {
+          "id": "markthalle-im-viadukt",
+          "name": "Markthalle im Viadukt",
+          "kind": "food_hall",
+          "dishIds": [],
+          "coordinates": {
+            "lat": 47.387744,
+            "lng": 8.5263897
+          },
+          "osmType": "way",
+          "osmId": 39607099,
+          "sourceUrl": "https://www.zuerich.com/de/besuchen/shopping/markthalle-im-viadukt",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "sprungli-paradeplatz",
+          "name": "Confiserie Sprüngli Paradeplatz",
+          "kind": "restaurant",
+          "dishIds": [
+            "luxemburgerli"
+          ],
+          "coordinates": {
+            "lat": 47.3694816,
+            "lng": 8.5391402
+          },
+          "osmType": "node",
+          "osmId": 648907100,
+          "sourceUrl": "https://www.zuerich.com/en/visit/shopping/sprungli-boutique-at-paradeplatz",
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        }
+      ],
+      "videos": [
+        {
+          "id": "BsytuJMjZpU",
+          "dishIds": [],
+          "placeIds": [
+            "markthalle-im-viadukt"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
+          "status": "published"
+        },
+        {
+          "id": "TpZRzbHCmYo",
+          "dishIds": [
+            "rosti"
+          ],
+          "placeIds": [
+            "sprungli-paradeplatz"
+          ],
+          "startSeconds": 0,
+          "verifiedAt": "2026-10-09",
           "status": "published"
         }
       ]

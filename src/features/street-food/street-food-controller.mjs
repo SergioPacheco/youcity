@@ -52,8 +52,8 @@ export function streetFoodPlaceholder(city) {
   return `<section class="city-guide-section street-food-section" data-street-food-section="${slug}" data-street-token="${slug}" aria-label="Local food"><p class="city-guide-loading" role="status">Loading local food…</p></section>`;
 }
 
-function dishCard(dish, places, videos) {
-  const placesMarkup = places.length
+function placesList(places) {
+  return places.length
     ? `<ul class="street-food-places">${places
         .map((place) => {
           const osmUrl = `https://www.openstreetmap.org/?mlat=${place.coordinates.lat}&mlon=${place.coordinates.lng}#map=16/${place.coordinates.lat}/${place.coordinates.lng}`;
@@ -61,7 +61,10 @@ function dishCard(dish, places, videos) {
         })
         .join("")}</ul>`
     : "";
-  const videosMarkup = videos.length
+}
+
+function videosList(videos) {
+  return videos.length
     ? `<ul class="street-food-videos">${videos
         .map(
           (video) =>
@@ -69,6 +72,9 @@ function dishCard(dish, places, videos) {
         )
         .join("")}</ul>`
     : "";
+}
+
+function dishCard(dish, places, videos) {
   const dietMarkup =
     Array.isArray(dish.dietaryClaims) && dish.dietaryClaims.length
       ? `<p class="street-food-diet">Dietary notes: ${dish.dietaryClaims.map(escapeHtml).join(", ")} — confirm at the venue.</p>`
@@ -77,7 +83,7 @@ function dishCard(dish, places, videos) {
   const sourceMarkup = sourceUrl
     ? `<p class="street-food-source"><a href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Source ↗</a></p>`
     : "";
-  return `<article class="street-food-card" data-street-dish="${escapeHtml(dish.id)}"><h4>${escapeHtml(dish.name)}</h4><p>${escapeHtml(dish.description)}</p>${dietMarkup}${placesMarkup}${videosMarkup}${sourceMarkup}</article>`;
+  return `<article class="street-food-card" data-street-dish="${escapeHtml(dish.id)}"><h4>${escapeHtml(dish.name)}</h4><p>${escapeHtml(dish.description)}</p>${dietMarkup}${placesList(places)}${videosList(videos)}${sourceMarkup}</article>`;
 }
 
 function placeKindLabel(kind) {
@@ -110,6 +116,16 @@ function sectionMarkup(city, { dishes, places, videos }, { offers = [], renderOf
   const cards = dishes
     .map((dish) => dishCard(dish, placesForDish(places, dish.id), videosForDish(videos, dish.id)))
     .join("");
+  const publishedDishIds = new Set(dishes.map((dish) => dish.id));
+  const withoutPublishedDish = (record) => !record.dishIds?.some((id) => publishedDishIds.has(id));
+  const cityPlaces = places.filter(withoutPublishedDish);
+  const cityVideos = videos.filter(withoutPublishedDish);
+  const cityPlacesMarkup = cityPlaces.length
+    ? `<article class="street-food-card"><h4>Places around the city</h4>${placesList(cityPlaces)}</article>`
+    : "";
+  const cityVideosMarkup = cityVideos.length
+    ? `<article class="street-food-card"><h4>More food videos</h4>${videosList(cityVideos)}</article>`
+    : "";
   const offerMarkup = offers.length
     ? `<div class="street-food-tours"><span class="drawer-kicker">Guided experiences</span>${offers
         .slice(0, 2)
@@ -117,7 +133,7 @@ function sectionMarkup(city, { dishes, places, videos }, { offers = [], renderOf
         .filter(Boolean)
         .join("")}</div>`
     : "";
-  return `<div class="street-food-content"><div class="city-guide-section-heading"><span class="drawer-kicker">Taste the city</span><h3>Explore Local Food</h3></div>${filterMarkup}<div class="street-food-cards">${cards}</div>${offerMarkup}</div>`;
+  return `<div class="street-food-content"><div class="city-guide-section-heading"><span class="drawer-kicker">Taste the city</span><h3>Explore Local Food</h3></div>${filterMarkup}<div class="street-food-cards">${cards}${cityPlacesMarkup}${cityVideosMarkup}</div>${offerMarkup}</div>`;
 }
 
 function trackEvent(window, event, city, extra = {}) {
@@ -161,7 +177,7 @@ function bindSection(section, city, { window: win, document: doc, venues = [], m
       frame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
       frame.allowFullscreen = true;
       video.replaceWith(frame);
-      trackEvent(window, "street_food_video_open", city, { video: videoId });
+      trackEvent(win, "street_food_video_open", city, { video: videoId });
       return;
     }
     const place = event.target?.closest?.("[data-street-map-click]");

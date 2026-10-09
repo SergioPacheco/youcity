@@ -83,11 +83,12 @@ function deps(harness, extra = {}) {
   clearStreetFoodCache();
 }
 
-// City without published food (granada has no curation yet):
+// City without published food in an explicit empty catalog:
 // placeholder removes itself, no crash.
 {
   clearStreetFoodCache();
   const harness = createHarness();
+  harness.window.fetch = async () => ({ ok: true, json: async () => ({ schemaVersion: 1, cities: [] }) });
   const ok = await hydrateStreetFoodSection(harness.root, { id: "granada", name: "Granada", country: "Spain" }, deps(harness));
   assert.equal(ok, true);
   assert.equal(harness.section.removed, true, "empty section removes itself");
@@ -160,6 +161,62 @@ function deps(harness, extra = {}) {
   clearStreetFoodCache();
 }
 
+// Citywide records remain accessible without inventing dish associations.
+// Removing the general lists would hide these published videos and map buttons.
+{
+  clearStreetFoodCache();
+  const city = { id: "test-city", name: "Test City" };
+  const dishes = [
+    { id: "dish-one", name: "First dish", description: "First description", status: "published" },
+    { id: "dish-two", name: "Second dish", description: "Second description", status: "published" },
+    { id: "draft-dish", name: "Draft dish", status: "draft" }
+  ];
+  const places = [
+    { id: "linked-market", dishIds: ["dish-one"] },
+    { id: "city-market", dishIds: [] },
+    { id: "draft-dish-market", dishIds: ["draft-dish"] }
+  ].map((place) => ({ ...place, name: place.id, kind: "market", coordinates: { lat: 1, lng: 2 }, status: "published" }));
+  places.push({ ...places[1], id: "draft-market", status: "draft" });
+  places.push({ ...places[1], id: "unverified-market", coordinates: null });
+  const videos = [
+    { id: "linkedvideo", dishIds: ["dish-one"], status: "published" },
+    { id: "citywidevid", dishIds: [], status: "published" },
+    { id: "draftdishvd", dishIds: ["draft-dish"], status: "published" },
+    { id: "draft-video", dishIds: [], status: "draft" }
+  ];
+  const catalog = { cities: [{ slug: city.id, dishes, places, videos }] };
+  const harness = createHarness();
+  harness.window.fetch = async () => ({ ok: true, json: async () => catalog });
+  const opened = [];
+  const frames = [];
+  const ok = await hydrateStreetFoodSection(harness.root, city, deps(harness, {
+    document: { createElement: () => { const frame = {}; frames.push(frame); return frame; } },
+    mapVenues: { openVenue: (venue) => opened.push(venue) }
+  }));
+  assert.equal(ok, true);
+  const { section } = harness;
+  const html = section.innerHTML;
+  const videoIds = [...html.matchAll(/data-street-video="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(videoIds.sort(), ["citywidevid", "draftdishvd", "linkedvideo"], "every published video is accessible once, including records without a published dish");
+  const placeIds = [...html.matchAll(/data-street-map-click="([^"]+)"/g)].map((match) => match[1]);
+  assert.deepEqual(placeIds.sort(), ["city-market", "draft-dish-market", "linked-market"], "only published, verified places are accessible, including citywide markets");
+  const dishArticles = [...html.matchAll(/<article[^>]*data-street-dish="[^"]+"[^>]*>([\s\S]*?)<\/article>/g)];
+  assert.ok(dishArticles.length > 0);
+  assert.ok(dishArticles.every((match) => !match[1].includes('data-street-video="citywidevid"') && !match[1].includes('data-street-map-click="city-market"')), "citywide records sit outside filterable dish cards");
+  const cityMarket = { dataset: { streetMapClick: "city-market" } };
+  const cityVideo = { dataset: { streetVideo: "citywidevid" }, replaceWith: (frame) => { cityVideo.frame = frame; } };
+  section.contains = (node) => node === cityMarket || node === cityVideo;
+  const clickButton = (button, selector) => section.handlers.click({ target: { closest: (query) => query === selector ? button : null } });
+  clickButton(cityMarket, "[data-street-map-click]");
+  await Promise.resolve();
+  assert.equal(opened[0]?.id, "city-market", "citywide market opens the in-app map");
+  assert.equal(frames.length, 0, "videos remain click-to-play");
+  clickButton(cityVideo, "[data-street-video]");
+  assert.match(cityVideo.frame.src, /^https:\/\/www\.youtube-nocookie\.com\/embed\/citywidevid\?/);
+  assert.ok(harness.tracked.some((event) => event.event === "street_food_video_open" && event.video === "citywidevid"), "citywide video clicks are tracked");
+  clearStreetFoodCache();
+}
+
 // Placeholder used by the hub is escaped and carries the hook + token.
 {
   const placeholder = streetFoodPlaceholder({ id: "tokyo" });
@@ -167,4 +224,4 @@ function deps(harness, extra = {}) {
   assert.ok(placeholder.includes('data-street-token="tokyo"'), "placeholder stamps the hydration token");
 }
 
-console.log("Street food UI tests passed: tokyo renders, empty cities self-remove, stale guard holds.");
+console.log("Street food UI tests passed: dishes and citywide media render, map/video actions work, empty/stale guards hold.");
