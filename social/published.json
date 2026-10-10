@@ -251,5 +251,47 @@
       "autor": "Steven Lek",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "moscow",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "MOSCOW",
+    "pais": "RUSSIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122109455217493232",
+    "scheduled_for": "2026-10-09 16:30",
+    "published_at": "2026-10-09T19:37:06.908054+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/moscow?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=moscow",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "U.S. Department of State",
+      "licenca": "Public domain"
+    }
+  },
+  {
+    "city_slug": "antalya",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "ANTALYA",
+    "pais": "TÜRKIYE",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122109531879493232",
+    "scheduled_for": "2026-10-09 20:00",
+    "published_at": "2026-10-09T23:25:09.706474+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/antalya?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=antalya",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Esginmurat",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
