@@ -145,6 +145,57 @@ def download_youtube_segment(
         raise
 
 
+def _escape_drawtext(value: str) -> str:
+    """Escapa texto para drawtext do FFmpeg (evita quebra com :, ', %, [, ])."""
+    text = value.replace("\\", "\\\\")
+    text = text.replace("'", "\\'").replace(":", "\\:").replace("%", "\\%")
+    text = text.replace("[", "\\[").replace("]", "\\]")
+    return text
+
+
+def build_branding_filter(
+    city_name: str,
+    country_name: str,
+    radio_name: Optional[str] = None,
+    font_file: Optional[str] = None,
+    logo_width: int = 120,
+) -> tuple[list[str], str, bool]:
+    """
+    Monta filtros de branding para o topo do vídeo.
+
+    Layout (vertical 9:16):
+    - Logo centralizado no topo (y=12)
+    - Nome da cidade centralizado logo abaixo (y=66), com caixa semitransparente
+    - Rádio (se houver) mantida na base
+
+    Returns:
+        (drawtext_filters, logo_filter, has_logo)
+    """
+    city_text = _escape_drawtext(f"{city_name} – {country_name}")
+
+    font_opt = f":fontfile={font_file}" if font_file else ""
+    drawtext_filters = [
+        f"drawtext=text='{city_text}':"
+        f"fontsize=28:fontcolor=white:"
+        f"x=(w-text_w)/2:y=66:"
+        f"box=1:boxcolor=black@0.45:boxborderw=10:"
+        f"shadowcolor=black@0.6:shadowx=1:shadowy=1{font_opt}"
+    ]
+
+    if radio_name:
+        radio_text = _escape_drawtext(f"📻 {radio_name[:30]}")
+        drawtext_filters.append(
+            f"drawtext=text='{radio_text}':"
+            f"fontsize=22:fontcolor=white:"
+            f"x=(w-text_w)/2:y=h-60:"
+            f"box=1:boxcolor=black@0.45:boxborderw=8:"
+            f"shadowcolor=black@0.6:shadowx=1:shadowy=1{font_opt}"
+        )
+
+    logo_filter = f"scale={logo_width}:-1:flags=lanczos,format=rgba"
+    return drawtext_filters, logo_filter, True
+
+
 def edit_short_video(
     video_path: Path,
     audio_path: Optional[Path],
@@ -188,45 +239,24 @@ def edit_short_video(
             font_file = path
             break
     
-    # Construir filtros
-    filters = []
-    
-    # 1. Overlay de texto (cidade/país)
-    city_text = f"{city_name} – {country_name}"
-    
-    if font_file:
-        filters.append(
-            f"drawtext=text='{city_text}':"
-            f"fontsize=48:fontcolor=white:"
-            f"x=20:y=h-120:"
-            f"shadowcolor=black:shadowx=2:shadowy=2:"
-            f"fontfile={font_file}"
+    # Construir filtros (topo: logo pequeno centralizado + cidade abaixo)
+    drawtext_filters, logo_scale_filter, _ = build_branding_filter(
+        city_name=city_name,
+        country_name=country_name,
+        radio_name=radio_name,
+        font_file=font_file,
+    )
+
+    has_logo = bool(logo_path and logo_path.exists())
+    if has_logo:
+        # [0:v]textos -> [vtext]; [1:v]logo pequeno -> [logo]; overlay topo-centralizado
+        video_filter = (
+            f"[0:v]{','.join(drawtext_filters)}[vtext];"
+            f"[1:v]{logo_scale_filter}[logo];"
+            f"[vtext][logo]overlay=(W-w)/2:12:format=auto,format=yuv420p[v]"
         )
     else:
-        # Fallback sem fonte específica (usa default)
-        filters.append(
-            f"drawtext=text='{city_text}':"
-            f"fontsize=48:fontcolor=white:"
-            f"x=20:y=h-120:"
-            f"shadowcolor=black:shadowx=2:shadowy=2"
-        )
-    
-    # 2. Nome da rádio
-    if radio_name:
-        radio_text = f"📻 {radio_name[:30]}"
-        filters.append(
-            f"drawtext=text='{radio_text}':"
-            f"fontsize=28:fontcolor=white:"
-            f"x=20:y=h-60:"
-            f"shadowcolor=black:shadowx=1:shadowy=1"
-        )
-    
-    # 3. Logo (se existir)
-    if logo_path and logo_path.exists():
-        filters.append(f"[1:v]scale=120:-1[logo]")
-        video_filter = f"[0:v]{','.join(filters)}[vtext];[vtext][logo]overlay=W-140:20[v]"
-    else:
-        video_filter = f"[0:v]{','.join(filters)}[v]"
+        video_filter = f"[0:v]{','.join(drawtext_filters)},format=yuv420p[v]"
     
     # Montar comando FFmpeg
     cmd = ["ffmpeg", "-y"]
@@ -239,24 +269,25 @@ def edit_short_video(
         cmd.extend(["-i", str(logo_path)])
     
     # Input: áudio da rádio (se existir)
-    if audio_path and audio_path.exists():
+    # Índices: 0=vídeo, 1=logo (se houver), N=áudio
+    audio_input_index = 2 if has_logo else 1
+    has_audio_file = bool(audio_path and audio_path.exists())
+    if has_audio_file:
         cmd.extend(["-i", str(audio_path)])
-        audio_map = "-map 2:a"  # Usa áudio da rádio
-    else:
-        audio_map = "-map 0:a"  # Usa áudio original do vídeo
     
-    # Filtros e codecs
+    # Filtros e codecs (mapeia [v] filtrado, não 0:v original)
+    audio_map_args = [f"{audio_input_index}:a"] if has_audio_file else ["0:a"]
     cmd.extend([
         "-filter_complex", video_filter,
-        "-map", "0:v",  # Vídeo original
-        audio_map,       # Áudio (rádio ou original)
+        "-map", "[v]",
+        "-map", audio_map_args[0],
         "-c:v", "libx264",
         "-preset", "fast",
         "-crf", "23",
+        "-pix_fmt", "yuv420p",
         "-c:a", "aac",
         "-b:a", "128k",
         "-t", str(duration),
-        "-aspect", "9:16",  # Formato vertical
         "-movflags", "+faststart",
         str(output_path)
     ])
