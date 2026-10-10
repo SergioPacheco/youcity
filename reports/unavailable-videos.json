@@ -1,0 +1,50 @@
+[
+  {
+    "city": "Barcelona",
+    "mode": "walk",
+    "videoId": "36s5d26vqpw",
+    "status": 403,
+    "statusText": "Forbidden",
+    "reason": "HTTP 403"
+  },
+  {
+    "city": "Barcelona",
+    "mode": "walk",
+    "videoId": "0_1VjaM89D0",
+    "status": 404,
+    "statusText": "Not Found",
+    "reason": "HTTP 404"
+  },
+  {
+    "city": "Basel",
+    "mode": "walk",
+    "videoId": "MOxPECFU6iU",
+    "status": 401,
+    "statusText": "Unauthorized",
+    "reason": "HTTP 401"
+  },
+  {
+    "city": "Basel",
+    "mode": "walk",
+    "videoId": "N2aIVtWhGIA",
+    "status": 401,
+    "statusText": "Unauthorized",
+    "reason": "HTTP 401"
+  },
+  {
+    "city": "Bronx",
+    "mode": "drive",
+    "videoId": "03Y8ykq2NEk",
+    "status": 401,
+    "statusText": "Unauthorized",
+    "reason": "HTTP 401"
+  },
+  {
+    "city": "Columbus",
+    "mode": "drive",
+    "videoId": "l4S5Xx-fz2o",
+    "status": 401,
+    "statusText": "Unauthorized",
+    "reason": "HTTP 401"
+  }
+]
