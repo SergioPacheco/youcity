@@ -12,5 +12,89 @@
       "facebook": "1132233572719795"
     },
     "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro"
+  },
+  {
+    "city_slug": "rio-de-janeiro",
+    "city_name": "Rio De Janeiro",
+    "country": "Brazil",
+    "video_path": "out/shorts/2026-10-09/rio-clean-final/rio-de-janeiro_mobile.mp4",
+    "video_size_mb": 3.06,
+    "radio_name": "ZYD470 Feliz FM",
+    "published_at": "2026-10-10T00:36:58.791046+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1134249239046235"
+    },
+    "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro"
+  },
+  {
+    "city_slug": "sao-paulo",
+    "city_name": "São Paulo",
+    "country": "Brazil",
+    "video_path": "out/shorts/2026-10-09/batch-5/sao-paulo/sao-paulo_mobile.mp4",
+    "video_size_mb": 5.09,
+    "radio_name": "Rádio Antena 1",
+    "published_at": "2026-10-10T00:47:45.076473+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2591745491339164"
+    },
+    "url": "https://youcity.app/city/sao-paulo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=sao-paulo"
+  },
+  {
+    "city_slug": "lisbon",
+    "city_name": "Lisbon",
+    "country": "Portugal",
+    "video_path": "out/shorts/2026-10-09/batch-5/lisbon/lisbon_mobile.mp4",
+    "video_size_mb": 3.13,
+    "radio_name": "TSF Rádio Notícias",
+    "published_at": "2026-10-10T00:47:45.076901+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2010221936348686"
+    },
+    "url": "https://youcity.app/city/lisbon?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=lisbon"
+  },
+  {
+    "city_slug": "london",
+    "city_name": "London",
+    "country": "United Kingdom",
+    "video_path": "out/shorts/2026-10-09/batch-5/london/london_mobile.mp4",
+    "video_size_mb": 3.49,
+    "radio_name": "Bloomsbury Radio",
+    "published_at": "2026-10-10T00:47:45.078103+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2129524960981969"
+    },
+    "url": "https://youcity.app/city/london?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=london"
+  },
+  {
+    "city_slug": "tokyo",
+    "city_name": "Tokyo",
+    "country": "Japan",
+    "video_path": "out/shorts/2026-10-09/batch-5/tokyo/tokyo_mobile.mp4",
+    "video_size_mb": 4.02,
+    "radio_name": "AFN Eagle 810",
+    "published_at": "2026-10-10T00:47:45.078425+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2347757139358113"
+    },
+    "url": "https://youcity.app/city/tokyo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tokyo"
+  },
+  {
+    "city_slug": "paris",
+    "city_name": "Paris",
+    "country": "France",
+    "video_path": "out/shorts/2026-10-09/batch-5/paris/paris_mobile.mp4",
+    "video_size_mb": 3.97,
+    "radio_name": "Jazz Radio Blues",
+    "published_at": "2026-10-10T00:47:45.079068+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2237257623797978"
+    },
+    "url": "https://youcity.app/city/paris?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=paris"
   }
 ]
