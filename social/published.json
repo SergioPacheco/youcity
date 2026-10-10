@@ -293,5 +293,47 @@
       "autor": "Esginmurat",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "istanbul",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "ISTANBUL",
+    "pais": "TÜRKIYE",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122109519567493232",
+    "scheduled_for": "2026-10-09 20:00",
+    "published_at": "2026-10-09T22:44:53.900615+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/istanbul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=istanbul",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Hunanuk",
+      "licenca": "CC0"
+    }
+  },
+  {
+    "city_slug": "rio-de-janeiro",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "RIO DE JANEIRO",
+    "pais": "BRAZIL",
+    "modos": "drive+bike+walk+beach_walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122109525765493232",
+    "scheduled_for": "2026-10-09 12:30",
+    "published_at": "2026-10-09T23:03:19.851950+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Rafael Rabello de Barros",
+      "licenca": "CC BY-SA 3.0"
+    }
   }
 ]

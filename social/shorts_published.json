@@ -1,0 +1,16 @@
+[
+  {
+    "city_slug": "rio-de-janeiro",
+    "city_name": "Rio De Janeiro",
+    "country": "Brazil",
+    "video_path": "out/shorts/2026-10-09/rio-browser/rio-de-janeiro_facebook.mp4",
+    "video_size_mb": 1.47,
+    "radio_name": null,
+    "published_at": "2026-10-10T00:24:09.361197+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1132233572719795"
+    },
+    "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro"
+  }
+]

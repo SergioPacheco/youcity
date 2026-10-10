@@ -1,0 +1,24 @@
+# Dependências para YouCity Shorts
+# Instalar com: pip install -r requirements-shorts.txt
+
+# YouTube download
+yt-dlp>=2024.1.1
+
+# Playwright (alternativa para captura de vídeo)
+playwright>=1.40.0
+
+# FFmpeg wrapper
+ffmpeg-python>=0.2.0
+
+# Google API client (YouTube Shorts)
+google-api-python-client>=2.100.0
+google-auth-oauthlib>=1.0.0
+
+# Requisitos já existentes
+requests>=2.28.0
+Pillow>=10.0.0
+
+# Nota: FFmpeg binary deve estar instalado no sistema
+# Ubuntu/Debian: sudo apt install ffmpeg
+# macOS: brew install ffmpeg
+# Windows: baixar de https://ffmpeg.org/download.html

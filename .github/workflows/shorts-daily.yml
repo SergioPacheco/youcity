@@ -1,0 +1,136 @@
+name: YouCity Shorts Daily
+
+on:
+  schedule:
+    # 12:00 BRT (meio-dia)
+    - cron: '0 15 * * *'
+    # 18:00 BRT (fim de tarde)
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+    inputs:
+      city:
+        description: 'Slug da cidade (ex: sao-paulo)'
+        required: false
+      duration:
+        description: 'Duração em segundos (15-60)'
+        required: false
+        default: '30'
+
+concurrency:
+  group: youcity-shorts-daily
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  shorts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    env:
+      # Facebook
+      FB_SYSTEM_USER_TOKEN: ${{ secrets.FB_SYSTEM_USER_TOKEN }}
+      FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
+      
+      # YouTube
+      YOUTUBE_CREDENTIALS_PATH: /tmp/credentials.json
+      
+      # TikTok
+      TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+      TIKTOK_OPEN_ID: ${{ secrets.TIKTOK_OPEN_ID }}
+    
+    steps:
+      - uses: actions/checkout@v6
+      
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg fonts-dejavu-core
+      
+      - name: Install Python dependencies
+        run: pip install -r requirements-shorts.txt
+      
+      - name: Setup YouTube credentials
+        env:
+          YOUTUBE_CREDENTIALS_JSON: ${{ secrets.YOUTUBE_CREDENTIALS_JSON }}
+        run: |
+          if [ -n "$YOUTUBE_CREDENTIALS_JSON" ]; then
+            echo "$YOUTUBE_CREDENTIALS_JSON" > "$YOUTUBE_CREDENTIALS_PATH"
+            echo "✓ YouTube credentials configured"
+          else
+            echo "⚠️  YouTube credentials not set (YouTube Shorts will be skipped)"
+          fi
+      
+      - name: Generate and publish short
+        env:
+          CITY: ${{ github.event.inputs.city }}
+          DURATION: ${{ github.event.inputs.duration || '30' }}
+        run: |
+          # Montar comando
+          CMD="python tools/social/shorts_daily.py --duration $DURATION"
+          
+          if [ -n "$CITY" ]; then
+            CMD="$CMD --city $CITY"
+          fi
+          
+          # Verificar secrets disponíveis
+          PLATFORMS=""
+          
+          if [ -n "$FB_SYSTEM_USER_TOKEN" ] && [ -n "$FACEBOOK_PAGE_ID" ]; then
+            PLATFORMS="${PLATFORMS}facebook,"
+            echo "✓ Facebook configured"
+          else
+            echo "⚠️  Facebook not configured"
+          fi
+          
+          if [ -f "$YOUTUBE_CREDENTIALS_PATH" ]; then
+            PLATFORMS="${PLATFORMS}youtube,"
+            echo "✓ YouTube configured"
+          else
+            echo "⚠️  YouTube not configured"
+          fi
+          
+          if [ -n "$TIKTOK_ACCESS_TOKEN" ] && [ -n "$TIKTOK_OPEN_ID" ]; then
+            PLATFORMS="${PLATFORMS}tiktok,"
+            echo "✓ TikTok configured"
+          else
+            echo "⚠️  TikTok not configured"
+          fi
+          
+          # Remover vírgula final
+          PLATFORMS="${PLATFORMS%,}"
+          
+          if [ -z "$PLATFORMS" ]; then
+            echo "❌ No platforms configured. Set at least one of:"
+            echo "   - FB_SYSTEM_USER_TOKEN + FACEBOOK_PAGE_ID"
+            echo "   - YOUTUBE_CREDENTIALS_JSON"
+            echo "   - TIKTOK_ACCESS_TOKEN + TIKTOK_OPEN_ID"
+            exit 1
+          fi
+          
+          CMD="$CMD --platforms $PLATFORMS"
+          
+          echo "Running: $CMD"
+          $CMD
+      
+      - name: Persist history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          if [ -f social/shorts_published.json ]; then
+            git add social/shorts_published.json
+          fi
+          
+          if ! git diff --staged --quiet; then
+            git commit -m "chore(shorts): record daily publications"
+            git push
+          else
+            echo "No changes to persist"
+          fi
