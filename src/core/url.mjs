@@ -1,4 +1,5 @@
 const MODES = new Set(["drive", "bike", "walk", "drone", "beach_walk"]);
+const TRUE_QUERY_VALUES = new Set(["1", "true", "yes"]);
 
 function normalizeBasePath(basePath = "") {
   const value = String(basePath || "").trim();
@@ -15,6 +16,11 @@ export function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+export function parseDisplayOptions(location) {
+  const params = new URLSearchParams(location?.search || "");
+  const clean = String(params.get("clean") || "").trim().toLowerCase();
+  return { clean: TRUE_QUERY_VALUES.has(clean) };
+}
 export function parseRoute(location, basePath = "") {
   const params = new URLSearchParams(location?.search || "");
   const base = normalizeBasePath(basePath);

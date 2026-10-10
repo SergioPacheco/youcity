@@ -2,7 +2,7 @@
 
 import assert from "node:assert/strict";
 import { getEffectiveStartSeconds } from "../src/core/video-policy.mjs";
-import { buildCityUrl, parseRoute } from "../src/core/url.mjs";
+import { buildCityUrl, parseDisplayOptions, parseRoute } from "../src/core/url.mjs";
 import { createCatalogRepository } from "../src/catalog/catalog-repository.mjs";
 import { createCitySelection } from "../src/city/city-selection.mjs";
 
@@ -13,6 +13,10 @@ assert.equal(getEffectiveStartSeconds({ start: 8 }), 15);
 assert.equal(getEffectiveStartSeconds({ start: 15 }), 15);
 assert.equal(getEffectiveStartSeconds({ start: 45 }), 45);
 
+assert.deepEqual(parseDisplayOptions({ search: "?clean=1" }), { clean: true });
+assert.deepEqual(parseDisplayOptions({ search: "?clean=true" }), { clean: true });
+assert.deepEqual(parseDisplayOptions({ search: "?clean=0" }), { clean: false });
+assert.deepEqual(parseDisplayOptions({ search: "?clean=unexpected" }), { clean: false });
 const route = parseRoute({ pathname: "/youcity/city/Granada", search: "?mode=walk&video=2" }, "/youcity");
 assert.deepEqual(route, { citySlug: "granada", mode: "walk", videoIndex: 1, isDeepLink: true });
 assert.equal(buildCityUrl({ slug: "sao-paulo", mode: "drive", videoIndex: 0 }, "/youcity"), "/youcity/city/sao-paulo?mode=drive");
