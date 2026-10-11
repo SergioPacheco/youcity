@@ -335,5 +335,26 @@
       "autor": "Rafael Rabello de Barros",
       "licenca": "CC BY-SA 3.0"
     }
+  },
+  {
+    "city_slug": "cape-town",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "CAPE TOWN",
+    "pais": "SOUTH AFRICA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122110500735493232",
+    "scheduled_for": "2026-10-11 16:30",
+    "published_at": "2026-10-11T19:38:38.747756+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/cape-town?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=cape-town",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Der Berzerker from Washington, DC, USA",
+      "licenca": "CC BY-SA 2.0"
+    }
   }
 ]
