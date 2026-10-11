@@ -356,5 +356,26 @@
       "autor": "Der Berzerker from Washington, DC, USA",
       "licenca": "CC BY-SA 2.0"
     }
+  },
+  {
+    "city_slug": "taipei",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "TAIPEI",
+    "pais": "TAIWAN",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122110554219493232",
+    "scheduled_for": "2026-10-11 20:00",
+    "published_at": "2026-10-11T23:05:15.467152+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/taipei?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=taipei",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "毛貓大少爺",
+      "licenca": "CC BY-SA 2.0"
+    }
   }
 ]
