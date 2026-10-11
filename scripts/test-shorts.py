@@ -85,10 +85,8 @@ def test_city_selection():
     print("=" * 60)
     
     cmd = [sys.executable, "-c", """
-import sys
-sys.path.insert(0, 'tools/social')
-from shorts_daily import load_catalog, select_city_for_short
-from utils import city_slug, display_city_name
+from tools.social.shorts_daily import load_catalog, select_city_for_short
+from tools.social.utils import city_slug, display_city_name
 
 catalog = load_catalog()
 city = select_city_for_short(catalog, recent_days=0)  # Ignorar anti-duplicate

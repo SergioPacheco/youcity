@@ -20,12 +20,12 @@ from typing import Optional
 
 # Imports internos
 if __package__ in (None, ""):
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    from audio_capture import capture_best_radio, get_city_radios
-    from video_editor import download_youtube_segment, edit_short_video, get_city_drone_video, get_city_info
-    from publishers import MultiPublisher
-    from utils import city_slug, city_url, display_city_name, display_country_name, now_utc, read_json, write_json
-    from selector import candidates, weighted_pick
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    from tools.social.audio_capture import capture_best_radio, get_city_radios
+    from tools.social.video_editor import download_youtube_segment, edit_short_video, get_city_drone_video, get_city_info
+    from tools.social.publishers import MultiPublisher
+    from tools.social.utils import city_slug, city_url, display_city_name, display_country_name, now_utc, read_json, write_json
+    from tools.social.selector import candidates, weighted_pick
 else:
     from .audio_capture import capture_best_radio, get_city_radios
     from .video_editor import download_youtube_segment, edit_short_video, get_city_drone_video, get_city_info
@@ -224,12 +224,18 @@ def publish_short(
     
     # Configurar publisher
     import os
+
+    youtube_credentials = Path(os.getenv("YOUTUBE_CREDENTIALS_PATH") or "credentials.json")
     
     publisher = MultiPublisher(
-        facebook_token=os.getenv("FB_SYSTEM_USER_TOKEN"),
-        youtube_credentials=Path(os.getenv("YOUTUBE_CREDENTIALS_PATH", "credentials.json")),
-        tiktok_token=os.getenv("TIKTOK_ACCESS_TOKEN"),
-        tiktok_open_id=os.getenv("TIKTOK_OPEN_ID"),
+        facebook_token=os.getenv("FB_SYSTEM_USER_TOKEN") if "facebook" in platforms else None,
+        youtube_credentials=(
+            youtube_credentials
+            if "youtube" in platforms and youtube_credentials.is_file()
+            else None
+        ),
+        tiktok_token=os.getenv("TIKTOK_ACCESS_TOKEN") if "tiktok" in platforms else None,
+        tiktok_open_id=os.getenv("TIKTOK_OPEN_ID") if "tiktok" in platforms else None,
     )
     
     # Publicar
@@ -401,9 +407,6 @@ def main() -> int:
 
 if __name__ == "__main__":
     # Carregar .env para testes locais
-    import sys
-    from pathlib import Path
-    sys.path.insert(0, str(Path(__file__).parent.parent))
     from tools.social.load_env import load_env
     load_env()
     

@@ -55,6 +55,9 @@ jobs:
       
       - name: Install Python dependencies
         run: pip install -r requirements-shorts.txt
+
+      - name: Test shorts CLI and platform selection
+        run: python scripts/test-shorts-regressions.py
       
       - name: Setup YouTube credentials
         env:
