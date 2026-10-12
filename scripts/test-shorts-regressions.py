@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -128,7 +129,7 @@ class ShortsRegressions(unittest.TestCase):
                     patch.object(shorts_daily, "get_city_info", return_value=city), \
                     patch.object(shorts_daily, "generate_short", return_value=(video, None)), \
                     patch.object(shorts_daily, "publish_short", return_value={"facebook_error": "rejected"}), \
-                    patch.object(sys, "argv", ["shorts_daily", "--city", "lisbon", "--platforms", "facebook"]):
+                    patch.object(sys, "argv", ["shorts_daily", "--city", "lisbon", "--platforms", "facebook", "--source", "browser"]):
                 self.assertEqual(main(), 1)
 
     def test_browser_source_generates_drone_without_youtube_download(self):
@@ -137,7 +138,8 @@ class ShortsRegressions(unittest.TestCase):
             video = Path(directory) / "drone.mp4"
             video.write_bytes(b"captured-drone")
             city = {"name": "Lisbon", "country": "Portugal", "videos": {"drone": [{"id": "drone123"}]}}
-            with patch("tools.social.video_capture_browser.capture_mobile_video", return_value=video) as capture, \
+            capture = unittest.mock.Mock(return_value=video)
+            with patch.dict(sys.modules, {"tools.social.video_capture_browser": SimpleNamespace(capture_mobile_video=capture)}), \
                     patch.object(shorts_daily, "download_youtube_segment", side_effect=AssertionError("YouTube download should not be used")):
                 result, radio = shorts_daily.generate_short(city, 15, Path(directory), source="browser")
             self.assertEqual(result.read_bytes(), b"captured-drone")
@@ -176,6 +178,15 @@ class ShortsRegressions(unittest.TestCase):
                 str(ROOT / "tools/social/video_editor.py"),
             ], cwd=directory, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_only_successful_facebook_publication_blocks_repeats(self):
+        from tools.social.shorts_daily import _load_recent_slugs
+        from tools.social.utils import now_utc
+        history = [
+            {"city_slug": "lisbon", "status": "published", "published_at": now_utc().isoformat(), "platforms": {"facebook": "reel-1"}},
+            {"city_slug": "tokyo", "status": "published", "published_at": now_utc().isoformat(), "platforms": {"youtube": "short-2", "facebook_error": "rejected"}},
+        ]
+        self.assertEqual(_load_recent_slugs(history, 45), {"lisbon"})
 
 
 if __name__ == "__main__":

@@ -12,6 +12,7 @@ import os
 import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 from urllib.parse import quote
@@ -66,6 +67,7 @@ def mux_video_audio(video_path: Path, audio_path: Optional[Path], output_path: P
     output_path.parent.mkdir(parents=True, exist_ok=True)
     cmd = [
         "ffmpeg", "-y",
+        "-threads", "2",
         "-ss", f"{max(0.0, video_skip):.1f}",
         "-i", str(video_path),
     ]
@@ -77,6 +79,7 @@ def mux_video_audio(video_path: Path, audio_path: Optional[Path], output_path: P
         "-map", "0:v:0",
         "-map", "1:a:0",
         "-c:v", "libx264",
+        "-threads", "2",
         "-preset", "fast",
         "-crf", "23",
         "-pix_fmt", "yuv420p",
@@ -149,11 +152,14 @@ def add_branding_overlay(
         )
         cmd = [
             "ffmpeg", "-y",
+            "-threads", "2",
             "-i", str(video_path),
             "-i", str(logo_path),
             "-filter_complex", video_filter,
+            "-filter_complex_threads", "1",
             "-map", "[v]", "-map", "0:a?",
             "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+            "-threads", "2",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac", "-b:a", "128k",
             "-movflags", "+faststart",
@@ -164,10 +170,13 @@ def add_branding_overlay(
         video_filter = f"[0:v]{','.join(drawtext_filters)},format=yuv420p[v]"
         cmd = [
             "ffmpeg", "-y",
+            "-threads", "2",
             "-i", str(video_path),
             "-filter_complex", video_filter,
+            "-filter_complex_threads", "1",
             "-map", "[v]", "-map", "0:a?",
             "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+            "-threads", "2",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac", "-b:a", "128k",
             "-movflags", "+faststart",
@@ -222,6 +231,7 @@ def capture_mobile_video(
     timeout: int = 30000,
     show_controls: bool = False,
     expected_video_ids: Optional[set[str]] = None,
+    start_seconds: Optional[float] = None,
 ) -> Optional[Path]:
     """
     Captura vídeo do youcity.app em modo mobile.
@@ -302,7 +312,7 @@ def capture_mobile_video(
             
             # Aguardar qualquer um: iframe do YouTube, video element, ou .video-container
             try:
-                page.wait_for_selector("iframe[src*='youtube'], video, .video-container", timeout=timeout)
+                page.wait_for_selector("iframe[src*='youtube'], video, .video-container", timeout=timeout, state="attached")
             except:
                 print("   ⚠️  Player não detectado, continuando...")
             
@@ -334,6 +344,27 @@ def capture_mobile_video(
                 print(f"   Frames: {[frame.url for frame in page.frames]}")
                 page.screenshot(path=str(output_dir / f"{city_slug}_capture_error.png"))
                 return None
+            source_frame = None
+            for frame in page.frames:
+                try:
+                    current = frame.evaluate("document.querySelector('#movie_player')?.getVideoData?.()?.video_id")
+                    if current and (not expected_video_ids or current in expected_video_ids):
+                        source_frame = frame
+                        break
+                except Exception:
+                    continue
+            if source_frame is None:
+                print("   ❌ Origem do drone não pôde ser identificada")
+                return None
+            if start_seconds is not None:
+                video_duration = source_frame.evaluate("document.querySelector('video').duration")
+                if not video_duration or start_seconds + duration + 2 >= video_duration:
+                    print("   ❌ Drone curto demais para o trecho solicitado")
+                    return None
+                source_frame.evaluate("seconds => document.querySelector('#movie_player').seekTo(seconds, true)", start_seconds)
+                source_frame.wait_for_function("seconds => Math.abs(document.querySelector('video').currentTime - seconds) < 5", arg=start_seconds, timeout=timeout)
+                if not wait_for_video_playback(page, timeout, expected_video_ids):
+                    return None
             video_state = page.evaluate("""
                 () => {
                     // Verificar iframe do YouTube
@@ -376,6 +407,17 @@ def capture_mobile_video(
 
             # Marcar início do conteúdo (tudo antes disso é descartado)
             video_skip = time.time() - t_page_created
+            provenance = source_frame.evaluate("""() => {
+                const data = document.querySelector('#movie_player').getVideoData();
+                return {source_video_id: data.video_id, source_author: data.author || '',
+                    source_title: data.title || '', source_start_seconds: document.querySelector('video').currentTime};
+            }""")
+            provenance["captured_at"] = datetime.now(timezone.utc).isoformat()
+            provenance["source_url"] = f"https://www.youtube.com/watch?v={provenance['source_video_id']}"
+            from tools.social.reels_library import validate_provenance
+            validate_provenance(provenance, expected_video_ids or {provenance["source_video_id"]}, require_branding=False)
+            # Pin this one source for provenance, even if the city has other valid drones.
+            expected_video_ids = {provenance["source_video_id"]}
             print(f"   ✂️  Descartando {video_skip:.1f}s iniciais (loading)")
 
             # Gravar vídeo
@@ -445,7 +487,7 @@ def capture_mobile_video(
         print(f"   📻 Rádio: {radio_info.get('name', 'Unknown') if radio_info else 'Unknown'}")
         print(f"   📊 Tamanho: {muxed_path.stat().st_size / 1024 / 1024:.1f} MB")
 
-        # Branding no topo (clean=1 esconde nome/logo do site): não bloqueia entrega
+        # Branding is required for the committed library.
         try:
             city_info = next(
                 (c for c in catalog
@@ -463,10 +505,17 @@ def capture_mobile_video(
             )
             if branded:
                 branded.replace(muxed_path)  # mantém nome final *_mobile.mp4
+                provenance["branding_applied"] = True
                 print(f"   ✓ Vídeo com branding: {muxed_path}")
+            else:
+                print("   ❌ Branding falhou; captura descartada")
+                return None
         except Exception as e:
-            print(f"   ⚠️  Branding pulado: {e}")
+            print(f"   ❌ Branding falhou; captura descartada: {e}")
+            return None
 
+        provenance["radio"] = radio_info
+        (output_dir / f"{city_slug}_capture.json").write_text(json.dumps(provenance, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return muxed_path
     
     print("   ❌ Vídeo não foi salvo")

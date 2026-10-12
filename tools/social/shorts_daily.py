@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
 import sys
 from datetime import date, datetime, timedelta
 from pathlib import Path
@@ -38,7 +39,7 @@ else:
 OUTPUT_DIR = Path("out") / "shorts"
 STATE_FILE = Path("social") / "shorts_published.json"
 LOGO_PATH = Path("assets") / "logo-youcity.png"
-DEFAULT_DURATION = 30  # segundos
+DEFAULT_DURATION = 15  # segundos
 DEFAULT_RECENT_DAYS = 45  # dias para não repetir cidade
 
 
@@ -101,6 +102,7 @@ def _load_recent_slugs(state: list, days: int) -> set[str]:
         if isinstance(item, dict)
         and item.get("city_slug")
         and item.get("status") == "published"
+        and item.get("platforms", {}).get("facebook")
         and _parse_datetime(item.get("published_at")) >= cutoff
     }
 
@@ -205,6 +207,7 @@ def publish_short(
     city: dict,
     radio_info: Optional[dict],
     platforms: list[str],
+    source_url: Optional[str] = None,
 ) -> dict[str, str]:
     """
     Publica vídeo nas plataformas configuradas.
@@ -230,6 +233,8 @@ def publish_short(
     if radio_info:
         radio_name = radio_info.get("name", "")
         description += f"\n\n📻 Radio: {radio_name}"
+    if source_url:
+        description += f"\n\nDrone source: {source_url}"
     
     # Configurar publisher
     import os
@@ -266,6 +271,7 @@ def save_state(
     video_path: Path,
     radio_info: Optional[dict],
     results: dict[str, str],
+    clip_id: Optional[str] = None,
 ):
     """Persiste histórico de publicação."""
     state = read_json(STATE_FILE, [])
@@ -281,6 +287,7 @@ def save_state(
         "status": "published" if any(value and not key.endswith("_error") for key, value in results.items()) else "error",
         "platforms": results,
         "url": city_url(city, "WORLD"),
+        "clip_id": clip_id,
     }
     
     state.append(entry)
@@ -319,8 +326,8 @@ def main() -> int:
         help="Plataformas separadas por vírgula (default: facebook)"
     )
     parser.add_argument(
-        "--source", choices=("browser", "download"), default="browser",
-        help="Origem do vídeo: captura do drone no site ou yt-dlp (default: browser)",
+        "--source", choices=("prerecorded", "browser", "download"), default="prerecorded",
+        help="Origem do vídeo: biblioteca, captura do drone ou yt-dlp (default: prerecorded)",
     )
     parser.add_argument(
         "--generate-only",
@@ -350,8 +357,14 @@ def main() -> int:
         catalog = load_catalog()
         print(f"   {len(catalog)} cidades encontradas")
         
-        # 2. Selecionar cidade
-        if args.city:
+        # 2. Selecionar somente um drone disponível na biblioteca quando pré-gerado.
+        clip = None
+        if args.source == "prerecorded":
+            from tools.social.reels_library import load_library, select_clip
+            library = load_library(catalog)
+            clip = select_clip(library, _load_recent_slugs(read_json(STATE_FILE, []), args.recent_days), args.city)
+            city = next(city for city in catalog if city_slug(city) == clip["city_slug"])
+        elif args.city:
             city = get_city_info(catalog, args.city)
             if not city:
                 print(f"❌ Cidade não encontrada: {args.city}")
@@ -366,12 +379,15 @@ def main() -> int:
         output_dir.mkdir(parents=True, exist_ok=True)
         
         # 4. Gerar vídeo
-        video_path, radio_info = generate_short(
-            city=city,
-            duration=args.duration,
-            output_dir=output_dir,
-            source=args.source,
-        )
+        if clip:
+            video_path = output_dir / f"{clip['id']}.mp4"
+            shutil.copyfile(clip["path"], video_path)
+            radio_info = clip.get("radio")
+            print(f"   Biblioteca: {clip['id']} ({clip['duration_seconds']:.1f}s)")
+        else:
+            video_path, radio_info = generate_short(
+                city=city, duration=args.duration, output_dir=output_dir, source=args.source,
+            )
         
         if not video_path:
             print("\n❌ Falha ao gerar vídeo")
@@ -390,10 +406,11 @@ def main() -> int:
             city=city,
             radio_info=radio_info,
             platforms=platforms,
+            source_url=clip.get("source_url") if clip else None,
         )
         
         # 6. Salvar estado
-        save_state(city, video_path, radio_info, results)
+        save_state(city, video_path, radio_info, results, clip_id=clip["id"] if clip else None)
         
         # 7. Resumo
         print("\n" + "=" * 60)

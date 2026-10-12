@@ -7,14 +7,10 @@ on:
   workflow_dispatch:
     inputs:
       city:
-        description: 'Slug da cidade (ex: sao-paulo)'
+        description: 'Slug da cidade da biblioteca (opcional)'
         required: false
-      duration:
-        description: 'Duração em segundos (15-60)'
-        required: false
-        default: '30'
       generate_only:
-        description: 'Gerar vídeo para revisão, sem publicar'
+        description: 'Revisar um vídeo da biblioteca sem publicar'
         type: boolean
         default: false
 
@@ -26,14 +22,13 @@ permissions:
   contents: write
 
 jobs:
-  shorts:
+  reels:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     env:
       FB_SYSTEM_USER_TOKEN: ${{ secrets.FB_SYSTEM_USER_TOKEN }}
       FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
       META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
-      YOUCITY_SITE_URL: ${{ vars.YOUCITY_SITE_URL || 'http://127.0.0.1:4173' }}
     steps:
       - uses: actions/checkout@v6
 
@@ -49,64 +44,26 @@ jobs:
         with:
           python-version: '3.11'
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
-      - name: Build and serve the capture site
-        env:
-          SEO_SITE_URL: https://youcity.app
-        run: |
-          node scripts/build-static.js
-          python -m http.server 4173 --bind 127.0.0.1 --directory dist > /tmp/youcity-capture-site.log 2>&1 &
-          for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/youcity-capture-site.log
-          exit 1
-
-      - name: Install system dependencies
+      - name: Install publishing dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y ffmpeg fonts-dejavu-core
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r requirements-social.txt
 
-      - name: Install Python and browser dependencies
-        run: |
-          python -m pip install -r requirements-shorts.txt
-          python -m playwright install --with-deps chromium
-
-      - name: Test Reels generation and publishing
+      - name: Test prerecorded selection and publishing
         run: |
           python scripts/test-shorts-regressions.py
-          python scripts/test-reels-capture.py
+          python scripts/test-reels-library.py
 
-      - name: Check production page delivery
-        if: ${{ inputs.generate_only == true }}
-        continue-on-error: true
-        run: |
-          python - <<'PY'
-          from playwright.sync_api import sync_playwright
-          with sync_playwright() as p:
-              browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
-              page = browser.new_page()
-              response = page.goto("https://youcity.app/city/lisbon?mode=drone&clean=1", wait_until="load", timeout=30000)
-              page.wait_for_timeout(3000)
-              print("Production HTTP", response.status, "title:", page.title())
-              print("Production body:", page.locator("body").inner_text()[:500])
-              print("Production frames:", [frame.url for frame in page.frames])
-              browser.close()
-          PY
+      - name: Validate all 100 prerecorded drones
+        run: python -m tools.social.reels_library --expected-count 100
 
-      - name: Generate and publish Facebook Reel
+      - name: Publish prerecorded Facebook Reel
         env:
           CITY: ${{ inputs.city }}
-          DURATION: ${{ inputs.duration || '30' }}
           GENERATE_ONLY: ${{ inputs.generate_only }}
         run: |
-          args=(--duration "$DURATION" --source browser --platforms facebook)
+          args=(--source prerecorded --platforms facebook)
           if [ -n "$CITY" ]; then
             args+=(--city "$CITY")
           fi
@@ -115,14 +72,12 @@ jobs:
           fi
           python tools/social/shorts_daily.py "${args[@]}"
 
-      - name: Save generated videos for review
+      - name: Save selected video for review
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: facebook-reels-video
-          path: |
-            out/shorts/**/*.mp4
-            out/shorts/**/*_capture_error.png
+          path: out/shorts/**/*.mp4
           if-no-files-found: ignore
           retention-days: 7
 
