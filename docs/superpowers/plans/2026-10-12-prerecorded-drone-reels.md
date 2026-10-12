@@ -45,4 +45,4 @@
 - [x] Configure prerecorded publishing and a generate-only review input, removing capture-site/browser installation from Actions.
 - [x] Verify exactly 100 manifest entries, MP4 hashes, actual formats, duration, size and origin metadata.
 - [x] Run regression tests and npm test; review code independently.
-- [ ] Commit code and all 100 files, update PR #12 and run an Actions preview without publishing.
+- [x] Commit code and all 100 files, update PR #12 and run an Actions preview without publishing.
