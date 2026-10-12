@@ -28,5 +28,20 @@
     },
     "url": "https://youcity.app/city/lisbon?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=lisbon",
     "clip_id": "lisbon-01"
+  },
+  {
+    "city_slug": "dublin",
+    "city_name": "Dublin",
+    "country": "Ireland",
+    "video_path": "out/shorts/2026-10-12/dublin-01.mp4",
+    "video_size_mb": 1.72,
+    "radio_name": "Classic Hits",
+    "published_at": "2026-10-12T22:28:38.027945+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1415639316730851"
+    },
+    "url": "https://youcity.app/city/dublin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dublin",
+    "clip_id": "dublin-01"
   }
 ]
