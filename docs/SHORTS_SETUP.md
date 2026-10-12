@@ -1,5 +1,39 @@
 # Setup Guide: YouCity Shorts no GitHub Actions
 
+## Fluxo ativo: somente Facebook Reels
+
+O workflow `Facebook Reels Daily` usa exclusivamente os secrets
+`FB_SYSTEM_USER_TOKEN` e `FACEBOOK_PAGE_ID`. YouTube e TikTok estão
+desativados no Actions. Nenhum `.env`, cookie ou token do YouTube é necessário.
+
+O vídeo de drone é capturado pelo Chromium na página da cidade, em 540×960
+(9:16), e convertido para MP4 H.264/AAC a 25 fps. A captura verifica que um
+vídeo do catálogo de drones está efetivamente reproduzindo antes e depois
+da gravação. Se o player bloquear a reprodução, a execução falha e não
+publica uma tela de erro nem substitui o drone por uma foto.
+Quando a rádio estiver indisponível, o vídeo mantém uma faixa de áudio silenciosa.
+
+O envio segue o fluxo oficial de Reels: iniciar sessão em `/{page_id}/video_reels`,
+enviar o arquivo à URL de upload retornada, finalizar como `PUBLISHED` e
+consultar o processamento. Somente publicações confirmadas entram no histórico
+como `published`; falhas deixam o Actions com erro.
+
+As Repository Variables opcionais são `YOUCITY_SITE_URL` (padrão
+`https://youcity.app`) e `META_GRAPH_VERSION` (padrão `v23.0`).
+
+Para revisar sem publicar, execute o workflow manualmente com
+`generate_only=true`. Os MP4 ficam no artifact `facebook-reels-video` por 7 dias.
+Para testar localmente:
+
+```bash
+python -m pip install -r requirements-shorts.txt
+python -m playwright install --with-deps chromium
+python tools/social/shorts_daily.py --city lisbon --duration 15 --source browser --platforms facebook --generate-only
+```
+
+As instruções abaixo sobre download e credenciais do YouTube/TikTok se aplicam
+somente ao modo opcional `--source download` e à futura ativação dessas plataformas.
+
 ## Limitações conhecidas
 
 ### 1. YouTube Download (yt-dlp)

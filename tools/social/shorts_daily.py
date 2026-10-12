@@ -3,10 +3,10 @@ Orquestrador principal: gera e publica shorts diariamente.
 
 Fluxo:
 1. Seleciona cidade aleatória com modo drone
-2. Baixa vídeo do YouTube (yt-dlp)
+2. Captura o drone no site pelo navegador (ou download opcional via yt-dlp)
 3. Captura áudio da rádio (FFmpeg)
 4. Edita vídeo final (FFmpeg)
-5. Publica em Facebook, YouTube, TikTok
+5. Publica no Facebook Reels (outras plataformas são opcionais)
 6. Persiste histórico
 """
 from __future__ import annotations
@@ -119,6 +119,7 @@ def generate_short(
     city: dict,
     duration: int,
     output_dir: Path,
+    source: str = "browser",
 ) -> tuple[Optional[Path], Optional[dict]]:
     """
     Gera vídeo short para uma cidade.
@@ -143,6 +144,14 @@ def generate_short(
     start = drone_video.get("start", 0)
     
     print(f"   ✓ Vídeo YouTube: {video_id} (start: {start}s)")
+
+    if source == "browser":
+        from tools.social.video_capture_browser import capture_mobile_video
+        captured = capture_mobile_video(
+            city_slug=slug, duration=duration, output_dir=output_dir,
+            expected_video_ids={str(ride["id"]) for ride in city["videos"]["drone"] if ride.get("id")},
+        )
+        return captured, None
     
     # 2. Baixar vídeo
     raw_video_path = output_dir / f"{slug}_raw.mp4"
@@ -269,7 +278,7 @@ def save_state(
         "video_size_mb": round(video_path.stat().st_size / 1024 / 1024, 2),
         "radio_name": radio_info.get("name") if radio_info else None,
         "published_at": now_utc().isoformat(),
-        "status": "published",
+        "status": "published" if any(value and not key.endswith("_error") for key, value in results.items()) else "error",
         "platforms": results,
         "url": city_url(city, "WORLD"),
     }
@@ -306,8 +315,12 @@ def main() -> int:
     )
     parser.add_argument(
         "--platforms",
-        default="facebook,youtube,tiktok",
-        help="Plataformas separadas por vírgula (default: facebook,youtube,tiktok)"
+        default="facebook",
+        help="Plataformas separadas por vírgula (default: facebook)"
+    )
+    parser.add_argument(
+        "--source", choices=("browser", "download"), default="browser",
+        help="Origem do vídeo: captura do drone no site ou yt-dlp (default: browser)",
     )
     parser.add_argument(
         "--generate-only",
@@ -321,6 +334,8 @@ def main() -> int:
     )
     
     args = parser.parse_args()
+    if not 15 <= args.duration <= 60:
+        parser.error("A duração deve estar entre 15 e 60 segundos")
     
     platforms = [p.strip().lower() for p in args.platforms.split(",")]
     
@@ -355,6 +370,7 @@ def main() -> int:
             city=city,
             duration=args.duration,
             output_dir=output_dir,
+            source=args.source,
         )
         
         if not video_path:
@@ -396,7 +412,7 @@ def main() -> int:
         
         print("=" * 60)
         
-        return 0
+        return 0 if any(value and not key.endswith("_error") for key, value in results.items()) and not any(key.endswith("_error") for key in results) else 1
         
     except Exception as e:
         print(f"\n❌ Erro: {e}")
@@ -407,7 +423,9 @@ def main() -> int:
 
 if __name__ == "__main__":
     # Carregar .env para testes locais
-    from tools.social.load_env import load_env
-    load_env()
+    import os
+    if os.environ.get("GITHUB_ACTIONS") != "true":
+        from tools.social.load_env import load_env
+        load_env()
     
     sys.exit(main())
