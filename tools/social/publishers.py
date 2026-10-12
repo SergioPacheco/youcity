@@ -31,7 +31,7 @@ class FacebookReelsPublisher:
     
     def __init__(self, access_token: str, api_version: Optional[str] = None):
         import os
-        self.access_token = access_token
+        self.access_token = access_token.strip()
         self.api_version = api_version or os.environ.get("META_GRAPH_VERSION", "").strip() or "v23.0"
         self.base_url = f"https://graph.facebook.com/{self.api_version}"
     
@@ -54,6 +54,7 @@ class FacebookReelsPublisher:
         Returns:
             ID do post publicado
         """
+        page_id = str(page_id).strip()
         # Obter Page Access Token a partir do System User Token
         page_token = self._get_page_access_token(page_id)
         

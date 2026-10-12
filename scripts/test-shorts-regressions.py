@@ -35,10 +35,11 @@ class ShortsRegressions(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("--platforms", result.stdout)
 
-    def check_facebook_publication(self, platforms, credentials_exist, tiktok_configured):
+    def check_facebook_publication(self, platforms, credentials_exist, tiktok_configured, whitespace=False):
         # Keep the actual publishers; replace only the external HTTP calls.
         def facebook_response(url, **kwargs):
             if url.endswith("/me/accounts"):
+                self.assertEqual(kwargs["params"]["access_token"], "system-token")
                 payload = {"data": [{"id": "123", "access_token": "page-token"}]}
             elif url.endswith("/123/video_reels"):
                 data = kwargs["data"]
@@ -70,8 +71,8 @@ class ShortsRegressions(unittest.TestCase):
             if credentials_exist:
                 credentials.write_text("{}", encoding="utf-8")
             environment = {
-                "FB_SYSTEM_USER_TOKEN": "system-token",
-                "FACEBOOK_PAGE_ID": "123",
+                "FB_SYSTEM_USER_TOKEN": " system-token \n" if whitespace else "system-token",
+                "FACEBOOK_PAGE_ID": " 123\n" if whitespace else "123",
                 "YOUTUBE_CREDENTIALS_PATH": str(credentials),
                 "TIKTOK_ACCESS_TOKEN": "tiktok-token" if tiktok_configured else "",
                 "TIKTOK_OPEN_ID": "tiktok-user" if tiktok_configured else "",
@@ -86,6 +87,9 @@ class ShortsRegressions(unittest.TestCase):
 
     def test_facebook_only_without_other_credentials(self):
         self.check_facebook_publication(["facebook"], False, False)
+
+    def test_facebook_credentials_ignore_surrounding_whitespace(self):
+        self.check_facebook_publication(["facebook"], False, False, whitespace=True)
 
     def test_facebook_only_ignores_other_configured_platforms(self):
         self.check_facebook_publication(["facebook"], True, True)
