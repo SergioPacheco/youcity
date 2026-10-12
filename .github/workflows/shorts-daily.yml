@@ -33,7 +33,7 @@ jobs:
       FB_SYSTEM_USER_TOKEN: ${{ secrets.FB_SYSTEM_USER_TOKEN }}
       FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
       META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
-      YOUCITY_SITE_URL: ${{ vars.YOUCITY_SITE_URL || 'https://youcity.app' }}
+      YOUCITY_SITE_URL: ${{ vars.YOUCITY_SITE_URL || 'http://127.0.0.1:4173' }}
     steps:
       - uses: actions/checkout@v6
 
@@ -49,6 +49,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Build and serve the capture site
+        env:
+          SEO_SITE_URL: https://youcity.app
+        run: |
+          node scripts/build-static.js
+          python -m http.server 4173 --bind 127.0.0.1 --directory dist > /tmp/youcity-capture-site.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/youcity-capture-site.log
+          exit 1
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -63,6 +82,23 @@ jobs:
         run: |
           python scripts/test-shorts-regressions.py
           python scripts/test-reels-capture.py
+
+      - name: Check production page delivery
+        if: ${{ inputs.generate_only == true }}
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True, args=["--no-sandbox"])
+              page = browser.new_page()
+              response = page.goto("https://youcity.app/city/lisbon?mode=drone&clean=1", wait_until="load", timeout=30000)
+              page.wait_for_timeout(3000)
+              print("Production HTTP", response.status, "title:", page.title())
+              print("Production body:", page.locator("body").inner_text()[:500])
+              print("Production frames:", [frame.url for frame in page.frames])
+              browser.close()
+          PY
 
       - name: Generate and publish Facebook Reel
         env:
@@ -84,7 +120,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: facebook-reels-video
-          path: out/shorts/**/*.mp4
+          path: |
+            out/shorts/**/*.mp4
+            out/shorts/**/*_capture_error.png
           if-no-files-found: ignore
           retention-days: 7
 

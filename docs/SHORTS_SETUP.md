@@ -6,6 +6,8 @@ O workflow `Facebook Reels Daily` usa exclusivamente os secrets
 `FB_SYSTEM_USER_TOKEN` e `FACEBOOK_PAGE_ID`. YouTube e TikTok estão
 desativados no Actions. Nenhum `.env`, cookie ou token do YouTube é necessário.
 
+No Actions, o site do checkout é compilado e servido em `http://127.0.0.1:4173`
+para a captura, evitando depender da entrega da página pública ao runner.
 O vídeo de drone é capturado pelo Chromium na página da cidade, em 540×960
 (9:16), e convertido para MP4 H.264/AAC a 25 fps. A captura verifica que um
 vídeo do catálogo de drones está efetivamente reproduzindo antes e depois
@@ -19,7 +21,8 @@ consultar o processamento. Somente publicações confirmadas entram no históric
 como `published`; falhas deixam o Actions com erro.
 
 As Repository Variables opcionais são `YOUCITY_SITE_URL` (padrão
-`https://youcity.app`) e `META_GRAPH_VERSION` (padrão `v23.0`).
+`http://127.0.0.1:4173` no Actions; `https://youcity.app` localmente) e
+`META_GRAPH_VERSION` (padrão `v23.0`).
 
 Para revisar sem publicar, execute o workflow manualmente com
 `generate_only=true`. Os MP4 ficam no artifact `facebook-reels-video` por 7 dias.

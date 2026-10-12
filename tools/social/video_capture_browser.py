@@ -292,7 +292,8 @@ def capture_mobile_video(
             print(f"   📱 Abrindo: {url}")
             
             t_nav_start = time.time()
-            page.goto(url, timeout=timeout, wait_until="load")  # Mais rápido que networkidle
+            navigation = page.goto(url, timeout=timeout, wait_until="load")
+            print(f"   🌐 HTTP {navigation.status if navigation else 'unknown'} — {page.title()}")
             
             # Aguardar carregamento do vídeo
             print("   ⏳ Aguardando player...")
@@ -327,6 +328,9 @@ def capture_mobile_video(
             # Verificar se vídeo está reproduzindo
             if not wait_for_video_playback(page, timeout, expected_video_ids):
                 print("   ❌ Vídeo de drone não reproduziu; captura cancelada")
+                print(f"   Página: {page.locator('body').inner_text()[:500]}")
+                print(f"   Frames: {[frame.url for frame in page.frames]}")
+                page.screenshot(path=str(output_dir / f"{city_slug}_capture_error.png"))
                 return None
             video_state = page.evaluate("""
                 () => {
