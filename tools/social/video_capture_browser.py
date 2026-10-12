@@ -14,6 +14,7 @@ import sys
 import time
 from pathlib import Path
 from typing import Optional
+from urllib.parse import quote
 
 try:
     from playwright.sync_api import sync_playwright, Browser, Page, Playwright, BrowserContext
@@ -288,7 +289,8 @@ def capture_mobile_video(
             # Navegar para a cidade
             base_url = os.environ.get("YOUCITY_SITE_URL", "https://youcity.app").rstrip("/")
             query = "mode=drone" if show_controls else "mode=drone&clean=1"
-            url = f"{base_url}/city/{city_slug}?{query}"
+            # The app's query route works with both Pages and plain static HTTP servers.
+            url = f"{base_url}/?city={quote(city_slug, safe='')}&{query}"
             print(f"   📱 Abrindo: {url}")
             
             t_nav_start = time.time()
