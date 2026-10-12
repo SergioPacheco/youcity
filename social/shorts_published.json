@@ -13,5 +13,20 @@
     },
     "url": "https://youcity.app/city/sao-paulo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=sao-paulo",
     "note": "reteste pos-limpeza: logo 120px + cidade topo + warmup 10s"
+  },
+  {
+    "city_slug": "lisbon",
+    "city_name": "Lisbon",
+    "country": "Portugal",
+    "video_path": "out/shorts/2026-10-12/lisbon-01.mp4",
+    "video_size_mb": 2.02,
+    "radio_name": "TSF Rádio Notícias",
+    "published_at": "2026-10-12T15:39:14.871679+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2180022452573683"
+    },
+    "url": "https://youcity.app/city/lisbon?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=lisbon",
+    "clip_id": "lisbon-01"
   }
 ]
