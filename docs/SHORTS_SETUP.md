@@ -1,256 +1,72 @@
-# Setup Guide: YouCity Shorts no GitHub Actions
+# Facebook Reels com drones pré-gerados
 
-## Limitações conhecidas
+O workflow `Facebook Reels Daily` publica exclusivamente no Facebook usando os
+secrets `FB_SYSTEM_USER_TOKEN` e `FACEBOOK_PAGE_ID`. A variável opcional
+`META_GRAPH_VERSION` configura a versão da API (padrão `v23.0`). YouTube e TikTok
+não são plataformas ativas nesse workflow.
 
-### 1. YouTube Download (yt-dlp)
+## Biblioteca
 
-**Problema**: YouTube bloqueia downloads de CI/CD (rate limiting, bot detection).
+Os 100 MP4 ficam em `social/reels/videos/`; `social/reels/catalog.json` registra
+cidade, país, vídeo de origem, autor, trecho, data de captura, rádio quando
+obtida, propriedades do MP4, tamanho e SHA-256. São clipes de drones reais de
+15 segundos, 540×960, H.264/AAC e 25 fps, com branding YouCity. A rádio é
+opcional; sua indisponibilidade resulta em uma faixa silenciosa.
 
-**Solução**: Usar cookies de autenticação.
+Os vídeos são capturados neste computador e commitados. O job do Actions não
+instala navegador, não acessa o player e não baixa vídeos do YouTube. Ele
+valida a biblioteca, seleciona um MP4 local e envia ao Facebook. A descrição
+inclui a referência ao drone original.
 
-```bash
-# Exportar cookies do navegador
-# Chrome: extensão "Get cookies.txt LOCALLY"
-# Firefox: extensão "cookies.txt"
+Cada execução normal escolhe uma cidade que não tenha uma publicação
+confirmada no Facebook nos últimos 45 dias. Se não houver cidade elegível,
+a execução informa o motivo e não repete uma cidade dentro da janela.
+`--city` é uma escolha manual explícita e permite revisar ou publicar uma
+cidade específica independentemente da janela.
 
-# Salvar como cookies.txt
-```
+O envio usa `/{page_id}/video_reels`: iniciar sessão, enviar o MP4 à URL
+retornada, finalizar como `PUBLISHED` e consultar o processamento. Somente
+publicações confirmadas entram no histórico como `published`. Falhas deixam
+o Actions com erro e não bloqueiam a cidade na janela de repetição.
 
-```yaml
-# Adicionar ao GitHub Secret
-YOUTUBE_COOKIES: " conteúdo do cookies.txt "
-```
+## Revisar sem publicar
 
-**Alternativa**: Baixar vídeos localmente e commitar no repo (se poucos vídeos).
+No GitHub, execute o workflow manualmente com `generate_only=true` e,
+opcionalmente, a cidade. O MP4 selecionado fica no artifact
+`facebook-reels-video` por 7 dias. Os arquivos permanentes ficam no Git;
+o artifact é somente uma cópia para revisão.
 
-### 2. Rádio Streaming
-
-**Problema**: Streams podem ter geo-blocking ou falhar em CI.
-
-**Solução**: Múltiplos fallbacks.
-
-```python
-# Já implementado: tenta 3 rádios diferentes
-# Se todas falharem, usa áudio original do vídeo
-```
-
-### 3. Fontes para Overlays
-
-**Problema**: GitHub Actions não tem fontes por padrão.
-
-**Solução**: Instalar pacote `fonts-dejavu-core`.
-
-```yaml
-# Já adicionado ao workflow
-- name: Install fonts
-  run: sudo apt-get install -y fonts-dejavu-core
-```
-
-### 4. YouTube Data API Quota
-
-**Problema**: 10.000 unidades/dia (limite baixo).
-
-**Solução**: 
-- Monitorar quota
-- Publicar máx 6 vídeos/dia
-- Ou pular YouTube no MVP
-
-### 5. TikTok API Approval
-
-**Problema**: TikTok precisa aprovar seu app (pode demorar dias/semanas).
-
-**Solução**: 
-- Usar apenas Facebook + YouTube no MVP
-- Adicionar TikTok depois da aprovação
-
-## Secrets necessários
-
-### Facebook Reels ✅
+Localmente, usando as dependências já instaladas neste projeto:
 
 ```bash
-# 1. Criar System User no Meta Business Suite
-# 2. Adicionar página como asset
-# 3. Gerar token (sem expiração)
-
-FB_SYSTEM_USER_TOKEN=EAAxxx...
-FACEBOOK_PAGE_ID=123456789
+.venv-shorts/bin/python -m tools.social.reels_library --expected-count 100
+.venv-shorts/bin/python tools/social/shorts_daily.py --source prerecorded --platforms facebook --generate-only
 ```
 
-### YouTube Shorts ⚠️
+Retirar `--generate-only` autoriza o envio ao Facebook. No computador local,
+as credenciais podem vir do `.env` ignorado pelo Git ou de variáveis exportadas.
+No Actions, vêm dos secrets. O workflow executa às 12:00 e 18:00 de Brasília.
+
+## Gerar ou retomar a biblioteca local
+
+Instale FFmpeg, fontes DejaVu e as dependências de captura na máquina que
+consegue reproduzir os drones. Não é necessário token da API do YouTube.
 
 ```bash
-# 1. Criar projeto no Google Cloud Console
-# 2. Habilitar YouTube Data API v3
-# 3. Criar OAuth2 credentials (Desktop app)
-# 4. Autorizar manualmente (primeira vez)
-# 5. Salvar credentials.json
-
-# Script para gerar token inicial:
-python tools/social/youtube_auth.py --client-id xxx --client-secret xxx
-
-# Exportar JSON como secret:
-YOUTUBE_CREDENTIALS_JSON={"installed":{"client_id":"xxx"...}}
+python3 -m venv .venv-shorts
+.venv-shorts/bin/python -m pip install -r requirements-shorts.txt
+.venv-shorts/bin/python -m playwright install --with-deps chromium
+.venv-shorts/bin/python tools/social/pregenerate_reels.py --count 100 --workers 6
 ```
 
-### TikTok ❓
+O gerador retoma os MP4 já validados, prioriza cidades diferentes e descarta
+fontes indisponíveis. Se necessário para atingir 100 clipes, captura trechos
+distintos de drones disponíveis. Cada worker grava em seu próprio diretório
+em `out/reels-library/`, onde ficam originais, áudio, logs e metadados de captura.
+Somente o processo principal copia MP4 aprovados para a biblioteca e atualiza
+o catálogo atomicamente. Nenhum vídeo é publicado por esse comando.
 
-```bash
-# 1. Registrar app em developers.tiktok.com
-# 2. Submeter para review (Content Posting API)
-# 3. Após aprovação, obter access_token e open_id
-
-TIKTOK_ACCESS_TOKEN=xxx
-TIKTOK_OPEN_ID=xxx
-```
-
-### YouTube Cookies (opcional, mas recomendado)
-
-```bash
-# Exportar cookies do navegador autenticado
-# Chrome: extensão "Get cookies.txt LOCALLY"
-
-YOUTUBE_COOKIES="# Netscape HTTP Cookie File\n..."
-```
-
-## Testar localmente
-
-### 1. Instalar dependências
-
-```bash
-pip install -r requirements-shorts.txt
-sudo apt install ffmpeg fonts-dejavu-core  # Linux
-```
-
-### 2. Testar componentes
-
-```bash
-# Teste completo (sem publicar)
-python scripts/test-shorts.py
-
-# Teste específico
-python scripts/test-shorts.py --test video
-python scripts/test-shorts.py --test audio
-python scripts/test-shorts.py --test full
-```
-
-### 3. Testar com cidade específica
-
-```bash
-# Gerar vídeo (sem publicar)
-python tools/social/shorts_daily.py \
-  --city sao-paulo \
-  --duration 15 \
-  --generate-only
-
-# Verificar vídeo gerado
-ls -lh out/shorts/*/sao-paulo_final.mp4
-```
-
-### 4. Testar publicação (Facebook apenas)
-
-```bash
-# Configurar token
-export FB_SYSTEM_USER_TOKEN="EAAxxx"
-export FACEBOOK_PAGE_ID="123456"
-
-# Publicar
-python tools/social/shorts_daily.py \
-  --city sao-paulo \
-  --duration 30 \
-  --platforms facebook
-```
-
-## Debug no GitHub Actions
-
-### Verificar logs
-
-```bash
-# Workflow > Run > View logs
-# Procurar por:
-# - "❌" (erros)
-# - "⚠️" (warnings)
-# - "✓" (sucessos)
-```
-
-### Testar workflow manualmente
-
-1. Ir em Actions > "YouCity Shorts Daily"
-2. Clicar em "Run workflow"
-3. Especificar cidade e duração
-4. Verificar logs em tempo real
-
-### Problemas comuns
-
-#### "yt-dlp error: HTTP Error 403"
-
-**Causa**: YouTube bloqueou download.
-
-**Solução**: Adicionar `YOUTUBE_COOKIES` secret.
-
-#### "FFmpeg error: fontfile not found"
-
-**Causa**: Fontes não instaladas.
-
-**Solução**: Verificar se `fonts-dejavu-core` está no workflow.
-
-#### "TikTok API error: unauthorized"
-
-**Causa**: App não aprovado.
-
-**Solução**: Pular TikTok ou aguardar aprovação.
-
-#### "YouTube quota exceeded"
-
-**Causa**: Limite diário atingido.
-
-**Solução**: Reduzir frequência ou pular YouTube.
-
-## Checklist antes de ativar
-
-- [ ] Testar localmente com `python scripts/test-shorts.py`
-- [ ] Gerar vídeo de teste com `--generate-only`
-- [ ] Configurar `FB_SYSTEM_USER_TOKEN` e `FACEBOOK_PAGE_ID`
-- [ ] (Opcional) Configurar `YOUTUBE_CREDENTIALS_JSON`
-- [ ] (Opcional) Configurar `YOUTUBE_COOKIES`
-- [ ] (Opcional) Configurar `TIKTOK_ACCESS_TOKEN` e `TIKTOK_OPEN_ID`
-- [ ] Testar workflow manualmente no GitHub Actions
-- [ ] Verificar logs e corrigir erros
-- [ ] Ativar schedule automático
-
-## Monitoramento
-
-### Verificar histórico
-
-```bash
-# Ver últimas publicações
-cat social/shorts_published.json | jq '.[-5:]'
-```
-
-### Verificar quota YouTube
-
-```bash
-# Via API
-python -c "
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-
-creds = Credentials.from_authorized_user_file('credentials.json')
-youtube = build('youtube', 'v3', credentials=creds)
-quota = youtube.quota().list().execute()
-print(quota)
-"
-```
-
-### Verificar posts no Facebook
-
-```bash
-# Via Graph API
-curl "https://graph.facebook.com/v23.0/{page_id}/posts?access_token={token}"
-```
-
-## Próximos passos
-
-1. **Fase 1**: Facebook apenas (mais confiável)
-2. **Fase 2**: Adicionar YouTube (após OAuth setup)
-3. **Fase 3**: Adicionar TikTok (após aprovação)
-4. **Fase 4**: Otimizar (cache de vídeos, paralelismo)
+A captura exige quadros decodificados, relógio avançando e o identificador
+real do drone durante toda a gravação. Uma mudança para outro vídeo, uma tela
+de erro ou um arquivo fora do formato exigido invalida o clipe. A publicação
+valida hashes e formatos antes de usar os arquivos.

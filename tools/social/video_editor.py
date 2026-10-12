@@ -16,6 +16,9 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 
 def download_youtube_segment(
     video_id: str,
@@ -317,8 +320,9 @@ def edit_short_video(
 
 def get_city_drone_video(catalog: list[dict], city_slug: str) -> Optional[dict]:
     """Retorna primeiro vídeo drone da cidade."""
+    from tools.social.utils import city_slug as slug_for_city
     for city in catalog:
-        slug = city.get("name", "").lower().replace(" ", "-")
+        slug = slug_for_city(city)
         if slug == city_slug.lower():
             videos = city.get("videos", {})
             drone_videos = videos.get("drone", [])
@@ -329,8 +333,9 @@ def get_city_drone_video(catalog: list[dict], city_slug: str) -> Optional[dict]:
 
 def get_city_info(catalog: list[dict], city_slug: str) -> Optional[dict]:
     """Retorna informações da cidade."""
+    from tools.social.utils import city_slug as slug_for_city
     for city in catalog:
-        slug = city.get("name", "").lower().replace(" ", "-")
+        slug = slug_for_city(city)
         if slug == city_slug.lower():
             return city
     return None

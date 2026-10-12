@@ -1,20 +1,18 @@
-name: YouCity Shorts Daily
+name: Facebook Reels Daily
 
 on:
   schedule:
-    # 12:00 BRT (meio-dia)
-    - cron: '0 15 * * *'
-    # 18:00 BRT (fim de tarde)
-    - cron: '0 21 * * *'
+    - cron: '0 15 * * *' # 12:00 BRT
+    - cron: '0 21 * * *' # 18:00 BRT
   workflow_dispatch:
     inputs:
       city:
-        description: 'Slug da cidade (ex: sao-paulo)'
+        description: 'Slug da cidade da biblioteca (opcional)'
         required: false
-      duration:
-        description: 'Duração em segundos (15-60)'
-        required: false
-        default: '30'
+      generate_only:
+        description: 'Revisar um vídeo da biblioteca sem publicar'
+        type: boolean
+        default: false
 
 concurrency:
   group: youcity-shorts-daily
@@ -24,113 +22,73 @@ permissions:
   contents: write
 
 jobs:
-  shorts:
+  reels:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-    
+    timeout-minutes: 10
     env:
-      # Facebook
       FB_SYSTEM_USER_TOKEN: ${{ secrets.FB_SYSTEM_USER_TOKEN }}
       FACEBOOK_PAGE_ID: ${{ secrets.FACEBOOK_PAGE_ID }}
-      
-      # YouTube
-      YOUTUBE_CREDENTIALS_PATH: /tmp/credentials.json
-      
-      # TikTok
-      TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
-      TIKTOK_OPEN_ID: ${{ secrets.TIKTOK_OPEN_ID }}
-    
+      META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
     steps:
       - uses: actions/checkout@v6
-      
-      - name: Setup Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'
-      
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg fonts-dejavu-core
-      
-      - name: Install Python dependencies
-        run: pip install -r requirements-shorts.txt
 
-      - name: Test shorts CLI and platform selection
-        run: python scripts/test-shorts-regressions.py
-      
-      - name: Setup YouTube credentials
-        env:
-          YOUTUBE_CREDENTIALS_JSON: ${{ secrets.YOUTUBE_CREDENTIALS_JSON }}
+      - name: Validate Facebook configuration
+        if: ${{ inputs.generate_only != true }}
         run: |
-          if [ -n "$YOUTUBE_CREDENTIALS_JSON" ]; then
-            echo "$YOUTUBE_CREDENTIALS_JSON" > "$YOUTUBE_CREDENTIALS_PATH"
-            echo "✓ YouTube credentials configured"
-          else
-            echo "⚠️  YouTube credentials not set (YouTube Shorts will be skipped)"
-          fi
-      
-      - name: Generate and publish short
-        env:
-          CITY: ${{ github.event.inputs.city }}
-          DURATION: ${{ github.event.inputs.duration || '30' }}
-        run: |
-          # Montar comando
-          CMD="python tools/social/shorts_daily.py --duration $DURATION"
-          
-          if [ -n "$CITY" ]; then
-            CMD="$CMD --city $CITY"
-          fi
-          
-          # Verificar secrets disponíveis
-          PLATFORMS=""
-          
-          if [ -n "$FB_SYSTEM_USER_TOKEN" ] && [ -n "$FACEBOOK_PAGE_ID" ]; then
-            PLATFORMS="${PLATFORMS}facebook,"
-            echo "✓ Facebook configured"
-          else
-            echo "⚠️  Facebook not configured"
-          fi
-          
-          if [ -f "$YOUTUBE_CREDENTIALS_PATH" ]; then
-            PLATFORMS="${PLATFORMS}youtube,"
-            echo "✓ YouTube configured"
-          else
-            echo "⚠️  YouTube not configured"
-          fi
-          
-          if [ -n "$TIKTOK_ACCESS_TOKEN" ] && [ -n "$TIKTOK_OPEN_ID" ]; then
-            PLATFORMS="${PLATFORMS}tiktok,"
-            echo "✓ TikTok configured"
-          else
-            echo "⚠️  TikTok not configured"
-          fi
-          
-          # Remover vírgula final
-          PLATFORMS="${PLATFORMS%,}"
-          
-          if [ -z "$PLATFORMS" ]; then
-            echo "❌ No platforms configured. Set at least one of:"
-            echo "   - FB_SYSTEM_USER_TOKEN + FACEBOOK_PAGE_ID"
-            echo "   - YOUTUBE_CREDENTIALS_JSON"
-            echo "   - TIKTOK_ACCESS_TOKEN + TIKTOK_OPEN_ID"
+          if [ -z "$FB_SYSTEM_USER_TOKEN" ] || [ -z "$FACEBOOK_PAGE_ID" ]; then
+            echo "Configure os secrets FB_SYSTEM_USER_TOKEN e FACEBOOK_PAGE_ID."
             exit 1
           fi
-          
-          CMD="$CMD --platforms $PLATFORMS"
-          
-          echo "Running: $CMD"
-          $CMD
-      
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install publishing dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install -r requirements-social.txt
+
+      - name: Test prerecorded selection and publishing
+        run: |
+          python scripts/test-shorts-regressions.py
+          python scripts/test-reels-library.py
+
+      - name: Validate all 100 prerecorded drones
+        run: python -m tools.social.reels_library --expected-count 100
+
+      - name: Publish prerecorded Facebook Reel
+        env:
+          CITY: ${{ inputs.city }}
+          GENERATE_ONLY: ${{ inputs.generate_only }}
+        run: |
+          args=(--source prerecorded --platforms facebook)
+          if [ -n "$CITY" ]; then
+            args+=(--city "$CITY")
+          fi
+          if [ "$GENERATE_ONLY" = "true" ]; then
+            args+=(--generate-only)
+          fi
+          python tools/social/shorts_daily.py "${args[@]}"
+
+      - name: Save selected video for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: facebook-reels-video
+          path: out/shorts/**/*.mp4
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Persist history
+        if: ${{ always() && inputs.generate_only != true }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
           if [ -f social/shorts_published.json ]; then
             git add social/shorts_published.json
           fi
-          
           if ! git diff --staged --quiet; then
             git commit -m "chore(shorts): record daily publications"
             git push

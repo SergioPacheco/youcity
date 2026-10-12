@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Optional
+from urllib.parse import urlparse
 
 import requests
 
@@ -24,13 +26,14 @@ class FacebookReelsPublisher:
     """
     Publisher para Facebook Reels via Graph API.
     
-    Docs: https://developers.facebook.com/docs/video-api/guides/publishing
+    Docs: https://developers.facebook.com/docs/video-api/guides/reels-publishing/
     """
     
-    def __init__(self, access_token: str, api_version: str = "v23.0"):
-        self.access_token = access_token
-        self.api_version = api_version
-        self.base_url = f"https://graph.facebook.com/{api_version}"
+    def __init__(self, access_token: str, api_version: Optional[str] = None):
+        import os
+        self.access_token = access_token.strip()
+        self.api_version = api_version or os.environ.get("META_GRAPH_VERSION", "").strip() or "v23.0"
+        self.base_url = f"https://graph.facebook.com/{self.api_version}"
     
     def upload_reel(
         self,
@@ -51,35 +54,76 @@ class FacebookReelsPublisher:
         Returns:
             ID do post publicado
         """
+        page_id = str(page_id).strip()
         # Obter Page Access Token a partir do System User Token
         page_token = self._get_page_access_token(page_id)
         
-        # Endpoint correto para Reels: /{page_id}/videos
-        url = f"{self.base_url}/{page_id}/videos"
-        
+        url = f"{self.base_url}/{page_id}/video_reels"
+        print("   📤 Publicando no Facebook Reels...")
+        print(f"      Página: {page_id}")
+        session = self._request("post", url, data={
+            "access_token": page_token, "upload_phase": "start",
+        })
+        video_id = session.get("video_id")
+        upload_url = session.get("upload_url", "")
+        if not video_id or urlparse(upload_url).scheme != "https" or urlparse(upload_url).hostname != "rupload.facebook.com":
+            raise PublisherError("Facebook did not return a valid Reels upload session")
+
         with open(video_path, "rb") as video_file:
-            files = {"source": (video_path.name, video_file, "video/mp4")}
-            data = {
-                "access_token": page_token,  # Usar Page Token, não System User Token
-                "title": title,
-                "description": description or title,
-            }
-            
-            print(f"   📤 Publicando no Facebook Reels...")
-            print(f"      Página: {page_id}")
-            
-            response = requests.post(url, files=files, data=data, timeout=120)
-        
-        if response.status_code != 200:
-            error_msg = response.text[:500]
-            print(f"   ❌ Erro Facebook: {error_msg}")
-            raise PublisherError(f"Facebook API {response.status_code}: {error_msg}")
-        
-        result = response.json()
-        post_id = result.get("id") or result.get("post_id", "")
-        
-        print(f"      ✓ Publicado: {post_id}")
-        return post_id
+            uploaded = self._request("post", upload_url, headers={
+                "Authorization": f"OAuth {page_token}",
+                "offset": "0",
+                "file_size": str(video_path.stat().st_size),
+                "Content-Type": "application/octet-stream",
+            }, data=video_file, timeout=120)
+        if uploaded.get("success") is not True:
+            raise PublisherError("Facebook rejected the Reels video upload")
+
+        finished = self._request("post", url, data={
+            "access_token": page_token,
+            "upload_phase": "finish",
+            "video_id": video_id,
+            "video_state": "PUBLISHED",
+            "title": title,
+            "description": description or title,
+        })
+        if finished.get("success") is not True:
+            raise PublisherError("Facebook rejected the Reels publication")
+
+        # Finish is asynchronous: only record a publication after Meta confirms it.
+        for attempt in range(24):
+            payload = self._request("get", f"{self.base_url}/{video_id}", params={
+                "access_token": page_token, "fields": "status",
+            })
+            status = payload.get("status", {})
+            phases = [status.get(name, {}).get("status") for name in (
+                "uploading_phase", "processing_phase", "publishing_phase",
+            )]
+            if status.get("video_status") == "error" or "error" in phases:
+                raise PublisherError(f"Facebook failed to process Reel {video_id}")
+            if status.get("publishing_phase", {}).get("status") == "complete":
+                print(f"      ✓ Reel publicado: {video_id}")
+                return str(video_id)
+            if attempt < 23:
+                time.sleep(5)
+        raise PublisherError(f"Facebook has not confirmed publication of Reel {video_id}; check its status before retrying")
+
+    def _request(self, method: str, url: str, **kwargs) -> dict:
+        kwargs.setdefault("timeout", 30)
+        try:
+            response = getattr(requests, method)(url, **kwargs)
+            payload = response.json()
+        except requests.RequestException as exc:
+            # Request URLs and exception messages can contain the access token.
+            raise PublisherError(f"Facebook request failed ({type(exc).__name__})") from None
+        except ValueError:
+            raise PublisherError("Facebook returned a non-JSON response") from None
+        if not isinstance(payload, dict):
+            raise PublisherError("Facebook returned an invalid response")
+        if response.status_code >= 400 or payload.get("error"):
+            error = payload.get("error") or {}
+            raise PublisherError(f"Facebook API {response.status_code} (code {error.get('code', 'unknown')}, subcode {error.get('error_subcode', 'unknown')})")
+        return payload
     
     def _get_page_access_token(self, page_id: str) -> str:
         """
@@ -91,17 +135,12 @@ class FacebookReelsPublisher:
         url = f"{self.base_url}/me/accounts"
         params = {"access_token": self.access_token}
         
-        response = requests.get(url, params=params, timeout=30)
-        
-        if response.status_code != 200:
-            raise PublisherError(f"Failed to get page token: {response.text[:200]}")
-        
-        result = response.json()
+        result = self._request("get", url, params=params)
         
         # Encontrar a página pelo ID
         for page in result.get("data", []):
-            if page.get("id") == page_id:
-                return page.get("access_token", "")
+            if str(page.get("id")) == str(page_id) and page.get("access_token"):
+                return page["access_token"]
         
         # Se não encontrou, pode ser que o System User tenha acesso direto
         # Tentar usar o próprio token

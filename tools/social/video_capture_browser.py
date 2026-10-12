@@ -12,8 +12,10 @@ import os
 import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
+from urllib.parse import quote
 
 try:
     from playwright.sync_api import sync_playwright, Browser, Page, Playwright, BrowserContext
@@ -24,13 +26,16 @@ except ImportError:
     sys.exit(1)
 
 if __package__ in (None, ""):
-    from audio_capture import capture_best_radio, get_city_radios
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+    from tools.social.audio_capture import capture_best_radio, get_city_radios
+    from tools.social.utils import city_slug as slug_for_city, display_city_name, display_country_name
     try:
-        from video_editor import build_branding_filter
+        from tools.social.video_editor import build_branding_filter
     except ImportError:
         build_branding_filter = None  # type: ignore
 else:
     from .audio_capture import capture_best_radio, get_city_radios
+    from .utils import city_slug as slug_for_city, display_city_name, display_country_name
     try:
         from .video_editor import build_branding_filter
     except ImportError:
@@ -57,26 +62,34 @@ def load_catalog() -> list[dict]:
 WARMUP_SECONDS = 10.0
 
 
-def mux_video_audio(video_path: Path, audio_path: Path, output_path: Path, duration: int, video_skip: float = 0.0) -> Optional[Path]:
+def mux_video_audio(video_path: Path, audio_path: Optional[Path], output_path: Path, duration: int, video_skip: float = 0.0) -> Optional[Path]:
     """Muxa vídeo (descartando `video_skip` s iniciais de loading) + áudio da rádio."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     cmd = [
         "ffmpeg", "-y",
+        "-threads", "2",
         "-ss", f"{max(0.0, video_skip):.1f}",
         "-i", str(video_path),
-        "-i", str(audio_path),
+    ]
+    if audio_path:
+        cmd.extend(["-i", str(audio_path)])
+    else:
+        cmd.extend(["-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100"])
+    cmd.extend([
         "-map", "0:v:0",
         "-map", "1:a:0",
         "-c:v", "libx264",
+        "-threads", "2",
         "-preset", "fast",
         "-crf", "23",
         "-pix_fmt", "yuv420p",
+        "-r", "25",
         "-c:a", "aac",
         "-b:a", "128k",
         "-t", str(duration),
         "-movflags", "+faststart",
         str(output_path),
-    ]
+    ])
     try:
         result = subprocess.run(cmd, timeout=max(60, duration * 4), capture_output=True, text=True, errors="replace")
     except (FileNotFoundError, subprocess.TimeoutExpired) as error:
@@ -139,11 +152,14 @@ def add_branding_overlay(
         )
         cmd = [
             "ffmpeg", "-y",
+            "-threads", "2",
             "-i", str(video_path),
             "-i", str(logo_path),
             "-filter_complex", video_filter,
+            "-filter_complex_threads", "1",
             "-map", "[v]", "-map", "0:a?",
             "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+            "-threads", "2",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac", "-b:a", "128k",
             "-movflags", "+faststart",
@@ -154,10 +170,13 @@ def add_branding_overlay(
         video_filter = f"[0:v]{','.join(drawtext_filters)},format=yuv420p[v]"
         cmd = [
             "ffmpeg", "-y",
+            "-threads", "2",
             "-i", str(video_path),
             "-filter_complex", video_filter,
+            "-filter_complex_threads", "1",
             "-map", "[v]", "-map", "0:a?",
             "-c:v", "libx264", "-preset", "fast", "-crf", "23",
+            "-threads", "2",
             "-pix_fmt", "yuv420p",
             "-c:a", "aac", "-b:a", "128k",
             "-movflags", "+faststart",
@@ -177,6 +196,33 @@ def add_branding_overlay(
     return output_path
 
 
+def wait_for_video_playback(page, timeout: int = 30000, expected_video_ids: Optional[set[str]] = None) -> bool:
+    """Require decoded frames and an advancing playback clock, including in iframes."""
+    deadline = time.monotonic() + timeout / 1000
+    previous = {}
+    while time.monotonic() < deadline:
+        for frame in page.frames:
+            try:
+                state = frame.evaluate("""() => {
+                    const v = document.querySelector('video');
+                    const player = document.querySelector('#movie_player');
+                    return v && { time: v.currentTime, paused: v.paused,
+                        ready: v.readyState, width: v.videoWidth, ended: v.ended,
+                        videoId: player?.getVideoData?.()?.video_id };
+                }""")
+            except Exception:
+                continue  # The app may replace a failed iframe while loading.
+            if state and (not expected_video_ids or state.get("videoId") in expected_video_ids) and not state["paused"] and not state["ended"] and state["ready"] >= 2 and state["width"] > 0:
+                last = previous.get(frame)
+                previous[frame] = state["time"]
+                if last is not None and state["time"] > last + 0.05:
+                    return True
+            else:
+                previous.pop(frame, None)
+        page.wait_for_timeout(200)
+    return False
+
+
 def capture_mobile_video(
     city_slug: str,
     duration: int = 30,
@@ -184,6 +230,8 @@ def capture_mobile_video(
     headless: bool = True,
     timeout: int = 30000,
     show_controls: bool = False,
+    expected_video_ids: Optional[set[str]] = None,
+    start_seconds: Optional[float] = None,
 ) -> Optional[Path]:
     """
     Captura vídeo do youcity.app em modo mobile.
@@ -212,7 +260,7 @@ def capture_mobile_video(
     with sync_playwright() as p:
         # Configurar navegador mobile
         iphone_14_pro = p.devices["iPhone 14 Pro"]
-        capture_viewport = {"width": 393, "height": 852}
+        capture_viewport = {"width": 540, "height": 960}
         browser = p.chromium.launch(
             headless=headless,
             args=[
@@ -227,7 +275,7 @@ def capture_mobile_video(
         context = browser.new_context(
             **{**iphone_14_pro, "viewport": capture_viewport},
             record_video_dir=str(output_dir),
-            record_video_size={"width": 393, "height": 852},  # iPhone 14 Pro
+            record_video_size=capture_viewport,
         )
         
         if show_controls:
@@ -251,18 +299,20 @@ def capture_mobile_video(
             # Navegar para a cidade
             base_url = os.environ.get("YOUCITY_SITE_URL", "https://youcity.app").rstrip("/")
             query = "mode=drone" if show_controls else "mode=drone&clean=1"
-            url = f"{base_url}/city/{city_slug}?{query}"
+            # The app's query route works with both Pages and plain static HTTP servers.
+            url = f"{base_url}/?city={quote(city_slug, safe='')}&{query}"
             print(f"   📱 Abrindo: {url}")
             
             t_nav_start = time.time()
-            page.goto(url, timeout=timeout, wait_until="load")  # Mais rápido que networkidle
+            navigation = page.goto(url, timeout=timeout, wait_until="load")
+            print(f"   🌐 HTTP {navigation.status if navigation else 'unknown'} — {page.title()}")
             
             # Aguardar carregamento do vídeo
             print("   ⏳ Aguardando player...")
             
             # Aguardar qualquer um: iframe do YouTube, video element, ou .video-container
             try:
-                page.wait_for_selector("iframe[src*='youtube'], video, .video-container", timeout=timeout)
+                page.wait_for_selector("iframe[src*='youtube'], video, .video-container", timeout=timeout, state="attached")
             except:
                 print("   ⚠️  Player não detectado, continuando...")
             
@@ -288,6 +338,33 @@ def capture_mobile_video(
                     print(f"   ⚠️  Erro ao selecionar Drone: {e}")
             
             # Verificar se vídeo está reproduzindo
+            if not wait_for_video_playback(page, timeout, expected_video_ids):
+                print("   ❌ Vídeo de drone não reproduziu; captura cancelada")
+                print(f"   Página: {page.locator('body').inner_text()[:500]}")
+                print(f"   Frames: {[frame.url for frame in page.frames]}")
+                page.screenshot(path=str(output_dir / f"{city_slug}_capture_error.png"))
+                return None
+            source_frame = None
+            for frame in page.frames:
+                try:
+                    current = frame.evaluate("document.querySelector('#movie_player')?.getVideoData?.()?.video_id")
+                    if current and (not expected_video_ids or current in expected_video_ids):
+                        source_frame = frame
+                        break
+                except Exception:
+                    continue
+            if source_frame is None:
+                print("   ❌ Origem do drone não pôde ser identificada")
+                return None
+            if start_seconds is not None:
+                video_duration = source_frame.evaluate("document.querySelector('video').duration")
+                if not video_duration or start_seconds + duration + 2 >= video_duration:
+                    print("   ❌ Drone curto demais para o trecho solicitado")
+                    return None
+                source_frame.evaluate("seconds => document.querySelector('#movie_player').seekTo(seconds, true)", start_seconds)
+                source_frame.wait_for_function("seconds => Math.abs(document.querySelector('video').currentTime - seconds) < 5", arg=start_seconds, timeout=timeout)
+                if not wait_for_video_playback(page, timeout, expected_video_ids):
+                    return None
             video_state = page.evaluate("""
                 () => {
                     // Verificar iframe do YouTube
@@ -330,21 +407,41 @@ def capture_mobile_video(
 
             # Marcar início do conteúdo (tudo antes disso é descartado)
             video_skip = time.time() - t_page_created
+            provenance = source_frame.evaluate("""() => {
+                const data = document.querySelector('#movie_player').getVideoData();
+                return {source_video_id: data.video_id, source_author: data.author || '',
+                    source_title: data.title || '', source_start_seconds: document.querySelector('video').currentTime};
+            }""")
+            provenance["captured_at"] = datetime.now(timezone.utc).isoformat()
+            provenance["source_url"] = f"https://www.youtube.com/watch?v={provenance['source_video_id']}"
+            from tools.social.reels_library import validate_provenance
+            validate_provenance(provenance, expected_video_ids or {provenance["source_video_id"]}, require_branding=False)
+            # Pin this one source for provenance, even if the city has other valid drones.
+            expected_video_ids = {provenance["source_video_id"]}
             print(f"   ✂️  Descartando {video_skip:.1f}s iniciais (loading)")
 
             # Gravar vídeo
             print(f"   ⏺️  Gravando por {duration} segundos...")
             
             # Scroll suave para simular interação
-            for i in range(duration):
+            recording_deadline = time.monotonic() + duration
+            i = 0
+            while time.monotonic() < recording_deadline:
+                if not wait_for_video_playback(page, 2000, expected_video_ids):
+                    print("   ❌ Drone interrompido ou substituído por outro modo; captura cancelada")
+                    return None
                 if show_controls and i == 2:
                     more_button = page.locator("#more-button")
                     if more_button.is_visible():
                         more_button.click()
-                if i > 0 and i % 5 == 0:  # Scroll a cada 5s
+                if show_controls and i > 0 and i % 5 == 0:
                     page.mouse.wheel(0, 100)
-                time.sleep(1)
+                page.wait_for_timeout(max(0, min(1000, (recording_deadline - time.monotonic()) * 1000)))
+                i += 1
             
+            if not wait_for_video_playback(page, 2000, expected_video_ids):
+                print("   ❌ Reprodução interrompida; captura cancelada")
+                return None
             print("   ✓ Gravação concluída")
             
         except Exception as e:
@@ -380,8 +477,7 @@ def capture_mobile_video(
             output_dir=output_dir,
         )
         if not audio_path:
-            print("   ❌ Captura cancelada: não foi possível obter áudio da rádio")
-            return None
+            print("   ⚠️  Rádio indisponível; mantendo o vídeo de drone sem áudio")
 
         output_path = output_dir / f"{city_slug}_mobile.mp4"
         muxed_path = mux_video_audio(final_path, audio_path, output_path, duration, video_skip=video_skip)
@@ -391,23 +487,15 @@ def capture_mobile_video(
         print(f"   📻 Rádio: {radio_info.get('name', 'Unknown') if radio_info else 'Unknown'}")
         print(f"   📊 Tamanho: {muxed_path.stat().st_size / 1024 / 1024:.1f} MB")
 
-        # Branding no topo (clean=1 esconde nome/logo do site): não bloqueia entrega
+        # Branding is required for the committed library.
         try:
             city_info = next(
                 (c for c in catalog
-                 if str(c.get("name", "")).lower().replace(" ", "-") == city_slug.lower()),
+                 if slug_for_city(c) == city_slug.lower()),
                 None,
             )
-            try:
-                # Import estilo pacote (funciona como script e como módulo).
-                # `from utils import` direto quebra porque utils.py usa import relativo.
-                sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-                from social.utils import display_city_name, display_country_name
-                city_name = display_city_name(city_info) if city_info else city_slug.replace("-", " ").title()
-                country_name = display_country_name(city_info) if city_info else ""
-            except Exception:
-                city_name = str((city_info or {}).get("name") or city_slug.replace("-", " ").title())
-                country_name = str((city_info or {}).get("country") or "")
+            city_name = display_city_name(city_info) if city_info else city_slug.replace("-", " ").title()
+            country_name = display_country_name(city_info) if city_info else ""
             branded_path = output_dir / f"{city_slug}_branded.mp4"
             branded = add_branding_overlay(
                 video_path=muxed_path,
@@ -417,10 +505,17 @@ def capture_mobile_video(
             )
             if branded:
                 branded.replace(muxed_path)  # mantém nome final *_mobile.mp4
+                provenance["branding_applied"] = True
                 print(f"   ✓ Vídeo com branding: {muxed_path}")
+            else:
+                print("   ❌ Branding falhou; captura descartada")
+                return None
         except Exception as e:
-            print(f"   ⚠️  Branding pulado: {e}")
+            print(f"   ❌ Branding falhou; captura descartada: {e}")
+            return None
 
+        provenance["radio"] = radio_info
+        (output_dir / f"{city_slug}_capture.json").write_text(json.dumps(provenance, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         return muxed_path
     
     print("   ❌ Vídeo não foi salvo")
