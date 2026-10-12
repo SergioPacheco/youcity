@@ -1,6 +1,15 @@
 # Setup Guide: YouCity Shorts no GitHub Actions
 
-## Fluxo ativo: somente Facebook Reels
+## Fluxo de Facebook Reels
+
+**Validação em 2026-10-12:** os 12 testes de regressão e os 3 testes de
+Chromium/FFmpeg passaram localmente e no Actions. Uma amostra real de drone
+de Lisboa, com rádio e branding, foi gerada localmente. Entretanto, o runner
+hospedado do GitHub não conseguiu reproduzir esse drone, tanto pela página
+pública quanto pelo site servido localmente. A automação ainda depende de
+uma fonte de drones acessível ao runner ou de executar a captura em um runner
+próprio. Os dois secrets do Facebook autorizam o envio; eles não resolvem a
+obtenção dos vídeos. Publicação real no Facebook ainda não foi validada.
 
 O workflow `Facebook Reels Daily` usa exclusivamente os secrets
 `FB_SYSTEM_USER_TOKEN` e `FACEBOOK_PAGE_ID`. YouTube e TikTok estão
