@@ -43,5 +43,20 @@
     },
     "url": "https://youcity.app/city/dublin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dublin",
     "clip_id": "dublin-01"
+  },
+  {
+    "city_slug": "cook-islands",
+    "city_name": "Cook Islands",
+    "country": "Cook Islands",
+    "video_path": "out/shorts/2026-10-13/cook-islands-01.mp4",
+    "video_size_mb": 2.15,
+    "radio_name": "Life FM Cook Islands",
+    "published_at": "2026-10-13T02:26:29.215401+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "939214348928674"
+    },
+    "url": "https://youcity.app/city/cook-islands?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=cook-islands",
+    "clip_id": "cook-islands-01"
   }
 ]
