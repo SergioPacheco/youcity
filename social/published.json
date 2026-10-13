@@ -398,5 +398,26 @@
       "autor": "Bahnfrend",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "bangalore",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "BANGALORE",
+    "pais": "INDIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122111422131493232",
+    "scheduled_for": "2026-10-13 16:30",
+    "published_at": "2026-10-13T19:35:54.592554+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/bangalore?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bangalore",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Gpkp",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
