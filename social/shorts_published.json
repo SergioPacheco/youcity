@@ -58,5 +58,20 @@
     },
     "url": "https://youcity.app/city/cook-islands?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=cook-islands",
     "clip_id": "cook-islands-01"
+  },
+  {
+    "city_slug": "tampa",
+    "city_name": "Tampa",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-13/tampa-01.mp4",
+    "video_size_mb": 2.41,
+    "radio_name": "WJIS The JOY FM",
+    "published_at": "2026-10-13T20:35:47.252083+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "3346305055542525"
+    },
+    "url": "https://youcity.app/city/tampa?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tampa",
+    "clip_id": "tampa-01"
   }
 ]
