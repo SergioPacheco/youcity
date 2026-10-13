@@ -419,5 +419,26 @@
       "autor": "Gpkp",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "mexico-city",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "MEXICO CITY",
+    "pais": "MEXICO",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122111461857493232",
+    "scheduled_for": "2026-10-13 20:00",
+    "published_at": "2026-10-13T23:23:04.023533+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/mexico-city?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mexico-city",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Gobierno CDMX",
+      "licenca": "CC0"
+    }
   }
 ]
