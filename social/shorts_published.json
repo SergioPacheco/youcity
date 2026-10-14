@@ -88,5 +88,20 @@
     },
     "url": "https://youcity.app/city/atlanta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=atlanta",
     "clip_id": "atlanta-01"
+  },
+  {
+    "city_slug": "buenos-aires",
+    "city_name": "Buenos Aires",
+    "country": "Argentina",
+    "video_path": "out/shorts/2026-10-14/buenos-aires-01.mp4",
+    "video_size_mb": 1.18,
+    "radio_name": "Radio Cadena Eco",
+    "published_at": "2026-10-14T19:16:20.193609+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1120526880475601"
+    },
+    "url": "https://youcity.app/city/buenos-aires?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=buenos-aires",
+    "clip_id": "buenos-aires-01"
   }
 ]
