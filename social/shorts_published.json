@@ -103,5 +103,20 @@
     },
     "url": "https://youcity.app/city/buenos-aires?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=buenos-aires",
     "clip_id": "buenos-aires-01"
+  },
+  {
+    "city_slug": "austin",
+    "city_name": "Austin",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-14/austin-01.mp4",
+    "video_size_mb": 2.48,
+    "radio_name": "KOOP HD2",
+    "published_at": "2026-10-14T23:43:21.962141+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1424268209090474"
+    },
+    "url": "https://youcity.app/city/austin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=austin",
+    "clip_id": "austin-01"
   }
 ]
