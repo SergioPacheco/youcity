@@ -440,5 +440,26 @@
       "autor": "Gobierno CDMX",
       "licenca": "CC0"
     }
+  },
+  {
+    "city_slug": "seoul",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "SEOUL",
+    "pais": "SOUTH KOREA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122111722455493232",
+    "scheduled_for": "2026-10-14 16:30",
+    "published_at": "2026-10-14T19:35:39.388308+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/seoul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=seoul",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Eunmi Park",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
