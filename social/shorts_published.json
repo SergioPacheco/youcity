@@ -73,5 +73,20 @@
     },
     "url": "https://youcity.app/city/tampa?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tampa",
     "clip_id": "tampa-01"
+  },
+  {
+    "city_slug": "atlanta",
+    "city_name": "Atlanta",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-14/atlanta-01.mp4",
+    "video_size_mb": 1.77,
+    "radio_name": "WUBL The Bull",
+    "published_at": "2026-10-14T00:09:58.002588+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1386115750402245"
+    },
+    "url": "https://youcity.app/city/atlanta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=atlanta",
+    "clip_id": "atlanta-01"
   }
 ]
