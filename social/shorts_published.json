@@ -133,5 +133,20 @@
     },
     "url": "https://youcity.app/city/seoul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=seoul",
     "clip_id": "seoul-01"
+  },
+  {
+    "city_slug": "miami",
+    "city_name": "Miami",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-15/miami-01.mp4",
+    "video_size_mb": 2.35,
+    "radio_name": "NPR News",
+    "published_at": "2026-10-15T23:34:12.966010+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1658329282474071"
+    },
+    "url": "https://youcity.app/city/miami?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=miami",
+    "clip_id": "miami-01"
   }
 ]
