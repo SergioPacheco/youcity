@@ -118,5 +118,20 @@
     },
     "url": "https://youcity.app/city/austin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=austin",
     "clip_id": "austin-01"
+  },
+  {
+    "city_slug": "seoul",
+    "city_name": "Seoul",
+    "country": "South Korea",
+    "video_path": "out/shorts/2026-10-15/seoul-01.mp4",
+    "video_size_mb": 1.8,
+    "radio_name": "Listen Moe K-pop",
+    "published_at": "2026-10-15T19:00:34.564525+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "4476629792559330"
+    },
+    "url": "https://youcity.app/city/seoul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=seoul",
+    "clip_id": "seoul-01"
   }
 ]
