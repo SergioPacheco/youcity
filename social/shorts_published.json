@@ -148,5 +148,20 @@
     },
     "url": "https://youcity.app/city/miami?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=miami",
     "clip_id": "miami-01"
+  },
+  {
+    "city_slug": "antalya",
+    "city_name": "Antalya",
+    "country": "Türkiye",
+    "video_path": "out/shorts/2026-10-16/antalya-01.mp4",
+    "video_size_mb": 1.74,
+    "radio_name": "Joy Türk",
+    "published_at": "2026-10-16T18:44:20.995456+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2264724090735632"
+    },
+    "url": "https://youcity.app/city/antalya?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=antalya",
+    "clip_id": "antalya-01"
   }
 ]
