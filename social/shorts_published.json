@@ -163,5 +163,20 @@
     },
     "url": "https://youcity.app/city/antalya?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=antalya",
     "clip_id": "antalya-01"
+  },
+  {
+    "city_slug": "vienna",
+    "city_name": "Vienna",
+    "country": "Austria",
+    "video_path": "out/shorts/2026-10-16/vienna-01.mp4",
+    "video_size_mb": 3.03,
+    "radio_name": "Rádio Expres",
+    "published_at": "2026-10-16T23:16:22.485495+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1649189450121931"
+    },
+    "url": "https://youcity.app/city/vienna?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=vienna",
+    "clip_id": "vienna-01"
   }
 ]
