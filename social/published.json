@@ -461,5 +461,26 @@
       "autor": "Eunmi Park",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "los-angeles",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "LOS ANGELES",
+    "pais": "UNITED STATES",
+    "modos": "drive+bike+beach_walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122112384231493232",
+    "scheduled_for": "2026-10-16 16:30",
+    "published_at": "2026-10-16T20:01:14.246496+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/los-angeles?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=los-angeles",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Gnaphron",
+      "licenca": "CC BY-SA 2.0"
+    }
   }
 ]
