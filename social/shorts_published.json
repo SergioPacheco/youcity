@@ -193,5 +193,20 @@
     },
     "url": "https://youcity.app/city/chicago?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=chicago",
     "clip_id": "chicago-01"
+  },
+  {
+    "city_slug": "abu-dhabi",
+    "city_name": "Abu Dhabi",
+    "country": "United Arab Emirates",
+    "video_path": "out/shorts/2026-10-17/abu-dhabi-01.mp4",
+    "video_size_mb": 1.75,
+    "radio_name": "إذاعة الشارقة",
+    "published_at": "2026-10-17T22:54:53.542482+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "3004171989926000"
+    },
+    "url": "https://youcity.app/city/abu-dhabi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=abu-dhabi",
+    "clip_id": "abu-dhabi-01"
   }
 ]
