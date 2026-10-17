@@ -178,5 +178,20 @@
     },
     "url": "https://youcity.app/city/vienna?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=vienna",
     "clip_id": "vienna-01"
+  },
+  {
+    "city_slug": "chicago",
+    "city_name": "Chicago",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-17/chicago-01.mp4",
+    "video_size_mb": 3.08,
+    "radio_name": "WCRX 88.1 FM - Chicago's Underground Radio",
+    "published_at": "2026-10-17T17:50:20.067301+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1617081583451808"
+    },
+    "url": "https://youcity.app/city/chicago?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=chicago",
+    "clip_id": "chicago-01"
   }
 ]
