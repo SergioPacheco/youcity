@@ -482,5 +482,26 @@
       "autor": "Gnaphron",
       "licenca": "CC BY-SA 2.0"
     }
+  },
+  {
+    "city_slug": "budapest",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "BUDAPEST",
+    "pais": "HUNGARY",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122112696933493232",
+    "scheduled_for": "2026-10-17 12:30",
+    "published_at": "2026-10-17T15:45:58.474254+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/budapest?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=budapest",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Visions of Domino",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
