@@ -524,5 +524,26 @@
       "autor": "Medelam",
       "licenca": "CC BY 4.0"
     }
+  },
+  {
+    "city_slug": "buenos-aires",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "BUENOS AIRES",
+    "pais": "ARGENTINA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-10-17 20:00",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/buenos-aires?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=buenos-aires",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Deensel",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
