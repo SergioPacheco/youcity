@@ -503,5 +503,26 @@
       "autor": "Visions of Domino",
       "licenca": "CC BY 2.0"
     }
+  },
+  {
+    "city_slug": "jakarta",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "JAKARTA",
+    "pais": "INDONESIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122112747957493232",
+    "scheduled_for": "2026-10-17 16:30",
+    "published_at": "2026-10-17T19:36:48.216975+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/jakarta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jakarta",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Medelam",
+      "licenca": "CC BY 4.0"
+    }
   }
 ]
