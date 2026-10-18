@@ -566,5 +566,26 @@
       "autor": "Ynhockey",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "amsterdam",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "AMSTERDAM",
+    "pais": "NETHERLANDS",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122113019757493232",
+    "scheduled_for": "2026-10-18 16:30",
+    "published_at": "2026-10-18T19:32:24.138852+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/amsterdam?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=amsterdam",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Andrés Barrios",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
