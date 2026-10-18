@@ -208,5 +208,20 @@
     },
     "url": "https://youcity.app/city/abu-dhabi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=abu-dhabi",
     "clip_id": "abu-dhabi-01"
+  },
+  {
+    "city_slug": "mumbai",
+    "city_name": "Mumbai",
+    "country": "India",
+    "video_path": "out/shorts/2026-10-18/mumbai-01.mp4",
+    "video_size_mb": 1.67,
+    "radio_name": "Hits Of Bollywood",
+    "published_at": "2026-10-18T17:57:53.930598+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "28125442490468749"
+    },
+    "url": "https://youcity.app/city/mumbai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mumbai",
+    "clip_id": "mumbai-01"
   }
 ]
