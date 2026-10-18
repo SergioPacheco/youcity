@@ -223,5 +223,20 @@
     },
     "url": "https://youcity.app/city/mumbai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mumbai",
     "clip_id": "mumbai-01"
+  },
+  {
+    "city_slug": "baltimore",
+    "city_name": "Baltimore",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-18/baltimore-01.mp4",
+    "video_size_mb": 2.07,
+    "radio_name": "WNAV",
+    "published_at": "2026-10-18T22:47:44.501560+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1801416691095868"
+    },
+    "url": "https://youcity.app/city/baltimore?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=baltimore",
+    "clip_id": "baltimore-01"
   }
 ]
