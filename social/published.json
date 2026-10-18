@@ -545,5 +545,26 @@
       "autor": "Deensel",
       "licenca": "CC BY 2.0"
     }
+  },
+  {
+    "city_slug": "tel-aviv",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "TEL AVIV",
+    "pais": "ISRAEL",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122112983079493232",
+    "scheduled_for": "2026-10-18 12:30",
+    "published_at": "2026-10-18T16:01:31.574121+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/tel-aviv?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tel-aviv",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Ynhockey",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
