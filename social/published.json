@@ -587,5 +587,26 @@
       "autor": "Andrés Barrios",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "washington-dc",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "WASHINGTON DC",
+    "pais": "UNITED STATES",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122113061379493232",
+    "scheduled_for": "2026-10-18 20:00",
+    "published_at": "2026-10-18T23:45:55.207039+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/washington-dc?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=washington-dc",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Ralf Roletschek ( talk ) - Infos über Fahrräder auf fahrradmonteur.de Wikis in d",
+      "licenca": "CC BY-SA 3.0"
+    }
   }
 ]
