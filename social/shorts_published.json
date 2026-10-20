@@ -283,5 +283,20 @@
     },
     "url": "https://youcity.app/city/toronto?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=toronto",
     "clip_id": "toronto-01"
+  },
+  {
+    "city_slug": "tel-aviv",
+    "city_name": "Tel Aviv",
+    "country": "Israel",
+    "video_path": "out/shorts/2026-10-20/tel-aviv-01.mp4",
+    "video_size_mb": 3.82,
+    "radio_name": "רדיו לב המדינה 91.0",
+    "published_at": "2026-10-20T23:38:27.831427+00:00",
+    "status": "error",
+    "platforms": {
+      "facebook_error": "Facebook API 400 (code 100, subcode 33)"
+    },
+    "url": "https://youcity.app/city/tel-aviv?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tel-aviv",
+    "clip_id": "tel-aviv-01"
   }
 ]
