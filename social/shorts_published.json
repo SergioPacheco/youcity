@@ -253,5 +253,20 @@
     },
     "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro",
     "clip_id": "rio-de-janeiro-01"
+  },
+  {
+    "city_slug": "milan",
+    "city_name": "Milan",
+    "country": "Italy",
+    "video_path": "out/shorts/2026-10-20/milan-01.mp4",
+    "video_size_mb": 1.83,
+    "radio_name": "Radio Bruno (Milano)",
+    "published_at": "2026-10-20T00:07:44.007525+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1411614057800652"
+    },
+    "url": "https://youcity.app/city/milan?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=milan",
+    "clip_id": "milan-01"
   }
 ]
