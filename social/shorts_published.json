@@ -298,5 +298,20 @@
     },
     "url": "https://youcity.app/city/tel-aviv?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tel-aviv",
     "clip_id": "tel-aviv-01"
+  },
+  {
+    "city_slug": "kuala-lumpur",
+    "city_name": "Kuala Lumpur",
+    "country": "Malaysia",
+    "video_path": "out/shorts/2026-10-21/kuala-lumpur-01.mp4",
+    "video_size_mb": 3.53,
+    "radio_name": "RTM Asyik FM RTM Salam FM",
+    "published_at": "2026-10-21T19:12:43.808712+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1435151191274102"
+    },
+    "url": "https://youcity.app/city/kuala-lumpur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=kuala-lumpur",
+    "clip_id": "kuala-lumpur-01"
   }
 ]
