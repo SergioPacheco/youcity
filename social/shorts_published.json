@@ -313,5 +313,20 @@
     },
     "url": "https://youcity.app/city/kuala-lumpur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=kuala-lumpur",
     "clip_id": "kuala-lumpur-01"
+  },
+  {
+    "city_slug": "san-francisco",
+    "city_name": "San Francisco",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-21/san-francisco-01.mp4",
+    "video_size_mb": 3.71,
+    "radio_name": "Groove Salad",
+    "published_at": "2026-10-21T23:55:14.318203+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1105498511838139"
+    },
+    "url": "https://youcity.app/city/san-francisco?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=san-francisco",
+    "clip_id": "san-francisco-01"
   }
 ]
