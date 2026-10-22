@@ -343,5 +343,20 @@
     },
     "url": "https://youcity.app/city/tokyo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tokyo",
     "clip_id": "tokyo-01"
+  },
+  {
+    "city_slug": "madrid",
+    "city_name": "Madrid",
+    "country": "Spain",
+    "video_path": "out/shorts/2026-10-22/madrid-01.mp4",
+    "video_size_mb": 1.99,
+    "radio_name": "LOS40 Classic",
+    "published_at": "2026-10-22T23:54:10.594576+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1586012643277875"
+    },
+    "url": "https://youcity.app/city/madrid?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=madrid",
+    "clip_id": "madrid-01"
   }
 ]
