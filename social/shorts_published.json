@@ -373,5 +373,20 @@
     },
     "url": "https://youcity.app/city/tel-aviv?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tel-aviv",
     "clip_id": "tel-aviv-01"
+  },
+  {
+    "city_slug": "skopelos",
+    "city_name": "Skopelos",
+    "country": "Greece",
+    "video_path": "out/shorts/2026-10-23/skopelos-01.mp4",
+    "video_size_mb": 1.61,
+    "radio_name": "Vanilla Radio Fresh Flavors",
+    "published_at": "2026-10-23T23:45:50.694481+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "28464885799880556"
+    },
+    "url": "https://youcity.app/city/skopelos?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=skopelos",
+    "clip_id": "skopelos-01"
   }
 ]
