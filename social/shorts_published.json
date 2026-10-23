@@ -358,5 +358,20 @@
     },
     "url": "https://youcity.app/city/madrid?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=madrid",
     "clip_id": "madrid-01"
+  },
+  {
+    "city_slug": "tel-aviv",
+    "city_name": "Tel Aviv",
+    "country": "Israel",
+    "video_path": "out/shorts/2026-10-23/tel-aviv-01.mp4",
+    "video_size_mb": 3.82,
+    "radio_name": "רדיו לב המדינה 91.0",
+    "published_at": "2026-10-23T19:01:26.475076+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1483345646947716"
+    },
+    "url": "https://youcity.app/city/tel-aviv?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tel-aviv",
+    "clip_id": "tel-aviv-01"
   }
 ]
