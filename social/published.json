@@ -667,5 +667,26 @@
       "autor": "Marina Campos Vinhal",
       "licenca": "CC BY 2.0"
     }
+  },
+  {
+    "city_slug": "edinburgh",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "EDINBURGH",
+    "pais": "UNITED KINGDOM",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122115012201493232",
+    "scheduled_for": "2026-10-24 16:30",
+    "published_at": "2026-10-24T19:39:09.545123+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/edinburgh?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=edinburgh",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Andrew Colin",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
