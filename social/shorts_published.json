@@ -388,5 +388,20 @@
     },
     "url": "https://youcity.app/city/skopelos?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=skopelos",
     "clip_id": "skopelos-01"
+  },
+  {
+    "city_slug": "stockholm",
+    "city_name": "Stockholm",
+    "country": "Sweden",
+    "video_path": "out/shorts/2026-10-24/stockholm-01.mp4",
+    "video_size_mb": 2.97,
+    "radio_name": "Star FM",
+    "published_at": "2026-10-24T18:01:09.047300+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1774995933789259"
+    },
+    "url": "https://youcity.app/city/stockholm?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=stockholm",
+    "clip_id": "stockholm-01"
   }
 ]
