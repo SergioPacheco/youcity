@@ -403,5 +403,20 @@
     },
     "url": "https://youcity.app/city/stockholm?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=stockholm",
     "clip_id": "stockholm-01"
+  },
+  {
+    "city_slug": "malta",
+    "city_name": "Malta",
+    "country": "Malta",
+    "video_path": "out/shorts/2026-10-24/malta-01.mp4",
+    "video_size_mb": 2.17,
+    "radio_name": "Bay Easy",
+    "published_at": "2026-10-24T22:54:37.023416+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1780026286606795"
+    },
+    "url": "https://youcity.app/city/malta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=malta",
+    "clip_id": "malta-01"
   }
 ]
