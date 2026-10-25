@@ -433,5 +433,20 @@
     },
     "url": "https://youcity.app/city/mexico-city?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mexico-city",
     "clip_id": "mexico-city-01"
+  },
+  {
+    "city_slug": "singapore",
+    "city_name": "Singapore",
+    "country": "Singapore",
+    "video_path": "out/shorts/2026-10-25/singapore-01.mp4",
+    "video_size_mb": 1.79,
+    "radio_name": "Ria 89.7 FM",
+    "published_at": "2026-10-25T23:02:28.998074+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1332848095528295"
+    },
+    "url": "https://youcity.app/city/singapore?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=singapore",
+    "clip_id": "singapore-01"
   }
 ]
