@@ -688,5 +688,26 @@
       "autor": "Andrew Colin",
       "licenca": "CC BY 2.0"
     }
+  },
+  {
+    "city_slug": "beijing",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "BEIJING",
+    "pais": "CHINA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122115314883493232",
+    "scheduled_for": "2026-10-25 16:30",
+    "published_at": "2026-10-25T19:51:19.271006+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/beijing?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=beijing",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "N509FZ",
+      "licenca": "CC BY 4.0"
+    }
   }
 ]
