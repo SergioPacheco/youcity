@@ -709,5 +709,26 @@
       "autor": "N509FZ",
       "licenca": "CC BY 4.0"
     }
+  },
+  {
+    "city_slug": "zurich",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "ZURICH",
+    "pais": "SWITZERLAND",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122115347247493232",
+    "scheduled_for": "2026-10-25 20:00",
+    "published_at": "2026-10-25T23:39:41.097734+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/zurich?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=zurich",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Thomas Wolf , www.foto-tw.de",
+      "licenca": "CC BY-SA 3.0 de"
+    }
   }
 ]
