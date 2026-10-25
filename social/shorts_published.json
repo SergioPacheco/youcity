@@ -418,5 +418,20 @@
     },
     "url": "https://youcity.app/city/malta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=malta",
     "clip_id": "malta-01"
+  },
+  {
+    "city_slug": "mexico-city",
+    "city_name": "Mexico City",
+    "country": "Mexico",
+    "video_path": "out/shorts/2026-10-25/mexico-city-01.mp4",
+    "video_size_mb": 1.59,
+    "radio_name": "XETUL Radio Mexiquense",
+    "published_at": "2026-10-25T18:19:32.366785+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1111987418204593"
+    },
+    "url": "https://youcity.app/city/mexico-city?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mexico-city",
+    "clip_id": "mexico-city-01"
   }
 ]
