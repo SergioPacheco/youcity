@@ -730,5 +730,26 @@
       "autor": "Thomas Wolf , www.foto-tw.de",
       "licenca": "CC BY-SA 3.0 de"
     }
+  },
+  {
+    "city_slug": "mumbai",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "MUMBAI",
+    "pais": "INDIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-10-26 16:30",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/mumbai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mumbai",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Rutiknatekar",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
