@@ -751,5 +751,26 @@
       "autor": "Rutiknatekar",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "athens",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "ATHENS",
+    "pais": "GREECE",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122115658527493232",
+    "scheduled_for": "2026-10-26 20:00",
+    "published_at": "2026-10-26T23:16:03.144013+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/athens?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=athens",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Andrew Parlette",
+      "licenca": "CC BY 4.0"
+    }
   }
 ]
