@@ -448,5 +448,20 @@
     },
     "url": "https://youcity.app/city/singapore?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=singapore",
     "clip_id": "singapore-01"
+  },
+  {
+    "city_slug": "gili-islands",
+    "city_name": "Gili Islands",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-10-26/gili-islands-01.mp4",
+    "video_size_mb": 1.79,
+    "radio_name": "Mandalika Radio Lombok",
+    "published_at": "2026-10-26T20:24:10.185296+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1469534755270238"
+    },
+    "url": "https://youcity.app/city/gili-islands?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=gili-islands",
+    "clip_id": "gili-islands-01"
   }
 ]
