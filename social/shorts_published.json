@@ -478,5 +478,20 @@
     },
     "url": "https://youcity.app/city/tahiti?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tahiti",
     "clip_id": "tahiti-01"
+  },
+  {
+    "city_slug": "taha-a",
+    "city_name": "Taha’a",
+    "country": "French Polynesia",
+    "video_path": "out/shorts/2026-10-27/taha-a-01.mp4",
+    "video_size_mb": 1.52,
+    "radio_name": null,
+    "published_at": "2026-10-27T19:59:31.383406+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1147251454497217"
+    },
+    "url": "https://youcity.app/city/taha-a?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=taha-a",
+    "clip_id": "taha-a-01"
   }
 ]
