@@ -772,5 +772,26 @@
       "autor": "Andrew Parlette",
       "licenca": "CC BY 4.0"
     }
+  },
+  {
+    "city_slug": "sofia",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "SOFIA",
+    "pais": "BULGARIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122115901827493232",
+    "scheduled_for": "2026-10-27 16:30",
+    "published_at": "2026-10-27T19:33:01.980147+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/sofia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=sofia",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Deensel",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
