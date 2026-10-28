@@ -814,5 +814,26 @@
       "autor": "elpinto007",
       "licenca": "CC BY-SA 2.0"
     }
+  },
+  {
+    "city_slug": "milan",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "MILAN",
+    "pais": "ITALY",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-10-28 16:30",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/milan?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=milan",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Jiuguang Wang",
+      "licenca": "CC BY-SA 3.0"
+    }
   }
 ]
