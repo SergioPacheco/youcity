@@ -508,5 +508,20 @@
     },
     "url": "https://youcity.app/city/johannesburg?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=johannesburg",
     "clip_id": "johannesburg-01"
+  },
+  {
+    "city_slug": "houston",
+    "city_name": "Houston",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-28/houston-01.mp4",
+    "video_size_mb": 2.22,
+    "radio_name": "KROI La Ley HD2",
+    "published_at": "2026-10-28T20:12:09.064659+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2580120645799873"
+    },
+    "url": "https://youcity.app/city/houston?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=houston",
+    "clip_id": "houston-01"
   }
 ]
