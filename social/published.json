@@ -835,5 +835,26 @@
       "autor": "Jiuguang Wang",
       "licenca": "CC BY-SA 3.0"
     }
+  },
+  {
+    "city_slug": "melbourne",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "MELBOURNE",
+    "pais": "AUSTRALIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122116290015493232",
+    "scheduled_for": "2026-10-28 20:00",
+    "published_at": "2026-10-28T23:25:36.526609+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/melbourne?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=melbourne",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Melbpal",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
