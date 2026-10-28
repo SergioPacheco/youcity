@@ -493,5 +493,20 @@
     },
     "url": "https://youcity.app/city/taha-a?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=taha-a",
     "clip_id": "taha-a-01"
+  },
+  {
+    "city_slug": "johannesburg",
+    "city_name": "Johannesburg",
+    "country": "South Africa",
+    "video_path": "out/shorts/2026-10-28/johannesburg-01.mp4",
+    "video_size_mb": 3.23,
+    "radio_name": "Kaya FM 95.9",
+    "published_at": "2026-10-28T00:15:57.393997+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "29058075440476190"
+    },
+    "url": "https://youcity.app/city/johannesburg?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=johannesburg",
+    "clip_id": "johannesburg-01"
   }
 ]
