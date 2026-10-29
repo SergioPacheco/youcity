@@ -877,5 +877,26 @@
       "autor": "Dietmar Rabich",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "kuala-lumpur",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "KUALA LUMPUR",
+    "pais": "MALAYSIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-10-29 20:00",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/kuala-lumpur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=kuala-lumpur",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Renek78",
+      "licenca": "CC0"
+    }
   }
 ]
