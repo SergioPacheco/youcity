@@ -856,5 +856,26 @@
       "autor": "Melbpal",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "hamburg",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "HAMBURG",
+    "pais": "GERMANY",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122116510749493232",
+    "scheduled_for": "2026-10-29 16:30",
+    "published_at": "2026-10-29T19:45:34.137805+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/hamburg?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=hamburg",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Dietmar Rabich",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
