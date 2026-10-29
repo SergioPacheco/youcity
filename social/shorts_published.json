@@ -538,5 +538,20 @@
     },
     "url": "https://youcity.app/city/new-orleans?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=new-orleans",
     "clip_id": "new-orleans-01"
+  },
+  {
+    "city_slug": "los-angeles",
+    "city_name": "Los Angeles",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-29/los-angeles-01.mp4",
+    "video_size_mb": 1.3,
+    "radio_name": "Groove Salad",
+    "published_at": "2026-10-29T20:08:46.379702+00:00",
+    "status": "error",
+    "platforms": {
+      "facebook_error": "Facebook API 400 (code 100, subcode 33)"
+    },
+    "url": "https://youcity.app/city/los-angeles?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=los-angeles",
+    "clip_id": "los-angeles-01"
   }
 ]
