@@ -523,5 +523,20 @@
     },
     "url": "https://youcity.app/city/houston?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=houston",
     "clip_id": "houston-01"
+  },
+  {
+    "city_slug": "new-orleans",
+    "city_name": "New Orleans",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-29/new-orleans-01.mp4",
+    "video_size_mb": 1.55,
+    "radio_name": "NPR News",
+    "published_at": "2026-10-29T00:37:14.123348+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2319995438750817"
+    },
+    "url": "https://youcity.app/city/new-orleans?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=new-orleans",
+    "clip_id": "new-orleans-01"
   }
 ]
