@@ -568,5 +568,20 @@
     },
     "url": "https://youcity.app/city/detroit?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=detroit",
     "clip_id": "detroit-01"
+  },
+  {
+    "city_slug": "dallas",
+    "city_name": "Dallas",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-30/dallas-01.mp4",
+    "video_size_mb": 2.48,
+    "radio_name": "KFXR Talk Radio",
+    "published_at": "2026-10-30T19:54:08.368899+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "4632647133682936"
+    },
+    "url": "https://youcity.app/city/dallas?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dallas",
+    "clip_id": "dallas-01"
   }
 ]
