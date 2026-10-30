@@ -553,5 +553,20 @@
     },
     "url": "https://youcity.app/city/los-angeles?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=los-angeles",
     "clip_id": "los-angeles-01"
+  },
+  {
+    "city_slug": "detroit",
+    "city_name": "Detroit",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-30/detroit-01.mp4",
+    "video_size_mb": 2.18,
+    "radio_name": "WEMU Jazz",
+    "published_at": "2026-10-30T00:38:45.865023+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2001811733828933"
+    },
+    "url": "https://youcity.app/city/detroit?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=detroit",
+    "clip_id": "detroit-01"
   }
 ]
