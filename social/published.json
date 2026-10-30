@@ -898,5 +898,22 @@
       "autor": "Renek78",
       "licenca": "CC0"
     }
+  },
+  {
+    "city_slug": "chennai",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "CHENNAI",
+    "pais": "INDIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122116854459493232",
+    "scheduled_for": "2026-10-30 16:30",
+    "published_at": "2026-10-30T19:35:11.239760+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/chennai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=chennai",
+    "foto": null
   }
 ]
