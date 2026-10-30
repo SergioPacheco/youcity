@@ -915,5 +915,26 @@
     "error": "",
     "url": "https://youcity.app/city/chennai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=chennai",
     "foto": null
+  },
+  {
+    "city_slug": "san-francisco",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "SAN FRANCISCO",
+    "pais": "UNITED STATES",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-10-30 20:00",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/san-francisco?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=san-francisco",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Craig Howell from San Carlos, CA, USA",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
