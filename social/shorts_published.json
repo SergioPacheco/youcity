@@ -583,5 +583,20 @@
     },
     "url": "https://youcity.app/city/dallas?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dallas",
     "clip_id": "dallas-01"
+  },
+  {
+    "city_slug": "philadelphia",
+    "city_name": "Philadelphia",
+    "country": "United States",
+    "video_path": "out/shorts/2026-10-31/philadelphia-01.mp4",
+    "video_size_mb": 2.81,
+    "radio_name": "WFED Federal News Network",
+    "published_at": "2026-10-31T00:24:34.580926+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1664232285096077"
+    },
+    "url": "https://youcity.app/city/philadelphia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=philadelphia",
+    "clip_id": "philadelphia-01"
   }
 ]
