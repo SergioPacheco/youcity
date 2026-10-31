@@ -598,5 +598,20 @@
     },
     "url": "https://youcity.app/city/philadelphia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=philadelphia",
     "clip_id": "philadelphia-01"
+  },
+  {
+    "city_slug": "athens",
+    "city_name": "Athens",
+    "country": "Greece",
+    "video_path": "out/shorts/2026-10-31/athens-01.mp4",
+    "video_size_mb": 2.04,
+    "radio_name": "Vanilla Radio Fresh Flavors",
+    "published_at": "2026-10-31T19:12:34.820150+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1343039027788566"
+    },
+    "url": "https://youcity.app/city/athens?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=athens",
+    "clip_id": "athens-01"
   }
 ]
