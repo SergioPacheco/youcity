@@ -613,5 +613,20 @@
     },
     "url": "https://youcity.app/city/athens?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=athens",
     "clip_id": "athens-01"
+  },
+  {
+    "city_slug": "fortaleza",
+    "city_name": "Fortaleza",
+    "country": "Brazil",
+    "video_path": "out/shorts/2026-11-01/fortaleza-01.mp4",
+    "video_size_mb": 1.88,
+    "radio_name": "Web Radio Expresso Music",
+    "published_at": "2026-11-01T00:02:55.518557+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1426212756293308"
+    },
+    "url": "https://youcity.app/city/fortaleza?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=fortaleza",
+    "clip_id": "fortaleza-01"
   }
 ]
