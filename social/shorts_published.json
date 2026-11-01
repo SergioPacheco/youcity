@@ -628,5 +628,20 @@
     },
     "url": "https://youcity.app/city/fortaleza?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=fortaleza",
     "clip_id": "fortaleza-01"
+  },
+  {
+    "city_slug": "bangalore",
+    "city_name": "Bangalore",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-01/bangalore-01.mp4",
+    "video_size_mb": 2.06,
+    "radio_name": "OYE INDIA RADIO",
+    "published_at": "2026-11-01T19:28:11.263977+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1062955130100296"
+    },
+    "url": "https://youcity.app/city/bangalore?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bangalore",
+    "clip_id": "bangalore-01"
   }
 ]
