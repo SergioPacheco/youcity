@@ -658,5 +658,20 @@
     },
     "url": "https://youcity.app/city/melbourne?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=melbourne",
     "clip_id": "melbourne-01"
+  },
+  {
+    "city_slug": "paris",
+    "city_name": "Paris",
+    "country": "France",
+    "video_path": "out/shorts/2026-11-02/paris-01.mp4",
+    "video_size_mb": 2.29,
+    "radio_name": "Jazz Radio Blues",
+    "published_at": "2026-11-02T23:03:37.301056+00:00",
+    "status": "error",
+    "platforms": {
+      "facebook_error": "Facebook API 400 (code 100, subcode 33)"
+    },
+    "url": "https://youcity.app/city/paris?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=paris",
+    "clip_id": "paris-01"
   }
 ]
