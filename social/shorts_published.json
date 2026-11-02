@@ -643,5 +643,20 @@
     },
     "url": "https://youcity.app/city/bangalore?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bangalore",
     "clip_id": "bangalore-01"
+  },
+  {
+    "city_slug": "melbourne",
+    "city_name": "Melbourne",
+    "country": "Australia",
+    "video_path": "out/shorts/2026-11-02/melbourne-01.mp4",
+    "video_size_mb": 2.9,
+    "radio_name": "SBS Radio 2 93.1",
+    "published_at": "2026-11-02T00:16:08.575439+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1826891388341928"
+    },
+    "url": "https://youcity.app/city/melbourne?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=melbourne",
+    "clip_id": "melbourne-01"
   }
 ]
