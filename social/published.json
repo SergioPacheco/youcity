@@ -978,5 +978,26 @@
       "autor": "Agent010",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "prague",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "PRAGUE",
+    "pais": "CZECHIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122117828631493232",
+    "scheduled_for": "2026-11-03 16:30",
+    "published_at": "2026-11-03T19:41:20.782881+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/prague?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=prague",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Moyan Brenn from Italy",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
