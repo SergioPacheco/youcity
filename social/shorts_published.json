@@ -673,5 +673,20 @@
     },
     "url": "https://youcity.app/city/paris?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=paris",
     "clip_id": "paris-01"
+  },
+  {
+    "city_slug": "istanbul",
+    "city_name": "Istanbul",
+    "country": "Türkiye",
+    "video_path": "out/shorts/2026-11-03/istanbul-01.mp4",
+    "video_size_mb": 2.89,
+    "radio_name": "Baba Radyo",
+    "published_at": "2026-11-03T02:47:16.361089+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1152306830582107"
+    },
+    "url": "https://youcity.app/city/istanbul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=istanbul",
+    "clip_id": "istanbul-01"
   }
 ]
