@@ -688,5 +688,20 @@
     },
     "url": "https://youcity.app/city/istanbul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=istanbul",
     "clip_id": "istanbul-01"
+  },
+  {
+    "city_slug": "santorini",
+    "city_name": "Santorini",
+    "country": "Greece",
+    "video_path": "out/shorts/2026-11-03/santorini-01.mp4",
+    "video_size_mb": 2.16,
+    "radio_name": "Vanilla Radio Fresh Flavors",
+    "published_at": "2026-11-03T20:54:58.227575+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1864110134603988"
+    },
+    "url": "https://youcity.app/city/santorini?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=santorini",
+    "clip_id": "santorini-01"
   }
 ]
