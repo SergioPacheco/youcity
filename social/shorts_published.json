@@ -703,5 +703,20 @@
     },
     "url": "https://youcity.app/city/santorini?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=santorini",
     "clip_id": "santorini-01"
+  },
+  {
+    "city_slug": "elafonisi",
+    "city_name": "Elafonisi",
+    "country": "Greece",
+    "video_path": "out/shorts/2026-11-04/elafonisi-01.mp4",
+    "video_size_mb": 1.87,
+    "radio_name": "Vanilla Radio Fresh Flavors",
+    "published_at": "2026-11-04T01:03:22.510711+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1684065113085644"
+    },
+    "url": "https://youcity.app/city/elafonisi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=elafonisi",
+    "clip_id": "elafonisi-01"
   }
 ]
