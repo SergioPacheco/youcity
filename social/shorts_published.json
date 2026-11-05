@@ -748,5 +748,20 @@
     },
     "url": "https://youcity.app/city/bora-bora?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bora-bora",
     "clip_id": "bora-bora-01"
+  },
+  {
+    "city_slug": "ankara",
+    "city_name": "Ankara",
+    "country": "Türkiye",
+    "video_path": "out/shorts/2026-11-05/ankara-01.mp4",
+    "video_size_mb": 2.42,
+    "radio_name": "Joy Türk",
+    "published_at": "2026-11-05T21:26:20.885381+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1039058789218131"
+    },
+    "url": "https://youcity.app/city/ankara?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=ankara",
+    "clip_id": "ankara-01"
   }
 ]
