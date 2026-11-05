@@ -733,5 +733,20 @@
     },
     "url": "https://youcity.app/city/brisbane?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=brisbane",
     "clip_id": "brisbane-01"
+  },
+  {
+    "city_slug": "bora-bora",
+    "city_name": "Bora Bora",
+    "country": "French Polynesia",
+    "video_path": "out/shorts/2026-11-05/bora-bora-01.mp4",
+    "video_size_mb": 1.16,
+    "radio_name": "Radio 1 Tahiti",
+    "published_at": "2026-11-05T01:19:02.335280+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1133600532994701"
+    },
+    "url": "https://youcity.app/city/bora-bora?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bora-bora",
+    "clip_id": "bora-bora-01"
   }
 ]
