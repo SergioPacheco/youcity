@@ -1062,5 +1062,26 @@
       "autor": "Renek78",
       "licenca": "CC0"
     }
+  },
+  {
+    "city_slug": "havana",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "HAVANA",
+    "pais": "CUBA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122118527295493232",
+    "scheduled_for": "2026-11-06 16:30",
+    "published_at": "2026-11-06T19:35:41.553772+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/havana?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=havana",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "RenaatPeeters",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
