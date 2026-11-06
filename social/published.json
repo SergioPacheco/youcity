@@ -1083,5 +1083,26 @@
       "autor": "RenaatPeeters",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "tokyo",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "TOKYO",
+    "pais": "JAPAN",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-11-06 20:00",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/tokyo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=tokyo",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Morio",
+      "licenca": "CC BY-SA 3.0"
+    }
   }
 ]
