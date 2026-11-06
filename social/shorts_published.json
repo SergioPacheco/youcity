@@ -763,5 +763,20 @@
     },
     "url": "https://youcity.app/city/ankara?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=ankara",
     "clip_id": "ankara-01"
+  },
+  {
+    "city_slug": "lombok",
+    "city_name": "Lombok",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-11-06/lombok-01.mp4",
+    "video_size_mb": 4.87,
+    "radio_name": "Mandalika Radio Lombok",
+    "published_at": "2026-11-06T01:23:32.760938+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1784851322806343"
+    },
+    "url": "https://youcity.app/city/lombok?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=lombok",
+    "clip_id": "lombok-01"
   }
 ]
