@@ -778,5 +778,20 @@
     },
     "url": "https://youcity.app/city/lombok?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=lombok",
     "clip_id": "lombok-01"
+  },
+  {
+    "city_slug": "komodo",
+    "city_name": "Komodo",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-11-07/komodo-01.mp4",
+    "video_size_mb": 2.36,
+    "radio_name": "RRI Pro 1 Labuan Bajo",
+    "published_at": "2026-11-07T00:39:00.814183+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1647964260305570"
+    },
+    "url": "https://youcity.app/city/komodo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=komodo",
+    "clip_id": "komodo-01"
   }
 ]
