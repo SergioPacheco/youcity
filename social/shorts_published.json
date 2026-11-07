@@ -793,5 +793,20 @@
     },
     "url": "https://youcity.app/city/komodo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=komodo",
     "clip_id": "komodo-01"
+  },
+  {
+    "city_slug": "granada",
+    "city_name": "Granada",
+    "country": "Spain",
+    "video_path": "out/shorts/2026-11-07/granada-01.mp4",
+    "video_size_mb": 2.52,
+    "radio_name": "Onda Cero Granada",
+    "published_at": "2026-11-07T19:20:07.090830+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2241565199727093"
+    },
+    "url": "https://youcity.app/city/granada?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=granada",
+    "clip_id": "granada-01"
   }
 ]
