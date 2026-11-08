@@ -1125,5 +1125,26 @@
       "autor": "Orjanarvola",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "miami",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "MIAMI",
+    "pais": "UNITED STATES",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-11-08 16:30",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/miami?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=miami",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Averette",
+      "licenca": "CC BY 3.0"
+    }
   }
 ]
