@@ -823,5 +823,20 @@
     },
     "url": "https://youcity.app/city/acapulco?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=acapulco",
     "clip_id": "acapulco-01"
+  },
+  {
+    "city_slug": "ahmedabad",
+    "city_name": "Ahmedabad",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-08/ahmedabad-01.mp4",
+    "video_size_mb": 1.37,
+    "radio_name": "OYE INDIA RADIO",
+    "published_at": "2026-11-08T19:27:47.505004+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1499356805345106"
+    },
+    "url": "https://youcity.app/city/ahmedabad?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=ahmedabad",
+    "clip_id": "ahmedabad-01"
   }
 ]
