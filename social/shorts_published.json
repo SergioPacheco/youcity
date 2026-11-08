@@ -808,5 +808,20 @@
     },
     "url": "https://youcity.app/city/granada?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=granada",
     "clip_id": "granada-01"
+  },
+  {
+    "city_slug": "acapulco",
+    "city_name": "Acapulco",
+    "country": "Mexico",
+    "video_path": "out/shorts/2026-11-08/acapulco-01.mp4",
+    "video_size_mb": 2.21,
+    "radio_name": "Cadena Ke Buena",
+    "published_at": "2026-11-08T00:12:34.626832+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1301720618754506"
+    },
+    "url": "https://youcity.app/city/acapulco?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=acapulco",
+    "clip_id": "acapulco-01"
   }
 ]
