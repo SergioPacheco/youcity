@@ -1167,5 +1167,26 @@
       "autor": "Ilya Grigorik",
       "licenca": "CC BY-SA 3.0"
     }
+  },
+  {
+    "city_slug": "paris",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "PARIS",
+    "pais": "FRANCE",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-11-09 20:00",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/paris?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=paris",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Yann Caradec from Paris, France",
+      "licenca": "CC BY-SA 2.0"
+    }
   }
 ]
