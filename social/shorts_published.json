@@ -853,5 +853,20 @@
     },
     "url": "https://youcity.app/city/oslo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=oslo",
     "clip_id": "oslo-01"
+  },
+  {
+    "city_slug": "cairo",
+    "city_name": "Cairo",
+    "country": "Egypt",
+    "video_path": "out/shorts/2026-11-09/cairo-01.mp4",
+    "video_size_mb": 3.01,
+    "radio_name": "راديو هيتس",
+    "published_at": "2026-11-09T23:44:54.928602+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1653250403198870"
+    },
+    "url": "https://youcity.app/city/cairo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=cairo",
+    "clip_id": "cairo-01"
   }
 ]
