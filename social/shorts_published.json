@@ -838,5 +838,20 @@
     },
     "url": "https://youcity.app/city/ahmedabad?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=ahmedabad",
     "clip_id": "ahmedabad-01"
+  },
+  {
+    "city_slug": "oslo",
+    "city_name": "Oslo",
+    "country": "Norway",
+    "video_path": "out/shorts/2026-11-09/oslo-01.mp4",
+    "video_size_mb": 1.84,
+    "radio_name": "Radio Nova",
+    "published_at": "2026-11-09T00:33:34.952953+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1143940835156512"
+    },
+    "url": "https://youcity.app/city/oslo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=oslo",
+    "clip_id": "oslo-01"
   }
 ]
