@@ -868,5 +868,20 @@
     },
     "url": "https://youcity.app/city/cairo?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=cairo",
     "clip_id": "cairo-01"
+  },
+  {
+    "city_slug": "jakarta",
+    "city_name": "Jakarta",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-11-10/jakarta-01.mp4",
+    "video_size_mb": 1.7,
+    "radio_name": "Radio Elshinta",
+    "published_at": "2026-11-10T03:18:22.419348+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1642833737498620"
+    },
+    "url": "https://youcity.app/city/jakarta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jakarta",
+    "clip_id": "jakarta-01"
   }
 ]
