@@ -883,5 +883,20 @@
     },
     "url": "https://youcity.app/city/jakarta?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jakarta",
     "clip_id": "jakarta-01"
+  },
+  {
+    "city_slug": "delhi",
+    "city_name": "Delhi",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-10/delhi-01.mp4",
+    "video_size_mb": 2.19,
+    "radio_name": "Hits Of Bollywood",
+    "published_at": "2026-11-10T21:15:27.898595+00:00",
+    "status": "error",
+    "platforms": {
+      "facebook_error": "Facebook API 400 (code 100, subcode 33)"
+    },
+    "url": "https://youcity.app/city/delhi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=delhi",
+    "clip_id": "delhi-01"
   }
 ]
