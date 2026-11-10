@@ -1230,5 +1230,26 @@
       "autor": "Esginmurat",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "lisbon",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "LISBON",
+    "pais": "PORTUGAL",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-11-10 16:30",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/lisbon?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=lisbon",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Vitor Oliveira from Torres Vedras, PORTUGAL",
+      "licenca": "CC BY-SA 2.0"
+    }
   }
 ]
