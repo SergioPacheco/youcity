@@ -1251,5 +1251,26 @@
       "autor": "Vitor Oliveira from Torres Vedras, PORTUGAL",
       "licenca": "CC BY-SA 2.0"
     }
+  },
+  {
+    "city_slug": "rome",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "ROME",
+    "pais": "ITALY",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122119664313493232",
+    "scheduled_for": "2026-11-11 16:30",
+    "published_at": "2026-11-11T19:45:22.920589+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/rome?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rome",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Diliff",
+      "licenca": "CC BY 3.0"
+    }
   }
 ]
