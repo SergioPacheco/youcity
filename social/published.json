@@ -1272,5 +1272,26 @@
       "autor": "Diliff",
       "licenca": "CC BY 3.0"
     }
+  },
+  {
+    "city_slug": "jaipur",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "JAIPUR",
+    "pais": "INDIA",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122119690143493232",
+    "scheduled_for": "2026-11-11 20:00",
+    "published_at": "2026-11-11T23:37:27.277724+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/jaipur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jaipur",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Chainwit.",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
