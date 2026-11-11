@@ -898,5 +898,20 @@
     },
     "url": "https://youcity.app/city/delhi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=delhi",
     "clip_id": "delhi-01"
+  },
+  {
+    "city_slug": "boston",
+    "city_name": "Boston",
+    "country": "United States",
+    "video_path": "out/shorts/2026-11-11/boston-01.mp4",
+    "video_size_mb": 1.75,
+    "radio_name": "WSNE Now 93.3 HD2",
+    "published_at": "2026-11-11T01:01:07.243784+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1788254135762944"
+    },
+    "url": "https://youcity.app/city/boston?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=boston",
+    "clip_id": "boston-01"
   }
 ]
