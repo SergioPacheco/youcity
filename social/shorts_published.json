@@ -913,5 +913,20 @@
     },
     "url": "https://youcity.app/city/boston?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=boston",
     "clip_id": "boston-01"
+  },
+  {
+    "city_slug": "raja-ampat",
+    "city_name": "Raja Ampat",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-11-11/raja-ampat-01.mp4",
+    "video_size_mb": 3.22,
+    "radio_name": "RRI Pro 1 Sorong",
+    "published_at": "2026-11-11T21:50:22.019292+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "29282253008095312"
+    },
+    "url": "https://youcity.app/city/raja-ampat?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=raja-ampat",
+    "clip_id": "raja-ampat-01"
   }
 ]
