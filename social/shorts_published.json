@@ -943,5 +943,20 @@
     },
     "url": "https://youcity.app/city/los-angeles?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=los-angeles",
     "clip_id": "los-angeles-01"
+  },
+  {
+    "city_slug": "raiatea",
+    "city_name": "Raiatea",
+    "country": "French Polynesia",
+    "video_path": "out/shorts/2026-11-12/raiatea-01.mp4",
+    "video_size_mb": 2.2,
+    "radio_name": "Radio 1 Tahiti",
+    "published_at": "2026-11-12T21:48:10.450426+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "28851448207810809"
+    },
+    "url": "https://youcity.app/city/raiatea?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=raiatea",
+    "clip_id": "raiatea-01"
   }
 ]
