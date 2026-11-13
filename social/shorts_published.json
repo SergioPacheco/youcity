@@ -958,5 +958,20 @@
     },
     "url": "https://youcity.app/city/raiatea?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=raiatea",
     "clip_id": "raiatea-01"
+  },
+  {
+    "city_slug": "warsaw",
+    "city_name": "Warsaw",
+    "country": "Poland",
+    "video_path": "out/shorts/2026-11-13/warsaw-01.mp4",
+    "video_size_mb": 1.5,
+    "radio_name": "Chillizet",
+    "published_at": "2026-11-13T01:42:44.064346+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1468801142023590"
+    },
+    "url": "https://youcity.app/city/warsaw?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=warsaw",
+    "clip_id": "warsaw-01"
   }
 ]
