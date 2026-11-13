@@ -973,5 +973,20 @@
     },
     "url": "https://youcity.app/city/warsaw?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=warsaw",
     "clip_id": "warsaw-01"
+  },
+  {
+    "city_slug": "chennai",
+    "city_name": "Chennai",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-13/chennai-01.mp4",
+    "video_size_mb": 2.48,
+    "radio_name": "NammRadio - Gulf",
+    "published_at": "2026-11-13T21:21:42.650384+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1860386161767361"
+    },
+    "url": "https://youcity.app/city/chennai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=chennai",
+    "clip_id": "chennai-01"
   }
 ]
