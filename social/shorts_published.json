@@ -1003,5 +1003,20 @@
     },
     "url": "https://youcity.app/city/paris?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=paris",
     "clip_id": "paris-01"
+  },
+  {
+    "city_slug": "valencia",
+    "city_name": "Valencia",
+    "country": "Spain",
+    "video_path": "out/shorts/2026-11-14/valencia-01.mp4",
+    "video_size_mb": 4.36,
+    "radio_name": "Onda Cero Valencia",
+    "published_at": "2026-11-14T19:52:10.088759+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2141508823121187"
+    },
+    "url": "https://youcity.app/city/valencia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=valencia",
+    "clip_id": "valencia-01"
   }
 ]
