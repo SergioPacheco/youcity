@@ -1335,5 +1335,26 @@
       "autor": "毛貓大少爺",
       "licenca": "CC BY-SA 2.0"
     }
+  },
+  {
+    "city_slug": "istanbul",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "ISTANBUL",
+    "pais": "TÜRKIYE",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-11-14 16:30",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/istanbul?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=istanbul",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Hunanuk",
+      "licenca": "CC0"
+    }
   }
 ]
