@@ -1356,5 +1356,26 @@
       "autor": "Hunanuk",
       "licenca": "CC0"
     }
+  },
+  {
+    "city_slug": "berlin",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "BERLIN",
+    "pais": "GERMANY",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122120295435493232",
+    "scheduled_for": "2026-11-14 20:00",
+    "published_at": "2026-11-14T23:15:52.046016+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/berlin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=berlin",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Kasa Fue derivative work: Georgfotoart",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
