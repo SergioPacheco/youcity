@@ -988,5 +988,20 @@
     },
     "url": "https://youcity.app/city/chennai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=chennai",
     "clip_id": "chennai-01"
+  },
+  {
+    "city_slug": "paris",
+    "city_name": "Paris",
+    "country": "France",
+    "video_path": "out/shorts/2026-11-14/paris-01.mp4",
+    "video_size_mb": 2.29,
+    "radio_name": "Jazz Radio Blues",
+    "published_at": "2026-11-14T01:18:14.047845+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1105227492411001"
+    },
+    "url": "https://youcity.app/city/paris?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=paris",
+    "clip_id": "paris-01"
   }
 ]
