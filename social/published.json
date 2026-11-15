@@ -1398,5 +1398,26 @@
       "autor": "Gobierno CDMX",
       "licenca": "CC0"
     }
+  },
+  {
+    "city_slug": "antalya",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "ANTALYA",
+    "pais": "TÜRKIYE",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122120485389493232",
+    "scheduled_for": "2026-11-15 20:00",
+    "published_at": "2026-11-15T23:28:36.957004+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/antalya?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=antalya",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Esginmurat",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
