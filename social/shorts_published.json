@@ -1033,5 +1033,20 @@
     },
     "url": "https://youcity.app/city/jaipur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jaipur",
     "clip_id": "jaipur-01"
+  },
+  {
+    "city_slug": "seattle",
+    "city_name": "Seattle",
+    "country": "United States",
+    "video_path": "out/shorts/2026-11-15/seattle-01.mp4",
+    "video_size_mb": 1.72,
+    "radio_name": "KEXP 90.3 FM",
+    "published_at": "2026-11-15T20:16:06.078043+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1658701205701549"
+    },
+    "url": "https://youcity.app/city/seattle?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=seattle",
+    "clip_id": "seattle-01"
   }
 ]
