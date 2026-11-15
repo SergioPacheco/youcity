@@ -1018,5 +1018,20 @@
     },
     "url": "https://youcity.app/city/valencia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=valencia",
     "clip_id": "valencia-01"
+  },
+  {
+    "city_slug": "jaipur",
+    "city_name": "Jaipur",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-15/jaipur-01.mp4",
+    "video_size_mb": 1.51,
+    "radio_name": "OYE INDIA RADIO",
+    "published_at": "2026-11-15T00:46:16.605396+00:00",
+    "status": "error",
+    "platforms": {
+      "facebook_error": "Facebook API 400 (code 100, subcode 33)"
+    },
+    "url": "https://youcity.app/city/jaipur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jaipur",
+    "clip_id": "jaipur-01"
   }
 ]
