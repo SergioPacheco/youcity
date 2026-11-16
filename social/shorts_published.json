@@ -1063,5 +1063,20 @@
     },
     "url": "https://youcity.app/city/vancouver?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=vancouver",
     "clip_id": "vancouver-01"
+  },
+  {
+    "city_slug": "delhi",
+    "city_name": "Delhi",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-16/delhi-01.mp4",
+    "video_size_mb": 2.19,
+    "radio_name": "Hits Of Bollywood",
+    "published_at": "2026-11-16T23:42:12.113125+00:00",
+    "status": "error",
+    "platforms": {
+      "facebook_error": "Facebook API 400 (code 100, subcode 33)"
+    },
+    "url": "https://youcity.app/city/delhi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=delhi",
+    "clip_id": "delhi-01"
   }
 ]
