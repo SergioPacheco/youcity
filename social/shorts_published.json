@@ -1048,5 +1048,20 @@
     },
     "url": "https://youcity.app/city/seattle?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=seattle",
     "clip_id": "seattle-01"
+  },
+  {
+    "city_slug": "vancouver",
+    "city_name": "Vancouver",
+    "country": "Canada",
+    "video_path": "out/shorts/2026-11-16/vancouver-01.mp4",
+    "video_size_mb": 3.21,
+    "radio_name": "CHBE Virgin Radio (Victoria) HD2",
+    "published_at": "2026-11-16T00:46:47.104226+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1486970079979778"
+    },
+    "url": "https://youcity.app/city/vancouver?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=vancouver",
+    "clip_id": "vancouver-01"
   }
 ]
