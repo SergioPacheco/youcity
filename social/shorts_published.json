@@ -1093,5 +1093,20 @@
     },
     "url": "https://youcity.app/city/munich?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=munich",
     "clip_id": "munich-01"
+  },
+  {
+    "city_slug": "auckland",
+    "city_name": "Auckland",
+    "country": "New Zealand",
+    "video_path": "out/shorts/2026-11-17/auckland-01.mp4",
+    "video_size_mb": 1.8,
+    "radio_name": "Newstalk ZB",
+    "published_at": "2026-11-17T22:50:47.179431+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1689674466151032"
+    },
+    "url": "https://youcity.app/city/auckland?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=auckland",
+    "clip_id": "auckland-01"
   }
 ]
