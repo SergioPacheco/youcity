@@ -1461,5 +1461,26 @@
       "autor": "Eunmi Park",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "budapest",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "BUDAPEST",
+    "pais": "HUNGARY",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122120887845493232",
+    "scheduled_for": "2026-11-17 20:00",
+    "published_at": "2026-11-17T23:03:34.739907+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/budapest?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=budapest",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Visions of Domino",
+      "licenca": "CC BY 2.0"
+    }
   }
 ]
