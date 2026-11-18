@@ -1482,5 +1482,26 @@
       "autor": "Visions of Domino",
       "licenca": "CC BY 2.0"
     }
+  },
+  {
+    "city_slug": "abu-dhabi",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "ABU DHABI",
+    "pais": "UNITED ARAB EMIRATES",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122121084597493232",
+    "scheduled_for": "2026-11-18 20:00",
+    "published_at": "2026-11-18T23:29:04.469541+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/abu-dhabi?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=abu-dhabi",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Wadiia",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
