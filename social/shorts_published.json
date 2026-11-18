@@ -1108,5 +1108,20 @@
     },
     "url": "https://youcity.app/city/auckland?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=auckland",
     "clip_id": "auckland-01"
+  },
+  {
+    "city_slug": "berlin",
+    "city_name": "Berlin",
+    "country": "Germany",
+    "video_path": "out/shorts/2026-11-18/berlin-01.mp4",
+    "video_size_mb": 1.7,
+    "radio_name": "MANGORADIO",
+    "published_at": "2026-11-18T02:45:07.613372+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1467112122227001"
+    },
+    "url": "https://youcity.app/city/berlin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=berlin",
+    "clip_id": "berlin-01"
   }
 ]
