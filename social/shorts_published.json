@@ -1123,5 +1123,20 @@
     },
     "url": "https://youcity.app/city/berlin?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=berlin",
     "clip_id": "berlin-01"
+  },
+  {
+    "city_slug": "denver",
+    "city_name": "Denver",
+    "country": "United States",
+    "video_path": "out/shorts/2026-11-18/denver-01.mp4",
+    "video_size_mb": 2.79,
+    "radio_name": "KTCL Channel 93.3 HD2",
+    "published_at": "2026-11-18T22:32:10.840398+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1636806818188448"
+    },
+    "url": "https://youcity.app/city/denver?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=denver",
+    "clip_id": "denver-01"
   }
 ]
