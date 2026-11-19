@@ -1153,5 +1153,20 @@
     },
     "url": "https://youcity.app/city/hawaii?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=hawaii",
     "clip_id": "hawaii-01"
+  },
+  {
+    "city_slug": "huahine",
+    "city_name": "Huahine",
+    "country": "French Polynesia",
+    "video_path": "out/shorts/2026-11-19/huahine-01.mp4",
+    "video_size_mb": 1.17,
+    "radio_name": "Radio 1 Tahiti",
+    "published_at": "2026-11-19T22:43:00.913408+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1707238227663395"
+    },
+    "url": "https://youcity.app/city/huahine?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=huahine",
+    "clip_id": "huahine-01"
   }
 ]
