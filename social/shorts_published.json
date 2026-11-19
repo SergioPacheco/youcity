@@ -1138,5 +1138,20 @@
     },
     "url": "https://youcity.app/city/denver?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=denver",
     "clip_id": "denver-01"
+  },
+  {
+    "city_slug": "hawaii",
+    "city_name": "Hawaii",
+    "country": "United States",
+    "video_path": "out/shorts/2026-11-19/hawaii-01.mp4",
+    "video_size_mb": 1.66,
+    "radio_name": "KHPR Hawai'i Public Radio 1",
+    "published_at": "2026-11-19T02:17:10.882429+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1020386113667454"
+    },
+    "url": "https://youcity.app/city/hawaii?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=hawaii",
+    "clip_id": "hawaii-01"
   }
 ]
