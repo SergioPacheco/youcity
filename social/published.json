@@ -1503,5 +1503,26 @@
       "autor": "Wadiia",
       "licenca": "CC BY-SA 4.0"
     }
+  },
+  {
+    "city_slug": "sydney",
+    "scope": "WORLD",
+    "template": "claro",
+    "cidade": "SYDNEY",
+    "pais": "AUSTRALIA",
+    "modos": "drive+bike+walk+beach_walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122121273351493232",
+    "scheduled_for": "2026-11-19 20:00",
+    "published_at": "2026-11-19T23:41:32.853313+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/sydney?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=sydney",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Benh LIEU SONG ( Flickr )",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
