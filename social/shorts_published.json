@@ -1183,5 +1183,20 @@
     },
     "url": "https://youcity.app/city/brasilia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=brasilia",
     "clip_id": "brasilia-01"
+  },
+  {
+    "city_slug": "rome",
+    "city_name": "Rome",
+    "country": "Italy",
+    "video_path": "out/shorts/2026-11-20/rome-01.mp4",
+    "video_size_mb": 1.89,
+    "radio_name": "A19",
+    "published_at": "2026-11-20T22:13:00.043469+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2492546781570426"
+    },
+    "url": "https://youcity.app/city/rome?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rome",
+    "clip_id": "rome-01"
   }
 ]
