@@ -1168,5 +1168,20 @@
     },
     "url": "https://youcity.app/city/huahine?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=huahine",
     "clip_id": "huahine-01"
+  },
+  {
+    "city_slug": "brasilia",
+    "city_name": "Brasilia",
+    "country": "Brazil",
+    "video_path": "out/shorts/2026-11-20/brasilia-01.mp4",
+    "video_size_mb": 2.05,
+    "radio_name": "Web Radio Expresso Music",
+    "published_at": "2026-11-20T02:02:21.495445+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2146721792592909"
+    },
+    "url": "https://youcity.app/city/brasilia?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=brasilia",
+    "clip_id": "brasilia-01"
   }
 ]
