@@ -1198,5 +1198,20 @@
     },
     "url": "https://youcity.app/city/rome?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rome",
     "clip_id": "rome-01"
+  },
+  {
+    "city_slug": "zurich",
+    "city_name": "Zurich",
+    "country": "Switzerland",
+    "video_path": "out/shorts/2026-11-21/zurich-01.mp4",
+    "video_size_mb": 1.73,
+    "radio_name": "SWR1 Baden-Württemberg",
+    "published_at": "2026-11-21T01:59:06.324270+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2924211637948332"
+    },
+    "url": "https://youcity.app/city/zurich?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=zurich",
+    "clip_id": "zurich-01"
   }
 ]
