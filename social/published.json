@@ -1566,5 +1566,26 @@
       "autor": "Yann Caradec from Paris, France",
       "licenca": "CC BY-SA 2.0"
     }
+  },
+  {
+    "city_slug": "rio-de-janeiro",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "RIO DE JANEIRO",
+    "pais": "BRAZIL",
+    "modos": "drive+bike+walk+beach_walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122121648069493232",
+    "scheduled_for": "2026-11-21 16:30",
+    "published_at": "2026-11-21T19:51:45.958833+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Rafael Rabello de Barros",
+      "licenca": "CC BY-SA 3.0"
+    }
   }
 ]
