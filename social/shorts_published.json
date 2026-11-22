@@ -1243,5 +1243,20 @@
     },
     "url": "https://youcity.app/city/rio-de-janeiro?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=rio-de-janeiro",
     "clip_id": "rio-de-janeiro-01"
+  },
+  {
+    "city_slug": "sumba",
+    "city_name": "Sumba",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-11-22/sumba-01.mp4",
+    "video_size_mb": 2.83,
+    "radio_name": "RRI Pro 1 Sumba",
+    "published_at": "2026-11-22T20:59:07.808708+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "916813524760619"
+    },
+    "url": "https://youcity.app/city/sumba?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=sumba",
+    "clip_id": "sumba-01"
   }
 ]
