@@ -1587,5 +1587,26 @@
       "autor": "Rafael Rabello de Barros",
       "licenca": "CC BY-SA 3.0"
     }
+  },
+  {
+    "city_slug": "dubai",
+    "scope": "WORLD",
+    "template": "premium",
+    "cidade": "DUBAI",
+    "pais": "UNITED ARAB EMIRATES",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "1299778099896041_122121834621493232",
+    "scheduled_for": "2026-11-22 16:30",
+    "published_at": "2026-11-22T19:53:08.536536+00:00",
+    "timezone": "America/Sao_Paulo",
+    "status": "published",
+    "error": "",
+    "url": "https://youcity.app/city/dubai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dubai",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Francisco Anzola",
+      "licenca": "CC-BY-2.0"
+    }
   }
 ]
