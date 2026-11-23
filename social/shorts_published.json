@@ -1258,5 +1258,20 @@
     },
     "url": "https://youcity.app/city/sumba?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=sumba",
     "clip_id": "sumba-01"
+  },
+  {
+    "city_slug": "bali",
+    "city_name": "Bali",
+    "country": "Indonesia",
+    "video_path": "out/shorts/2026-11-23/bali-01.mp4",
+    "video_size_mb": 2.1,
+    "radio_name": "Beat Radio Bali",
+    "published_at": "2026-11-23T01:25:30.285251+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1568556025035061"
+    },
+    "url": "https://youcity.app/city/bali?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bali",
+    "clip_id": "bali-01"
   }
 ]
