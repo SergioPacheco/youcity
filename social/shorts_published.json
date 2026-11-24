@@ -1288,5 +1288,20 @@
     },
     "url": "https://youcity.app/city/london?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=london",
     "clip_id": "london-01"
+  },
+  {
+    "city_slug": "prague",
+    "city_name": "Prague",
+    "country": "Czechia",
+    "video_path": "out/shorts/2026-11-24/prague-01.mp4",
+    "video_size_mb": 2.73,
+    "radio_name": "Rádio BLANÍK",
+    "published_at": "2026-11-24T05:09:36.788589+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1748011233709524"
+    },
+    "url": "https://youcity.app/city/prague?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=prague",
+    "clip_id": "prague-01"
   }
 ]
