@@ -1273,5 +1273,20 @@
     },
     "url": "https://youcity.app/city/bali?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=bali",
     "clip_id": "bali-01"
+  },
+  {
+    "city_slug": "london",
+    "city_name": "London",
+    "country": "United Kingdom",
+    "video_path": "out/shorts/2026-11-24/london-01.mp4",
+    "video_size_mb": 2.55,
+    "radio_name": "Bloomsbury Radio",
+    "published_at": "2026-11-24T02:05:54.022574+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1678714250370100"
+    },
+    "url": "https://youcity.app/city/london?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=london",
+    "clip_id": "london-01"
   }
 ]
