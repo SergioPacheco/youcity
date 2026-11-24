@@ -1303,5 +1303,20 @@
     },
     "url": "https://youcity.app/city/prague?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=prague",
     "clip_id": "prague-01"
+  },
+  {
+    "city_slug": "havana",
+    "city_name": "Havana",
+    "country": "Cuba",
+    "video_path": "out/shorts/2026-11-24/havana-01.mp4",
+    "video_size_mb": 2.17,
+    "radio_name": "PJB Radio Trans Mundial",
+    "published_at": "2026-11-24T23:50:03.677658+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1159380959863064"
+    },
+    "url": "https://youcity.app/city/havana?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=havana",
+    "clip_id": "havana-01"
   }
 ]
