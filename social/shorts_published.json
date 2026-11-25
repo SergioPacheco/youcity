@@ -1318,5 +1318,20 @@
     },
     "url": "https://youcity.app/city/havana?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=havana",
     "clip_id": "havana-01"
+  },
+  {
+    "city_slug": "jaipur",
+    "city_name": "Jaipur",
+    "country": "India",
+    "video_path": "out/shorts/2026-11-25/jaipur-01.mp4",
+    "video_size_mb": 1.51,
+    "radio_name": "OYE INDIA RADIO",
+    "published_at": "2026-11-25T03:57:43.521397+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1130089386682049"
+    },
+    "url": "https://youcity.app/city/jaipur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jaipur",
+    "clip_id": "jaipur-01"
   }
 ]
