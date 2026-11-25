@@ -1629,5 +1629,26 @@
       "autor": "U.S. Department of State",
       "licenca": "Public domain"
     }
+  },
+  {
+    "city_slug": "manila",
+    "scope": "WORLD",
+    "template": "spotlight",
+    "cidade": "MANILA",
+    "pais": "PHILIPPINES",
+    "modos": "drive+bike+walk+drone",
+    "page_id": "1299778099896041",
+    "post_id": "",
+    "scheduled_for": "2026-11-25 20:00",
+    "published_at": "",
+    "timezone": "America/Sao_Paulo",
+    "status": "skipped",
+    "error": "already on the page in the last days",
+    "url": "https://youcity.app/city/manila?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=manila",
+    "foto": {
+      "provedor": "wikipedia",
+      "autor": "Bahnfrend",
+      "licenca": "CC BY-SA 4.0"
+    }
   }
 ]
