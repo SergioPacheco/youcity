@@ -1333,5 +1333,20 @@
     },
     "url": "https://youcity.app/city/jaipur?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=jaipur",
     "clip_id": "jaipur-01"
+  },
+  {
+    "city_slug": "dubai",
+    "city_name": "Dubai",
+    "country": "United Arab Emirates",
+    "video_path": "out/shorts/2026-11-25/dubai-01.mp4",
+    "video_size_mb": 3.09,
+    "radio_name": "وتر اف ام",
+    "published_at": "2026-11-25T23:32:25.399851+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1147523298143150"
+    },
+    "url": "https://youcity.app/city/dubai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dubai",
+    "clip_id": "dubai-01"
   }
 ]
