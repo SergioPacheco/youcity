@@ -1348,5 +1348,20 @@
     },
     "url": "https://youcity.app/city/dubai?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=dubai",
     "clip_id": "dubai-01"
+  },
+  {
+    "city_slug": "mo-orea",
+    "city_name": "Mo’orea",
+    "country": "French Polynesia",
+    "video_path": "out/shorts/2026-11-26/mo-orea-01.mp4",
+    "video_size_mb": 1.88,
+    "radio_name": null,
+    "published_at": "2026-11-26T03:23:36.105442+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1877861053523417"
+    },
+    "url": "https://youcity.app/city/mo-orea?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mo-orea",
+    "clip_id": "mo-orea-01"
   }
 ]
