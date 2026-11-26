@@ -1363,5 +1363,20 @@
     },
     "url": "https://youcity.app/city/mo-orea?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=mo-orea",
     "clip_id": "mo-orea-01"
+  },
+  {
+    "city_slug": "hamburg",
+    "city_name": "Hamburg",
+    "country": "Germany",
+    "video_path": "out/shorts/2026-11-26/hamburg-01.mp4",
+    "video_size_mb": 2.0,
+    "radio_name": "Berliner Rundfunk",
+    "published_at": "2026-11-26T23:39:25.887919+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "910039175464901"
+    },
+    "url": "https://youcity.app/city/hamburg?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=hamburg",
+    "clip_id": "hamburg-01"
   }
 ]
