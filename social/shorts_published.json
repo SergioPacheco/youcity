@@ -1378,5 +1378,20 @@
     },
     "url": "https://youcity.app/city/hamburg?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=hamburg",
     "clip_id": "hamburg-01"
+  },
+  {
+    "city_slug": "amsterdam",
+    "city_name": "Amsterdam",
+    "country": "Netherlands",
+    "video_path": "out/shorts/2026-11-27/amsterdam-01.mp4",
+    "video_size_mb": 4.41,
+    "radio_name": "Radio 10",
+    "published_at": "2026-11-27T03:30:23.498630+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1150917147329347"
+    },
+    "url": "https://youcity.app/city/amsterdam?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=amsterdam",
+    "clip_id": "amsterdam-01"
   }
 ]
