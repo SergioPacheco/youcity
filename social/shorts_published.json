@@ -1393,5 +1393,20 @@
     },
     "url": "https://youcity.app/city/amsterdam?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=amsterdam",
     "clip_id": "amsterdam-01"
+  },
+  {
+    "city_slug": "moscow",
+    "city_name": "Moscow",
+    "country": "Russia",
+    "video_path": "out/shorts/2026-11-27/moscow-01.mp4",
+    "video_size_mb": 1.65,
+    "radio_name": "Русское Радио",
+    "published_at": "2026-11-27T23:19:44.910995+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "2564798740671025"
+    },
+    "url": "https://youcity.app/city/moscow?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=moscow",
+    "clip_id": "moscow-01"
   }
 ]
