@@ -1408,5 +1408,20 @@
     },
     "url": "https://youcity.app/city/moscow?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=moscow",
     "clip_id": "moscow-01"
+  },
+  {
+    "city_slug": "beijing",
+    "city_name": "Beijing",
+    "country": "China",
+    "video_path": "out/shorts/2026-11-28/beijing-01.mp4",
+    "video_size_mb": 1.69,
+    "radio_name": "Alxa Mongolian Radio",
+    "published_at": "2026-11-28T03:06:50.959886+00:00",
+    "status": "published",
+    "platforms": {
+      "facebook": "1898010821380533"
+    },
+    "url": "https://youcity.app/city/beijing?utm_source=facebook&utm_medium=social&utm_campaign=world_daily&utm_content=beijing",
+    "clip_id": "beijing-01"
   }
 ]
